@@ -1,0 +1,12 @@
+
+.app-background {
+  background: rgb(34,193,195);
+  background: linear-gradient(0deg, rgba(34,193,195,1) 0%, rgba(157,239,156,1) 100%);
+  min-height: 95vh ;
+}
+
+.no-overflow{
+  overflow: hidden;
+  background: linear-gradient(0deg, rgba(157,239,156,1 ) 0%, rgba(34,193,195,1) 100%);
+  min-height: 5vh
+}
