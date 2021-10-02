@@ -2,7 +2,9 @@ import {red} from '@material-ui/core/colors';
 import {createTheme, Theme} from '@material-ui/core/styles';
 
 // A custom theme for this app
-export const theme1: Theme = createTheme({
+export const themeMain: Theme = createTheme({
+    direction: 'rtl',
+    
     typography: {
         h1: {
             fontSize: '3rem',

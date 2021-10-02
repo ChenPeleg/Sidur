@@ -1,6 +1,6 @@
-import React from 'react'
+import React, {useLayoutEffect} from 'react'
 import {makeStyles, ThemeProvider} from '@material-ui/core/styles';
-import {theme1} from '../hoc/themes';
+import {themeMain} from '../hoc/themes';
 import {HeaderLayout} from './header-layout';
 import {MainLayout} from './main-layout';
 
@@ -12,10 +12,12 @@ const useStyles = makeStyles((theme) => ({
 
 
 export const AppLayout = () => {
-
+    useLayoutEffect(() => {
+        document.body.setAttribute('dir', 'rtl');
+    }, [])
 
     return (
-        <ThemeProvider theme={theme1}>
+        <ThemeProvider theme={themeMain}>
             <div className="app-background" dir={'rtl'}>
                 <HeaderLayout/>
                 <MainLayout/>

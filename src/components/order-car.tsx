@@ -1,34 +1,31 @@
 import React from 'react'
 import {makeStyles} from '@material-ui/core/styles';
+import {Card} from '@material-ui/core';
+import {OrderCarForm} from './order-car-form';
 
 const useStyles = makeStyles((theme) => ({
-    root: {
-        flexGrow: 1
-    },
-    headerText: {
-        fontSize: theme.typography.h1.fontSize,
-        margin: theme.typography.h1.marginTop,
-        padding: '5px',
-
+    cardBase: {
+        padding: '10px',
+        cursor: 'pointer',
+        width: '50vw',
         display: 'flex',
         flexDirection: 'row',
         justifyContent: 'center',
         alignItems: 'center'
+
     },
-
-    carIcon: {
-        marginTop: '10px',
-        fontSize: theme.typography.h1.fontSize,
-
+    additionalText: {
+        fontSize: '14px'
     }
-}));
-
+}))
 
 export const OrderCar = () => {
     const classes = useStyles();
     return (
 
-        <div></div>
+        <Card className={classes.cardBase}>
+            <OrderCarForm handleSubmit={'d'} pristine={'b'} reset={'c'} submitting={'d'}/>
+        </Card>
 
 
     )

@@ -1,7 +1,9 @@
 import React from 'react';
-import {Checkbox, MenuItem, Radio, RadioGroup, Select, TextField} from '@material-ui/core';
+import {Checkbox, FormControlLabel, MenuItem, Radio, RadioGroup, Select, TextField} from '@material-ui/core';
 import {Field, Form} from 'react-final-form';
 import validate from './validate';
+import {makeStyles} from '@material-ui/core/styles';
+import {translations} from '../services/translations';
 
 interface TextFieldProps {
     input: any,
@@ -21,7 +23,35 @@ interface MuiFormProps {
 }
 
 const validateFunc = validate;
-const renderTextField = (
+const TRL = translations;
+const useStyles = makeStyles((theme) => ({
+    root: {
+        direction: theme.direction,
+        '& .MuiFormLabel-root': {
+            left: 'inherit'
+        }
+    },
+    fieldWrapper: {
+        display: 'inline-flex',
+        padding: '10px'
+    },
+    cardBase: {
+        direction: theme.direction,
+        padding: '10px',
+        cursor: 'pointer',
+        width: '90%',
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'center',
+        alignItems: 'center'
+
+    },
+    additionalText: {
+        fontSize: '14px'
+    }
+}))
+
+const RenderTextField = (
     {
         input,
         label,
@@ -33,9 +63,13 @@ const renderTextField = (
     }: TextFieldProps,
 ) => (
     <TextField
-        hintText={label}
-        floatingLabelText={label}
-        errorText={touched && error}
+        dir={'rtl'}
+        style={{direction: 'rtl'}}
+        label={label}
+        className={useStyles().root}
+        // hintText={label}
+        // floatingLabelText={label}
+        // errorText={touched && error}
         {...input}
         {...custom}
     />
@@ -59,7 +93,7 @@ const renderRadioGroup = ({
     <RadioGroup
         {...input}
         {...rest}
-        valueSelected={input.value}
+        //  valueSelected={input.value}
         onChange={(event: any, value: any) => input.onChange(value)}
     />
 );
@@ -77,8 +111,8 @@ const renderSelectField = (
     }: any,
 ) => (
     <Select
-        floatingLabelText={label}
-        errorText={touched && error}
+        // floatingLabelText={label}
+        // errorText={touched && error}
         {...input}
         onChange={(event: any, index: any, value: any) => input.onChange(value)}
         children={children}
@@ -93,28 +127,32 @@ const MaterialUiForm = (muiFormProps: MuiFormProps) => {
         reset,
         submitting
     } = muiFormProps;
+    const classes = useStyles();
     return (
-        <form onSubmit={handleSubmit}>
-            <div>
+        <form onSubmit={handleSubmit} dir={'rtl'}>
+            <div className={classes.fieldWrapper}>
                 <Field
+
                     name="firstName"
-                    component={renderTextField}
-                    label="First Name"
+                    component={RenderTextField}
+                    label={TRL.Name}
                 />
             </div>
-            <div>
-                <Field name="lastName" component={renderTextField} label="Last Name"/>
+            <div className={classes.fieldWrapper}>
+                <Field name="FromHour" component={RenderTextField}
+                       label={TRL.From + TRL.Hour}/>
             </div>
-            <div>
-                <Field name="email" component={renderTextField} label="Email"/>
+            <div className={classes.fieldWrapper}>
+                <Field name="Untill" component={RenderTextField} label={TRL.Until + ' ' + TRL.Hour}/>
             </div>
-            <div>
+            <div className={classes.fieldWrapper}>
                 <Field name="sex" component={renderRadioGroup}>
-                    <Radio value="male"/>
-                    <Radio value="female"/>
+                    <FormControlLabel value="Tsamud" control={<Radio/>} label="Female"/>
+                    <FormControlLabel value="OnWay" control={<Radio/>} label="Female"/>
+
                 </Field>
             </div>
-            <div>
+            <div className={classes.fieldWrapper}>
                 <Field
                     name="favoriteColor"
                     component={renderSelectField}
@@ -125,21 +163,22 @@ const MaterialUiForm = (muiFormProps: MuiFormProps) => {
                     <MenuItem value="0000ff"/>
                 </Field>
             </div>
-            <div>
+            <div className={classes.fieldWrapper}>
                 <Field name="employed" component={renderCheckbox} label="Employed"/>
             </div>
-            <div>
+            <div className={classes.fieldWrapper}>
                 <Field
                     name="notes"
-                    component={renderTextField}
+                    component={RenderTextField}
                     label="Notes"
-                    multiLine={true}
+                    // multiLine={true}
                     rows={2}
                 />
             </div>
             <div>
                 <button type="submit" disabled={pristine || submitting}>Submit</button>
-                <button type="button" disabled={pristine || submitting} onClick={reset}>
+                <button type="button" disabled={pristine || submitting} onClick={() => {
+                }}>
                     Clear Values
                 </button>
             </div>

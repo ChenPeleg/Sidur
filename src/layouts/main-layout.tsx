@@ -1,6 +1,7 @@
 import React from 'react'
 import {makeStyles} from '@material-ui/core/styles';
 import {Box} from '@material-ui/core';
+import {OrderCar} from '../components/order-car';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -19,6 +20,8 @@ export const MainLayout = () => {
 
         <main>
             <Box className={classes.mainBox} flexDirection="row" flexWrap="wrap" display="flex" alignItems="start" justifyContent="start">
+                <OrderCar/>
+
                 <ul>
                     <li>1</li>
                     <li>2</li>
