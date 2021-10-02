@@ -3,6 +3,23 @@ import {Checkbox, MenuItem, Radio, RadioGroup, Select, TextField} from '@materia
 import {Field, Form} from 'react-final-form';
 import validate from './validate';
 
+interface TextFieldProps {
+    input: any,
+    label: any,
+    meta: {
+        touched: any,
+        error: any
+    },
+    custom: any
+}
+
+interface MuiFormProps {
+    handleSubmit: any,
+    pristine: any,
+    reset: any,
+    submitting: any
+}
+
 const validateFunc = validate;
 const renderTextField = (
     {
@@ -13,7 +30,7 @@ const renderTextField = (
             error
         },
         ...custom
-    }: any,
+    }: TextFieldProps,
 ) => (
     <TextField
         hintText={label}
@@ -69,13 +86,13 @@ const renderSelectField = (
     />
 );
 
-const MaterialUiForm = (props: any) => {
+const MaterialUiForm = (muiFormProps: MuiFormProps) => {
     const {
         handleSubmit,
         pristine,
         reset,
         submitting
-    } = props;
+    } = muiFormProps;
     return (
         <form onSubmit={handleSubmit}>
             <div>
@@ -131,11 +148,16 @@ const MaterialUiForm = (props: any) => {
 };
 const onSubmit = () => {
 }
-export const OrderCarForm = () => {
+export const OrderCarForm = (formProps: MuiFormProps) => (
     <Form
         onSubmit={onSubmit}
         validate={validate}
-        render={({handleSubmit}: any) => (<div></div>)
+        render={({handleSubmit}: any) => (MaterialUiForm({
+            ...formProps,
+            handleSubmit
+        }))
 
         }/>
-}
+)
+
+
