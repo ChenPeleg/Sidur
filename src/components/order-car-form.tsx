@@ -1,11 +1,15 @@
 import React from 'react';
-import {Checkbox, FormControlLabel, MenuItem, Radio, RadioGroup, Select, TextField} from '@material-ui/core';
+import {Checkbox, MenuItem, RadioGroup, Select, TextField} from '@material-ui/core';
 import {Field, Form} from 'react-final-form';
-import validate from './validate';
+
 import {makeStyles} from '@material-ui/core/styles';
 import {translations} from '../services/translations';
 import {TextFieldPropertiesModel} from '../models/text-field-properties.model';
 import {MuiFormPropsModel} from '../models/mui-form-props.model';
+import {useDispatch} from 'react-redux';
+import {validate} from './validate';
+import {HourPicker} from './Form/time-picker';
+import {OrderFields, OrderModel} from '../models/Order.model';
 
 const validateFunc = validate;
 const TRL = translations;
@@ -35,7 +39,7 @@ const useStyles = makeStyles((theme) => ({
         fontSize: '14px'
     }
 }))
-
+const orderFields: OrderModel = new OrderFields();
 const RenderTextField = (
     {
         input,
@@ -52,9 +56,8 @@ const RenderTextField = (
         style={{direction: 'rtl'}}
         label={label}
         className={useStyles().root}
-        // hintText={label}
-        // floatingLabelText={label}
-        // errorText={touched && error}
+
+        onChange={input.onChange}
         {...input}
         {...custom}
     />
@@ -66,8 +69,8 @@ const renderCheckbox = ({
                         }: any) => (
     <Checkbox
         // label={label}
-        checked={input.value ? true : false}
-        // onCheck={input.onChange}
+        checked={!!input.value}
+        onChange={input.onChange}
     />
 );
 
@@ -96,13 +99,18 @@ const renderSelectField = (
     }: any,
 ) => (
     <Select
+        label={label}
         // floatingLabelText={label}
         // errorText={touched && error}
         {...input}
-        onChange={(event: any, index: any, value: any) => input.onChange(value)}
+        onChange={(event: any, index: any, value: any) => {
+            input.onChange(value)
+        }}
+        value={input.value}
         children={children}
-        {...custom}
-    />
+        {...custom}>
+
+    </Select>
 );
 
 const MaterialUiForm = (muiFormProps: MuiFormPropsModel) => {
@@ -114,40 +122,32 @@ const MaterialUiForm = (muiFormProps: MuiFormPropsModel) => {
     } = muiFormProps;
     const classes = useStyles();
     return (
-        <form onSubmit={handleSubmit} dir={'rtl'}>
-              
 
+        <form onSubmit={handleSubmit} dir={'rtl'}>
             <div className={classes.fieldWrapper}>
                 <Field
-                    name="firstName"
+                    name={orderFields.driverName}
                     component={RenderTextField}
                     label={TRL.Name}
                 />
             </div>
             <div className={classes.fieldWrapper}>
-                <Field name="FromHour" component={RenderTextField}
+                <Field name={orderFields.startHour} component={HourPicker}
                        label={TRL.From + TRL.Hour}/>
             </div>
             <div className={classes.fieldWrapper}>
-                <Field name="Untill" component={RenderTextField} label={TRL.Until + ' ' + TRL.Hour}/>
+                <Field name={orderFields.finishHour} component={HourPicker} label={TRL.Until + ' ' + TRL.Hour}/>
             </div>
-            <div className={classes.fieldWrapper}>
-                <Field name="sex" component={renderRadioGroup}>
-                    <FormControlLabel value="Tsamud" control={<Radio/>} label={TRL.Tsamud}/>
-                    <FormControlLabel value="OnWay" control={<Radio/>} label={TRL.OneWayTo}/>
-                    <FormControlLabel value="OneWayFrom" control={<Radio/>} label={TRL.OneWayFrom}/>
 
-                </Field>
-            </div>
             <div className={classes.fieldWrapper}>
                 <Field
                     name="favoriteColor"
                     component={renderSelectField}
                     label="Favorite Color"
                 >
-                    <MenuItem value="ff0000"/>
-                    <MenuItem value="00ff00"/>
-                    <MenuItem value="0000ff"/>
+                    <MenuItem value="Tsamud">{TRL.Tsamud}</MenuItem>
+                    <MenuItem value="OnWay"> {TRL.OneWayFrom}</MenuItem>
+                    <MenuItem value="OneWayFrom">{TRL.OneWayFrom}</MenuItem>
                 </Field>
             </div>
             <div className={classes.fieldWrapper}>
@@ -174,16 +174,28 @@ const MaterialUiForm = (muiFormProps: MuiFormPropsModel) => {
 };
 const onSubmit = () => {
 }
-export const OrderCarForm = (formProps: MuiFormPropsModel) => (
-    <Form
-        onSubmit={onSubmit}
-        validate={validate}
-        render={({handleSubmit}: any) => (MaterialUiForm({
-            ...formProps,
-            handleSubmit
-        }))
+export const OrderCarForm = (formProps: MuiFormPropsModel) => {
+    const dispatch = useDispatch();
+    return (
+        <Form
+            onSubmit={onSubmit}
+            validate={(values: any) => {
+                dispatch({
+                    type: 'FormChagned',
+                    payLoad: {
+                        values
+                    }
+                })
+                return validate(values)
+            }}
 
-        }/>
-)
+            render={({handleSubmit}: any) => (MaterialUiForm({
+                ...formProps,
+                handleSubmit
+            }))
+
+            }/>
+    )
+}
 
 
