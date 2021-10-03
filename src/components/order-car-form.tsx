@@ -1,15 +1,16 @@
 import React from 'react';
-import {Button, Checkbox, MenuItem, RadioGroup, Select, TextField} from '@material-ui/core';
+import {Button, Checkbox, MenuItem, RadioGroup} from '@material-ui/core';
 import {Field, Form} from 'react-final-form';
 
 import {makeStyles} from '@material-ui/core/styles';
 import {translations} from '../services/translations';
-import {TextFieldPropertiesModel} from '../models/text-field-properties.model';
 import {MuiFormPropsModel} from '../models/mui-form-props.model';
 import {useDispatch, useSelector} from 'react-redux';
 import {validate} from './validate';
 import {HourPicker} from './Form/time-picker';
 import {OrderFields, OrderModel} from '../models/Order.model';
+import {RenderTextField} from './Form/text-field';
+import {RenderSelectField} from './Form/select-field';
 
 const validateFunc = validate;
 const TRL = translations;
@@ -45,27 +46,7 @@ const useStyles = makeStyles((theme) => ({
     }
 }))
 const orderFields: OrderModel = new OrderFields();
-const RenderTextField = (
-    {
-        input,
-        label,
-        meta: {
-            touched,
-            error
-        },
-        ...custom
-    }: TextFieldPropertiesModel,
-) => (
-    <TextField
-        dir={'rtl'}
-        style={{direction: 'rtl'}}
-        label={label}
-        className={useStyles().root}
-        onChange={input.onChange}
-        {...input}
-        {...custom}
-    />
-);
+
 
 const renderCheckbox = ({
                             input,
@@ -90,34 +71,6 @@ const renderRadioGroup = ({
     />
 );
 
-const renderSelectField = (
-    {
-        input,
-        label,
-        meta: {
-            touched,
-            error
-        },
-        children,
-        ...custom
-    }: any,
-) => (
-    <Select
-        label={label}
-        // floatingLabelText={label}
-        // errorText={touched && error}
-        {...input}
-        onChange={(event: any, index: any, value: any) => {
-            input.onChange(value)
-        }}
-        value={input.value}
-        children={children}
-        {...custom}>
-        <MenuItem value="Tsamud">{TRL.Tsamud}</MenuItem>
-        <MenuItem value="OnWay"> {TRL.OneWayFrom}</MenuItem>
-        <MenuItem value="OneWayFrom">{TRL.OneWayFrom}</MenuItem>
-    </Select>
-);
 
 const MaterialUiForm = (muiFormProps: MuiFormPropsModel) => {
     const {
@@ -148,15 +101,15 @@ const MaterialUiForm = (muiFormProps: MuiFormPropsModel) => {
             <div className={classes.fieldWrapper}>
                 <Field
                     name={'TypeOfDrive'}
-                    component={renderSelectField}
+                    component={RenderSelectField}
                     label={TRL.TypeOfDrive}
                 >
-
+                    <MenuItem value="Tsamud">{TRL.Tsamud}</MenuItem>
+                    <MenuItem value="OnWay"> {TRL.OneWayFrom}</MenuItem>
+                    <MenuItem value="OneWayFrom">{TRL.OneWayFrom}</MenuItem>
                 </Field>
             </div>
-            {/*<div className={classes.fieldWrapper}>*/}
-            {/*    <Field name="employed" component={renderCheckbox} label="Employed"/>*/}
-            {/*</div>*/}
+
             <div className={classes.fieldWrapper}>
                 <Field
                     name={orderFields.Comments}
