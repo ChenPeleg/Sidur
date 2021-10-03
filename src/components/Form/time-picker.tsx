@@ -1,8 +1,8 @@
-import React, {Fragment, useState} from 'react';
-import {KeyboardTimePicker, TimePicker} from '@material-ui/pickers';
+import React from 'react';
 import {TextFieldPropertiesModel} from '../../models/text-field-properties.model';
+import {TextField} from '@material-ui/core';
 
-export const timePicker = ({
+export const HourPicker = ({
                                input,
                                label,
                                meta: {
@@ -11,24 +11,16 @@ export const timePicker = ({
                                },
                                ...custom
                            }: TextFieldPropertiesModel) => {
-    const [selectedDate, handleDateChange] = useState('2018-01-01T00:00:00.000Z');
-    return (
-        <Fragment>
-            <TimePicker
-                variant="inline"
-                label={label}
-                value={selectedDate}
-                onChange={handleDateChange}
-            />
 
-            <KeyboardTimePicker
-                ampm={false}
-                variant="inline"
-                label={label}
-                value={selectedDate}
-                onChange={handleDateChange}
-            />
-        </Fragment>
+    return (
+
+        <TextField
+            type="time"
+            label={label}
+            value={input.value}
+            onChange={input.onChange}/>
+
+
     );
 }
 

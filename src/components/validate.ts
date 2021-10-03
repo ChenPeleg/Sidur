@@ -1,4 +1,5 @@
-export default function (values: any) {
+export const validate = (values: any) => {
+    
     const errors: any = {};
     const requiredFields = [
         'firstName',

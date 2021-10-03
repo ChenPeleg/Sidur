@@ -4,8 +4,6 @@ interface SidurStore {
     orders: OrderModel[];
     orderNumberInEdit: number | null;
     currentOrderInEdite: OrderModel | null;
-
-
 }
 
 const initialState: SidurStore = {
@@ -19,7 +17,7 @@ const reducer = (state = initialState, action: any) => {
     let newState = {
         ...state
     }
-    console.log(state, action)
+    console.log(action)
     switch (action.type) {
 
 
