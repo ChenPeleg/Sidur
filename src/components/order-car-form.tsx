@@ -7,12 +7,13 @@ import {translations} from '../services/translations';
 import {MuiFormPropsModel} from '../models/mui-form-props.model';
 import {useDispatch, useSelector} from 'react-redux';
 import {validate} from './validate';
-import {HourPicker} from './Form/time-picker';
+import {HourPicker} from './Form/hour-picker';
 import {OrderFields, OrderModel} from '../models/Order.model';
 import {RenderTextField} from './Form/text-field';
 import {RenderSelectField} from './Form/select-field';
+import {DriveType} from '../models/DriveType.enum';
 
-const validateFunc = validate;
+
 const TRL = translations;
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -104,9 +105,10 @@ const MaterialUiForm = (muiFormProps: MuiFormPropsModel) => {
                     component={RenderSelectField}
                     label={TRL.TypeOfDrive}
                 >
-                    <MenuItem value="Tsamud">{TRL.Tsamud}</MenuItem>
-                    <MenuItem value="OnWay"> {TRL.OneWayFrom}</MenuItem>
-                    <MenuItem value="OneWayFrom">{TRL.OneWayFrom}</MenuItem>
+                    <MenuItem value={DriveType.Tsamud.toString()}>{TRL.Tsamud}</MenuItem>
+                    <MenuItem value={DriveType.OneWayFrom.toString()}> {TRL.OneWayFrom}</MenuItem>
+                    <MenuItem value={DriveType.OneWayTo.toString()}>{TRL.OneWayTo}</MenuItem>
+                    {/*<MenuItem value={DriveType.TwoWay.toString()}>{TRL.TwoWay}</MenuItem>*/}
                 </Field>
             </div>
 

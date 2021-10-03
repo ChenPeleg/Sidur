@@ -13,7 +13,7 @@ export const translations = {
     'Finish': 'סיום',
     'TypeOfDrive': 'סוג הנסיעה',
     'Tsamud': 'צריך צמוד',
-    'OneWayTo': 'הקפצה',
+    'OneWayTo': 'הסעה',
     'OneWayFrom': 'איסוף',
     'TwoWay': 'הלוך חזור',
     'Submit': 'הוספה ',
