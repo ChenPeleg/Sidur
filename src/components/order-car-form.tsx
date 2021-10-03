@@ -1,12 +1,12 @@
 import React from 'react';
-import {Checkbox, MenuItem, RadioGroup, Select, TextField} from '@material-ui/core';
+import {Button, Checkbox, MenuItem, RadioGroup, Select, TextField} from '@material-ui/core';
 import {Field, Form} from 'react-final-form';
 
 import {makeStyles} from '@material-ui/core/styles';
 import {translations} from '../services/translations';
 import {TextFieldPropertiesModel} from '../models/text-field-properties.model';
 import {MuiFormPropsModel} from '../models/mui-form-props.model';
-import {useDispatch} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import {validate} from './validate';
 import {HourPicker} from './Form/time-picker';
 import {OrderFields, OrderModel} from '../models/Order.model';
@@ -23,6 +23,11 @@ const useStyles = makeStyles((theme) => ({
     fieldWrapper: {
         display: 'inline-flex',
         padding: '10px'
+    },
+    fieldWrapperText: {
+        display: 'inline-flex',
+        padding: '10px',
+        maxWidth: '150px'
     },
     cardBase: {
         direction: theme.direction,
@@ -56,7 +61,6 @@ const RenderTextField = (
         style={{direction: 'rtl'}}
         label={label}
         className={useStyles().root}
-
         onChange={input.onChange}
         {...input}
         {...custom}
@@ -109,7 +113,9 @@ const renderSelectField = (
         value={input.value}
         children={children}
         {...custom}>
-
+        <MenuItem value="Tsamud">{TRL.Tsamud}</MenuItem>
+        <MenuItem value="OnWay"> {TRL.OneWayFrom}</MenuItem>
+        <MenuItem value="OneWayFrom">{TRL.OneWayFrom}</MenuItem>
     </Select>
 );
 
@@ -124,7 +130,7 @@ const MaterialUiForm = (muiFormProps: MuiFormPropsModel) => {
     return (
 
         <form onSubmit={handleSubmit} dir={'rtl'}>
-            <div className={classes.fieldWrapper}>
+            <div className={classes.fieldWrapperText}>
                 <Field
                     name={orderFields.driverName}
                     component={RenderTextField}
@@ -141,33 +147,29 @@ const MaterialUiForm = (muiFormProps: MuiFormPropsModel) => {
 
             <div className={classes.fieldWrapper}>
                 <Field
-                    name="favoriteColor"
+                    name={'TypeOfDrive'}
                     component={renderSelectField}
-                    label="Favorite Color"
+                    label={TRL.TypeOfDrive}
                 >
-                    <MenuItem value="Tsamud">{TRL.Tsamud}</MenuItem>
-                    <MenuItem value="OnWay"> {TRL.OneWayFrom}</MenuItem>
-                    <MenuItem value="OneWayFrom">{TRL.OneWayFrom}</MenuItem>
+
                 </Field>
             </div>
-            <div className={classes.fieldWrapper}>
-                <Field name="employed" component={renderCheckbox} label="Employed"/>
-            </div>
+            {/*<div className={classes.fieldWrapper}>*/}
+            {/*    <Field name="employed" component={renderCheckbox} label="Employed"/>*/}
+            {/*</div>*/}
             <div className={classes.fieldWrapper}>
                 <Field
-                    name="notes"
+                    name={orderFields.Comments}
                     component={RenderTextField}
-                    label="Notes"
+                    label={TRL.Comments}
                     // multiLine={true}
                     rows={2}
                 />
             </div>
-            <div>
-                <button type="submit" disabled={pristine || submitting}>Submit</button>
-                <button type="button" disabled={pristine || submitting} onClick={() => {
-                }}>
-                    Clear Values
-                </button>
+            <div className={classes.fieldWrapper}>
+                <Button variant="contained" color={'primary'} type="submit">{TRL.Submit}</Button>
+
+
             </div>
         </form>
     );
@@ -176,8 +178,12 @@ const onSubmit = () => {
 }
 export const OrderCarForm = (formProps: MuiFormPropsModel) => {
     const dispatch = useDispatch();
+
+    const initialValues = useSelector((state: { defaultOrderValues: OrderModel }) => state.defaultOrderValues);
+    console.log(initialValues)
     return (
         <Form
+            initialValues={initialValues}
             onSubmit={onSubmit}
             validate={(values: any) => {
                 dispatch({

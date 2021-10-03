@@ -5,6 +5,7 @@ export interface OrderModel {
     startHour: string,
     finishHour: string,
     TypeOfDrive: DriveType | null,
+    Comments: string
 }
 
 export class OrderFields implements OrderModel {
@@ -12,6 +13,7 @@ export class OrderFields implements OrderModel {
     startHour: string = 'startHour';
     finishHour: string = 'finishHour';
     TypeOfDrive: DriveType | null = null;
+    Comments: string = 'Comments'
 
     constructor() {
 

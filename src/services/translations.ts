@@ -11,9 +11,12 @@ export const translations = {
     'Where': 'למקום',
     'Start': 'התחלה',
     'Finish': 'סיום',
+    'TypeOfDrive': 'סוג הנסיעה',
     'Tsamud': 'צריך צמוד',
     'OneWayTo': 'הקפצה',
     'OneWayFrom': 'איסוף',
-    'TwoWay': 'הלוך חזור'
+    'TwoWay': 'הלוך חזור',
+    'Submit': 'הוספה ',
+    'Comments': 'הערות ',
 
 }
