@@ -4,23 +4,8 @@ import {Field, Form} from 'react-final-form';
 import validate from './validate';
 import {makeStyles} from '@material-ui/core/styles';
 import {translations} from '../services/translations';
-
-interface TextFieldProps {
-    input: any,
-    label: any,
-    meta: {
-        touched: any,
-        error: any
-    },
-    custom: any
-}
-
-interface MuiFormProps {
-    handleSubmit: any,
-    pristine: any,
-    reset: any,
-    submitting: any
-}
+import {TextFieldPropertiesModel} from '../models/text-field-properties.model';
+import {MuiFormPropsModel} from '../models/mui-form-props.model';
 
 const validateFunc = validate;
 const TRL = translations;
@@ -60,7 +45,7 @@ const RenderTextField = (
             error
         },
         ...custom
-    }: TextFieldProps,
+    }: TextFieldPropertiesModel,
 ) => (
     <TextField
         dir={'rtl'}
@@ -120,7 +105,7 @@ const renderSelectField = (
     />
 );
 
-const MaterialUiForm = (muiFormProps: MuiFormProps) => {
+const MaterialUiForm = (muiFormProps: MuiFormPropsModel) => {
     const {
         handleSubmit,
         pristine,
@@ -130,9 +115,10 @@ const MaterialUiForm = (muiFormProps: MuiFormProps) => {
     const classes = useStyles();
     return (
         <form onSubmit={handleSubmit} dir={'rtl'}>
+              
+
             <div className={classes.fieldWrapper}>
                 <Field
-
                     name="firstName"
                     component={RenderTextField}
                     label={TRL.Name}
@@ -147,8 +133,9 @@ const MaterialUiForm = (muiFormProps: MuiFormProps) => {
             </div>
             <div className={classes.fieldWrapper}>
                 <Field name="sex" component={renderRadioGroup}>
-                    <FormControlLabel value="Tsamud" control={<Radio/>} label="Female"/>
-                    <FormControlLabel value="OnWay" control={<Radio/>} label="Female"/>
+                    <FormControlLabel value="Tsamud" control={<Radio/>} label={TRL.Tsamud}/>
+                    <FormControlLabel value="OnWay" control={<Radio/>} label={TRL.OneWayTo}/>
+                    <FormControlLabel value="OneWayFrom" control={<Radio/>} label={TRL.OneWayFrom}/>
 
                 </Field>
             </div>
@@ -187,7 +174,7 @@ const MaterialUiForm = (muiFormProps: MuiFormProps) => {
 };
 const onSubmit = () => {
 }
-export const OrderCarForm = (formProps: MuiFormProps) => (
+export const OrderCarForm = (formProps: MuiFormPropsModel) => (
     <Form
         onSubmit={onSubmit}
         validate={validate}

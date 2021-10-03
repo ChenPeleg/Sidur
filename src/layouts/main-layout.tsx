@@ -22,12 +22,7 @@ export const MainLayout = () => {
             <Box className={classes.mainBox} flexDirection="row" flexWrap="wrap" display="flex" alignItems="start" justifyContent="start">
                 <OrderCar/>
 
-                <ul>
-                    <li>1</li>
-                    <li>2</li>
-                    <li>3</li>
-                    <li>4</li>
-                </ul>
+               
             </Box>
 
         </main>
