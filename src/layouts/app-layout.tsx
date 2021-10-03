@@ -1,14 +1,8 @@
 import React, {useLayoutEffect} from 'react'
-import {makeStyles, ThemeProvider} from '@material-ui/core/styles';
+import {ThemeProvider} from '@material-ui/core/styles';
 import {themeMain} from '../hoc/themes';
 import {HeaderLayout} from './header-layout';
 import {MainLayout} from './main-layout';
-
-const useStyles = makeStyles((theme) => ({
-    root: {
-        flexGrow: 1
-    },
-}));
 
 
 export const AppLayout = () => {
