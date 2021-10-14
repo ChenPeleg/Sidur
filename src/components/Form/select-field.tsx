@@ -26,7 +26,7 @@ export const RenderSelectField = (
 ) => {
     const classes = useStyles()
     return (
-        <Select variant={'filled'}
+        <Select variant={'standard'}
                 sx={{
                     ...
                         classes

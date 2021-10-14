@@ -103,9 +103,8 @@ const MaterialUiForm = (muiFormProps: MuiFormPropsModel) => {
             </Box>
             <Box
                 sx={{
-                    ...
-                        classes
-                            .fieldWrapper
+                    ...classes
+                        .fieldWrapper
                 }}
             >
                 <Field name={orderFields.startHour} component={HourPicker}

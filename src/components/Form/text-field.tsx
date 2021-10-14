@@ -32,7 +32,7 @@ export const RenderTextField = (
                dir={'rtl'}
                style={{
                    direction: 'rtl',
-                   height: '80%'
+                  
                }}
                label={label}
                sx={{
