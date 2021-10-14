@@ -1,15 +1,16 @@
-import {Select} from '@material-ui/core';
 import React from 'react';
-import {makeStyles} from '@material-ui/core/styles';
+import {Theme} from '@mui/system';
+import {Select} from '@mui/material';
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = () => ({
     root: {
-        direction: theme.direction,
+        direction: (theme: Theme) => theme.direction,
         '& .MuiInputBase-input': {
             paddingLeft: '10px'
         }
     }
-}))
+})
+
 export const RenderSelectField = (
     {
         input,
@@ -25,7 +26,11 @@ export const RenderSelectField = (
     const classes = useStyles()
     return (
         <Select
-            className={classes.root}
+            sx={{
+                ...
+                    classes
+                        .root
+            }}
             label={label}
             // floatingLabelText={label}
             // errorText={touched && error}

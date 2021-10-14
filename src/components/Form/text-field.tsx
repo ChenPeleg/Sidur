@@ -1,11 +1,13 @@
 import {TextFieldPropertiesModel} from '../../models/text-field-properties.model';
-import {TextField} from '@material-ui/core';
-import React from 'react';
-import {makeStyles} from '@material-ui/core/styles';
 
-const useStyles = makeStyles((theme) => ({
+import React from 'react';
+import {Theme} from '@mui/system';
+import {TextField} from '@mui/material';
+
+
+const useStyles = (() => ({
     root: {
-        direction: theme.direction,
+        direction: (theme: Theme) => theme.direction,
         '& .MuiFormLabel-root': {
             left: 'inherit'
         }
@@ -26,7 +28,11 @@ export const RenderTextField = (
         dir={'rtl'}
         style={{direction: 'rtl'}}
         label={label}
-        className={useStyles().root}
+        sx={{
+            ...
+                useStyles()
+                    .root
+        }}
         onChange={input.onChange}
         {...input}
         {...custom}

@@ -1,17 +1,20 @@
 import React from 'react';
 import {TextFieldPropertiesModel} from '../../models/text-field-properties.model';
+import {Theme} from '@mui/system';
+import {TextField} from '@mui/material';
 
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = () => ({
     root: {
-        direction: theme.direction,
+        direction: (theme: Theme) => theme.direction,
         '& .MuiFormLabel-root': {
             left: 'inherit'
         }
     },
 
 
-}))
+})
+ 
 export const HourPicker = ({
                                input,
                                label,
@@ -27,7 +30,10 @@ export const HourPicker = ({
     return (
 
         <TextField
-            className={classes.root}
+            sx={{
+                ...classes
+                    .root
+            }}
             type="time"
             label={label}
             value={input.value}

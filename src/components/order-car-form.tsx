@@ -1,8 +1,7 @@
 import React from 'react';
-import {Button, Checkbox, MenuItem, RadioGroup} from '@material-ui/core';
+
 import {Field, Form} from 'react-final-form';
 
-import {makeStyles} from '@material-ui/core/styles';
 import {translations} from '../services/translations';
 import {MuiFormPropsModel} from '../models/mui-form-props.model';
 import {useDispatch, useSelector} from 'react-redux';
@@ -12,12 +11,14 @@ import {OrderFields, OrderModel} from '../models/Order.model';
 import {RenderTextField} from './Form/text-field';
 import {RenderSelectField} from './Form/select-field';
 import {DriveType} from '../models/DriveType.enum';
+import {Theme} from '@mui/system';
+import {Button, Checkbox, MenuItem, RadioGroup} from '@mui/material';
 
 
 const TRL = translations;
-const useStyles = makeStyles((theme) => ({
+const useStyles = (() => ({
     root: {
-        direction: theme.direction,
+        direction: (theme: Theme) => theme.direction,
         '& .MuiFormLabel-root': {
             left: 'inherit'
         }
@@ -32,7 +33,7 @@ const useStyles = makeStyles((theme) => ({
         maxWidth: '150px'
     },
     cardBase: {
-        direction: theme.direction,
+        direction: (theme: Theme) => theme.direction,
         padding: '10px',
         cursor: 'pointer',
         width: '90%',
@@ -81,25 +82,44 @@ const MaterialUiForm = (muiFormProps: MuiFormPropsModel) => {
         submitting
     } = muiFormProps;
     const classes = useStyles();
+
+    // @ts-ignore
     return (
 
         <form onSubmit={handleSubmit} dir={'rtl'}>
-            <div className={classes.fieldWrapperText}>
+
+            <div
+                //     sx={{
+                //     ...
+                //         classes
+                //             .fieldWrapperText
+                // }}
+            >
                 <Field
                     name={orderFields.driverName}
                     component={RenderTextField}
                     label={TRL.Name}
                 />
             </div>
-            <div className={classes.fieldWrapper}>
+            <div
+                //     className={{
+                //     ...
+                //         classes
+                //             .fieldWrapper
+                // }}
+            >
                 <Field name={orderFields.startHour} component={HourPicker}
                        label={TRL.From + TRL.Hour}/>
             </div>
-            <div className={classes.fieldWrapper}>
+            <div
+                // className={classes.fieldWrapper}
+            >
                 <Field name={orderFields.finishHour} component={HourPicker} label={TRL.Until + ' ' + TRL.Hour}/>
             </div>
 
-            <div className={classes.fieldWrapper}>
+            <div
+                // className={classes.fieldWrapper}
+            >
                 <Field
                     name={'TypeOfDrive'}
                     component={RenderSelectField}
@@ -112,7 +132,9 @@ const MaterialUiForm = (muiFormProps: MuiFormPropsModel) => {
                 </Field>
             </div>
 
-            <div className={classes.fieldWrapper}>
+            <div
+                // className={classes.fieldWrapper}
+            >
                 <Field
                     name={orderFields.Comments}
                     component={RenderTextField}
@@ -121,7 +143,9 @@ const MaterialUiForm = (muiFormProps: MuiFormPropsModel) => {
                     rows={2}
                 />
             </div>
-            <div className={classes.fieldWrapper}>
+            <div
+                // className={classes.fieldWrapper}
+            >
                 <Button variant="contained" color={'primary'} type="submit">{TRL.Submit}</Button>
 
 
