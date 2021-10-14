@@ -1,7 +1,9 @@
 import React from 'react'
+import {TimeToLeave} from '@mui/icons-material';
+import {Box} from '@mui/material';
 
 
-const useStyles = (() => ({
+const useStyles: any = (() => ({
     root: {
         flexGrow: 1
     },
@@ -29,8 +31,16 @@ export const HeaderLayout = () => {
 
         <header>
             <Box flexDirection="row" flexWrap="wrap" display="flex" alignItems="center" justifyContent="space-around" dir={'rtl'}>
-                <h1 className={classes.headerText}>
-                    <TimeToLeave className={classes.carIcon}/>  &nbsp; סידור </h1>
+                <Box sx={{
+                    ...
+                        classes
+                            .headerText
+                }}>
+                    <TimeToLeave sx={{
+                        ...
+                            classes
+                                .carIcon
+                    }}/>  &nbsp; סידור </Box>
 
             </Box>
 

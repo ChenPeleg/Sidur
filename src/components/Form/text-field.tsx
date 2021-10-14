@@ -10,6 +10,10 @@ const useStyles = (() => ({
         direction: (theme: Theme) => theme.direction,
         '& .MuiFormLabel-root': {
             left: 'inherit'
+        },
+        '& .MuiInputBase-input': {
+            // paddingTop: '10px',
+            // paddingBottom: '10px'
         }
     }
 }))
@@ -24,17 +28,20 @@ export const RenderTextField = (
         ...custom
     }: TextFieldPropertiesModel,
 ) => (
-    <TextField
-        dir={'rtl'}
-        style={{direction: 'rtl'}}
-        label={label}
-        sx={{
-            ...
-                useStyles()
-                    .root
-        }}
-        onChange={input.onChange}
-        {...input}
-        {...custom}
+    <TextField variant={'standard'}
+               dir={'rtl'}
+               style={{
+                   direction: 'rtl',
+                   height: '80%'
+               }}
+               label={label}
+               sx={{
+                   ...
+                       useStyles()
+                           .root
+               }}
+               onChange={input.onChange}
+               {...input}
+               {...custom}
     />
 );

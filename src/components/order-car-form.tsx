@@ -11,12 +11,12 @@ import {OrderFields, OrderModel} from '../models/Order.model';
 import {RenderTextField} from './Form/text-field';
 import {RenderSelectField} from './Form/select-field';
 import {DriveType} from '../models/DriveType.enum';
-import {Theme} from '@mui/system';
+import {Box, Theme} from '@mui/system';
 import {Button, Checkbox, MenuItem, RadioGroup} from '@mui/material';
 
 
 const TRL = translations;
-const useStyles = (() => ({
+const useStyles: any = (() => ({
     root: {
         direction: (theme: Theme) => theme.direction,
         '& .MuiFormLabel-root': {
@@ -88,37 +88,45 @@ const MaterialUiForm = (muiFormProps: MuiFormPropsModel) => {
 
         <form onSubmit={handleSubmit} dir={'rtl'}>
 
-            <div
-                //     sx={{
-                //     ...
-                //         classes
-                //             .fieldWrapperText
-                // }}
+            <Box
+                sx={{
+                    ...
+                        classes
+                            .fieldWrapperText
+                }}
             >
                 <Field
                     name={orderFields.driverName}
                     component={RenderTextField}
                     label={TRL.Name}
                 />
-            </div>
-            <div
-                //     className={{
-                //     ...
-                //         classes
-                //             .fieldWrapper
-                // }}
+            </Box>
+            <Box
+                sx={{
+                    ...
+                        classes
+                            .fieldWrapper
+                }}
             >
                 <Field name={orderFields.startHour} component={HourPicker}
                        label={TRL.From + TRL.Hour}/>
-            </div>
-            <div
-                // className={classes.fieldWrapper}
+            </Box>
+            <Box
+                sx={{
+                    ...
+                        classes
+                            .fieldWrapper
+                }}
             >
                 <Field name={orderFields.finishHour} component={HourPicker} label={TRL.Until + ' ' + TRL.Hour}/>
-            </div>
+            </Box>
 
-            <div
-                // className={classes.fieldWrapper}
+            <Box
+                sx={{
+                    ...
+                        classes
+                            .fieldWrapper
+                }}
             >
                 <Field
                     name={'TypeOfDrive'}
@@ -130,10 +138,14 @@ const MaterialUiForm = (muiFormProps: MuiFormPropsModel) => {
                     <MenuItem value={DriveType.OneWayTo.toString()}>{TRL.OneWayTo}</MenuItem>
                     {/*<MenuItem value={DriveType.TwoWay.toString()}>{TRL.TwoWay}</MenuItem>*/}
                 </Field>
-            </div>
+            </Box>
 
-            <div
-                // className={classes.fieldWrapper}
+            <Box
+                sx={{
+                    ...
+                        classes
+                            .fieldWrapper
+                }}
             >
                 <Field
                     name={orderFields.Comments}
@@ -142,14 +154,18 @@ const MaterialUiForm = (muiFormProps: MuiFormPropsModel) => {
                     // multiLine={true}
                     rows={2}
                 />
-            </div>
-            <div
-                // className={classes.fieldWrapper}
+            </Box>
+            <Box
+                sx={{
+                    ...
+                        classes
+                            .fieldWrapper
+                }}
             >
                 <Button variant="contained" color={'primary'} type="submit">{TRL.Submit}</Button>
 
 
-            </div>
+            </Box>
         </form>
     );
 };

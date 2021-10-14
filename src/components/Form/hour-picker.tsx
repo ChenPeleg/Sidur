@@ -9,12 +9,15 @@ const useStyles = () => ({
         direction: (theme: Theme) => theme.direction,
         '& .MuiFormLabel-root': {
             left: 'inherit'
+        },
+        '& .MuiInputBase-input': {
+            padding: '10px'
         }
     },
 
 
 })
- 
+
 export const HourPicker = ({
                                input,
                                label,
@@ -29,15 +32,15 @@ export const HourPicker = ({
 
     return (
 
-        <TextField
-            sx={{
-                ...classes
-                    .root
-            }}
-            type="time"
-            label={label}
-            value={input.value}
-            onChange={input.onChange}/>
+        <TextField variant={'standard'}
+                   sx={{
+                       ...classes
+                           .root
+                   }}
+                   type="time"
+                   label={label}
+                   value={input.value}
+                   onChange={input.onChange}/>
     );
 }
 

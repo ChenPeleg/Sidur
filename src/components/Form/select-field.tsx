@@ -7,7 +7,8 @@ const useStyles = () => ({
         direction: (theme: Theme) => theme.direction,
         '& .MuiInputBase-input': {
             paddingLeft: '10px'
-        }
+        },
+
     }
 })
 
@@ -25,23 +26,23 @@ export const RenderSelectField = (
 ) => {
     const classes = useStyles()
     return (
-        <Select
-            sx={{
-                ...
-                    classes
-                        .root
-            }}
-            label={label}
+        <Select variant={'filled'}
+                sx={{
+                    ...
+                        classes
+                            .root
+                }}
+                label={label}
             // floatingLabelText={label}
             // errorText={touched && error}
-            {...input}
-            onChange={(event: any, child: any) => {
-                console.log(child)
-                input.onChange(event)
-            }}
+                {...input}
+                onChange={(event: any, child: any) => {
+                    console.log(child)
+                    input.onChange(event)
+                }}
             //  value={input.value}
-            children={children}
-            {...custom}>
+                children={children}
+                {...custom}>
 
         </Select>
     )
