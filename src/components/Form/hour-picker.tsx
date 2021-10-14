@@ -1,7 +1,6 @@
 import React from 'react';
 import {TextFieldPropertiesModel} from '../../models/text-field-properties.model';
-import {TextField} from '@material-ui/core';
-import {makeStyles} from '@material-ui/core/styles';
+
 
 const useStyles = makeStyles((theme) => ({
     root: {

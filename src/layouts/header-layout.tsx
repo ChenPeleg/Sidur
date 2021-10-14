@@ -11,7 +11,6 @@ const useStyles = makeStyles((theme) => ({
         fontSize: theme.typography.h1.fontSize,
         margin: theme.typography.h1.marginTop,
         padding: '5px',
-
         display: 'flex',
         flexDirection: 'row',
         justifyContent: 'center',

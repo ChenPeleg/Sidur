@@ -1,8 +1,9 @@
 import React, {useLayoutEffect} from 'react'
-import {ThemeProvider} from '@material-ui/core/styles';
+
 import {themeMain} from '../hoc/themes';
 import {HeaderLayout} from './header-layout';
 import {MainLayout} from './main-layout';
+import {ThemeProvider} from '@mui/material';
 
 
 export const AppLayout = () => {

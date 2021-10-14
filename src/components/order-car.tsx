@@ -1,11 +1,11 @@
 import React from 'react'
-import {makeStyles} from '@material-ui/core/styles';
-import {Card, CardHeader} from '@material-ui/core';
+
 import {OrderCarForm} from './order-car-form';
 import {translations} from '../services/translations';
+import {Card, CardHeader} from '@mui/material';
 
 const TRL = translations;
-const useStyles = makeStyles((theme) => ({
+const useStyles = (() => ({
     cardBase: {
         padding: '10px',
         cursor: 'pointer',
@@ -27,11 +27,14 @@ const useStyles = makeStyles((theme) => ({
 }))
 
 export const OrderCar = () => {
-    const classes = useStyles();
+    const classes = useStyles()
     return (
 
-        <Card className={classes.cardBase}>
-            <CardHeader className={classes.cardHeader} title={TRL.Order}/>
+        <Card sx={{...classes.cardBase}}>
+            <CardHeader sx={{
+                ...classes
+                    .cardHeader
+            }} title={TRL.Order}/>
             <OrderCarForm handleSubmit={'d'} pristine={'b'} reset={'c'} submitting={'d'}/>
         </Card>
 
