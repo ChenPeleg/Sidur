@@ -1,9 +1,8 @@
-import React, {useState} from 'react';
+import React from 'react';
 
 import {Field, Form} from 'react-final-form';
 import {MuiFormPropsModel} from '../models/mui-form-props.model';
 import {useDispatch, useSelector} from 'react-redux';
-import {validate} from './validate';
 import {HourPicker} from './Form/hour-picker';
 import {OrderFields, OrderModel} from '../models/Order.model';
 import {RenderTextField} from './Form/text-field';
@@ -12,6 +11,8 @@ import {DriveType} from '../models/DriveType.enum';
 import {Box, Theme} from '@mui/system';
 import {Button, Checkbox, MenuItem, RadioGroup} from '@mui/material';
 import {translations} from '../services/translations';
+import {validate} from './validate';
+import {ActionTypes} from '../store/actionTypes';
 
 
 const TRL = translations;
@@ -176,22 +177,15 @@ const MaterialUiForm = (muiFormProps: MuiFormPropsModel) => {
 export const OrderCarForm = (formProps: MuiFormPropsModel) => {
 
     const dispatch = useDispatch();
-    const submitHandler = (...args: any) => {
-        console.log(...args);
 
-    }
-    const submittingHandler = (...args: any) => {
-        args[0].preventDefault()
-        console.log(...args);
-
-    }
     const id = formProps.orderId;
     // const initialValues = useSelector((state: { defaultOrderValues: OrderModel }) => state.defaultOrderValues);
     const order = useSelector((state: { orders: OrderModel[] }) => state.orders);
     const initialValues = order.find(order => order.id === id);
-    const [formState, setFormState] = useState(
-        {...initialValues}
-    );
+    let formValues = {...initialValues}
+    // const [formState, setFormState] = useState(
+    //     null
+    // );
 
     return (
         <Form
@@ -208,26 +202,40 @@ export const OrderCarForm = (formProps: MuiFormPropsModel) => {
                 // return validate(values)
             }}
             validate={(values: any) => {
+                dispatch({
+                    type: ActionTypes.UPDATE_ORDER_IN_EDIT,
+                    payLoad: {
+                        ...values
+                    }
+                })
                 // dispatch({
                 //     type: ActionTypes.UPDATE_ORDER,
                 //     payLoad: {
                 //         values
                 //     }
                 // })
-                const newFormState = {...values};
-                console.log(newFormState)
-                //  setFormState({...values})
+                // const newFormState = {...values};
+                // formValues = newFormState;
+                // let updateState: boolean = false;
+                // for (const key of Object.keys(newFormState)) {
+                //     if (formState && (newFormState[key] !== formState[key])) {
+                //         updateState = true;
+                //     }
+                // }
+                // if (updateState) {
+                //     console.log('newFormState', newFormState);
+                //     setFormState({...values})
+                // }
+
                 return validate(values)
             }}
             handleSubmit={(event: Event, values: any) => {
-                // console.log(formState)
-                //
-                // dispatch({
-                //     type: ActionTypes.UPDATE_ORDER,
-                //     payLoad: {
-                //         values
-                //     }
-                // })
+                dispatch({
+                    type: ActionTypes.UPDATE_ORDER,
+                    payLoad: {
+                        id: id
+                    }
+                })
 
             }}
             render={({handleSubmit}: any) => (MaterialUiForm({

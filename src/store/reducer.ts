@@ -37,24 +37,21 @@ const reducer = (state = initialState, action: IAction) => {
     let newState = {
         ...state
     }
-
     switch (action.type) {
         case ActionTypes.UPDATE_ORDER:
-            console.log(newState);
-
-            const orderId = action.payLoad.values.id;
+            const orderId = action.payLoad.id;
 
             newState.orders = newState.orders.map(order => {
-                if (orderId === order.id) {
-                    order.driverName = action.payLoad.values.driverName;
+                if (orderId === order.id && newState.currentOrderInEdit) {
+                    order = newState.currentOrderInEdit
                     // order = {...action.payLoad.values}
                 }
                 return order
-
             });
             // newState.orders = [...newState.orders]
-
-
+            break;
+        case ActionTypes.UPDATE_ORDER_IN_EDIT:
+            newState.currentOrderInEdit = action.payLoad;
             break;
 
         default:
