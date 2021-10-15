@@ -37,9 +37,7 @@ export const HeaderLayout = () => {
                             .headerText
                 }}>
                     <TimeToLeave sx={{
-                        ...
-                            classes
-                                .carIcon
+                        ...classes.carIcon
                     }}/>  &nbsp; סידור </Box>
 
             </Box>

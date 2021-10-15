@@ -1,0 +1,40 @@
+import React from 'react'
+import {translations} from '../services/translations';
+import {Box} from '@mui/system';
+import {OrderCar} from './order-car';
+
+const TRL = translations;
+const useStyles = (() => ({
+    cardBase: {
+        padding: '10px',
+        cursor: 'pointer',
+        width: '50vw',
+        // display: 'flex',
+        // flexDirection: 'row',
+        // justifyContent: 'center',
+        // alignItems: 'center',
+        borderRadius: '15px'
+
+    },
+    cardHeader: {
+        paddingBottom: 0,
+        paddingTop: '10px'
+    },
+    additionalText: {
+        fontSize: '14px'
+    }
+}))
+
+export const Orders = () => {
+    const classes = useStyles();
+
+    return (
+
+        <Box>
+            <OrderCar/>
+        </Box>
+
+
+    )
+
+}

@@ -1,6 +1,7 @@
 import {OrderModel} from '../models/Order.model';
 import {DriveType} from '../models/DriveType.enum';
 
+// noinspection SpellCheckingInspection
 interface SidurStore {
     orders: OrderModel[];
     orderNumberInEdit: number | null;
@@ -15,8 +16,14 @@ const defaultOrderValues: OrderModel = {
     TypeOfDrive: DriveType.OneWayTo,
     Comments: ''
 }
+
+const startOrders = ['Chen', 'Avi', 'Roni'].map((name: string): OrderModel => ({
+    ...defaultOrderValues,
+    driverName: name
+}))
+
 const initialState: SidurStore = {
-    orders: [],
+    orders: startOrders,
     orderNumberInEdit: null,
     currentOrderInEdit: null,
     defaultOrderValues: {...defaultOrderValues}
