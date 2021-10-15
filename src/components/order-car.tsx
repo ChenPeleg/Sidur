@@ -2,8 +2,12 @@ import React from 'react'
 
 import {OrderCarForm} from './order-car-form';
 import {translations} from '../services/translations';
-import {Card, CardHeader} from '@mui/material';
+import {Box, Card, CardHeader} from '@mui/material';
 
+
+type AppProps = {
+    orderId: string;
+};
 const TRL = translations;
 const useStyles = (() => ({
     cardBase: {
@@ -23,20 +27,29 @@ const useStyles = (() => ({
     },
     additionalText: {
         fontSize: '14px'
+    },
+    dividerBox: {
+        width: '20px',
+        height: '20px'
     }
+
 }))
 
-export const OrderCar = () => {
+export const OrderCar = (props: AppProps) => {
     const classes = useStyles()
     return (
+        <>
+            <Card sx={{...classes.cardBase}}>
+                <CardHeader sx={{
+                    ...classes
+                        .cardHeader
+                }} title={TRL.Order}/>
+                <OrderCarForm orderId={props.orderId} handleSubmit={'d'} pristine={'b'} reset={'c'} submitting={'d'}/>
+            </Card>
+            <Box sx={{...classes.dividerBox}}>
 
-        <Card sx={{...classes.cardBase}}>
-            <CardHeader sx={{
-                ...classes
-                    .cardHeader
-            }} title={TRL.Order}/>
-            <OrderCarForm handleSubmit={'d'} pristine={'b'} reset={'c'} submitting={'d'}/>
-        </Card>
+            </Box>
+        </>
 
 
     )

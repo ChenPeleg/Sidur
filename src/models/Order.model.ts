@@ -1,6 +1,7 @@
 import {DriveType} from './DriveType.enum';
 
 export interface OrderModel {
+    id: string,
     driverName: string,
     startHour: string,
     finishHour: string,
@@ -9,6 +10,7 @@ export interface OrderModel {
 }
 
 export class OrderFields implements OrderModel {
+    id: string = 'id';
     driverName: string = 'driverName';
     startHour: string = 'startHour';
     finishHour: string = 'finishHour';

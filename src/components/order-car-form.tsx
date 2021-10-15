@@ -16,6 +16,11 @@ import {Button, Checkbox, MenuItem, RadioGroup} from '@mui/material';
 
 
 const TRL = translations;
+
+type AppProps = {
+    orderId: string;
+};
+
 const useStyles: any = (() => ({
     root: {
         direction: (theme: Theme) => theme.direction,
@@ -172,9 +177,11 @@ const onSubmit = () => {
 }
 export const OrderCarForm = (formProps: MuiFormPropsModel) => {
     const dispatch = useDispatch();
+    const id = formProps.orderId;
+    // const initialValues = useSelector((state: { defaultOrderValues: OrderModel }) => state.defaultOrderValues);
+    const order = useSelector((state: { orders: OrderModel[] }) => state.orders);
+    const initialValues = order.find(order => order.id === id);
 
-    const initialValues = useSelector((state: { defaultOrderValues: OrderModel }) => state.defaultOrderValues);
-    console.log(initialValues)
     return (
         <Form
             initialValues={initialValues}

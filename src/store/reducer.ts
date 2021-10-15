@@ -10,6 +10,7 @@ interface SidurStore {
 }
 
 const defaultOrderValues: OrderModel = {
+    id: '1',
     driverName: '',
     startHour: '08:00',
     finishHour: '09:00',
@@ -17,8 +18,9 @@ const defaultOrderValues: OrderModel = {
     Comments: ''
 }
 
-const startOrders = ['Chen', 'Avi', 'Roni'].map((name: string): OrderModel => ({
+const startOrders: OrderModel[] = ['Chen', 'Avi', 'Roni'].map((name: string, index: number): OrderModel => ({
     ...defaultOrderValues,
+    id: (index + 1).toString(),
     driverName: name
 }))
 

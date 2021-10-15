@@ -2,6 +2,8 @@ import React from 'react'
 import {translations} from '../services/translations';
 import {Box} from '@mui/system';
 import {OrderCar} from './order-car';
+import {useSelector} from 'react-redux';
+import {OrderModel} from '../models/Order.model';
 
 const TRL = translations;
 const useStyles = (() => ({
@@ -26,12 +28,17 @@ const useStyles = (() => ({
 }))
 
 export const Orders = () => {
+
+    const orders = useSelector((state: { orders: OrderModel[] }) => state.orders);
     const classes = useStyles();
 
     return (
 
         <Box>
-            <OrderCar/>
+            {orders.map((o) => (
+                <OrderCar orderId={o.id}/>
+            ))}
+
         </Box>
 
 
