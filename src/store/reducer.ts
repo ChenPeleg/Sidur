@@ -6,9 +6,11 @@ import {ActionTypes} from './actionTypes';
 // noinspection SpellCheckingInspection
 interface SidurStore {
     orders: OrderModel[];
+    orderIdInEdit: null | string;
     orderNumberInEdit: number | null;
-    currentOrderInEdit: OrderModel | null;
-    defaultOrderValues: OrderModel
+    dataHolderForCurrentOrderInEdit: OrderModel | null;
+    defaultOrderValues: OrderModel,
+
 }
 
 const defaultOrderValues: OrderModel = {
@@ -28,8 +30,9 @@ const startOrders: OrderModel[] = ['Chen', 'Avi', 'Roni'].map((name: string, ind
 
 const initialState: SidurStore = {
     orders: startOrders,
+    orderIdInEdit: '1',
     orderNumberInEdit: null,
-    currentOrderInEdit: null,
+    dataHolderForCurrentOrderInEdit: null,
     defaultOrderValues: {...defaultOrderValues}
 }
 
@@ -38,20 +41,34 @@ const reducer = (state = initialState, action: IAction) => {
         ...state
     }
     switch (action.type) {
+        case ActionTypes.CLICKED_ORDER:
+            const clickeOrderId = action.payLoad.id;
+            if (newState.dataHolderForCurrentOrderInEdit) {
+                const currentOrderId = newState.dataHolderForCurrentOrderInEdit.id
+                newState.orders = newState.orders.map(order => {
+                    if (currentOrderId === order.id && newState.dataHolderForCurrentOrderInEdit) {
+                        order = newState.dataHolderForCurrentOrderInEdit
+                    }
+                    return order
+                });
+            }
+            ;
+            newState.dataHolderForCurrentOrderInEdit = null;
+            newState.orderIdInEdit = clickeOrderId
+
+            break;
         case ActionTypes.UPDATE_ORDER:
             const orderId = action.payLoad.id;
-
             newState.orders = newState.orders.map(order => {
-                if (orderId === order.id && newState.currentOrderInEdit) {
-                    order = newState.currentOrderInEdit
-                    // order = {...action.payLoad.values}
+                if (orderId === order.id && newState.dataHolderForCurrentOrderInEdit) {
+                    order = newState.dataHolderForCurrentOrderInEdit
                 }
                 return order
             });
-            // newState.orders = [...newState.orders]
+
             break;
         case ActionTypes.UPDATE_ORDER_IN_EDIT:
-            newState.currentOrderInEdit = action.payLoad;
+            newState.dataHolderForCurrentOrderInEdit = action.payLoad;
             break;
 
         default:

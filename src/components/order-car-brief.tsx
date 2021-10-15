@@ -1,13 +1,16 @@
 import React from 'react';
-import {useSelector} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import {OrderFields, OrderModel} from '../models/Order.model';
-import {Box, Theme} from '@mui/system';
+import {Box, SxProps, Theme} from '@mui/system';
+import {Card} from '@mui/material';
+import {ActionTypes} from '../store/actionTypes';
 
 
 //const TRL = translations;
 
 type AppProps = {
     orderId: string;
+    sx: SxProps
 };
 
 const useStyles: any = (() => ({
@@ -44,9 +47,19 @@ const useStyles: any = (() => ({
 const orderFields: OrderModel = new OrderFields();
 
 
-export const OrderCarBrief = (formProps: AppProps) => {
-    //const dispatch = useDispatch();
-    const id = formProps.orderId;
+export const OrderCarBrief = (props: AppProps) => {
+    const dispatch = useDispatch();
+    const id = props.orderId;
+    const clickHandler = (event: MouseEvent) => {
+
+        dispatch({
+            type: ActionTypes.CLICKED_ORDER,
+            payLoad: {
+                id: id
+            }
+        })
+    }
+
     // const initialValues = useSelector((state: { defaultOrderValues: OrderModel }) => state.defaultOrderValues);
     const orderValues = useSelector((state: { orders: OrderModel[] }) => {
         const order = state.orders.find(order => order.id === id) as OrderModel;
@@ -54,14 +67,28 @@ export const OrderCarBrief = (formProps: AppProps) => {
         return order;
 
     });
-    const startHour = orderValues.startHour
+    const startHour = orderValues.startHour;
+    const style: SxProps = {
+        ...props.sx,
+        bgcolor: {
+            transition: ' ease-in-out 100ms',
+        },
+
+        '&:hover': {
+            'bgcolor': '#f7f2bb',
+
+        },
+
+    }
 
     //  console.log('after use selector called', order);
     // const orderValues: OrderModel =
     return (
-        <Box> {
-            orderValues.startHour} {orderValues.driverName}
-        </Box>
+        <Card sx={style} onClick={(event: any) => clickHandler(event)}>
+            <Box> {
+                orderValues.startHour} {orderValues.driverName}
+            </Box>
+        </Card>
 
     )
 }

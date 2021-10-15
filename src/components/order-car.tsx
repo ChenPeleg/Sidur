@@ -2,12 +2,13 @@ import React from 'react'
 
 import {OrderCarForm} from './order-car-form';
 import {translations} from '../services/translations';
-import {Box, Card, CardHeader} from '@mui/material';
+import {Box, Card, CardHeader, Grow} from '@mui/material';
 import {OrderCarBrief} from './order-car-brief';
 
 
 type AppProps = {
     orderId: string;
+    isInEdit: boolean;
 };
 const TRL = translations;
 const useStyles = (() => ({
@@ -26,6 +27,9 @@ const useStyles = (() => ({
         paddingBottom: 0,
         paddingTop: '10px'
     },
+    growStyle: {
+        transformOrigin: '0 0 0'
+    },
     additionalText: {
         fontSize: '14px'
     },
@@ -40,20 +44,28 @@ export const OrderCar = (props: AppProps) => {
     const classes = useStyles()
     return (
         <>
-            <Card sx={{...classes.cardBase}}>
-                <CardHeader sx={{
-                    ...classes
-                        .cardHeader
-                }} title={TRL.Order}/>
-                <OrderCarForm orderId={props.orderId} handleSubmit={'d'} pristine={'b'} reset={'c'} submitting={'d'}/>
-            </Card>
-            <Box sx={{...classes.dividerBox}}/>
-            <Card sx={{...classes.cardBase}}>
+            {props.isInEdit ? <>
+                    <Grow in={props.isInEdit} style={classes.growStyle}
+                    >
+                        <Card sx={{...classes.cardBase}}>
+                            <CardHeader sx={{
+                                ...classes
+                                    .cardHeader
+                            }} title={TRL.Order}/>
+                            <OrderCarForm orderId={props.orderId} handleSubmit={'d'} pristine={'b'} reset={'c'} submitting={'d'}/>
+                        </Card>
+                    </Grow>
 
-                <OrderCarBrief orderId={props.orderId}/>
-            </Card>
-            <Box sx={{...classes.dividerBox}}/>
- 
+                    <Box sx={{...classes.dividerBox}}/>  </> :
+                <>
+
+                    <OrderCarBrief sx={{...classes.cardBase}} orderId={props.orderId}/>
+
+                    <Box sx={{...classes.dividerBox}}/>
+
+                </>}
+
+
         </>
 
 

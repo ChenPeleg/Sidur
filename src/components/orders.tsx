@@ -30,13 +30,14 @@ const useStyles = (() => ({
 export const Orders = () => {
 
     const orders = useSelector((state: { orders: OrderModel[] }) => state.orders);
+    const orderIdInEdit = useSelector((state: { orderIdInEdit: string | null }) => state.orderIdInEdit);
     const classes = useStyles();
 
     return (
 
         <Box>
             {orders.map((o) => (
-                <OrderCar orderId={o.id} key={o.id}/>
+                <OrderCar orderId={o.id} key={o.id} isInEdit={orderIdInEdit === o.id}/>
             ))}
 
         </Box>
