@@ -188,7 +188,7 @@ export const OrderCarForm = (formProps: MuiFormPropsModel) => {
             onSubmit={onSubmit}
             validate={(values: any) => {
                 dispatch({
-                    type: 'FormChagned',
+                    type: 'FormChanged',
                     payLoad: {
                         values
                     }

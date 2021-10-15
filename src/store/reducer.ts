@@ -1,5 +1,6 @@
 import {OrderModel} from '../models/Order.model';
 import {DriveType} from '../models/DriveType.enum';
+import {Reducer} from 'redux';
 
 // noinspection SpellCheckingInspection
 interface SidurStore {
@@ -31,7 +32,7 @@ const initialState: SidurStore = {
     defaultOrderValues: {...defaultOrderValues}
 }
 
-const reducer = (state = initialState, action: any) => {
+const reducer: Reducer = (state = initialState, action: any) => {
     let newState = {
         ...state
     }
