@@ -1,6 +1,7 @@
 import {OrderModel} from '../models/Order.model';
 import {DriveType} from '../models/DriveType.enum';
-import {Reducer} from 'redux';
+import {IAction} from './store.types';
+import {ActionTypes} from './actionTypes';
 
 // noinspection SpellCheckingInspection
 interface SidurStore {
@@ -32,18 +33,29 @@ const initialState: SidurStore = {
     defaultOrderValues: {...defaultOrderValues}
 }
 
-const reducer: Reducer = (state = initialState, action: any) => {
+const reducer = (state = initialState, action: IAction) => {
     let newState = {
         ...state
     }
-    console.log(initialState)
+
     switch (action.type) {
+        case ActionTypes.UPDATE_ORDER:
+            console.log(newState);
 
+            const orderId = action.payLoad.values.id;
 
-        case 'STOP_SOUND':
+            newState.orders = newState.orders.map(order => {
+                if (orderId === order.id) {
+                    order.driverName = action.payLoad.values.driverName;
+                    // order = {...action.payLoad.values}
+                }
+                return order
+
+            });
+            // newState.orders = [...newState.orders]
+
 
             break;
-
 
         default:
             break;

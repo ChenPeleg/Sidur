@@ -37,7 +37,7 @@ export const RenderSelectField = (
             // errorText={touched && error}
                 {...input}
                 onChange={(event: any, child: any) => {
-                    console.log(child)
+
                     input.onChange(event)
                 }}
             //  value={input.value}

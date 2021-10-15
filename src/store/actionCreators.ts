@@ -1,10 +1,15 @@
-// export function addArticle(article: IArticle) {
-//     const action: ArticleAction = {
-//         type: actionTypes.ADD_ARTICLE,
-//         article,
-//     }
-//
-//     return simulateHttpRequest(action)
-// }
+import {OrderModel} from '../models/Order.model';
+import {IAction} from './store.types';
+import {ActionTypes} from './actionTypes';
+
+export const addOrder = (order: OrderModel): any => {
+    const action: IAction = {
+        type: ActionTypes.ADD_ORDER,
+        payLoad: {}
+    };
+
+    return {}
+}
+
 export const t = () => {
 }

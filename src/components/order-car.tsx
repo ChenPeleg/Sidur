@@ -3,6 +3,7 @@ import React from 'react'
 import {OrderCarForm} from './order-car-form';
 import {translations} from '../services/translations';
 import {Box, Card, CardHeader} from '@mui/material';
+import {OrderCarBrief} from './order-car-brief';
 
 
 type AppProps = {
@@ -46,9 +47,13 @@ export const OrderCar = (props: AppProps) => {
                 }} title={TRL.Order}/>
                 <OrderCarForm orderId={props.orderId} handleSubmit={'d'} pristine={'b'} reset={'c'} submitting={'d'}/>
             </Card>
-            <Box sx={{...classes.dividerBox}}>
+            <Box sx={{...classes.dividerBox}}/>
+            <Card sx={{...classes.cardBase}}>
 
-            </Box>
+                <OrderCarBrief orderId={props.orderId}/>
+            </Card>
+            <Box sx={{...classes.dividerBox}}/>
+ 
         </>
 
 

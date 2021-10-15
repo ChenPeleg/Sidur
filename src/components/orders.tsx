@@ -36,7 +36,7 @@ export const Orders = () => {
 
         <Box>
             {orders.map((o) => (
-                <OrderCar orderId={o.id}/>
+                <OrderCar orderId={o.id} key={o.id}/>
             ))}
 
         </Box>

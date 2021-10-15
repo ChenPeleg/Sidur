@@ -1,8 +1,6 @@
-import React from 'react';
+import React, {useState} from 'react';
 
 import {Field, Form} from 'react-final-form';
-
-import {translations} from '../services/translations';
 import {MuiFormPropsModel} from '../models/mui-form-props.model';
 import {useDispatch, useSelector} from 'react-redux';
 import {validate} from './validate';
@@ -13,6 +11,7 @@ import {RenderSelectField} from './Form/select-field';
 import {DriveType} from '../models/DriveType.enum';
 import {Box, Theme} from '@mui/system';
 import {Button, Checkbox, MenuItem, RadioGroup} from '@mui/material';
+import {translations} from '../services/translations';
 
 
 const TRL = translations;
@@ -88,10 +87,10 @@ const MaterialUiForm = (muiFormProps: MuiFormPropsModel) => {
     } = muiFormProps;
     const classes = useStyles();
 
-    // @ts-ignore
+
     return (
 
-        <form onSubmit={handleSubmit} dir={'rtl'}>
+        <form onSubmit={(...args) => submitting(...args)} dir={'rtl'}>
 
             <Box
                 sx={{
@@ -166,39 +165,75 @@ const MaterialUiForm = (muiFormProps: MuiFormPropsModel) => {
                             .fieldWrapper
                 }}
             >
-                <Button variant="contained" color={'primary'} type="submit">{TRL.Submit}</Button>
+                <Button variant="contained" color={'primary'} type="button" onClick={handleSubmit}>{TRL.Submit}</Button>
 
 
             </Box>
         </form>
     );
 };
-const onSubmit = () => {
-}
+
 export const OrderCarForm = (formProps: MuiFormPropsModel) => {
+
     const dispatch = useDispatch();
+    const submitHandler = (...args: any) => {
+        console.log(...args);
+
+    }
+    const submittingHandler = (...args: any) => {
+        args[0].preventDefault()
+        console.log(...args);
+
+    }
     const id = formProps.orderId;
     // const initialValues = useSelector((state: { defaultOrderValues: OrderModel }) => state.defaultOrderValues);
     const order = useSelector((state: { orders: OrderModel[] }) => state.orders);
     const initialValues = order.find(order => order.id === id);
+    const [formState, setFormState] = useState(
+        {...initialValues}
+    );
 
     return (
         <Form
             initialValues={initialValues}
-            onSubmit={onSubmit}
+
+            onSubmit={(values: any) => {
+                // alert('submit')
+                // dispatch({
+                //     type: ActionTypes.UPDATE_ORDER,
+                //     payLoad: {
+                //         values
+                //     }
+                // })
+                // return validate(values)
+            }}
             validate={(values: any) => {
-                dispatch({
-                    type: 'FormChanged',
-                    payLoad: {
-                        values
-                    }
-                })
+                // dispatch({
+                //     type: ActionTypes.UPDATE_ORDER,
+                //     payLoad: {
+                //         values
+                //     }
+                // })
+                const newFormState = {...values};
+                console.log(newFormState)
+                //  setFormState({...values})
                 return validate(values)
             }}
+            handleSubmit={(event: Event, values: any) => {
+                // console.log(formState)
+                //
+                // dispatch({
+                //     type: ActionTypes.UPDATE_ORDER,
+                //     payLoad: {
+                //         values
+                //     }
+                // })
 
+            }}
             render={({handleSubmit}: any) => (MaterialUiForm({
                 ...formProps,
-                handleSubmit
+                handleSubmit,
+                //  submitting: submittingHandler
             }))
 
             }/>
