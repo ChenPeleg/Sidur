@@ -2,8 +2,11 @@ import React from 'react'
 
 import {OrderCarForm} from './order-car-form';
 import {translations} from '../services/translations';
-import {Box, Card, CardHeader, Grow} from '@mui/material';
+import {Box, Card, CardHeader, Collapse} from '@mui/material';
 import {OrderCarBrief} from './order-car-brief';
+import {SxProps} from '@mui/system';
+import {useDispatch} from 'react-redux';
+import {ActionTypes} from '../store/actionTypes';
 
 
 type AppProps = {
@@ -15,12 +18,16 @@ const useStyles = (() => ({
     cardBase: {
         padding: '10px',
         cursor: 'pointer',
+        maxHeight: '40vh',
+        h: '30vh',
         width: '50vw',
         // display: 'flex',
         // flexDirection: 'row',
         // justifyContent: 'center',
         // alignItems: 'center',
-        borderRadius: '15px'
+        borderRadius: '15px',
+        // height: {transition: ' ease-in-out 300ms'},
+
 
     },
     cardHeader: {
@@ -41,34 +48,55 @@ const useStyles = (() => ({
 }))
 
 export const OrderCar = (props: AppProps) => {
-    const classes = useStyles()
-    return (
-        <>
-            {props.isInEdit ? <>
-                    <Grow in={props.isInEdit} style={classes.growStyle}
-                    >
-                        <Card sx={{...classes.cardBase}}>
-                            <CardHeader sx={{
-                                ...classes
-                                    .cardHeader
-                            }} title={TRL.Order}/>
-                            <OrderCarForm orderId={props.orderId} handleSubmit={'d'} pristine={'b'} reset={'c'} submitting={'d'}/>
-                        </Card>
-                    </Grow>
+    const classes = useStyles();
+    const dispatch = useDispatch();
+    const clickHandler = (event: MouseEvent) => {
 
-                    <Box sx={{...classes.dividerBox}}/>  </> :
-                <>
+        dispatch({
+            type: ActionTypes.CLICKED_ORDER,
+            payLoad: {
+                id: props.orderId
+            }
+        })
+    }
+    const briefOrderStyle: SxProps = props.isInEdit ? {} : {
+        maxHeight: '10vh',
+        height: '4vh',
+        bgcolor: {
+            transition: ' ease-in-out 100ms',
+        },
 
-                    <OrderCarBrief sx={{...classes.cardBase}} orderId={props.orderId}/>
+        '&:hover': {
+            'bgcolor': '#f7f2bb',
 
-                    <Box sx={{...classes.dividerBox}}/>
+        },
 
-                </>}
+    }
+    return (<>
+ 
 
+            <Card sx={{
+                ...classes.cardBase,
+                ...briefOrderStyle
+            }} onClick={(event: any) => clickHandler(event)}>
+                <OrderCarBrief sx={{...classes.cardBase}} orderId={props.orderId}/>
+                {props.isInEdit ? <> <CardHeader sx={{
+                    ...classes
+                        .cardHeader
+                }} title={TRL.Order}/> </> : null}
+
+                <Collapse in={props.isInEdit}>
+
+                    <OrderCarForm orderId={props.orderId} handleSubmit={'d'} pristine={'b'} reset={'c'} submitting={'d'}/>
+
+                </Collapse>
+
+            </Card>
+
+
+            <Box sx={{...classes.dividerBox}}/>
 
         </>
-
-
     )
 
 }
