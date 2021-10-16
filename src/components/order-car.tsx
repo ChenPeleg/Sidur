@@ -28,7 +28,7 @@ const useStyles = (() => ({
         paddingTop: '10px'
     },
     growStyle: {
-        transformOrigin: '0 0 0'
+        // transformOrigin: '0 0 0'
     },
     additionalText: {
         fontSize: '14px'

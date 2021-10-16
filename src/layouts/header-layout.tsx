@@ -27,6 +27,10 @@ const useStyles: any = (() => ({
 
 export const HeaderLayout = () => {
     const classes = useStyles();
+    const icons = '🌱 🌴 🌵 🌷 🌸 🌹 🌺 🌻 🌼 💐 🌾 🌿 🍀 🍁 🍂 🍃 🍄 🌰 🐭 🐹 🐮 🐯 🐇 🐰 🐈 🐱 🐎 🐴 🐑 🐔 🐤 🐣 🐥 🐦 🐧 🐘 🐫 🐗 🐷 🐽 🐕 🐩 🐶 🐺 🐻 🐨 🐼 🐵 🐒 🐲 🐍 🐢 🐸 🐳 🐬 🐙 🐟 🐠 🐡 🐚 🐌 🐛 🐜 🐝 🐞 🐾'
+    const rand = Math.floor(Math.random() * 20);
+    const icon = icons.slice(rand, rand + 3)
+
     return (
 
         <header>
@@ -39,8 +43,13 @@ export const HeaderLayout = () => {
                     <TimeToLeave sx={{
                         ...classes.carIcon
                     }}/>  &nbsp; סידור </Box>
+                <Box sx={{fontSize: '48px'}}>
+                    {icon}
+
+                </Box>
 
             </Box>
+
 
         </header>
 
