@@ -13,10 +13,7 @@ const useStyles = (() => ({
         padding: '10px',
         cursor: 'pointer',
         width: '50vw',
-        // display: 'flex',
-        // flexDirection: 'row',
-        // justifyContent: 'center',
-        // alignItems: 'center',
+
         borderRadius: '15px'
 
     },
@@ -49,7 +46,7 @@ export const Orders = () => {
                 alignItems: 'center',
                 mb: '10px',
                 justifyContent: 'center',
-                width: '30vw',
+                minWidth: '30vw',
             }}>
                 <AddButton addClickHandler={addClickHandler}/>
             </Box>

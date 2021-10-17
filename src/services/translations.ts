@@ -16,7 +16,8 @@ export const translations = {
     'OneWayTo': 'הסעה',
     'OneWayFrom': 'איסוף',
     'TwoWay': 'הלוך חזור',
-    'Submit': 'הוספה ',
+    'Submit': 'סיום ',
+    'Advanced': 'מתקדם ',
     'AddOrder': 'הוסף נסיעה ',
     'Comments': 'הערות ',
 

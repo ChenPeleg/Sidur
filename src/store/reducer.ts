@@ -82,7 +82,18 @@ const reducer = (state = initialState, action: IAction) => {
             }
 
             break;
+        case ActionTypes.ADD_NEW_ORDER:
+            const allOrdersIds: number [] = newState.orders.map(o => Number(o.id));
+            const newId = Math.max(...allOrdersIds) + 1;
+            const newOrder: OrderModel = {
+                ...defaultOrderValues,
+                id: newId.toString()
+            }
+            newState.orders = [...newState.orders]
+            newState.orders.unshift(newOrder)
 
+
+            break;
         default:
             break;
 

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 
 import {Field, Form} from 'react-final-form';
 import {MuiFormPropsModel} from '../models/mui-form-props.model';
@@ -87,6 +87,10 @@ const MaterialUiForm = (muiFormProps: MuiFormPropsModel) => {
         submitting
     } = muiFormProps;
     const classes = useStyles();
+    const [isAdvanced, setIsAdvanced] = useState(false);
+    const handleSetAdvanced = (value: boolean = true) => {
+        setIsAdvanced(value)
+    }
 
 
     return (
@@ -166,9 +170,22 @@ const MaterialUiForm = (muiFormProps: MuiFormPropsModel) => {
                             .fieldWrapper
                 }}
             >
+                <Button variant="text" type="button" onClick={() => handleSetAdvanced(true)}>{TRL.Advanced}</Button>
+                <Box sx={{
+                    width: '10px',
+                    height: '5px'
+                }}/>
+
+
                 <Button variant="contained" color={'primary'} type="button" onClick={handleSubmit}>{TRL.Submit}</Button>
-
-
+                {/*<Typography component="legend">Controlled</Typography>*/}
+                {/*<Rating*/}
+                {/*    name="simple-controlled"*/}
+                {/*    value={value}*/}
+                {/*    onChange={(event, newValue) => {*/}
+                {/*        setValue(newValue);*/}
+                {/*    }}*/}
+                {/*/>*/}
             </Box>
         </form>
     );

@@ -2,7 +2,7 @@ import React, {useState} from 'react'
 
 import {OrderCarForm} from './order-car-form';
 import {translations} from '../services/translations';
-import {Box, Card, CardHeader, Collapse} from '@mui/material';
+import {Box, Card, Collapse} from '@mui/material';
 import {OrderCarBrief} from './order-car-brief';
 import {SxProps} from '@mui/system';
 import {useDispatch} from 'react-redux';
@@ -86,19 +86,24 @@ export const OrderCar = (props: AppProps) => {
                     ...classes.cardBase,
                     ...briefOrderStyle
                 }} onClick={(event: any) => !props.isInEdit ? cardClickHandler(event) : null}>
-                    <Box sx={{
-                        display: 'flex',
-                        flexDirection: 'row',
-                        justifyContent: 'space-between'
-                    }}>
-                        <OrderCarBrief isInEdit={props.isInEdit} sx={{...classes.cardBase}} orderId={props.orderId}/>
-                        <DeleteButton deleteClickHandler={deleteClickHandler} sx={{fontSize: '14px'}}/>
-                    </Box>
+                    <div tabIndex={0}>
+                        <Box sx={{
 
-                    {props.isInEdit ? <> <CardHeader sx={{
-                        ...classes
-                            .cardHeader
-                    }} title={TRL.Order}/> </> : null}
+                            display: 'flex',
+                            flexDirection: 'row',
+                            justifyContent: 'space-between'
+                        }}>
+                            <OrderCarBrief isInEdit={props.isInEdit} sx={{...classes.cardBase}} orderId={props.orderId}/>
+                            <DeleteButton deleteClickHandler={deleteClickHandler} sx={{fontSize: '14px'}}/>
+                        </Box>
+                    </div>
+
+                    {props.isInEdit ? <>
+                        {/*    <CardHeader sx={{*/}
+                        {/*    ...classes*/}
+                        {/*        .cardHeader*/}
+                        {/*}} title={TRL.Order}/>*/}
+                    </> : null}
 
                     <Collapse in={props.isInEdit}>
 
