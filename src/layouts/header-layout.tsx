@@ -28,8 +28,8 @@ const useStyles: any = (() => ({
 export const HeaderLayout = () => {
     const classes = useStyles();
     const icons = '🌱 🌴 🌵 🌷 🌸 🌹 🌺 🌻 🌼 💐 🌾 🌿 🍀 🍁 🍂 🍃 🍄 🌰 🐭 🐹 🐮 🐯 🐇 🐰 🐈 🐱 🐎 🐴 🐑 🐔 🐤 🐣 🐥 🐦 🐧 🐘 🐫 🐗 🐷 🐽 🐕 🐩 🐶 🐺 🐻 🐨 🐼 🐵 🐒 🐲 🐍 🐢 🐸 🐳 🐬 🐙 🐟 🐠 🐡 🐚 🐌 🐛 🐜 🐝 🐞 🐾'
-    const rand = Math.floor(Math.random() * 20);
-    const icon = icons.slice(rand, rand + 3)
+    const rand = Math.floor(Math.random() * 10);
+    const icon = icons.slice(rand * 2, (rand * 2) + 3)
 
     return (
 

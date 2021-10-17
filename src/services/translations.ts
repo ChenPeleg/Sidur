@@ -17,6 +17,7 @@ export const translations = {
     'OneWayFrom': 'איסוף',
     'TwoWay': 'הלוך חזור',
     'Submit': 'הוספה ',
+    'AddOrder': 'הוסף נסיעה ',
     'Comments': 'הערות ',
 
 }

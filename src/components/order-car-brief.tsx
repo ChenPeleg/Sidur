@@ -2,13 +2,15 @@ import React from 'react';
 import {useSelector} from 'react-redux';
 import {OrderFields, OrderModel} from '../models/Order.model';
 import {Box, SxProps, Theme} from '@mui/system';
+import {Typography} from '@mui/material';
 
 
 //const TRL = translations;
 
 type AppProps = {
     orderId: string;
-    sx: SxProps
+    sx: SxProps,
+    isInEdit: boolean
 };
 
 const useStyles: any = (() => ({
@@ -48,18 +50,19 @@ const orderFields: OrderModel = new OrderFields();
 export const OrderCarBrief = (props: AppProps) => {
     const id = props.orderId;
     const orderValues = useSelector((state: { orders: OrderModel[] }) => {
-        const order = state.orders.find(order => order.id === id) as OrderModel;
-
-        return order;
-
+        return state.orders.find(order => order.id === id) as OrderModel;
     });
     const startHour = orderValues.startHour;
 
 
     return (
 
-        <Box> {
-            orderValues.startHour} {orderValues.driverName}
+        <Box sx={{padding: '5px'}}>
+            <Typography fontWeight={props.isInEdit ? 'bold' : 'initial'} fontSize={'large'} padding={'initial'}>
+                {
+                    orderValues.startHour} {orderValues.driverName}
+            </Typography>
+
         </Box>
 
 

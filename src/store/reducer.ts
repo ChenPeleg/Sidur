@@ -71,6 +71,17 @@ const reducer = (state = initialState, action: IAction) => {
         case ActionTypes.UPDATE_ORDER_IN_EDIT:
             newState.dataHolderForCurrentOrderInEdit = action.payLoad;
             break;
+        case ActionTypes.DELETE_ORDER:
+            const deleteOrderId = action.payLoad.id;
+            newState.orders = newState.orders.filter(order => deleteOrderId !== order.id)
+            if (newState.dataHolderForCurrentOrderInEdit && newState.dataHolderForCurrentOrderInEdit.id === deleteOrderId) {
+                newState.dataHolderForCurrentOrderInEdit = null;
+            }
+            if (newState.orderIdInEdit === deleteOrderId) {
+                newState.orderIdInEdit = null;
+            }
+
+            break;
 
         default:
             break;

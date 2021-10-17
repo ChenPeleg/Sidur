@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState} from 'react'
 
 import {OrderCarForm} from './order-car-form';
 import {translations} from '../services/translations';
@@ -7,6 +7,7 @@ import {OrderCarBrief} from './order-car-brief';
 import {SxProps} from '@mui/system';
 import {useDispatch} from 'react-redux';
 import {ActionTypes} from '../store/actionTypes';
+import {DeleteButton} from './delete-button';
 
 
 type AppProps = {
@@ -17,16 +18,8 @@ const TRL = translations;
 const useStyles = (() => ({
     cardBase: {
         padding: '10px',
-        cursor: 'pointer',
-        // maxHeight: '40vh',
-        // h: '30vh',
         width: '50vw',
-        // display: 'flex',
-        // flexDirection: 'row',
-        // justifyContent: 'center',
-        // alignItems: 'center',
         borderRadius: '15px',
-        // height: {transition: ' ease-in-out 300ms'},
 
 
     },
@@ -46,9 +39,15 @@ const useStyles = (() => ({
 
 export const OrderCar = (props: AppProps) => {
     const classes = useStyles();
+    const [inHover, setInHover] = useState(false);
+    const onMouseOver = () => {
+        setInHover(!props.isInEdit)
+    };
+    const onMouseOut = () => {
+        setInHover(false)
+    };
     const dispatch = useDispatch();
-    const clickHandler = (event: MouseEvent) => {
-
+    const cardClickHandler = (event: MouseEvent) => {
         dispatch({
             type: ActionTypes.CLICKED_ORDER,
             payLoad: {
@@ -56,43 +55,64 @@ export const OrderCar = (props: AppProps) => {
             }
         })
     }
-    const briefOrderStyle: SxProps = props.isInEdit ? {} : {
+    const deleteClickHandler = (event: any) => {
+        event.stopPropagation();
+        dispatch({
+            type: ActionTypes.DELETE_ORDER,
+            payLoad: {
+                id: props.orderId
+            }
+        })
 
+    }
+    const briefOrderStyle: SxProps = props.isInEdit ? {} : {
+        cursor: 'pointer',
         bgcolor: {
             transition: ' ease-in-out 100ms',
         },
 
-        '&:hover': {
-            'bgcolor': '#f7f2bb',
-
-        },
+        // '&:hover': {
+        //     'bgcolor': '#f7f2bb',
+        //
+        // },
 
     }
-    return (<>
+    return (
+        <Box>
 
-            <Card sx={{
-                ...classes.cardBase,
-                ...briefOrderStyle
-            }} onClick={(event: any) => !props.isInEdit ? clickHandler(event) : null}>
-                <OrderCarBrief sx={{...classes.cardBase}} orderId={props.orderId}/>
-                {props.isInEdit ? <> <CardHeader sx={{
-                    ...classes
-                        .cardHeader
-                }} title={TRL.Order}/> </> : null}
+            <Box sx={{display: 'flex'}}>
+                <Card onMouseOver={onMouseOver}
+                      onMouseOut={onMouseOut} elevation={inHover ? 7 : 2} sx={{
+                    ...classes.cardBase,
+                    ...briefOrderStyle
+                }} onClick={(event: any) => !props.isInEdit ? cardClickHandler(event) : null}>
+                    <Box sx={{
+                        display: 'flex',
+                        flexDirection: 'row',
+                        justifyContent: 'space-between'
+                    }}>
+                        <OrderCarBrief isInEdit={props.isInEdit} sx={{...classes.cardBase}} orderId={props.orderId}/>
+                        <DeleteButton deleteClickHandler={deleteClickHandler} sx={{fontSize: '14px'}}/>
+                    </Box>
 
-                <Collapse in={props.isInEdit}>
+                    {props.isInEdit ? <> <CardHeader sx={{
+                        ...classes
+                            .cardHeader
+                    }} title={TRL.Order}/> </> : null}
 
-                    <OrderCarForm isInEdit={props.isInEdit} orderId={props.orderId} handleSubmit={'d'} pristine={'b'} reset={'c'}
-                                  submitting={'d'}/>
+                    <Collapse in={props.isInEdit}>
 
-                </Collapse>
+                        <OrderCarForm isInEdit={props.isInEdit} orderId={props.orderId} handleSubmit={'d'} pristine={'b'} reset={'c'}
+                                      submitting={'d'}/>
 
-            </Card>
+                    </Collapse>
+
+                </Card>
 
 
+            </Box>
             <Box sx={{...classes.dividerBox}}/>
-
-        </>
+        </Box>
     )
 
 }

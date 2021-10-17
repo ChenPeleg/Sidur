@@ -2,8 +2,10 @@ import React from 'react'
 import {translations} from '../services/translations';
 import {Box} from '@mui/system';
 import {OrderCar} from './order-car';
-import {useSelector} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import {OrderModel} from '../models/Order.model';
+import {AddButton} from './add-button';
+import {ActionTypes} from '../store/actionTypes';
 
 const TRL = translations;
 const useStyles = (() => ({
@@ -28,18 +30,35 @@ const useStyles = (() => ({
 }))
 
 export const Orders = () => {
-
+    const dispatch = useDispatch()
     const orders = useSelector((state: { orders: OrderModel[] }) => state.orders);
     const orderIdInEdit = useSelector((state: { orderIdInEdit: string | null }) => state.orderIdInEdit);
     const classes = useStyles();
+    const addClickHandler = (event: any) => {
+        dispatch({
+            type: ActionTypes.ADD_NEW_ORDER,
+            payLoad: {}
+        })
+    }
 
     return (
-
         <Box>
-            {orders.map((o) => (
-                <OrderCar orderId={o.id} key={o.id} isInEdit={orderIdInEdit === o.id}/>
-            ))}
+            <Box sx={{
+                display: 'flex',
+                flexDirection: 'row',
+                alignItems: 'center',
+                mb: '10px',
+                justifyContent: 'center',
+                width: '30vw',
+            }}>
+                <AddButton addClickHandler={addClickHandler}/>
+            </Box>
+            <Box>
+                {orders.map((o) => (
+                    <OrderCar orderId={o.id} key={o.id} isInEdit={orderIdInEdit === o.id}/>
+                ))}
 
+            </Box>
         </Box>
 
 
