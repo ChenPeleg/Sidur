@@ -18,8 +18,8 @@ const useStyles = (() => ({
     cardBase: {
         padding: '10px',
         cursor: 'pointer',
-        maxHeight: '40vh',
-        h: '30vh',
+        // maxHeight: '40vh',
+        // h: '30vh',
         width: '50vw',
         // display: 'flex',
         // flexDirection: 'row',
@@ -33,9 +33,6 @@ const useStyles = (() => ({
     cardHeader: {
         paddingBottom: 0,
         paddingTop: '10px'
-    },
-    growStyle: {
-        // transformOrigin: '0 0 0'
     },
     additionalText: {
         fontSize: '14px'
@@ -60,8 +57,7 @@ export const OrderCar = (props: AppProps) => {
         })
     }
     const briefOrderStyle: SxProps = props.isInEdit ? {} : {
-        maxHeight: '10vh',
-        height: '4vh',
+
         bgcolor: {
             transition: ' ease-in-out 100ms',
         },
@@ -73,12 +69,11 @@ export const OrderCar = (props: AppProps) => {
 
     }
     return (<>
- 
 
             <Card sx={{
                 ...classes.cardBase,
                 ...briefOrderStyle
-            }} onClick={(event: any) => clickHandler(event)}>
+            }} onClick={(event: any) => !props.isInEdit ? clickHandler(event) : null}>
                 <OrderCarBrief sx={{...classes.cardBase}} orderId={props.orderId}/>
                 {props.isInEdit ? <> <CardHeader sx={{
                     ...classes
@@ -87,7 +82,8 @@ export const OrderCar = (props: AppProps) => {
 
                 <Collapse in={props.isInEdit}>
 
-                    <OrderCarForm orderId={props.orderId} handleSubmit={'d'} pristine={'b'} reset={'c'} submitting={'d'}/>
+                    <OrderCarForm isInEdit={props.isInEdit} orderId={props.orderId} handleSubmit={'d'} pristine={'b'} reset={'c'}
+                                  submitting={'d'}/>
 
                 </Collapse>
 

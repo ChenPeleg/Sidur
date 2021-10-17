@@ -8,7 +8,11 @@ import {createStore} from 'redux';
 import reducer from './store/reducer';
 
 
-const store = createStore(reducer);
+// @ts-ignore
+const composeEnhancers = (window as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+const store = createStore(reducer,
+    (window as any).__REDUX_DEVTOOLS_EXTENSION__ &&
+    (window as any).__REDUX_DEVTOOLS_EXTENSION__());
 ReactDOM.render(
     <React.StrictMode>
         <Provider store={store}>

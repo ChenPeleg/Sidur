@@ -179,57 +179,35 @@ export const OrderCarForm = (formProps: MuiFormPropsModel) => {
     const dispatch = useDispatch();
 
     const id = formProps.orderId;
-    // const initialValues = useSelector((state: { defaultOrderValues: OrderModel }) => state.defaultOrderValues);
     const order = useSelector((state: { orders: OrderModel[] }) => state.orders);
     const initialValues = order.find(order => order.id === id);
     let formValues = {...initialValues}
-    // const [formState, setFormState] = useState(
-    //     null
-    // );
 
     return (
         <Form
             initialValues={initialValues}
 
             onSubmit={(values: any) => {
-                // alert('submit')
-                // dispatch({
-                //     type: ActionTypes.UPDATE_ORDER,
-                //     payLoad: {
-                //         values
-                //     }
-                // })
-                // return validate(values)
+
             }}
             validate={(values: any) => {
+                if (!formProps.isInEdit) {
+                    return
+                }
                 dispatch({
                     type: ActionTypes.UPDATE_ORDER_IN_EDIT,
                     payLoad: {
                         ...values
                     }
                 })
-                // dispatch({
-                //     type: ActionTypes.UPDATE_ORDER,
-                //     payLoad: {
-                //         values
-                //     }
-                // })
-                // const newFormState = {...values};
-                // formValues = newFormState;
-                // let updateState: boolean = false;
-                // for (const key of Object.keys(newFormState)) {
-                //     if (formState && (newFormState[key] !== formState[key])) {
-                //         updateState = true;
-                //     }
-                // }
-                // if (updateState) {
-                //     console.log('newFormState', newFormState);
-                //     setFormState({...values})
-                // }
+
 
                 return validate(values)
             }}
             handleSubmit={(event: Event, values: any) => {
+                if (!formProps.isInEdit) {
+                    return
+                }
                 dispatch({
                     type: ActionTypes.UPDATE_ORDER,
                     payLoad: {

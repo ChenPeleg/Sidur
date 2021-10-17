@@ -7,7 +7,7 @@ import {ActionTypes} from './actionTypes';
 interface SidurStore {
     orders: OrderModel[];
     orderIdInEdit: null | string;
-    orderNumberInEdit: number | null;
+
     dataHolderForCurrentOrderInEdit: OrderModel | null;
     defaultOrderValues: OrderModel,
 
@@ -31,7 +31,6 @@ const startOrders: OrderModel[] = ['Chen', 'Avi', 'Roni'].map((name: string, ind
 const initialState: SidurStore = {
     orders: startOrders,
     orderIdInEdit: '1',
-    orderNumberInEdit: null,
     dataHolderForCurrentOrderInEdit: null,
     defaultOrderValues: {...defaultOrderValues}
 }
@@ -46,7 +45,7 @@ const reducer = (state = initialState, action: IAction) => {
             if (newState.dataHolderForCurrentOrderInEdit) {
                 const currentOrderId = newState.dataHolderForCurrentOrderInEdit.id
                 newState.orders = newState.orders.map(order => {
-                    if (currentOrderId === order.id && newState.dataHolderForCurrentOrderInEdit) {
+                    if ((currentOrderId === order.id) && newState.dataHolderForCurrentOrderInEdit) {
                         order = newState.dataHolderForCurrentOrderInEdit
                     }
                     return order
@@ -60,11 +59,13 @@ const reducer = (state = initialState, action: IAction) => {
         case ActionTypes.UPDATE_ORDER:
             const orderId = action.payLoad.id;
             newState.orders = newState.orders.map(order => {
-                if (orderId === order.id && newState.dataHolderForCurrentOrderInEdit) {
+                if ((orderId === order.id) && newState.dataHolderForCurrentOrderInEdit) {
                     order = newState.dataHolderForCurrentOrderInEdit
                 }
                 return order
             });
+            newState.dataHolderForCurrentOrderInEdit = null;
+            newState.orderIdInEdit = null
 
             break;
         case ActionTypes.UPDATE_ORDER_IN_EDIT:

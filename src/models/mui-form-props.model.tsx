@@ -3,5 +3,7 @@ export interface MuiFormPropsModel {
     pristine: any,
     reset: any,
     submitting: any,
-    orderId: any
+    orderId: any,
+    isInEdit: boolean
+
 }
