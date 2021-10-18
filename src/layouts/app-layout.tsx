@@ -1,9 +1,9 @@
 import React, {useLayoutEffect} from 'react'
 
 import {themeMain} from '../hoc/themes';
-import {HeaderLayout} from './header-layout';
 import {MainLayout} from './main-layout';
 import {ThemeProvider} from '@mui/material';
+import AppNavBar from '../components/app-nav-bar';
 
 
 export const AppLayout = () => {
@@ -14,7 +14,8 @@ export const AppLayout = () => {
     return (
         <ThemeProvider theme={themeMain}>
             <div className="app-background" dir={'rtl'}>
-                <HeaderLayout/>
+                <AppNavBar/>
+                {/*<HeaderLayout/>*/}
                 <MainLayout/>
 
             </div>
