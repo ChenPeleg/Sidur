@@ -4,10 +4,16 @@ import {IAction} from './store.types';
 import {ActionTypes} from './actionTypes';
 
 // noinspection SpellCheckingInspection
-interface SidurStore {
+export interface SidurRecord {
+    id: string,
+    Name: string
+}
+
+export interface SidurStore {
+    sidurCollection: SidurRecord[]
+    sidurId: string;
     orders: OrderModel[];
     orderIdInEdit: null | string;
-
     dataHolderForCurrentOrderInEdit: OrderModel | null;
     defaultOrderValues: OrderModel,
 
@@ -29,6 +35,20 @@ const startOrders: OrderModel[] = ['Chen', 'Avi', 'Roni'].map((name: string, ind
 }))
 
 const initialState: SidurStore = {
+    sidurCollection: [{
+        id: '1',
+        Name: 'סידור יום שני'
+    }, {
+        id: '2',
+        Name: 'סידור גנים'
+    }, {
+        id: '3',
+        Name: 'סידור שבת'
+    }, {
+        id: '4',
+        Name: 'סידור יום ראשון'
+    }],
+    sidurId: '1',
     orders: startOrders,
     orderIdInEdit: '1',
     dataHolderForCurrentOrderInEdit: null,

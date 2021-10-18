@@ -13,12 +13,17 @@ import MailIcon from '@mui/icons-material/Mail';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import MoreIcon from '@mui/icons-material/MoreVert';
 import {translations} from '../services/translations';
+import {useSelector} from 'react-redux';
+import {Select} from '@mui/material';
+import {SidurRecord, SidurStore} from '../store/reducer';
 
 
 export default function AppNavBar() {
     const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
     const [mobileMoreAnchorEl, setMobileMoreAnchorEl] =
         React.useState<null | HTMLElement>(null);
+    const sidurInitialId = useSelector((state: SidurStore) => state.sidurId);
+    const sidurCollection = useSelector((state: SidurStore) => state.sidurCollection);
 
     const isMenuOpen = Boolean(anchorEl);
     const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
@@ -115,15 +120,26 @@ export default function AppNavBar() {
     );
 
     return (
-        <Box sx={{flexGrow: 1}}>
-            <AppBar position="static">
-                <Toolbar>
+        <Box dir="rtl"
+            // sx={{flexGrow: 1}}
+        >
+            <AppBar position="static" sx={{
+                mr: 0,
+                ml: 0,
+                'div.MuiToolbar-root.MuiToolbar-gutters.MuiToolbar-regular': {
+                    margin: 0
+                }
+            }}>
+                <Toolbar sx={{
+                    mr: 0,
+                    ml: 0
+                }}>
                     <IconButton
                         size="large"
-                        edge="start"
+                        // edge="start"
                         color="inherit"
                         aria-label="open drawer"
-                        sx={{mr: 2}}
+                        sx={{mr: 0}}
                     >
                         <MenuIcon/>
                     </IconButton>
@@ -137,18 +153,30 @@ export default function AppNavBar() {
                                 sm: 'block'
                             }
                         }}
-                    >
-                        {translations.Sidur}
+                    >    &nbsp;   &nbsp;
+                        {translations.Sidur} &nbsp;&nbsp;-
+
+                        &nbsp;&nbsp;
+
+                        <Select dir={'rtl'} disableUnderline={true} variant={'standard'} defaultValue={sidurInitialId}
+                                sx={{
+                                    color: 'white',
+                                    fontSize: '1.25rem',
+                                    fontWeight: 'normal'
+                                }}
+
+
+                                onChange={(event: any, child: any) => {
+
+
+                                }}
+
+                        >
+                            {sidurCollection.map((sidurRecord: SidurRecord) => <MenuItem key={sidurRecord.id}
+                                                                                         value={sidurRecord.id}> &nbsp;&nbsp;{sidurRecord.Name} &nbsp;&nbsp;</MenuItem>)}
+                        </Select>
                     </Typography>
-                    {/*<Search>*/}
-                    {/*    <SearchIconWrapper>*/}
-                    {/*        <SearchIcon/>*/}
-                    {/*    </SearchIconWrapper>*/}
-                    {/*    <StyledInputBase*/}
-                    {/*        placeholder="Search…"*/}
-                    {/*        inputProps={{'aria-label': 'search'}}*/}
-                    {/*    />*/}
-                    {/*</Search>*/}
+
                     <Box sx={{flexGrow: 1}}/>
                     <Box sx={{
                         display: {
