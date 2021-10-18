@@ -153,11 +153,8 @@ export default function AppNavBar() {
                                 sm: 'block'
                             }
                         }}
-                    >    &nbsp;   &nbsp;
-                        {translations.Sidur} &nbsp;&nbsp;-
-
-                        &nbsp;&nbsp;
-
+                    >    &nbsp; &nbsp;
+                        {translations.Sidur}
                         <Select dir={'rtl'} disableUnderline={true} variant={'standard'} defaultValue={sidurInitialId}
                                 sx={{
                                     color: 'white',

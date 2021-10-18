@@ -6,7 +6,9 @@ import {ActionTypes} from './actionTypes';
 // noinspection SpellCheckingInspection
 export interface SidurRecord {
     id: string,
-    Name: string
+    Name: string,
+    orders?: OrderModel[];
+    defaultOrderValues?: OrderModel,
 }
 
 export interface SidurStore {
