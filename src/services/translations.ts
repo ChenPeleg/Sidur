@@ -25,5 +25,7 @@ export const translations = {
     'Advanced': 'מתקדם ',
     'AddOrder': 'הוסף נסיעה ',
     'Comments': 'הערות ',
+    'Approve': 'אישור',
+    'Cancel': 'ביטול'
 
 }

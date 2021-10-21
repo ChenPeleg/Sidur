@@ -1,10 +1,10 @@
 import * as React from 'react';
+import {useRef} from 'react';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
-import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import {translations} from '../../services/translations';
 
@@ -21,19 +21,20 @@ export const SidurRenameDialog = (props: SidurRenameProps) => {
         selectedValue,
         open
     } = props;
-
-    const handleClose = () => {
+    const valueRef: any = useRef('')
+    const handleCloseCancel = () => {
         onClose(selectedValue);
+    };
+    const handleCloseRename = () => {
+        onClose(valueRef.current.value || selectedValue);
     };
     return (
         <div>
 
-            <Dialog open={open} onClose={handleClose}>
+            <Dialog open={open} onClose={handleCloseCancel}>
                 <DialogTitle> {translations.Rename}</DialogTitle>
                 <DialogContent>
-                    <DialogContentText>
-                        {translations.Rename}
-                    </DialogContentText>
+
                     <TextField
                         autoFocus
                         margin="dense"
@@ -42,11 +43,13 @@ export const SidurRenameDialog = (props: SidurRenameProps) => {
                         type="text"
                         fullWidth
                         variant="standard"
+                        defaultValue={selectedValue}
+                        inputRef={valueRef}
                     />
                 </DialogContent>
                 <DialogActions>
-                    <Button onClick={handleClose}>Cancel</Button>
-                    <Button onClick={handleClose}>Subscribe</Button>
+                    <Button onClick={handleCloseCancel}>{translations.Cancel}</Button>
+                    <Button onClick={handleCloseRename}>{translations.Approve}</Button>
                 </DialogActions>
             </Dialog>
         </div>

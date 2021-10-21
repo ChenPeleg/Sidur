@@ -15,6 +15,7 @@ import {Select} from '@mui/material';
 import {SidurRecord, SidurStore} from '../../store/reducer';
 import {Delete, DriveFileRenameOutline, Edit, FileCopy, ImportExport} from '@mui/icons-material';
 import {SidurRenameDialog} from './sidur-rename-dialog';
+import {ProfileMenu} from './profile-menu';
 
 
 enum clickActionType {
@@ -32,20 +33,21 @@ export const AppNavBar = () => {
 
     const sidurInitialId = useSelector((state: SidurStore) => state.sidurId);
     const sidurCollection = useSelector((state: SidurStore) => state.sidurCollection);
+    const sidurSelected = sidurCollection.find((sidurRecord: SidurRecord) => sidurRecord.id === sidurInitialId)
+    const sidurName = sidurSelected?.Name || '';
 
-    const isMenuOpen = Boolean(anchorEl);
-    const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
+
+    const isProfileMenuOpen = Boolean(anchorEl);
+    const isSidurMenuOpen = Boolean(mobileMoreAnchorEl);
 
     const handleProfileMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
         setAnchorEl(event.currentTarget);
     };
 
-
     const handleRenameClose = (value: string) => {
         setRenameOpen(false);
         //  setSelectedValue(value);
     };
-
     const handleSidurMenuClick = (event: React.MouseEvent<HTMLElement>, clickAction: clickActionType) => {
         switch (clickAction) {
             case clickActionType.CreateCopy:
@@ -59,16 +61,16 @@ export const AppNavBar = () => {
                 break;
             default:
         }
+        handleSidurMenuClose()
     };
 
-
-    const handleMobileMenuClose = () => {
+    const handleSidurMenuClose = () => {
         setMobileMoreAnchorEl(null);
     };
 
-    const handleMenuClose = () => {
+    const handleProfileMenuClose = () => {
         setAnchorEl(null);
-        handleMobileMenuClose();
+        handleSidurMenuClose();
     };
 
     const handleSidurMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
@@ -76,26 +78,7 @@ export const AppNavBar = () => {
     };
 
     const menuId = 'primary-search-account-menu';
-    const renderMenu = (
-        <Menu
-            anchorEl={anchorEl}
-            anchorOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
-            }}
-            id={menuId}
-            keepMounted
-            transformOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
-            }}
-            open={isMenuOpen}
-            onClose={handleMenuClose}
-        >
-            <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
-            <MenuItem onClick={handleMenuClose}>My account</MenuItem>
-        </Menu>
-    );
+
 
     const sidurMenuId = 'primary-search-account-menu-mobile';
     const renderSidurMenu = (
@@ -111,8 +94,8 @@ export const AppNavBar = () => {
                 vertical: 'top',
                 horizontal: 'right',
             }}
-            open={isMobileMenuOpen}
-            onClose={handleMobileMenuClose}
+            open={isSidurMenuOpen}
+            onClose={handleSidurMenuClose}
         >
             <MenuItem onClick={(e) => handleSidurMenuClick(e, clickActionType.Rename)}>
 
@@ -240,8 +223,8 @@ export const AppNavBar = () => {
                 </Toolbar>
             </AppBar>
             {renderSidurMenu}
-            {renderMenu}
-            <SidurRenameDialog open={RenameOpen} onClose={handleRenameClose} selectedValue={sidurInitialId}/>
+            <ProfileMenu menuId={menuId} anchorEl={anchorEl} handleMenuClose={handleProfileMenuClose} isMenuOpen={isProfileMenuOpen}/>
+            <SidurRenameDialog open={RenameOpen} onClose={handleRenameClose} selectedValue={sidurName}/>
 
         </Box>
     );
