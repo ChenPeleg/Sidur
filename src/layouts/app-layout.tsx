@@ -3,7 +3,7 @@ import React, {useLayoutEffect} from 'react'
 import {themeMain} from '../hoc/themes';
 import {MainLayout} from './main-layout';
 import {ThemeProvider} from '@mui/material';
-import AppNavBar from '../components/app-nav-bar';
+import {AppNavBar} from '../components/NavBar/app-nav-bar';
 
 
 export const AppLayout = () => {

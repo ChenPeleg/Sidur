@@ -4,24 +4,32 @@ import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
-import Badge from '@mui/material/Badge';
 import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
 import MenuIcon from '@mui/icons-material/Menu';
 import AccountCircle from '@mui/icons-material/AccountCircle';
-import MailIcon from '@mui/icons-material/Mail';
-import NotificationsIcon from '@mui/icons-material/Notifications';
 import MoreIcon from '@mui/icons-material/MoreVert';
-import {translations} from '../services/translations';
+import {translations} from '../../services/translations';
 import {useSelector} from 'react-redux';
 import {Select} from '@mui/material';
-import {SidurRecord, SidurStore} from '../store/reducer';
+import {SidurRecord, SidurStore} from '../../store/reducer';
+import {Delete, DriveFileRenameOutline, Edit, FileCopy, ImportExport} from '@mui/icons-material';
+import {SidurRenameDialog} from './sidur-rename-dialog';
 
 
-export default function AppNavBar() {
+enum clickActionType {
+    Rename = 1,
+    Delete = 2,
+    Export = 3,
+    CreateCopy
+}
+
+export const AppNavBar = () => {
     const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+    const [RenameOpen, setRenameOpen] = React.useState(false);
     const [mobileMoreAnchorEl, setMobileMoreAnchorEl] =
         React.useState<null | HTMLElement>(null);
+
     const sidurInitialId = useSelector((state: SidurStore) => state.sidurId);
     const sidurCollection = useSelector((state: SidurStore) => state.sidurCollection);
 
@@ -32,6 +40,28 @@ export default function AppNavBar() {
         setAnchorEl(event.currentTarget);
     };
 
+
+    const handleRenameClose = (value: string) => {
+        setRenameOpen(false);
+        //  setSelectedValue(value);
+    };
+
+    const handleSidurMenuClick = (event: React.MouseEvent<HTMLElement>, clickAction: clickActionType) => {
+        switch (clickAction) {
+            case clickActionType.CreateCopy:
+                break;
+            case clickActionType.Delete:
+                break;
+            case clickActionType.Rename:
+                setRenameOpen(true);
+                break;
+            case clickActionType.Export:
+                break;
+            default:
+        }
+    };
+
+
     const handleMobileMenuClose = () => {
         setMobileMoreAnchorEl(null);
     };
@@ -41,7 +71,7 @@ export default function AppNavBar() {
         handleMobileMenuClose();
     };
 
-    const handleMobileMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
+    const handleSidurMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
         setMobileMoreAnchorEl(event.currentTarget);
     };
 
@@ -67,15 +97,15 @@ export default function AppNavBar() {
         </Menu>
     );
 
-    const mobileMenuId = 'primary-search-account-menu-mobile';
-    const renderMobileMenu = (
+    const sidurMenuId = 'primary-search-account-menu-mobile';
+    const renderSidurMenu = (
         <Menu
             anchorEl={mobileMoreAnchorEl}
             anchorOrigin={{
                 vertical: 'top',
                 horizontal: 'right',
             }}
-            id={mobileMenuId}
+            id={sidurMenuId}
             keepMounted
             transformOrigin={{
                 vertical: 'top',
@@ -84,44 +114,30 @@ export default function AppNavBar() {
             open={isMobileMenuOpen}
             onClose={handleMobileMenuClose}
         >
-            <MenuItem>
-                <IconButton size="large" aria-label="show 4 new mails" color="inherit">
-                    <Badge badgeContent={4} color="error">
-                        <MailIcon/>
-                    </Badge>
-                </IconButton>
-                <p>Messages</p>
+            <MenuItem onClick={(e) => handleSidurMenuClick(e, clickActionType.Rename)}>
+
+                <DriveFileRenameOutline/>&nbsp;
+                {translations.Rename}
             </MenuItem>
             <MenuItem>
-                <IconButton
-                    size="large"
-                    aria-label="show 17 new notifications"
-                    color="inherit"
-                >
-                    <Badge badgeContent={17} color="error">
-                        <NotificationsIcon/>
-                    </Badge>
-                </IconButton>
-                <p>Notifications</p>
+
+                <Delete/>&nbsp;
+                {translations.Delete}
             </MenuItem>
-            <MenuItem onClick={handleProfileMenuOpen}>
-                <IconButton
-                    size="large"
-                    aria-label="account of current user"
-                    aria-controls="primary-search-account-menu"
-                    aria-haspopup="true"
-                    color="inherit"
-                >
-                    <AccountCircle/>
-                </IconButton>
-                <p>Profile</p>
+            <MenuItem onClick={(e) => handleSidurMenuClick(e, clickActionType.CreateCopy)}>
+
+                <FileCopy/>&nbsp;
+                {translations.CreateCopy}
+            </MenuItem>
+            <MenuItem onClick={(e) => handleSidurMenuClick(e, clickActionType.Export)}>
+                <ImportExport/> &nbsp;
+                {translations.ExportToFile}
             </MenuItem>
         </Menu>
     );
 
     return (
         <Box dir="rtl"
-            // sx={{flexGrow: 1}}
         >
             <AppBar position="static" sx={{
                 mr: 0,
@@ -173,6 +189,16 @@ export default function AppNavBar() {
                                                                                          value={sidurRecord.id}> &nbsp;&nbsp;{sidurRecord.Name} &nbsp;&nbsp;</MenuItem>)}
                         </Select>
                     </Typography>
+                    <IconButton
+                        size="small"
+                        aria-label="show more"
+                        aria-controls={sidurMenuId}
+                        aria-haspopup="true"
+                        onClick={handleSidurMenuOpen}
+                        color="inherit"
+                    >
+                        <Edit/>
+                    </IconButton>
 
                     <Box sx={{flexGrow: 1}}/>
                     <Box sx={{
@@ -181,20 +207,7 @@ export default function AppNavBar() {
                             md: 'flex'
                         }
                     }}>
-                        <IconButton size="large" aria-label="show 4 new mails" color="inherit">
-                            <Badge badgeContent={4} color="error">
-                                <MailIcon/>
-                            </Badge>
-                        </IconButton>
-                        <IconButton
-                            size="large"
-                            aria-label="show 17 new notifications"
-                            color="inherit"
-                        >
-                            <Badge badgeContent={17} color="error">
-                                <NotificationsIcon/>
-                            </Badge>
-                        </IconButton>
+
                         <IconButton
                             size="large"
                             edge="end"
@@ -216,9 +229,9 @@ export default function AppNavBar() {
                         <IconButton
                             size="large"
                             aria-label="show more"
-                            aria-controls={mobileMenuId}
+                            aria-controls={sidurMenuId}
                             aria-haspopup="true"
-                            onClick={handleMobileMenuOpen}
+                            onClick={handleSidurMenuOpen}
                             color="inherit"
                         >
                             <MoreIcon/>
@@ -226,8 +239,10 @@ export default function AppNavBar() {
                     </Box>
                 </Toolbar>
             </AppBar>
-            {renderMobileMenu}
+            {renderSidurMenu}
             {renderMenu}
+            <SidurRenameDialog open={RenameOpen} onClose={handleRenameClose} selectedValue={sidurInitialId}/>
+
         </Box>
     );
 }
