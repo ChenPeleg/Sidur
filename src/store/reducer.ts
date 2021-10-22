@@ -5,17 +5,17 @@ import {ActionTypes} from './actionTypes';
 import {SaveLoadService} from '../services/save-load.service';
 import {DownloadFile} from '../services/download-file';
 
-// noinspection SpellCheckingInspection
 export interface SidurRecord {
     id: string,
     Name: string,
     orders: OrderModel[];
-    deletedOrders: OrderModel[]
+    deletedOrders: OrderModel[];
     defaultOrderValues?: OrderModel,
 }
 
 export interface SidurStore {
-    sidurCollection: SidurRecord[]
+    sidurCollection: SidurRecord[];
+    sidurArchive: SidurRecord[];
     sidurId: string;
     orders: OrderModel[];
     deletedOrders: OrderModel[];
@@ -40,6 +40,7 @@ const startOrders: OrderModel[] = ['Chen', 'Avi', 'Roni'].map((name: string, ind
 }))
 
 const defaultInitialState: SidurStore = {
+    sidurArchive: [],
     sidurCollection: [{
         id: '1',
         Name: 'סידור יום שני',
@@ -154,6 +155,7 @@ const reducer = (state: SidurStore = initialState, action: IAction) => {
             break;
         case ActionTypes.ADD_NEW_ORDER:
             const allOrdersIds: number [] = newState.orders.map(o => Number(o.id));
+            allOrdersIds.push(0)
             const newId = Math.max(...allOrdersIds) + 1;
             const newOrder: OrderModel = {
                 ...defaultOrderValues,
