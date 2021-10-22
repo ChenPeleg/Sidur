@@ -2,14 +2,14 @@ import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import * as React from 'react';
 import {translations} from '../../services/translations';
+import {ImportExport, Person} from '@mui/icons-material';
+import {ProfileMenuClickActionType} from '../../models/profile-menu-click-action-type.enum';
 
 interface profileMenuProps {
     anchorEl: Element | ((element: Element) => Element) | null | undefined;
     menuId: string,
     isMenuOpen: boolean,
-    handleMenuClose: (result: any) => void
-
-
+    handleMenuClose: (result: any, action?: ProfileMenuClickActionType) => void
 }
 
 export const ProfileMenu = (props: profileMenuProps) => {
@@ -33,11 +33,14 @@ export const ProfileMenu = (props: profileMenuProps) => {
                 horizontal: 'right',
             }}
             open={isMenuOpen}
-            onClose={handleMenuClose}
+            onClose={(e: any) => handleMenuClose(e)}
         >
-            <MenuItem onClick={handleMenuClose}>{translations.MyProfile}</MenuItem>
-            <MenuItem onClick={handleMenuClose}>{translations.ExportToFile}</MenuItem>
-            <MenuItem onClick={handleMenuClose}>{translations.ImportAllData}</MenuItem>
+            <MenuItem onClick={(event) => handleMenuClose(event, ProfileMenuClickActionType.MyProfile)}>
+                <Person/> &nbsp;{translations.MyProfile}</MenuItem>
+            <MenuItem onClick={(event) => handleMenuClose(event, ProfileMenuClickActionType.Export)}>
+                <ImportExport/> &nbsp;{translations.ExportToFile}</MenuItem>
+            <MenuItem onClick={(event) => handleMenuClose(event, ProfileMenuClickActionType.Import)}>
+                <ImportExport/>&nbsp; {translations.ImportAllData}</MenuItem>
         </Menu>
     );
 

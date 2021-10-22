@@ -3,6 +3,7 @@ import {DriveType} from '../models/DriveType.enum';
 import {IAction} from './store.types';
 import {ActionTypes} from './actionTypes';
 import {SaveLoadService} from '../services/save-load.service';
+import {DownloadFile} from '../services/download-file';
 
 // noinspection SpellCheckingInspection
 export interface SidurRecord {
@@ -50,13 +51,7 @@ const defaultInitialState: SidurStore = {
         orders: [],
         deletedOrders: []
     }
-        // , {
-        //     id: '3',
-        //     Name: 'סידור שבת'
-        // }, {
-        //     id: '4',
-        //     Name: 'סידור יום ראשון'
-        // }
+
     ],
     sidurId: '1',
     orders: startOrders,
@@ -73,7 +68,7 @@ const reducer = (state: SidurStore = initialState, action: IAction) => {
     let newState = {
         ...state
     }
-    let updateSidurCollection: boolean = false;
+    let shouldUpdateSidurCollection: boolean = false;
     switch (action.type) {
         case ActionTypes.CHOOSE_SIDUR:
             const chosenSidurId = action.payLoad.id;
@@ -139,12 +134,9 @@ const reducer = (state: SidurStore = initialState, action: IAction) => {
                 }
                 return order
             });
-
             newState.dataHolderForCurrentOrderInEdit = null;
             newState.orderIdInEdit = null;
-
-            updateSidurCollection = true;
-
+            shouldUpdateSidurCollection = true;
             break;
         case ActionTypes.UPDATE_ORDER_IN_EDIT:
             newState.dataHolderForCurrentOrderInEdit = action.payLoad;
@@ -158,7 +150,7 @@ const reducer = (state: SidurStore = initialState, action: IAction) => {
             if (newState.orderIdInEdit === deleteOrderId) {
                 newState.orderIdInEdit = null;
             }
-            updateSidurCollection = true
+            shouldUpdateSidurCollection = true
             break;
         case ActionTypes.ADD_NEW_ORDER:
             const allOrdersIds: number [] = newState.orders.map(o => Number(o.id));
@@ -169,34 +161,44 @@ const reducer = (state: SidurStore = initialState, action: IAction) => {
             }
             newState.orders = [...newState.orders]
             newState.orders.unshift(newOrder);
-
-            updateSidurCollection = true;
-
+            shouldUpdateSidurCollection = true;
+            break;
+        case ActionTypes.EXPORT_ALL:
+            newState.sidurCollection = UpdateSidurCollection(newState);
+            DownloadFile('sidur.json', JSON.stringify(newState))
             break;
         default:
             break;
 
     }
-    if (updateSidurCollection) {
-        const sidurId = newState.sidurId;
-        const updatedOrders = newState.orders.map(o => ({...o}))
-        newState.sidurCollection = newState.sidurCollection.map((sidur: SidurRecord) => {
-            if (sidur.id === sidurId) {
-                const updatedSidur = {...sidur};
-                updatedSidur.orders = updatedOrders;
-                return updatedSidur
-            } else {
-                return sidur
-            }
-        });
-        SaveLoadService.saveToLocalStorage({
-            userName: 'chen',
-            userId: 'chen',
-            savedStore: newState,
-            timeStamp: ''
-        })
+    if (shouldUpdateSidurCollection) {
+        newState.sidurCollection = UpdateSidurCollection(newState)
+        saveToLocalStorage(newState);
+
     }
     return newState
 }
-
+const UpdateSidurCollection = (state: SidurStore): SidurRecord[] => {
+    const newState = {...state}
+    const sidurId = newState.sidurId;
+    const updatedOrders = newState.orders.map(o => ({...o}))
+    newState.sidurCollection = newState.sidurCollection.map((sidur: SidurRecord) => {
+        if (sidur.id === sidurId) {
+            const updatedSidur = {...sidur};
+            updatedSidur.orders = updatedOrders;
+            return updatedSidur
+        } else {
+            return sidur
+        }
+    });
+    return newState.sidurCollection
+}
+const saveToLocalStorage = (state: SidurStore): void => {
+    SaveLoadService.saveToLocalStorage({
+        userName: 'chen',
+        userId: 'chen',
+        savedStore: state,
+        timeStamp: ''
+    })
+}
 export default reducer

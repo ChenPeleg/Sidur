@@ -18,6 +18,7 @@ import {ProfileMenu} from './profile-menu';
 import {ActionTypes} from '../../store/actionTypes';
 import {SidurMenu} from './sidur-menu';
 import {SidurMenuClickActionType} from '../../models/SidurMenuClickActionType.enum';
+import {ProfileMenuClickActionType} from '../../models/profile-menu-click-action-type.enum';
 
 
 export const AppNavBar = () => {
@@ -64,8 +65,32 @@ export const AppNavBar = () => {
         setSidurMoreAnchorEl(null);
     };
 
-    const handleProfileMenuClose = () => {
+    const handleProfileMenuClose = (result: any, action?: ProfileMenuClickActionType) => {
         setAnchorEl(null);
+        switch (action) {
+            case ProfileMenuClickActionType.MyProfile:
+                dispatch({
+                    type: ActionTypes.OPEN_MY_PROFILE,
+                    payLoad: null
+                })
+                break;
+            case ProfileMenuClickActionType.Export:
+                dispatch({
+                    type: ActionTypes.EXPORT_ALL,
+                    payLoad: null
+                })
+                break;
+            case ProfileMenuClickActionType.Import:
+                dispatch({
+                    type: ActionTypes.IMPORT_ALL,
+                    payLoad: null
+                })
+                break;
+            case null:
+            case undefined:
+                break;
+            default:
+        }
         handleSidurMenuClose();
     };
 
