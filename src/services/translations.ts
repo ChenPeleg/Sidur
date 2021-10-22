@@ -10,6 +10,7 @@ export const translations = {
     'ExportAllData': 'יצוא הכל',
     'ImportAllData': 'יבוא הכל',
     'NewName': 'שם חדש',
+    'NewSidur': 'סידור חדש',
     'Delete': 'מחק',
     'ExportToFile': 'יצא לקובץ',
     'Archive': 'העברה לארכיון',

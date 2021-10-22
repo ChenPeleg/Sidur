@@ -13,24 +13,28 @@ import {useDispatch, useSelector} from 'react-redux';
 import {Select, SelectChangeEvent} from '@mui/material';
 import {SidurRecord, SidurStore} from '../../store/reducer';
 import {Edit} from '@mui/icons-material';
-import {SidurRenameDialog} from './sidur-rename-dialog';
+import {SidurRenameDialog} from '../Dialogs/sidur-rename-dialog';
 import {ProfileMenu} from './profile-menu';
 import {ActionTypes} from '../../store/actionTypes';
 import {SidurMenu} from './sidur-menu';
 import {SidurMenuClickActionType} from '../../models/SidurMenuClickActionType.enum';
 import {ProfileMenuClickActionType} from '../../models/profile-menu-click-action-type.enum';
+import {Utilites} from '../../services/utilites';
 
 
 export const AppNavBar = () => {
     const dispatch = useDispatch()
     const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
     const [RenameOpen, setRenameOpen] = React.useState(false);
+    const [uploadDialogOpen, setUploadDialogOpen] = React.useState(false);
     const [sidurMoreAnchorEl, setSidurMoreAnchorEl] =
         React.useState<null | HTMLElement>(null);
 
     const sidurInitialId = useSelector((state: SidurStore) => state.sidurId);
     const sidurCollection = useSelector((state: SidurStore) => state.sidurCollection);
-    const sidurSelected = sidurCollection.find((sidurRecord: SidurRecord) => sidurRecord.id === sidurInitialId)
+    const sidurSelected = sidurCollection.find((sidurRecord: SidurRecord) => sidurRecord.id === sidurInitialId);
+    const nextSidurId = Utilites.getNextId(sidurCollection.map(c => c.id));
+
     const sidurName = sidurSelected?.Name || '';
 
 
@@ -41,15 +45,32 @@ export const AppNavBar = () => {
         setAnchorEl(event.currentTarget);
     };
 
-    const handleRenameClose = (value: string) => {
+    const handleRenameClose = (value: string | null) => {
         setRenameOpen(false);
-        //  setSelectedValue(value);
+        if (value) {
+            dispatch({
+                type: ActionTypes.RENAME_SIDUR,
+                payLoad: {value}
+            })
+        }
+
     };
     const handleSidurMenuClick = (event: React.MouseEvent<HTMLElement>, clickAction: SidurMenuClickActionType) => {
+
         switch (clickAction) {
+            // case  SidurMenuClickActionType.CreateNew:
+            //     dispatch({
+            //         type: ActionTypes.ADD_NEW_SIDUR,
+            //         payLoad: null
+            //     });
+            //     break;
             case SidurMenuClickActionType.CreateCopy:
                 break;
             case SidurMenuClickActionType.Delete:
+                dispatch({
+                    type: ActionTypes.DELETE_SIDUR,
+                    payload: null
+                })
                 break;
             case SidurMenuClickActionType.Rename:
                 setRenameOpen(true);
@@ -97,12 +118,22 @@ export const AppNavBar = () => {
     const handleSidurMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
         setSidurMoreAnchorEl(event.currentTarget);
     };
-    const handleSidurChanged = (event: SelectChangeEvent<any>, child: React.ReactNode) => {
+    const handleSidurChanged = (event: any, child: React.ReactNode) => {
+        // event.preventDefault();
+        // event.stopPropagation()
         const chosenSidur = event.target.value as string;
-        dispatch({
-            type: ActionTypes.CHOOSE_SIDUR,
-            payLoad: {id: chosenSidur}
-        })
+        if (chosenSidur === nextSidurId) {
+            dispatch({
+                type: ActionTypes.ADD_NEW_SIDUR,
+                payLoad: null
+            });
+        } else {
+            dispatch({
+                type: ActionTypes.CHOOSE_SIDUR,
+                payLoad: {id: chosenSidur}
+            })
+        }
+
 
     }
     const menuId = 'primary-search-account-menu';
@@ -148,16 +179,18 @@ export const AppNavBar = () => {
                                     fontSize: '1.25rem',
                                     fontWeight: 'normal'
                                 }}
-
-
                                 onChange={(event: SelectChangeEvent<any>, child: React.ReactNode) => {
+                                 
                                     handleSidurChanged(event, child)
+                                }}>
+                            <MenuItem key={nextSidurId}
+                                      value={nextSidurId}> &nbsp;&nbsp;<b>{translations.NewSidur}</b> &nbsp;&nbsp;</MenuItem>
+                            {sidurCollection.map((sidurRecord: SidurRecord) => <MenuItem key={sidurRecord.id} onMouseDown={(event) => {
+                                event.preventDefault();
+                                event.stopPropagation();
+                                handleSidurChanged(event, sidurRecord)
 
-
-                                }}
-
-                        >
-                            {sidurCollection.map((sidurRecord: SidurRecord) => <MenuItem key={sidurRecord.id}
+                            }}
                                                                                          value={sidurRecord.id}> &nbsp;&nbsp;{sidurRecord.Name} &nbsp;&nbsp;</MenuItem>)}
                         </Select>
                     </Typography>
@@ -216,6 +249,7 @@ export const AppNavBar = () => {
                        handleSidurMenuClick={handleSidurMenuClick} handleSidurMenuClose={handleSidurMenuClose}/>
             <ProfileMenu menuId={menuId} anchorEl={anchorEl} handleMenuClose={handleProfileMenuClose} isMenuOpen={isProfileMenuOpen}/>
             <SidurRenameDialog open={RenameOpen} onClose={handleRenameClose} selectedValue={sidurName}/>
+            {/*<SidurRenameDialog open={RenameOpen} onClose={handleRenameClose} selectedValue={sidurName}/>*/}
 
         </Box>
     );

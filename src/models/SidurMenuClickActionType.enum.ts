@@ -3,5 +3,6 @@ export enum SidurMenuClickActionType {
     Delete = 2,
     Export = 3,
     CreateCopy = 4,
-    Archive = 5
+    Archive = 5,
+    CreateNew = 6
 }

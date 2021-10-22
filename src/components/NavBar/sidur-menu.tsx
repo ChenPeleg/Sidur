@@ -38,12 +38,17 @@ export const SidurMenu = (props: sidurMenuProps) => {
             open={isSidurMenuOpen}
             onClose={handleSidurMenuClose}
         >
+            {/*<MenuItem onClick={(e) => handleSidurMenuClick(e, SidurMenuClickActionType.CreateNew)}>*/}
+
+            {/*    <Add/>&nbsp;*/}
+            {/*    {translations.NewSidur}*/}
+            {/*</MenuItem>*/}
             <MenuItem onClick={(e) => handleSidurMenuClick(e, SidurMenuClickActionType.Rename)}>
 
                 <DriveFileRenameOutline/>&nbsp;
                 {translations.Rename}
             </MenuItem>
-            <MenuItem>
+            <MenuItem onClick={(e) => handleSidurMenuClick(e, SidurMenuClickActionType.Delete)}>
 
                 <Delete/>&nbsp;
                 {translations.Delete}
@@ -55,7 +60,7 @@ export const SidurMenu = (props: sidurMenuProps) => {
             </MenuItem>
             <MenuItem onClick={(e) => handleSidurMenuClick(e, SidurMenuClickActionType.Export)}>
                 <Archive/> &nbsp;
-                {/*<ImportExport/> &nbsp;*/}
+
                 {translations.Archive}
             </MenuItem>
         </Menu>

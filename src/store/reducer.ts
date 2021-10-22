@@ -4,6 +4,8 @@ import {IAction} from './store.types';
 import {ActionTypes} from './actionTypes';
 import {SaveLoadService} from '../services/save-load.service';
 import {DownloadFile} from '../services/download-file';
+import {translations} from '../services/translations';
+import {Utilites} from '../services/utilites';
 
 export interface SidurRecord {
     id: string,
@@ -24,6 +26,12 @@ export interface SidurStore {
     defaultOrderValues: OrderModel,
 }
 
+const DefaultSidur: SidurRecord = {
+    id: '1',
+    Name: 'סידור יום שני',
+    orders: [],
+    deletedOrders: []
+}
 const defaultOrderValues: OrderModel = {
     id: '1',
     driverName: '',
@@ -71,6 +79,9 @@ const reducer = (state: SidurStore = initialState, action: IAction) => {
     }
     let shouldUpdateSidurCollection: boolean = false;
     switch (action.type) {
+        /**
+         * @code Sidur actions
+         */
         case ActionTypes.CHOOSE_SIDUR:
             const chosenSidurId = action.payLoad.id;
             const previousSidurId = newState.sidurId;
@@ -104,15 +115,57 @@ const reducer = (state: SidurStore = initialState, action: IAction) => {
                     })
                 }
 
-
-                newState.orders = chosenSidurObj?.orders.map(o => ({...o})) || []
-                newState.deletedOrders = chosenSidurObj?.deletedOrders.map(o => ({...o})) || [];
-                newState.orderIdInEdit = null;
-                newState.dataHolderForCurrentOrderInEdit = null;
+                setChosenSidur(newState, chosenSidurObj);
+                // newState.orders = chosenSidurObj?.orders.map(o => ({...o})) || []
+                // newState.deletedOrders = chosenSidurObj?.deletedOrders.map(o => ({...o})) || [];
+                // newState.orderIdInEdit = null;
+                // newState.dataHolderForCurrentOrderInEdit = null;
 
 
             }
             break;
+
+        case ActionTypes.RENAME_SIDUR:
+            const sidurId = newState.sidurId;
+            const newName = action.payLoad.value;
+            if (!newName) {
+                break;
+            }
+            newState.sidurCollection = newState.sidurCollection.map((sidur: SidurRecord) => {
+                if (sidur.id === sidurId) {
+                    const updatedSidur = {...sidur};
+                    updatedSidur.Name = newName;
+                    return updatedSidur
+                } else {
+                    return sidur
+                }
+            });
+            break;
+        case ActionTypes.ADD_NEW_SIDUR:
+            const newSidurId = Utilites.getNextId(newState.sidurCollection.map(o => o.id))
+            const newSidur: SidurRecord = {
+                id: newSidurId,
+                Name: translations.Sidur + ' ' + newSidurId,
+                orders: [],
+                deletedOrders: [],
+                defaultOrderValues: newState.defaultOrderValues
+            }
+            newState.sidurCollection = newState.sidurCollection.map(c => c);
+            newState.sidurCollection.push(newSidur);
+            newState.sidurId = newSidurId;
+            newState.orderIdInEdit = null;
+            newState.dataHolderForCurrentOrderInEdit = null;
+            break;
+        case ActionTypes.DELETE_SIDUR:
+            const sidurIdToDelete = newState.sidurId;
+            newState.sidurCollection = newState.sidurCollection.filter(s => s.id !== sidurIdToDelete);
+
+            const chosenSidurAfterDelete: SidurRecord = newState.sidurCollection[0] || DefaultSidur;
+            setChosenSidur(newState, chosenSidurAfterDelete);
+            break;
+        /**
+         * @code Order actions
+         */
         case ActionTypes.CLICKED_ORDER:
             const clickedOrderId = action.payLoad.id;
             if (newState.dataHolderForCurrentOrderInEdit) {
@@ -154,19 +207,20 @@ const reducer = (state: SidurStore = initialState, action: IAction) => {
             shouldUpdateSidurCollection = true
             break;
         case ActionTypes.ADD_NEW_ORDER:
-            const allOrdersIds: number [] = newState.orders.map(o => Number(o.id));
-            allOrdersIds.push(0)
-            const newId = Math.max(...allOrdersIds) + 1;
+            const newId = Utilites.getNextId(newState.orders.map(o => o.id))
             const newOrder: OrderModel = {
                 ...defaultOrderValues,
-                id: newId.toString()
+                id: newId
             }
             newState.orders = [...newState.orders]
             newState.orders.unshift(newOrder);
             shouldUpdateSidurCollection = true;
             break;
+        /**
+         * @code General User actions
+         */
         case ActionTypes.EXPORT_ALL:
-            newState.sidurCollection = UpdateSidurCollection(newState);
+            newState.sidurCollection = UpdateSidurCollectionWithCurrenSidur(newState);
             DownloadFile('sidur.json', JSON.stringify(newState))
             break;
         default:
@@ -174,13 +228,13 @@ const reducer = (state: SidurStore = initialState, action: IAction) => {
 
     }
     if (shouldUpdateSidurCollection) {
-        newState.sidurCollection = UpdateSidurCollection(newState)
+        newState.sidurCollection = UpdateSidurCollectionWithCurrenSidur(newState)
         saveToLocalStorage(newState);
 
     }
     return newState
 }
-const UpdateSidurCollection = (state: SidurStore): SidurRecord[] => {
+const UpdateSidurCollectionWithCurrenSidur = (state: SidurStore): SidurRecord[] => {
     const newState = {...state}
     const sidurId = newState.sidurId;
     const updatedOrders = newState.orders.map(o => ({...o}))
@@ -202,5 +256,14 @@ const saveToLocalStorage = (state: SidurStore): void => {
         savedStore: state,
         timeStamp: ''
     })
+}
+const setChosenSidur = (state: SidurStore, chosenSidur: SidurRecord): SidurStore => {
+    const newState = {...state};
+    newState.orders = chosenSidur?.orders.map(o => ({...o})) || []
+    newState.deletedOrders = chosenSidur?.deletedOrders.map(o => ({...o})) || [];
+    newState.orderIdInEdit = null;
+    newState.dataHolderForCurrentOrderInEdit = null;
+    return newState
+
 }
 export default reducer
