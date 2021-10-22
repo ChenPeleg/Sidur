@@ -1,6 +1,7 @@
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import * as React from 'react';
+import {translations} from '../../services/translations';
 
 interface profileMenuProps {
     anchorEl: Element | ((element: Element) => Element) | null | undefined;
@@ -34,8 +35,9 @@ export const ProfileMenu = (props: profileMenuProps) => {
             open={isMenuOpen}
             onClose={handleMenuClose}
         >
-            <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
-            <MenuItem onClick={handleMenuClose}>My account</MenuItem>
+            <MenuItem onClick={handleMenuClose}>{translations.MyProfile}</MenuItem>
+            <MenuItem onClick={handleMenuClose}>{translations.ExportToFile}</MenuItem>
+            <MenuItem onClick={handleMenuClose}>{translations.ImportAllData}</MenuItem>
         </Menu>
     );
 
