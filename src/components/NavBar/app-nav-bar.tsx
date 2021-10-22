@@ -30,9 +30,9 @@ export const AppNavBar = () => {
     const [sidurMoreAnchorEl, setSidurMoreAnchorEl] =
         React.useState<null | HTMLElement>(null);
 
-    const sidurInitialId = useSelector((state: SidurStore) => state.sidurId);
+    const sidurId = useSelector((state: SidurStore) => state.sidurId);
     const sidurCollection = useSelector((state: SidurStore) => state.sidurCollection);
-    const sidurSelected = sidurCollection.find((sidurRecord: SidurRecord) => sidurRecord.id === sidurInitialId);
+    const sidurSelected = sidurCollection.find((sidurRecord: SidurRecord) => sidurRecord.id === sidurId);
     const nextSidurId = Utilites.getNextId(sidurCollection.map(c => c.id));
 
     const sidurName = sidurSelected?.Name || '';
@@ -119,10 +119,9 @@ export const AppNavBar = () => {
         setSidurMoreAnchorEl(event.currentTarget);
     };
     const handleSidurChanged = (event: any, child: React.ReactNode) => {
-        // event.preventDefault();
-        // event.stopPropagation()
+
         const chosenSidur = event.target.value as string;
-        if (chosenSidur === nextSidurId) {
+        if (chosenSidur === 'NEW') {
             dispatch({
                 type: ActionTypes.ADD_NEW_SIDUR,
                 payLoad: null
@@ -154,7 +153,7 @@ export const AppNavBar = () => {
                 }}>
                     <IconButton
                         size="large"
-                        // edge="start"
+
                         color="inherit"
                         aria-label="open drawer"
                         sx={{mr: 0}}
@@ -173,24 +172,18 @@ export const AppNavBar = () => {
                         }}
                     >    &nbsp; &nbsp;
                         {translations.Sidur}
-                        <Select dir={'rtl'} disableUnderline={true} variant={'standard'} defaultValue={sidurInitialId}
+                        <Select dir={'rtl'} disableUnderline={true} variant={'standard'} value={sidurId}
                                 sx={{
                                     color: 'white',
                                     fontSize: '1.25rem',
                                     fontWeight: 'normal'
                                 }}
                                 onChange={(event: SelectChangeEvent<any>, child: React.ReactNode) => {
-                                 
                                     handleSidurChanged(event, child)
                                 }}>
-                            <MenuItem key={nextSidurId}
-                                      value={nextSidurId}> &nbsp;&nbsp;<b>{translations.NewSidur}</b> &nbsp;&nbsp;</MenuItem>
-                            {sidurCollection.map((sidurRecord: SidurRecord) => <MenuItem key={sidurRecord.id} onMouseDown={(event) => {
-                                event.preventDefault();
-                                event.stopPropagation();
-                                handleSidurChanged(event, sidurRecord)
-
-                            }}
+                            <MenuItem key={'NEW'}
+                                      value={'NEW'}> &nbsp;&nbsp;<b>{translations.NewSidur}</b> &nbsp;&nbsp;</MenuItem>
+                            {sidurCollection.map((sidurRecord: SidurRecord) => <MenuItem key={sidurRecord.id}
                                                                                          value={sidurRecord.id}> &nbsp;&nbsp;{sidurRecord.Name} &nbsp;&nbsp;</MenuItem>)}
                         </Select>
                     </Typography>

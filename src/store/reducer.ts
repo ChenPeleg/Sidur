@@ -27,8 +27,8 @@ export interface SidurStore {
 }
 
 const DefaultSidur: SidurRecord = {
-    id: '1',
-    Name: 'סידור יום שני',
+    id: '99999',
+    Name: 'הסידור החדש שלי',
     orders: [],
     deletedOrders: []
 }
@@ -115,11 +115,7 @@ const reducer = (state: SidurStore = initialState, action: IAction) => {
                     })
                 }
 
-                setChosenSidur(newState, chosenSidurObj);
-                // newState.orders = chosenSidurObj?.orders.map(o => ({...o})) || []
-                // newState.deletedOrders = chosenSidurObj?.deletedOrders.map(o => ({...o})) || [];
-                // newState.orderIdInEdit = null;
-                // newState.dataHolderForCurrentOrderInEdit = null;
+                newState = setChosenSidur(newState, chosenSidurObj);
 
 
             }
@@ -153,15 +149,17 @@ const reducer = (state: SidurStore = initialState, action: IAction) => {
             newState.sidurCollection = newState.sidurCollection.map(c => c);
             newState.sidurCollection.push(newSidur);
             newState.sidurId = newSidurId;
-            newState.orderIdInEdit = null;
-            newState.dataHolderForCurrentOrderInEdit = null;
+            newState = setChosenSidur(newState, newSidur);
             break;
         case ActionTypes.DELETE_SIDUR:
             const sidurIdToDelete = newState.sidurId;
             newState.sidurCollection = newState.sidurCollection.filter(s => s.id !== sidurIdToDelete);
-
-            const chosenSidurAfterDelete: SidurRecord = newState.sidurCollection[0] || DefaultSidur;
-            setChosenSidur(newState, chosenSidurAfterDelete);
+            if (!newState.sidurCollection.length) {
+                newState.sidurCollection.push(DefaultSidur);
+            }
+            const chosenSidurAfterDelete: SidurRecord = newState.sidurCollection[0];
+            newState.sidurId = chosenSidurAfterDelete.id
+            newState = setChosenSidur(newState, chosenSidurAfterDelete);
             break;
         /**
          * @code Order actions
