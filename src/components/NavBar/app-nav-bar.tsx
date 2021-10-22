@@ -10,12 +10,13 @@ import MenuIcon from '@mui/icons-material/Menu';
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import MoreIcon from '@mui/icons-material/MoreVert';
 import {translations} from '../../services/translations';
-import {useSelector} from 'react-redux';
-import {Select} from '@mui/material';
+import {useDispatch, useSelector} from 'react-redux';
+import {Select, SelectChangeEvent} from '@mui/material';
 import {SidurRecord, SidurStore} from '../../store/reducer';
 import {Delete, DriveFileRenameOutline, Edit, FileCopy, ImportExport} from '@mui/icons-material';
 import {SidurRenameDialog} from './sidur-rename-dialog';
 import {ProfileMenu} from './profile-menu';
+import {ActionTypes} from '../../store/actionTypes';
 
 
 enum clickActionType {
@@ -26,6 +27,7 @@ enum clickActionType {
 }
 
 export const AppNavBar = () => {
+    const dispatch = useDispatch()
     const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
     const [RenameOpen, setRenameOpen] = React.useState(false);
     const [mobileMoreAnchorEl, setMobileMoreAnchorEl] =
@@ -76,7 +78,14 @@ export const AppNavBar = () => {
     const handleSidurMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
         setMobileMoreAnchorEl(event.currentTarget);
     };
+    const handleSidurChanged = (event: SelectChangeEvent<any>, child: React.ReactNode) => {
+        const chosenSidur = event.target.value as string;
+        dispatch({
+            type: ActionTypes.CHOOSE_SIDUR,
+            payLoad: {id: chosenSidur}
+        })
 
+    }
     const menuId = 'primary-search-account-menu';
 
 
@@ -162,7 +171,8 @@ export const AppNavBar = () => {
                                 }}
 
 
-                                onChange={(event: any, child: any) => {
+                                onChange={(event: SelectChangeEvent<any>, child: React.ReactNode) => {
+                                    handleSidurChanged(event, child)
 
 
                                 }}

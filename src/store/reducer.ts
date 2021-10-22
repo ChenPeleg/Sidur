@@ -7,7 +7,8 @@ import {ActionTypes} from './actionTypes';
 export interface SidurRecord {
     id: string,
     Name: string,
-    orders?: OrderModel[];
+    orders: OrderModel[];
+    deletedOrders: OrderModel[]
     defaultOrderValues?: OrderModel,
 }
 
@@ -15,10 +16,10 @@ export interface SidurStore {
     sidurCollection: SidurRecord[]
     sidurId: string;
     orders: OrderModel[];
+    deletedOrders: OrderModel[];
     orderIdInEdit: null | string;
     dataHolderForCurrentOrderInEdit: OrderModel | null;
     defaultOrderValues: OrderModel,
-
 }
 
 const defaultOrderValues: OrderModel = {
@@ -39,21 +40,28 @@ const startOrders: OrderModel[] = ['Chen', 'Avi', 'Roni'].map((name: string, ind
 const initialState: SidurStore = {
     sidurCollection: [{
         id: '1',
-        Name: 'סידור יום שני'
+        Name: 'סידור יום שני',
+        orders: [],
+        deletedOrders: []
     }, {
         id: '2',
-        Name: 'סידור גנים'
-    }, {
-        id: '3',
-        Name: 'סידור שבת'
-    }, {
-        id: '4',
-        Name: 'סידור יום ראשון'
-    }],
+        Name: 'סידור גנים',
+        orders: [],
+        deletedOrders: []
+    }
+        // , {
+        //     id: '3',
+        //     Name: 'סידור שבת'
+        // }, {
+        //     id: '4',
+        //     Name: 'סידור יום ראשון'
+        // }
+    ],
     sidurId: '1',
     orders: startOrders,
     orderIdInEdit: '1',
     dataHolderForCurrentOrderInEdit: null,
+    deletedOrders: [],
     defaultOrderValues: {...defaultOrderValues}
 }
 
@@ -62,6 +70,48 @@ const reducer = (state = initialState, action: IAction) => {
         ...state
     }
     switch (action.type) {
+        case ActionTypes.CHOOSE_SIDUR:
+            const chosenSidurId = action.payLoad.id;
+            const previousSidurId = newState.sidurId;
+            if (chosenSidurId === previousSidurId) {
+                break;
+            }
+            newState.sidurId = chosenSidurId;
+            const chosenSidurObj: SidurRecord | undefined = newState.sidurCollection.find((record: SidurRecord) => record.id === chosenSidurId);
+            if (chosenSidurObj !== undefined) {
+                const previousSidurObj: SidurRecord | undefined = newState.sidurCollection.find((record: SidurRecord) => record.id === previousSidurId);
+                if (previousSidurObj !== undefined) {
+                    const NewPreviousSidurObj = {...previousSidurObj};
+                    NewPreviousSidurObj.orders = newState.orders.map(o => ({
+                        ...o
+                    }));
+                    NewPreviousSidurObj.deletedOrders = newState.deletedOrders.map(o => ({
+                        ...o
+                    }));
+
+                    NewPreviousSidurObj.defaultOrderValues = {
+                        ...
+                            NewPreviousSidurObj
+                                .defaultOrderValues
+                    } as OrderModel;
+                    newState.sidurCollection = newState.sidurCollection.map((sidur: SidurRecord) => {
+                        if (sidur.id === previousSidurId) {
+                            return NewPreviousSidurObj
+                        } else {
+                            return sidur
+                        }
+                    })
+                }
+
+
+                newState.orders = chosenSidurObj?.orders.map(o => ({...o})) || []
+                newState.deletedOrders = chosenSidurObj?.deletedOrders.map(o => ({...o})) || [];
+                newState.orderIdInEdit = null;
+                newState.dataHolderForCurrentOrderInEdit = null;
+
+
+            }
+            break;
         case ActionTypes.CLICKED_ORDER:
             const clickeOrderId = action.payLoad.id;
             if (newState.dataHolderForCurrentOrderInEdit) {
@@ -73,10 +123,8 @@ const reducer = (state = initialState, action: IAction) => {
                     return order
                 });
             }
-            ;
             newState.dataHolderForCurrentOrderInEdit = null;
             newState.orderIdInEdit = clickeOrderId
-
             break;
         case ActionTypes.UPDATE_ORDER:
             const orderId = action.payLoad.id;

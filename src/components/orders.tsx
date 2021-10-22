@@ -37,7 +37,7 @@ export const Orders = () => {
             payLoad: {}
         })
     }
-
+    console.log(orders)
     return (
         <Box>
             <Box sx={{
