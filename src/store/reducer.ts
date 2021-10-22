@@ -153,6 +153,13 @@ const reducer = (state: SidurStore = initialState, action: IAction) => {
             break;
         case ActionTypes.DELETE_SIDUR:
             const sidurIdToDelete = newState.sidurId;
+            let deletedSidur: SidurRecord | undefined = newState.sidurCollection.find(s => s.id === sidurIdToDelete);
+            if (deletedSidur) {
+                deletedSidur = {...deletedSidur};
+                deletedSidur.id = 'Del' + deletedSidur.id;
+                newState.sidurArchive.push(deletedSidur);
+            }
+
             newState.sidurCollection = newState.sidurCollection.filter(s => s.id !== sidurIdToDelete);
             if (!newState.sidurCollection.length) {
                 newState.sidurCollection.push(DefaultSidur);
