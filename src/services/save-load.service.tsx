@@ -17,15 +17,15 @@ export const SaveLoadService = {
         localStorage.setItem(APPID + userId, JSON.stringify(data));
         return {success: true}
     },
-    loadFromLocalStorage(userId: string): { data: SaveDataModel | '', success: boolean } {
+    loadFromLocalStorage(userId: string): { data: SaveDataModel | null, success: boolean } {
         userId = userId || 'Chen123';
 
         const data = localStorage.getItem(APPID + userId);
         const parsedData = data ? JSON.parse(data) : '';
 
         return {
-            data: parsedData as SaveDataModel | '',
-            success: true
+            data: parsedData as SaveDataModel | null,
+            success: !!data
         }
 
 

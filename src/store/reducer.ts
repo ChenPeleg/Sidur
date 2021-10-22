@@ -2,6 +2,7 @@ import {OrderModel} from '../models/Order.model';
 import {DriveType} from '../models/DriveType.enum';
 import {IAction} from './store.types';
 import {ActionTypes} from './actionTypes';
+import {SaveLoadService} from '../services/save-load.service';
 
 // noinspection SpellCheckingInspection
 export interface SidurRecord {
@@ -37,7 +38,7 @@ const startOrders: OrderModel[] = ['Chen', 'Avi', 'Roni'].map((name: string, ind
     driverName: name
 }))
 
-const initialState: SidurStore = {
+const defaultInitialState: SidurStore = {
     sidurCollection: [{
         id: '1',
         Name: 'סידור יום שני',
@@ -65,10 +66,14 @@ const initialState: SidurStore = {
     defaultOrderValues: {...defaultOrderValues}
 }
 
-const reducer = (state = initialState, action: IAction) => {
+const stateFromLocalStorage: SidurStore | undefined = SaveLoadService.loadFromLocalStorage('chen').data?.savedStore
+const initialState = stateFromLocalStorage || defaultInitialState;
+
+const reducer = (state: SidurStore = initialState, action: IAction) => {
     let newState = {
         ...state
     }
+    let updateSidurCollection: boolean = false;
     switch (action.type) {
         case ActionTypes.CHOOSE_SIDUR:
             const chosenSidurId = action.payLoad.id;
@@ -113,7 +118,7 @@ const reducer = (state = initialState, action: IAction) => {
             }
             break;
         case ActionTypes.CLICKED_ORDER:
-            const clickeOrderId = action.payLoad.id;
+            const clickedOrderId = action.payLoad.id;
             if (newState.dataHolderForCurrentOrderInEdit) {
                 const currentOrderId = newState.dataHolderForCurrentOrderInEdit.id
                 newState.orders = newState.orders.map(order => {
@@ -124,7 +129,7 @@ const reducer = (state = initialState, action: IAction) => {
                 });
             }
             newState.dataHolderForCurrentOrderInEdit = null;
-            newState.orderIdInEdit = clickeOrderId
+            newState.orderIdInEdit = clickedOrderId
             break;
         case ActionTypes.UPDATE_ORDER:
             const orderId = action.payLoad.id;
@@ -134,8 +139,11 @@ const reducer = (state = initialState, action: IAction) => {
                 }
                 return order
             });
+
             newState.dataHolderForCurrentOrderInEdit = null;
-            newState.orderIdInEdit = null
+            newState.orderIdInEdit = null;
+
+            updateSidurCollection = true;
 
             break;
         case ActionTypes.UPDATE_ORDER_IN_EDIT:
@@ -150,7 +158,7 @@ const reducer = (state = initialState, action: IAction) => {
             if (newState.orderIdInEdit === deleteOrderId) {
                 newState.orderIdInEdit = null;
             }
-
+            updateSidurCollection = true
             break;
         case ActionTypes.ADD_NEW_ORDER:
             const allOrdersIds: number [] = newState.orders.map(o => Number(o.id));
@@ -160,15 +168,34 @@ const reducer = (state = initialState, action: IAction) => {
                 id: newId.toString()
             }
             newState.orders = [...newState.orders]
-            newState.orders.unshift(newOrder)
+            newState.orders.unshift(newOrder);
 
+            updateSidurCollection = true;
 
             break;
         default:
             break;
 
     }
-
+    if (updateSidurCollection) {
+        const sidurId = newState.sidurId;
+        const updatedOrders = newState.orders.map(o => ({...o}))
+        newState.sidurCollection = newState.sidurCollection.map((sidur: SidurRecord) => {
+            if (sidur.id === sidurId) {
+                const updatedSidur = {...sidur};
+                updatedSidur.orders = updatedOrders;
+                return updatedSidur
+            } else {
+                return sidur
+            }
+        });
+        SaveLoadService.saveToLocalStorage({
+            userName: 'chen',
+            userId: 'chen',
+            savedStore: newState,
+            timeStamp: ''
+        })
+    }
     return newState
 }
 
