@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {useRef, useState} from 'react';
+import {useState} from 'react';
 import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
@@ -14,7 +14,7 @@ import {FileUploadType} from '../../store/store.types';
 interface FileUploadProps {
     open: boolean;
     selectedValue: string;
-    onClose: (value: string) => void;
+    onClose: (result: { uploadType: FileUploadType, fileAsString: string } | null) => void;
 
 }
 
@@ -45,20 +45,19 @@ const fileUploadTypes: TypeOfUpload[] = [
 const defaultUploadType: FileUploadType = FileUploadType.uploadFullDataAndAdd;
 const defaultId: string = fileUploadTypes.find(upload => upload.type === defaultUploadType)?.id || '1'
 export const FileUploadDialog = (props: FileUploadProps) => {
-    // const [open, setOpen] = React.useState(false);
+
     const {
         onClose,
         selectedValue,
         open
     } = props;
     const [uploadType, setUploadType] = useState(defaultId)
-    const valueRef: any = useRef('')
     const handleCloseCancel = () => {
-        onClose(selectedValue);
+        onClose(null);
     };
-    const handleCloseRename = () => {
-        onClose(valueRef.current.value || selectedValue);
-    };
+    // const handleCloseUploaded = () => {
+    //     onClose(valueRef.current.value || selectedValue);
+    // };
 
     const onFileLoadChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const files = event.target?.files;
@@ -67,9 +66,13 @@ export const FileUploadDialog = (props: FileUploadProps) => {
             const reader = new FileReader();
             reader.onload = (event) => {
                 if (event) {
-                    
-                }
+                    const fileAsString = event?.target?.result as string;
+                    onClose({
+                        uploadType: FileUploadType.uploadFullDataAndAdd,
+                        fileAsString
+                    })
 
+                }
             };
             reader.readAsText(file);
         }
@@ -114,6 +117,7 @@ export const FileUploadDialog = (props: FileUploadProps) => {
                         >
                             {translations.ChooseFile}
                             <input
+
                                 onChange={onFileLoadChange}
                                 type="file"
                                 hidden
@@ -123,7 +127,7 @@ export const FileUploadDialog = (props: FileUploadProps) => {
                 </DialogContent>
                 <DialogActions>
                     <Button onClick={handleCloseCancel}>{translations.Cancel}</Button>
-                    <Button onClick={handleCloseRename}>{translations.Approve}</Button>
+                    {/*<Button onClick={handleCloseUploaded}>{translations.Approve}</Button>*/}
                 </DialogActions>
             </Dialog>
         </div>

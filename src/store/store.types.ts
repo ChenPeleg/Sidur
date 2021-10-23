@@ -42,3 +42,11 @@ export enum FileUploadType {
     uploadFullDataAndAdd = 2,
     uploadSpecificData = 3
 }
+
+export interface SaveDataModel {
+    userId: string,
+    userName: string,
+    timeStamp: string,
+    savedStore: SidurStore,
+    hash: string
+}

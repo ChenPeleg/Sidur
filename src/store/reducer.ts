@@ -2,10 +2,9 @@ import {OrderModel} from '../models/Order.model';
 import {defaultOrderValues, IAction, SidurStore} from './store.types';
 import {ActionTypes} from './actionTypes';
 import {SaveLoadService} from '../services/save-load.service';
-import {DownloadFile} from '../services/download-file';
 import {SidurReducer} from './sidur.reducer';
 import {OrderReducer} from './order.reducer';
-import {UtilsReducer} from './utils.reducer';
+import {ImportExportReducer} from './import-export.reducer';
 
 
 const startOrders: OrderModel[] = ['Chen', 'Avi', 'Roni'].map((name: string, index: number): OrderModel => ({
@@ -46,7 +45,6 @@ const reducer = (state: SidurStore = initialState, action: IAction) => {
     }
 
     switch (action.type) {
-
         case ActionTypes.CHOOSE_SIDUR:
         case ActionTypes.RENAME_SIDUR:
         case ActionTypes.ADD_NEW_SIDUR:
@@ -63,9 +61,10 @@ const reducer = (state: SidurStore = initialState, action: IAction) => {
             return OrderReducer[action.type](newState, action)
 
         case ActionTypes.EXPORT_ALL:
-            newState.sidurCollection = UtilsReducer.UpdateSidurCollectionWithCurrenSidur(newState);
-            DownloadFile('sidur.json', JSON.stringify(newState))
-            break;
+        case ActionTypes.IMPORT_FILE_UPLOADED:
+            
+            return ImportExportReducer[action.type](newState, action)
+
         default:
             break;
 

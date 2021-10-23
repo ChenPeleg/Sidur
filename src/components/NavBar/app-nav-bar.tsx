@@ -19,7 +19,7 @@ import {SidurMenu} from './sidur-menu';
 import {SidurMenuClickActionType} from '../../models/SidurMenuClickActionType.enum';
 import {ProfileMenuClickActionType} from '../../models/profile-menu-click-action-type.enum';
 import {Utilites} from '../../services/utilites';
-import {SidurRecord, SidurStore} from '../../store/store.types';
+import {FileUploadType, SidurRecord, SidurStore} from '../../store/store.types';
 import {FileUploadDialog} from '../Dialogs/file-uplaod-dialog';
 
 
@@ -56,24 +56,19 @@ export const AppNavBar = () => {
             })
         }
     };
-    const handleUploadClose = (value: string | null) => {
+    const handleUploadClose = (result: { uploadType: FileUploadType, fileAsString: string } | null): void => {
         setUploadOpen(false);
-        if (value) {
-            // dispatch({
-            //     type: ActionTypes.RENAME_SIDUR,
-            //     payLoad: {value}
-            // })
+        if (result) {
+            dispatch({
+                type: ActionTypes.IMPORT_FILE_UPLOADED,
+                payLoad: {...result}
+            })
         }
     };
     const handleSidurMenuClick = (event: React.MouseEvent<HTMLElement>, clickAction: SidurMenuClickActionType) => {
 
         switch (clickAction) {
-            // case  SidurMenuClickActionType.CreateNew:
-            //     dispatch({
-            //         type: ActionTypes.ADD_NEW_SIDUR,
-            //         payLoad: null
-            //     });
-            //     break;
+
             case SidurMenuClickActionType.CreateCopy:
                 break;
             case SidurMenuClickActionType.Delete:

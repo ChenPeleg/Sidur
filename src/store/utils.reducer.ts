@@ -1,15 +1,12 @@
-import {SidurRecord, SidurStore} from './store.types';
+import {SaveDataModel, SidurRecord, SidurStore} from './store.types';
 import {SaveLoadService} from '../services/save-load.service';
+import {hashFunction} from '../services/hash-function';
 
 
 export const UtilsReducer = {
     saveToLocalStorage: (state: SidurStore): void => {
-        SaveLoadService.saveToLocalStorage({
-            userName: 'chen',
-            userId: 'chen',
-            savedStore: state,
-            timeStamp: ''
-        })
+        const saveObj: SaveDataModel = UtilsReducer.buildSaveDataModel(state, 'chen', 'chen')
+        SaveLoadService.saveToLocalStorage(saveObj);
     },
     UpdateSidurCollectionWithCurrenSidur: (state: SidurStore): SidurRecord[] => {
         const newState = {...state}
@@ -25,5 +22,16 @@ export const UtilsReducer = {
             }
         });
         return newState.sidurCollection
+    },
+    buildSaveDataModel: (state: SidurStore, userName: string = 'chen', userId: string = 'chen'): SaveDataModel => {
+        const hash = hashFunction(JSON.stringify(state))
+        return {
+            userName: 'chen',
+            userId: 'chen',
+            savedStore: state,
+            timeStamp: SaveLoadService.getTimeStampFromDate(),
+            hash: hash.toString()
+        }
+
     }
 }

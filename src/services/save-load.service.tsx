@@ -1,19 +1,12 @@
 //interface
-import {SidurStore} from '../store/store.types';
-
-interface SaveDataModel {
-    userId: string,
-    userName: string,
-    timeStamp: string,
-    savedStore: SidurStore
-}
+import {SaveDataModel} from '../store/store.types';
 
 
 const APPID = '$123AT6'
 export const SaveLoadService = {
     saveToLocalStorage: (data: SaveDataModel): { success: boolean } => {
         const userId = data.userId || 'Chen123';
-        data.timeStamp = data.timeStamp || SaveLoadService.getTimeStamp()
+        data.timeStamp = data.timeStamp || SaveLoadService.getTimeStampFromDate()
         localStorage.setItem(APPID + userId, JSON.stringify(data));
         return {success: true}
     },
@@ -30,8 +23,8 @@ export const SaveLoadService = {
 
 
     },
-    getTimeStamp: (): string => {
-        return new Date().getTime().toString()
+    getTimeStampFromDate: (date: Date = new Date()): string => {
+        return date.getTime().toString()
     }
 }
 
