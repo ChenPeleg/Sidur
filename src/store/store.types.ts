@@ -6,7 +6,7 @@ export type ActionType = string;
 
 export type IAction = {
     type: ActionTypes
-    payLoad: any
+    payload: any
 }
 
 export interface SidurRecord {

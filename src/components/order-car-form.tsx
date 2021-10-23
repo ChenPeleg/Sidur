@@ -213,7 +213,7 @@ export const OrderCarForm = (formProps: MuiFormPropsModel) => {
                 }
                 dispatch({
                     type: ActionTypes.UPDATE_ORDER_IN_EDIT,
-                    payLoad: {
+                    payload: {
                         ...values
                     }
                 })
@@ -227,7 +227,7 @@ export const OrderCarForm = (formProps: MuiFormPropsModel) => {
                 }
                 dispatch({
                     type: ActionTypes.UPDATE_ORDER,
-                    payLoad: {
+                    payload: {
                         id: id
                     }
                 })

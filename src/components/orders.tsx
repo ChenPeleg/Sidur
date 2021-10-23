@@ -34,7 +34,7 @@ export const Orders = () => {
     const addClickHandler = (event: any) => {
         dispatch({
             type: ActionTypes.ADD_NEW_ORDER,
-            payLoad: {}
+            payload: {}
         })
     }
     console.log(orders)

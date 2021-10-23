@@ -23,7 +23,7 @@ const DefaultSidur: SidurRecord = {
 export const SidurReducer: Record<SidurReducerFunctions, (state: SidurStore, action: IAction) => SidurStore> = {
     [ActionTypes.CHOOSE_SIDUR]: (state: SidurStore, action: IAction): SidurStore => {
         let newState = {...state}
-        const chosenSidurId = action.payLoad.id;
+        const chosenSidurId = action.payload.id;
         const previousSidurId = newState.sidurId;
         if (chosenSidurId === previousSidurId) {
             return newState
@@ -64,8 +64,8 @@ export const SidurReducer: Record<SidurReducerFunctions, (state: SidurStore, act
     },
     [ActionTypes.RENAME_SIDUR]: (state: SidurStore, action: IAction): SidurStore => {
         let newState = {...state}
-        const sidurId = action.payLoad.id// newState.sidurId;
-        const newName = action.payLoad.value;
+        const sidurId = action.payload.id// newState.sidurId;
+        const newName = action.payload.value;
         if (!newName) {
             return newState
         }
@@ -82,7 +82,7 @@ export const SidurReducer: Record<SidurReducerFunctions, (state: SidurStore, act
     },
     [ActionTypes.DELETE_SIDUR]: (state: SidurStore, action: IAction): SidurStore => {
         let newState = {...state}
-        const sidurIdToDelete = action.payLoad.id// newState.sidurId;
+        const sidurIdToDelete = action.payload.id// newState.sidurId;
         let deletedSidur: SidurRecord | undefined = newState.sidurCollection.find(s => s.id === sidurIdToDelete);
         if (deletedSidur) {
             deletedSidur = {...deletedSidur};
@@ -104,7 +104,7 @@ export const SidurReducer: Record<SidurReducerFunctions, (state: SidurStore, act
     [ActionTypes.ARCHIVE_SIDUR]: (state: SidurStore, action: IAction): SidurStore => {
         let newState = {...state}
 
-        const sidurIdToArchive = action.payLoad.id//newState.sidurId;
+        const sidurIdToArchive = action.payload.id//newState.sidurId;
         let archivedSidur: SidurRecord | undefined = newState.sidurCollection.find(s => s.id === sidurIdToArchive);
         if (archivedSidur) {
             archivedSidur = {...archivedSidur};
@@ -119,7 +119,6 @@ export const SidurReducer: Record<SidurReducerFunctions, (state: SidurStore, act
         const chosenSidurAfterArchive: SidurRecord = newState.sidurCollection[0];
         newState.sidurId = chosenSidurAfterArchive.id
         newState = setChosenSidur(newState, chosenSidurAfterArchive);
-
         return newState
     },
     [ActionTypes.ADD_NEW_SIDUR]: (state: SidurStore, action: IAction): SidurStore => {
@@ -141,7 +140,7 @@ export const SidurReducer: Record<SidurReducerFunctions, (state: SidurStore, act
     },
     [ActionTypes.CLONE_SIDUR]: (state: SidurStore, action: IAction): SidurStore => {
         let newState = {...state}
-        const sidurIdToClone = action.payLoad.id;// newState.sidurId;
+        const sidurIdToClone = action.payload.id;// newState.sidurId;
         let sidurForCloning: SidurRecord | undefined = newState.sidurCollection.find(s => s.id === sidurIdToClone);
 
         if (sidurForCloning) {

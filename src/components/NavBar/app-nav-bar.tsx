@@ -16,7 +16,7 @@ import {SidurRenameDialog} from '../Dialogs/sidur-rename-dialog';
 import {ProfileMenu} from './profile-menu';
 import {ActionTypes} from '../../store/actionTypes';
 import {SidurMenu} from './sidur-menu';
-import {SidurMenuClickActionType} from '../../models/SidurMenuClickActionType.enum';
+import {SidurActionType} from '../../models/SidurMenuClickActionType.enum';
 import {ProfileMenuClickActionType} from '../../models/profile-menu-click-action-type.enum';
 import {Utilites} from '../../services/utilites';
 import {FileUploadType, SidurRecord, SidurStore} from '../../store/store.types';
@@ -53,7 +53,7 @@ export const AppNavBar = () => {
         if (value) {
             dispatch({
                 type: ActionTypes.RENAME_SIDUR,
-                payLoad: {value}
+                payload: {value}
             })
         }
     };
@@ -62,36 +62,36 @@ export const AppNavBar = () => {
         if (result) {
             dispatch({
                 type: ActionTypes.IMPORT_FILE_UPLOADED,
-                payLoad: {...result}
+                payload: {...result}
             })
         }
     };
-    const handleSidurMenuClick = (event: React.MouseEvent<HTMLElement>, clickAction: SidurMenuClickActionType) => {
+    const handleSidurMenuClick = (event: React.MouseEvent<HTMLElement>, clickAction: SidurActionType) => {
 
         switch (clickAction) {
 
-            case SidurMenuClickActionType.CreateCopy:
+            case SidurActionType.CreateCopy:
                 dispatch({
                     type: ActionTypes.CLONE_SIDUR,
                     payload: {id: sidurId}
                 })
                 break;
-            case SidurMenuClickActionType.Archive:
+            case SidurActionType.Archive:
                 dispatch({
                     type: ActionTypes.ARCHIVE_SIDUR,
                     payload: {id: sidurId}
                 })
                 break;
-            case SidurMenuClickActionType.Delete:
+            case SidurActionType.Delete:
                 dispatch({
                     type: ActionTypes.DELETE_SIDUR,
                     payload: {id: sidurId}
                 })
                 break;
-            case SidurMenuClickActionType.Rename:
+            case SidurActionType.Rename:
                 setRenameOpen(true);
                 break;
-            case SidurMenuClickActionType.ManageSidurim:
+            case SidurActionType.ManageSidurim:
                 setManageSidurimOpen(true);
                 break;
 
@@ -109,13 +109,13 @@ export const AppNavBar = () => {
             case ProfileMenuClickActionType.MyProfile:
                 dispatch({
                     type: ActionTypes.OPEN_MY_PROFILE,
-                    payLoad: null
+                    payload: null
                 })
                 break;
             case ProfileMenuClickActionType.Export:
                 dispatch({
                     type: ActionTypes.EXPORT_ALL,
-                    payLoad: null
+                    payload: null
                 })
                 break;
             case ProfileMenuClickActionType.Import:
@@ -138,12 +138,12 @@ export const AppNavBar = () => {
         if (chosenSidur === 'NEW') {
             dispatch({
                 type: ActionTypes.ADD_NEW_SIDUR,
-                payLoad: null
+                payload: null
             });
         } else {
             dispatch({
                 type: ActionTypes.CHOOSE_SIDUR,
-                payLoad: {id: chosenSidur}
+                payload: {id: chosenSidur}
             })
         }
 
@@ -167,7 +167,6 @@ export const AppNavBar = () => {
                 }}>
                     <IconButton
                         size="large"
-
                         color="inherit"
                         aria-label="open drawer"
                         sx={{mr: 0}}

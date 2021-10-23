@@ -1,16 +1,16 @@
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import * as React from 'react';
-import {Archive, Delete, DriveFileRenameOutline, FileCopy, RecordVoiceOver} from '@mui/icons-material';
+import {Archive, Delete, DriveFileRenameOutline, FileCopy, ListAlt} from '@mui/icons-material';
 import {translations} from '../../services/translations';
-import {SidurMenuClickActionType} from '../../models/SidurMenuClickActionType.enum';
+import {SidurActionType} from '../../models/SidurMenuClickActionType.enum';
 
 
 interface sidurMenuProps {
     sidurMoreAnchorEl: Element | ((element: Element) => Element) | null | undefined;
     sidurMenuId: string,
     isSidurMenuOpen: boolean,
-    handleSidurMenuClick: (event: React.MouseEvent<HTMLElement>, clickAction: SidurMenuClickActionType) => void
+    handleSidurMenuClick: (event: React.MouseEvent<HTMLElement>, clickAction: SidurActionType) => void
     handleSidurMenuClose: () => void
 }
 
@@ -39,28 +39,28 @@ export const SidurMenu = (props: sidurMenuProps) => {
             onClose={handleSidurMenuClose}
         >
 
-            <MenuItem onClick={(e) => handleSidurMenuClick(e, SidurMenuClickActionType.Rename)}>
+            <MenuItem onClick={(e) => handleSidurMenuClick(e, SidurActionType.Rename)}>
 
                 <DriveFileRenameOutline/>&nbsp;
                 {translations.Rename}
             </MenuItem>
-            <MenuItem onClick={(e) => handleSidurMenuClick(e, SidurMenuClickActionType.Delete)}>
+            <MenuItem onClick={(e) => handleSidurMenuClick(e, SidurActionType.Delete)}>
 
                 <Delete/>&nbsp;
                 {translations.Delete}
             </MenuItem>
-            <MenuItem onClick={(e) => handleSidurMenuClick(e, SidurMenuClickActionType.CreateCopy)}>
+            <MenuItem onClick={(e) => handleSidurMenuClick(e, SidurActionType.CreateCopy)}>
 
                 <FileCopy/>&nbsp;
                 {translations.CreateCopy}
             </MenuItem>
-            <MenuItem onClick={(e) => handleSidurMenuClick(e, SidurMenuClickActionType.Archive)}>
+            <MenuItem onClick={(e) => handleSidurMenuClick(e, SidurActionType.Archive)}>
                 <Archive/> &nbsp;
                 {translations.Archive}
             </MenuItem>
-            <MenuItem onClick={(e) => handleSidurMenuClick(e, SidurMenuClickActionType.ManageSidurim)}>
+            <MenuItem onClick={(e) => handleSidurMenuClick(e, SidurActionType.ManageSidurim)}>
 
-                <RecordVoiceOver/>&nbsp;
+                <ListAlt/>&nbsp;
                 {translations.ManageAllSidrurim}
             </MenuItem>
         </Menu>

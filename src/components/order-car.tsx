@@ -50,7 +50,7 @@ export const OrderCar = (props: AppProps) => {
     const cardClickHandler = (event: MouseEvent) => {
         dispatch({
             type: ActionTypes.CLICKED_ORDER,
-            payLoad: {
+            payload: {
                 id: props.orderId
             }
         })
@@ -59,7 +59,7 @@ export const OrderCar = (props: AppProps) => {
         event.stopPropagation();
         dispatch({
             type: ActionTypes.DELETE_ORDER,
-            payLoad: {
+            payload: {
                 id: props.orderId
             }
         })

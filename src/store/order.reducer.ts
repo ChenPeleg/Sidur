@@ -28,12 +28,12 @@ export const OrderReducer: Record<OrderReducerFunctions, (state: SidurStore, act
     },
     [ActionTypes.UPDATE_ORDER_IN_EDIT]: (state: SidurStore, action: IAction): SidurStore => {
         let newState = {...state}
-        newState.dataHolderForCurrentOrderInEdit = action.payLoad;
+        newState.dataHolderForCurrentOrderInEdit = action.payload;
         return newState
     },
     [ActionTypes.UPDATE_ORDER]: (state: SidurStore, action: IAction): SidurStore => {
         let newState = {...state}
-        const orderId = action.payLoad.id;
+        const orderId = action.payload.id;
         newState.orders = newState.orders.map(order => {
             if ((orderId === order.id) && newState.dataHolderForCurrentOrderInEdit) {
                 order = newState.dataHolderForCurrentOrderInEdit
@@ -48,7 +48,7 @@ export const OrderReducer: Record<OrderReducerFunctions, (state: SidurStore, act
     },
     [ActionTypes.CLICKED_ORDER]: (state: SidurStore, action: IAction): SidurStore => {
         let newState = {...state}
-        const clickedOrderId = action.payLoad.id;
+        const clickedOrderId = action.payload.id;
         if (newState.dataHolderForCurrentOrderInEdit) {
             const currentOrderId = newState.dataHolderForCurrentOrderInEdit.id
             newState.orders = newState.orders.map(order => {
@@ -64,7 +64,7 @@ export const OrderReducer: Record<OrderReducerFunctions, (state: SidurStore, act
     },
     [ActionTypes.DELETE_ORDER]: (state: SidurStore, action: IAction): SidurStore => {
         let newState = {...state}
-        const deleteOrderId = action.payLoad.id;
+        const deleteOrderId = action.payload.id;
         newState.orders = newState.orders.filter(order => deleteOrderId !== order.id)
         if (newState.dataHolderForCurrentOrderInEdit && newState.dataHolderForCurrentOrderInEdit.id === deleteOrderId) {
             newState.dataHolderForCurrentOrderInEdit = null;
