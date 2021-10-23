@@ -36,6 +36,11 @@ export const defaultOrderValues: OrderModel = {
     TypeOfDrive: DriveType.OneWayTo,
     Comments: ''
 }
+export const AppConstants = {
+    deleteIdPrefix: 'Del',
+    ArchiveIdPrefix: 'Arch',
+
+}
 
 export enum FileUploadType {
     uploadFullDataAndReplace = 1,

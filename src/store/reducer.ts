@@ -49,6 +49,7 @@ const reducer = (state: SidurStore = initialState, action: IAction) => {
         case ActionTypes.RENAME_SIDUR:
         case ActionTypes.ADD_NEW_SIDUR:
         case ActionTypes.DELETE_SIDUR:
+        case ActionTypes.CLONE_SIDUR:
 
             return SidurReducer[action.type](newState, action)
 
@@ -62,7 +63,7 @@ const reducer = (state: SidurStore = initialState, action: IAction) => {
 
         case ActionTypes.EXPORT_ALL:
         case ActionTypes.IMPORT_FILE_UPLOADED:
-            
+
             return ImportExportReducer[action.type](newState, action)
 
         default:

@@ -1,7 +1,7 @@
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import * as React from 'react';
-import {Archive, Delete, DriveFileRenameOutline, FileCopy} from '@mui/icons-material';
+import {Archive, Delete, DriveFileRenameOutline, FileCopy, RecordVoiceOver} from '@mui/icons-material';
 import {translations} from '../../services/translations';
 import {SidurMenuClickActionType} from '../../models/SidurMenuClickActionType.enum';
 
@@ -38,11 +38,7 @@ export const SidurMenu = (props: sidurMenuProps) => {
             open={isSidurMenuOpen}
             onClose={handleSidurMenuClose}
         >
-            {/*<MenuItem onClick={(e) => handleSidurMenuClick(e, SidurMenuClickActionType.CreateNew)}>*/}
 
-            {/*    <Add/>&nbsp;*/}
-            {/*    {translations.NewSidur}*/}
-            {/*</MenuItem>*/}
             <MenuItem onClick={(e) => handleSidurMenuClick(e, SidurMenuClickActionType.Rename)}>
 
                 <DriveFileRenameOutline/>&nbsp;
@@ -58,10 +54,14 @@ export const SidurMenu = (props: sidurMenuProps) => {
                 <FileCopy/>&nbsp;
                 {translations.CreateCopy}
             </MenuItem>
-            <MenuItem onClick={(e) => handleSidurMenuClick(e, SidurMenuClickActionType.Export)}>
+            <MenuItem onClick={(e) => handleSidurMenuClick(e, SidurMenuClickActionType.Archive)}>
                 <Archive/> &nbsp;
-
                 {translations.Archive}
+            </MenuItem>
+            <MenuItem onClick={(e) => handleSidurMenuClick(e, SidurMenuClickActionType.ManageSidurim)}>
+
+                <RecordVoiceOver/>&nbsp;
+                {translations.ManageAllSidrurim}
             </MenuItem>
         </Menu>
     );

@@ -13,6 +13,7 @@ export const translations = {
     'ImportPart': 'יבוא חלקי',
     'NewName': 'שם חדש',
     'NewSidur': 'סידור חדש',
+    'ManageAllSidrurim': 'ניהול סידורים',
     'Delete': 'מחק',
     'ExportToFile': 'יצא לקובץ',
     'ImportFromFile': 'יבא מקובץ',
@@ -36,6 +37,10 @@ export const translations = {
     'Comments': 'הערות ',
     'Approve': 'אישור',
     'Cancel': 'ביטול',
-    'NewOrder': 'הזמנה חדשה'
+    'NewOrder': 'הזמנה חדשה',
+    'CopyOf': '(עותק)',
+    'Trash': 'אשפה',
+    'inArchive': 'ארכיון',
+    'ActiveSidurim': 'סידורים פעילים'
 
 }

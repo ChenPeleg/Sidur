@@ -1,6 +1,6 @@
 import {ActionTypes} from './actionTypes';
 import {defaultOrderValues, IAction, SidurStore} from './store.types';
-import {UtilsReducer} from './utils.reducer';
+import {StoreUtils} from './store-utils';
 import {Utilites} from '../services/utilites';
 import {OrderModel} from '../models/Order.model';
 
@@ -22,8 +22,8 @@ export const OrderReducer: Record<OrderReducerFunctions, (state: SidurStore, act
         }
         newState.orders = [...newState.orders]
         newState.orders.unshift(newOrder);
-        newState.sidurCollection = UtilsReducer.UpdateSidurCollectionWithCurrenSidur(newState)
-        UtilsReducer.saveToLocalStorage(newState);
+        newState.sidurCollection = StoreUtils.UpdateSidurCollectionWithCurrenSidur(newState)
+        StoreUtils.HandleReducerSaveToLocalStorage(newState);
         return newState
     },
     [ActionTypes.UPDATE_ORDER_IN_EDIT]: (state: SidurStore, action: IAction): SidurStore => {
@@ -42,8 +42,8 @@ export const OrderReducer: Record<OrderReducerFunctions, (state: SidurStore, act
         });
         newState.dataHolderForCurrentOrderInEdit = null;
         newState.orderIdInEdit = null;
-        newState.sidurCollection = UtilsReducer.UpdateSidurCollectionWithCurrenSidur(newState)
-        UtilsReducer.saveToLocalStorage(newState);
+        newState.sidurCollection = StoreUtils.UpdateSidurCollectionWithCurrenSidur(newState)
+        StoreUtils.HandleReducerSaveToLocalStorage(newState);
         return newState
     },
     [ActionTypes.CLICKED_ORDER]: (state: SidurStore, action: IAction): SidurStore => {
@@ -72,8 +72,8 @@ export const OrderReducer: Record<OrderReducerFunctions, (state: SidurStore, act
         if (newState.orderIdInEdit === deleteOrderId) {
             newState.orderIdInEdit = null;
         }
-        newState.sidurCollection = UtilsReducer.UpdateSidurCollectionWithCurrenSidur(newState)
-        UtilsReducer.saveToLocalStorage(newState);
+        newState.sidurCollection = StoreUtils.UpdateSidurCollectionWithCurrenSidur(newState)
+        StoreUtils.HandleReducerSaveToLocalStorage(newState);
         return newState
     },
 

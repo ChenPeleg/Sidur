@@ -1,6 +1,6 @@
 import {ActionTypes} from './actionTypes';
 import {IAction, SaveDataModel, SidurStore} from './store.types';
-import {UtilsReducer} from './utils.reducer';
+import {StoreUtils} from './store-utils';
 import {DownloadFile} from '../services/download-file';
 
 export type ImportReducerFunctions =
@@ -9,8 +9,8 @@ export type ImportReducerFunctions =
 export const ImportExportReducer: Record<ImportReducerFunctions, (state: SidurStore, action: IAction) => SidurStore> = {
     [ActionTypes.EXPORT_ALL]: (state: SidurStore, action: IAction): SidurStore => {
         let newState = {...state}
-        newState.sidurCollection = UtilsReducer.UpdateSidurCollectionWithCurrenSidur(newState);
-        const saveObj: SaveDataModel = UtilsReducer.buildSaveDataModel(newState)
+        newState.sidurCollection = StoreUtils.UpdateSidurCollectionWithCurrenSidur(newState);
+        const saveObj: SaveDataModel = StoreUtils.buildSaveDataModel(newState)
         DownloadFile('sidur.json', JSON.stringify(saveObj))
         return newState
 

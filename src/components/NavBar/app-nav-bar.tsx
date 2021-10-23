@@ -21,6 +21,7 @@ import {ProfileMenuClickActionType} from '../../models/profile-menu-click-action
 import {Utilites} from '../../services/utilites';
 import {FileUploadType, SidurRecord, SidurStore} from '../../store/store.types';
 import {FileUploadDialog} from '../Dialogs/file-uplaod-dialog';
+import {SidurManagementDialog} from '../Dialogs/sidur-management-dialog';
 
 
 export const AppNavBar = () => {
@@ -28,10 +29,10 @@ export const AppNavBar = () => {
     const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
     const [RenameOpen, setRenameOpen] = React.useState(false);
     const [UploadOpen, setUploadOpen] = React.useState(false);
+    const [ManageSidurimOpen, setManageSidurimOpen] = React.useState(false);
     const [uploadDialogOpen, setUploadDialogOpen] = React.useState(false);
     const [sidurMoreAnchorEl, setSidurMoreAnchorEl] =
         React.useState<null | HTMLElement>(null);
-
     const sidurId = useSelector((state: SidurStore) => state.sidurId);
     const sidurCollection = useSelector((state: SidurStore) => state.sidurCollection);
     const sidurSelected = sidurCollection.find((sidurRecord: SidurRecord) => sidurRecord.id === sidurId);
@@ -70,22 +71,34 @@ export const AppNavBar = () => {
         switch (clickAction) {
 
             case SidurMenuClickActionType.CreateCopy:
+                dispatch({
+                    type: ActionTypes.CLONE_SIDUR,
+                    payload: {id: sidurId}
+                })
+                break;
+            case SidurMenuClickActionType.Archive:
+                dispatch({
+                    type: ActionTypes.ARCHIVE_SIDUR,
+                    payload: {id: sidurId}
+                })
                 break;
             case SidurMenuClickActionType.Delete:
                 dispatch({
                     type: ActionTypes.DELETE_SIDUR,
-                    payload: null
+                    payload: {id: sidurId}
                 })
                 break;
             case SidurMenuClickActionType.Rename:
                 setRenameOpen(true);
+                break;
+            case SidurMenuClickActionType.ManageSidurim:
+                setManageSidurimOpen(true);
                 break;
 
             default:
         }
         handleSidurMenuClose()
     };
-
     const handleSidurMenuClose = () => {
         setSidurMoreAnchorEl(null);
     };
@@ -244,6 +257,9 @@ export const AppNavBar = () => {
             <ProfileMenu menuId={menuId} anchorEl={anchorEl} handleMenuClose={handleProfileMenuClose} isMenuOpen={isProfileMenuOpen}/>
             <SidurRenameDialog open={RenameOpen} onClose={handleRenameClose} selectedValue={sidurName}/>
             <FileUploadDialog open={UploadOpen} onClose={handleUploadClose} selectedValue={''}/>
+            <SidurManagementDialog open={ManageSidurimOpen} onClose={() => {
+                setManageSidurimOpen(false)
+            }}/>
 
         </Box>
     );

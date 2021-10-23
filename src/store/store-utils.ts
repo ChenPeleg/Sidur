@@ -3,10 +3,17 @@ import {SaveLoadService} from '../services/save-load.service';
 import {hashFunction} from '../services/hash-function';
 
 
-export const UtilsReducer = {
-    saveToLocalStorage: (state: SidurStore): void => {
-        const saveObj: SaveDataModel = UtilsReducer.buildSaveDataModel(state, 'chen', 'chen')
+export const StoreUtils = {
+    HandleReducerSaveToLocalStorage: (state: SidurStore): void => {
+        const saveObj: SaveDataModel = StoreUtils.buildSaveDataModel(state, 'chen', 'chen')
         SaveLoadService.saveToLocalStorage(saveObj);
+    },
+    deepCloneSidur: (sidur: SidurRecord): SidurRecord => {
+        const clonedSidur = {...sidur}
+        clonedSidur.orders = clonedSidur.orders.map(o => ({...o}));
+        clonedSidur.deletedOrders = clonedSidur.deletedOrders.map(o => ({...o}));
+        clonedSidur.defaultOrderValues = clonedSidur.defaultOrderValues ? {...clonedSidur.defaultOrderValues} : undefined
+        return clonedSidur
     },
     UpdateSidurCollectionWithCurrenSidur: (state: SidurStore): SidurRecord[] => {
         const newState = {...state}
