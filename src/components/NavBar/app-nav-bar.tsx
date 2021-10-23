@@ -11,7 +11,6 @@ import MoreIcon from '@mui/icons-material/MoreVert';
 import {translations} from '../../services/translations';
 import {useDispatch, useSelector} from 'react-redux';
 import {Select, SelectChangeEvent} from '@mui/material';
-import {SidurRecord, SidurStore} from '../../store/reducer';
 import {Edit} from '@mui/icons-material';
 import {SidurRenameDialog} from '../Dialogs/sidur-rename-dialog';
 import {ProfileMenu} from './profile-menu';
@@ -20,6 +19,7 @@ import {SidurMenu} from './sidur-menu';
 import {SidurMenuClickActionType} from '../../models/SidurMenuClickActionType.enum';
 import {ProfileMenuClickActionType} from '../../models/profile-menu-click-action-type.enum';
 import {Utilites} from '../../services/utilites';
+import {SidurRecord, SidurStore} from '../../store/store.types';
 
 
 export const AppNavBar = () => {

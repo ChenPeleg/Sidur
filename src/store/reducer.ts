@@ -1,30 +1,11 @@
 import {OrderModel} from '../models/Order.model';
 import {DriveType} from '../models/DriveType.enum';
-import {IAction} from './store.types';
+import {IAction, SidurRecord, SidurStore} from './store.types';
 import {ActionTypes} from './actionTypes';
 import {SaveLoadService} from '../services/save-load.service';
 import {DownloadFile} from '../services/download-file';
 import {translations} from '../services/translations';
 import {Utilites} from '../services/utilites';
-
-export interface SidurRecord {
-    id: string,
-    Name: string,
-    orders: OrderModel[];
-    deletedOrders: OrderModel[];
-    defaultOrderValues?: OrderModel,
-}
-
-export interface SidurStore {
-    sidurCollection: SidurRecord[];
-    sidurArchive: SidurRecord[];
-    sidurId: string;
-    orders: OrderModel[];
-    deletedOrders: OrderModel[];
-    orderIdInEdit: null | string;
-    dataHolderForCurrentOrderInEdit: OrderModel | null;
-    defaultOrderValues: OrderModel,
-}
 
 const DefaultSidur: SidurRecord = {
     id: '99999',
@@ -120,7 +101,6 @@ const reducer = (state: SidurStore = initialState, action: IAction) => {
 
             }
             break;
-
         case ActionTypes.RENAME_SIDUR:
             const sidurId = newState.sidurId;
             const newName = action.payLoad.value;

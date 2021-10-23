@@ -1,5 +1,5 @@
 //interface
-import {SidurStore} from '../store/reducer';
+import {SidurStore} from '../store/store.types';
 
 interface SaveDataModel {
     userId: string,
