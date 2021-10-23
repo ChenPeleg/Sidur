@@ -1,5 +1,6 @@
 import {ActionTypes} from './actionTypes';
 import {OrderModel} from '../models/Order.model';
+import {DriveType} from '../models/DriveType.enum';
 
 export type ActionType = string;
 
@@ -25,4 +26,13 @@ export interface SidurStore {
     orderIdInEdit: null | string;
     dataHolderForCurrentOrderInEdit: OrderModel | null;
     defaultOrderValues: OrderModel,
+}
+
+export const defaultOrderValues: OrderModel = {
+    id: '1',
+    driverName: '',
+    startHour: '08:00',
+    finishHour: '09:00',
+    TypeOfDrive: DriveType.OneWayTo,
+    Comments: ''
 }

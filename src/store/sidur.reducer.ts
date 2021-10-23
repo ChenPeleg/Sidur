@@ -1,20 +1,21 @@
 import {ActionTypes} from './actionTypes';
 import {IAction, SidurRecord, SidurStore} from './store.types';
 import {OrderModel} from '../models/Order.model';
+import {Utilites} from '../services/utilites';
+import {translations} from '../services/translations';
 
-type SidurReducerFunctions =
-    ActionTypes.RENAME_SIDUR | ActionTypes.DELETE_SIDUR | ActionTypes.ADD_NEW_SIDUR | ActionTypes.ADD_NEW_ORDER | ActionTypes.CHOOSE_SIDUR
+export type SidurReducerFunctions =
+    ActionTypes.RENAME_SIDUR | ActionTypes.DELETE_SIDUR | ActionTypes.ADD_NEW_SIDUR | ActionTypes.CHOOSE_SIDUR
 
-// const sidurReducer: Record<SidurReducerFunctions, (state: SidurStore, action: IAction) => SidurStore>
-// {
-//     [ActionTypes.RENAME_SIDUR.toString()]
-// :
-//     (state: SidurStore, action: IAction): SidurStore => {
-//         return state
-//
-//     }
-// }
-export const SidurReducer: any = {
+const DefaultSidur: SidurRecord = {
+    id: '1',
+    Name: 'הסידור החדש שלי',
+    orders: [],
+    deletedOrders: []
+}
+
+
+export const SidurReducer: Record<SidurReducerFunctions, (state: SidurStore, action: IAction) => SidurStore> = {
     [ActionTypes.CHOOSE_SIDUR]: (state: SidurStore, action: IAction): SidurStore => {
         let newState = {...state}
         const chosenSidurId = action.payLoad.id;
@@ -55,7 +56,67 @@ export const SidurReducer: any = {
         }
         return newState
 
-    }
+    },
+    [ActionTypes.RENAME_SIDUR]: (state: SidurStore, action: IAction): SidurStore => {
+        let newState = {...state}
+        const sidurId = newState.sidurId;
+        const newName = action.payLoad.value;
+        if (!newName) {
+            return newState
+        }
+        newState.sidurCollection = newState.sidurCollection.map((sidur: SidurRecord) => {
+            if (sidur.id === sidurId) {
+                const updatedSidur = {...sidur};
+                updatedSidur.Name = newName;
+                return updatedSidur
+            } else {
+                return sidur
+            }
+        });
+        return newState
+    },
+    [ActionTypes.DELETE_SIDUR]: (state: SidurStore, action: IAction): SidurStore => {
+        let newState = {...state}
+
+
+        const sidurIdToDelete = newState.sidurId;
+        let deletedSidur: SidurRecord | undefined = newState.sidurCollection.find(s => s.id === sidurIdToDelete);
+        if (deletedSidur) {
+            deletedSidur = {...deletedSidur};
+            deletedSidur.id = 'Del' + deletedSidur.id;
+            newState.sidurArchive.push(deletedSidur);
+        }
+
+        newState.sidurCollection = newState.sidurCollection.filter(s => s.id !== sidurIdToDelete);
+        if (!newState.sidurCollection.length) {
+            newState.sidurCollection.push(DefaultSidur);
+        }
+        const chosenSidurAfterDelete: SidurRecord = newState.sidurCollection[0];
+        newState.sidurId = chosenSidurAfterDelete.id
+        newState = setChosenSidur(newState, chosenSidurAfterDelete);
+
+
+        return newState
+    },
+    [ActionTypes.ADD_NEW_SIDUR]: (state: SidurStore, action: IAction): SidurStore => {
+        let newState = {...state}
+
+        const newSidurId = Utilites.getNextId(newState.sidurCollection.map(o => o.id))
+        const newSidur: SidurRecord = {
+            id: newSidurId,
+            Name: translations.Sidur + ' ' + newSidurId,
+            orders: [],
+            deletedOrders: [],
+            defaultOrderValues: newState.defaultOrderValues
+        }
+        newState.sidurCollection = newState.sidurCollection.map(c => c);
+        newState.sidurCollection.push(newSidur);
+        newState.sidurId = newSidurId;
+        newState = setChosenSidur(newState, newSidur);
+        return newState
+    },
+
+
 }
 const setChosenSidur = (state: SidurStore, chosenSidur: SidurRecord): SidurStore => {
     const newState = {...state};

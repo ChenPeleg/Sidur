@@ -31,6 +31,7 @@ export const translations = {
     'AddOrder': 'הוסף נסיעה ',
     'Comments': 'הערות ',
     'Approve': 'אישור',
-    'Cancel': 'ביטול'
+    'Cancel': 'ביטול',
+    'NewOrder': 'הזמנה חדשה'
 
 }

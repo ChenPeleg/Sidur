@@ -3,6 +3,7 @@ import {useSelector} from 'react-redux';
 import {OrderFields, OrderModel} from '../models/Order.model';
 import {Box, SxProps, Theme} from '@mui/system';
 import {Typography} from '@mui/material';
+import {translations} from '../services/translations';
 
 
 //const TRL = translations;
@@ -53,14 +54,12 @@ export const OrderCarBrief = (props: AppProps) => {
         return state.orders.find(order => order.id === id) as OrderModel;
     });
     const startHour = orderValues.startHour;
-
-
+    const isWithName = orderValues.driverName.trim() !== ''
     return (
-
         <Box sx={{padding: '5px'}}>
             <Typography fontWeight={props.isInEdit ? 'bold' : 'initial'} fontSize={'large'} padding={'initial'}>
-                {
-                    orderValues.startHour} {orderValues.driverName}
+                {isWithName ?
+                    orderValues.startHour : null} {isWithName ? orderValues.driverName : translations.NewOrder}
             </Typography>
 
         </Box>
