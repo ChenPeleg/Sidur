@@ -36,3 +36,9 @@ export const defaultOrderValues: OrderModel = {
     TypeOfDrive: DriveType.OneWayTo,
     Comments: ''
 }
+
+export enum FileUploadType {
+    uploadFullDataAndReplace = 1,
+    uploadFullDataAndAdd = 2,
+    uploadSpecificData = 3
+}

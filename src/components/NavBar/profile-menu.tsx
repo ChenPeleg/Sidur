@@ -40,7 +40,7 @@ export const ProfileMenu = (props: profileMenuProps) => {
             <MenuItem onClick={(event) => handleMenuClose(event, ProfileMenuClickActionType.Export)}>
                 <ImportExport/> &nbsp;{translations.ExportToFile}</MenuItem>
             <MenuItem onClick={(event) => handleMenuClose(event, ProfileMenuClickActionType.Import)}>
-                <ImportExport/>&nbsp; {translations.ImportAllData}</MenuItem>
+                <ImportExport/>&nbsp; {translations.ImportFromFile}</MenuItem>
         </Menu>
     );
 
