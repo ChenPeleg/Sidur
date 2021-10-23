@@ -6,6 +6,7 @@ import {SaveLoadService} from '../services/save-load.service';
 import {DownloadFile} from '../services/download-file';
 import {translations} from '../services/translations';
 import {Utilites} from '../services/utilites';
+import {SidurReducer} from './sidur.reducer';
 
 const DefaultSidur: SidurRecord = {
     id: '99999',
@@ -64,6 +65,10 @@ const reducer = (state: SidurStore = initialState, action: IAction) => {
          * @code Sidur actions
          */
         case ActionTypes.CHOOSE_SIDUR:
+
+            if (ActionTypes) {
+                return SidurReducer[ActionTypes.CHOOSE_SIDUR](newState, action)
+            }
             const chosenSidurId = action.payLoad.id;
             const previousSidurId = newState.sidurId;
             if (chosenSidurId === previousSidurId) {
