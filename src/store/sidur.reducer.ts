@@ -12,6 +12,7 @@ export type SidurReducerFunctions =
     | ActionTypes.CHOOSE_SIDUR
     | ActionTypes.CLONE_SIDUR
     | ActionTypes.ARCHIVE_SIDUR
+    | ActionTypes.MOVE_TO_ACTIVE_SIDUR
 
 const DefaultSidur: SidurRecord = {
     id: '1',
@@ -83,16 +84,27 @@ export const SidurReducer: Record<SidurReducerFunctions, (state: SidurStore, act
     [ActionTypes.DELETE_SIDUR]: (state: SidurStore, action: IAction): SidurStore => {
         let newState = {...state}
         const sidurIdToDelete = action.payload.id// newState.sidurId;
-        let deletedSidur: SidurRecord | undefined = newState.sidurCollection.find(s => s.id === sidurIdToDelete);
-        if (deletedSidur) {
-            deletedSidur = {...deletedSidur};
-            deletedSidur.id = 'Del' + deletedSidur.id;
-            newState.sidurArchive.push(deletedSidur);
+        if (sidurIdToDelete.includes(AppConstants.ArchiveIdPrefix)) {
+            newState.sidurArchive = newState.sidurArchive.map(sidur => {
+                if (sidurIdToDelete === sidur.id) {
+                    const updatedSidur = {...sidur};
+                    updatedSidur.id = updatedSidur.id.replace(AppConstants.ArchiveIdPrefix, AppConstants.deleteIdPrefix);
+                    return updatedSidur
+                }
+                return sidur
+            })
+        } else {
+            let deletedSidur: SidurRecord | undefined = newState.sidurCollection.find(s => s.id === sidurIdToDelete);
+            if (deletedSidur) {
+                deletedSidur = {...deletedSidur};
+                deletedSidur.id = 'Del' + deletedSidur.id;
+                newState.sidurArchive.push(deletedSidur);
+            }
+            newState.sidurCollection = newState.sidurCollection.filter(s => s.id !== sidurIdToDelete);
         }
 
-        newState.sidurCollection = newState.sidurCollection.filter(s => s.id !== sidurIdToDelete);
         if (!newState.sidurCollection.length) {
-            newState.sidurCollection.push(DefaultSidur);
+            newState.sidurCollection.push(getDefaultSidur(newState));
         }
         if (newState.sidurId === sidurIdToDelete) {
             const chosenSidurAfterDelete: SidurRecord = newState.sidurCollection[0];
@@ -105,18 +117,30 @@ export const SidurReducer: Record<SidurReducerFunctions, (state: SidurStore, act
     },
     [ActionTypes.ARCHIVE_SIDUR]: (state: SidurStore, action: IAction): SidurStore => {
         let newState = {...state}
+        const sidurIdToArchive = action.payload.id;
+        if (sidurIdToArchive.includes(AppConstants.deleteIdPrefix)) {
+            newState.sidurArchive = newState.sidurArchive.map(sidur => {
+                if (sidurIdToArchive === sidur.id) {
+                    const updatedSidur = {...sidur};
+                    updatedSidur.id = updatedSidur.id.replace(AppConstants.ArchiveIdPrefix, AppConstants.deleteIdPrefix);
+                    return updatedSidur
+                }
+                return sidur
+            })
+        } else {
+            let archivedSidur: SidurRecord | undefined = newState.sidurCollection.find(s => s.id === sidurIdToArchive);
+            if (archivedSidur) {
+                archivedSidur = {...archivedSidur};
+                archivedSidur.id = AppConstants.ArchiveIdPrefix + archivedSidur.id;
+                newState.sidurArchive.push(archivedSidur);
+                newState.sidurCollection = newState.sidurCollection.filter(s => s.id !== sidurIdToArchive);
+            }
 
-        const sidurIdToArchive = action.payload.id//newState.sidurId;
-        let archivedSidur: SidurRecord | undefined = newState.sidurCollection.find(s => s.id === sidurIdToArchive);
-        if (archivedSidur) {
-            archivedSidur = {...archivedSidur};
-            archivedSidur.id = AppConstants.ArchiveIdPrefix + archivedSidur.id;
-            newState.sidurArchive.push(archivedSidur);
         }
 
-        newState.sidurCollection = newState.sidurCollection.filter(s => s.id !== sidurIdToArchive);
+
         if (!newState.sidurCollection.length) {
-            newState.sidurCollection.push(DefaultSidur);
+            newState.sidurCollection.push(getDefaultSidur(newState));
         }
         if (newState.sidurId === sidurIdToArchive) {
             const chosenSidurAfterArchive: SidurRecord = newState.sidurCollection[0];
@@ -161,6 +185,22 @@ export const SidurReducer: Record<SidurReducerFunctions, (state: SidurStore, act
 
         return newState
     },
+    [ActionTypes.MOVE_TO_ACTIVE_SIDUR]: (state: SidurStore, action: IAction): SidurStore => {
+        let newState = {...state}
+        const sidurIdToActivate = action.payload.id;
+
+        let toActivateSidur: SidurRecord | undefined = newState.sidurArchive.find(s => s.id === sidurIdToActivate);
+        if (toActivateSidur) {
+            toActivateSidur = {...toActivateSidur};
+
+            toActivateSidur.id = StoreUtils.removeIdPrefix(toActivateSidur.id);
+            newState.sidurCollection.push(toActivateSidur);
+            newState.sidurArchive = newState.sidurArchive.filter(s => s.id !== sidurIdToActivate);
+        }
+
+
+        return newState
+    },
 
 
 }
@@ -176,8 +216,18 @@ const setChosenSidur = (state: SidurStore, chosenSidur: SidurRecord): SidurStore
 const getAllSidurIDs = (state: SidurStore): string[] => {
     const collectionIds = state.sidurCollection.map(o => o.id);
     const ArchiveIdsWithWords = state.sidurArchive.map(o => o.id);
-    const replaceIdsNames: RegExp = new RegExp(AppConstants.ArchiveIdPrefix + '|' + AppConstants.deleteIdPrefix, 'g');
-    ;
-    const ArchiveIds = ArchiveIdsWithWords.map(o => o.replace(replaceIdsNames, ''))
+
+    const ArchiveIds = ArchiveIdsWithWords.map(id => StoreUtils.removeIdPrefix(id))
     return [...ArchiveIds, ...collectionIds]
+}
+
+const getDefaultSidur = (state: SidurStore): SidurRecord => {
+    const newSidur: SidurRecord = {...DefaultSidur};
+    newSidur.id = Utilites.getNextId(getAllSidurIDs(state));
+    const allNames = [...state.sidurCollection.map(o => o.Name), ...state.sidurArchive.map(o => o.Name)];
+    if (allNames.some(name => name === newSidur.Name)) {
+        newSidur.Name = newSidur.Name + ' ' + newSidur.id
+    }
+    return newSidur
+
 }

@@ -1,9 +1,13 @@
-import {SaveDataModel, SidurRecord, SidurStore} from './store.types';
+import {AppConstants, SaveDataModel, SidurRecord, SidurStore} from './store.types';
 import {SaveLoadService} from '../services/save-load.service';
 import {hashFunction} from '../services/hash-function';
 
 
 export const StoreUtils = {
+    removeIdPrefix: (id: string): string => {
+        const replaceIdsNames: RegExp = new RegExp(AppConstants.ArchiveIdPrefix + '|' + AppConstants.deleteIdPrefix, 'g');
+        return id.replace(replaceIdsNames, '')
+    },
     HandleReducerSaveToLocalStorage: (state: SidurStore): void => {
         const saveObj: SaveDataModel = StoreUtils.buildSaveDataModel(state, 'chen', 'chen')
         SaveLoadService.saveToLocalStorage(saveObj);

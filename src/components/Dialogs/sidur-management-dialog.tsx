@@ -200,7 +200,7 @@ export const SidurManagementDialog = (props: FileUploadProps) => {
                     </Box>
                 </DialogContent>
                 <DialogActions>
-                    <Button onClick={handleCloseCancel}>{translations.Cancel}</Button>
+                    <Button onClick={handleCloseCancel}>{translations.Finish}</Button>
                     {/*<Button onClick={handleCloseUploaded}>{translations.Approve}</Button>*/}
                 </DialogActions>
             </Dialog>
