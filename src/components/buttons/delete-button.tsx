@@ -10,10 +10,7 @@ interface DeleteButtonProps {
 }
 
 export const DeleteButton = (props: DeleteButtonProps) => {
-
-
     return (
-
         <Box>
             <IconButton onClick={props.deleteClickHandler} size={'small'} sx={{...props.sx}} aria-label="delete">
                 <Delete/>

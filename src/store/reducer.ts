@@ -61,6 +61,7 @@ const reducer = (state: SidurStore = initialState, action: IAction) => {
         case ActionTypes.UPDATE_ORDER_IN_EDIT:
         case ActionTypes.DELETE_ORDER:
         case ActionTypes.ADD_NEW_ORDER:
+        case ActionTypes.CLONE_ORDER:
 
             return OrderReducer[action.type](newState, action)
 

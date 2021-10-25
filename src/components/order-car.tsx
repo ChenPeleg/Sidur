@@ -7,7 +7,8 @@ import {OrderCarBrief} from './order-car-brief';
 import {SxProps} from '@mui/system';
 import {useDispatch} from 'react-redux';
 import {ActionTypes} from '../store/actionTypes';
-import {DeleteButton} from './delete-button';
+import {DeleteButton} from './buttons/delete-button';
+import {CloneButton} from './buttons/clone-button';
 
 
 type AppProps = {
@@ -65,6 +66,16 @@ export const OrderCar = (props: AppProps) => {
         })
 
     }
+    const cloneClickHandler = (event: any) => {
+        event.stopPropagation();
+        dispatch({
+            type: ActionTypes.CLONE_ORDER,
+            payload: {
+                id: props.orderId
+            }
+        })
+
+    }
     const briefOrderStyle: SxProps = props.isInEdit ? {} : {
         cursor: 'pointer',
         bgcolor: {
@@ -94,7 +105,14 @@ export const OrderCar = (props: AppProps) => {
                             justifyContent: 'space-between'
                         }}>
                             <OrderCarBrief isInEdit={props.isInEdit} sx={{...classes.cardBase}} orderId={props.orderId}/>
-                            <DeleteButton deleteClickHandler={deleteClickHandler} sx={{fontSize: '14px'}}/>
+                            <Box sx={{
+                                display: 'flex',
+                                flexDirection: 'row'
+                            }}>
+                                <CloneButton cloneClickHandler={cloneClickHandler} sx={{fontSize: '14px'}}/>
+                                <DeleteButton deleteClickHandler={deleteClickHandler} sx={{fontSize: '14px'}}/>
+                            </Box>
+
                         </Box>
                     </div>
 
