@@ -13,6 +13,7 @@ export type SidurReducerFunctions =
     | ActionTypes.CLONE_SIDUR
     | ActionTypes.ARCHIVE_SIDUR
     | ActionTypes.MOVE_TO_ACTIVE_SIDUR
+    | ActionTypes.DELETE_FOREVER_SIDUR
 
 const DefaultSidur: SidurRecord = {
     id: '1',
@@ -199,6 +200,12 @@ export const SidurReducer: Record<SidurReducerFunctions, (state: SidurStore, act
         }
 
 
+        return newState
+    },
+    [ActionTypes.DELETE_FOREVER_SIDUR]: (state: SidurStore, action: IAction): SidurStore => {
+        let newState = {...state}
+        const sidurIdToDeleteForever = action.payload.id;
+        newState.sidurArchive = newState.sidurArchive.filter(s => s.id !== sidurIdToDeleteForever);
         return newState
     },
 

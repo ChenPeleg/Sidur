@@ -52,6 +52,7 @@ const reducer = (state: SidurStore = initialState, action: IAction) => {
         case ActionTypes.CLONE_SIDUR:
         case ActionTypes.ARCHIVE_SIDUR:
         case ActionTypes.MOVE_TO_ACTIVE_SIDUR:
+        case  ActionTypes.DELETE_FOREVER_SIDUR:
 
             return SidurReducer[action.type](newState, action)
 
