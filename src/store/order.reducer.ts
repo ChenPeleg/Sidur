@@ -1,5 +1,5 @@
 import {ActionTypes} from './actionTypes';
-import {defaultOrderValues, IAction, SidurStore} from './store.types';
+import {AppConstants, defaultOrderValues, IAction, SidurStore} from './store.types';
 import {StoreUtils} from './store-utils';
 import {Utilites} from '../services/utilites';
 import {OrderModel} from '../models/Order.model';
@@ -15,7 +15,7 @@ export type OrderReducerFunctions =
 export const OrderReducer: Record<OrderReducerFunctions, (state: SidurStore, action: IAction) => SidurStore> = {
     [ActionTypes.ADD_NEW_ORDER]: (state: SidurStore, action: IAction): SidurStore => {
         let newState = {...state}
-        const newId = Utilites.getNextId(newState.orders.map(o => o.id))
+        const newId = Utilites.getNextId(getAllOrdersIDs(state))
         const newOrder: OrderModel = {
             ...defaultOrderValues,
             id: newId
@@ -78,4 +78,13 @@ export const OrderReducer: Record<OrderReducerFunctions, (state: SidurStore, act
     },
 
 }
+const getAllOrdersIDs = (state: SidurStore): string[] => {
+    const ordersIds = state.orders.map(o => o.id);
+    const deletedIdsWithWords = state.deletedOrders.map(o => o.id);
+    const replaceIdsNames: RegExp = new RegExp(AppConstants.ArchiveIdPrefix + '|' + AppConstants.deleteIdPrefix, 'g');
+    ;
+    const deletedIds = deletedIdsWithWords.map(o => o.replace(replaceIdsNames, ''))
+    return [...deletedIds, ...ordersIds]
+}
+
 

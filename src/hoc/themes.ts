@@ -31,7 +31,7 @@ export const themeMain: Theme = createTheme({
 
         MuiSelect: {
             styleOverrides: {icon: {position: 'relative'}},
-           
+
         }
     },
 
@@ -53,3 +53,9 @@ export const themeMain: Theme = createTheme({
 
 });
 
+export const customStyles = {
+    smallIcons: {
+        height: '0.7em',
+        width: '0.7em'
+    }
+}

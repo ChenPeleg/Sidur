@@ -94,9 +94,11 @@ export const SidurReducer: Record<SidurReducerFunctions, (state: SidurStore, act
         if (!newState.sidurCollection.length) {
             newState.sidurCollection.push(DefaultSidur);
         }
-        const chosenSidurAfterDelete: SidurRecord = newState.sidurCollection[0];
-        newState.sidurId = chosenSidurAfterDelete.id
-        newState = setChosenSidur(newState, chosenSidurAfterDelete);
+        if (newState.sidurId === sidurIdToDelete) {
+            const chosenSidurAfterDelete: SidurRecord = newState.sidurCollection[0];
+            newState.sidurId = chosenSidurAfterDelete.id
+            newState = setChosenSidur(newState, chosenSidurAfterDelete);
+        }
 
 
         return newState
@@ -116,15 +118,18 @@ export const SidurReducer: Record<SidurReducerFunctions, (state: SidurStore, act
         if (!newState.sidurCollection.length) {
             newState.sidurCollection.push(DefaultSidur);
         }
-        const chosenSidurAfterArchive: SidurRecord = newState.sidurCollection[0];
-        newState.sidurId = chosenSidurAfterArchive.id
-        newState = setChosenSidur(newState, chosenSidurAfterArchive);
+        if (newState.sidurId === sidurIdToArchive) {
+            const chosenSidurAfterArchive: SidurRecord = newState.sidurCollection[0];
+            newState.sidurId = chosenSidurAfterArchive.id
+            newState = setChosenSidur(newState, chosenSidurAfterArchive);
+        }
+
         return newState
     },
     [ActionTypes.ADD_NEW_SIDUR]: (state: SidurStore, action: IAction): SidurStore => {
         let newState = {...state}
 
-        const newSidurId = Utilites.getNextId(newState.sidurCollection.map(o => o.id))
+        const newSidurId = Utilites.getNextId(getAllSidurIDs(state))
         const newSidur: SidurRecord = {
             id: newSidurId,
             Name: translations.Sidur + ' ' + newSidurId,
@@ -146,7 +151,7 @@ export const SidurReducer: Record<SidurReducerFunctions, (state: SidurStore, act
         if (sidurForCloning) {
             const newSidur: SidurRecord = StoreUtils.deepCloneSidur(sidurForCloning);
             newSidur.Name = translations.CopyOf + ' ' + newSidur.Name;
-            const newSidurId = Utilites.getNextId(newState.sidurCollection.map(o => o.id));
+            const newSidurId = Utilites.getNextId(getAllSidurIDs(state));
             newSidur.id = newSidurId
             newState.sidurCollection = newState.sidurCollection.map(c => c);
             newState.sidurCollection.push(newSidur);
@@ -167,4 +172,12 @@ const setChosenSidur = (state: SidurStore, chosenSidur: SidurRecord): SidurStore
     newState.dataHolderForCurrentOrderInEdit = null;
     return newState
 
+}
+const getAllSidurIDs = (state: SidurStore): string[] => {
+    const collectionIds = state.sidurCollection.map(o => o.id);
+    const ArchiveIdsWithWords = state.sidurArchive.map(o => o.id);
+    const replaceIdsNames: RegExp = new RegExp(AppConstants.ArchiveIdPrefix + '|' + AppConstants.deleteIdPrefix, 'g');
+    ;
+    const ArchiveIds = ArchiveIdsWithWords.map(o => o.replace(replaceIdsNames, ''))
+    return [...ArchiveIds, ...collectionIds]
 }

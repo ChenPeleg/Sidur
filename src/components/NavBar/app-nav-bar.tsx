@@ -50,10 +50,14 @@ export const AppNavBar = () => {
 
     const handleRenameClose = (value: string | null) => {
         setRenameOpen(false);
+        const id = sidurId;
         if (value) {
             dispatch({
                 type: ActionTypes.RENAME_SIDUR,
-                payload: {value}
+                payload: {
+                    value,
+                    id
+                }
             })
         }
     };
