@@ -13,9 +13,15 @@ export type VehicleReducerFunctions =
 export const VehicleReducer: Record<VehicleReducerFunctions, (state: SidurStore, action: IAction) => SidurStore> = {
     [ActionTypes.NEW_VEHICLE]: (state: SidurStore, action: IAction): SidurStore => {
         let newState = {...state}
-        const newId = Utilites.getNextId(state.vehicles.map(v => v.id))
+        const newId = Utilites.getNextId(state.vehicles.map(v => v.id));
+
         const newVehicle: VehicleModel = action.payload.value;
-        newVehicle.id = newId
+        newVehicle.id = newId;
+
+        const existingNames = state.vehicles.map(v => v.vehicleName);
+        if (existingNames.includes(newVehicle.vehicleName)) {
+            newVehicle.vehicleName = newVehicle.vehicleName + ' ' + newVehicle.id.toString()
+        }
         //const newVehicleId = get
         newState.vehicles = [...newState.vehicles, newVehicle]
 
@@ -30,6 +36,10 @@ export const VehicleReducer: Record<VehicleReducerFunctions, (state: SidurStore,
         const updateVehicle: VehicleModel = action.payload.value;
         if (updateVehicle) {
             const vehicleId = updateVehicle.id;
+            const existingNames = state.vehicles.filter(v => v.id !== vehicleId).map(v => v.vehicleName);
+            if (existingNames.includes(updateVehicle.vehicleName)) {
+                updateVehicle.vehicleName = updateVehicle.vehicleName + ' ' + updateVehicle.id.toString()
+            }
             newState.vehicles = newState.vehicles.map(vehicle => {
                 if ((vehicleId === vehicle.id)) {
                     vehicle = {...updateVehicle};
