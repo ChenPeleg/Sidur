@@ -39,8 +39,8 @@ export const defaultOrderValues: OrderModel = {
     Comments: ''
 }
 export const defaultVehicleValues: VehicleModel = {
-    id: '1',
-    vehicleName: '',
+    id: '0',
+    vehicleName: 'רכב',
     startHour: '08:00',
     endHour: '09:00',
     kmLimit: '',

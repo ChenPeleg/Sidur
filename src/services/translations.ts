@@ -45,6 +45,9 @@ export const translations = {
     'Trash': 'אשפה',
     'inArchive': 'ארכיון',
     'vehicles': 'רכבים',
+    'AddVehicles': 'הוסף רכב',
+    'Add': 'הוסף',
+    'seats': 'מושבים',
 
     'ActiveSidurim': 'סידורים פעילים'
 
