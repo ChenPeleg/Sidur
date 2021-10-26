@@ -45,14 +45,10 @@ export const VehicleReducer: Record<VehicleReducerFunctions, (state: SidurStore,
 
     [ActionTypes.DELETE_VEHICLE]: (state: SidurStore, action: IAction): SidurStore => {
         let newState = {...state}
-        const deleteOrderId = action.payload.id;
-        newState.orders = newState.orders.filter(order => deleteOrderId !== order.id)
-        if (newState.dataHolderForCurrentOrderInEdit && newState.dataHolderForCurrentOrderInEdit.id === deleteOrderId) {
-            newState.dataHolderForCurrentOrderInEdit = null;
-        }
-        if (newState.orderIdInEdit === deleteOrderId) {
-            newState.orderIdInEdit = null;
-        }
+        const deleteVehiclerId = action.payload.id;
+        newState.vehicles = newState.vehicles.filter(vehicle => deleteVehiclerId !== vehicle.id)
+
+
         newState.sidurCollection = StoreUtils.UpdateSidurCollectionWithCurrenSidur(newState)
         StoreUtils.HandleReducerSaveToLocalStorage(newState);
         return newState

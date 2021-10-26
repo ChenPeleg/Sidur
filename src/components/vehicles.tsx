@@ -6,7 +6,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import {ActionTypes} from '../store/actionTypes';
 import {VehicleModel} from '../models/Vehicle.model';
 import {Add, TimeToLeave} from '@mui/icons-material';
-import {Button} from '@mui/material';
+import {Badge, Button} from '@mui/material';
 import {VehicleEditDialog} from './Dialogs/vehicle-edit-dialog';
 import {defaultVehicleValues} from '../store/store.types';
 
@@ -50,14 +50,13 @@ export const Vehicles = () => {
 
         }
     };
-    const handleVehicleDelete = (value: string | null) => {
+    const handleVehicleDelete = (id: string | null) => {
         setVehicleEditOpen(false);
-        const id = 'sidurId';
-        if (value) {
+        if (id) {
             dispatch({
-                type: ActionTypes.RENAME_SIDUR,
+                type: ActionTypes.DELETE_VEHICLE,
                 payload: {
-                    value,
+
                     id
                 }
             })
@@ -94,10 +93,14 @@ export const Vehicles = () => {
                             .variant} onClick={(event) => {
                             vehicleClickHandler(event, v.id)
                         }}>
-                            <TimeToLeave sx={{
-                                width: '1.2em',
-                                height: '1.2em'
-                            }}/>{v.vehicleName}</Button>
+                            <Badge color={'warning'} invisible={v.seats === '5'} badgeContent={7}>
+                                <TimeToLeave sx={{
+                                    width: '1.2em',
+                                    height: '1.2em'
+                                }}/>
+                            </Badge>
+
+                            {v.vehicleName}</Button>
                     </Box>))}
                 <Box sx={{
                     ...vehicleButtonDesign

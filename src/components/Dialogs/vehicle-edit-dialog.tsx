@@ -107,8 +107,8 @@ export const VehicleEditDialog = (props: VehicleEditDialogProps) => {
                             }}
 
                         >
-                            <ToggleButton value="5" dir={'rtl'}>5 {translations.seats} </ToggleButton>
                             <ToggleButton value="7" dir={'rtl'}>7 {translations.seats} </ToggleButton>
+                            <ToggleButton value="5" dir={'rtl'}>5 {translations.seats} </ToggleButton>
 
                         </ToggleButtonGroup>
                     </Box>

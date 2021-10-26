@@ -44,6 +44,9 @@ export const SidurReducer: Record<SidurReducerFunctions, (state: SidurStore, act
                 NewPreviousSidurObj.deletedOrders = newState.deletedOrders.map(o => ({
                     ...o
                 }));
+                NewPreviousSidurObj.vehicles = newState.vehicles.map(o => ({
+                    ...o
+                }));
 
                 NewPreviousSidurObj.defaultOrderValues = {
                     ...
@@ -216,7 +219,9 @@ export const SidurReducer: Record<SidurReducerFunctions, (state: SidurStore, act
 }
 const setChosenSidur = (state: SidurStore, chosenSidur: SidurRecord): SidurStore => {
     const newState = {...state};
+    
     newState.orders = chosenSidur?.orders.map(o => ({...o})) || []
+    newState.vehicles = chosenSidur?.vehicles.map(o => ({...o})) || []
     newState.deletedOrders = chosenSidur?.deletedOrders?.map(o => ({...o})) || [];
     newState.orderIdInEdit = null;
     newState.dataHolderForCurrentOrderInEdit = null;
