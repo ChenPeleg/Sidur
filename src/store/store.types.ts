@@ -14,6 +14,7 @@ export interface SidurRecord {
     id: string,
     Name: string,
     orders: OrderModel[];
+    vehicles: VehicleModel[];
     deletedOrders: OrderModel[];
     defaultOrderValues?: OrderModel,
 }

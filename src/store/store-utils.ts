@@ -23,10 +23,12 @@ export const StoreUtils = {
         const newState = {...state}
         const sidurId = newState.sidurId;
         const updatedOrders = newState.orders.map(o => ({...o}))
+        const updatedVehicles = newState.vehicles.map(o => ({...o}))
         newState.sidurCollection = newState.sidurCollection.map((sidur: SidurRecord) => {
             if (sidur.id === sidurId) {
                 const updatedSidur = {...sidur};
                 updatedSidur.orders = updatedOrders;
+                updatedSidur.vehicles = updatedVehicles;
                 return updatedSidur
             } else {
                 return sidur

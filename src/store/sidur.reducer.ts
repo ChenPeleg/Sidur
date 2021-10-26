@@ -1,5 +1,5 @@
 import {ActionTypes} from './actionTypes';
-import {AppConstants, IAction, SidurRecord, SidurStore} from './store.types';
+import {AppConstants, defaultVehicleValues, IAction, SidurRecord, SidurStore} from './store.types';
 import {OrderModel} from '../models/Order.model';
 import {Utilites} from '../services/utilites';
 import {translations} from '../services/translations';
@@ -19,7 +19,9 @@ const DefaultSidur: SidurRecord = {
     id: '1',
     Name: 'הסידור החדש שלי',
     orders: [],
-    deletedOrders: []
+    deletedOrders: [],
+    vehicles: [defaultVehicleValues],
+
 }
 
 export const SidurReducer: Record<SidurReducerFunctions, (state: SidurStore, action: IAction) => SidurStore> = {
@@ -160,6 +162,7 @@ export const SidurReducer: Record<SidurReducerFunctions, (state: SidurStore, act
             Name: translations.Sidur + ' ' + newSidurId,
             orders: [],
             deletedOrders: [],
+            vehicles: [defaultVehicleValues],
             defaultOrderValues: newState.defaultOrderValues
         }
         newState.sidurCollection = newState.sidurCollection.map(c => c);

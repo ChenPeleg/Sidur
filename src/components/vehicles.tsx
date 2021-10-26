@@ -30,15 +30,24 @@ export const Vehicles = () => {
     }
     const handleVehicleEditClose = (value: VehicleModel | null) => {
         setVehicleEditOpen(false);
-        const id = 'sidurId';
+
         if (value) {
-            dispatch({
-                type: ActionTypes.RENAME_SIDUR,
-                payload: {
-                    value,
-                    id
-                }
-            })
+            if (value.id === '0') {
+                dispatch({
+                    type: ActionTypes.NEW_VEHICLE,
+                    payload: {
+                        value
+                    }
+                })
+            } else {
+                dispatch({
+                    type: ActionTypes.UPDATE_VEHICLE,
+                    payload: {
+                        value
+                    }
+                })
+            }
+
         }
     };
     const handleVehicleDelete = (value: string | null) => {

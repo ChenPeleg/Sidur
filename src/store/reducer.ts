@@ -6,6 +6,7 @@ import {SidurReducer} from './sidur.reducer';
 import {OrderReducer} from './order.reducer';
 import {ImportExportReducer} from './import-export.reducer';
 import {VehicleModel} from '../models/Vehicle.model';
+import {VehicleReducer} from './vehicle.reducer';
 
 
 const startOrders: OrderModel[] = ['חן', 'אבי', 'רוני'].map((name: string, index: number): OrderModel => ({
@@ -26,12 +27,14 @@ const defaultInitialState: SidurStore = {
         id: '1',
         Name: 'סידור יום שני',
         orders: [],
-        deletedOrders: []
+        deletedOrders: [],
+        vehicles: [defaultVehicleValues]
     }, {
         id: '2',
         Name: 'סידור גנים',
         orders: [],
-        deletedOrders: []
+        deletedOrders: [],
+        vehicles: [defaultVehicleValues]
     }
 
     ],
@@ -76,7 +79,13 @@ const reducer = (state: SidurStore = initialState, action: IAction) => {
         case ActionTypes.EXPORT_ALL:
         case ActionTypes.IMPORT_FILE_UPLOADED:
 
-            return ImportExportReducer[action.type](newState, action)
+            return ImportExportReducer[action.type](newState, action);
+
+        case ActionTypes.NEW_VEHICLE:
+        case ActionTypes.UPDATE_VEHICLE:
+        case ActionTypes.DELETE_VEHICLE:
+
+            return VehicleReducer[action.type](newState, action)
 
         default:
             break;

@@ -34,7 +34,7 @@ export const VehicleEditDialog = (props: VehicleEditDialogProps) => {
         onClose(null);
     };
     const handleCloseEdit = () => {
-        let editedData: VehicleModel | null;
+        let editedData: VehicleModel | null = null;
         if (vehicleData) {
             editedData = {...vehicleData};
             editedData.seats = seatsValue;
@@ -120,9 +120,10 @@ export const VehicleEditDialog = (props: VehicleEditDialogProps) => {
                         marginTop: '1em',
                         display: 'flex'
                     }}>
-                        <Button variant="contained" onClick={handleCloseDelete} aria-label="add" size="large">
-                            <Delete/> {translations.Delete}
-                        </Button>
+                        {(vehicleData?.id !== '0') ? (
+                            <Button variant="contained" onClick={handleCloseDelete} aria-label="add" size="large">
+                                <Delete/> {translations.Delete}
+                            </Button>) : null}
                     </Box>
                 </DialogContent>
                 <DialogActions>
