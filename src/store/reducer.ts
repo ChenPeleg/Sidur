@@ -1,16 +1,23 @@
 import {OrderModel} from '../models/Order.model';
-import {defaultOrderValues, IAction, SidurStore} from './store.types';
+import {defaultOrderValues, defaultVehicleValues, IAction, SidurStore} from './store.types';
 import {ActionTypes} from './actionTypes';
 import {SaveLoadService} from '../services/save-load.service';
 import {SidurReducer} from './sidur.reducer';
 import {OrderReducer} from './order.reducer';
 import {ImportExportReducer} from './import-export.reducer';
+import {VehicleModel} from '../models/Vehicle.model';
 
 
-const startOrders: OrderModel[] = ['Chen', 'Avi', 'Roni'].map((name: string, index: number): OrderModel => ({
+const startOrders: OrderModel[] = ['חן', 'אבי', 'רוני'].map((name: string, index: number): OrderModel => ({
     ...defaultOrderValues,
     id: (index + 1).toString(),
     driverName: name
+}));
+const startVehicles: VehicleModel[] = ['סנאו', 'שלגיה', 'שכור', 'מאזדה'].map((name: string, index: number): VehicleModel => ({
+    ...defaultVehicleValues,
+    id: (index + 1).toString(),
+    vehicleName: name,
+
 }))
 
 const defaultInitialState: SidurStore = {
@@ -30,6 +37,7 @@ const defaultInitialState: SidurStore = {
     ],
     sidurId: '1',
     orders: startOrders,
+    vehicles: startVehicles,
     orderIdInEdit: '1',
     dataHolderForCurrentOrderInEdit: null,
     deletedOrders: [],

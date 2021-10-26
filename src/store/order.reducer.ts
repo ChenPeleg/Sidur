@@ -45,8 +45,7 @@ export const OrderReducer: Record<OrderReducerFunctions, (state: SidurStore, act
             newState.sidurCollection = StoreUtils.UpdateSidurCollectionWithCurrenSidur(newState)
             StoreUtils.HandleReducerSaveToLocalStorage(newState);
         }
-
-
+        
         return newState
     },
     [ActionTypes.UPDATE_ORDER_IN_EDIT]: (state: SidurStore, action: IAction): SidurStore => {

@@ -44,6 +44,8 @@ export const translations = {
     'CopyOf': '(עותק)',
     'Trash': 'אשפה',
     'inArchive': 'ארכיון',
+    'vehicles': 'רכבים',
+
     'ActiveSidurim': 'סידורים פעילים'
 
 }

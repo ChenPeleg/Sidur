@@ -1,6 +1,7 @@
 import {ActionTypes} from './actionTypes';
 import {OrderModel} from '../models/Order.model';
 import {DriveType} from '../models/DriveType.enum';
+import {VehicleModel} from '../models/Vehicle.model';
 
 export type ActionType = string;
 
@@ -22,6 +23,7 @@ export interface SidurStore {
     sidurArchive: SidurRecord[];
     sidurId: string;
     orders: OrderModel[];
+    vehicles: VehicleModel[];
     deletedOrders: OrderModel[];
     orderIdInEdit: null | string;
     dataHolderForCurrentOrderInEdit: OrderModel | null;
@@ -34,6 +36,15 @@ export const defaultOrderValues: OrderModel = {
     startHour: '08:00',
     finishHour: '09:00',
     TypeOfDrive: DriveType.OneWayTo,
+    Comments: ''
+}
+export const defaultVehicleValues: VehicleModel = {
+    id: '1',
+    vehicleName: '',
+    startHour: '08:00',
+    endHour: '09:00',
+    kmLimit: '',
+    seats: '5',
     Comments: ''
 }
 export const AppConstants = {
