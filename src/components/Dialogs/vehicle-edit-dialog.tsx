@@ -26,6 +26,7 @@ export const VehicleEditDialog = (props: VehicleEditDialogProps) => {
         open,
         vehicleData
     } = props;
+
     const [seatsValue, setSeatsValue] = useState(vehicleData?.seats || '5')
     const nameValueRef: any = useRef('')
     const commentsValueRef: any = useRef('')

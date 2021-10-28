@@ -15,7 +15,7 @@ export const Vehicles = () => {
     const [vehicleEditOpen, setVehicleEditOpen] = useState(false);
     const [vehicleClicked, setVehicleClicked] = useState(null);
     const dispatch = useDispatch();
-    const vehicles = useSelector((state: { vehicles: VehicleModel[] }) => state.vehicles);
+    const vehicles = useSelector((state: { vehicles: VehicleModel[] }) => state.vehicles || []);
 
     const vehicleButtonDesign: { boxSX: SxProps, variant: 'text' | 'outlined' | 'contained' } = {
         boxSX: {
