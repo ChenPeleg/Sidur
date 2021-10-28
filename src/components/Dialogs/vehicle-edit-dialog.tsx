@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {useRef, useState} from 'react';
+import {useEffect, useRef, useState} from 'react';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import Dialog from '@mui/material/Dialog';
@@ -27,14 +27,29 @@ export const VehicleEditDialog = (props: VehicleEditDialogProps) => {
         vehicleData
     } = props;
 
-    const [seatsValue, setSeatsValue] = useState(vehicleData?.seats || '5')
+    const [seatsValue, setSeatsValue] = useState(vehicleData?.seats || '5');
+    const [didDialogJustClosed, setDidDialogJustClosed] = useState(false);
+
+    if (didDialogJustClosed && open) {
+        setSeatsValue(vehicleData?.seats || '5');
+        console.log('dialog just opend ', vehicleData?.seats)
+        setDidDialogJustClosed(false);
+    }
+
+    //let seatsInternalValue = vehicleData?.seats || '5';
     const nameValueRef: any = useRef('')
     const commentsValueRef: any = useRef('')
     const filedWrapper: SxProps = {width: '230px'}
     const handleCloseCancel = () => {
         onClose(null);
+        setDidDialogJustClosed(true)
     };
-    const handleCloseEdit = () => {
+    useEffect(() => {
+        // Update the document title using the browser API
+        console.log(vehicleData?.vehicleName)
+        // document.title = `You clicked ${count} times`;
+    });
+    const handleCloseEdit = (): void => {
         let editedData: VehicleModel | null = null;
         if (vehicleData) {
             editedData = {...vehicleData};
@@ -44,10 +59,17 @@ export const VehicleEditDialog = (props: VehicleEditDialogProps) => {
         }
 
         onClose(editedData);
+        setDidDialogJustClosed(true)
     };
-    const handleCloseDelete = () => {
+    const handleCloseDelete = (): void => {
         onDelete(vehicleData?.id || '');
+        setDidDialogJustClosed(true)
     };
+    const handleSeatsValueChanged = (event: any, value: '7' | '5'): void => {
+
+        setSeatsValue(value);
+
+    }
     return (
         <div>
 
@@ -101,15 +123,19 @@ export const VehicleEditDialog = (props: VehicleEditDialogProps) => {
                     }}>
                         <ToggleButtonGroup
                             color="primary"
-                            value={seatsValue}
+                            // value={seatsValue}
+                            // defaultValue={vehicleData?.seats || '5'}
                             exclusive
                             onChange={(event, value) => {
-                                setSeatsValue(value)
+
+                                handleSeatsValueChanged(event, value)
                             }}
 
                         >
-                            <ToggleButton value="7" dir={'rtl'}>7 {translations.seats} </ToggleButton>
-                            <ToggleButton value="5" dir={'rtl'}>5 {translations.seats} </ToggleButton>
+                            <ToggleButton selected={seatsValue === '7'} key={'7'} value="7"
+                                          dir={'rtl'}>7 {translations.seats} </ToggleButton>
+                            <ToggleButton selected={seatsValue === '5'} key={'5'} value="5"
+                                          dir={'rtl'}>5 {translations.seats} </ToggleButton>
 
                         </ToggleButtonGroup>
                     </Box>
