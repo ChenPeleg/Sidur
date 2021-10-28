@@ -37,7 +37,10 @@ export const defaultOrderValues: OrderModel = {
     startHour: '08:00',
     finishHour: '09:00',
     TypeOfDrive: DriveType.OneWayTo,
-    Comments: ''
+    Comments: '',
+    passengers: '1',
+    flexibility: '',
+    location: ''
 }
 export const defaultVehicleValues: VehicleModel = {
     id: '0',

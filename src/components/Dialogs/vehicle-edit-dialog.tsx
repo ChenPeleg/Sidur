@@ -32,11 +32,10 @@ export const VehicleEditDialog = (props: VehicleEditDialogProps) => {
 
     if (didDialogJustClosed && open) {
         setSeatsValue(vehicleData?.seats || '5');
-        console.log('dialog just opend ', vehicleData?.seats)
+
         setDidDialogJustClosed(false);
     }
 
-    //let seatsInternalValue = vehicleData?.seats || '5';
     const nameValueRef: any = useRef('')
     const commentsValueRef: any = useRef('')
     const filedWrapper: SxProps = {width: '230px'}
@@ -46,7 +45,7 @@ export const VehicleEditDialog = (props: VehicleEditDialogProps) => {
     };
     useEffect(() => {
         // Update the document title using the browser API
-        console.log(vehicleData?.vehicleName)
+
         // document.title = `You clicked ${count} times`;
     });
     const handleCloseEdit = (): void => {

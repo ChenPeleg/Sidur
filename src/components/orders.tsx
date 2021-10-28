@@ -38,7 +38,7 @@ export const Orders = () => {
             payload: {}
         })
     }
-    console.log(orders)
+
     return (
         <Box>
             <Box sx={{

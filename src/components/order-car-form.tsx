@@ -9,17 +9,16 @@ import {RenderTextField} from './Form/text-field';
 import {RenderSelectField} from './Form/select-field';
 import {DriveType} from '../models/DriveType.enum';
 import {Box, Theme} from '@mui/system';
-import {Button, Checkbox, MenuItem, RadioGroup} from '@mui/material';
+import {Button, MenuItem} from '@mui/material';
 import {translations} from '../services/translations';
 import {validate} from './validate';
 import {ActionTypes} from '../store/actionTypes';
+import {LocationModel} from '../models/Location.model';
+import {locations} from '../services/locations';
 
 
 const TRL = translations;
 
-type AppProps = {
-    orderId: string;
-};
 
 const useStyles: any = (() => ({
     root: {
@@ -29,7 +28,7 @@ const useStyles: any = (() => ({
         }
     },
     fieldWrapper: {
-        display: 'inline-flex',
+        //  display: 'inline-flex',
         padding: '10px'
     },
     fieldWrapperText: {
@@ -51,33 +50,15 @@ const useStyles: any = (() => ({
     additionalText: {
         fontSize: '14px'
     }
-}))
+}));
+const allLocations: LocationModel[] = locations.map(o => ({...o}))
 const orderFields: OrderModel = new OrderFields();
 
-
-const renderCheckbox = ({
-                            input,
-                            label
-                        }: any) => (
-    <Checkbox
-        // label={label}
-        checked={!!input.value}
-        onChange={input.onChange}
-    />
-);
-
-const renderRadioGroup = ({
-                              input,
-                              ...rest
-                          }: any) => (
-    <RadioGroup
-        {...input}
-        {...rest}
-        //  valueSelected={input.value}
-        onChange={(event: any, value: any) => input.onChange(value)}
-    />
-);
-
+const Divider = () => (<Box sx={{
+    width: '10px',
+    height: '5px'
+}}/>)
+ 
 
 const MaterialUiForm = (muiFormProps: MuiFormPropsModel) => {
     const {
@@ -91,101 +72,105 @@ const MaterialUiForm = (muiFormProps: MuiFormPropsModel) => {
     const handleSetAdvanced = (value: boolean = true) => {
         setIsAdvanced(value)
     }
-
-
     return (
 
         <form onSubmit={(...args) => submitting(...args)} dir={'rtl'}>
+            <Box id={'form-wrapper'} sx={{
+                display: 'flex',
+                flexDirection: 'row',
+                flexWrap: 'wrap'
+            }}>
 
-            <Box
-                sx={{
-                    ...
-                        classes
-                            .fieldWrapperText
-                }}
-            >
-                <Field
-                    name={orderFields.driverName}
-                    component={RenderTextField}
-                    label={TRL.Name}
-                />
-            </Box>
-            <Box
-                sx={{
-                    ...classes
-                        .fieldWrapper
-                }}
-            >
-                <Field name={orderFields.startHour} component={HourPicker}
-                       label={TRL.From + TRL.Hour}/>
-            </Box>
-            <Box
-                sx={{
-                    ...
-                        classes
-                            .fieldWrapper
-                }}
-            >
-                <Field name={orderFields.finishHour} component={HourPicker} label={TRL.Until + ' ' + TRL.Hour}/>
-            </Box>
 
-            <Box
-                sx={{
-                    ...
-                        classes
-                            .fieldWrapper
-                }}
-            >
-                <Field
-                    name={'TypeOfDrive'}
-                    component={RenderSelectField}
-                    label={TRL.TypeOfDrive}
+                <Box
+                    sx={{
+                        ...classes.fieldWrapperText
+                    }}
                 >
-                    <MenuItem value={DriveType.Tsamud.toString()}>{TRL.Tsamud}</MenuItem>
-                    <MenuItem value={DriveType.OneWayFrom.toString()}> {TRL.OneWayFrom}</MenuItem>
-                    <MenuItem value={DriveType.OneWayTo.toString()}>{TRL.OneWayTo}</MenuItem>
-                    {/*<MenuItem value={DriveType.TwoWay.toString()}>{TRL.TwoWay}</MenuItem>*/}
-                </Field>
-            </Box>
-
-            <Box
-                sx={{
-                    ...
-                        classes
+                    <Field name={orderFields.driverName}
+                           component={RenderTextField}
+                           label={TRL.Name}
+                    />
+                </Box>
+                <Box
+                    sx={{
+                        ...classes
                             .fieldWrapper
-                }}
-            >
-                <Field
-                    name={orderFields.Comments}
-                    component={RenderTextField}
-                    label={TRL.Comments}
-                    // multiLine={true}
-                    rows={2}
-                />
-            </Box>
-            <Box
-                sx={{
-                    ...
-                        classes
-                            .fieldWrapper
-                }}
-            >
-                <Button variant="text" type="button" onClick={() => handleSetAdvanced(true)}>{TRL.Advanced}</Button>
-                <Box sx={{
-                    width: '10px',
-                    height: '5px'
-                }}/>
+                    }}
+                >
+                    <Field name={orderFields.startHour} component={HourPicker}
+                           label={TRL.From + TRL.Hour}/>
+                </Box>
+                <Box
+                    sx={{
+                        ...
+                            classes
+                                .fieldWrapper
+                    }}
+                >
+                    <Field name={orderFields.finishHour} component={HourPicker} label={TRL.Until + ' ' + TRL.Hour}/>
+                </Box>
+
+                <Box
+                    sx={{
+                        ...
+                            classes
+                                .fieldWrapper
+                    }}
+                >
+                    <Field
+                        name={'TypeOfDrive'}
+                        component={RenderSelectField}
+                        label={TRL.TypeOfDrive}
+                    >
+                        <MenuItem value={DriveType.Tsamud.toString()}>{TRL.Tsamud}</MenuItem>
+                        <MenuItem value={DriveType.OneWayFrom.toString()}> {TRL.OneWayFrom}</MenuItem>
+                        <MenuItem value={DriveType.OneWayTo.toString()}>{TRL.OneWayTo}</MenuItem>
+                        {/*<MenuItem value={DriveType.TwoWay.toString()}>{TRL.TwoWay}</MenuItem>*/}
+                    </Field>
+
+                    <Field
+                        name={orderFields.location}
+                        component={RenderSelectField}
+                        label={TRL.TypeOfDrive}
+                    >
+                        {allLocations.map((location: LocationModel) => (
+
+                            <MenuItem key={location.id} value={location.id}>{location.Name}</MenuItem>
+
+                        ))}     </Field>
+
+                </Box>
+
+                <Box
+                    sx={{
+                        ...
+                            classes
+                                .fieldWrapper
+                    }}
+                >
+                    <Field
+                        name={orderFields.Comments}
+                        component={RenderTextField}
+                        label={TRL.Comments}
+                        // multiLine={true}
+                        rows={2}
+                    />
+                </Box>
+                <Box
+                    sx={{
+                        ...
+                            classes
+                                .fieldWrapper
+                    }}
+                >
+                    <Button variant="text" type="button" onClick={() => handleSetAdvanced(true)}>{TRL.Advanced}</Button>
+                    <Divider/>
 
 
-                <Button variant="contained" color={'primary'} type="button" onClick={handleSubmit}>{TRL.Submit}</Button>
-                {/*<Typography component="legend">Controlled</Typography>*/}
-                {/*<Rating*/}
-                {/*    name="simple-controlled"*/}
-                {/*    value={value}*/}
-                {/*    onChange={(event, newValue) => {*/}
-                {/*        setValue(newValue);*/}
-                {/*    }}*/}
-                {/*/>*/}
+                    <Button variant="contained" color={'primary'} type="button" onClick={handleSubmit}>{TRL.Submit}</Button>
+
+                </Box>
             </Box>
         </form>
     );
