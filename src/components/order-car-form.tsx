@@ -28,7 +28,6 @@ const useStyles: any = (() => ({
         }
     },
     fieldWrapper: {
-        //  display: 'inline-flex',
         padding: '10px'
     },
     fieldWrapperText: {
@@ -51,6 +50,15 @@ const useStyles: any = (() => ({
         fontSize: '14px'
     }
 }));
+const fieldWrapper = {
+    padding: '10px'
+}
+
+const fieldWrapperText = {
+    display: 'inline-flex',
+    padding: '10px',
+    maxWidth: '150px'
+};
 const allLocations: LocationModel[] = locations.map(o => ({...o}))
 const orderFields: OrderModel = new OrderFields();
 
@@ -58,7 +66,7 @@ const Divider = () => (<Box sx={{
     width: '10px',
     height: '5px'
 }}/>)
- 
+
 
 const MaterialUiForm = (muiFormProps: MuiFormPropsModel) => {
     const {
@@ -83,9 +91,7 @@ const MaterialUiForm = (muiFormProps: MuiFormPropsModel) => {
 
 
                 <Box
-                    sx={{
-                        ...classes.fieldWrapperText
-                    }}
+                    sx={fieldWrapperText}
                 >
                     <Field name={orderFields.driverName}
                            component={RenderTextField}
@@ -93,30 +99,18 @@ const MaterialUiForm = (muiFormProps: MuiFormPropsModel) => {
                     />
                 </Box>
                 <Box
-                    sx={{
-                        ...classes
-                            .fieldWrapper
-                    }}
+                    sx={fieldWrapper}
                 >
                     <Field name={orderFields.startHour} component={HourPicker}
                            label={TRL.From + TRL.Hour}/>
                 </Box>
-                <Box
-                    sx={{
-                        ...
-                            classes
-                                .fieldWrapper
-                    }}
+                <Box sx={fieldWrapper}
                 >
                     <Field name={orderFields.finishHour} component={HourPicker} label={TRL.Until + ' ' + TRL.Hour}/>
                 </Box>
 
                 <Box
-                    sx={{
-                        ...
-                            classes
-                                .fieldWrapper
-                    }}
+                    sx={fieldWrapper}
                 >
                     <Field
                         name={'TypeOfDrive'}
@@ -143,12 +137,7 @@ const MaterialUiForm = (muiFormProps: MuiFormPropsModel) => {
                 </Box>
 
                 <Box
-                    sx={{
-                        ...
-                            classes
-                                .fieldWrapper
-                    }}
-                >
+                    sx={fieldWrapper}>
                     <Field
                         name={orderFields.Comments}
                         component={RenderTextField}
@@ -158,11 +147,8 @@ const MaterialUiForm = (muiFormProps: MuiFormPropsModel) => {
                     />
                 </Box>
                 <Box
-                    sx={{
-                        ...
-                            classes
-                                .fieldWrapper
-                    }}
+                    sx={fieldWrapper
+                    }
                 >
                     <Button variant="text" type="button" onClick={() => handleSetAdvanced(true)}>{TRL.Advanced}</Button>
                     <Divider/>
