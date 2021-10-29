@@ -42,7 +42,7 @@ const defaultInitialState: SidurStore = {
     orders: startOrders,
     vehicles: startVehicles,
     orderIdInEdit: '1',
-    dataHolderForCurrentOrderInEdit: null,
+    dataHolderForCurrentOrderInEdit: startOrders[0] || null,
     deletedOrders: [],
     defaultOrderValues: {...defaultOrderValues}
 }

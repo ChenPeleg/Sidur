@@ -67,17 +67,15 @@ export const Vehicles = () => {
         const vehicle: any = vehicleId !== '0' && foundVehicle ? foundVehicle : defaultVehicleValues;
         setVehicleClicked(vehicle);
         setVehicleEditOpen(true)
-        // dispatch({
-        //     type: ActionTypes.ADD_NEW_ORDER,
-        //     payload: {}
-        // })
+     
     }
 
     return (
         <Box>
             <Box sx={{
                 fontSize: 'large',
-                height: '150px',
+                // height: '150px',
+                mb: '1em',
                 display: 'flex',
                 flexDirection: 'row',
                 alignItems: 'start',

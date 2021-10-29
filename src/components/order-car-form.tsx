@@ -8,7 +8,7 @@ import {OrderFields, OrderModel} from '../models/Order.model';
 import {RenderTextField} from './Form/text-field';
 import {RenderSelectField} from './Form/select-field';
 import {DriveType} from '../models/DriveType.enum';
-import {Box, Theme} from '@mui/system';
+import {Box, SxProps, Theme} from '@mui/system';
 import {Button, MenuItem} from '@mui/material';
 import {translations} from '../services/translations';
 import {validate} from './validate';
@@ -50,8 +50,12 @@ const useStyles: any = (() => ({
         fontSize: '14px'
     }
 }));
-const fieldWrapper = {
+const fieldWrapper: SxProps = {
     padding: '10px'
+}
+const selectFieldWrapper: SxProps = {
+    ...fieldWrapper,
+    paddingBottom: '0px'
 }
 
 const fieldWrapperText = {
@@ -108,10 +112,7 @@ const MaterialUiForm = (muiFormProps: MuiFormPropsModel) => {
                 >
                     <Field name={orderFields.finishHour} component={HourPicker} label={TRL.Until + ' ' + TRL.Hour}/>
                 </Box>
-
-                <Box
-                    sx={fieldWrapper}
-                >
+                <Box sx={selectFieldWrapper}>
                     <Field
                         name={'TypeOfDrive'}
                         component={RenderSelectField}
@@ -122,6 +123,9 @@ const MaterialUiForm = (muiFormProps: MuiFormPropsModel) => {
                         <MenuItem value={DriveType.OneWayTo.toString()}>{TRL.OneWayTo}</MenuItem>
                         {/*<MenuItem value={DriveType.TwoWay.toString()}>{TRL.TwoWay}</MenuItem>*/}
                     </Field>
+
+                </Box>
+                <Box sx={selectFieldWrapper}>
 
                     <Field
                         name={orderFields.location}
@@ -146,9 +150,7 @@ const MaterialUiForm = (muiFormProps: MuiFormPropsModel) => {
                         rows={2}
                     />
                 </Box>
-                <Box
-                    sx={fieldWrapper
-                    }
+                <Box sx={fieldWrapper}
                 >
                     <Button variant="text" type="button" onClick={() => handleSetAdvanced(true)}>{TRL.Advanced}</Button>
                     <Divider/>
@@ -169,7 +171,8 @@ export const OrderCarForm = (formProps: MuiFormPropsModel) => {
     const id = formProps.orderId;
     const order = useSelector((state: { orders: OrderModel[] }) => state.orders);
     const initialValues = order.find(order => order.id === id);
-    let formValues = {...initialValues}
+    let formValues = {...initialValues};
+    //const LocationPrefix : TRL.From |  TRL. =
 
     return (
         <Form
