@@ -5,5 +5,7 @@ export interface TextFieldPropertiesModel {
         touched: any,
         error: any
     },
-    custom: any
+    custom: any | {
+        inActive: boolean
+    }
 }

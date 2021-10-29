@@ -13,14 +13,14 @@ export const LanguageUtilites = {
         switch (driveType) {
             case DriveType.OneWayFrom:
                 return {
-                    timeStart: translations.Start,
-                    timeEnd: translations.pickupTime,
+                    timeStart: translations.pickupTime,
+                    timeEnd: '',
                     location: translations.fromLocation
                 }
             case DriveType.OneWayTo:
                 return {
                     timeStart: translations.exitTime,
-                    timeEnd: translations.Finish,
+                    timeEnd: '',
                     location: translations.toLocation
                 }
             case DriveType.Tsamud:

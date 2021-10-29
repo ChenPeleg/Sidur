@@ -1,6 +1,6 @@
 import React from 'react';
 import {TextFieldPropertiesModel} from '../../models/text-field-properties.model';
-import {Theme} from '@mui/system';
+import {SxProps, Theme} from '@mui/system';
 import {TextField} from '@mui/material';
 
 
@@ -23,12 +23,16 @@ export const HourPicker = ({
                                ...custom
                            }: TextFieldPropertiesModel) => {
 
-    const sxExtra = {};
+    const inActive: boolean = custom?.custom?.inActive || false;
+    const sxExtra: SxProps = {
+        visibility: inActive ? 'hidden' : 'visible',
+        //visibility: 'hidden'
+    };
     return (
 
         <TextField variant={'standard'}
-                   sx={sxRoot
-                   }
+                   sx={{...sxRoot, ...sxExtra}}
+                   disabled={inActive}
                    type="time"
                    label={label}
                    value={input.value}
