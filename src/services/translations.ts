@@ -50,9 +50,9 @@ export const translations = {
     'Add': 'הוסף',
     'seats': 'מושבים',
 
-    'exitTime': 'יציאה בשעה',
+    'exitTime': 'יציאה',
     'exitTimeToPickup': 'יציאה לאיסוף',
-    'returnTime': 'חזרה בשעה',
+    'returnTime': 'חזרה',
     'pickupTime': ' בשעה',
     'toLocation': ' אל  ',
     'fromLocation': 'מ',

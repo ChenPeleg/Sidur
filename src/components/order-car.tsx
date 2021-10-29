@@ -82,10 +82,6 @@ export const OrderCar = (props: AppProps) => {
             transition: ' ease-in-out 100ms',
         },
 
-        // '&:hover': {
-        //     'bgcolor': '#f7f2bb',
-        //
-        // },
 
     }
     return (
@@ -123,7 +119,7 @@ export const OrderCar = (props: AppProps) => {
                         {/*}} title={TRL.Order}/>*/}
                     </> : null}
 
-                    <Collapse in={props.isInEdit}>
+                    <Collapse in={props.isInEdit} unmountOnExit>
 
                         <OrderCarForm isInEdit={props.isInEdit} orderId={props.orderId} handleSubmit={'d'} pristine={'b'} reset={'c'}
                                       submitting={'d'}/>

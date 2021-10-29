@@ -4,20 +4,15 @@ import {Theme} from '@mui/system';
 import {TextField} from '@mui/material';
 
 
-const useStyles = () => ({
-    root: {
-        direction: (theme: Theme) => theme.direction,
-        '& .MuiFormLabel-root': {
-            left: 'inherit'
-        },
-        '& .MuiInputBase-input': {
-            // padding: '10px'
-        }
+const sxRoot = {
+    direction: (theme: Theme) => theme.direction,
+    '& .MuiFormLabel-root': {
+        left: 'inherit'
     },
-
-
-})
-
+    '& .MuiInputBase-input': {
+        // padding: '10px'
+    }
+}
 export const HourPicker = ({
                                input,
                                label,
@@ -27,16 +22,13 @@ export const HourPicker = ({
                                },
                                ...custom
                            }: TextFieldPropertiesModel) => {
-    const classes = useStyles();
 
-
+    const sxExtra = {};
     return (
 
         <TextField variant={'standard'}
-                   sx={{
-                       ...classes
-                           .root
-                   }}
+                   sx={sxRoot
+                   }
                    type="time"
                    label={label}
                    value={input.value}

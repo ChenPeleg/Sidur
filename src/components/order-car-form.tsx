@@ -86,7 +86,7 @@ const MaterialUiForm = (muiFormProps: MuiFormPropsModel) => {
         setIsAdvanced(value)
     }
     const driveTimelanguage = LanguageUtilites.getPrefixByDriveType(typeOfDrive)
-    console.log(typeOfDrive, driveTimelanguage.location)
+    //console.log(typeOfDrive, driveTimelanguage.location)
     return (
 
         <form onSubmit={(...args) => submitting(...args)} dir={'rtl'}>
@@ -134,7 +134,8 @@ const MaterialUiForm = (muiFormProps: MuiFormPropsModel) => {
                 </Box>
                 <Box sx={fieldWrapper}
                 >
-                    <Field name={orderFields.finishHour} component={HourPicker} label={driveTimelanguage.timeEnd}/>
+                    <Field name={orderFields.finishHour} custom={{inActive: typeOfDrive !== DriveType.Tsamud}} component={HourPicker}
+                           label={driveTimelanguage.timeEnd}/>
                 </Box>
 
                 <Box
