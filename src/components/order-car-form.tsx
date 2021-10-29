@@ -11,10 +11,10 @@ import {DriveType} from '../models/DriveType.enum';
 import {Box, SxProps, Theme} from '@mui/system';
 import {Button, MenuItem} from '@mui/material';
 import {translations} from '../services/translations';
-import {validate} from './validate';
 import {ActionTypes} from '../store/actionTypes';
 import {LocationModel} from '../models/Location.model';
 import {locations} from '../services/locations';
+import {LanguageUtilites} from '../services/language-utilites';
 
 
 const TRL = translations;
@@ -77,13 +77,16 @@ const MaterialUiForm = (muiFormProps: MuiFormPropsModel) => {
         handleSubmit,
         pristine,
         reset,
-        submitting
+        submitting,
+        typeOfDrive
     } = muiFormProps;
     const classes = useStyles();
     const [isAdvanced, setIsAdvanced] = useState(false);
     const handleSetAdvanced = (value: boolean = true) => {
         setIsAdvanced(value)
     }
+    const driveTimelanguage = LanguageUtilites.getPrefixByDriveType(typeOfDrive)
+    console.log(typeOfDrive, driveTimelanguage.location)
     return (
 
         <form onSubmit={(...args) => submitting(...args)} dir={'rtl'}>
@@ -102,16 +105,6 @@ const MaterialUiForm = (muiFormProps: MuiFormPropsModel) => {
                            label={TRL.Name}
                     />
                 </Box>
-                <Box
-                    sx={fieldWrapper}
-                >
-                    <Field name={orderFields.startHour} component={HourPicker}
-                           label={TRL.From + TRL.Hour}/>
-                </Box>
-                <Box sx={fieldWrapper}
-                >
-                    <Field name={orderFields.finishHour} component={HourPicker} label={TRL.Until + ' ' + TRL.Hour}/>
-                </Box>
                 <Box sx={selectFieldWrapper}>
                     <Field
                         name={'TypeOfDrive'}
@@ -121,34 +114,36 @@ const MaterialUiForm = (muiFormProps: MuiFormPropsModel) => {
                         <MenuItem value={DriveType.Tsamud.toString()}>{TRL.Tsamud}</MenuItem>
                         <MenuItem value={DriveType.OneWayFrom.toString()}> {TRL.OneWayFrom}</MenuItem>
                         <MenuItem value={DriveType.OneWayTo.toString()}>{TRL.OneWayTo}</MenuItem>
-                        {/*<MenuItem value={DriveType.TwoWay.toString()}>{TRL.TwoWay}</MenuItem>*/}
+
                     </Field>
 
                 </Box>
+
                 <Box sx={selectFieldWrapper}>
 
-                    <Field
-                        name={orderFields.location}
-                        component={RenderSelectField}
-                        label={TRL.TypeOfDrive}
-                    >
+                    <Field name={orderFields.location} component={RenderSelectField} label={TRL.Where}>
                         {allLocations.map((location: LocationModel) => (
-
-                            <MenuItem key={location.id} value={location.id}>{location.Name}</MenuItem>
-
-                        ))}     </Field>
-
+                            <MenuItem key={location.id}
+                                      value={location.id}>{driveTimelanguage.location}{location.Name}</MenuItem>))}     </Field> </Box>
+                <Box
+                    sx={fieldWrapper}
+                >
+                    {/*TRL.Where*/}
+                    <Field name={orderFields.startHour} component={HourPicker}
+                           label={driveTimelanguage.timeStart}/>
+                </Box>
+                <Box sx={fieldWrapper}
+                >
+                    <Field name={orderFields.finishHour} component={HourPicker} label={driveTimelanguage.timeEnd}/>
                 </Box>
 
                 <Box
-                    sx={fieldWrapper}>
-                    <Field
-                        name={orderFields.Comments}
-                        component={RenderTextField}
-                        label={TRL.Comments}
-                        // multiLine={true}
-                        rows={2}
-                    />
+                    sx={fieldWrapper}> <Field name={orderFields.Comments}
+                                              component={RenderTextField}
+                                              label={TRL.Comments}
+                    // multiLine={true}
+                                              rows={2}
+                />
                 </Box>
                 <Box sx={fieldWrapper}
                 >
@@ -169,10 +164,13 @@ export const OrderCarForm = (formProps: MuiFormPropsModel) => {
     const dispatch = useDispatch();
 
     const id = formProps.orderId;
-    const order = useSelector((state: { orders: OrderModel[] }) => state.orders);
-    const initialValues = order.find(order => order.id === id);
+    const orders = useSelector((state: { orders: OrderModel[] }) => state.orders);
+
+    const initialValues = orders.find(order => order.id === id);
+    // @ts-ignore
+    const [_typeOfDrive, set_typeOfDrive] = useState(initialValues.TypeOfDrive as DriveType)
     let formValues = {...initialValues};
-    //const LocationPrefix : TRL.From |  TRL. =
+
 
     return (
         <Form
@@ -191,9 +189,13 @@ export const OrderCarForm = (formProps: MuiFormPropsModel) => {
                         ...values
                     }
                 })
+                if (values?.TypeOfDrive && values?.TypeOfDrive !== _typeOfDrive) {
+
+                    set_typeOfDrive(values.TypeOfDrive)
+                }
 
 
-                return validate(values)
+                return {} // validate(values)
             }}
             handleSubmit={(event: Event, values: any) => {
                 if (!formProps.isInEdit) {
@@ -209,6 +211,7 @@ export const OrderCarForm = (formProps: MuiFormPropsModel) => {
             }}
             render={({handleSubmit}: any) => (MaterialUiForm({
                 ...formProps,
+                typeOfDrive: _typeOfDrive,
                 handleSubmit,
                 //  submitting: submittingHandler
             }))

@@ -1,6 +1,6 @@
 import React from 'react';
-import {Theme} from '@mui/system';
-import {Select} from '@mui/material';
+import {SxProps, Theme} from '@mui/system';
+import {InputLabel, Select} from '@mui/material';
 
 const useStyles = () => ({
     root: {
@@ -11,6 +11,10 @@ const useStyles = () => ({
 
     }
 })
+const lableSx: SxProps = {
+    fontSize: (theme) => '0.7em'
+
+}
 
 export const RenderSelectField = (
     {
@@ -26,24 +30,30 @@ export const RenderSelectField = (
 ) => {
     const classes = useStyles()
     return (
-        <Select variant={'standard'}
-                sx={{
-                    ...
-                        classes
-                            .root
-                }}
-                label={label}
-            // floatingLabelText={label}
-            // errorText={touched && error}
-                {...input}
-                onChange={(event: any, child: any) => {
+        <>
 
-                    input.onChange(event)
-                }}
-            //  value={input.value}
-                children={children}
-                {...custom}>
 
-        </Select>
+            <InputLabel sx={{...lableSx}} id="select-liable">{label}</InputLabel>
+            <Select variant={'standard'}
+                    sx={{
+                        ...
+                            classes
+                                .root
+                    }}
+                    labelId="select-liable"
+                    label={label}
+
+                    {...input}
+                    onChange={(event: any, child: any) => {
+
+                        input.onChange(event)
+                    }}
+                //  value={input.value}
+                    children={children}
+                    {...custom}>
+
+            </Select>
+        </>
+
     )
 };

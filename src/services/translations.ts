@@ -26,7 +26,8 @@ export const translations = {
     'Hour': 'שעה',
     'From': 'מ',
     'Until': 'עד',
-    'Where': 'למקום',
+    'toWhere': 'למקום',
+    'Where': 'מקום',
     'Start': 'התחלה',
     'Finish': 'סיום',
     'TypeOfDrive': 'סוג הנסיעה',
@@ -48,6 +49,14 @@ export const translations = {
     'AddVehicles': 'הוסף רכב',
     'Add': 'הוסף',
     'seats': 'מושבים',
+
+    'exitTime': 'יציאה בשעה',
+    'exitTimeToPickup': 'יציאה לאיסוף',
+    'returnTime': 'חזרה בשעה',
+    'pickupTime': ' בשעה',
+    'toLocation': ' אל  ',
+    'fromLocation': 'מ',
+    'inLocation': 'ב',
 
     'ActiveSidurim': 'סידורים פעילים'
 
