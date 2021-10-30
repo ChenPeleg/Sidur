@@ -3,6 +3,7 @@ import {TextFieldPropertiesModel} from '../../models/text-field-properties.model
 import React from 'react';
 import {Box, Slider, Theme, Typography} from '@mui/material';
 import {translations} from '../../services/translations';
+import {Utilities} from '../../services/utilities';
 
 
 const sliderSx = {
@@ -32,13 +33,13 @@ export const RenderFlexibilityField = (
         ...custom
     }: TextFieldPropertiesModel,
 ) => {
-
-
+    const convertedInput = {...input}
+    convertedInput.value = convertedInput.value.map((v: string) => Utilities.convertStrToNum(v))
     return (
         <>
-            <Typography component="legend">{renderFlexibilityText(input.value)}</Typography>
+            <Typography component="legend"><b>{translations.flexibility}: </b>{renderFlexibilityText(input.value)}</Typography>
 
-            <Box sx={{width: '200px'}}>
+            <Box sx={{width: '250px'}}>
 
                 <Slider variant={'standard'}
                         sx={sliderSx}
@@ -50,7 +51,7 @@ export const RenderFlexibilityField = (
                         step={10}
                         onChange={input.onChange}
 
-                        {...input}
+                        {...convertedInput}
                         {...custom}
                 />
             </Box>   </>

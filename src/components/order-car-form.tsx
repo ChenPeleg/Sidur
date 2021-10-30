@@ -87,6 +87,10 @@ const MaterialUiForm = (muiFormProps: MuiFormPropsModel) => {
     const handleSetAdvanced = (value: boolean = true) => {
         setIsAdvanced(value)
     }
+    const advanceFieldWrapper: SxProps = {
+        ...fieldWrapper,
+        display: isAdvanced ? 'initial' : 'none'
+    }
     const driveTimelanguage = LanguageUtilites.getPrefixByDriveType(typeOfDrive)
     //console.log(typeOfDrive, driveTimelanguage.location)
     return (
@@ -154,15 +158,15 @@ const MaterialUiForm = (muiFormProps: MuiFormPropsModel) => {
                     sx={fieldWrapper}> <Field name={orderFields.passengers}
                                               component={RenderPassengerField}
                                               label={TRL.passengers}
-                    // multiLine={true}
+                                              type={'radio'}
                                               rows={2}
                 />
                 </Box>
                 <Box
-                    sx={fieldWrapper}> <Field name={orderFields.flexibility[0]}
-                                              component={RenderFlexibilityField}
-                                              label={TRL.flexibility}
-                                              rows={2}
+                    sx={advanceFieldWrapper}> <Field name={orderFields.flexibility[0]}
+                                                     component={RenderFlexibilityField}
+                                                     label={TRL.flexibility}
+                                                     rows={2}
                 />
 
 
@@ -174,9 +178,11 @@ const MaterialUiForm = (muiFormProps: MuiFormPropsModel) => {
                     flexDirection: 'row'
                 }}
                 >
-                    <Button variant="text" type="button" onClick={() => handleSetAdvanced(true)}>{TRL.Advanced}</Button>
+                    <Button sx={{display: isAdvanced ? 'none' : 'initial'}} variant="text" type="button"
+                            onClick={() => handleSetAdvanced(true)}>{TRL.Advanced}</Button>
                     <Divider/>
-                    <Button variant="contained" color={'primary'} type="button" onClick={handleSubmit}>{TRL.Submit}</Button>
+                    <Button sx={{m: '5px'}} variant="contained" color={'primary'} type="button"
+                            onClick={handleSubmit}>{TRL.Submit}</Button>
 
 
                 </Box>

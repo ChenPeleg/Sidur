@@ -39,6 +39,8 @@ const StyledRating = styled(Rating)({
 const renderPassengerText = (num: string): string => {
     if (num === '1') {
         return translations.onePassenger
+    } else {
+        num = '1'
     }
     return num.toString() + ' ' + translations.passengers
 }
@@ -55,7 +57,7 @@ export const RenderPassengerField = (
 ) => {
     const convertedInput = {...input};
     convertedInput.value = Utilities.convertStrToNum(convertedInput.value)
-  
+
     return (
         <>
             <Typography component="legend">{renderPassengerText(input.value)}</Typography>
@@ -65,8 +67,7 @@ export const RenderPassengerField = (
                               direction: 'rtl',
 
                           }}
-                          type="radio"
-                // size="large"
+                           
                           label={label}
                           sx={rootSx}
                           max={7}
