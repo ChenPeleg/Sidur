@@ -49,6 +49,9 @@ export const translations = {
     'AddVehicles': 'הוסף רכב',
     'Add': 'הוסף',
     'seats': 'מושבים',
+    'passengers': 'נוסעים',
+    'flexibility': 'גמישות',
+    'onePassenger': 'נוסע/ת אחד/ת',
 
     'exitTime': 'יציאה',
     'exitTimeToPickup': 'יציאה לאיסוף',

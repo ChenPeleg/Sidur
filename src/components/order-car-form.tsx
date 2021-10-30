@@ -15,6 +15,8 @@ import {ActionTypes} from '../store/actionTypes';
 import {LocationModel} from '../models/Location.model';
 import {locations} from '../services/locations';
 import {LanguageUtilites} from '../services/language-utilites';
+import {RenderPassengerField} from './Form/passengers-field';
+import {RenderFlexibilityField} from './Form/flexibility-field';
 
 
 const TRL = translations;
@@ -146,15 +148,39 @@ const MaterialUiForm = (muiFormProps: MuiFormPropsModel) => {
                                               rows={2}
                 />
                 </Box>
-                <Box sx={fieldWrapper}
+
+
+                <Box
+                    sx={fieldWrapper}> <Field name={orderFields.passengers}
+                                              component={RenderPassengerField}
+                                              label={TRL.passengers}
+                    // multiLine={true}
+                                              rows={2}
+                />
+                </Box>
+                <Box
+                    sx={fieldWrapper}> <Field name={orderFields.flexibility[0]}
+                                              component={RenderFlexibilityField}
+                                              label={TRL.flexibility}
+                                              rows={2}
+                />
+
+
+                </Box>
+
+                <Box sx={{
+                    ...fieldWrapper,
+                    display: 'flex',
+                    flexDirection: 'row'
+                }}
                 >
                     <Button variant="text" type="button" onClick={() => handleSetAdvanced(true)}>{TRL.Advanced}</Button>
                     <Divider/>
-
-
                     <Button variant="contained" color={'primary'} type="button" onClick={handleSubmit}>{TRL.Submit}</Button>
 
+
                 </Box>
+
             </Box>
         </form>
     );
@@ -176,9 +202,7 @@ export const OrderCarForm = (formProps: MuiFormPropsModel) => {
     return (
         <Form
             initialValues={initialValues}
-
             onSubmit={(values: any) => {
-
             }}
             validate={(values: any) => {
                 if (!formProps.isInEdit) {
@@ -191,11 +215,8 @@ export const OrderCarForm = (formProps: MuiFormPropsModel) => {
                     }
                 })
                 if (values?.TypeOfDrive && values?.TypeOfDrive !== _typeOfDrive) {
-
                     set_typeOfDrive(values.TypeOfDrive)
                 }
-
-
                 return {} // validate(values)
             }}
             handleSubmit={(event: Event, values: any) => {
@@ -214,7 +235,6 @@ export const OrderCarForm = (formProps: MuiFormPropsModel) => {
                 ...formProps,
                 typeOfDrive: _typeOfDrive,
                 handleSubmit,
-                //  submitting: submittingHandler
             }))
 
             }/>

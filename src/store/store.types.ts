@@ -39,7 +39,7 @@ export const defaultOrderValues: OrderModel = {
     TypeOfDrive: DriveType.OneWayTo,
     Comments: '',
     passengers: '1',
-    flexibility: '',
+    flexibility: ['10', '-30'],
     location: ''
 }
 export const defaultVehicleValues: VehicleModel = {

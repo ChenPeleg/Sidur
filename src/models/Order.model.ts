@@ -9,7 +9,7 @@ export interface OrderModel {
     location: string,
     Comments: string,
     passengers: string,
-    flexibility: string
+    flexibility: [string, string]
 }
 
 export class OrderFields implements OrderModel {
@@ -21,7 +21,7 @@ export class OrderFields implements OrderModel {
     Comments: string = 'Comments';
     location: string = 'location';
     passengers: string = 'passengers';
-    flexibility: string = 'flexibility'
+    flexibility: [string, string] = ['flexibility', 'flexibility']
 
     constructor() {
 
