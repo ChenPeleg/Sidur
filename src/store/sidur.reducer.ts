@@ -1,7 +1,7 @@
 import {ActionTypes} from './actionTypes';
 import {AppConstants, defaultVehicleValues, IAction, SidurRecord, SidurStore} from './store.types';
 import {OrderModel} from '../models/Order.model';
-import {Utilites} from '../services/utilites';
+import {Utilities} from '../services/utilities';
 import {translations} from '../services/translations';
 import {StoreUtils} from './store-utils';
 
@@ -159,7 +159,7 @@ export const SidurReducer: Record<SidurReducerFunctions, (state: SidurStore, act
     [ActionTypes.ADD_NEW_SIDUR]: (state: SidurStore, action: IAction): SidurStore => {
         let newState = {...state}
 
-        const newSidurId = Utilites.getNextId(getAllSidurIDs(state))
+        const newSidurId = Utilities.getNextId(getAllSidurIDs(state))
         const newSidur: SidurRecord = {
             id: newSidurId,
             Name: translations.Sidur + ' ' + newSidurId,
@@ -182,7 +182,7 @@ export const SidurReducer: Record<SidurReducerFunctions, (state: SidurStore, act
         if (sidurForCloning) {
             const newSidur: SidurRecord = StoreUtils.deepCloneSidur(sidurForCloning);
             newSidur.Name = translations.CopyOf + ' ' + newSidur.Name;
-            const newSidurId = Utilites.getNextId(getAllSidurIDs(state));
+            const newSidurId = Utilities.getNextId(getAllSidurIDs(state));
             newSidur.id = newSidurId
             newState.sidurCollection = newState.sidurCollection.map(c => c);
             newState.sidurCollection.push(newSidur);
@@ -219,7 +219,7 @@ export const SidurReducer: Record<SidurReducerFunctions, (state: SidurStore, act
 }
 const setChosenSidur = (state: SidurStore, chosenSidur: SidurRecord): SidurStore => {
     const newState = {...state};
-    
+
     newState.orders = chosenSidur?.orders.map(o => ({...o})) || []
     newState.vehicles = chosenSidur?.vehicles.map(o => ({...o})) || []
     newState.deletedOrders = chosenSidur?.deletedOrders?.map(o => ({...o})) || [];
@@ -238,7 +238,7 @@ const getAllSidurIDs = (state: SidurStore): string[] => {
 
 const getDefaultSidur = (state: SidurStore): SidurRecord => {
     const newSidur: SidurRecord = {...DefaultSidur};
-    newSidur.id = Utilites.getNextId(getAllSidurIDs(state));
+    newSidur.id = Utilities.getNextId(getAllSidurIDs(state));
     const allNames = [...state.sidurCollection.map(o => o.Name), ...state.sidurArchive.map(o => o.Name)];
     if (allNames.some(name => name === newSidur.Name)) {
         newSidur.Name = newSidur.Name + ' ' + newSidur.id

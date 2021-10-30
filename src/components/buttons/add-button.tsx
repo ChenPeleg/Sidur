@@ -1,7 +1,7 @@
-import {Box, SxProps} from '@mui/system';
+import {SxProps} from '@mui/system';
 import React from 'react';
 import {Add} from '@mui/icons-material';
-import {Button} from '@mui/material';
+import {Box, Button} from '@mui/material';
 import {translations} from '../../services/translations';
 
 

@@ -1,37 +1,25 @@
 import {TextFieldPropertiesModel} from '../../models/text-field-properties.model';
 
 import React from 'react';
-import {Box, Theme} from '@mui/system';
-import {Slider, Typography} from '@mui/material';
+import {Box, Slider, Theme, Typography} from '@mui/material';
 import {translations} from '../../services/translations';
 
 
-const rootSx = {
+const sliderSx = {
     direction: (theme: Theme) => theme.direction,
-    '& .MuiFormLabel-root': {
-        left: 'inherit'
-    },
-    '& .MuiInputBase-input': {
-        // paddingTop: '10px',
-        // paddingBottom: '10px'
+
+    '& .MuiSlider-thumb': {
+        marginRight: -2,
+        marginLeft: 0
     }
 }
-// <Typography component="legend">Controlled</Typography>
-// <Rating
-//     name="simple-controlled"
-//     value={value}
-//     onChange={(event, newValue) => {
-//         setValue(newValue);
-//     }}
 
 
-// />
-
-const renderFlexibilityText = (num: string): string => {
-    if (num === '1') {
-        return translations.onePassenger
-    }
-    return num.toString() + ' ' + translations.passengers
+const renderFlexibilityText = (flexValues: [number, number]): string => {
+    const absValue = (n: number): string => Math.abs(n).toString()
+    let text = translations.flexEarly + ' ' + absValue(flexValues[0]) + ' ' + translations.min + ', ' +
+        translations.flexLate + ' ' + absValue(flexValues[1]) + ' ' + translations.min;
+    return text
 }
 export const RenderFlexibilityField = (
     {
@@ -50,22 +38,21 @@ export const RenderFlexibilityField = (
         <>
             <Typography component="legend">{renderFlexibilityText(input.value)}</Typography>
 
-            <Box sx={{width: '400px'}}>
+            <Box sx={{width: '200px'}}>
 
                 <Slider variant={'standard'}
-
+                        sx={sliderSx}
                         disableSwap
                         valueLabelDisplay="auto"
                         label={label}
                         min={-60}
                         max={120}
+                        step={10}
                         onChange={input.onChange}
 
                         {...input}
                         {...custom}
                 />
-            </Box>
-
-        </>
+            </Box>   </>
     );
 }

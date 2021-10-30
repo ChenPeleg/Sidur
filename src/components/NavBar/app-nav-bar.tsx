@@ -18,7 +18,7 @@ import {ActionTypes} from '../../store/actionTypes';
 import {SidurMenu} from './sidur-menu';
 import {SidurActionType} from '../../models/SidurMenuClickActionType.enum';
 import {ProfileMenuClickActionType} from '../../models/profile-menu-click-action-type.enum';
-import {Utilites} from '../../services/utilites';
+import {Utilities} from '../../services/utilities';
 import {FileUploadType, SidurRecord, SidurStore} from '../../store/store.types';
 import {FileUploadDialog} from '../Dialogs/file-uplaod-dialog';
 import {SidurManagementDialog} from '../Dialogs/sidur-management-dialog';
@@ -36,7 +36,7 @@ export const AppNavBar = () => {
     const sidurId = useSelector((state: SidurStore) => state.sidurId);
     const sidurCollection = useSelector((state: SidurStore) => state.sidurCollection);
     const sidurSelected = sidurCollection.find((sidurRecord: SidurRecord) => sidurRecord.id === sidurId);
-    const nextSidurId = Utilites.getNextId(sidurCollection.map(c => c.id));
+    const nextSidurId = Utilities.getNextId(sidurCollection.map(c => c.id));
 
     const sidurName = sidurSelected?.Name || '';
 

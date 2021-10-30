@@ -1,7 +1,7 @@
 import {ActionTypes} from './actionTypes';
 import {IAction, SidurStore} from './store.types';
 import {StoreUtils} from './store-utils';
-import {Utilites} from '../services/utilites';
+import {Utilities} from '../services/utilities';
 import {VehicleModel} from '../models/Vehicle.model';
 
 export type VehicleReducerFunctions =
@@ -13,7 +13,7 @@ export type VehicleReducerFunctions =
 export const VehicleReducer: Record<VehicleReducerFunctions, (state: SidurStore, action: IAction) => SidurStore> = {
     [ActionTypes.NEW_VEHICLE]: (state: SidurStore, action: IAction): SidurStore => {
         let newState = {...state}
-        const newId = Utilites.getNextId(state.vehicles.map(v => v.id));
+        const newId = Utilities.getNextId(state.vehicles.map(v => v.id));
 
         const newVehicle: VehicleModel = action.payload.value;
         newVehicle.id = newId;

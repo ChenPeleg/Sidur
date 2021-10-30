@@ -1,12 +1,11 @@
 import React, {useState} from 'react'
 import {translations} from '../services/translations';
-import {Box, SxProps} from '@mui/system';
+import {SxProps} from '@mui/system';
 import {useDispatch, useSelector} from 'react-redux';
-
 import {ActionTypes} from '../store/actionTypes';
 import {VehicleModel} from '../models/Vehicle.model';
 import {Add, TimeToLeave} from '@mui/icons-material';
-import {Badge, Button} from '@mui/material';
+import {Badge, Box, Button} from '@mui/material';
 import {VehicleEditDialog} from './Dialogs/vehicle-edit-dialog';
 import {defaultVehicleValues} from '../store/store.types';
 
@@ -67,7 +66,7 @@ export const Vehicles = () => {
         const vehicle: any = vehicleId !== '0' && foundVehicle ? foundVehicle : defaultVehicleValues;
         setVehicleClicked(vehicle);
         setVehicleEditOpen(true)
-     
+
     }
 
     return (

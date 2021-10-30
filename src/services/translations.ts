@@ -54,6 +54,9 @@ export const translations = {
     'onePassenger': 'נוסע/ת אחד/ת',
 
     'exitTime': 'יציאה',
+    'flexEarly': 'הקדמה',
+    'min': 'דק\'',
+    'flexLate': 'איחור',
     'exitTimeToPickup': 'יציאה לאיסוף',
     'returnTime': 'חזרה',
     'pickupTime': ' בשעה',

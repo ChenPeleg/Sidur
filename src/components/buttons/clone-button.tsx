@@ -1,6 +1,6 @@
-import {Box, SxProps} from '@mui/system';
+import {SxProps} from '@mui/system';
 import React from 'react';
-import {IconButton} from '@mui/material';
+import {Box, IconButton} from '@mui/material';
 import {ContentCopy} from '@mui/icons-material';
 
 interface CloneButtonProps {

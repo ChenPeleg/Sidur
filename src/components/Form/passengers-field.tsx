@@ -5,6 +5,7 @@ import {styled, Theme} from '@mui/system';
 import {Rating, Typography} from '@mui/material';
 import {Person} from '@mui/icons-material';
 import {translations} from '../../services/translations';
+import {Utilities} from '../../services/utilities';
 
 
 const rootSx = {
@@ -52,8 +53,9 @@ export const RenderPassengerField = (
         ...custom
     }: TextFieldPropertiesModel,
 ) => {
-
-    console.log(input)
+    const convertedInput = {...input};
+    convertedInput.value = Utilities.convertStrToNum(convertedInput.value)
+  
     return (
         <>
             <Typography component="legend">{renderPassengerText(input.value)}</Typography>
@@ -71,7 +73,7 @@ export const RenderPassengerField = (
                           onChange={input.onChange}
                           icon={<Person fontSize="inherit"/>}
                           emptyIcon={<Person fontSize="inherit"/>}
-                          {...input}
+                          {...convertedInput}
                           {...custom}
             />
 
