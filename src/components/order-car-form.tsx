@@ -158,7 +158,7 @@ const MaterialUiForm = (muiFormProps: MuiFormPropsModel) => {
                     sx={fieldWrapper}> <Field name={orderFields.passengers}
                                               component={RenderPassengerField}
                                               label={TRL.passengers}
-                                              type={'radio'}
+                                              type={'text'}
                                               rows={2}
                 />
                 </Box>
@@ -211,6 +211,7 @@ export const OrderCarForm = (formProps: MuiFormPropsModel) => {
             onSubmit={(values: any) => {
             }}
             validate={(values: any) => {
+
                 if (!formProps.isInEdit) {
                     return
                 }
