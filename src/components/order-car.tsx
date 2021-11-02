@@ -6,7 +6,7 @@ import {Box, Card, Collapse} from '@mui/material';
 import {OrderCarBrief} from './order-car-brief';
 import {SxProps} from '@mui/system';
 import {useDispatch} from 'react-redux';
-import {ActionTypes} from '../store/actionTypes';
+import {ActionsTypes} from '../store/types.actions';
 import {DeleteButton} from './buttons/delete-button';
 import {CloneButton} from './buttons/clone-button';
 
@@ -50,7 +50,7 @@ export const OrderCar = (props: AppProps) => {
     const dispatch = useDispatch();
     const cardClickHandler = (event: MouseEvent) => {
         dispatch({
-            type: ActionTypes.CLICKED_ORDER,
+            type: ActionsTypes.CLICKED_ORDER,
             payload: {
                 id: props.orderId
             }
@@ -59,7 +59,7 @@ export const OrderCar = (props: AppProps) => {
     const deleteClickHandler = (event: any) => {
         event.stopPropagation();
         dispatch({
-            type: ActionTypes.DELETE_ORDER,
+            type: ActionsTypes.DELETE_ORDER,
             payload: {
                 id: props.orderId
             }
@@ -69,7 +69,7 @@ export const OrderCar = (props: AppProps) => {
     const cloneClickHandler = (event: any) => {
         event.stopPropagation();
         dispatch({
-            type: ActionTypes.CLONE_ORDER,
+            type: ActionsTypes.CLONE_ORDER,
             payload: {
                 id: props.orderId
             }

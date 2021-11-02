@@ -1,17 +1,19 @@
-import {ActionTypes} from './actionTypes';
+import {ActionsTypes} from './types.actions';
+
+
 import {IAction, SidurStore} from './store.types';
 import {StoreUtils} from './store-utils';
 import {Utilities} from '../services/utilities';
 import {VehicleModel} from '../models/Vehicle.model';
 
 export type VehicleReducerFunctions =
-    ActionTypes.DELETE_VEHICLE
-    | ActionTypes.UPDATE_VEHICLE
-    | ActionTypes.NEW_VEHICLE
+    ActionsTypes.DELETE_VEHICLE
+    | ActionsTypes.UPDATE_VEHICLE
+    | ActionsTypes.NEW_VEHICLE
 
 
 export const VehicleReducer: Record<VehicleReducerFunctions, (state: SidurStore, action: IAction) => SidurStore> = {
-    [ActionTypes.NEW_VEHICLE]: (state: SidurStore, action: IAction): SidurStore => {
+    [ActionsTypes.NEW_VEHICLE]: (state: SidurStore, action: IAction): SidurStore => {
         let newState = {...state}
         const newId = Utilities.getNextId(state.vehicles.map(v => v.id));
 
@@ -31,7 +33,7 @@ export const VehicleReducer: Record<VehicleReducerFunctions, (state: SidurStore,
         return newState
     },
 
-    [ActionTypes.UPDATE_VEHICLE]: (state: SidurStore, action: IAction): SidurStore => {
+    [ActionsTypes.UPDATE_VEHICLE]: (state: SidurStore, action: IAction): SidurStore => {
         let newState = {...state};
         const updateVehicle: VehicleModel = action.payload.value;
         if (updateVehicle) {
@@ -53,7 +55,7 @@ export const VehicleReducer: Record<VehicleReducerFunctions, (state: SidurStore,
         return newState
     },
 
-    [ActionTypes.DELETE_VEHICLE]: (state: SidurStore, action: IAction): SidurStore => {
+    [ActionsTypes.DELETE_VEHICLE]: (state: SidurStore, action: IAction): SidurStore => {
         let newState = {...state}
         const deleteVehiclerId = action.payload.id;
         newState.vehicles = newState.vehicles.filter(vehicle => deleteVehiclerId !== vehicle.id)

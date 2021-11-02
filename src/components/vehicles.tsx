@@ -2,7 +2,7 @@ import React, {useState} from 'react'
 import {translations} from '../services/translations';
 import {SxProps} from '@mui/system';
 import {useDispatch, useSelector} from 'react-redux';
-import {ActionTypes} from '../store/actionTypes';
+import {ActionsTypes} from '../store/types.actions';
 import {VehicleModel} from '../models/Vehicle.model';
 import {Add, TimeToLeave} from '@mui/icons-material';
 import {Badge, Box, Button} from '@mui/material';
@@ -33,14 +33,14 @@ export const Vehicles = () => {
         if (value) {
             if (value.id === '0') {
                 dispatch({
-                    type: ActionTypes.NEW_VEHICLE,
+                    type: ActionsTypes.NEW_VEHICLE,
                     payload: {
                         value
                     }
                 })
             } else {
                 dispatch({
-                    type: ActionTypes.UPDATE_VEHICLE,
+                    type: ActionsTypes.UPDATE_VEHICLE,
                     payload: {
                         value
                     }
@@ -53,7 +53,7 @@ export const Vehicles = () => {
         setVehicleEditOpen(false);
         if (id) {
             dispatch({
-                type: ActionTypes.DELETE_VEHICLE,
+                type: ActionsTypes.DELETE_VEHICLE,
                 payload: {
 
                     id

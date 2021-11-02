@@ -1,4 +1,4 @@
-import {ActionTypes} from './actionTypes';
+import {ActionsTypes} from './types.actions';
 import {AppConstants, defaultVehicleValues, IAction, SidurRecord, SidurStore} from './store.types';
 import {OrderModel} from '../models/Order.model';
 import {Utilities} from '../services/utilities';
@@ -6,14 +6,14 @@ import {translations} from '../services/translations';
 import {StoreUtils} from './store-utils';
 
 export type SidurReducerFunctions =
-    ActionTypes.RENAME_SIDUR
-    | ActionTypes.DELETE_SIDUR
-    | ActionTypes.ADD_NEW_SIDUR
-    | ActionTypes.CHOOSE_SIDUR
-    | ActionTypes.CLONE_SIDUR
-    | ActionTypes.ARCHIVE_SIDUR
-    | ActionTypes.MOVE_TO_ACTIVE_SIDUR
-    | ActionTypes.DELETE_FOREVER_SIDUR
+    ActionsTypes.RENAME_SIDUR
+    | ActionsTypes.DELETE_SIDUR
+    | ActionsTypes.ADD_NEW_SIDUR
+    | ActionsTypes.CHOOSE_SIDUR
+    | ActionsTypes.CLONE_SIDUR
+    | ActionsTypes.ARCHIVE_SIDUR
+    | ActionsTypes.MOVE_TO_ACTIVE_SIDUR
+    | ActionsTypes.DELETE_FOREVER_SIDUR
 
 const DefaultSidur: SidurRecord = {
     id: '1',
@@ -25,7 +25,7 @@ const DefaultSidur: SidurRecord = {
 }
 
 export const SidurReducer: Record<SidurReducerFunctions, (state: SidurStore, action: IAction) => SidurStore> = {
-    [ActionTypes.CHOOSE_SIDUR]: (state: SidurStore, action: IAction): SidurStore => {
+    [ActionsTypes.CHOOSE_SIDUR]: (state: SidurStore, action: IAction): SidurStore => {
         let newState = {...state}
         const chosenSidurId = action.payload.id;
         const previousSidurId = newState.sidurId;
@@ -69,7 +69,7 @@ export const SidurReducer: Record<SidurReducerFunctions, (state: SidurStore, act
         return newState
 
     },
-    [ActionTypes.RENAME_SIDUR]: (state: SidurStore, action: IAction): SidurStore => {
+    [ActionsTypes.RENAME_SIDUR]: (state: SidurStore, action: IAction): SidurStore => {
         let newState = {...state}
         const sidurId = action.payload.id// newState.sidurId;
         const newName = action.payload.value;
@@ -87,7 +87,7 @@ export const SidurReducer: Record<SidurReducerFunctions, (state: SidurStore, act
         });
         return newState
     },
-    [ActionTypes.DELETE_SIDUR]: (state: SidurStore, action: IAction): SidurStore => {
+    [ActionsTypes.DELETE_SIDUR]: (state: SidurStore, action: IAction): SidurStore => {
         let newState = {...state}
         const sidurIdToDelete = action.payload.id// newState.sidurId;
         if (sidurIdToDelete.includes(AppConstants.ArchiveIdPrefix)) {
@@ -121,7 +121,7 @@ export const SidurReducer: Record<SidurReducerFunctions, (state: SidurStore, act
 
         return newState
     },
-    [ActionTypes.ARCHIVE_SIDUR]: (state: SidurStore, action: IAction): SidurStore => {
+    [ActionsTypes.ARCHIVE_SIDUR]: (state: SidurStore, action: IAction): SidurStore => {
         let newState = {...state}
         const sidurIdToArchive = action.payload.id;
         if (sidurIdToArchive.includes(AppConstants.deleteIdPrefix)) {
@@ -156,7 +156,7 @@ export const SidurReducer: Record<SidurReducerFunctions, (state: SidurStore, act
 
         return newState
     },
-    [ActionTypes.ADD_NEW_SIDUR]: (state: SidurStore, action: IAction): SidurStore => {
+    [ActionsTypes.ADD_NEW_SIDUR]: (state: SidurStore, action: IAction): SidurStore => {
         let newState = {...state}
 
         const newSidurId = Utilities.getNextId(getAllSidurIDs(state))
@@ -174,7 +174,7 @@ export const SidurReducer: Record<SidurReducerFunctions, (state: SidurStore, act
         newState = setChosenSidur(newState, newSidur);
         return newState
     },
-    [ActionTypes.CLONE_SIDUR]: (state: SidurStore, action: IAction): SidurStore => {
+    [ActionsTypes.CLONE_SIDUR]: (state: SidurStore, action: IAction): SidurStore => {
         let newState = {...state}
         const sidurIdToClone = action.payload.id;// newState.sidurId;
         let sidurForCloning: SidurRecord | undefined = newState.sidurCollection.find(s => s.id === sidurIdToClone);
@@ -192,7 +192,7 @@ export const SidurReducer: Record<SidurReducerFunctions, (state: SidurStore, act
 
         return newState
     },
-    [ActionTypes.MOVE_TO_ACTIVE_SIDUR]: (state: SidurStore, action: IAction): SidurStore => {
+    [ActionsTypes.MOVE_TO_ACTIVE_SIDUR]: (state: SidurStore, action: IAction): SidurStore => {
         let newState = {...state}
         const sidurIdToActivate = action.payload.id;
 
@@ -208,7 +208,7 @@ export const SidurReducer: Record<SidurReducerFunctions, (state: SidurStore, act
 
         return newState
     },
-    [ActionTypes.DELETE_FOREVER_SIDUR]: (state: SidurStore, action: IAction): SidurStore => {
+    [ActionsTypes.DELETE_FOREVER_SIDUR]: (state: SidurStore, action: IAction): SidurStore => {
         let newState = {...state}
         const sidurIdToDeleteForever = action.payload.id;
         newState.sidurArchive = newState.sidurArchive.filter(s => s.id !== sidurIdToDeleteForever);

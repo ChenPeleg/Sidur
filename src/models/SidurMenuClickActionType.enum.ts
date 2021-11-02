@@ -4,7 +4,8 @@ export enum SidurActionType {
     ManageSidurim = 3,
     CreateCopy = 4,
     Archive = 5,
-    CreateNew = 6
+    CreateNew = 6,
+    ImportOrders = 7
 }
 
 export enum SidurManagementActionType {

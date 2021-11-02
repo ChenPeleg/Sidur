@@ -15,7 +15,7 @@ import {SidurManagementActionType} from '../../models/SidurMenuClickActionType.e
 import {SxProps} from '@mui/system';
 import {customStyles} from '../../hoc/themes';
 import {red} from '@mui/material/colors';
-import {ActionTypes} from '../../store/actionTypes';
+import {ActionsTypes} from '../../store/types.actions';
 
 
 interface FileUploadProps {
@@ -40,19 +40,19 @@ export const SidurManagementDialog = (props: FileUploadProps) => {
         switch (props.action) {
             case SidurManagementActionType.DeleteForever:
                 dispatch({
-                    type: ActionTypes.DELETE_FOREVER_SIDUR,
+                    type: ActionsTypes.DELETE_FOREVER_SIDUR,
                     payload: {id: props.sidurId}
                 })
                 break;
             case SidurManagementActionType.MoveToArchive:
                 dispatch({
-                    type: ActionTypes.ARCHIVE_SIDUR,
+                    type: ActionsTypes.ARCHIVE_SIDUR,
                     payload: {id: props.sidurId}
                 })
                 break;
             case SidurManagementActionType.MoveToTrash:
                 dispatch({
-                    type: ActionTypes.DELETE_SIDUR,
+                    type: ActionsTypes.DELETE_SIDUR,
                     payload: {id: props.sidurId}
                 })
                 break;
@@ -64,7 +64,7 @@ export const SidurManagementDialog = (props: FileUploadProps) => {
                 break;
             case SidurManagementActionType.MoveToActive:
                 dispatch({
-                    type: ActionTypes.MOVE_TO_ACTIVE_SIDUR,
+                    type: ActionsTypes.MOVE_TO_ACTIVE_SIDUR,
                     payload: {id: props.sidurId}
                 })
                 break;

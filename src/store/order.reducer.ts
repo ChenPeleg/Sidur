@@ -1,20 +1,20 @@
-import {ActionTypes} from './actionTypes';
 import {AppConstants, defaultOrderValues, IAction, SidurStore} from './store.types';
 import {StoreUtils} from './store-utils';
 import {Utilities} from '../services/utilities';
 import {OrderModel} from '../models/Order.model';
+import {ActionsTypes} from './types.actions';
 
 export type OrderReducerFunctions =
-    ActionTypes.DELETE_ORDER
-    | ActionTypes.UPDATE_ORDER
-    | ActionTypes.ADD_NEW_ORDER
-    | ActionTypes.UPDATE_ORDER_IN_EDIT
-    | ActionTypes.CLICKED_ORDER
-    | ActionTypes.CLONE_ORDER
+    ActionsTypes.DELETE_ORDER
+    | ActionsTypes.UPDATE_ORDER
+    | ActionsTypes.ADD_NEW_ORDER
+    | ActionsTypes.UPDATE_ORDER_IN_EDIT
+    | ActionsTypes.CLICKED_ORDER
+    | ActionsTypes.CLONE_ORDER
 
 
 export const OrderReducer: Record<OrderReducerFunctions, (state: SidurStore, action: IAction) => SidurStore> = {
-    [ActionTypes.ADD_NEW_ORDER]: (state: SidurStore, action: IAction): SidurStore => {
+    [ActionsTypes.ADD_NEW_ORDER]: (state: SidurStore, action: IAction): SidurStore => {
         let newState = {...state}
         const newId = Utilities.getNextId(getAllOrdersIDs(state))
         const newOrder: OrderModel = {
@@ -27,7 +27,7 @@ export const OrderReducer: Record<OrderReducerFunctions, (state: SidurStore, act
         StoreUtils.HandleReducerSaveToLocalStorage(newState);
         return newState
     },
-    [ActionTypes.CLONE_ORDER]: (state: SidurStore, action: IAction): SidurStore => {
+    [ActionsTypes.CLONE_ORDER]: (state: SidurStore, action: IAction): SidurStore => {
         let newState = {...state};
         newState = updateOrdersWithEditedOrder(newState)
         const cloneOriginId = action.payload.id
@@ -48,12 +48,12 @@ export const OrderReducer: Record<OrderReducerFunctions, (state: SidurStore, act
 
         return newState
     },
-    [ActionTypes.UPDATE_ORDER_IN_EDIT]: (state: SidurStore, action: IAction): SidurStore => {
+    [ActionsTypes.UPDATE_ORDER_IN_EDIT]: (state: SidurStore, action: IAction): SidurStore => {
         let newState = {...state}
         newState.dataHolderForCurrentOrderInEdit = action.payload;
         return newState
     },
-    [ActionTypes.UPDATE_ORDER]: (state: SidurStore, action: IAction): SidurStore => {
+    [ActionsTypes.UPDATE_ORDER]: (state: SidurStore, action: IAction): SidurStore => {
         let newState = {...state}
         const orderId = action.payload.id;
         newState.orders = newState.orders.map(order => {
@@ -68,7 +68,7 @@ export const OrderReducer: Record<OrderReducerFunctions, (state: SidurStore, act
         StoreUtils.HandleReducerSaveToLocalStorage(newState);
         return newState
     },
-    [ActionTypes.CLICKED_ORDER]: (state: SidurStore, action: IAction): SidurStore => {
+    [ActionsTypes.CLICKED_ORDER]: (state: SidurStore, action: IAction): SidurStore => {
         let newState = {...state}
         const clickedOrderId = action.payload.id;
         newState = updateOrdersWithEditedOrder(newState)
@@ -76,7 +76,7 @@ export const OrderReducer: Record<OrderReducerFunctions, (state: SidurStore, act
         newState.orderIdInEdit = clickedOrderId
         return newState
     },
-    [ActionTypes.DELETE_ORDER]: (state: SidurStore, action: IAction): SidurStore => {
+    [ActionsTypes.DELETE_ORDER]: (state: SidurStore, action: IAction): SidurStore => {
         let newState = {...state}
         const deleteOrderId = action.payload.id;
         newState.orders = newState.orders.filter(order => deleteOrderId !== order.id)

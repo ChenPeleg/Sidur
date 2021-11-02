@@ -1,4 +1,4 @@
-import {ActionTypes} from './actionTypes';
+import {ActionsTypes} from './types.actions'
 import {OrderModel} from '../models/Order.model';
 import {DriveType} from '../models/DriveType.enum';
 import {VehicleModel} from '../models/Vehicle.model';
@@ -6,7 +6,7 @@ import {VehicleModel} from '../models/Vehicle.model';
 export type ActionType = string;
 
 export type IAction = {
-    type: ActionTypes
+    type: ActionsTypes
     payload: any
 }
 

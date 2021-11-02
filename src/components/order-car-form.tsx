@@ -11,7 +11,7 @@ import {DriveType} from '../models/DriveType.enum';
 import {Box, SxProps, Theme} from '@mui/system';
 import {Button, MenuItem} from '@mui/material';
 import {translations} from '../services/translations';
-import {ActionTypes} from '../store/actionTypes';
+import {ActionsTypes} from '../store/types.actions';
 import {LocationModel} from '../models/Location.model';
 import {locations} from '../services/locations';
 import {LanguageUtilites} from '../services/language-utilites';
@@ -216,7 +216,7 @@ export const OrderCarForm = (formProps: MuiFormPropsModel) => {
                     return
                 }
                 dispatch({
-                    type: ActionTypes.UPDATE_ORDER_IN_EDIT,
+                    type: ActionsTypes.UPDATE_ORDER_IN_EDIT,
                     payload: {
                         ...values
                     }
@@ -231,7 +231,7 @@ export const OrderCarForm = (formProps: MuiFormPropsModel) => {
                     return
                 }
                 dispatch({
-                    type: ActionTypes.UPDATE_ORDER,
+                    type: ActionsTypes.UPDATE_ORDER,
                     payload: {
                         id: id
                     }

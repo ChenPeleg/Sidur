@@ -1,12 +1,12 @@
 import {OrderModel} from '../models/Order.model';
 import {defaultOrderValues, defaultVehicleValues, IAction, SidurStore} from './store.types';
-import {ActionTypes} from './actionTypes';
 import {SaveLoadService} from '../services/save-load.service';
 import {SidurReducer} from './sidur.reducer';
 import {OrderReducer} from './order.reducer';
 import {ImportExportReducer} from './import-export.reducer';
 import {VehicleModel} from '../models/Vehicle.model';
 import {VehicleReducer} from './vehicle.reducer';
+import {ActionsTypes} from './types.actions';
 
 
 const startOrders: OrderModel[] = ['חן', 'אבי', 'רוני'].map((name: string, index: number): OrderModel => ({
@@ -56,34 +56,35 @@ const reducer = (state: SidurStore = initialState, action: IAction) => {
     }
 
     switch (action.type) {
-        case ActionTypes.CHOOSE_SIDUR:
-        case ActionTypes.RENAME_SIDUR:
-        case ActionTypes.ADD_NEW_SIDUR:
-        case ActionTypes.DELETE_SIDUR:
-        case ActionTypes.CLONE_SIDUR:
-        case ActionTypes.ARCHIVE_SIDUR:
-        case ActionTypes.MOVE_TO_ACTIVE_SIDUR:
-        case  ActionTypes.DELETE_FOREVER_SIDUR:
+        case ActionsTypes.CHOOSE_SIDUR:
+        case ActionsTypes.RENAME_SIDUR:
+        case ActionsTypes.ADD_NEW_SIDUR:
+        case ActionsTypes.DELETE_SIDUR:
+        case ActionsTypes.CLONE_SIDUR:
+        case ActionsTypes.ARCHIVE_SIDUR:
+        case ActionsTypes.MOVE_TO_ACTIVE_SIDUR:
+        case  ActionsTypes.DELETE_FOREVER_SIDUR:
 
             return SidurReducer[action.type](newState, action)
 
-        case ActionTypes.CLICKED_ORDER:
-        case ActionTypes.UPDATE_ORDER:
-        case ActionTypes.UPDATE_ORDER_IN_EDIT:
-        case ActionTypes.DELETE_ORDER:
-        case ActionTypes.ADD_NEW_ORDER:
-        case ActionTypes.CLONE_ORDER:
+        case ActionsTypes.CLICKED_ORDER:
+        case ActionsTypes.UPDATE_ORDER:
+        case ActionsTypes.UPDATE_ORDER_IN_EDIT:
+        case ActionsTypes.DELETE_ORDER:
+        case ActionsTypes.ADD_NEW_ORDER:
+        case ActionsTypes.CLONE_ORDER:
 
             return OrderReducer[action.type](newState, action)
 
-        case ActionTypes.EXPORT_ALL:
-        case ActionTypes.IMPORT_FILE_UPLOADED:
+        case ActionsTypes.EXPORT_ALL:
+        case ActionsTypes.IMPORT_FILE_UPLOADED:
+        case ActionsTypes.IMPORT_ORDERS_AS_TEXT:
 
             return ImportExportReducer[action.type](newState, action);
 
-        case ActionTypes.NEW_VEHICLE:
-        case ActionTypes.UPDATE_VEHICLE:
-        case ActionTypes.DELETE_VEHICLE:
+        case ActionsTypes.NEW_VEHICLE:
+        case ActionsTypes.UPDATE_VEHICLE:
+        case ActionsTypes.DELETE_VEHICLE:
 
             return VehicleReducer[action.type](newState, action)
 

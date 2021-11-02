@@ -1,7 +1,7 @@
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import * as React from 'react';
-import {Archive, Delete, DriveFileRenameOutline, FileCopy, ListAlt} from '@mui/icons-material';
+import {Archive, Delete, DriveFileRenameOutline, FileCopy, ImportContacts, ListAlt} from '@mui/icons-material';
 import {translations} from '../../services/translations';
 import {SidurActionType} from '../../models/SidurMenuClickActionType.enum';
 
@@ -57,6 +57,11 @@ export const SidurMenu = (props: sidurMenuProps) => {
             <MenuItem onClick={(e) => handleSidurMenuClick(e, SidurActionType.Archive)}>
                 <Archive/> &nbsp;
                 {translations.Archive}
+            </MenuItem>
+            <MenuItem onClick={(e) => handleSidurMenuClick(e, SidurActionType.ImportOrders)}>
+
+                <ImportContacts/>&nbsp;
+                {translations.ImportOrders}
             </MenuItem>
             <MenuItem onClick={(e) => handleSidurMenuClick(e, SidurActionType.ManageSidurim)}>
 

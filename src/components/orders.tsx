@@ -5,7 +5,7 @@ import {OrderCar} from './order-car';
 import {useDispatch, useSelector} from 'react-redux';
 import {OrderModel} from '../models/Order.model';
 
-import {ActionTypes} from '../store/actionTypes';
+import {ActionsTypes} from '../store/types.actions';
 import {AddButton} from './buttons/add-button';
 
 const TRL = translations;
@@ -34,7 +34,7 @@ export const Orders = () => {
     const classes = useStyles();
     const addClickHandler = (event: any) => {
         dispatch({
-            type: ActionTypes.ADD_NEW_ORDER,
+            type: ActionsTypes.ADD_NEW_ORDER,
             payload: {}
         })
     }

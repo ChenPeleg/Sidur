@@ -14,7 +14,7 @@ import {Select, SelectChangeEvent} from '@mui/material';
 import {Edit} from '@mui/icons-material';
 import {SidurRenameDialog} from '../Dialogs/sidur-rename-dialog';
 import {ProfileMenu} from './profile-menu';
-import {ActionTypes} from '../../store/actionTypes';
+import {ActionsTypes} from '../../store/types.actions';
 import {SidurMenu} from './sidur-menu';
 import {SidurActionType} from '../../models/SidurMenuClickActionType.enum';
 import {ProfileMenuClickActionType} from '../../models/profile-menu-click-action-type.enum';
@@ -22,6 +22,7 @@ import {Utilities} from '../../services/utilities';
 import {FileUploadType, SidurRecord, SidurStore} from '../../store/store.types';
 import {FileUploadDialog} from '../Dialogs/file-uplaod-dialog';
 import {SidurManagementDialog} from '../Dialogs/sidur-management-dialog';
+import {OrderImportDialog} from '../Dialogs/orders-import-dialog';
 
 
 export const AppNavBar = () => {
@@ -30,6 +31,7 @@ export const AppNavBar = () => {
     const [RenameOpen, setRenameOpen] = React.useState(false);
     const [UploadOpen, setUploadOpen] = React.useState(false);
     const [ManageSidurimOpen, setManageSidurimOpen] = React.useState(false);
+    const [importOrdersOpen, setImportOrdersOpen] = React.useState(false);
     const [uploadDialogOpen, setUploadDialogOpen] = React.useState(false);
     const [sidurMoreAnchorEl, setSidurMoreAnchorEl] =
         React.useState<null | HTMLElement>(null);
@@ -53,7 +55,7 @@ export const AppNavBar = () => {
         const id = sidurId;
         if (value) {
             dispatch({
-                type: ActionTypes.RENAME_SIDUR,
+                type: ActionsTypes.RENAME_SIDUR,
                 payload: {
                     value,
                     id
@@ -65,7 +67,7 @@ export const AppNavBar = () => {
         setUploadOpen(false);
         if (result) {
             dispatch({
-                type: ActionTypes.IMPORT_FILE_UPLOADED,
+                type: ActionsTypes.IMPORT_FILE_UPLOADED,
                 payload: {...result}
             })
         }
@@ -76,19 +78,19 @@ export const AppNavBar = () => {
 
             case SidurActionType.CreateCopy:
                 dispatch({
-                    type: ActionTypes.CLONE_SIDUR,
+                    type: ActionsTypes.CLONE_SIDUR,
                     payload: {id: sidurId}
                 })
                 break;
             case SidurActionType.Archive:
                 dispatch({
-                    type: ActionTypes.ARCHIVE_SIDUR,
+                    type: ActionsTypes.ARCHIVE_SIDUR,
                     payload: {id: sidurId}
                 })
                 break;
             case SidurActionType.Delete:
                 dispatch({
-                    type: ActionTypes.DELETE_SIDUR,
+                    type: ActionsTypes.DELETE_SIDUR,
                     payload: {id: sidurId}
                 })
                 break;
@@ -97,6 +99,9 @@ export const AppNavBar = () => {
                 break;
             case SidurActionType.ManageSidurim:
                 setManageSidurimOpen(true);
+                break;
+            case SidurActionType.ImportOrders:
+                setImportOrdersOpen(true);
                 break;
 
             default:
@@ -112,13 +117,13 @@ export const AppNavBar = () => {
         switch (action) {
             case ProfileMenuClickActionType.MyProfile:
                 dispatch({
-                    type: ActionTypes.OPEN_MY_PROFILE,
+                    type: ActionsTypes.OPEN_MY_PROFILE,
                     payload: null
                 })
                 break;
             case ProfileMenuClickActionType.Export:
                 dispatch({
-                    type: ActionTypes.EXPORT_ALL,
+                    type: ActionsTypes.EXPORT_ALL,
                     payload: null
                 })
                 break;
@@ -141,12 +146,12 @@ export const AppNavBar = () => {
         const chosenSidur = event.target.value as string;
         if (chosenSidur === 'NEW') {
             dispatch({
-                type: ActionTypes.ADD_NEW_SIDUR,
+                type: ActionsTypes.ADD_NEW_SIDUR,
                 payload: null
             });
         } else {
             dispatch({
-                type: ActionTypes.CHOOSE_SIDUR,
+                type: ActionsTypes.CHOOSE_SIDUR,
                 payload: {id: chosenSidur}
             })
         }
@@ -262,6 +267,9 @@ export const AppNavBar = () => {
             <FileUploadDialog open={UploadOpen} onClose={handleUploadClose} selectedValue={''}/>
             <SidurManagementDialog open={ManageSidurimOpen} onClose={() => {
                 setManageSidurimOpen(false)
+            }}/>
+            <OrderImportDialog open={importOrdersOpen} onClose={() => {
+                setImportOrdersOpen(false)
             }}/>
 
         </Box>
