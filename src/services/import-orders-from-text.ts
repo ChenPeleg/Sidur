@@ -81,7 +81,7 @@ const ordersToOrderModel = (orders: EshbalOrder[]): OrderModel[] => {
             passengers: '1',
             location: '',
             TypeOfDrive: DriveType.Tsamud,
-            startHour: eOrder.hour,
+            startHour: convertTimeTo4Digits(eOrder.hour),
             Comments: eOrder.text,
             driverName: eOrder.name,
             finishHour: ''
@@ -92,6 +92,22 @@ const ordersToOrderModel = (orders: EshbalOrder[]): OrderModel[] => {
     })
 
     return OrdersApp;
+}
+const searchAnotherTimeInText = (order: OrderModel): { anotherTime: string | null } => {
+    const text = order.Comments;
+    const results: { anotherTime: string | null } = {anotherTime: null}
+    const matchingTime = text.match(/\d{1,2}:\d\d/);
+    if (matchingTime && matchingTime[0]) {
+        matchingTime.forEach(t => {
+            const convertedTime = convertTimeTo4Digits(t);
+            if (convertedTime !== order.startHour) {
+                results.anotherTime = convertedTime
+            }
+        })
+
+    }
+
+    return results
 }
 const searchLocationInText = (text: string): { locationFound: LocationModel | null, typeOfDrive: DriveType | null } => {
     const allLocations: LocationModel[] = [...locations];
@@ -127,27 +143,38 @@ const searchLocationInText = (text: string): { locationFound: LocationModel | nu
 
     return results
 }
+const convertTimeTo4Digits = (time: string): string => {
+    if (time.match(/^\d:\d\d$/)) {
+        return '0' + time
+    } else {
+        return time
+    }
+}
 const getLocationAndTypeFromComments = (orders: OrderModel[]): OrderModel[] => {
     orders.map(orders => {
-        const searchRes = searchLocationInText(orders.Comments)
-        if (searchRes.locationFound) {
-            orders.location = searchRes.locationFound.id
+        const LocationSearchResult = searchLocationInText(orders.Comments);
+        if (LocationSearchResult.locationFound) {
+            orders.location = LocationSearchResult.locationFound.id
         }
-        if (searchRes.typeOfDrive) {
-            orders.TypeOfDrive = searchRes.typeOfDrive
+        if (LocationSearchResult.typeOfDrive) {
+            orders.TypeOfDrive = LocationSearchResult.typeOfDrive
+        }
+        const anotherTimeSearchResults = searchAnotherTimeInText(orders);
+        if (anotherTimeSearchResults.anotherTime && anotherTimeSearchResults.anotherTime !== orders.startHour) {
+            orders.finishHour = anotherTimeSearchResults.anotherTime
         }
         return orders
     })
     return orders
 }
 export const ImportOrdersFromText = (text: string): OrderModel[] => {
-    //text = stringValue;
+    text = stringValue;
     const rowsWithoutUserLineBreaks = DetectFormRows(text)
     const rows = stringIntoRows(rowsWithoutUserLineBreaks);
     const rowsWithColumns = rows.map(r => r.split(/\t/g));
     const orders: EshbalOrder[] = rowsToEshbalOrders(rowsWithColumns);
     let appOrders: OrderModel[] = ordersToOrderModel(orders)
-
+    //TODO - AD 19 Ad 6
     return getLocationAndTypeFromComments(appOrders);
 
 
