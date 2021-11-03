@@ -4,6 +4,7 @@ import {DownloadFile} from '../services/download-file';
 import {Utilities} from '../services/utilities';
 import {ActionsTypes} from './types.actions';
 import {ImportOrdersFromText} from '../services/import-orders-from-text';
+import {OrderModel} from '../models/Order.model';
 
 export type ImportReducerFunctions =
     ActionsTypes.EXPORT_ALL |
@@ -51,7 +52,8 @@ export const ImportExportReducer: Record<ImportReducerFunctions, (state: SidurSt
     [ActionsTypes.IMPORT_ORDERS_AS_TEXT]: (state: SidurStore, action: IAction): SidurStore => {
         let newState = {...state}
         const importedOrders: string = action.payload.importedOrders;
-        ImportOrdersFromText(importedOrders);
+        const modeledImportedOrders: OrderModel[] = ImportOrdersFromText(importedOrders);
+        newState.orders = newState.orders.concat(modeledImportedOrders)
         // try {
         //
         //

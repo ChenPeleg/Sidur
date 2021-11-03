@@ -34,6 +34,7 @@ export const translations = {
     'Finish': 'סיום',
     'TypeOfDrive': 'סוג הנסיעה',
     'Tsamud': 'צריך צמוד',
+    'TsamudWord': 'צמוד',
     'OneWayTo': 'הסעה',
     'OneWayFrom': 'איסוף',
     'TwoWay': 'הלוך חזור',
@@ -65,6 +66,7 @@ export const translations = {
     'toLocation': ' אל  ',
     'fromLocation': 'מ',
     'inLocation': 'ב',
+    'toLocationLe': 'ל',
 
     'ActiveSidurim': 'סידורים פעילים'
 

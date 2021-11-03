@@ -1,3 +1,10 @@
+import {OrderModel} from '../models/Order.model';
+import {DriveType} from '../models/DriveType.enum';
+import {defaultOrderValues} from '../store/store.types';
+import {locations} from './locations';
+import {LocationModel} from '../models/Location.model';
+import {translations} from './translations';
+
 const stringValue = `חותמת זמן\tשם\tנסיעה 1 - שעת הנסיעה\tנסיעה 1 - פירוט הנסיעה\tנסיעה 2 - שעת הנסיעה\tנסיעה 2 - פירוט הנסיעה\tנסיעה 3 - שעת הנסיעה\tנסיעה 3 - פירוט הנסיעה\tמתי אני נוהגת?\tכבר השתבצת להכין סידור החודש?\tנסיעה 1 - שעת הנסיעה\tמתי אני נוהגת?\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t
 02/11/2021 09:33:24\tמורן\t07:20\tיהל לרקפת, מורן לכרמיאל\t16:00\t16:00\tיהל ומורן מרקפת\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t
 02/11/2021 09:34:06\tעינת\t7:15\tעינת מסיעה לגן דרור ואז לרכבת כרמיאל \t18:30\tעינת מכרמיאל רוצה לעבןר בסחנין חצי שעה\t\t\t\tכן\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t
@@ -26,15 +33,12 @@ const stringValue = `חותמת זמן\tשם\tנסיעה 1 - שעת הנסיע�
 \t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t`
 const NewRowToken = 'New_row_';
 
-interface EshbalRide {
+interface EshbalOrder {
+    name: string,
     hour: string,
     text: string
 }
 
-interface EshbalOrder {
-    name: string,
-    rides: EshbalRide[]
-}
 
 const stringIntoRows = (str: string): string [] => {
     return str.split(NewRowToken).filter(s => s.replace(/\t/g, '').length > 5);
@@ -48,20 +52,103 @@ const DetectFormRows = (completeText: string): string => {
 }
 const rowsToEshbalOrders = (rows: string [][]): EshbalOrder[] => {
     let Eorders: EshbalOrder[] = [];
+    rows.forEach((row: string[], index: number) => {
+        if (row[1].length > 1 && index > 0) {
+            let name = row[1];
+            for (let c = 2; c < 8; c += 2) {
+                if (row[c].length > 1) {
+                    const newRide: EshbalOrder = {
+                        name: name,
+                        hour: row[c],
+                        text: row[c + 1],
+                    }
+                    Eorders.push(newRide);
 
+                }
+            }
+        }
+    })
     return Eorders
 }
 
-export const ImportOrdersFromText = (text: string): any => {
-    text = stringValue;
+const ordersToOrderModel = (orders: EshbalOrder[]): OrderModel[] => {
+    let idNum = 99;
+    const defaultValues: OrderModel = {...defaultOrderValues}
+    let OrdersApp: OrderModel[] = orders.map((eOrder) => {
+        const appOrder: OrderModel = {
+            id: idNum.toString(),
+            flexibility: defaultValues.flexibility,
+            passengers: '1',
+            location: '',
+            TypeOfDrive: DriveType.Tsamud,
+            startHour: eOrder.hour,
+            Comments: eOrder.text,
+            driverName: eOrder.name,
+            finishHour: ''
+
+        }
+        idNum++;
+        return appOrder;
+    })
+
+    return OrdersApp;
+}
+const searchLocationInText = (text: string): { locationFound: LocationModel | null, typeOfDrive: DriveType | null } => {
+    const allLocations: LocationModel[] = [...locations];
+    const results: { locationFound: LocationModel | null, typeOfDrive: DriveType | null } = {
+        locationFound: null,
+        typeOfDrive:
+            null
+    }
+    allLocations.forEach((location: LocationModel) => {
+        if (text.includes(location.Name)) {
+            results.locationFound = location;
+        }
+    });
+
+    if (results.locationFound) {
+        const locName = results.locationFound.Name;
+        const fromPrefixes = [translations.From];
+        const toPrefixes = [translations.toLocation, translations.toLocationLe];
+        const tzamudPrefix = [translations.inLocation];
+        if (fromPrefixes.some(pre => text.includes(pre + locName))) {
+            results.typeOfDrive = DriveType.OneWayFrom
+        }
+        if (toPrefixes.some(pre => text.includes(pre + locName))) {
+            results.typeOfDrive = DriveType.OneWayTo
+        }
+        if (tzamudPrefix.some(pre => text.includes(pre + locName))) {
+            results.typeOfDrive = DriveType.Tsamud
+        }
+    }
+    if (text.includes(translations.TsamudWord)) {
+        results.typeOfDrive = DriveType.Tsamud
+    }
+
+    return results
+}
+const getLocationAndTypeFromComments = (orders: OrderModel[]): OrderModel[] => {
+    orders.map(orders => {
+        const searchRes = searchLocationInText(orders.Comments)
+        if (searchRes.locationFound) {
+            orders.location = searchRes.locationFound.id
+        }
+        if (searchRes.typeOfDrive) {
+            orders.TypeOfDrive = searchRes.typeOfDrive
+        }
+        return orders
+    })
+    return orders
+}
+export const ImportOrdersFromText = (text: string): OrderModel[] => {
+    //text = stringValue;
     const rowsWithoutUserLineBreaks = DetectFormRows(text)
     const rows = stringIntoRows(rowsWithoutUserLineBreaks);
     const rowsWithColumns = rows.map(r => r.split(/\t/g));
+    const orders: EshbalOrder[] = rowsToEshbalOrders(rowsWithColumns);
+    let appOrders: OrderModel[] = ordersToOrderModel(orders)
 
-    setTimeout(_ => {
-        console.clear();
-        console.log(rowsWithColumns);
-    }, 400)
+    return getLocationAndTypeFromComments(appOrders);
 
 
 }
