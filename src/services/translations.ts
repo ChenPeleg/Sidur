@@ -33,7 +33,7 @@ export const translations = {
     'Start': 'התחלה',
     'Finish': 'סיום',
     'TypeOfDrive': 'סוג הנסיעה',
-    'Tsamud': 'צריך צמוד',
+    'Tsamud': 'צמוד',
     'TsamudWord': 'צמוד',
     'OneWayTo': 'הסעה',
     'OneWayFrom': 'איסוף',
@@ -54,6 +54,8 @@ export const translations = {
     'seats': 'מושבים',
     'passengers': 'נוסעים',
     'flexibility': 'גמישות',
+    'missingDetails': 'מידע חלקי',
+
     'onePassenger': 'נוסע/ת אחד/ת',
 
     'exitTime': 'יציאה',

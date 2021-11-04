@@ -90,11 +90,17 @@ const ordersToOrderModel = (orders: EshbalOrder[]): OrderModel[] => {
 
     return OrdersApp;
 }
+/**
+ * @description Searches for Time (number in hour pattern in the text, if the returned number is not equal to start hour, returns them
+ * @param {OrderModel} order
+ * @returns {{anotherTime: string | null}}
+ */
 const searchAnotherTimeInText = (order: OrderModel): { anotherTime: string | null } => {
     const text = order.Comments;
     const results: { anotherTime: string | null } = {anotherTime: null}
-    const matchingTime = text.matchAll(/\d{1,2}:\d\d/g);
+    const matchingTime = text.matchAll(/(\d{1,2}:\d\d)/g);
     const matchingArray = Array.from(matchingTime)
+
     if (matchingArray && matchingArray[0]) {
         matchingArray.forEach(t => {
             const convertedTime = convertTimeTo4Digits(t.toString());
@@ -102,7 +108,20 @@ const searchAnotherTimeInText = (order: OrderModel): { anotherTime: string | nul
                 results.anotherTime = convertedTime
             }
         })
+    }
 
+    if (!results.anotherTime) {
+        const matchingTime = text.matchAll(/(1\d|20|21|22|23)/g);
+        const matchingArray = Array.from(matchingTime)
+
+        if (matchingArray && matchingArray[0]) {
+            matchingArray.forEach(t => {
+                const convertedTime = convert2DigitTimeTo4Digits(t.toString());
+                if (convertedTime !== order.startHour) {
+                    results.anotherTime = convertedTime
+                }
+            })
+        }
     }
 
     return results
@@ -148,25 +167,32 @@ const convertTimeTo4Digits = (time: string): string => {
         return time
     }
 }
+const convert2DigitTimeTo4Digits = (time: string): string => {
+    if (time.match(/^\d\d$/)) {
+        return time + ':00'
+    } else {
+        return time
+    }
+}
 const getLocationAndTypeFromComments = (orders: OrderModel[]): OrderModel[] => {
-    orders.map(orders => {
-        const LocationSearchResult = searchLocationInText(orders.Comments);
+    orders.map(order => {
+        const LocationSearchResult = searchLocationInText(order.Comments);
         if (LocationSearchResult.locationFound) {
-            orders.location = LocationSearchResult.locationFound.id
+            order.location = LocationSearchResult.locationFound.id
         }
         if (LocationSearchResult.typeOfDrive) {
-            orders.TypeOfDrive = LocationSearchResult.typeOfDrive
+            order.TypeOfDrive = LocationSearchResult.typeOfDrive
         }
-        const anotherTimeSearchResults = searchAnotherTimeInText(orders);
-        if (anotherTimeSearchResults.anotherTime && anotherTimeSearchResults.anotherTime !== orders.startHour) {
-            orders.finishHour = anotherTimeSearchResults.anotherTime
+        const anotherTimeSearchResults = searchAnotherTimeInText(order);
+        if (anotherTimeSearchResults.anotherTime && anotherTimeSearchResults.anotherTime !== order.startHour) {
+            order.finishHour = anotherTimeSearchResults.anotherTime
         }
-        return orders
+        return order
     })
     return orders
 }
 export const ImportOrdersFromText = (text: string): OrderModel[] => {
-    text = stringValue;
+    // text = stringValue;
     const rowsWithoutUserLineBreaks = DetectFormRows(text)
     const rows = stringIntoRows(rowsWithoutUserLineBreaks);
     const rowsWithColumns = rows.map(r => r.split(/\t/g));

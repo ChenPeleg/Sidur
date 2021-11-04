@@ -51,6 +51,18 @@ const useStyles: any = (() => ({
 }))
 const orderFields: OrderModel = new OrderFields();
 
+const areDetailsMissing = (orderValues: OrderModel): boolean => {
+    if (!orderValues.TypeOfDrive || !orderValues.driverName || !orderValues.startHour) {
+        return true
+    }
+    if (orderValues.TypeOfDrive === DriveType.Tsamud) {
+        if (!orderValues.finishHour || !orderValues.startHour) {
+            return true
+        }
+    }
+    return false
+}
+
 const buildBriefText = (orderValues: OrderModel): string => {
     const isWithName = orderValues.driverName.trim() !== '';
     if (!isWithName) {
@@ -77,12 +89,22 @@ export const OrderCarBrief = (props: AppProps) => {
     const orderValues = useSelector((state: { orders: OrderModel[] }) => {
         return state.orders.find(order => order.id === id) as OrderModel;
     });
+    const missingDetailsShown: boolean = areDetailsMissing(orderValues) && !props.isInEdit;
 
 
     return (
-        <Box sx={{padding: '5px'}}>
+        <Box sx={{
+            padding: '5px',
+            display: 'flex',
+            flexDirection: 'row',
+            justifyContent: 'start',
+            alignItems: 'start'
+        }}>
             <Typography fontWeight={props.isInEdit ? 'bold' : 'initial'} fontSize={'large'} padding={'initial'}>
                 {buildBriefText(orderValues)}
+            </Typography>
+            <Typography fontSize={'large'} color={'red'} padding={'initial'}>  &nbsp;
+                {missingDetailsShown ? ' (' + translations.missingDetails + ') ' : null}
             </Typography>
 
         </Box>
