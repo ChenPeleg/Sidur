@@ -43,9 +43,7 @@ interface EshbalOrder {
 const stringIntoRows = (str: string): string [] => {
     return str.split(NewRowToken).filter(s => s.replace(/\t/g, '').length > 5);
 }
-// const isFormDate = (cell: string): string[] | null => {
-//     return cell.match(/(0?[1-9]|[12][0-9]|3[01])[\/\-](0?[1-9]|1[012])[\/\-]\d{4}/g);
-// }
+
 const DetectFormRows = (completeText: string): string => {
     let finalText = completeText.replace(/\n((0?[1-9]|[12][0-9]|3[01])[\/\-](0?[1-9]|1[012])[\/\-]\d{4})/g, NewRowToken + '\$1');
     return finalText;
@@ -80,12 +78,11 @@ const ordersToOrderModel = (orders: EshbalOrder[]): OrderModel[] => {
             flexibility: defaultValues.flexibility,
             passengers: '1',
             location: '',
-            TypeOfDrive: DriveType.Tsamud,
+            TypeOfDrive: null,
             startHour: convertTimeTo4Digits(eOrder.hour),
             Comments: eOrder.text,
             driverName: eOrder.name,
             finishHour: ''
-
         }
         idNum++;
         return appOrder;
@@ -96,10 +93,11 @@ const ordersToOrderModel = (orders: EshbalOrder[]): OrderModel[] => {
 const searchAnotherTimeInText = (order: OrderModel): { anotherTime: string | null } => {
     const text = order.Comments;
     const results: { anotherTime: string | null } = {anotherTime: null}
-    const matchingTime = text.match(/\d{1,2}:\d\d/);
-    if (matchingTime && matchingTime[0]) {
-        matchingTime.forEach(t => {
-            const convertedTime = convertTimeTo4Digits(t);
+    const matchingTime = text.matchAll(/\d{1,2}:\d\d/g);
+    const matchingArray = Array.from(matchingTime)
+    if (matchingArray && matchingArray[0]) {
+        matchingArray.forEach(t => {
+            const convertedTime = convertTimeTo4Digits(t.toString());
             if (convertedTime !== order.startHour) {
                 results.anotherTime = convertedTime
             }
@@ -124,7 +122,7 @@ const searchLocationInText = (text: string): { locationFound: LocationModel | nu
 
     if (results.locationFound) {
         const locName = results.locationFound.Name;
-        const fromPrefixes = [translations.From];
+        const fromPrefixes = [translations.From, translations.fromLocationWithThe];
         const toPrefixes = [translations.toLocation, translations.toLocationLe];
         const tzamudPrefix = [translations.inLocation];
         if (fromPrefixes.some(pre => text.includes(pre + locName))) {

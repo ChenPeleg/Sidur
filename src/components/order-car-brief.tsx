@@ -7,6 +7,7 @@ import {translations} from '../services/translations';
 import {LanguageUtilites} from '../services/language-utilites';
 import {LocationModel} from '../models/Location.model';
 import {locations} from '../services/locations';
+import {DriveType} from '../models/DriveType.enum';
 
 
 //const TRL = translations;
@@ -55,7 +56,11 @@ const buildBriefText = (orderValues: OrderModel): string => {
     if (!isWithName) {
         return translations.NewOrder
     }
-    let briefText = orderValues?.startHour + ' ' + orderValues.driverName;
+    let timeText = orderValues?.startHour || '';
+    if (orderValues.TypeOfDrive === DriveType.Tsamud && orderValues?.startHour && orderValues?.finishHour) {
+        timeText = orderValues.finishHour + ' - ' + orderValues.startHour;
+    }
+    let briefText = timeText + ' ' + orderValues.driverName;
     if (orderValues.TypeOfDrive && orderValues.location) {
         const driveTimeLanguage = LanguageUtilites.getPrefixByDriveType(orderValues.TypeOfDrive);
         const location = allLocations.find(l => l.id === orderValues.location);

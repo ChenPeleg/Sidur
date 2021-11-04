@@ -65,6 +65,7 @@ export const translations = {
     'pickupTime': ' בשעה',
     'toLocation': ' אל  ',
     'fromLocation': 'מ',
+    'fromLocationWithThe': 'מה',
     'inLocation': 'ב',
     'toLocationLe': 'ל',
 
