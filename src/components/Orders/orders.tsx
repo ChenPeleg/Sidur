@@ -1,12 +1,11 @@
 import React from 'react'
-import {translations} from '../services/translations';
+import {translations} from '../../services/translations';
 import {Box} from '@mui/system';
 import {OrderCar} from './order-car';
 import {useDispatch, useSelector} from 'react-redux';
-import {OrderModel} from '../models/Order.model';
-
-import {ActionsTypes} from '../store/types.actions';
-import {AddButton} from './buttons/add-button';
+import {OrderModel} from '../../models/Order.model';
+import {ActionsTypes} from '../../store/types.actions';
+import {AddButton} from '../buttons/add-button';
 
 const TRL = translations;
 const useStyles = (() => ({

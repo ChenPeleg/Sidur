@@ -1,14 +1,14 @@
 import React, {useState} from 'react'
 
 import {OrderCarForm} from './order-car-form';
-import {translations} from '../services/translations';
+import {translations} from '../../services/translations';
 import {Box, Card, Collapse} from '@mui/material';
 import {OrderCarBrief} from './order-car-brief';
 import {SxProps} from '@mui/system';
 import {useDispatch} from 'react-redux';
-import {ActionsTypes} from '../store/types.actions';
-import {DeleteButton} from './buttons/delete-button';
-import {CloneButton} from './buttons/clone-button';
+import {ActionsTypes} from '../../store/types.actions';
+import {DeleteButton} from '../buttons/delete-button';
+import {CloneButton} from '../buttons/clone-button';
 
 
 type AppProps = {

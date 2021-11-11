@@ -1,22 +1,22 @@
 import React, {useState} from 'react';
 
 import {Field, Form} from 'react-final-form';
-import {MuiFormPropsModel} from '../models/mui-form-props.model';
+import {MuiFormPropsModel} from '../../models/mui-form-props.model';
 import {useDispatch, useSelector} from 'react-redux';
-import {HourPicker} from './Form/hour-picker';
-import {OrderFields, OrderModel} from '../models/Order.model';
-import {RenderTextField} from './Form/text-field';
-import {RenderSelectField} from './Form/select-field';
-import {DriveType} from '../models/DriveType.enum';
+import {HourPicker} from '../Form/hour-picker';
+import {OrderFields, OrderModel} from '../../models/Order.model';
+import {RenderTextField} from '../Form/text-field';
+import {RenderSelectField} from '../Form/select-field';
+import {DriveType} from '../../models/DriveType.enum';
 import {Box, SxProps, Theme} from '@mui/system';
 import {Button, MenuItem} from '@mui/material';
-import {translations} from '../services/translations';
-import {ActionsTypes} from '../store/types.actions';
-import {LocationModel} from '../models/Location.model';
-import {locations} from '../services/locations';
-import {LanguageUtilites} from '../services/language-utilites';
-import {RenderPassengerField} from './Form/passengers-field';
-import {RenderFlexibilityField} from './Form/flexibility-field';
+import {translations} from '../../services/translations';
+import {ActionsTypes} from '../../store/types.actions';
+import {LocationModel} from '../../models/Location.model';
+import {locations} from '../../services/locations';
+import {LanguageUtilites} from '../../services/language-utilites';
+import {RenderPassengerField} from '../Form/passengers-field';
+import {RenderFlexibilityField} from '../Form/flexibility-field';
 
 
 const TRL = translations;

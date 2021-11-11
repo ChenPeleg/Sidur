@@ -70,7 +70,7 @@ export const translations = {
     'fromLocationWithThe': 'מה',
     'inLocation': 'ב',
     'toLocationLe': 'ל',
-
+    'Sketch': 'סקיצה',
     'ActiveSidurim': 'סידורים פעילים'
 
 }

@@ -1,13 +1,13 @@
 import React from 'react';
 import {useSelector} from 'react-redux';
-import {OrderFields, OrderModel} from '../models/Order.model';
+import {OrderFields, OrderModel} from '../../models/Order.model';
 import {Box, SxProps, Theme} from '@mui/system';
 import {Typography} from '@mui/material';
-import {translations} from '../services/translations';
-import {LanguageUtilites} from '../services/language-utilites';
-import {LocationModel} from '../models/Location.model';
-import {locations} from '../services/locations';
-import {DriveType} from '../models/DriveType.enum';
+import {translations} from '../../services/translations';
+import {LanguageUtilites} from '../../services/language-utilites';
+import {LocationModel} from '../../models/Location.model';
+import {locations} from '../../services/locations';
+import {DriveType} from '../../models/DriveType.enum';
 
 
 //const TRL = translations;
