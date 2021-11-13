@@ -21,8 +21,6 @@ const useStyles = (() => ({
         padding: '10px',
         width: '50vw',
         borderRadius: '15px',
-
-
     },
     cardHeader: {
         paddingBottom: 0,

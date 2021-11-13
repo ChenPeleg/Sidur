@@ -10,7 +10,7 @@ export const MainLayout = () => {
     return (
 
         <main>
-            <Box sx={{margin: '20px'}} flexDirection="row" flexWrap="wrap" display="flex" alignItems="start" justifyContent="start">
+            <Box sx={{margin: '20px'}} flexDirection="row" display="flex" alignItems="start" justifyContent="start">
                 <Box flexDirection="column" flexWrap="wrap" display="flex" alignItems="start" justifyContent="start">
 
                     <Sketches/>

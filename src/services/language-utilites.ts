@@ -1,5 +1,8 @@
 import {DriveType} from '../models/DriveType.enum';
 import {translations} from './translations';
+import {OrderModel} from '../models/Order.model';
+import {LocationModel} from '../models/Location.model';
+import {DriveModel} from '../models/Sketch.model';
 
 interface driveHourPrefixes {
     timeStart: string,
@@ -43,6 +46,27 @@ export const LanguageUtilites = {
             location: translations.Where + ' '
         }
 
+    },
+    buildBriefText(orderValues: OrderModel | DriveModel, locations: LocationModel[]): string {
+        const isWithName = orderValues.driverName.trim() !== '';
+        if (!isWithName) {
+            return translations.NewOrder
+        }
+        let timeText = orderValues?.startHour || '';
+        if (orderValues.TypeOfDrive === DriveType.Tsamud && orderValues?.startHour && orderValues?.finishHour) {
+            timeText = orderValues.finishHour + ' - ' + orderValues.startHour;
+        }
+        let briefText = timeText + ' ' + orderValues.driverName;
+        if (orderValues.TypeOfDrive && orderValues.location) {
+            const driveTimeLanguage = LanguageUtilites.getPrefixByDriveType(orderValues.TypeOfDrive);
+            const location = locations.find(l => l.id === orderValues.location);
+            if (location) {
+                briefText += ' ' + driveTimeLanguage.location + location.Name
+            }
+
+        }
+
+        return briefText
     }
 
 }
