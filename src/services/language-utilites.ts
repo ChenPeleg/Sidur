@@ -47,16 +47,20 @@ export const LanguageUtilites = {
         }
 
     },
-    buildBriefText(orderValues: OrderModel | DriveModel, locations: LocationModel[]): string {
+    buildBriefText(orderValues: OrderModel | DriveModel, locations: LocationModel[]): { timeText: string, driverAndLocation: string } {
         const isWithName = orderValues.driverName.trim() !== '';
         if (!isWithName) {
-            return translations.NewOrder
+            return {
+                timeText: '',
+                driverAndLocation: translations.NewOrder
+            }
+
         }
         let timeText = orderValues?.startHour || '';
         if (orderValues.TypeOfDrive === DriveType.Tsamud && orderValues?.startHour && orderValues?.finishHour) {
-            timeText = orderValues.finishHour + ' - ' + orderValues.startHour;
+            timeText = orderValues.startHour + ' - ' + orderValues.finishHour;
         }
-        let briefText = timeText + ' ' + orderValues.driverName;
+        let briefText = orderValues.driverName;
         if (orderValues.TypeOfDrive && orderValues.location) {
             const driveTimeLanguage = LanguageUtilites.getPrefixByDriveType(orderValues.TypeOfDrive);
             const location = locations.find(l => l.id === orderValues.location);
@@ -66,7 +70,10 @@ export const LanguageUtilites = {
 
         }
 
-        return briefText
+        return {
+            timeText: timeText,
+            driverAndLocation: briefText
+        }
     }
 
 }

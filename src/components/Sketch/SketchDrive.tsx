@@ -14,6 +14,8 @@ interface sketchDriveProps {
 const getLocationFromId = (locationId: string): string | null => {
     return locations.find(v => v.id === locationId)?.Name || locationId
 }
+const timeText = (drive: DriveModel) => LanguageUtilites.buildBriefText(drive, locations).timeText;
+const driverAndLocation = (drive: DriveModel) => LanguageUtilites.buildBriefText(drive, locations).driverAndLocation;
 export const SketchDrive = (props: sketchDriveProps) => {
     const dispatch = useDispatch();
     const drive = props.drive
@@ -24,18 +26,40 @@ export const SketchDrive = (props: sketchDriveProps) => {
             <Card sx={{
                 m: '0.1em',
                 mb: '0.3em',
-                minHeight: '10vh'
+                minHeight: '10vh',
+                display: 'flex',
+                flexDirection: 'row',
+                alignItems: 'start',
+                justifyContent: 'start',
             }}>
-                <Box key={drive.id} id={'vehicle-drive-' + drive.id} sx={{
+                <Box id={'drive-description'} sx={{
                     display: 'flex',
                     flexDirection: 'row',
                     alignItems: 'start',
                     justifyContent: 'start',
-                    p: '0.2em'
+                    flexWrap: 'wrap',
+                    p: '0.2em',
+                    bgcolor: '#aadcff',
+                    flexShrink: 4,
+                    width: '20%'
+                    //flexShrink: '4'
+
+                }}>
+                    <Typography dir="ltr"
+                                variant={'subtitle1'}>{timeText(drive)}  </Typography>
+
+                </Box>
+                <Box id={'drive-description'} sx={{
+                    display: 'flex',
+                    flexDirection: 'row',
+                    alignItems: 'start',
+                    justifyContent: 'start',
+                    p: '0.2em',
+                    flexGrow: 4,
 
                 }}>
                     <Typography
-                        variant={'subtitle1'}>{LanguageUtilites.buildBriefText(drive, locations)}  </Typography>
+                        variant={'subtitle1'}>{driverAndLocation(drive)}  </Typography>
 
                 </Box>
             </Card>
