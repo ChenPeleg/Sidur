@@ -17,6 +17,7 @@ import {locations} from '../../services/locations';
 import {LanguageUtilites} from '../../services/language-utilites';
 import {RenderPassengerField} from '../Form/passengers-field';
 import {RenderFlexibilityField} from '../Form/flexibility-field';
+import {RenderSelectFieldAutoComplete} from '../Form/select-field-auto-complete';
 
 
 const TRL = translations;
@@ -127,14 +128,19 @@ const MaterialUiForm = (muiFormProps: MuiFormPropsModel) => {
 
                 <Box sx={selectFieldWrapper}>
 
-                    <Field name={orderFields.location} component={RenderSelectField} label={TRL.Where}>
-                        {allLocations.map((location: LocationModel) => (
-                            <MenuItem key={location.id}
-                                      value={location.id}>{driveTimelanguage.location}{location.Name}</MenuItem>))}     </Field> </Box>
+                    <Field name={orderFields.location} component={RenderSelectFieldAutoComplete} label={TRL.Where}
+                           selectOptions={allLocations.map((location: LocationModel) => ({
+                               ...location,
+                               name: driveTimelanguage.location + location.Name
+                           }))}>
+                        
+                        {/*{allLocations.map((location: LocationModel) => (*/}
+                        {/*    <MenuItem key={location.id}*/}
+                        {/*              value={location.id}>{driveTimelanguage.location}{location.Name}</MenuItem>))}     */}
+                    </Field> </Box>
                 <Box
                     sx={fieldWrapper}
                 >
-                    {/*TRL.Where*/}
                     <Field name={orderFields.startHour} component={HourPicker}
                            label={driveTimelanguage.timeStart}/>
                 </Box>

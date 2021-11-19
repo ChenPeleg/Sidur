@@ -48,7 +48,7 @@ export const RenderSelectField = (
 
                         input.onChange(event)
                     }}
-                //  value={input.value}
+
                     children={children}
                     {...custom}>
 
