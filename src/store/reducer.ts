@@ -44,7 +44,8 @@ const defaultInitialState: SidurStore = {
     orderIdInEdit: '1',
     dataHolderForCurrentOrderInEdit: startOrders[0] || null,
     deletedOrders: [],
-    defaultOrderValues: {...defaultOrderValues}
+    defaultOrderValues: {...defaultOrderValues},
+    displaySetting: {view: 'both'}
 }
 
 const stateFromLocalStorage: SidurStore | undefined = SaveLoadService.loadFromLocalStorage('chen').data?.savedStore
@@ -87,7 +88,8 @@ const reducer = (state: SidurStore = initialState, action: IAction) => {
         case ActionsTypes.DELETE_VEHICLE:
 
             return VehicleReducer[action.type](newState, action)
-
+        case ActionsTypes.CHANGE_VIEW:
+            break;
         default:
             break;
 

@@ -7,7 +7,7 @@ export type ActionType = string;
 
 export type IAction = {
     type: ActionsTypes
-    payload: any
+    payload: any | { value: any }
 }
 
 export interface SidurRecord {
@@ -17,6 +17,10 @@ export interface SidurRecord {
     vehicles: VehicleModel[];
     deletedOrders: OrderModel[];
     defaultOrderValues?: OrderModel,
+}
+
+export interface DisplaySettings {
+    view: 'orders' | 'sketch' | 'both'
 }
 
 export interface SidurStore {
@@ -29,6 +33,7 @@ export interface SidurStore {
     orderIdInEdit: null | string;
     dataHolderForCurrentOrderInEdit: OrderModel | null;
     defaultOrderValues: OrderModel,
+    displaySetting: DisplaySettings
 }
 
 export const defaultOrderValues: OrderModel = {

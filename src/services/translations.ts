@@ -1,8 +1,10 @@
 //interface
 
 export const translations = {
+    'All': 'הכל',
     'Sidur': 'סידור',
     'Order': 'הזמנה',
+    'Orders': 'הזמנות',
     'Nesia': 'נסיעה',
     'Name': 'שם',
     'Rename': 'שנה שם',

@@ -23,6 +23,7 @@ import {FileUploadType, SidurRecord, SidurStore} from '../../store/store.types';
 import {FileUploadDialog} from '../Dialogs/file-uplaod-dialog';
 import {SidurManagementDialog} from '../Dialogs/sidur-management-dialog';
 import {OrderImportDialog} from '../Dialogs/orders-import-dialog';
+import {ToggleButtons} from '../buttons/toggle-button-group';
 
 
 export const AppNavBar = () => {
@@ -219,6 +220,8 @@ export const AppNavBar = () => {
                     >
                         <Edit/>
                     </IconButton>
+                    
+                    <ToggleButtons></ToggleButtons>
 
                     <Box sx={{flexGrow: 1}}/>
                     <Box sx={{
