@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {ChangeEvent} from 'react';
 import {SxProps, Theme} from '@mui/system';
 import {Autocomplete, TextField} from '@mui/material';
 import {LocationModel} from '../../models/Location.model';
@@ -9,6 +9,9 @@ const useStyles = () => ({
         '& .MuiInputBase-input': {
             //  paddingLeft: '10px'
 
+        },
+        '& .MuiFormLabel-root': {
+            left: 'inherit'
         },
 
     }
@@ -31,13 +34,16 @@ export const RenderSelectFieldAutoComplete = (
     }: any,
 ) => {
     const classes = useStyles()
-    const options: Array<{ label: string, id: string }> = (custom.selectOptions || []).map((location: LocationModel) => ({
-        label: location.Name,
+    const options: Array<{ label: string, id: string }> = (custom.selectoptions || []).map((location: LocationModel) => ({
+        label: location.Name.replaceAll('  ', ' '),
         id: location.id
     }));
     const inputAsText = options.find(o => o.id === input.value)?.label || input.value
     const inputWithTextValue = {...input};
     inputWithTextValue.value = inputAsText;
+
+    const onTextFieldChange = (event: any, params: any) => {
+    }
 
     return (
         <>
@@ -46,7 +52,10 @@ export const RenderSelectFieldAutoComplete = (
             {/*<InputLabel sx={{...labelSx}} id="select-liable">{label}</InputLabel>*/}
             <Autocomplete
                 fullWidth
-
+                isOptionEqualToValue={(option: { label: string, id: string }, value: string) => {
+                    const thisLabel: string = option.label;
+                    return thisLabel?.replaceAll('  ', ' ') === value
+                }}
                 sx={{
                     direction: (theme: Theme) => theme.direction,
                     '& .MuiInputBase-input': {
@@ -55,20 +64,28 @@ export const RenderSelectFieldAutoComplete = (
                     width: '150px'
                 }}
                 disableClearable
+                openOnFocus
+                autoSelect
+                autoComplete
 
-                // labelId="select-liable"
+
                 {...inputWithTextValue}
-                onChange={(event: any, child: any) => {
 
-                    //  input.onChange(event)
-                }}
-                onSelect={(event: any, child: any) => {
+                onChange={(event: ChangeEvent, newValue: any) => {
+                    const clonedEvent: any = {
+                        ...event,
+                        target: {...event.target}
+                    };
+                    clonedEvent.target.value = newValue.id
+                    console.log(clonedEvent);
+                    input.onChange(clonedEvent)
 
-                    input.onChange(event)
                 }}
+
+
                 options={options}
 
-                renderInput={(params) => <TextField sx={{
+                renderInput={(params) => <TextField onChange={(event: ChangeEvent) => onTextFieldChange(event, params)} sx={{
                     ...
                         classes
                             .root

@@ -87,7 +87,7 @@ export const VehicleEditDialog = (props: VehicleEditDialogProps) => {
                             defaultValue={vehicleData?.vehicleName}
                             inputRef={nameValueRef}
                             onKeyUp={(event) => {
-                                if (event.key == 'Enter') {
+                                if (event.key === 'Enter') {
                                     handleCloseEdit()
                                 }
                             }}
@@ -105,7 +105,7 @@ export const VehicleEditDialog = (props: VehicleEditDialogProps) => {
                             defaultValue={vehicleData?.Comments}
                             inputRef={commentsValueRef}
                             onKeyUp={(event) => {
-                                if (event.key == 'Enter') {
+                                if (event.key === 'Enter') {
                                     handleCloseEdit()
                                 }
                             }}

@@ -129,14 +129,11 @@ const MaterialUiForm = (muiFormProps: MuiFormPropsModel) => {
                 <Box sx={selectFieldWrapper}>
 
                     <Field name={orderFields.location} component={RenderSelectFieldAutoComplete} label={TRL.Where}
-                           selectOptions={allLocations.map((location: LocationModel) => ({
+                           selectoptions={allLocations.map((location: LocationModel) => ({
                                ...location,
                                Name: driveTimelanguage.location + location.Name
                            }))}>
 
-                        {/*{allLocations.map((location: LocationModel) => (*/}
-                        {/*    <MenuItem key={location.id}*/}
-                        {/*              value={location.id}>{driveTimelanguage.location}{location.Name}</MenuItem>))}     */}
                     </Field> </Box>
                 <Box
                     sx={fieldWrapper}

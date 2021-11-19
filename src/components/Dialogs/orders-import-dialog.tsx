@@ -94,7 +94,7 @@ export const OrderImportDialog = (props: FileUploadProps) => {
                         variant="standard"
                         inputRef={valueRef}
                         onKeyUp={(event) => {
-                            if (event.key == 'Enter') {
+                            if (event.key === 'Enter') {
                                 handleCloseCancel()
                             }
                         }}

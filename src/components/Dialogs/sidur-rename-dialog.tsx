@@ -46,7 +46,7 @@ export const SidurRenameDialog = (props: SidurRenameProps) => {
                         defaultValue={selectedValue}
                         inputRef={valueRef}
                         onKeyUp={(event) => {
-                            if (event.key == 'Enter') {
+                            if (event.key === 'Enter') {
                                 handleCloseRename()
                             }
                         }}
