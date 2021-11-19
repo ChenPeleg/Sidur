@@ -40,7 +40,7 @@ export const themeMain: Theme = createTheme({
             main: '#556cd6',
         },
         secondary: {
-            main: '#19857b',
+            main: '#9e18be',
         },
         error: {
             main: red.A400,

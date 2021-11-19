@@ -15,14 +15,15 @@ export const ToggleButtons = () => {
 
     return (
         <ToggleButtonGroup
-            color="primary"
             value={alignment}
             exclusive
+            sx={{color: 'white'}}
+
             onChange={handleChange}
         >
-            <ToggleButton value={'orders'}>{translations.Orders}</ToggleButton>
-            <ToggleButton value={'sketches'}>{translations.Sketch}</ToggleButton>
-            <ToggleButton value={'all'}>{translations.All}</ToggleButton>
+            <ToggleButton sx={{color: 'white'}} value={'orders'}> {translations.Orders} </ToggleButton>
+            <ToggleButton sx={{color: 'white'}} value={'sketches'}>{translations.Sketch}</ToggleButton>
+            <ToggleButton sx={{color: 'white'}} value={'all'}>{translations.All}</ToggleButton>
         </ToggleButtonGroup>
     );
 }
