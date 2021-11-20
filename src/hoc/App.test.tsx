@@ -1,9 +1,15 @@
 import React from 'react';
-import { render, screen } from '@testing-library/react';
-import App from './App';
+import {Provider} from 'react-redux';
 
-test('renders learn react link', () => {
-  render(<App />);
-  const linkElement = screen.getByText('סידור');
-  expect(linkElement).toBeInTheDocument();
+
+// @ts-ignore
+const ReduxProvider = ({
+                           children,
+                           reduxStore
+                       }: any) => (
+    <Provider store={reduxStore}>{children}</Provider>
+)
+
+test('renders learn react link', async () => {
+
 });
