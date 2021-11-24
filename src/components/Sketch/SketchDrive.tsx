@@ -18,8 +18,8 @@ const timeText = (drive: DriveModel) => LanguageUtilites.buildBriefText(drive, l
 const driverAndLocation = (drive: DriveModel) => LanguageUtilites.buildBriefText(drive, locations).driverAndLocation;
 export const SketchDrive = (props: sketchDriveProps) => {
     const dispatch = useDispatch();
-    const drive = props.drive
-
+    const drive = props.drive;
+    
 
     return (
         <Box>
@@ -32,7 +32,7 @@ export const SketchDrive = (props: sketchDriveProps) => {
                 alignItems: 'start',
                 justifyContent: 'start',
             }}>
-                <Box id={'drive-description'} sx={{
+                <Box id={'drive-hour'} sx={{
                     display: 'flex',
                     flexDirection: 'row',
                     alignItems: 'start',
@@ -62,6 +62,10 @@ export const SketchDrive = (props: sketchDriveProps) => {
                     flexGrow: 4,
 
                 }}>
+                    <Box sx={{
+                        width: '5px',
+                        height: '10px'
+                    }}/>
                     <Typography
                         variant={'subtitle1'}>{driverAndLocation(drive)}  </Typography>
 

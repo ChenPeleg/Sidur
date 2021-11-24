@@ -220,8 +220,11 @@ export const AppNavBar = () => {
                     >
                         <Edit/>
                     </IconButton>
-                    
-                    <ToggleButtons></ToggleButtons>
+                    <Box sx={{
+                        width: '20px',
+                        height: '5px'
+                    }}/>
+                    <ToggleButtons/>
 
                     <Box sx={{flexGrow: 1}}/>
                     <Box sx={{

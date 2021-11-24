@@ -7,6 +7,7 @@ import {ImportExportReducer} from './import-export.reducer';
 import {VehicleModel} from '../models/Vehicle.model';
 import {VehicleReducer} from './vehicle.reducer';
 import {ActionsTypes} from './types.actions';
+import {DisplayReducer} from './display.reducer';
 
 
 const startOrders: OrderModel[] = ['חן', 'אבי', 'רוני'].map((name: string, index: number): OrderModel => ({
@@ -89,6 +90,7 @@ const reducer = (state: SidurStore = initialState, action: IAction) => {
 
             return VehicleReducer[action.type](newState, action)
         case ActionsTypes.CHANGE_VIEW:
+            return DisplayReducer[action.type](newState, action)
             break;
         default:
             break;
