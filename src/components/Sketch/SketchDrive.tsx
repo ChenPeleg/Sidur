@@ -24,7 +24,7 @@ export const SketchDrive = (props: sketchDriveProps) => {
     return (
         <Box>
             <Card sx={{
-                m: '0.1em',
+                m: '0.2em',
                 mb: '0.3em',
                 minHeight: '10vh',
                 display: 'flex',
@@ -39,6 +39,8 @@ export const SketchDrive = (props: sketchDriveProps) => {
                     justifyContent: 'start',
                     flexWrap: 'wrap',
                     p: '0.2em',
+                    pl: '0.4em',
+                    pr: '0.4em',
                     bgcolor: '#aadcff',
                     flexShrink: 4,
                     width: '20%'
@@ -55,6 +57,8 @@ export const SketchDrive = (props: sketchDriveProps) => {
                     alignItems: 'start',
                     justifyContent: 'start',
                     p: '0.2em',
+                    pl: '0.4em',
+                    pr: '0.4em',
                     flexGrow: 4,
 
                 }}>

@@ -6,9 +6,16 @@ import {LocationModel} from '../../models/Location.model';
 const useStyles = () => ({
     root: {
         direction: (theme: Theme) => theme.direction,
-        '& .MuiInputBase-input': {
-            //  paddingLeft: '10px'
+        '& .MuiButtonBase-root': {
+            position: 'absolute',
+            left: '2px'
+            //  display: 'inline'
+            //alignSelf: 'flex-end'
 
+        },
+        '& .MuiAutocomplete-endAdornment': {
+            position: 'absolute',
+            left: '2px',
         },
         '& .MuiFormLabel-root': {
             left: 'inherit'

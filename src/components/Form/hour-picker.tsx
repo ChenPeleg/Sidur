@@ -26,6 +26,7 @@ export const HourPicker = ({
     const inActive: boolean = custom?.custom?.inActive || false;
     const sxExtra: SxProps = {
         visibility: inActive ? 'hidden' : 'visible',
+        //display: inActive ? 'none' : 'initial'
         //visibility: 'hidden'
     };
     return (
