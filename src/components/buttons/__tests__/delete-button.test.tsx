@@ -9,18 +9,18 @@ const props: DeleteButtonProps = {
     sx: null,
     deleteClickHandler: clickMock
 }
-const addButton = shallow(<DeleteButton deleteClickHandler={props.deleteClickHandler} sx={null}/>);
+const component = shallow(<DeleteButton deleteClickHandler={props.deleteClickHandler} sx={null}/>);
 describe('Delete Button', () => {
 
 
     it('contains only one button', () => {
-        expect(addButton.children()).toHaveLength(1);
+        expect(component.children()).toHaveLength(1);
     });
     it('only have delete icon', () => {
-        expect(addButton.html()).toContain('DeleteIcon');
+        expect(component.html()).toContain('DeleteIcon');
     });
     it('click triggers click handler', () => {
-        addButton.find('#delete-button').simulate('click');
+        component.find('#delete-button').simulate('click');
         expect(clickMock).toHaveBeenCalled()
     });
 

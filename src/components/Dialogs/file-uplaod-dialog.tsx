@@ -55,9 +55,7 @@ export const FileUploadDialog = (props: FileUploadProps) => {
     const handleCloseCancel = () => {
         onClose(null);
     };
-    // const handleCloseUploaded = () => {
-    //     onClose(valueRef.current.value || selectedValue);
-    // };
+
 
     const onFileLoadChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const files = event.target?.files;
@@ -111,7 +109,7 @@ export const FileUploadDialog = (props: FileUploadProps) => {
                                                                                            value={typeOfUpload.id}> &nbsp;&nbsp;{typeOfUpload.name} &nbsp;&nbsp;</MenuItem>)}
                         </Select>
 
-                        <Button sx={{m: '15px'}}
+                        <Button id={'choose-file-button'} sx={{m: '15px'}}
                                 variant="contained"
                                 component="label"
                         >
@@ -126,7 +124,7 @@ export const FileUploadDialog = (props: FileUploadProps) => {
                     </Box>
                 </DialogContent>
                 <DialogActions>
-                    <Button onClick={handleCloseCancel}>{translations.Cancel}</Button>
+                    <Button id={'file-upload-cancel-button'} onClick={handleCloseCancel}>{translations.Cancel}</Button>
                     {/*<Button onClick={handleCloseUploaded}>{translations.Approve}</Button>*/}
                 </DialogActions>
             </Dialog>

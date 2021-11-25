@@ -11,13 +11,13 @@ const props: AddButtonProps = {
     addClickHandler: clickMock
 }
 const addButton = shallow(<AddButton addClickHandler={props.addClickHandler}/>);
-describe('basic app rendering', () => {
+describe('Add Button', () => {
 
 
     it('only one button', () => {
         expect(addButton.children()).toHaveLength(1);
     });
-    it('only have text to add', () => {
+    it('only have text  AddOrder', () => {
         // expect(addButton.children()).toHaveLength(1);
         expect(addButton.text().includes(translations.AddOrder)).toBe(true);
     });
