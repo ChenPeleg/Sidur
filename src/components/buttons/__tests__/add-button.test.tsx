@@ -1,8 +1,8 @@
 import React from 'react';
-import '../../setupTests'
+import '../../../setupTests'
 import {shallow} from 'enzyme';
-import {AddButton, AddButtonProps} from './add-button';
-import {translations} from '../../services/translations';
+import {AddButton, AddButtonProps} from '../add-button';
+import {translations} from '../../../services/translations';
 
 
 const clickMock = jest.fn()
