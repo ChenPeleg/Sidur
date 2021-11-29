@@ -26,8 +26,7 @@ describe('File Upload Dialog', () => {
         expect(_baseElement.innerHTML.toString()).toContain('MuiDialog');
     });
     it('only have text to add', async () => {
-        expect(_baseElement.querySelector('#choose-file-button')).toBeTruthy();
-        expect(component.find('#choose-file-button')).toBeTruthy();
+        expect(component.find('#choose-file-button')).toHaveLength(1);
     });
     it('closes dialog on press cancel', () => {
         component.find('#file-upload-cancel-button').simulate('click')

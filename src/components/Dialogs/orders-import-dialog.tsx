@@ -100,7 +100,8 @@ export const OrderImportDialog = (props: FileUploadProps) => {
                     />
                 </DialogContent>
                 <DialogActions>
-                    <Button id={'orders-import-cancel-button'} onClick={handleCloseCancel}>{translations.Finish}</Button>
+                    <Button id={'orders-import-cancel-button'}
+                            onClick={handleCloseCancel}>{translations.Finish}</Button>
                     <Button id={'orders-import-approve-button'} onClick={handleCloseImportOrder}>{translations.Approve}</Button>
                 </DialogActions>
             </Dialog>

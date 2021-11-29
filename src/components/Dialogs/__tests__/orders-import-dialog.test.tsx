@@ -1,4 +1,4 @@
-import {shallow} from 'enzyme';
+import {mount} from 'enzyme';
 
 import React from 'react';
 import {render} from '@testing-library/react';
@@ -20,7 +20,8 @@ describe('Orders import Dialog', () => {
         const mockStore = configureStore(middlewares);
         const store = mockStore({});
         fileDialog = (<Provider store={store}><OrderImportDialog open={true} key={'1'} onClose={onClose}/> </Provider>);
-        component = shallow(fileDialog);
+        component = mount(fileDialog);
+
         const {baseElement} = render(fileDialog);
         _baseElement = baseElement
 
@@ -31,15 +32,16 @@ describe('Orders import Dialog', () => {
         expect(component).toBeTruthy();
         expect(_baseElement.innerHTML.toString()).toContain('MuiDialog');
     });
-    it('only have text to add', async () => {
-        expect(_baseElement.querySelector('#import-orders-dialog-text-field')).toBeTruthy();
-        expect(component.find('#import-orders-dialog-text-field')).toBeTruthy();
+    it('renders one text-field', async () => {
+        // expect(_baseElement.querySelector('#import-orders-dialog-text-field')).toBeTruthy();
+        expect(component.find('#import-orders-dialog-text-field').length).toBeGreaterThan(0);
     });
     it('closes dialog on press cancel', async () => {
         //_baseElement.querySelector('#import-orders-dialog-text-field').simulate('click')
 
-        component.find('button').simulate('click')
-        expect(onClose).toHaveBeenCalledWith(null);
+        component.find('#orders-import-cancel-button').first().simulate('click');
+        expect(component.find('#orders-import-cancel-button').length).toBeGreaterThan(0);
+        expect(onClose).toHaveBeenCalledWith();
 
     })
     it('click triggers click handler', async () => {
