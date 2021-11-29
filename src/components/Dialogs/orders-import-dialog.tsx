@@ -80,29 +80,28 @@ export const OrderImportDialog = (props: FileUploadProps) => {
 
                 <Typography/>
                 <DialogContent>
-                    <TextField
-                        autoFocus
-                        sx={{
-                            width:
-                                '200px',
-                        }}
-                        id="name"
-                        label={translations.PastHere}
-                        type="text"
-                        fullWidth
-                        multiline={true}
-                        variant="standard"
-                        inputRef={valueRef}
-                        onKeyUp={(event) => {
-                            if (event.key === 'Enter') {
-                                handleCloseCancel()
-                            }
-                        }}
+                    <TextField id={'import-orders-dialog-text-field'}
+                               autoFocus
+                               sx={{
+                                   width:
+                                       '200px',
+                               }}
+                               label={translations.PastHere}
+                               type="text"
+                               fullWidth
+                               multiline={true}
+                               variant="standard"
+                               inputRef={valueRef}
+                               onKeyUp={(event) => {
+                                   if (event.key === 'Enter') {
+                                       handleCloseCancel()
+                                   }
+                               }}
                     />
                 </DialogContent>
                 <DialogActions>
-                    <Button onClick={handleCloseCancel}>{translations.Finish}</Button>
-                    <Button onClick={handleCloseImportOrder}>{translations.Approve}</Button>
+                    <Button id={'orders-import-cancel-button'} onClick={handleCloseCancel}>{translations.Finish}</Button>
+                    <Button id={'orders-import-approve-button'} onClick={handleCloseImportOrder}>{translations.Approve}</Button>
                 </DialogActions>
             </Dialog>
         </div>

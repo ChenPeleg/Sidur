@@ -30,6 +30,11 @@
     "typescript": "^4.4.3",
     "web-vitals": "^1.1.2"
   },
+  "jest": {
+    "watchPathIgnorePatterns": [
+      "<rootDir>/src/__tests__"
+    ]
+  },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
