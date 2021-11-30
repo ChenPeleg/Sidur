@@ -7,7 +7,6 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
 import {translations} from '../../services/translations';
 import {useDispatch} from 'react-redux';
-import {SidurManagementActionType} from '../../models/SidurMenuClickActionType.enum';
 import {ActionsTypes} from '../../store/types.actions';
 import TextField from '@mui/material/TextField';
 import {Box, Typography} from '@mui/material';
@@ -30,7 +29,10 @@ export const OrderImportDialog = (props: FileUploadProps) => {
         onClose();
     };
     const handleCloseImportOrder = () => {
+
+        
         if (valueRef.current.value && valueRef.current.value.length) {
+
             dispatch({
                 type: ActionsTypes.IMPORT_ORDERS_AS_TEXT,
                 payload: {importedOrders: valueRef.current.value}
@@ -39,35 +41,6 @@ export const OrderImportDialog = (props: FileUploadProps) => {
         onClose();
 
 
-    }
-    const handleActionClick = (event: any, props: { action: SidurManagementActionType, sidurId: string }) => {
-        switch (props.action) {
-            case SidurManagementActionType.DeleteForever:
-                dispatch({
-                    type: ActionsTypes.DELETE_FOREVER_SIDUR,
-                    payload: {id: props.sidurId}
-                })
-                break;
-            case SidurManagementActionType.MoveToArchive:
-                dispatch({
-                    type: ActionsTypes.ARCHIVE_SIDUR,
-                    payload: {id: props.sidurId}
-                })
-                break;
-            case SidurManagementActionType.MoveToTrash:
-                dispatch({
-                    type: ActionsTypes.DELETE_SIDUR,
-                    payload: {id: props.sidurId}
-                })
-                break;
-
-            case SidurManagementActionType.MoveToActive:
-                dispatch({
-                    type: ActionsTypes.MOVE_TO_ACTIVE_SIDUR,
-                    payload: {id: props.sidurId}
-                })
-                break;
-        }
     }
 
     return (
@@ -91,6 +64,7 @@ export const OrderImportDialog = (props: FileUploadProps) => {
                                fullWidth
                                multiline={true}
                                variant="standard"
+                        // defaultValue={'acb123'}
                                inputRef={valueRef}
                                onKeyUp={(event) => {
                                    if (event.key === 'Enter') {
