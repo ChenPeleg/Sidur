@@ -64,11 +64,7 @@ describe('Orders import Dialog', () => {
 
 
     })
-    it('click triggers click handler', async () => {
 
-        // component.find('#add-order-button').simulate('click');
-        //  expect(onClose).toHaveBeenCalled()
-    });
 
 })
 

@@ -30,7 +30,7 @@ export const OrderImportDialog = (props: FileUploadProps) => {
     };
     const handleCloseImportOrder = () => {
 
-        
+
         if (valueRef.current.value && valueRef.current.value.length) {
 
             dispatch({
@@ -64,7 +64,6 @@ export const OrderImportDialog = (props: FileUploadProps) => {
                                fullWidth
                                multiline={true}
                                variant="standard"
-                        // defaultValue={'acb123'}
                                inputRef={valueRef}
                                onKeyUp={(event) => {
                                    if (event.key === 'Enter') {

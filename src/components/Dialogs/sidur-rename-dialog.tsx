@@ -38,7 +38,7 @@ export const SidurRenameDialog = (props: SidurRenameProps) => {
                     <TextField
                         autoFocus
                         margin="dense"
-                        id="name"
+                        id={'sidur-rename-dialog-text-field'}
                         label={translations.NewName}
                         type="text"
                         fullWidth
@@ -53,8 +53,8 @@ export const SidurRenameDialog = (props: SidurRenameProps) => {
                     />
                 </DialogContent>
                 <DialogActions>
-                    <Button onClick={handleCloseCancel}>{translations.Cancel}</Button>
-                    <Button onClick={handleCloseRename}>{translations.Approve}</Button>
+                    <Button id={'sidur-rename-cancel-button'} onClick={handleCloseCancel}>{translations.Cancel}</Button>
+                    <Button id={'sidur-rename-approve-button'} onClick={handleCloseRename}>{translations.Approve}</Button>
                 </DialogActions>
             </Dialog>
         </div>
