@@ -79,7 +79,7 @@ export const VehicleEditDialog = (props: VehicleEditDialogProps) => {
                         <TextField
                             autoFocus
                             margin="dense"
-                            id="name"
+                            id="vehicle-rename-dialog-text-field"
                             label={translations.NewName}
                             type="text"
 
@@ -97,7 +97,7 @@ export const VehicleEditDialog = (props: VehicleEditDialogProps) => {
                         <TextField
 
                             margin="dense"
-                            id="name"
+                            id="vehicle-comments-dialog-text-field"
                             label={translations.Comments}
                             type="text"
                             fullWidth
@@ -153,8 +153,8 @@ export const VehicleEditDialog = (props: VehicleEditDialogProps) => {
                     </Box>
                 </DialogContent>
                 <DialogActions>
-                    <Button onClick={handleCloseCancel}>{translations.Cancel}</Button>
-                    <Button onClick={handleCloseEdit}>{translations.Approve}</Button>
+                    <Button id={'vehicle-edit-cancel-button'} onClick={handleCloseCancel}>{translations.Cancel}</Button>
+                    <Button id={'vehicle-edit-approve-button'} onClick={handleCloseEdit}>{translations.Approve}</Button>
                 </DialogActions>
             </Dialog>
         </div>
