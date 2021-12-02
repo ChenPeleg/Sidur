@@ -7,6 +7,7 @@ import {Utilities} from '../../services/utilities';
 
 
 const sliderSx = {
+    
     direction: (theme: Theme) => theme.direction,
 
     '& .MuiSlider-thumb': {
