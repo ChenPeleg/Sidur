@@ -1,5 +1,5 @@
 export enum ActionsTypes {
-
+    /* Orders */
     UPDATE_ORDER = 'UPDATE_ORDER',
     UPDATE_ORDER_IN_EDIT = 'UPDATE_ORDER_IN_EDIT',
     DELETE_ORDER = 'DELETE_ORDER',
@@ -8,6 +8,7 @@ export enum ActionsTypes {
     CLICKED_ORDER = 'CLICKED_ORDER',
     ADD_NEW_ORDER = 'ADD_NEW_ORDER',
 
+    /* Import - Export */
     OPEN_MY_PROFILE = 'OPEN_MY_PROFILE',
     EXPORT_ALL = 'EXPORT_ALL',
     IMPORT_ALL = 'IMPORT_ALL',
@@ -15,6 +16,7 @@ export enum ActionsTypes {
     IMPORT_ORDERS_AS_TEXT = 'IMPORT_ORDERS_AS_TEXT',
     IMPORT_DIALOG_OPEN = 'IMPORT_DIALOG_OPEN',
 
+    /* Sidur */
     DELETE_SIDUR = 'DELETE_SIDUR',
     DELETE_FOREVER_SIDUR = 'DELETE_FOREVER_SIDUR',
     RENAME_SIDUR = 'RENAME_SIDUR',
@@ -24,10 +26,15 @@ export enum ActionsTypes {
     ARCHIVE_SIDUR = 'ARCHIVE_SIDUR',
     MOVE_TO_ACTIVE_SIDUR = 'MOVE_TO_ACTIVE_SIDUR',
 
+
+    /* Vehicle */
     UPDATE_VEHICLE = 'UPDATE_VEHICLE',
     NEW_VEHICLE = 'NEW_VEHICLE',
     DELETE_VEHICLE = 'DELETE_VEHICLE',
-    CHANGE_VIEW = 'CHANGE_VIEW'
+    CHANGE_VIEW = 'CHANGE_VIEW',
+
+    /* Sketch */
+    NEW_SKETCH = 'NEW_SKETCH'
 
 }
 

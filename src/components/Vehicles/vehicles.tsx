@@ -1,14 +1,14 @@
 import React, {useState} from 'react'
-import {translations} from '../services/translations';
+import {translations} from '../../services/translations';
 import {SxProps} from '@mui/system';
 import {useDispatch, useSelector} from 'react-redux';
-import {ActionsTypes} from '../store/types.actions';
-import {VehicleModel} from '../models/Vehicle.model';
+import {ActionsTypes} from '../../store/types.actions';
+import {VehicleModel} from '../../models/Vehicle.model';
 import {Add, TimeToLeave} from '@mui/icons-material';
 import {Badge, Box, Button} from '@mui/material';
-import {VehicleEditDialog} from './Dialogs/vehicle-edit-dialog';
-import {defaultVehicleValues} from '../store/store.types';
-import {ImportOrdersFromText} from '../services/import-orders-from-text';
+import {VehicleEditDialog} from '../Dialogs/vehicle-edit-dialog';
+import {defaultVehicleValues} from '../../store/store.types';
+import {ImportOrdersFromText} from '../../services/import-orders-from-text';
 
 
 export const Vehicles = () => {
@@ -64,7 +64,10 @@ export const Vehicles = () => {
     };
     const vehicleClickHandler = (event: any, vehicleId: string) => {
         const foundVehicle = vehicles.find(v => v.id === vehicleId);
-        const vehicle: any = vehicleId !== '0' && foundVehicle ? foundVehicle : defaultVehicleValues;
+        const vehicle: any = vehicleId !== '0' && foundVehicle ? foundVehicle : {
+            ...defaultVehicleValues,
+            id: '0'
+        };
         setVehicleClicked(vehicle);
         setVehicleEditOpen(true)
 

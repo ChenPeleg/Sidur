@@ -2,13 +2,14 @@ import React from 'react'
 import {Box} from '@mui/system';
 import {useDispatch, useSelector} from 'react-redux';
 import {OrderModel} from '../../models/Order.model';
-import {Divider, Typography} from '@mui/material';
+import {Button, Divider, Typography} from '@mui/material';
 import {translations} from '../../services/translations';
 import {DriveModel, SketchModel, VehicleScheduleModel} from '../../models/Sketch.model';
 import {Utilities} from '../../services/utilities';
 import {VehicleModel} from '../../models/Vehicle.model';
 import {locations} from '../../services/locations';
 import {SketchDrive} from './SketchDrive';
+import {ActionsTypes} from '../../store/types.actions';
 
 
 export const Sketches = () => {
@@ -22,11 +23,21 @@ export const Sketches = () => {
     const getLocationFromId = (locationId: string): string | null => {
         return locations.find(v => v.id === locationId)?.Name || locationId
     }
+    const handleCreateSketch = () => {
+        dispatch({
+            type: ActionsTypes.NEW_SKETCH,
+            payload: {
+                value: null,
+            }
+        })
+    }
     const defaultSketch: SketchModel = Utilities.defaultSketchMMock();
 
 
     return (
         <Box>
+            <Button variant={'contained'} id={'sketches-create-sketch'} onClick={handleCreateSketch}>{translations.CreateSketch}</Button>
+
             <Typography variant={'h5'}>{translations.Sketch} {defaultSketch.name}</Typography>
             <Box id={'sketch-wrapper-row'} sx={{
                 display: 'flex',

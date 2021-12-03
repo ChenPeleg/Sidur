@@ -46,6 +46,7 @@ export const translations = {
     'Comments': 'הערות ',
     'Approve': 'אישור',
     'Cancel': 'ביטול',
+    'CreateSketch': 'צור סקיצה חדשה',
     'NewOrder': 'הזמנה חדשה',
     'CopyOf': '(עותק)',
     'Trash': 'אשפה',
