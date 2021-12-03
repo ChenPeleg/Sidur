@@ -23,13 +23,17 @@ export const StoreUtils = {
     UpdateSidurCollectionWithCurrenSidur: (state: SidurStore): SidurRecord[] => {
         const newState = {...state}
         const sidurId = newState.sidurId;
-        const updatedOrders = newState.orders.map(o => ({...o}))
-        const updatedVehicles = newState.vehicles.map(o => ({...o}))
+        const updatedOrders = newState.orders.map(o => ({...o}));
+        const updatedVehicles = newState.vehicles.map(o => ({...o}));
+        const updatedDeletedOrders = newState.deletedOrders.map(o => ({...o}));
+        const updatedSketches = newState.sketches.map(o => ({...o}))
         newState.sidurCollection = newState.sidurCollection.map((sidur: SidurRecord) => {
             if (sidur.id === sidurId) {
                 const updatedSidur = {...sidur};
                 updatedSidur.orders = updatedOrders;
                 updatedSidur.vehicles = updatedVehicles;
+                updatedSidur.sketches = updatedSketches;
+                updatedSidur.deletedOrders = updatedDeletedOrders;
                 return updatedSidur
             } else {
                 return sidur
