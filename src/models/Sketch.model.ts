@@ -29,5 +29,6 @@ export interface SketchModel {
     id: string,
     name: string,
     vehicleSchedules: VehicleScheduleModel[],
-    Comments: string
+    Comments: string,
+    suggestions?: any,
 }

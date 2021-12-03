@@ -30,13 +30,15 @@ const defaultInitialState: SidurStore = {
         Name: 'סידור יום שני',
         orders: [],
         deletedOrders: [],
-        vehicles: [defaultVehicleValues]
+        vehicles: [defaultVehicleValues],
+        sketches: [],
     }, {
         id: '2',
         Name: 'סידור גנים',
         orders: [],
         deletedOrders: [],
-        vehicles: [defaultVehicleValues]
+        vehicles: [defaultVehicleValues],
+        sketches: [],
     }
 
     ],
@@ -47,6 +49,7 @@ const defaultInitialState: SidurStore = {
     dataHolderForCurrentOrderInEdit: startOrders[0] || null,
     deletedOrders: [],
     defaultOrderValues: {...defaultOrderValues},
+    sketches: [],
     displaySetting: {view: 'both'}
 }
 

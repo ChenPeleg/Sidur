@@ -21,6 +21,7 @@ const DefaultSidur: SidurRecord = {
     orders: [],
     deletedOrders: [],
     vehicles: [defaultVehicleValues],
+    sketches: []
 
 }
 
@@ -42,6 +43,9 @@ export const SidurReducer: Record<SidurReducerFunctions, (state: SidurStore, act
                     ...o
                 }));
                 NewPreviousSidurObj.deletedOrders = newState.deletedOrders.map(o => ({
+                    ...o
+                }));
+                NewPreviousSidurObj.sketches = newState.sketches.map(o => ({
                     ...o
                 }));
                 NewPreviousSidurObj.vehicles = newState.vehicles.map(o => ({
@@ -166,7 +170,8 @@ export const SidurReducer: Record<SidurReducerFunctions, (state: SidurStore, act
             orders: [],
             deletedOrders: [],
             vehicles: [defaultVehicleValues],
-            defaultOrderValues: newState.defaultOrderValues
+            defaultOrderValues: newState.defaultOrderValues,
+            sketches: []
         }
         newState.sidurCollection = newState.sidurCollection.map(c => c);
         newState.sidurCollection.push(newSidur);
@@ -223,6 +228,7 @@ const setChosenSidur = (state: SidurStore, chosenSidur: SidurRecord): SidurStore
     newState.orders = chosenSidur?.orders.map(o => ({...o})) || []
     newState.vehicles = chosenSidur?.vehicles.map(o => ({...o})) || []
     newState.deletedOrders = chosenSidur?.deletedOrders?.map(o => ({...o})) || [];
+    newState.sketches = chosenSidur?.sketches?.map(o => ({...o})) || [];
     newState.orderIdInEdit = null;
     newState.dataHolderForCurrentOrderInEdit = null;
     return newState

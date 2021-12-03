@@ -16,6 +16,7 @@ export const StoreUtils = {
         const clonedSidur = {...sidur}
         clonedSidur.orders = clonedSidur.orders.map(o => ({...o}));
         clonedSidur.deletedOrders = clonedSidur.deletedOrders.map(o => ({...o}));
+        clonedSidur.sketches = clonedSidur.sketches.map(o => ({...o}));
         clonedSidur.defaultOrderValues = clonedSidur.defaultOrderValues ? {...clonedSidur.defaultOrderValues} : undefined
         return clonedSidur
     },

@@ -2,6 +2,7 @@ import {ActionsTypes} from './types.actions'
 import {OrderModel} from '../models/Order.model';
 import {DriveType} from '../models/DriveType.enum';
 import {VehicleModel} from '../models/Vehicle.model';
+import {SketchModel} from '../models/Sketch.model';
 
 export type ActionType = string;
 
@@ -17,6 +18,7 @@ export interface SidurRecord {
     vehicles: VehicleModel[];
     deletedOrders: OrderModel[];
     defaultOrderValues?: OrderModel,
+    sketches: SketchModel[],
 }
 
 export interface DisplaySettings {
@@ -33,7 +35,9 @@ export interface SidurStore {
     orderIdInEdit: null | string;
     dataHolderForCurrentOrderInEdit: OrderModel | null;
     defaultOrderValues: OrderModel,
-    displaySetting: DisplaySettings
+    displaySetting: DisplaySettings,
+    sketches: SketchModel[]
+
 }
 
 export const defaultOrderValues: OrderModel = {
