@@ -1,13 +1,13 @@
 import {OrderModel} from '../models/Order.model';
 import {OrderMetaDataModel} from './models/sidurBuilder.models';
 import {SidurBuilderTools} from './sidurBuilder.tools';
-import {LocationModel} from '../models/Location.model';
 import {DriveType} from '../models/DriveType.enum';
-import {CloneUltil, Utilities} from '../services/utilities';
+import {CloneUtil} from '../services/utilities';
+import {locations} from '../services/locations';
 
 export const SidurBuilderBuildOrdersMetaData = (orders: OrderModel[], buildSettings: any = null): OrderMetaDataModel[] => {
-    const clonedOrders: OrderModel[] = orders.map((o: OrderModel) => Utilities.deepCloneByType([o, 'OrderModel'])) as OrderModel[];
-    const forstOrder: OrderModel = CloneUltil.deep('OrderModel', orders[0])
+    const clonedOrders: OrderModel[] = orders.map((o: OrderModel) => CloneUtil.deep(o, 'OrderModel'));
+
     const ordersMeta: OrderMetaDataModel[] = clonedOrders.map((order: OrderModel) => {
         const start: number = SidurBuilderTools.hourTextToDecimal(order.startHour);
         const finish: number = SidurBuilderTools.hourTextToDecimal(order.finishHour);
@@ -24,15 +24,39 @@ export const SidurBuilderBuildOrdersMetaData = (orders: OrderModel[], buildSetti
 
     // Estimate finish hour of non-Tsamud Drives
     ordersMeta.forEach((metaOrder: OrderMetaDataModel) => {
-        if (metaOrder.order.TypeOfDrive === DriveType.Tsamud) {
+        const driveType = metaOrder.order.TypeOfDrive
+        if (driveType === DriveType.Tsamud) {
             return
         }
+        const locationId = metaOrder.order.location;
+        let locationObj = locations.find(l => l.id === locationId);
+        if (!locationObj) {
+            locationObj = locations.find(l => l.Name === 'Other') ||
+                {
+                    EnName: 'Other',
+                    id: '999',
+                    Name: 'אחר',
+                    ETA: 45,
+                }
+
+        }
+        const EtaInHours = SidurBuilderTools.minutesToFraction(locationObj.ETA);
+        switch (driveType) {
+            case DriveType.OneWayTo:
+                metaOrder.finish = metaOrder.start + EtaInHours * 2;
+                break;
+            case DriveType.OneWayFrom:
+                metaOrder.finish = metaOrder.start + EtaInHours;
+                metaOrder.start = metaOrder.start - EtaInHours;
+                break;
+        }
+        ;
+        metaOrder.length = metaOrder.finish - metaOrder.start;
+
 
     })
-    let o = ordersMeta;
+
     return ordersMeta
 }
 
-const EstimateLengthTimeBasedOnLocation = (location: LocationModel): number => {
-    return 0.75
-}
+

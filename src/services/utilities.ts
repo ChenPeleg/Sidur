@@ -1,20 +1,24 @@
 import {hashFunction} from './hash-function';
 import {DriveModel, SketchModel, VehicleScheduleModel} from '../models/Sketch.model';
-import {DriveType} from '../models/DriveType.enum';
 import {OrderModel} from '../models/Order.model';
+import {DriveType} from '../models/DriveType.enum';
 
 
-type deepCloneTypes = [OrderModel, 'OrderModel']
-                      | [SketchModel, 'SketchModel']
-
-export class CloneUltil {
+export class CloneUtil {
     constructor() {
     }
 
-    public static deep(name: 'OrderModel', obj: OrderModel): OrderModel ;
-    public static deep(name: 'SketchModel', obj: SketchModel): SketchModel ;
-    public static deep(name: string, obj: any): any {
-        return name
+    public static deep(obj: OrderModel, name: 'OrderModel'): OrderModel ;
+    public static deep(obj: SketchModel, name: 'SketchModel'): SketchModel ;
+    public static deep(obj: any, name: string,): any {
+        const newObj = {...obj}
+        switch (name) {
+            case 'SketchModel':
+                break;
+            case 'OrderModel':
+                newObj.flexibility = [(newObj).flexibility[0], (newObj).flexibility[1]];
+        }
+        return newObj;
     }
 }
 
@@ -92,20 +96,5 @@ export const Utilities = {
             name: 'סידור בשני רכבים'
         }
     },
-    deepClone<T>(obj: T): T {
-        return obj;
-    },
 
-
-    deepCloneByType(obj: deepCloneTypes): deepCloneTypes[0] {
-        const newObj = {...obj[0]}
-        switch (obj[1]) {
-            case 'SketchModel':
-                break;
-            case 'OrderModel':
-                let o: OrderModel
-                (newObj as OrderModel).flexibility = [(newObj as OrderModel).flexibility[0], (newObj as OrderModel).flexibility[1]];
-        }
-        return newObj;
-    }
 }
