@@ -12,7 +12,7 @@ export const SidurBuilder = (Sidur: SidurRecord, buildSettings: any = null): Ske
     const settings: SidurBuildSettings = {custom: null}
     const ordersMetaData: OrderMetaDataModel[] = SidurBuilderBuildOrdersMetaData(Sidur.orders, settings)
     const initialVehicles: VehicleScheduleModel [] = SidurBuilderBuildVehicles(ordersMetaData, Sidur.vehicles, settings);
-
+    let v = initialVehicles;
     const defaultSketch: SketchModel = Utilities.defaultSketchMMock();
     return defaultSketch
 }
