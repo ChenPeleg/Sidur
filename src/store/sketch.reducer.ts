@@ -13,8 +13,10 @@ export type SketchReducerFunctions =
 export const SketchReducer: Record<SketchReducerFunctions, (state: SidurStore, action: IAction) => SidurStore> = {
     [ActionsTypes.NEW_SKETCH]: (state: SidurStore, action: IAction): SidurStore => {
         let newState = {...state}
-
-        const newId = Utilities.getNextId(state.sketches.map(v => v.id));
+        if (!newState.sketches) {
+            newState.sketches = [];
+        }
+        const newId = Utilities.getNextId(newState.sketches.map(v => v.id));
         const chosenSidurObj: SidurRecord | undefined = newState.sidurCollection.find((record: SidurRecord) => record.id === newState.sidurId);
         if (chosenSidurObj !== undefined) {
             const deconstructedSidur = {...chosenSidurObj};

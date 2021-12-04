@@ -1,6 +1,23 @@
 import {hashFunction} from './hash-function';
 import {DriveModel, SketchModel, VehicleScheduleModel} from '../models/Sketch.model';
 import {DriveType} from '../models/DriveType.enum';
+import {OrderModel} from '../models/Order.model';
+
+
+type deepCloneTypes = [OrderModel, 'OrderModel']
+                      | [SketchModel, 'SketchModel']
+
+export class Clone {
+    constructor() {
+    }
+
+    public static cloner(a: 'OrderModel', b: OrderModel): OrderModel ;
+    public static cloner(a: 'SketchModel', b: SketchModel): SketchModel ;
+    public static cloner(a: string, b: any): any {
+        return a
+    }
+}
+
 
 export const Utilities = {
     getNextId: (currentIds: string[]): string => {
@@ -74,5 +91,21 @@ export const Utilities = {
             Comments: '',
             name: 'סידור בשני רכבים'
         }
+    },
+    deepClone<T>(obj: T): T {
+        return obj;
+    },
+
+
+    deepCloneByType(obj: deepCloneTypes): deepCloneTypes[0] {
+        const newObj = {...obj[0]}
+        switch (obj[1]) {
+            case 'SketchModel':
+                break;
+            case 'OrderModel':
+                let o: OrderModel
+                (newObj as OrderModel).flexibility = [(newObj as OrderModel).flexibility[0], (newObj as OrderModel).flexibility[1]];
+        }
+        return newObj;
     }
 }
