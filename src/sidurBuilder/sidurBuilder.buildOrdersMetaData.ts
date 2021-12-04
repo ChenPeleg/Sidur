@@ -1,11 +1,12 @@
 import {OrderModel} from '../models/Order.model';
-import {OrderMetaDataModel} from './models/sidurBuilder.models';
+import {OrderMetaDataModel, OrderMetaStatus} from './models/sidurBuilder.models';
 import {SidurBuilderTools} from './sidurBuilder.tools';
 import {DriveType} from '../models/DriveType.enum';
 import {CloneUtil} from '../services/utilities';
 import {locations} from '../services/locations';
 
 export const SidurBuilderBuildOrdersMetaData = (orders: OrderModel[], buildSettings: any = null): OrderMetaDataModel[] => {
+    let idCount: number = 1;
     const clonedOrders: OrderModel[] = orders.map((o: OrderModel) => CloneUtil.deep(o, 'OrderModel'));
 
     const ordersMeta: OrderMetaDataModel[] = clonedOrders.map((order: OrderModel) => {
@@ -13,11 +14,14 @@ export const SidurBuilderBuildOrdersMetaData = (orders: OrderModel[], buildSetti
         const finish: number = SidurBuilderTools.hourTextToDecimal(order.finishHour);
         const length = finish - start;
         const metaOrder: OrderMetaDataModel = {
+            id: idCount.toString(),
             order: {...order},
             finish: finish,
             start: start,
-            length: length
+            length: length,
+            status: OrderMetaStatus.None
         }
+        idCount++;
 
         return metaOrder
     })

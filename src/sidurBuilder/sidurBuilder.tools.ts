@@ -1,9 +1,9 @@
 export const SidurBuilderTools = {
     hourTextToDecimal(hourText: string): number {
         if (!hourText.includes(':')) {
-            throw {
-                message: 'hour is not set correctly'
-            }
+            // throw {
+            //     message: 'hour is not set correctly'
+            // }
         }
         const splitHour = hourText.split(':');
         const hour = Number(splitHour[0]) || 0;
