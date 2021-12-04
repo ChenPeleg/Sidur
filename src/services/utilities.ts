@@ -7,14 +7,14 @@ import {OrderModel} from '../models/Order.model';
 type deepCloneTypes = [OrderModel, 'OrderModel']
                       | [SketchModel, 'SketchModel']
 
-export class Clone {
+export class CloneUltil {
     constructor() {
     }
 
-    public static cloner(a: 'OrderModel', b: OrderModel): OrderModel ;
-    public static cloner(a: 'SketchModel', b: SketchModel): SketchModel ;
-    public static cloner(a: string, b: any): any {
-        return a
+    public static deep(name: 'OrderModel', obj: OrderModel): OrderModel ;
+    public static deep(name: 'SketchModel', obj: SketchModel): SketchModel ;
+    public static deep(name: string, obj: any): any {
+        return name
     }
 }
 
