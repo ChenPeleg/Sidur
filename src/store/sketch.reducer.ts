@@ -23,7 +23,9 @@ export const SketchReducer: Record<SketchReducerFunctions, (state: SidurStore, a
             deconstructedSidur.orders = newState.orders;
             deconstructedSidur.sketches = newState.sketches;
             deconstructedSidur.vehicles = newState.vehicles;
-            const newSketch = SidurBuilder(deconstructedSidur)
+            const newSketch = SidurBuilder(deconstructedSidur);
+            //   deconstructedSidur.sketches =
+            newState.sketches = [newSketch];
         } else {
 
         }

@@ -1,6 +1,5 @@
 import {SidurRecord} from '../store/store.types';
 import {SketchModel, VehicleScheduleModel} from '../models/Sketch.model';
-import {Utilities} from '../services/utilities';
 import {OrderMetaDataModel, SidurBuildSettings} from './models/sidurBuilder.models';
 import {SidurBuilderBuildOrdersMetaData} from './sidurBuilder.buildOrdersMetaData';
 import {SidurBuilderBuildVehicles} from './sidurBuilder.buildVehicles';
@@ -13,7 +12,13 @@ export const SidurBuilder = (Sidur: SidurRecord, buildSettings: any = null): Ske
     const ordersMetaData: OrderMetaDataModel[] = SidurBuilderBuildOrdersMetaData(Sidur.orders, settings)
     const initialVehicles: VehicleScheduleModel [] = SidurBuilderBuildVehicles(ordersMetaData, Sidur.vehicles, settings);
     let v = initialVehicles;
-    const defaultSketch: SketchModel = Utilities.defaultSketchMMock();
+
+    const defaultSketch: SketchModel = {
+        id: '2',
+        name: 'first sketch',
+        vehicleSchedules: initialVehicles,
+        Comments: ''
+    }//Utilities.defaultSketchMMock();
     return defaultSketch
 }
 const mockSidur = {
@@ -46,7 +51,7 @@ const mockSidur = {
             'startHour': '07:20',
             'Comments': 'רייצ\'ל לוקחת את ילדי גן דרור לכרמיאל, רוצה להמשיך לתור לרופאה עד 10. ',
             'driverName': 'רייצ\'ל',
-            'finishHour': '10,10'
+            'finishHour': '10:10'
         },
         {
             'id': '101',
@@ -60,7 +65,7 @@ const mockSidur = {
             'startHour': '12:50',
             'Comments': 'רייצ\'ל למרפאה במשגב עד 13:00',
             'driverName': 'רייצ\'ל',
-            'finishHour': '13:00,13:00'
+            'finishHour': '13:00'
         },
         {
             'id': '102',
@@ -130,7 +135,7 @@ const mockSidur = {
             'startHour': '15:50',
             'Comments': 'אלון לרקפת - יעזור מאוד צמוד עד 17:20',
             'driverName': 'אלון דרור',
-            'finishHour': '17:20,17:20'
+            'finishHour': '17:20'
         },
         {
             'id': '107',
@@ -242,7 +247,7 @@ const mockSidur = {
             'startHour': '16:00',
             'Comments': 'עדי יונתן ועמרי לחיסון שפעת במשגב, צמוד עד 17:30 אם אפשר עד אחרי, עדיף עד 19 ואז נעשה עוד משהו',
             'driverName': 'עדי',
-            'finishHour': '17:30,17:30'
+            'finishHour': '17:30'
         },
         {
             'id': '116',
@@ -256,7 +261,7 @@ const mockSidur = {
             'startHour': '08:30',
             'Comments': 'רינת שרון לרכבת כרמיאל / לחיפה (להיות ב-10 בבת גלים) ',
             'driverName': 'רינת שרון',
-            'finishHour': '10,10'
+            'finishHour': '10:10'
         },
         {
             'id': '117',
@@ -312,7 +317,7 @@ const mockSidur = {
             'startHour': '14:00',
             'Comments': 'מורן מהצומת, או אם יש סביב 13:00 נסיעה מחיפה',
             'driverName': 'מורן',
-            'finishHour': '13:00,13:00'
+            'finishHour': '13:00'
         },
         {
             'id': '122',
@@ -326,7 +331,7 @@ const mockSidur = {
             'startHour': '18:30',
             'Comments': 'תמה ואמיר שוורץ לכרמיאל עד 22:00. יש סיכוי שיהיה רכב מסידור החלוץ',
             'driverName': 'תמה',
-            'finishHour': '22:00,22:00'
+            'finishHour': '22:00'
         },
         {
             'id': '123',
@@ -382,7 +387,7 @@ const mockSidur = {
             'startHour': '08:45',
             'Comments': 'שירי צמוד לעכו ועפולה עד 15:15. אם בעייתי דברו איתי',
             'driverName': 'שירי אליאס',
-            'finishHour': '15:15,15:15'
+            'finishHour': '15:15'
         },
         {
             'id': '127',
@@ -438,7 +443,7 @@ const mockSidur = {
             'startHour': '14:00',
             'Comments': '14:00 אייל מאשבל ליובלים ',
             'driverName': 'אייל יסוד',
-            'finishHour': '14:00,14:00'
+            'finishHour': '14:00'
         },
         {
             'id': '131',

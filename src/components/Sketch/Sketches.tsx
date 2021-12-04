@@ -17,6 +17,8 @@ export const Sketches = () => {
     const orders = useSelector((state: { orders: OrderModel[] }) => state.orders);
     const vehicles = useSelector((state: { vehicles: VehicleModel[] }) => state.vehicles);
     const orderIdInEdit = useSelector((state: { orderIdInEdit: string | null }) => state.orderIdInEdit);
+    const sketches: SketchModel[] = useSelector((state: { sketches: SketchModel[] }) => state.sketches);
+
     const getVehicleNameFromId = (vehicleId: string): string | null => {
         return vehicles.find(v => v.id === vehicleId)?.vehicleName || vehicleId
     }
@@ -31,7 +33,7 @@ export const Sketches = () => {
             }
         })
     }
-    const defaultSketch: SketchModel = Utilities.defaultSketchMMock();
+    const defaultSketch: SketchModel = sketches[0] || Utilities.defaultSketchMMock();
 
 
     return (
