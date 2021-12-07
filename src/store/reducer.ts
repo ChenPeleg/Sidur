@@ -50,7 +50,8 @@ const defaultInitialState: SidurStore = {
     deletedOrders: [],
     defaultOrderValues: {...defaultOrderValues},
     sketches: [],
-    displaySetting: {view: 'both'}
+    displaySetting: {view: 'both'},
+    SketchIdInEdit: null
 }
 
 const stateFromLocalStorage: SidurStore | undefined = SaveLoadService.loadFromLocalStorage('chen').data?.savedStore

@@ -36,7 +36,8 @@ export interface SidurStore {
     dataHolderForCurrentOrderInEdit: OrderModel | null;
     defaultOrderValues: OrderModel,
     displaySetting: DisplaySettings,
-    sketches: SketchModel[]
+    sketches: SketchModel[];
+    SketchIdInEdit: null | string;
 
 }
 

@@ -19,7 +19,7 @@ const driverAndLocation = (drive: DriveModel) => LanguageUtilites.buildBriefText
 export const SketchDrive = (props: sketchDriveProps) => {
     const dispatch = useDispatch();
     const drive = props.drive;
-    
+
 
     return (
         <Box>
@@ -29,7 +29,7 @@ export const SketchDrive = (props: sketchDriveProps) => {
                 minHeight: '10vh',
                 display: 'flex',
                 flexDirection: 'row',
-                alignItems: 'start',
+                alignItems: 'stretch',
                 justifyContent: 'start',
             }}>
                 <Box id={'drive-hour'} sx={{
@@ -42,8 +42,9 @@ export const SketchDrive = (props: sketchDriveProps) => {
                     pl: '0.4em',
                     pr: '0.4em',
                     bgcolor: '#aadcff',
-                    flexShrink: 4,
-                    width: '20%'
+                    //flexShrink: 4,
+                    width: '20%',
+                    minHeight: '100%',
                     //flexShrink: '4'
 
                 }}>
