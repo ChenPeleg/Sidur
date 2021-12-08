@@ -25,6 +25,7 @@ export const SidurBuilderTools = {
     },
     createSketchName(id: string): string {
         switch (id) {
+            
             case '1':
                 return translations.first
             case '2':

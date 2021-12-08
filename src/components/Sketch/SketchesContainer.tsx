@@ -119,7 +119,8 @@ export const SketchesContainer = () => {
                     sx={{
                         display: {
                             xs: 'none',
-                            sm: 'block'
+                            sm: 'block',
+                            fontWight: 'regular'
                         }
                     }}
                 >    &nbsp;
