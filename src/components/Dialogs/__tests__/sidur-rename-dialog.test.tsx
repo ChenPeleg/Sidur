@@ -5,7 +5,7 @@ import {act, render} from '@testing-library/react';
 import {Provider} from 'react-redux';
 import configureStore from '../../../__tests-utils__/redux-mock-store';
 import {TextField} from '@mui/material';
-import {SidurRenameDialog} from '../sidur-rename-dialog';
+import {RenameDialog} from '../rename-dialog';
 import Mock = jest.Mock;
 
 
@@ -22,7 +22,7 @@ describe('Sidur rename import Dialog', () => {
         const middlewares: any = []
         const mockStore = configureStore(middlewares);
         store = mockStore({});
-        fileDialog = (<Provider store={store}><SidurRenameDialog selectedValue={sidurDefaultName} open={true} key={'1'} onClose={onClose}/>
+        fileDialog = (<Provider store={store}><RenameDialog selectedValue={sidurDefaultName} open={true} key={'1'} onClose={onClose}/>
         </Provider>);
         component = mount(fileDialog);
 
@@ -55,7 +55,7 @@ describe('Sidur rename import Dialog', () => {
             component.find('#sidur-rename-approve-button').hostNodes().first().simulate('click');
             expect(onClose).toHaveBeenCalledWith('rename sidur');
 
-         
+
         })
 
 

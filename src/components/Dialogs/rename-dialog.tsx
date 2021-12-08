@@ -8,13 +8,13 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
 import {translations} from '../../services/translations';
 
-interface SidurRenameProps {
+interface RenameProps {
     open: boolean;
     selectedValue: string;
     onClose: (value: string | null) => void;
 }
 
-export const SidurRenameDialog = (props: SidurRenameProps) => {
+export const RenameDialog = (props: RenameProps) => {
     // const [open, setOpen] = React.useState(false);
     const {
         onClose,

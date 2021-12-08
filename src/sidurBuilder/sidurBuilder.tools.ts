@@ -1,3 +1,5 @@
+import {translations} from '../services/translations';
+
 export const SidurBuilderTools = {
     hourTextToDecimal(hourText: string): number {
         if (!hourText.includes(':')) {
@@ -20,5 +22,18 @@ export const SidurBuilderTools = {
             return 0
         }
         return Math.floor((minAsNumber / 60) * 100) / 100
+    },
+    createSketchName(id: string): string {
+        switch (id) {
+            case '1':
+                return translations.first
+            case '2':
+                return translations.second
+            case '3':
+                return translations.third
+            default:
+                return translations.number + ' ' + id
+
+        }
     }
 }

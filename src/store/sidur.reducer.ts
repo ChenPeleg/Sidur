@@ -21,7 +21,8 @@ const DefaultSidur: SidurRecord = {
     orders: [],
     deletedOrders: [],
     vehicles: [defaultVehicleValues],
-    sketches: []
+    sketches: [],
+    chosenSketch: ''
 
 }
 
@@ -171,7 +172,8 @@ export const SidurReducer: Record<SidurReducerFunctions, (state: SidurStore, act
             deletedOrders: [],
             vehicles: [defaultVehicleValues],
             defaultOrderValues: newState.defaultOrderValues,
-            sketches: []
+            sketches: [],
+            chosenSketch: ''
         }
         newState.sidurCollection = newState.sidurCollection.map(c => c);
         newState.sidurCollection.push(newSidur);

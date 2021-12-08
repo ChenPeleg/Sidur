@@ -74,6 +74,10 @@ export const translations = {
     'inLocation': 'ב',
     'toLocationLe': 'ל',
     'Sketch': 'סקיצה',
-    'ActiveSidurim': 'סידורים פעילים'
+    'ActiveSidurim': 'סידורים פעילים',
+    'number': 'מספר',
+    'first': 'ראשונה',
+    'second': 'שנייה',
+    'third': 'שלישית',
 
 }

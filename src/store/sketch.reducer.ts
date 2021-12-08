@@ -1,7 +1,7 @@
 import {ActionsTypes} from './types.actions';
 
 
-import {AppConstants, IAction, SidurRecord, SidurStore} from './store.types';
+import {IAction, SidurRecord, SidurStore} from './store.types';
 import {StoreUtils} from './store-utils';
 import {Utilities} from '../services/utilities';
 import {SidurBuilder} from '../sidurBuilder/sidurBuilder.main';
@@ -30,12 +30,11 @@ export const SketchReducer: Record<SketchReducerFunctions, (state: SidurStore, a
                 newState.sketches = [];
             }
             newState.sketches.push(newSketch);
-        } else {
-
+            newState.SketchIdInEdit = newId;
         }
 
 
-        newState.sidurCollection = StoreUtils.UpdateSidurCollectionWithCurrenSidur(newState);
+        newState = updateSidurRecordWithSketchChanges(newState)
         StoreUtils.HandleReducerSaveToLocalStorage(newState);
         return newState
     },
@@ -52,7 +51,11 @@ export const SketchReducer: Record<SketchReducerFunctions, (state: SidurStore, a
             const previousSketchObj: SketchModel | undefined = newState.sketches.find((record: SketchModel) => record.id === previousSketchId);
             if (previousSketchObj !== undefined) {
                 const NewPreviousSketchObj = {...previousSketchObj};
+            }
+            const thisSidurInCollection: SidurRecord | undefined = newState.sidurCollection.find((sidur: SidurRecord) => sidur.id === newState.sidurId);
 
+            if (thisSidurInCollection) {
+                thisSidurInCollection.chosenSketch = chosenSketchId;
             }
 
 
@@ -76,66 +79,57 @@ export const SketchReducer: Record<SketchReducerFunctions, (state: SidurStore, a
                 return sketch
             }
         });
+        newState = updateSidurRecordWithSketchChanges(newState)
         return newState
     },
     [ActionsTypes.DELETE_SKETCH]: (state: SidurStore, action: IAction): SidurStore => {
         let newState = {...state}
-        const sidurIdToDelete = action.payload.id// newState.sidurId;
-        if (sidurIdToDelete.includes(AppConstants.ArchiveIdPrefix)) {
-            newState.sidurArchive = newState.sidurArchive.map(sidur => {
-                if (sidurIdToDelete === sidur.id) {
-                    const updatedSidur = {...sidur};
-                    updatedSidur.id = updatedSidur.id.replace(AppConstants.ArchiveIdPrefix, AppConstants.deleteIdPrefix);
-                    return updatedSidur
-                }
-                return sidur
-            })
-        } else {
-            let deletedSidur: SidurRecord | undefined = newState.sidurCollection.find(s => s.id === sidurIdToDelete);
-            if (deletedSidur) {
-                deletedSidur = {...deletedSidur};
-                deletedSidur.id = 'Del' + deletedSidur.id;
-                newState.sidurArchive.push(deletedSidur);
+        const sketchToDelete = action.payload.id// newState.sidurId;
+        let posOfDeletedSketch = -1;
+        let deletedSketch: SketchModel | undefined = newState.sketches.find(s => s.id === sketchToDelete);
+        if (deletedSketch) {
+            posOfDeletedSketch = newState.sketches.indexOf(deletedSketch);
+            deletedSketch = {...deletedSketch};
+            deletedSketch.id = 'Del' + deletedSketch.id;
+            // newState.sidurArchive.push(deletedSketch);
+        }
+
+        newState.sketches = newState.sketches.filter(s => s.id !== sketchToDelete);
+        if (newState.sketches.length) {
+            const sketchesIds = newState.sketches.map(s => s.id);
+            if (posOfDeletedSketch > 1) {
+                newState.SketchIdInEdit = sketchesIds [posOfDeletedSketch - 1]
+            } else {
+                newState.SketchIdInEdit = sketchesIds [0]
             }
-            newState.sidurCollection = newState.sidurCollection.filter(s => s.id !== sidurIdToDelete);
+        } else {
+            newState.SketchIdInEdit = ''
         }
 
-        if (!newState.sidurCollection.length) {
-            // newState.sidurCollection.push(getDefaultSidur(newState));
-        }
-        if (newState.sidurId === sidurIdToDelete) {
-            const chosenSidurAfterDelete: SidurRecord = newState.sidurCollection[0];
-            newState.sidurId = chosenSidurAfterDelete.id
-            newState = setChosenSidur(newState, chosenSidurAfterDelete);
-        }
-
-
+        newState = updateSidurRecordWithSketchChanges(newState)
         return newState
+
     },
 
 
 }
-const setChosenSidur = (state: SidurStore, chosenSidur: SidurRecord): SidurStore => {
+const updateSidurRecordWithSketchChanges = (state: SidurStore): SidurStore => {
     const newState = {...state};
+    const thisSidurInCollection: SidurRecord | undefined = newState.sidurCollection.find((sidur: SidurRecord) => sidur.id === newState.sidurId);
 
-    newState.orders = chosenSidur?.orders.map(o => ({...o})) || []
-    newState.vehicles = chosenSidur?.vehicles.map(o => ({...o})) || []
-    newState.deletedOrders = chosenSidur?.deletedOrders?.map(o => ({...o})) || [];
-    newState.sketches = chosenSidur?.sketches?.map(o => ({...o})) || [];
-    newState.orderIdInEdit = null;
-    newState.dataHolderForCurrentOrderInEdit = null;
+
+    if (thisSidurInCollection) {
+        thisSidurInCollection.sketches = newState.sketches.map(s => cloneSketch(s))
+    }
+
+
     return newState
 
 }
 
-const getDefaultSidur = (state: SidurStore): null => {
-    // const newSidur: SidurRecord = {...DefaultSidur};
-    // newSidur.id = Utilities.getNextId(getAllSidurIDs(state));
-    // const allNames = [...state.sidurCollection.map(o => o.Name), ...state.sidurArchive.map(o => o.Name)];
-    // if (allNames.some(name => name === newSidur.Name)) {
-    //     newSidur.Name = newSidur.Name + ' ' + newSidur.id
-    // }
-    return null
 
+const cloneSketch = (original: SketchModel): SketchModel => {
+    const newSketch = {...original};
+    newSketch.vehicleSchedules = newSketch.vehicleSchedules.map(v => ({...v}))
+    return newSketch;
 }
-

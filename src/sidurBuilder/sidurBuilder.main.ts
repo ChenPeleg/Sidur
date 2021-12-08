@@ -3,6 +3,8 @@ import {SketchModel, VehicleScheduleModel} from '../models/Sketch.model';
 import {OrderMetaDataModel, SidurBuildSettings} from './models/sidurBuilder.models';
 import {SidurBuilderBuildOrdersMetaData} from './sidurBuilder.buildOrdersMetaData';
 import {SidurBuilderBuildVehicles} from './sidurBuilder.buildVehicles';
+import {SidurBuilderTools} from './sidurBuilder.tools';
+import {Utilities} from '../services/utilities';
 
 export const SidurBuilder = (Sidur: SidurRecord, buildSettings: any = null): SketchModel => {
     if (Sidur === null) {
@@ -18,7 +20,11 @@ export const SidurBuilder = (Sidur: SidurRecord, buildSettings: any = null): Ske
         name: 'first sketch',
         vehicleSchedules: initialVehicles,
         Comments: ''
-    }//Utilities.defaultSketchMMock();
+    };
+    const newId = Utilities.getNextId(Sidur.sketches.map(v => v.id));
+    defaultSketch.id = newId;
+    defaultSketch.name = SidurBuilderTools.createSketchName(defaultSketch.id);
+
     return defaultSketch
 }
 const mockSidur = {

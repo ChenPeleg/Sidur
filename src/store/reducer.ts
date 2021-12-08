@@ -32,6 +32,7 @@ const defaultInitialState: SidurStore = {
         deletedOrders: [],
         vehicles: [defaultVehicleValues],
         sketches: [],
+        chosenSketch: ''
     }, {
         id: '2',
         Name: 'סידור גנים',
@@ -39,6 +40,7 @@ const defaultInitialState: SidurStore = {
         deletedOrders: [],
         vehicles: [defaultVehicleValues],
         sketches: [],
+        chosenSketch: ''
     }
 
     ],

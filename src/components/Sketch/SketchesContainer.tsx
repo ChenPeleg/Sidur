@@ -13,7 +13,7 @@ import {Edit} from '@mui/icons-material';
 import IconButton from '@mui/material/IconButton';
 import {Sketch} from './Sketch';
 import MenuItem from '@mui/material/MenuItem';
-import {SidurRenameDialog} from '../Dialogs/sidur-rename-dialog';
+import {RenameDialog} from '../Dialogs/rename-dialog';
 
 
 export const SketchesContainer = () => {
@@ -105,15 +105,13 @@ export const SketchesContainer = () => {
     const sketchName = sketchInEdit.name;
     return (
         <Box>
-            <Box sx={{
+            {SketchIdInEdit ? <Box sx={{
                 display: 'flex',
                 flexDirection: 'row',
                 alignItems: 'start',
                 justifyContent: 'start',
                 mb: '10px'
             }}>
-                <Typography variant={'h5'}>{translations.Sketch} {sketchInEdit.name}</Typography>
-
                 <Typography
                     variant="h6"
                     noWrap
@@ -124,11 +122,11 @@ export const SketchesContainer = () => {
                             sm: 'block'
                         }
                     }}
-                >    &nbsp; &nbsp;
-                    {translations.Sketch}
+                >    &nbsp;
+                    {translations.Sketch} &nbsp;
                     <Select dir={'rtl'} disableUnderline={true} variant={'standard'} value={SketchIdInEdit}
                             sx={{
-                                color: 'white',
+                                //  color: 'black',
                                 fontSize: '1.25rem',
                                 fontWeight: 'normal'
                             }}
@@ -136,9 +134,9 @@ export const SketchesContainer = () => {
                                 handleSketchChanged(event, child)
                             }}>
                         <MenuItem key={'NEW'}
-                                  value={'NEW'}> &nbsp;&nbsp;<b>{translations.CreateSketch}</b> &nbsp;&nbsp;</MenuItem>
+                                  value={'NEW'}> &nbsp; <b>{translations.CreateSketch}</b>  &nbsp;</MenuItem>
                         {sketches.map((oneSketch: SketchModel) => <MenuItem key={oneSketch.id}
-                                                                            value={oneSketch.id}> &nbsp;&nbsp;{oneSketch.name} &nbsp;&nbsp;</MenuItem>)}
+                                                                            value={oneSketch.id}> {oneSketch.name} &nbsp; </MenuItem>)}
                     </Select>
                 </Typography>
 
@@ -152,17 +150,16 @@ export const SketchesContainer = () => {
                 >
                     <Edit/>
                 </IconButton>
-                <Button variant={'contained'} id={'sketches-create-sketch'}
-                        onClick={handleCreateSketch}>{translations.CreateSketch}</Button>
 
 
-            </Box>
+            </Box> : <Button variant={'contained'} id={'sketches-create-sketch'}
+                             onClick={handleCreateSketch}>{translations.CreateSketch}</Button>}
 
 
             <Sketch/>
             <SketchMenu sketchMoreAnchorEl={sketchMoreAnchorEl} sketchMenuId={SketchIdInEdit || ''} isSketchMenuOpen={isSketchMenuOpen}
                         handleSketchMenuClick={handleSketchMenuClick} handleSketchMenuClose={handleSketchMenuClose}/>
-            <SidurRenameDialog open={RenameOpen} onClose={handleRenameClose} selectedValue={sketchName}/>
+            <RenameDialog open={RenameOpen} onClose={handleRenameClose} selectedValue={sketchName}/>
         </Box>
 
 

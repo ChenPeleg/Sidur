@@ -19,6 +19,7 @@ export interface SidurRecord {
     deletedOrders: OrderModel[];
     defaultOrderValues?: OrderModel,
     sketches: SketchModel[],
+    chosenSketch: string
 }
 
 export interface DisplaySettings {

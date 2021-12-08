@@ -12,7 +12,6 @@ import {translations} from '../../services/translations';
 import {useDispatch, useSelector} from 'react-redux';
 import {Select, SelectChangeEvent} from '@mui/material';
 import {Edit} from '@mui/icons-material';
-import {SidurRenameDialog} from '../Dialogs/sidur-rename-dialog';
 import {ProfileMenu} from './profile-menu';
 import {ActionsTypes} from '../../store/types.actions';
 import {SidurMenu} from './sidur-menu';
@@ -24,6 +23,7 @@ import {FileUploadDialog} from '../Dialogs/file-uplaod-dialog';
 import {SidurManagementDialog} from '../Dialogs/sidur-management-dialog';
 import {OrderImportDialog} from '../Dialogs/orders-import-dialog';
 import {ToggleButtons} from '../buttons/toggle-button-group';
+import {RenameDialog} from '../Dialogs/rename-dialog';
 
 
 export const AppNavBar = () => {
@@ -269,7 +269,7 @@ export const AppNavBar = () => {
             <SidurMenu sidurMoreAnchorEl={sidurMoreAnchorEl} sidurMenuId={sidurMenuId} isSidurMenuOpen={isSidurMenuOpen}
                        handleSidurMenuClick={handleSidurMenuClick} handleSidurMenuClose={handleSidurMenuClose}/>
             <ProfileMenu menuId={menuId} anchorEl={anchorEl} handleMenuClose={handleProfileMenuClose} isMenuOpen={isProfileMenuOpen}/>
-            <SidurRenameDialog open={RenameOpen} onClose={handleRenameClose} selectedValue={sidurName}/>
+            <RenameDialog open={RenameOpen} onClose={handleRenameClose} selectedValue={sidurName}/>
             <FileUploadDialog open={UploadOpen} onClose={handleUploadClose} selectedValue={''}/>
             <SidurManagementDialog open={ManageSidurimOpen} onClose={() => {
                 setManageSidurimOpen(false)
