@@ -13,6 +13,7 @@ import {Edit} from '@mui/icons-material';
 import IconButton from '@mui/material/IconButton';
 import {Sketch} from './Sketch';
 import MenuItem from '@mui/material/MenuItem';
+import {SidurRenameDialog} from '../Dialogs/sidur-rename-dialog';
 
 
 export const SketchesContainer = () => {
@@ -25,34 +26,44 @@ export const SketchesContainer = () => {
     const isSketchMenuOpen = Boolean(sketchMoreAnchorEl);
 
     const sketchMenuId = 'primary-sketch-menu';
+    const [RenameOpen, setRenameOpen] = React.useState(false);
+
     const handleSketchMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
         setSketchMoreAnchorEl(event.currentTarget);
     };
-
+    const handleRenameClose = (value: string | null) => {
+        setRenameOpen(false);
+        const id = SketchIdInEdit;
+        if (value) {
+            dispatch({
+                type: ActionsTypes.RENAME_SKETCH,
+                payload: {
+                    value,
+                    id
+                }
+            })
+        }
+    };
     const handleSketchMenuClick = (event: React.MouseEvent<HTMLElement>, clickAction: SketchActionType) => {
+
 
         switch (clickAction) {
 
             case SketchActionType.CreateCopy:
                 dispatch({
-                    type: ActionsTypes.CLONE_SIDUR,
+                    type: ActionsTypes.CLONE_SKETCH,
                     payload: {id: SketchIdInEdit}
                 })
                 break;
-            case SketchActionType.Archive:
-                dispatch({
-                    type: ActionsTypes.ARCHIVE_SIDUR,
-                    payload: {id: SketchIdInEdit}
-                })
-                break;
+
             case SketchActionType.Delete:
                 dispatch({
-                    type: ActionsTypes.DELETE_SIDUR,
+                    type: ActionsTypes.DELETE_SKETCH,
                     payload: {id: SketchIdInEdit}
                 })
                 break;
             case SketchActionType.Rename:
-                // setRenameOpen(true);
+                setRenameOpen(true);
                 break;
 
 
@@ -68,12 +79,13 @@ export const SketchesContainer = () => {
         const chosenSketch = event.target.value as string;
         if (chosenSketch === 'NEW') {
             dispatch({
-                type: ActionsTypes.ADD_NEW_SIDUR,
+                type: ActionsTypes.NEW_SKETCH,
                 payload: null
             });
+
         } else {
             dispatch({
-                type: ActionsTypes.CHOOSE_SIDUR,
+                type: ActionsTypes.CHOOSE_SKETCH,
                 payload: {id: chosenSketch}
             })
         }
@@ -90,7 +102,7 @@ export const SketchesContainer = () => {
     }
     const sketchInEdit: SketchModel = sketches.find((sketch: SketchModel) => sketch.id === SketchIdInEdit) || Utilities.defaultSketchMMock();
 
-
+    const sketchName = sketchInEdit.name;
     return (
         <Box>
             <Box sx={{
@@ -150,6 +162,7 @@ export const SketchesContainer = () => {
             <Sketch/>
             <SketchMenu sketchMoreAnchorEl={sketchMoreAnchorEl} sketchMenuId={SketchIdInEdit || ''} isSketchMenuOpen={isSketchMenuOpen}
                         handleSketchMenuClick={handleSketchMenuClick} handleSketchMenuClose={handleSketchMenuClose}/>
+            <SidurRenameDialog open={RenameOpen} onClose={handleRenameClose} selectedValue={sketchName}/>
         </Box>
 
 

@@ -5,7 +5,7 @@ import {AppConstants, IAction, SidurRecord, SidurStore} from './store.types';
 import {StoreUtils} from './store-utils';
 import {Utilities} from '../services/utilities';
 import {SidurBuilder} from '../sidurBuilder/sidurBuilder.main';
-import {OrderModel} from '../models/Order.model';
+import {SketchModel} from '../models/Sketch.model';
 
 export type SketchReducerFunctions =
     | ActionsTypes.NEW_SKETCH | ActionsTypes.CHOOSE_SKETCH | ActionsTypes.RENAME_SKETCH | ActionsTypes.DELETE_SKETCH;
@@ -42,44 +42,18 @@ export const SketchReducer: Record<SketchReducerFunctions, (state: SidurStore, a
     [ActionsTypes.CHOOSE_SKETCH]: (state: SidurStore, action: IAction): SidurStore => {
         let newState = {...state}
         const chosenSketchId = action.payload.id;
-        const previousSidurId = newState.sidurId;
-        if (chosenSketchId === previousSidurId) {
+        const previousSketchId = newState.SketchIdInEdit;
+        if (chosenSketchId === previousSketchId) {
             return newState
         }
-        newState.sidurId = chosenSketchId;
-        const chosenSidurObj: SidurRecord | undefined = newState.sidurCollection.find((record: SidurRecord) => record.id === chosenSketchId);
-        if (chosenSidurObj !== undefined) {
-            const previousSidurObj: SidurRecord | undefined = newState.sidurCollection.find((record: SidurRecord) => record.id === previousSidurId);
-            if (previousSidurObj !== undefined) {
-                const NewPreviousSidurObj = {...previousSidurObj};
-                NewPreviousSidurObj.orders = newState.orders.map(o => ({
-                    ...o
-                }));
-                NewPreviousSidurObj.deletedOrders = newState.deletedOrders.map(o => ({
-                    ...o
-                }));
-                NewPreviousSidurObj.sketches = newState.sketches.map(o => ({
-                    ...o
-                }));
-                NewPreviousSidurObj.vehicles = newState.vehicles.map(o => ({
-                    ...o
-                }));
+        newState.SketchIdInEdit = chosenSketchId;
+        const chosenSketchObj: SketchModel | undefined = newState.sketches.find((record: SketchModel) => record.id === chosenSketchId);
+        if (chosenSketchObj !== undefined) {
+            const previousSketchObj: SketchModel | undefined = newState.sketches.find((record: SketchModel) => record.id === previousSketchId);
+            if (previousSketchObj !== undefined) {
+                const NewPreviousSketchObj = {...previousSketchObj};
 
-                NewPreviousSidurObj.defaultOrderValues = {
-                    ...
-                        NewPreviousSidurObj
-                            .defaultOrderValues
-                } as OrderModel;
-                newState.sidurCollection = newState.sidurCollection.map((sidur: SidurRecord) => {
-                    if (sidur.id === previousSidurId) {
-                        return NewPreviousSidurObj
-                    } else {
-                        return sidur
-                    }
-                })
             }
-
-            newState = setChosenSidur(newState, chosenSidurObj);
 
 
         }
@@ -88,18 +62,18 @@ export const SketchReducer: Record<SketchReducerFunctions, (state: SidurStore, a
     },
     [ActionsTypes.RENAME_SKETCH]: (state: SidurStore, action: IAction): SidurStore => {
         let newState = {...state}
-        const sidurId = action.payload.id// newState.sidurId;
+        const sketchId = action.payload.id// newState.sidurId;
         const newName = action.payload.value;
         if (!newName) {
             return newState
         }
-        newState.sidurCollection = newState.sidurCollection.map((sidur: SidurRecord) => {
-            if (sidur.id === sidurId) {
-                const updatedSidur = {...sidur};
-                updatedSidur.Name = newName;
-                return updatedSidur
+        newState.sketches = newState.sketches.map((sketch: SketchModel) => {
+            if (sketch.id === sketchId) {
+                const updatedSketch = {...sketch};
+                updatedSketch.name = newName;
+                return updatedSketch
             } else {
-                return sidur
+                return sketch
             }
         });
         return newState
