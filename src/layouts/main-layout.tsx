@@ -2,9 +2,9 @@ import React from 'react'
 import {Box} from '@mui/material';
 import {Orders} from '../components/Orders/orders';
 import {Vehicles} from '../components/Vehicles/vehicles';
-import {Sketches} from '../components/Sketch/Sketches';
 import {useSelector} from 'react-redux';
 import {DisplaySettings} from '../store/store.types';
+import {SketchesContainer} from '../components/Sketch/SketchesContainer';
 
 
 export const MainLayout = () => {
@@ -37,7 +37,7 @@ export const MainLayout = () => {
 
                 {displaySketches ? <Box flexDirection="column" flexWrap="wrap" display="flex" alignItems="start" justifyContent="start">
 
-                    <Sketches/>
+                    <SketchesContainer/>
 
                 </Box> : null}
                 {displayOrders ? <Box flexDirection="column" flexWrap="wrap" display="flex" alignItems="start" justifyContent="start">

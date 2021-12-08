@@ -34,7 +34,11 @@ export enum ActionsTypes {
     CHANGE_VIEW = 'CHANGE_VIEW',
 
     /* Sketch */
-    NEW_SKETCH = 'NEW_SKETCH'
+    NEW_SKETCH = 'NEW_SKETCH',
+    DELETE_SKETCH = 'DELETE_SKETCH',
+    RENAME_SKETCH = 'RENAME_SKETCH',
+    CLONE_SKETCH = 'CLONE_SKETCH',
+    CHOOSE_SKETCH = 'CHOOSE_SKETCH',
 
 }
 

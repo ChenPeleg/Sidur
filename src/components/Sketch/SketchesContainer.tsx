@@ -1,0 +1,158 @@
+import React from 'react'
+import {Box} from '@mui/system';
+import {useDispatch, useSelector} from 'react-redux';
+import {Button, Select, SelectChangeEvent, Typography} from '@mui/material';
+import {translations} from '../../services/translations';
+import {SketchModel} from '../../models/Sketch.model';
+import {Utilities} from '../../services/utilities';
+import {ActionsTypes} from '../../store/types.actions';
+import {SidurStore} from '../../store/store.types';
+import {SketchActionType} from '../../models/SketchMenuClickActionType.enum';
+import {SketchMenu} from './sketch-menu';
+import {Edit} from '@mui/icons-material';
+import IconButton from '@mui/material/IconButton';
+import {Sketch} from './Sketch';
+import MenuItem from '@mui/material/MenuItem';
+
+
+export const SketchesContainer = () => {
+    const dispatch = useDispatch();
+    const SketchIdInEdit = useSelector((state: SidurStore) => state.SketchIdInEdit);
+    const sketches: SketchModel[] = useSelector((state: { sketches: SketchModel[] }) => state.sketches);
+
+    const [sketchMoreAnchorEl, setSketchMoreAnchorEl] =
+        React.useState<null | HTMLElement>(null);
+    const isSketchMenuOpen = Boolean(sketchMoreAnchorEl);
+
+    const sketchMenuId = 'primary-sketch-menu';
+    const handleSketchMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
+        setSketchMoreAnchorEl(event.currentTarget);
+    };
+
+    const handleSketchMenuClick = (event: React.MouseEvent<HTMLElement>, clickAction: SketchActionType) => {
+
+        switch (clickAction) {
+
+            case SketchActionType.CreateCopy:
+                dispatch({
+                    type: ActionsTypes.CLONE_SIDUR,
+                    payload: {id: SketchIdInEdit}
+                })
+                break;
+            case SketchActionType.Archive:
+                dispatch({
+                    type: ActionsTypes.ARCHIVE_SIDUR,
+                    payload: {id: SketchIdInEdit}
+                })
+                break;
+            case SketchActionType.Delete:
+                dispatch({
+                    type: ActionsTypes.DELETE_SIDUR,
+                    payload: {id: SketchIdInEdit}
+                })
+                break;
+            case SketchActionType.Rename:
+                // setRenameOpen(true);
+                break;
+
+
+            default:
+        }
+        handleSketchMenuClose()
+    };
+    const handleSketchMenuClose = () => {
+        setSketchMoreAnchorEl(null);
+    };
+    const handleSketchChanged = (event: any, child: React.ReactNode) => {
+
+        const chosenSketch = event.target.value as string;
+        if (chosenSketch === 'NEW') {
+            dispatch({
+                type: ActionsTypes.ADD_NEW_SIDUR,
+                payload: null
+            });
+        } else {
+            dispatch({
+                type: ActionsTypes.CHOOSE_SIDUR,
+                payload: {id: chosenSketch}
+            })
+        }
+
+
+    }
+    const handleCreateSketch = () => {
+        dispatch({
+            type: ActionsTypes.NEW_SKETCH,
+            payload: {
+                value: null,
+            }
+        })
+    }
+    const sketchInEdit: SketchModel = sketches.find((sketch: SketchModel) => sketch.id === SketchIdInEdit) || Utilities.defaultSketchMMock();
+
+
+    return (
+        <Box>
+            <Box sx={{
+                display: 'flex',
+                flexDirection: 'row',
+                alignItems: 'start',
+                justifyContent: 'start',
+                mb: '10px'
+            }}>
+                <Typography variant={'h5'}>{translations.Sketch} {sketchInEdit.name}</Typography>
+
+                <Typography
+                    variant="h6"
+                    noWrap
+                    component="div"
+                    sx={{
+                        display: {
+                            xs: 'none',
+                            sm: 'block'
+                        }
+                    }}
+                >    &nbsp; &nbsp;
+                    {translations.Sketch}
+                    <Select dir={'rtl'} disableUnderline={true} variant={'standard'} value={SketchIdInEdit}
+                            sx={{
+                                color: 'white',
+                                fontSize: '1.25rem',
+                                fontWeight: 'normal'
+                            }}
+                            onChange={(event: SelectChangeEvent<any>, child: React.ReactNode) => {
+                                handleSketchChanged(event, child)
+                            }}>
+                        <MenuItem key={'NEW'}
+                                  value={'NEW'}> &nbsp;&nbsp;<b>{translations.CreateSketch}</b> &nbsp;&nbsp;</MenuItem>
+                        {sketches.map((oneSketch: SketchModel) => <MenuItem key={oneSketch.id}
+                                                                            value={oneSketch.id}> &nbsp;&nbsp;{oneSketch.name} &nbsp;&nbsp;</MenuItem>)}
+                    </Select>
+                </Typography>
+
+                <IconButton
+                    size="small"
+                    aria-label="show more"
+                    aria-controls={sketchMenuId}
+                    aria-haspopup="true"
+                    onClick={handleSketchMenuOpen}
+                    color="inherit"
+                >
+                    <Edit/>
+                </IconButton>
+                <Button variant={'contained'} id={'sketches-create-sketch'}
+                        onClick={handleCreateSketch}>{translations.CreateSketch}</Button>
+
+
+            </Box>
+
+
+            <Sketch/>
+            <SketchMenu sketchMoreAnchorEl={sketchMoreAnchorEl} sketchMenuId={SketchIdInEdit || ''} isSketchMenuOpen={isSketchMenuOpen}
+                        handleSketchMenuClick={handleSketchMenuClick} handleSketchMenuClose={handleSketchMenuClose}/>
+        </Box>
+
+
+    )
+
+}
