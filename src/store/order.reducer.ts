@@ -1,6 +1,6 @@
 import {AppConstants, defaultOrderValues, IAction, SidurStore} from './store.types';
 import {StoreUtils} from './store-utils';
-import {Utilities} from '../services/utilities';
+import {Utils} from '../services/utils';
 import {OrderModel} from '../models/Order.model';
 import {ActionsTypes} from './types.actions';
 
@@ -16,7 +16,7 @@ export type OrderReducerFunctions =
 export const OrderReducer: Record<OrderReducerFunctions, (state: SidurStore, action: IAction) => SidurStore> = {
     [ActionsTypes.ADD_NEW_ORDER]: (state: SidurStore, action: IAction): SidurStore => {
         let newState = {...state}
-        const newId = Utilities.getNextId(getAllOrdersIDs(state))
+        const newId = Utils.getNextId(getAllOrdersIDs(state))
         const newOrder: OrderModel = {
             ...defaultOrderValues,
             id: newId
@@ -34,7 +34,7 @@ export const OrderReducer: Record<OrderReducerFunctions, (state: SidurStore, act
         const cloneOriginOrder = newState.orders.find(order => cloneOriginId === order.id);
         if (cloneOriginOrder) {
             const orderIndex = newState.orders.indexOf(cloneOriginOrder) + 1;
-            const newId = Utilities.getNextId(getAllOrdersIDs(state))
+            const newId = Utils.getNextId(getAllOrdersIDs(state))
             const newOrder: OrderModel = {
                 ...cloneOriginOrder,
                 id: newId

@@ -4,7 +4,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import {OrderModel} from '../../models/Order.model';
 import {Divider, Typography} from '@mui/material';
 import {DriveModel, SketchModel, VehicleScheduleModel} from '../../models/Sketch.model';
-import {Utilities} from '../../services/utilities';
+import {Utils} from '../../services/utils';
 import {VehicleModel} from '../../models/Vehicle.model';
 import {locations} from '../../services/locations';
 import {SketchDrive} from './SketchDrive';
@@ -36,7 +36,7 @@ export const Sketch = () => {
         return locations.find(v => v.id === locationId)?.Name || locationId
     }
 
-    const sketchInEdit: SketchModel = sketches[0] || Utilities.defaultSketchMMock();
+    const sketchInEdit: SketchModel = sketches[0] || Utils.defaultSketchMMock();
 
 
     return (

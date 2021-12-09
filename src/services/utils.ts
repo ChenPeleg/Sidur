@@ -1,29 +1,9 @@
 import {hashFunction} from './hash-function';
 import {DriveModel, SketchModel, VehicleScheduleModel} from '../models/Sketch.model';
-import {OrderModel} from '../models/Order.model';
 import {DriveType} from '../models/DriveType.enum';
 
 
-export class CloneUtil {
-    constructor() {
-    }
-
-    public static deep(obj: OrderModel, name: 'OrderModel'): OrderModel ;
-    public static deep(obj: SketchModel, name: 'SketchModel'): SketchModel ;
-    public static deep(obj: any, name: string,): any {
-        const newObj = {...obj}
-        switch (name) {
-            case 'SketchModel':
-                break;
-            case 'OrderModel':
-                newObj.flexibility = [(newObj).flexibility[0], (newObj).flexibility[1]];
-        }
-        return newObj;
-    }
-}
-
-
-export const Utilities = {
+export const Utils = {
     getNextId: (currentIds: string[]): string => {
         const allIds: number [] = currentIds.map(id => Number(id));
         allIds.push(0)
@@ -93,7 +73,8 @@ export const Utilities = {
             vehicleSchedules: [vehicle1, vehicle2],
             id: '1',
             Comments: '',
-            name: 'סידור בשני רכבים'
+            name: 'סידור בשני רכבים',
+            unassignedOrders: []
         }
     },
 

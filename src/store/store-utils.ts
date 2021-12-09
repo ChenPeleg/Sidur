@@ -12,14 +12,7 @@ export const StoreUtils = {
         const saveObj: SaveDataModel = StoreUtils.buildSaveDataModel(state, 'chen', 'chen')
         SaveLoadService.saveToLocalStorage(saveObj);
     },
-    deepCloneSidur: (sidur: SidurRecord): SidurRecord => {
-        const clonedSidur = {...sidur}
-        clonedSidur.orders = clonedSidur.orders.map(o => ({...o}));
-        clonedSidur.deletedOrders = clonedSidur.deletedOrders.map(o => ({...o}));
-        clonedSidur.sketches = clonedSidur.sketches.map(o => ({...o}));
-        clonedSidur.defaultOrderValues = clonedSidur.defaultOrderValues ? {...clonedSidur.defaultOrderValues} : undefined
-        return clonedSidur
-    },
+
     UpdateSidurCollectionWithCurrenSidur: (state: SidurStore): SidurRecord[] => {
         const newState = {...state}
         const sidurId = newState.sidurId;

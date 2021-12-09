@@ -3,7 +3,7 @@ import {ActionsTypes} from './types.actions';
 
 import {IAction, SidurRecord, SidurStore} from './store.types';
 import {StoreUtils} from './store-utils';
-import {Utilities} from '../services/utilities';
+import {Utils} from '../services/utils';
 import {SidurBuilder} from '../sidurBuilder/sidurBuilder.main';
 import {SketchModel} from '../models/Sketch.model';
 
@@ -17,7 +17,7 @@ export const SketchReducer: Record<SketchReducerFunctions, (state: SidurStore, a
         if (!newState.sketches) {
             newState.sketches = [];
         }
-        const newId = Utilities.getNextId(newState.sketches.map(v => v.id));
+        const newId = Utils.getNextId(newState.sketches.map(v => v.id));
         const chosenSidurObj: SidurRecord | undefined = newState.sidurCollection.find((record: SidurRecord) => record.id === newState.sidurId);
         if (chosenSidurObj !== undefined) {
             const deconstructedSidur = {...chosenSidurObj};

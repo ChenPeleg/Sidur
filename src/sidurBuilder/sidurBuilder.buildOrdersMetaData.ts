@@ -2,8 +2,8 @@ import {OrderModel} from '../models/Order.model';
 import {OrderMetaDataModel, OrderMetaStatus} from './models/sidurBuilder.models';
 import {SidurBuilderTools} from './sidurBuilder.tools';
 import {DriveType} from '../models/DriveType.enum';
-import {CloneUtil} from '../services/utilities';
 import {locations} from '../services/locations';
+import {CloneUtil} from '../services/clone-utility';
 
 export const SidurBuilderBuildOrdersMetaData = (orders: OrderModel[], buildSettings: any = null): OrderMetaDataModel[] => {
     let idCount: number = 1;

@@ -3,7 +3,7 @@ import {ActionsTypes} from './types.actions';
 
 import {IAction, SidurStore} from './store.types';
 import {StoreUtils} from './store-utils';
-import {Utilities} from '../services/utilities';
+import {Utils} from '../services/utils';
 import {VehicleModel} from '../models/Vehicle.model';
 
 export type VehicleReducerFunctions =
@@ -15,7 +15,7 @@ export type VehicleReducerFunctions =
 export const VehicleReducer: Record<VehicleReducerFunctions, (state: SidurStore, action: IAction) => SidurStore> = {
     [ActionsTypes.NEW_VEHICLE]: (state: SidurStore, action: IAction): SidurStore => {
         let newState = {...state}
-        const newId = Utilities.getNextId(state.vehicles.map(v => v.id));
+        const newId = Utils.getNextId(state.vehicles.map(v => v.id));
 
         const newVehicle: VehicleModel = action.payload.value;
         newVehicle.id = newId;
@@ -42,7 +42,7 @@ export const VehicleReducer: Record<VehicleReducerFunctions, (state: SidurStore,
             if (existingNames.includes(updateVehicle.vehicleName)) {
                 updateVehicle.vehicleName = updateVehicle.vehicleName + ' ' + updateVehicle.id.toString()
             }
-            const newIdIfNeeded = Utilities.getNextId(state.vehicles.map(v => v.id));
+            const newIdIfNeeded = Utils.getNextId(state.vehicles.map(v => v.id));
 
             newState.vehicles = newState.vehicles.map(vehicle => {
                 if ((vehicleId === vehicle.id)) {

@@ -1,7 +1,7 @@
 import {FileUploadType, IAction, SaveDataModel, SidurStore} from './store.types';
 import {StoreUtils} from './store-utils';
 import {DownloadFile} from '../services/download-file';
-import {Utilities} from '../services/utilities';
+import {Utils} from '../services/utils';
 import {ActionsTypes} from './types.actions';
 import {ImportOrdersFromText} from '../services/import-orders-from-text';
 import {OrderModel} from '../models/Order.model';
@@ -27,7 +27,7 @@ export const ImportExportReducer: Record<ImportReducerFunctions, (state: SidurSt
         try {
             const fileObj: any = JSON.parse(fileAsString);
             if (fileObj && fileObj?.savedStore && fileObj?.hash) {
-                Utilities.validateHash(fileObj?.savedStore, fileObj?.hash);
+                Utils.validateHash(fileObj?.savedStore, fileObj?.hash);
                 const storeFromFile = {
                     ...fileObj
                         .savedStore

@@ -4,7 +4,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import {Button, Select, SelectChangeEvent, Typography} from '@mui/material';
 import {translations} from '../../services/translations';
 import {SketchModel} from '../../models/Sketch.model';
-import {Utilities} from '../../services/utilities';
+import {Utils} from '../../services/utils';
 import {ActionsTypes} from '../../store/types.actions';
 import {SidurStore} from '../../store/store.types';
 import {SketchActionType} from '../../models/SketchMenuClickActionType.enum';
@@ -100,7 +100,7 @@ export const SketchesContainer = () => {
             }
         })
     }
-    const sketchInEdit: SketchModel = sketches.find((sketch: SketchModel) => sketch.id === SketchIdInEdit) || Utilities.defaultSketchMMock();
+    const sketchInEdit: SketchModel = sketches.find((sketch: SketchModel) => sketch.id === SketchIdInEdit) || Utils.defaultSketchMMock();
 
     const sketchName = sketchInEdit.name;
     return (

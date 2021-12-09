@@ -5,7 +5,7 @@ import {styled, Theme} from '@mui/system';
 import {Rating, Typography} from '@mui/material';
 import {Person} from '@mui/icons-material';
 import {translations} from '../../services/translations';
-import {Utilities} from '../../services/utilities';
+import {Utils} from '../../services/utils';
 
 
 const rootSx = {
@@ -54,7 +54,7 @@ export const RenderPassengerField = (
     }: TextFieldPropertiesModel,
 ) => {
     const convertedInput = {...input};
-    convertedInput.value = Utilities.convertStrToNum(convertedInput.value)
+    convertedInput.value = Utils.convertStrToNum(convertedInput.value)
 
     return (
         <>
@@ -74,7 +74,7 @@ export const RenderPassengerField = (
                               console.log(args);
 
                               input.onChange(...args);
-                              
+
                           }}
                           icon={<Person fontSize="inherit"/>}
                           emptyIcon={<Person fontSize="inherit"/>}
