@@ -29,7 +29,7 @@ export interface SketchModel {
     id: string,
     name: string,
     vehicleSchedules: VehicleScheduleModel[],
-    unassignedOrders: DriveModel[]
+    unassignedOrders: OrderModel[]
     Comments: string,
     suggestions?: any,
 }

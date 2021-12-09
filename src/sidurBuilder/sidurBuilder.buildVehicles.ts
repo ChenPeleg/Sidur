@@ -1,6 +1,7 @@
 import {DriveModel, VehicleScheduleModel} from '../models/Sketch.model';
 import {VehicleModel} from '../models/Vehicle.model';
 import {OrderMetaDataModel, OrderMetaStatus} from './models/sidurBuilder.models';
+import {OrderModel} from '../models/Order.model';
 
 interface OrdMetaScheduleData {
     start: number,
@@ -10,7 +11,10 @@ interface OrdMetaScheduleData {
 
 }
 
-export const SidurBuilderBuildVehicles = (orders: OrderMetaDataModel[], vehicles: VehicleModel[], buildSettings: any = null): VehicleScheduleModel[] => {
+export const SidurBuilderBuildVehiclesAndUnAssigned = (orders: OrderMetaDataModel[], vehicles: VehicleModel[], buildSettings: any = null): {
+    vehicleSchedules: VehicleScheduleModel[],
+    unassignedOrders: OrderModel[]
+} => {
     const metaOrderScheduleData: OrdMetaScheduleData[] = orders.map((o: OrderMetaDataModel) => {
         return {
             start: o.start,
@@ -37,26 +41,29 @@ export const SidurBuilderBuildVehicles = (orders: OrderMetaDataModel[], vehicles
         let currentHour: number = 0.1;
         metaOrderScheduleData.forEach(metaOrder => {
             if (metaOrder.start > currentHour) {
-                const releventMetaDrive: OrderMetaDataModel | undefined = orders.find(meta => meta.id === metaOrder.id)
-                if (!releventMetaDrive || releventMetaDrive.status === OrderMetaStatus.Approved) {
+                const relevantMetaDrive: OrderMetaDataModel | undefined = orders.find(meta => meta.id === metaOrder.id)
+                if (!relevantMetaDrive || relevantMetaDrive.status === OrderMetaStatus.Approved) {
                     return
                 }
                 const newDrive: DriveModel = {
-                    ...releventMetaDrive
+                    ...relevantMetaDrive
                         .order,
-                    implementsOrders: [releventMetaDrive
+                    implementsOrders: [relevantMetaDrive
                         .order.id],
                     description: '',
                     id: idDriveModel.toString()
                 }
                 schedule.drives.push(newDrive);
-                releventMetaDrive.status = OrderMetaStatus.Approved;
+                relevantMetaDrive.status = OrderMetaStatus.Approved;
                 currentHour = metaOrder.finish;
 
 
             }
         })
     })
-
-    return vehicleSchedules
+    const unassignedOrders: OrderModel[] = orders.filter(o => o.status === OrderMetaStatus.None).map(o => o.order);
+    return {
+        vehicleSchedules,
+        unassignedOrders
+    }
 }

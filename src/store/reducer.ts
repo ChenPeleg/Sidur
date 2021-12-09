@@ -102,6 +102,7 @@ const reducer = (state: SidurStore = initialState, action: IAction) => {
 
         case ActionsTypes.NEW_SKETCH:
         case ActionsTypes.CHOOSE_SKETCH:
+        case  ActionsTypes.CLONE_SKETCH:
         case ActionsTypes.RENAME_SKETCH:
         case ActionsTypes.DELETE_SKETCH:
             return SketchReducer [action.type](newState, action)

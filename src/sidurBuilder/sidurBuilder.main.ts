@@ -2,9 +2,10 @@ import {SidurRecord} from '../store/store.types';
 import {SketchModel, VehicleScheduleModel} from '../models/Sketch.model';
 import {OrderMetaDataModel, SidurBuildSettings} from './models/sidurBuilder.models';
 import {SidurBuilderBuildOrdersMetaData} from './sidurBuilder.buildOrdersMetaData';
-import {SidurBuilderBuildVehicles} from './sidurBuilder.buildVehicles';
+import {SidurBuilderBuildVehiclesAndUnAssigned} from './sidurBuilder.buildVehicles';
 import {SidurBuilderTools} from './sidurBuilder.tools';
 import {Utils} from '../services/utils';
+import {OrderModel} from '../models/Order.model';
 
 export const SidurBuilder = (Sidur: SidurRecord, buildSettings: any = null): SketchModel => {
     if (Sidur === null) {
@@ -12,16 +13,19 @@ export const SidurBuilder = (Sidur: SidurRecord, buildSettings: any = null): Ske
     }
     const settings: SidurBuildSettings = {custom: null}
     const ordersMetaData: OrderMetaDataModel[] = SidurBuilderBuildOrdersMetaData(Sidur.orders, settings)
-    const initialVehicles: VehicleScheduleModel [] = SidurBuilderBuildVehicles(ordersMetaData, Sidur.vehicles, settings);
-    let v = initialVehicles;
+    const BuildResult = SidurBuilderBuildVehiclesAndUnAssigned(ordersMetaData, Sidur.vehicles, settings);
+    const initialVehicles: VehicleScheduleModel [] = BuildResult.vehicleSchedules;
+    const unassignedOrders: OrderModel [] = BuildResult.unassignedOrders;
+
 
     const baseSketch: SketchModel = {
         id: '2',
         name: 'first sketch',
         vehicleSchedules: initialVehicles,
         Comments: '',
-        unassignedOrders: []
+        unassignedOrders: unassignedOrders
     };
+    
     const newId = Utils.getNextId(Sidur.sketches.map(v => v.id));
     baseSketch.id = newId;
     baseSketch.name = SidurBuilderTools.createSketchName(baseSketch.id);

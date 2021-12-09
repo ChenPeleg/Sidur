@@ -6,9 +6,15 @@ import {StoreUtils} from './store-utils';
 import {Utils} from '../services/utils';
 import {SidurBuilder} from '../sidurBuilder/sidurBuilder.main';
 import {SketchModel} from '../models/Sketch.model';
+import {CloneUtil} from '../services/clone-utility';
+import {translations} from '../services/translations';
 
 export type SketchReducerFunctions =
-    | ActionsTypes.NEW_SKETCH | ActionsTypes.CHOOSE_SKETCH | ActionsTypes.RENAME_SKETCH | ActionsTypes.DELETE_SKETCH;
+    | ActionsTypes.NEW_SKETCH
+    | ActionsTypes.CHOOSE_SKETCH
+    | ActionsTypes.RENAME_SKETCH
+    | ActionsTypes.DELETE_SKETCH
+    | ActionsTypes.CLONE_SKETCH;
 
 
 export const SketchReducer: Record<SketchReducerFunctions, (state: SidurStore, action: IAction) => SidurStore> = {
@@ -110,6 +116,25 @@ export const SketchReducer: Record<SketchReducerFunctions, (state: SidurStore, a
         return newState
 
     },
+    [ActionsTypes.CLONE_SKETCH]: (state: SidurStore, action: IAction): SidurStore => {
+        let newState = {...state}
+        const sketchIdToClone = action.payload.id;// newState.sidurId;
+        let sketchForCloning: SketchModel | undefined = newState.sketches.find(s => s.id === sketchIdToClone);
+
+        if (sketchForCloning) {
+            const newSketch: SketchModel = CloneUtil.deepCloneSketch(sketchForCloning);
+            newSketch.name = translations.CopyOf + ' ' + newSketch.name;
+            const newSketchId = Utils.getNextId(getAllSketchesIDs(state));
+            newSketch.id = newSketchId
+            newState.sketches = newState.sketches.map(c => c);
+            newState.sketches.push(newSketch);
+            newState.SketchIdInEdit = newSketchId;
+            // newState = setChosenSidur(newState, newSketch);
+        }
+        newState = updateSidurRecordWithSketchChanges(newState)
+        return newState
+
+    },
 
 
 }
@@ -119,7 +144,7 @@ const updateSidurRecordWithSketchChanges = (state: SidurStore): SidurStore => {
 
 
     if (thisSidurInCollection) {
-        thisSidurInCollection.sketches = newState.sketches.map(s => cloneSketch(s))
+        thisSidurInCollection.sketches = newState.sketches.map(s => CloneUtil.deepCloneSketch(s))
     }
 
 
@@ -128,8 +153,8 @@ const updateSidurRecordWithSketchChanges = (state: SidurStore): SidurStore => {
 }
 
 
-const cloneSketch = (original: SketchModel): SketchModel => {
-    const newSketch = {...original};
-    newSketch.vehicleSchedules = newSketch.vehicleSchedules.map(v => ({...v}))
-    return newSketch;
+const getAllSketchesIDs = (state: SidurStore): string[] => {
+    const sketchesIds = state.sketches.map(o => o.id);
+
+    return [...sketchesIds]
 }
