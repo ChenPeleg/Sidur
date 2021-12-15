@@ -48,6 +48,7 @@ export const translations = {
     'Cancel': 'ביטול',
     'CreateSketch': 'צור סקיצה חדשה',
     'NewOrder': 'הזמנה חדשה',
+    'PendingOrders': 'הזמנות לטיפול',
     'CopyOf': '(עותק)',
     'Trash': 'אשפה',
     'inArchive': 'ארכיון',

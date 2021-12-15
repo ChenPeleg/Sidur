@@ -9,6 +9,7 @@ import {VehicleModel} from '../../models/Vehicle.model';
 import {locations} from '../../services/locations';
 import {SketchDrive} from './SketchDrive';
 import {SidurStore} from '../../store/store.types';
+import {SketchPendingOrders} from './SketchPendeingOrders';
 
 
 export const Sketch = () => {
@@ -41,7 +42,6 @@ export const Sketch = () => {
 
     return (
         <Box>
-
             <Box id={'sketch-wrapper-row'} sx={{
                 display: 'flex',
                 flexDirection: 'row',
@@ -50,6 +50,9 @@ export const Sketch = () => {
                 justifyContent: 'center',
                 minWidth: '30vw',
             }}>
+                <SketchPendingOrders pendingOrders={sketchInEdit.unassignedOrders}/>
+
+
                 {sketchInEdit.vehicleSchedules.map((vehicleTimeTable: VehicleScheduleModel) => {
                     return (<>
                         <Box key={vehicleTimeTable.id} id={'vehicle-column'} sx={{
@@ -59,7 +62,7 @@ export const Sketch = () => {
                             m: '15px',
                             mt: '0px',
                             justifyContent: 'start',
-                            minWidth: '20vw',
+                            minWidth: '6vw',
                             minHeight: '60vh',
                         }}> <Typography variant={'h6'}>{getVehicleNameFromId(vehicleTimeTable.id)}  </Typography>
                             {vehicleTimeTable.drives.map((drive: DriveModel) => {
