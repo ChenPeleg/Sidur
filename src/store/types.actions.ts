@@ -40,6 +40,9 @@ export enum ActionsTypes {
     CLONE_SKETCH = 'CLONE_SKETCH',
     CHOOSE_SKETCH = 'CHOOSE_SKETCH',
 
+    /*pending Orders */
+    CLICKED_PENDING_ORDER = 'CLICKED_PENDING_ORDER'
+
 }
 
 

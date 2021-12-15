@@ -1,7 +1,7 @@
 import React from 'react'
 import {Box} from '@mui/system';
 import {useDispatch} from 'react-redux';
-import {Card, Typography} from '@mui/material';
+import {Typography} from '@mui/material';
 import {locations} from '../../services/locations';
 import {LanguageUtilites} from '../../services/language-utilites';
 import {OrderModel} from '../../models/Order.model';
@@ -9,6 +9,7 @@ import {OrderModel} from '../../models/Order.model';
 
 interface sketchPendingOrderProps {
     order: OrderModel,
+    isInEdit: boolean
 }
 
 const getLocationFromId = (locationId: string): string | null => {
@@ -22,36 +23,18 @@ export const SketchPendingOrderBrief = (props: sketchPendingOrderProps) => {
 
 
     return ((<Box id={'pending-order'}>
-            <Card sx={{
-                m: '0.2em',
-                mb: '0.3em',
-                minHeight: '10vh',
-                display: 'flex',
-                flexDirection: 'row',
-                alignItems: 'stretch',
-                justifyContent: 'start',
-            }}>
 
-                <Box id={'drive-description'} sx={{
-                    display: 'flex',
-                    flexDirection: 'row',
-                    alignItems: 'start',
-                    justifyContent: 'start',
-                    p: '0.2em',
-                    pl: '0.4em',
-                    pr: '0.4em',
-                    flexGrow: 4,
 
-                }}>
-                    <Box sx={{
-                        width: '5px',
-                        height: '10px'
-                    }}/>
-                    <Typography
-                        variant={'subtitle1'}>{timeText(order) + ' ' + driverAndLocation(order)}  </Typography>
+            <Box id={'drive-description'}>
+                <Box sx={{
+                    width: '5px',
+                    height: '10px'
+                }}/>
+                <Typography
+                    variant={'subtitle1'}>{timeText(order) + ' ' + driverAndLocation(order)}  </Typography>
 
-                </Box>
-            </Card>
+            </Box>
+           
         </Box>)
 
     )

@@ -9,6 +9,7 @@ import {VehicleReducer} from './vehicle.reducer';
 import {ActionsTypes} from './types.actions';
 import {DisplayReducer} from './display.reducer';
 import {SketchReducer} from './sketch.reducer';
+import {PendingOrdersReducer} from './pendingOrders.reducer';
 
 
 const startOrders: OrderModel[] = ['חן', 'אבי', 'רוני'].map((name: string, index: number): OrderModel => ({
@@ -53,7 +54,8 @@ const defaultInitialState: SidurStore = {
     defaultOrderValues: {...defaultOrderValues},
     sketches: [],
     displaySetting: {view: 'both'},
-    SketchIdInEdit: null
+    SketchIdInEdit: null,
+    pendingOrderIdInEdit: null
 }
 
 const stateFromLocalStorage: SidurStore | undefined = SaveLoadService.loadFromLocalStorage('chen').data?.savedStore
@@ -106,6 +108,9 @@ const reducer = (state: SidurStore = initialState, action: IAction) => {
         case ActionsTypes.RENAME_SKETCH:
         case ActionsTypes.DELETE_SKETCH:
             return SketchReducer [action.type](newState, action)
+
+        case ActionsTypes.CLICKED_PENDING_ORDER:
+            return PendingOrdersReducer [action.type](newState, action)
 
         default:
             break;

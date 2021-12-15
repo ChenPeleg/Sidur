@@ -29,15 +29,16 @@ export interface DisplaySettings {
 export interface SidurStore {
     sidurCollection: SidurRecord[];
     sidurArchive: SidurRecord[];
-    sidurId: string;
     orders: OrderModel[];
     vehicles: VehicleModel[];
     deletedOrders: OrderModel[];
-    orderIdInEdit: null | string;
     dataHolderForCurrentOrderInEdit: OrderModel | null;
     defaultOrderValues: OrderModel,
     displaySetting: DisplaySettings,
     sketches: SketchModel[];
+    sidurId: string;
+    orderIdInEdit: null | string;
+    pendingOrderIdInEdit: null | string;
     SketchIdInEdit: null | string;
 
 }
