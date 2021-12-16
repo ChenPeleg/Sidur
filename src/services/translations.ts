@@ -1,6 +1,7 @@
 //interface
 
 export const translations = {
+    'close': 'סגור',
     'All': 'הכל',
     'Sidur': 'סידור',
     'Order': 'הזמנה',
@@ -80,5 +81,15 @@ export const translations = {
     'first': 'ראשונה',
     'second': 'שנייה',
     'third': 'שלישית',
+    'action': 'פעולה',
+    'moerActions': 'פעולות נוספות',
+    SketechActionRemove: 'סמן כטופלה',
+    SketechActionMerge: 'מזג עם נסיעה אחרת',
+    SketechActionSplit: 'פיצול להסעה ואיסוף',
+    SketechActionChange: 'שינוי נסיעה',
+    SketechActionChangeTime: 'שינוי שעות של נסיעה קיימת',
+    SketechActionReplaceExisting: 'העבר לרכב במקום נסיעה קיימת',
+    SketechActionpublicTransport: 'צור פתרון בתחב"צ',
+
 
 }

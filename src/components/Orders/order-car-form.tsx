@@ -14,7 +14,7 @@ import {translations} from '../../services/translations';
 import {ActionsTypes} from '../../store/types.actions';
 import {LocationModel} from '../../models/Location.model';
 import {locations} from '../../services/locations';
-import {LanguageUtilites} from '../../services/language-utilites';
+import {LanguageUtilities} from '../../services/language-utilities';
 import {RenderPassengerField} from '../Form/passengers-field';
 import {RenderFlexibilityField} from '../Form/flexibility-field';
 import {RenderSelectFieldAutoComplete} from '../Form/select-field-auto-complete';
@@ -92,7 +92,7 @@ const MaterialUiForm = (muiFormProps: MuiFormPropsModel) => {
         ...fieldWrapper,
         display: isAdvanced ? 'initial' : 'none'
     }
-    const driveTimelanguage = LanguageUtilites.getPrefixByDriveType(typeOfDrive)
+    const driveTimelanguage = LanguageUtilities.getPrefixByDriveType(typeOfDrive)
     //console.log(typeOfDrive, driveTimelanguage.location)
     return (
 

@@ -4,8 +4,8 @@ import React from 'react';
 import {styled, Theme} from '@mui/system';
 import {Rating, Typography} from '@mui/material';
 import {Person} from '@mui/icons-material';
-import {translations} from '../../services/translations';
 import {Utils} from '../../services/utils';
+import {LanguageUtilities} from '../../services/language-utilities';
 
 
 const rootSx = {
@@ -18,14 +18,7 @@ const rootSx = {
         // paddingBottom: '10px'
     }
 }
-// <Typography component="legend">Controlled</Typography>
-// <Rating
-//     name="simple-controlled"
-//     value={value}
-//     onChange={(event, newValue) => {
-//         setValue(newValue);
-//     }}
-
+ 
 
 // />
 const StyledRating = styled(Rating)({
@@ -36,12 +29,7 @@ const StyledRating = styled(Rating)({
         color: '#3b0c0f',
     },
 });
-const renderPassengerText = (num: string): string => {
-    if (num === '1') {
-        return translations.onePassenger
-    }
-    return num.toString() + ' ' + translations.passengers
-}
+
 export const RenderPassengerField = (
     {
         input,
@@ -58,7 +46,7 @@ export const RenderPassengerField = (
 
     return (
         <>
-            <Typography component="legend">{renderPassengerText(input.value)}</Typography>
+            <Typography component="legend">{LanguageUtilities.renderPassengerText(input.value)}</Typography>
             <StyledRating variant={'standard'}
                           dir={'rtl'}
                           style={{

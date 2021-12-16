@@ -3,7 +3,7 @@ import {Box} from '@mui/system';
 import {useDispatch} from 'react-redux';
 import {Typography} from '@mui/material';
 import {locations} from '../../services/locations';
-import {LanguageUtilites} from '../../services/language-utilites';
+import {LanguageUtilities} from '../../services/language-utilities';
 import {OrderModel} from '../../models/Order.model';
 
 
@@ -15,8 +15,8 @@ interface sketchPendingOrderProps {
 const getLocationFromId = (locationId: string): string | null => {
     return locations.find(v => v.id === locationId)?.Name || locationId
 }
-const timeText = (drive: OrderModel) => LanguageUtilites.buildBriefText(drive, locations).timeText;
-const driverAndLocation = (drive: OrderModel) => LanguageUtilites.buildBriefText(drive, locations).driverAndLocation;
+const timeText = (drive: OrderModel) => LanguageUtilities.buildBriefText(drive, locations).timeText;
+const driverAndLocation = (drive: OrderModel) => LanguageUtilities.buildBriefText(drive, locations).driverAndLocation;
 export const SketchPendingOrderBrief = (props: sketchPendingOrderProps) => {
     const dispatch = useDispatch();
     const order = props.order;
@@ -34,7 +34,7 @@ export const SketchPendingOrderBrief = (props: sketchPendingOrderProps) => {
                     variant={'subtitle1'}>{timeText(order) + ' ' + driverAndLocation(order)}  </Typography>
 
             </Box>
-           
+
         </Box>)
 
     )

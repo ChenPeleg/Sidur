@@ -50,6 +50,7 @@ export const SketchPendingOrder = (props: sketchPendingOrderProps) => {
                     mb: '0.3em',
                     minHeight: '10vh',
                     minWidth: '30vw',
+                    maxWidth: '50vw',
                     cursor: 'pointer',
                     display: 'flex',
                     flexDirection: 'row',
@@ -57,31 +58,35 @@ export const SketchPendingOrder = (props: sketchPendingOrderProps) => {
                     justifyContent: 'start',
                 }}
                       onClick={(event: any) => !props.isInEdit ? cardClickHandler(event) : null}>
-                    <div tabIndex={0}>
-
-                        <Box sx={{
-
-                            display: 'flex',
-                            flexDirection: 'row',
-                            justifyContent: 'space-between'
-                        }}>
-                            <SketchPendingOrderBrief isInEdit={props.isInEdit} order={props.order}/>
+                    <Box sx={{
+                        display: 'flex',
+                        flexDirection: 'column',
+                        alignItems: 'start',
+                        justifyContent: 'start'
+                    }}>
+                        <div tabIndex={0}>
                             <Box sx={{
+
                                 display: 'flex',
-                                flexDirection: 'row'
+                                flexDirection: 'row',
+                                justifyContent: 'space-between',
+                                mr: '0.6em',
+                                ml: '0.6em',
+                                mt: '0'
                             }}>
+                                <SketchPendingOrderBrief isInEdit={props.isInEdit} order={props.order}/>
+
 
                             </Box>
-
-                        </Box>
-                    </div>
+                        </div>
 
 
-                    <Collapse in={props.isInEdit} unmountOnExit>
+                        <Collapse in={props.isInEdit} unmountOnExit>
 
-                        <SketchPendingOrderFull isInEdit={props.isInEdit} order={order}/>
+                            <SketchPendingOrderFull isInEdit={props.isInEdit} order={order}/>
 
-                    </Collapse>
+                        </Collapse>
+                    </Box>
 
                 </Card>
 

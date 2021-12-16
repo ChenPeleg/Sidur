@@ -4,7 +4,7 @@ import {useDispatch} from 'react-redux';
 import {Card, Typography} from '@mui/material';
 import {DriveModel} from '../../models/Sketch.model';
 import {locations} from '../../services/locations';
-import {LanguageUtilites} from '../../services/language-utilites';
+import {LanguageUtilities} from '../../services/language-utilities';
 
 
 interface sketchDriveProps {
@@ -14,8 +14,8 @@ interface sketchDriveProps {
 const getLocationFromId = (locationId: string): string | null => {
     return locations.find(v => v.id === locationId)?.Name || locationId
 }
-const timeText = (drive: DriveModel) => LanguageUtilites.buildBriefText(drive, locations).timeText;
-const driverAndLocation = (drive: DriveModel) => LanguageUtilites.buildBriefText(drive, locations).driverAndLocation;
+const timeText = (drive: DriveModel) => LanguageUtilities.buildBriefText(drive, locations).timeText;
+const driverAndLocation = (drive: DriveModel) => LanguageUtilities.buildBriefText(drive, locations).driverAndLocation;
 export const SketchDrive = (props: sketchDriveProps) => {
     const dispatch = useDispatch();
     const drive = props.drive;

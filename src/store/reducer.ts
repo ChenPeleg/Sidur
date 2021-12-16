@@ -110,6 +110,7 @@ const reducer = (state: SidurStore = initialState, action: IAction) => {
             return SketchReducer [action.type](newState, action)
 
         case ActionsTypes.CLICKED_PENDING_ORDER:
+        case ActionsTypes.CLICKED_CLOSE_PENDING_ORDER:
             return PendingOrdersReducer [action.type](newState, action)
 
         default:

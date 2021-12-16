@@ -3,6 +3,7 @@ import {translations} from './translations';
 import {OrderModel} from '../models/Order.model';
 import {LocationModel} from '../models/Location.model';
 import {DriveModel} from '../models/Sketch.model';
+import {SketchEditActionEnum} from '../models/SketchEditAction.enum';
 
 interface driveHourPrefixes {
     timeStart: string,
@@ -11,7 +12,7 @@ interface driveHourPrefixes {
 
 }
 
-export const LanguageUtilites = {
+export const LanguageUtilities = {
     getPrefixByDriveType(driveType: DriveType | undefined): driveHourPrefixes {
         switch (driveType) {
             case DriveType.OneWayFrom:
@@ -62,7 +63,7 @@ export const LanguageUtilites = {
         }
         let briefText = orderValues.driverName;
         if (orderValues.TypeOfDrive && orderValues.location) {
-            const driveTimeLanguage = LanguageUtilites.getPrefixByDriveType(orderValues.TypeOfDrive);
+            const driveTimeLanguage = LanguageUtilities.getPrefixByDriveType(orderValues.TypeOfDrive);
             const location = locations.find(l => l.id === orderValues.location);
             if (location) {
                 briefText += ' ' + driveTimeLanguage.location + location.Name
@@ -74,6 +75,51 @@ export const LanguageUtilites = {
             timeText: timeText,
             driverAndLocation: briefText
         }
-    }
+    },
+    renderPassengerText(num: string): string {
+        if (num === '1') {
+            return translations.onePassenger
+        }
+        return num.toString() + ' ' + translations.passengers
+    },
+    buildSketchEditActionsArray(): { action: SketchEditActionEnum, name: string } [] {
+        const ret: { action: SketchEditActionEnum, name: string } [] = []
+        for (let sketchEditActionEnumKey in SketchEditActionEnum) {
+            if (isNaN(Number(sketchEditActionEnumKey))) {
+                continue
+            }
+            let name = sketchEditActionEnumKey;
+            switch (Number(sketchEditActionEnumKey) as SketchEditActionEnum) {
+                case SketchEditActionEnum.Split:
 
+
+                    name = translations.SketechActionSplit;
+
+                    break;
+                case SketchEditActionEnum.Merge:
+                    name = translations.SketechActionMerge;
+                    break;
+                case SketchEditActionEnum.Change:
+                    name = translations.SketechActionChange;
+                    break;
+                case SketchEditActionEnum.ChangeTime:
+                    name = translations.SketechActionChangeTime;
+                    break;
+                case SketchEditActionEnum.ReplaceExisting:
+                    name = translations.SketechActionReplaceExisting;
+                    break;
+                case SketchEditActionEnum.publicTransport:
+                    name = translations.SketechActionpublicTransport
+                    break;
+                case SketchEditActionEnum.Remove:
+                    name = translations.SketechActionRemove;
+                    break;
+            }
+            ret.push({
+                action: Number(sketchEditActionEnumKey),
+                name: name
+            })
+        }
+        return ret
+    }
 }

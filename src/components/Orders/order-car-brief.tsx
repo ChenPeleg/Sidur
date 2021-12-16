@@ -4,7 +4,7 @@ import {OrderFields, OrderModel} from '../../models/Order.model';
 import {Box, SxProps, Theme} from '@mui/system';
 import {Typography} from '@mui/material';
 import {translations} from '../../services/translations';
-import {LanguageUtilites} from '../../services/language-utilites';
+import {LanguageUtilities} from '../../services/language-utilities';
 import {LocationModel} from '../../models/Location.model';
 import {locations} from '../../services/locations';
 import {DriveType} from '../../models/DriveType.enum';
@@ -74,7 +74,7 @@ const buildBriefText = (orderValues: OrderModel): string => {
     }
     let briefText = timeText + ' ' + orderValues.driverName;
     if (orderValues.TypeOfDrive && orderValues.location) {
-        const driveTimeLanguage = LanguageUtilites.getPrefixByDriveType(orderValues.TypeOfDrive);
+        const driveTimeLanguage = LanguageUtilities.getPrefixByDriveType(orderValues.TypeOfDrive);
         const location = allLocations.find(l => l.id === orderValues.location);
         if (location) {
             briefText += ' ' + driveTimeLanguage.location + location.Name
