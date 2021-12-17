@@ -1,41 +1,39 @@
-import React from 'react'
+import React, {useState} from 'react'
 import {Box} from '@mui/system';
 import {useDispatch, useSelector} from 'react-redux';
-import {OrderModel} from '../../models/Order.model';
 import {Divider, Typography} from '@mui/material';
 import {DriveModel, SketchModel, VehicleScheduleModel} from '../../models/Sketch.model';
 import {Utils} from '../../services/utils';
 import {VehicleModel} from '../../models/Vehicle.model';
-import {locations} from '../../services/locations';
 import {SketchDrive} from './SketchDrive';
-import {SidurStore} from '../../store/store.types';
 import {SketchPendingOrders} from './SketchPendeingOrders';
+import {SketchDriveEditDialog} from '../Dialogs/sketch-drive-edit-dialog';
 
 
 export const Sketch = () => {
     const dispatch = useDispatch()
-    const orders = useSelector((state: { orders: OrderModel[] }) => state.orders);
     const vehicles = useSelector((state: { vehicles: VehicleModel[] }) => state.vehicles);
-    const orderIdInEdit = useSelector((state: { orderIdInEdit: string | null }) => state.orderIdInEdit);
     const sketches: SketchModel[] = useSelector((state: { sketches: SketchModel[] }) => state.sketches);
-
+    const [sketchDriveEditOpen, setSketchDriveEditOpen] = React.useState(false);
     const [sketchMoreAnchorEl, setSketchMoreAnchorEl] =
         React.useState<null | HTMLElement>(null);
-    const isSketchMenuOpen = Boolean(sketchMoreAnchorEl);
+    const [chosenDrive, setChosenDrive] = useState(null)
+    const handleSketchDriveEditDelete = () => {
+        setSketchDriveEditOpen(false);
+    }
+    const handleSketchDriveEditClose = () => {
+        setSketchDriveEditOpen(false);
+    }
 
-    const sketchMenuId = 'primary-sketch-menu';
-    const handleSketchMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
-        setSketchMoreAnchorEl(event.currentTarget);
+    const sketchDriveClickHandler = (event: React.MouseEvent<HTMLElement>, drive: DriveModel) => {
+        setChosenDrive(null)
+        setSketchDriveEditOpen(true);
     };
-    const SketchIdInEdit = useSelector((state: SidurStore) => state.SketchIdInEdit);
-
 
     const getVehicleNameFromId = (vehicleId: string): string | null => {
         return vehicles.find(v => v.id === vehicleId)?.vehicleName || vehicleId
     }
-    const getLocationFromId = (locationId: string): string | null => {
-        return locations.find(v => v.id === locationId)?.Name || locationId
-    }
+
 
     const sketchInEdit: SketchModel = sketches[0] || Utils.defaultSketchMMock();
 
@@ -68,7 +66,7 @@ export const Sketch = () => {
                             {vehicleTimeTable.drives.map((drive: DriveModel) => {
                                 return (
                                     <>
-                                        <SketchDrive key={drive.id} drive={drive}/>
+                                        <SketchDrive sketchDriveClick={sketchDriveClickHandler} key={drive.id} drive={drive}/>
 
                                     </>
                                 )
@@ -83,6 +81,8 @@ export const Sketch = () => {
                 })}
 
             </Box>
+            <SketchDriveEditDialog open={sketchDriveEditOpen} onClose={handleSketchDriveEditClose} sketchDriveData={chosenDrive}
+                                   onDelete={handleSketchDriveEditDelete}/>
 
 
         </Box>

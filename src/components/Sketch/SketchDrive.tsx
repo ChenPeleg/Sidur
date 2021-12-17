@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState} from 'react'
 import {Box} from '@mui/system';
 import {useDispatch} from 'react-redux';
 import {Card, Typography} from '@mui/material';
@@ -9,21 +9,28 @@ import {LanguageUtilities} from '../../services/language-utilities';
 
 interface sketchDriveProps {
     drive: DriveModel,
+    sketchDriveClick: (event: React.MouseEvent<HTMLElement>, drive: DriveModel) => void
 }
 
-const getLocationFromId = (locationId: string): string | null => {
-    return locations.find(v => v.id === locationId)?.Name || locationId
-}
+
 const timeText = (drive: DriveModel) => LanguageUtilities.buildBriefText(drive, locations).timeText;
 const driverAndLocation = (drive: DriveModel) => LanguageUtilities.buildBriefText(drive, locations).driverAndLocation;
 export const SketchDrive = (props: sketchDriveProps) => {
     const dispatch = useDispatch();
     const drive = props.drive;
+    const [inHover, setInHover] = useState(false);
+    const onMouseOver = () => {
+        setInHover(true)
+    };
+    const onMouseOut = () => {
+        setInHover(false)
+    };
 
 
     return (
         <Box>
-            <Card sx={{
+            <Card onClick={(event: any) => props.sketchDriveClick(event, drive)} onMouseOver={onMouseOver}
+                  onMouseOut={onMouseOut} elevation={inHover ? 8 : 2} sx={{
                 m: '0.2em',
                 mb: '0.3em',
                 minHeight: '10vh',
@@ -31,6 +38,7 @@ export const SketchDrive = (props: sketchDriveProps) => {
                 flexDirection: 'row',
                 alignItems: 'stretch',
                 justifyContent: 'start',
+                cursor: 'default'
             }}>
                 <Box id={'drive-hour'} sx={{
                     display: 'flex',
