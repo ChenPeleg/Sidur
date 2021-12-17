@@ -93,26 +93,26 @@ export const LanguageUtilities = {
                 case SketchEditActionEnum.Split:
 
 
-                    name = translations.SketechActionSplit;
+                    name = translations.SketchActionSplit;
 
                     break;
                 case SketchEditActionEnum.Merge:
-                    name = translations.SketechActionMerge;
+                    name = translations.SketchActionMerge;
                     break;
                 case SketchEditActionEnum.Change:
-                    name = translations.SketechActionChange;
+                    name = translations.SketchActionChange;
                     break;
                 case SketchEditActionEnum.ChangeTime:
-                    name = translations.SketechActionChangeTime;
+                    name = translations.SketchActionChangeTime;
                     break;
                 case SketchEditActionEnum.ReplaceExisting:
-                    name = translations.SketechActionReplaceExisting;
+                    name = translations.SketchActionReplaceExisting;
                     break;
                 case SketchEditActionEnum.publicTransport:
-                    name = translations.SketechActionpublicTransport
+                    name = translations.SketchActionPublicTransport
                     break;
                 case SketchEditActionEnum.Remove:
-                    name = translations.SketechActionRemove;
+                    name = translations.SketchActionRemove;
                     break;
             }
             ret.push({

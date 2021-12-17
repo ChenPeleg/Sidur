@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {useEffect, useRef, useState} from 'react';
+import {useRef, useState} from 'react';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import Dialog from '@mui/material/Dialog';
@@ -7,7 +7,7 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
 import {translations} from '../../services/translations';
-import {Box, ToggleButton, ToggleButtonGroup} from '@mui/material';
+import {Box} from '@mui/material';
 import {SxProps} from '@mui/system';
 import {Delete} from '@mui/icons-material';
 import {DriveModel} from '../../models/Sketch.model';
@@ -30,11 +30,6 @@ export const SketchDriveEditDialog = (props: SketchDriveEditDialogProps) => {
     const [seatsValue, setSeatsValue] = useState('5');
     const [didDialogJustClosed, setDidDialogJustClosed] = useState(false);
 
-    // if (didDialogJustClosed && open) {
-    //     setSeatsValue(sketchDriveData?.seats || '5');
-    //
-    //     setDidDialogJustClosed(false);
-    // }
 
     const nameValueRef: any = useRef('')
     const commentsValueRef: any = useRef('')
@@ -43,11 +38,7 @@ export const SketchDriveEditDialog = (props: SketchDriveEditDialogProps) => {
         onClose(null);
         setDidDialogJustClosed(true)
     };
-    useEffect(() => {
-        // Update the document title using the browser API
 
-        // document.title = `You clicked ${count} times`;
-    });
     const handleCloseEdit = (): void => {
         let editedData: DriveModel | null = null;
         if (sketchDriveData) {
@@ -73,7 +64,7 @@ export const SketchDriveEditDialog = (props: SketchDriveEditDialogProps) => {
         <div>
 
             <Dialog open={open} onClose={handleCloseCancel}>
-                <DialogTitle> {sketchDriveData?.Comments}</DialogTitle>
+                <DialogTitle> {translations.EditDrive}</DialogTitle>
                 <DialogContent>
                     <Box sx={{...filedWrapper}}>
                         <TextField
@@ -111,33 +102,11 @@ export const SketchDriveEditDialog = (props: SketchDriveEditDialogProps) => {
                             }}
                         />
                     </Box>
+                    {
+                        translations
+                            .connectedOrders
+                    }
 
-                    <Box dir={'ltr'} sx={{
-
-                        flexDirection: 'row',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        marginTop: '1em',
-                        display: 'flex'
-                    }}>
-                        <ToggleButtonGroup
-                            color="primary"
-                            // value={seatsValue}
-                            // defaultValue={vehicleData?.seats || '5'}
-                            exclusive
-                            onChange={(event, value) => {
-
-                                handleSeatsValueChanged(event, value)
-                            }}
-
-                        >
-                            <ToggleButton selected={seatsValue === '7'} key={'7'} value="7"
-                                          dir={'rtl'}>7 {translations.seats} </ToggleButton>
-                            <ToggleButton selected={seatsValue === '5'} key={'5'} value="5"
-                                          dir={'rtl'}>5 {translations.seats} </ToggleButton>
-
-                        </ToggleButtonGroup>
-                    </Box>
                     <Box sx={{
 
                         flexDirection: 'row',

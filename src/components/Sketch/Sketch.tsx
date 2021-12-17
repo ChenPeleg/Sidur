@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import {Box} from '@mui/system';
 import {useDispatch, useSelector} from 'react-redux';
 import {Divider, Typography} from '@mui/material';
@@ -9,6 +9,24 @@ import {SketchDrive} from './SketchDrive';
 import {SketchPendingOrders} from './SketchPendeingOrders';
 import {SketchDriveEditDialog} from '../Dialogs/sketch-drive-edit-dialog';
 
+const MOckDrive = {
+    'id': '0',
+    'flexibility': [
+        '-30',
+        '10'
+    ],
+    'passengers': '1',
+    'location': '6',
+    'TypeOfDrive': '2',
+    'startHour': '09:45',
+    'Comments': 'ורד תשמח לשעה במשגב, גמישה עד 1320. לא דחוף, רק אם מסתדר.',
+    'driverName': 'ורד',
+    'finishHour': '10:00',
+    'implementsOrders': [
+        '104'
+    ],
+    'description': ''
+}
 
 export const Sketch = () => {
     const dispatch = useDispatch()
@@ -17,16 +35,25 @@ export const Sketch = () => {
     const [sketchDriveEditOpen, setSketchDriveEditOpen] = React.useState(false);
     const [sketchMoreAnchorEl, setSketchMoreAnchorEl] =
         React.useState<null | HTMLElement>(null);
-    const [chosenDrive, setChosenDrive] = useState(null)
+    const [chosenDrive, setChosenDrive] = useState<DriveModel | null>(null);
+    const [mock, setMock] = useState<boolean>(false)
     const handleSketchDriveEditDelete = () => {
         setSketchDriveEditOpen(false);
     }
     const handleSketchDriveEditClose = () => {
         setSketchDriveEditOpen(false);
     }
-
+    useEffect(() => {
+        if (!mock) {
+            setTimeout(_ => {
+                setChosenDrive(MOckDrive as DriveModel)
+                setSketchDriveEditOpen(true);
+                setMock(true)
+            }, 2000)
+        }
+    })
     const sketchDriveClickHandler = (event: React.MouseEvent<HTMLElement>, drive: DriveModel) => {
-        setChosenDrive(null)
+        setChosenDrive(drive)
         setSketchDriveEditOpen(true);
     };
 

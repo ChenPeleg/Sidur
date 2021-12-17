@@ -2,6 +2,8 @@
 
 export const translations = {
     'close': 'סגור',
+    'EditDrive': 'עריכת נסיעה',
+    'connectedOrders': ' הזמנות מקושרות',
     'All': 'הכל',
     'Sidur': 'סידור',
     'Order': 'הזמנה',
@@ -83,13 +85,13 @@ export const translations = {
     'third': 'שלישית',
     'action': 'פעולה',
     'moerActions': 'פעולות נוספות',
-    SketechActionRemove: 'סמן כטופלה',
-    SketechActionMerge: 'מזג עם נסיעה אחרת',
-    SketechActionSplit: 'פיצול להסעה ואיסוף',
-    SketechActionChange: 'שינוי נסיעה',
-    SketechActionChangeTime: 'שינוי שעות של נסיעה קיימת',
-    SketechActionReplaceExisting: 'העבר לרכב במקום נסיעה קיימת',
-    SketechActionpublicTransport: 'צור פתרון בתחב"צ',
+    'SketchActionRemove': 'סמן כטופלה',
+    'SketchActionMerge': 'מזג עם נסיעה אחרת',
+    'SketchActionSplit': 'פיצול להסעה ואיסוף',
+    'SketchActionChange': 'שינוי נסיעה',
+    'SketchActionChangeTime': 'שינוי שעות של נסיעה קיימת',
+    'SketchActionReplaceExisting': 'העבר לרכב במקום נסיעה קיימת',
+    'SketchActionPublicTransport': 'צור פתרון בתחב"צ',
 
 
 }
