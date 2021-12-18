@@ -11,6 +11,7 @@ import {Box} from '@mui/material';
 import {SxProps} from '@mui/system';
 import {Delete} from '@mui/icons-material';
 import {DriveModel} from '../../models/Sketch.model';
+import {VerticalHourField} from '../buttons/vertical-hour-field';
 
 interface SketchDriveEditDialogProps {
     open: boolean;
@@ -55,6 +56,10 @@ export const SketchDriveEditDialog = (props: SketchDriveEditDialogProps) => {
         onDelete(sketchDriveData?.id || '');
         setDidDialogJustClosed(true)
     };
+    const handleHourChange =
+        (event: Event, input: any) => {
+
+        }
     const handleSeatsValueChanged = (event: any, value: '7' | '5'): void => {
 
         setSeatsValue(value);
@@ -66,23 +71,30 @@ export const SketchDriveEditDialog = (props: SketchDriveEditDialogProps) => {
             <Dialog open={open} onClose={handleCloseCancel}>
                 <DialogTitle> {translations.EditDrive}</DialogTitle>
                 <DialogContent>
-                    <Box sx={{...filedWrapper}}>
-                        <TextField
-                            autoFocus
-                            margin="dense"
-                            id="vehicle-rename-dialog-text-field"
-                            label={translations.NewName}
-                            type="text"
+                    <Box sx={{
+                        ...filedWrapper,
+                        display: 'flex',
+                        flexDirection: 'column'
+                    }}>
+                        <VerticalHourField input={sketchDriveData?.finishHour}
+                                           onHoursChange={handleHourChange}
+                                           label={translations.Start}/>
+                        {/*<TextField*/}
+                        {/*    autoFocus*/}
+                        {/*    margin="dense"*/}
+                        {/*    id="vehicle-rename-dialog-text-field"*/}
+                        {/*    label={translations.NewName}*/}
+                        {/*    type="text"*/}
 
-                            variant="standard"
-                            defaultValue={sketchDriveData?.description}
-                            inputRef={nameValueRef}
-                            onKeyUp={(event) => {
-                                if (event.key === 'Enter') {
-                                    handleCloseEdit()
-                                }
-                            }}
-                        />
+                        {/*    variant="standard"*/}
+                        {/*    defaultValue={sketchDriveData?.description}*/}
+                        {/*    inputRef={nameValueRef}*/}
+                        {/*    onKeyUp={(event) => {*/}
+                        {/*        if (event.key === 'Enter') {*/}
+                        {/*            handleCloseEdit()*/}
+                        {/*        }*/}
+                        {/*    }}*/}
+                        {/*/>*/}
                     </Box>
                     <Box sx={{...filedWrapper}}>
                         <TextField
