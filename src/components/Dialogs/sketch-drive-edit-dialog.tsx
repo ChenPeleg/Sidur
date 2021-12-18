@@ -34,7 +34,9 @@ export const SketchDriveEditDialog = (props: SketchDriveEditDialogProps) => {
 
     const nameValueRef: any = useRef('')
     const commentsValueRef: any = useRef('')
-    const filedWrapper: SxProps = {width: '230px'}
+    const filedWrapper: SxProps = {
+        // width: '230px'
+    }
     const handleCloseCancel = () => {
         onClose(null);
         setDidDialogJustClosed(true)
@@ -74,63 +76,63 @@ export const SketchDriveEditDialog = (props: SketchDriveEditDialogProps) => {
                     <Box sx={{
                         ...filedWrapper,
                         display: 'flex',
-                        flexDirection: 'column'
+                        flexDirection: 'row'
                     }}>
-                        <VerticalHourField input={sketchDriveData?.finishHour}
-                                           onHoursChange={handleHourChange}
-                                           label={translations.Start}/>
-                        {/*<TextField*/}
-                        {/*    autoFocus*/}
-                        {/*    margin="dense"*/}
-                        {/*    id="vehicle-rename-dialog-text-field"*/}
-                        {/*    label={translations.NewName}*/}
-                        {/*    type="text"*/}
 
-                        {/*    variant="standard"*/}
-                        {/*    defaultValue={sketchDriveData?.description}*/}
-                        {/*    inputRef={nameValueRef}*/}
-                        {/*    onKeyUp={(event) => {*/}
-                        {/*        if (event.key === 'Enter') {*/}
-                        {/*            handleCloseEdit()*/}
-                        {/*        }*/}
-                        {/*    }}*/}
-                        {/*/>*/}
-                    </Box>
-                    <Box sx={{...filedWrapper}}>
-                        <TextField
 
-                            margin="dense"
-                            id="vehicle-comments-dialog-text-field"
-                            label={translations.Comments}
-                            type="text"
-                            fullWidth
-                            variant="standard"
-                            defaultValue={sketchDriveData?.Comments}
-                            inputRef={commentsValueRef}
-                            onKeyUp={(event) => {
-                                if (event.key === 'Enter') {
-                                    handleCloseEdit()
-                                }
-                            }}
-                        />
-                    </Box>
-                    {
-                        translations
-                            .connectedOrders
-                    }
+                        <Box sx={{
+                            ...filedWrapper,
+                            display: 'flex',
+                            flexDirection: 'column',
+                            maxWidth: '80px'
+                        }}>
+                            <VerticalHourField input={sketchDriveData?.finishHour}
+                                               onHoursChange={handleHourChange}
+                                               label={translations.Start}/>
+                           
+                        </Box>
+                        <Box sx={{
+                            ...filedWrapper,
+                            display: 'flex',
+                            flexDirection: 'column'
+                        }}>
+                            <Box sx={{...filedWrapper}}>
+                                <TextField
 
-                    <Box sx={{
+                                    margin="dense"
+                                    id="vehicle-comments-dialog-text-field"
+                                    label={translations.Comments}
+                                    type="text"
+                                    fullWidth
+                                    variant="standard"
+                                    defaultValue={sketchDriveData?.Comments}
+                                    inputRef={commentsValueRef}
+                                    onKeyUp={(event) => {
+                                        if (event.key === 'Enter') {
+                                            handleCloseEdit()
+                                        }
+                                    }}
+                                />
+                            </Box>
+                            {
+                                translations
+                                    .connectedOrders
+                            }
 
-                        flexDirection: 'row',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        marginTop: '1em',
-                        display: 'flex'
-                    }}>
-                        {(sketchDriveData?.id !== '0') ? (
-                            <Button variant="contained" onClick={handleCloseDelete} aria-label="add" size="large">
-                                <Delete/> {translations.Delete}
-                            </Button>) : null}
+                            <Box sx={{
+
+                                flexDirection: 'row',
+                                alignItems: 'center',
+                                justifyContent: 'center',
+                                marginTop: '1em',
+                                display: 'flex'
+                            }}>
+                                {(sketchDriveData?.id !== '0') ? (
+                                    <Button variant="contained" onClick={handleCloseDelete} aria-label="add" size="large">
+                                        <Delete/> {translations.Delete}
+                                    </Button>) : null}
+                            </Box>
+                        </Box>
                     </Box>
                 </DialogContent>
                 <DialogActions>

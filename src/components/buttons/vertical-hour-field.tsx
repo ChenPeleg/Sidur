@@ -36,34 +36,40 @@ const renderFlexibilityText = (flexValuesOrg: number | [number, number]): string
 export const VerticalHourField = (
     props: VerticalHourFieldProps
 ) => {
-    // const handleSliderChange = (event: Event) => {
-    //     const newValue = event.target.value
-    //     setValue(newValue);
-    //     props.onHoursChange(event, event.target)
-    // };
+
     const handleSliderChange = (event: Event, newValue: any) => {
         setValue(newValue);
     };
     const [value, setValue] = React.useState<number | [number, number]>(
         [40, 60],
     );
+    const formatHourLabel = (hourInNumber: number) =>
+        hourInNumber.toString() + ':00'
 
     return (
         <>
-            <Typography component="legend"><b>{translations.flexibility}: </b>{renderFlexibilityText(value)}</Typography>
-
-            <Box sx={{width: '250px'}}>
+            <Box sx={{
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+                justifyContent: 'center',
+                height: '250px'
+            }}>
+                <Typography align={'center'}
+                            component="legend"><b>{translations.DriveTimes}</b>{false ? renderFlexibilityText(value) : null}</Typography>
 
 
                 <Slider
-
+                    orientation="vertical"
                     aria-labelledby="input-slider"
+                    valueLabelDisplay="on"
+                    valueLabelFormat={formatHourLabel}
                     // variant={'standard'}
-                    //sx={sliderSx}
+                    sx={sliderSx}
                     disableSwap
-                    valueLabelDisplay="auto"
                     min={-60}
                     max={120}
+
                     step={10}
                     value={value}
                     onChange={handleSliderChange}

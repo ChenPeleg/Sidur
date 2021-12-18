@@ -2,6 +2,7 @@
 
 export const translations = {
     'close': 'סגור',
+    'DriveTimes': 'זמני הנסיעה',
     'EditDrive': 'עריכת נסיעה',
     'connectedOrders': ' הזמנות מקושרות',
     'All': 'הכל',
