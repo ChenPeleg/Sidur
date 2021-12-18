@@ -3,9 +3,7 @@ import {translations} from '../services/translations';
 export const SidurBuilderTools = {
     hourTextToDecimal(hourText: string): number {
         if (!hourText.includes(':')) {
-            // throw {
-            //     message: 'hour is not set correctly'
-            // }
+
         }
         const splitHour = hourText.split(':');
         const hour = Number(splitHour[0]) || 0;
@@ -14,7 +12,6 @@ export const SidurBuilderTools = {
         return hour + minutesAsFraction;
 
 
-        return 0
     },
     minutesToFraction(minute: string | number): number {
         const minAsNumber = Number(minute) || 0;
@@ -25,7 +22,7 @@ export const SidurBuilderTools = {
     },
     createSketchName(id: string): string {
         switch (id) {
-            
+
             case '1':
                 return translations.first
             case '2':
