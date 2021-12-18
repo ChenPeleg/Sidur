@@ -1,5 +1,5 @@
 import React from 'react';
-import {Box, Slider, Theme, Typography} from '@mui/material';
+import {Box, Slider, Theme} from '@mui/material';
 import {translations} from '../../services/translations';
 
 
@@ -14,7 +14,7 @@ const sliderSx = {
 }
 
 interface VerticalHourFieldProps {
-    input: any,
+    input: [string, string],
     label: string,
     onHoursChange: (event: Event, newHours: any) => void
 }
@@ -55,8 +55,6 @@ export const VerticalHourField = (
                 justifyContent: 'center',
                 height: '250px'
             }}>
-                <Typography align={'center'}
-                            component="legend"><b>{translations.DriveTimes}</b>{false ? renderFlexibilityText(value) : null}</Typography>
 
 
                 <Slider

@@ -7,7 +7,7 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
 import {translations} from '../../services/translations';
-import {Box} from '@mui/material';
+import {Box, Typography} from '@mui/material';
 import {SxProps} from '@mui/system';
 import {Delete} from '@mui/icons-material';
 import {DriveModel} from '../../models/Sketch.model';
@@ -15,7 +15,7 @@ import {VerticalHourField} from '../buttons/vertical-hour-field';
 
 interface SketchDriveEditDialogProps {
     open: boolean;
-    sketchDriveData: DriveModel | null;
+    sketchDriveData: DriveModel;
     onDelete: (id: string | null) => void;
     onClose: (vehicleUpdate: DriveModel | null) => void;
 }
@@ -28,14 +28,14 @@ export const SketchDriveEditDialog = (props: SketchDriveEditDialogProps) => {
         sketchDriveData
     } = props;
 
-    const [seatsValue, setSeatsValue] = useState('5');
+
     const [didDialogJustClosed, setDidDialogJustClosed] = useState(false);
 
 
     const nameValueRef: any = useRef('')
     const commentsValueRef: any = useRef('')
     const filedWrapper: SxProps = {
-        // width: '230px'
+        width: '230px'
     }
     const handleCloseCancel = () => {
         onClose(null);
@@ -46,8 +46,6 @@ export const SketchDriveEditDialog = (props: SketchDriveEditDialogProps) => {
         let editedData: DriveModel | null = null;
         if (sketchDriveData) {
             editedData = {...sketchDriveData};
-            // editedData.seats = seatsValue;
-            // editedData.vehicleName = nameValueRef?.current?.value || sketchDriveData?.vehicleName || '';
             editedData.Comments = commentsValueRef?.current?.value || sketchDriveData?.Comments || '';
         }
 
@@ -62,84 +60,92 @@ export const SketchDriveEditDialog = (props: SketchDriveEditDialogProps) => {
         (event: Event, input: any) => {
 
         }
-    const handleSeatsValueChanged = (event: any, value: '7' | '5'): void => {
 
-        setSeatsValue(value);
-
-    }
     return (
-        <div>
 
-            <Dialog open={open} onClose={handleCloseCancel}>
-                <DialogTitle> {translations.EditDrive}</DialogTitle>
-                <DialogContent>
+
+        <Dialog open={open} onClose={handleCloseCancel}>
+            <DialogTitle> {translations.EditDrive}</DialogTitle>
+            <DialogContent>
+                <Box sx={{
+                    ...filedWrapper,
+                    display: 'flex',
+                    flexDirection: 'row',
+                    minWidth: '30vw'
+                }}>
+
+
                     <Box sx={{
                         ...filedWrapper,
                         display: 'flex',
-                        flexDirection: 'row'
+                        flexDirection: 'column',
+                        maxWidth: '160px',
+                        p: '0 1em',
                     }}>
+                        <Typography align={'center'}
+                                    component="legend"><b>{translations.DriveTimes}</b>
+                        </Typography>
 
+                        <VerticalHourField input={[sketchDriveData.startHour, sketchDriveData.finishHour]}
+                                           onHoursChange={handleHourChange}
+                                           label={translations.Start}/>
 
-                        <Box sx={{
-                            ...filedWrapper,
-                            display: 'flex',
-                            flexDirection: 'column',
-                            maxWidth: '80px'
-                        }}>
-                            <VerticalHourField input={sketchDriveData?.finishHour}
-                                               onHoursChange={handleHourChange}
-                                               label={translations.Start}/>
-                           
+                    </Box>
+                    <Box sx={{
+                        ...filedWrapper,
+                        display: 'flex',
+                        flexDirection: 'column'
+                    }}>
+                        <Typography align={'center'}
+                                    component="legend"><b>{translations.DriveDescription}</b>
+                        </Typography>
+
+                        <Box sx={{...filedWrapper}}>
+                            <TextField
+                                size={'medium'}
+                                sx={{minHeight: '200px'}}
+                                margin="dense"
+                                id="vehicle-comments-dialog-text-field"
+                                //  label={translations.Comments}
+                                type="text"
+                                fullWidth
+                                multiline={true}
+                                variant="standard"
+                                defaultValue={sketchDriveData?.Comments || ''}
+                                inputRef={commentsValueRef}
+                                onKeyUp={(event) => {
+                                    if (event.key === 'Enter') {
+                                        handleCloseEdit()
+                                    }
+                                }}
+                            />
                         </Box>
+                        {
+                            translations
+                                .connectedOrders
+                        }
+
                         <Box sx={{
-                            ...filedWrapper,
-                            display: 'flex',
-                            flexDirection: 'column'
+
+                            flexDirection: 'row',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            marginTop: '1em',
+                            display: 'flex'
                         }}>
-                            <Box sx={{...filedWrapper}}>
-                                <TextField
-
-                                    margin="dense"
-                                    id="vehicle-comments-dialog-text-field"
-                                    label={translations.Comments}
-                                    type="text"
-                                    fullWidth
-                                    variant="standard"
-                                    defaultValue={sketchDriveData?.Comments}
-                                    inputRef={commentsValueRef}
-                                    onKeyUp={(event) => {
-                                        if (event.key === 'Enter') {
-                                            handleCloseEdit()
-                                        }
-                                    }}
-                                />
-                            </Box>
-                            {
-                                translations
-                                    .connectedOrders
-                            }
-
-                            <Box sx={{
-
-                                flexDirection: 'row',
-                                alignItems: 'center',
-                                justifyContent: 'center',
-                                marginTop: '1em',
-                                display: 'flex'
-                            }}>
-                                {(sketchDriveData?.id !== '0') ? (
-                                    <Button variant="contained" onClick={handleCloseDelete} aria-label="add" size="large">
-                                        <Delete/> {translations.Delete}
-                                    </Button>) : null}
-                            </Box>
+                            {(sketchDriveData?.id !== '0') ? (
+                                <Button variant="contained" onClick={handleCloseDelete} aria-label="add" size="large">
+                                    <Delete/> {translations.Delete}
+                                </Button>) : null}
                         </Box>
                     </Box>
-                </DialogContent>
-                <DialogActions>
-                    <Button id={'vehicle-edit-cancel-button'} onClick={handleCloseCancel}>{translations.Cancel}</Button>
-                    <Button id={'vehicle-edit-approve-button'} onClick={handleCloseEdit}>{translations.Approve}</Button>
-                </DialogActions>
-            </Dialog>
-        </div>
+                </Box>
+            </DialogContent>
+            <DialogActions>
+                <Button id={'vehicle-edit-cancel-button'} onClick={handleCloseCancel}>{translations.Cancel}</Button>
+                <Button id={'vehicle-edit-approve-button'} onClick={handleCloseEdit}>{translations.Approve}</Button>
+            </DialogActions>
+        </Dialog>
+
     );
 }

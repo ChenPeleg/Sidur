@@ -48,6 +48,7 @@ export const LanguageUtilities = {
         }
 
     },
+
     buildBriefText(orderValues: OrderModel | DriveModel, locations: LocationModel[]): { timeText: string, driverAndLocation: string } {
         const isWithName = orderValues.driverName.trim() !== '';
         if (!isWithName) {
@@ -81,6 +82,11 @@ export const LanguageUtilities = {
             return translations.onePassenger
         }
         return num.toString() + ' ' + translations.passengers
+    },
+    addLineBreaksToString(str: string, numberOfBR: number = 2): string {
+        const br = '\n   ';
+        const arr = new Array(numberOfBR)
+        return str + arr.map(s => br).join('')
     },
     buildSketchEditActionsArray(): { action: SketchEditActionEnum, name: string } [] {
         const ret: { action: SketchEditActionEnum, name: string } [] = []

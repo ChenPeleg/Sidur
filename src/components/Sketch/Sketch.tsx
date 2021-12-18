@@ -108,8 +108,9 @@ export const Sketch = () => {
                 })}
 
             </Box>
-            <SketchDriveEditDialog open={sketchDriveEditOpen} onClose={handleSketchDriveEditClose} sketchDriveData={chosenDrive}
-                                   onDelete={handleSketchDriveEditDelete}/>
+            {chosenDrive ?
+                <SketchDriveEditDialog open={sketchDriveEditOpen} onClose={handleSketchDriveEditClose} sketchDriveData={chosenDrive}
+                                       onDelete={handleSketchDriveEditDelete}/> : null}
 
 
         </Box>
