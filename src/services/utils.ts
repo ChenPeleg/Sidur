@@ -77,5 +77,72 @@ export const Utils = {
             unassignedOrders: []
         }
     },
+    hourTextToDecimal(hourText: string): number {
+        if (!hourText.includes(':')) {
+
+        }
+        const splitHour = hourText.split(':');
+        const hour = Number(splitHour[0]) || 0;
+        const minutes = Number(splitHour[1]) || 0;
+        const minutesAsFraction = this.minutesToFraction(minutes);
+        return hour + minutesAsFraction;
+
+
+    },
+    DecimalTimeToHourText(time: number): string {
+        if (time !== 0 && !time) {
+            return ''
+        }
+        const numberToTwoDigit = (num: number): string => {
+            if (!num) {
+                num = 0;
+            }
+            let addZero = ''
+            if (num < 10) {
+                addZero = '0'
+            }
+            return addZero + num.toString()
+        }
+        const correctSmallDiversions = (num: number): number => {
+            if (!num) {
+                return num
+            }
+            const remainder = num % 5
+            if (remainder === 0) {
+                return num
+            }
+            if (remainder && remainder > 2.5) {
+                return num + (5 - remainder);
+            } else {
+                return num - remainder;
+            }
+
+        }
+        time += 0.02;
+        const hour = Math.floor(time);
+        const minutesAsFraction = Math.floor(100 * (time - Math.floor(time)));
+        const minutes = this.FractionToMinutes(minutesAsFraction);
+        const minutesCorrected = correctSmallDiversions(minutes);
+        const hourText = numberToTwoDigit(hour)
+        const minuteText = numberToTwoDigit(minutesCorrected)
+        return hourText + ':' + minuteText;
+
+
+    },
+
+    minutesToFraction(minute: string | number): number {
+        const minAsNumber = Number(minute) || 0;
+        if (minAsNumber == 0) {
+            return 0
+        }
+        return Math.floor((minAsNumber / 60) * 100) / 100
+    },
+    FractionToMinutes(minute: number): number {
+        const minAsNumber = Number(minute) || 0;
+        if (minAsNumber == 0) {
+            return 0
+        }
+        return Math.floor((minAsNumber / 100) * 60)
+    },
 
 }

@@ -1,6 +1,6 @@
 import React from 'react';
 import {Box, Slider, Theme} from '@mui/material';
-import {SidurBuilderTools} from '../../sidurBuilder/sidurBuilder.tools';
+import {Utils} from '../../services/utils';
 
 
 const sliderSx = {
@@ -25,7 +25,7 @@ export const VerticalHourField = (
     props: VerticalHourFieldProps
 ) => {
 
-    const inputAsNumbers: [number, number] = props.input.map(i => SidurBuilderTools.hourTextToDecimal(i)) as [number, number]
+    const inputAsNumbers: [number, number] = props.input.map(i => Utils.hourTextToDecimal(i)) as [number, number]
 
 
     const handleSliderChange = (event: Event, newValue: any) => {

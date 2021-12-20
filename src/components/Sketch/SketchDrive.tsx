@@ -42,22 +42,30 @@ export const SketchDrive = (props: sketchDriveProps) => {
             }}>
                 <Box id={'drive-hour'} sx={{
                     display: 'flex',
-                    flexDirection: 'row',
+                    flexDirection: 'column',
                     alignItems: 'start',
                     justifyContent: 'start',
                     flexWrap: 'wrap',
                     p: '0.2em',
-                    pl: '0.4em',
-                    pr: '0.4em',
+                    pl: '0.25em',
+                    pr: '0.25em',
                     bgcolor: '#aadcff',
                     //flexShrink: 4,
-                    width: '20%',
+                    //width: '20%',
                     minHeight: '100%',
                     //flexShrink: '4'
 
                 }}>
                     <Typography dir="ltr"
-                                variant={'subtitle1'}>{timeText(drive)}  </Typography>
+                                variant={'subtitle1'}>{drive.startHour}  </Typography>
+                    <Box sx={{
+                        width: '10px',
+                        height: '2px',
+                        borderBottom: '1px solid black',
+                        alignSelf: 'center'
+                    }}/>
+                    <Typography dir="ltr"
+                                variant={'subtitle1'}>{drive.finishHour}  </Typography>
 
                 </Box>
                 <Box id={'drive-description'} sx={{

@@ -1,17 +1,17 @@
 import {OrderModel} from '../models/Order.model';
 import {OrderMetaDataModel, OrderMetaStatus} from './models/sidurBuilder.models';
-import {SidurBuilderTools} from './sidurBuilder.tools';
 import {DriveType} from '../models/DriveType.enum';
 import {locations} from '../services/locations';
 import {CloneUtil} from '../services/clone-utility';
+import {Utils} from '../services/utils';
 
 export const SidurBuilderBuildOrdersMetaData = (orders: OrderModel[], buildSettings: any = null): OrderMetaDataModel[] => {
     let idCount: number = 1;
     const clonedOrders: OrderModel[] = orders.map((o: OrderModel) => CloneUtil.deep(o, 'OrderModel'));
 
     const ordersMeta: OrderMetaDataModel[] = clonedOrders.map((order: OrderModel) => {
-        const start: number = SidurBuilderTools.hourTextToDecimal(order.startHour);
-        const finish: number = SidurBuilderTools.hourTextToDecimal(order.finishHour);
+        const start: number = Utils.hourTextToDecimal(order.startHour);
+        const finish: number = Utils.hourTextToDecimal(order.finishHour);
         const length = finish - start;
         const metaOrder: OrderMetaDataModel = {
             id: idCount.toString(),
@@ -44,7 +44,7 @@ export const SidurBuilderBuildOrdersMetaData = (orders: OrderModel[], buildSetti
                 }
 
         }
-        const EtaInHours = SidurBuilderTools.minutesToFraction(locationObj.ETA);
+        const EtaInHours = Utils.minutesToFraction(locationObj.ETA);
         switch (driveType) {
             case DriveType.OneWayTo:
                 metaOrder.finish = metaOrder.start + EtaInHours * 2;

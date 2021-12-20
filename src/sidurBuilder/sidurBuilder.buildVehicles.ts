@@ -2,6 +2,7 @@ import {DriveModel, VehicleScheduleModel} from '../models/Sketch.model';
 import {VehicleModel} from '../models/Vehicle.model';
 import {OrderMetaDataModel, OrderMetaStatus} from './models/sidurBuilder.models';
 import {OrderModel} from '../models/Order.model';
+import {Utils} from '../services/utils';
 
 interface OrdMetaScheduleData {
     start: number,
@@ -45,17 +46,22 @@ export const SidurBuilderBuildVehiclesAndUnAssigned = (orders: OrderMetaDataMode
                 if (!relevantMetaDrive || relevantMetaDrive.status === OrderMetaStatus.Approved) {
                     return
                 }
+                currentHour = metaOrder.finish;
+
                 const newDrive: DriveModel = {
                     ...relevantMetaDrive
                         .order,
+                    startHour: Utils.DecimalTimeToHourText(metaOrder.start),
+                    finishHour: Utils.DecimalTimeToHourText(metaOrder.finish),
+
                     implementsOrders: [relevantMetaDrive
                         .order.id],
                     description: '',
                     id: idDriveModel.toString()
                 }
+
                 schedule.drives.push(newDrive);
                 relevantMetaDrive.status = OrderMetaStatus.Approved;
-                currentHour = metaOrder.finish;
 
 
             }

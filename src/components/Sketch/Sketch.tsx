@@ -79,7 +79,7 @@ export const Sketch = () => {
 
 
                 {sketchInEdit.vehicleSchedules.map((vehicleTimeTable: VehicleScheduleModel) => {
-                    return (<>
+                    return (<Box key={vehicleTimeTable.id}>
                         <Box key={vehicleTimeTable.id} id={'vehicle-column'} sx={{
                             display: 'flex',
                             flexDirection: 'column',
@@ -102,7 +102,7 @@ export const Sketch = () => {
 
                         </Box>
                         <Divider orientation="vertical" variant={'fullWidth'} sx={{borderRight: '2px solid black '}} flexItem/>
-                    </>)
+                    </Box>)
 
 
                 })}
