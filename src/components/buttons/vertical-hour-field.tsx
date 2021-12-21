@@ -20,24 +20,29 @@ interface VerticalHourFieldProps {
 }
 
 const formatHourLabel = (hourInNumber: number) =>
-    hourInNumber.toString() + ':00'
+    Utils.DecimalTimeToHourText(hourInNumber)
 export const VerticalHourField = (
     props: VerticalHourFieldProps
 ) => {
 
-    const inputAsNumbers: [number, number] = props.input.map(i => Utils.hourTextToDecimal(i)) as [number, number]
+    const InitialInputAsNumbers: [number, number] = props.input.map(i => Utils.hourTextToDecimal(i)) as [number, number]
 
 
     const handleSliderChange = (event: Event, newValue: any) => {
         setValue(newValue);
     };
+    const negativeInitialInput: [number, number] = InitialInputAsNumbers.map(n => n * -1) as [number, number]
     const [value, setValue] = React.useState<number | [number, number]>(
-        inputAsNumbers,
+        negativeInitialInput,
     );
+    const DriveDuration = InitialInputAsNumbers[1] - InitialInputAsNumbers[0];
+    const timeMargins = DriveDuration > 2 ? 2 : 1;
+    const maxSlider = -1 * (InitialInputAsNumbers[0] - timeMargins);
+    const minSlider = -1 * (InitialInputAsNumbers[1] + timeMargins);
 
 
     return (
-        <>
+        <Box>
             <Box sx={{
                 display: 'flex',
                 flexDirection: 'column',
@@ -55,14 +60,15 @@ export const VerticalHourField = (
                     // variant={'standard'}
                     sx={sliderSx}
                     disableSwap
-                    min={1}
-                    max={24}
+                    min={minSlider}
+                    max={maxSlider}
+                    scale={x => -x}
 
                     step={0.25}
                     value={value}
                     onChange={handleSliderChange}
 
                 />
-            </Box>   </>
+            </Box> </Box>
     );
 }

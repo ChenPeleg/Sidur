@@ -9,8 +9,8 @@ import {SidurActionType} from '../../models/SidurMenuClickActionType.enum';
 import {ActionsTypes} from '../../store/types.actions';
 import {PendingOrderMenu} from './pending-order-menu';
 import MoreIcon from '@mui/icons-material/MoreVert';
-import {translations} from '../../services/translations';
 import {OrderActionButton} from '../buttons/order-action-button';
+import {translations} from '../../services/translations';
 
 
 interface sketchPendingOrderProps {

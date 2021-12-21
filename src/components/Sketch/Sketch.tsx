@@ -92,10 +92,10 @@ export const Sketch = () => {
                         }}> <Typography variant={'h6'}>{getVehicleNameFromId(vehicleTimeTable.id)}  </Typography>
                             {vehicleTimeTable.drives.map((drive: DriveModel) => {
                                 return (
-                                    <>
-                                        <SketchDrive sketchDriveClick={sketchDriveClickHandler} key={drive.id} drive={drive}/>
 
-                                    </>
+                                    <SketchDrive sketchDriveClick={sketchDriveClickHandler} key={drive.id} drive={drive}/>
+
+
                                 )
 
                             })}
