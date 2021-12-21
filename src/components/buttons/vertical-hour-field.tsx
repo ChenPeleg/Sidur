@@ -1,6 +1,7 @@
 import React from 'react';
-import {Box, Slider, Theme} from '@mui/material';
+import {Box, Theme} from '@mui/material';
 import {Utils} from '../../services/utils';
+import {AirbnbSlider, AirbnbThumbComponent} from './air-bnb-slider';
 
 
 const sliderSx = {
@@ -39,7 +40,7 @@ export const VerticalHourField = (
     const timeMargins = DriveDuration > 2 ? 2 : 1;
     const maxSlider = -1 * (InitialInputAsNumbers[0] - timeMargins);
     const minSlider = -1 * (InitialInputAsNumbers[1] + timeMargins);
-
+    const sliderAttributes: React.HTMLAttributes<unknown> = {id: '1234'}
 
     return (
         <Box>
@@ -52,7 +53,8 @@ export const VerticalHourField = (
             }}>
 
 
-                <Slider
+                <AirbnbSlider
+                    components={{Thumb: (props) => AirbnbThumbComponent(props, {value: (value as [number, number]).map(v => formatHourLabel(v))})}}
                     orientation="vertical"
                     aria-labelledby="input-slider"
                     valueLabelDisplay="on"
