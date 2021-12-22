@@ -12,6 +12,9 @@ import {SxProps} from '@mui/system';
 import {Delete} from '@mui/icons-material';
 import {DriveModel} from '../../models/Sketch.model';
 import {VerticalHourField} from '../buttons/vertical-hour-field';
+import {OrderModel} from '../../models/Order.model';
+import {useSelector} from 'react-redux';
+import {Utils} from '../../services/utils';
 
 interface SketchDriveEditDialogProps {
     open: boolean;
@@ -31,9 +34,11 @@ export const SketchDriveEditDialog = (props: SketchDriveEditDialogProps) => {
 
     const [didDialogJustClosed, setDidDialogJustClosed] = useState(false);
 
+    const orders = useSelector((state: { orders: OrderModel[] }) => state.orders || []);
+    const [sketchChangedData, setSketchChangedData] = useState<DriveModel>({...sketchDriveData});
 
     const nameValueRef: any = useRef('')
-    const commentsValueRef: any = useRef('')
+    const descriptionValueRef: any = useRef('')
     const filedWrapper: SxProps = {
         width: '230px'
     }
@@ -43,14 +48,12 @@ export const SketchDriveEditDialog = (props: SketchDriveEditDialogProps) => {
     };
 
     const handleCloseEdit = (): void => {
-        let editedData: DriveModel | null = null;
-        if (sketchDriveData) {
-            editedData = {...sketchDriveData};
-            editedData.Comments = commentsValueRef?.current?.value || sketchDriveData?.Comments || '';
+        const editedData: DriveModel | null = {...sketchChangedData};
+        if (descriptionValueRef?.current?.value) {
+            editedData.description = descriptionValueRef?.current?.value
         }
-
         onClose(editedData);
-        setDidDialogJustClosed(true)
+
     };
     const handleCloseDelete = (): void => {
         onDelete(sketchDriveData?.id || '');
@@ -59,7 +62,15 @@ export const SketchDriveEditDialog = (props: SketchDriveEditDialogProps) => {
     const handleHourChange =
         (event: Event, input: any) => {
 
+
+            const newSketchData = {...sketchChangedData};
+            newSketchData.startHour = Utils.DecimalTimeToHourText(input[0]);
+            newSketchData.finishHour = Utils.DecimalTimeToHourText(input[1]);
+            setSketchChangedData(newSketchData);
+
+
         }
+    const implementedOrders = orders.filter((o: OrderModel) => sketchDriveData.implementsOrders.includes(o.id))
 
     return (
 
@@ -71,7 +82,7 @@ export const SketchDriveEditDialog = (props: SketchDriveEditDialogProps) => {
                     ...filedWrapper,
                     display: 'flex',
                     flexDirection: 'row',
-                    minWidth: '30vw'
+                    minWidth: '35vw'
                 }}>
 
 
@@ -80,7 +91,8 @@ export const SketchDriveEditDialog = (props: SketchDriveEditDialogProps) => {
                         display: 'flex',
                         flexDirection: 'column',
                         maxWidth: '160px',
-                        p: '0 1em',
+                        p: '0 0.2em',
+
                     }}>
                         <Typography align={'center'}
                                     component="legend"><b>{translations.DriveTimes}</b>
@@ -103,7 +115,7 @@ export const SketchDriveEditDialog = (props: SketchDriveEditDialogProps) => {
                         <Box sx={{...filedWrapper}}>
                             <TextField
                                 size={'medium'}
-                                sx={{minHeight: '200px'}}
+                                //sx={{minHeight: '200px'}}
                                 margin="dense"
                                 id="vehicle-comments-dialog-text-field"
                                 //  label={translations.Comments}
@@ -111,8 +123,8 @@ export const SketchDriveEditDialog = (props: SketchDriveEditDialogProps) => {
                                 fullWidth
                                 multiline={true}
                                 variant="standard"
-                                defaultValue={sketchDriveData?.Comments || ''}
-                                inputRef={commentsValueRef}
+                                defaultValue={sketchDriveData?.description || ''}
+                                inputRef={descriptionValueRef}
                                 onKeyUp={(event) => {
                                     if (event.key === 'Enter') {
                                         handleCloseEdit()
@@ -120,10 +132,19 @@ export const SketchDriveEditDialog = (props: SketchDriveEditDialogProps) => {
                                 }}
                             />
                         </Box>
-                        {
+                        <Typography align={'center'} sx={{mt: '1em'}}
+                                    component="legend"><b> {
                             translations
                                 .connectedOrders
-                        }
+                        }</b>
+                        </Typography>
+                        <Box id={'connected-orders'}>
+                            {implementedOrders.map((order: OrderModel, i: number) => (
+                                <Box key={i}>
+                                    {order.Comments}
+                                </Box>))}
+                        </Box>
+
 
                         <Box sx={{
 

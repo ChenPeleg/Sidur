@@ -9,9 +9,15 @@ export const AirbnbSlider = styled(Slider)(({theme}) => ({
     // //  height: 3,
     // padding: '13px 0',
     '& .MuiSlider-thumb': {
-        borderRadius: '1px',
+        borderRadius: '5px',
         width: '80px',
         height: '2em',
+        // after: {
+        //     content: '',
+        //     backgroundColor: '#fff',
+        //     width: '80px',
+        //     height: '0.5em',
+        // }
     },
     '& .MuiSlider-thumb-origin': {
         height: 27,
@@ -27,6 +33,24 @@ export const AirbnbSlider = styled(Slider)(({theme}) => ({
             backgroundColor: 'currentColor',
             marginLeft: 1,
             marginRight: 1,
+        },
+    },
+    '& .MuiSlider-valueLabel': {
+        fontSize: theme.typography.fontSize + 4,
+        fontWeight: 'bold',
+        position: 'absolute',
+        //bottom: '-10px',
+        top: '32px',
+        backgroundColor: 'unset',
+        color: theme.palette.text.primary,
+        '&:before': {
+            display: 'none',
+        },
+        '& *': {
+            background: 'transparent',
+            //  backgroundColor: theme.palette.text.primary,
+            color: '#ffffff'
+            // color: theme.palette.mode === 'dark' ? '#fff' : '#000',
         },
     },
     '& .MuiSlider-track': {
@@ -49,21 +73,11 @@ export const AirbnbThumbComponent = (props: AirbnbThumbComponentProps, data: any
         children,
         ...other
     } = props;
-    console.log(props, data);
-    //@ts-ignore
-    const index = props['data-index'] as number;
-    const textValue = data?.value[index] ? data?.value[index].replace('0-', '') : '';
+
     return (
-        <Box key={Math.random().toString()}>
+        <Box key={Math.random().toString()}> <SliderThumb {...other}    >   {children}
 
-            <SliderThumb {...other}    >
-                <Box sx={{color: 'white'}}>
-                    {textValue}
-                </Box>
-
-                {children}
-
-            </SliderThumb>
+        </SliderThumb>
         </Box>
     );
 }

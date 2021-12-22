@@ -29,7 +29,7 @@ export const SidurBuilder = (Sidur: SidurRecord, buildSettings: any = null): Ske
     const newId = Utils.getNextId(Sidur.sketches.map(v => v.id));
     baseSketch.id = newId;
     baseSketch.name = SidurBuilderTools.createSketchName(baseSketch.id);
-    console.log(baseSketch)
+
     return baseSketch
 }
 const mockSidur = {

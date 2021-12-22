@@ -31,6 +31,8 @@ export const VerticalHourField = (
 
     const handleSliderChange = (event: Event, newValue: any) => {
         setValue(newValue);
+        const positiveNewValue: [number, number] = [(newValue[0] * -1), (newValue[1] * -1)]
+        props.onHoursChange(event, positiveNewValue)
     };
     const negativeInitialInput: [number, number] = InitialInputAsNumbers.map(n => n * -1) as [number, number]
     const [value, setValue] = React.useState<number | [number, number]>(
@@ -40,7 +42,6 @@ export const VerticalHourField = (
     const timeMargins = DriveDuration > 2 ? 2 : 1;
     const maxSlider = -1 * (InitialInputAsNumbers[0] - timeMargins);
     const minSlider = -1 * (InitialInputAsNumbers[1] + timeMargins);
-    const sliderAttributes: React.HTMLAttributes<unknown> = {id: '1234'}
 
     return (
         <Box>
@@ -54,7 +55,7 @@ export const VerticalHourField = (
 
 
                 <AirbnbSlider
-                    components={{Thumb: (props) => AirbnbThumbComponent(props, {value: (value as [number, number]).map(v => formatHourLabel(v))})}}
+                    components={{Thumb: AirbnbThumbComponent}}
                     orientation="vertical"
                     aria-labelledby="input-slider"
                     valueLabelDisplay="on"
@@ -66,7 +67,7 @@ export const VerticalHourField = (
                     max={maxSlider}
                     scale={x => -x}
 
-                    step={0.25}
+                    step={0.0833333333333}
                     value={value}
                     onChange={handleSliderChange}
 

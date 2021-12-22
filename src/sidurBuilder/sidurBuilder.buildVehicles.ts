@@ -3,6 +3,8 @@ import {VehicleModel} from '../models/Vehicle.model';
 import {OrderMetaDataModel, OrderMetaStatus} from './models/sidurBuilder.models';
 import {OrderModel} from '../models/Order.model';
 import {Utils} from '../services/utils';
+import {LanguageUtilities} from '../services/language-utilities';
+import {locations} from '../services/locations';
 
 interface OrdMetaScheduleData {
     start: number,
@@ -59,6 +61,15 @@ export const SidurBuilderBuildVehiclesAndUnAssigned = (orders: OrderMetaDataMode
                     description: '',
                     id: idDriveModel.toString()
                 }
+                const fakeOrder: OrderModel = {
+                    ...relevantMetaDrive
+                        .order,
+                    startHour: Utils.DecimalTimeToHourText(metaOrder.start),
+                    finishHour: Utils.DecimalTimeToHourText(metaOrder.finish),
+
+                }
+                newDrive.description = LanguageUtilities.buildBriefText(fakeOrder, locations).driverAndLocation;
+              
 
                 schedule.drives.push(newDrive);
                 relevantMetaDrive.status = OrderMetaStatus.Approved;

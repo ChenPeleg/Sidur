@@ -84,7 +84,7 @@ export const RenderSelectFieldAutoComplete = (
                         target: {...event.target}
                     };
                     clonedEvent.target.value = newValue.id
-                    console.log(clonedEvent);
+                    
                     input.onChange(clonedEvent)
 
                 }}

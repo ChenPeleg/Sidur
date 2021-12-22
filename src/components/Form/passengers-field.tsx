@@ -18,7 +18,7 @@ const rootSx = {
         // paddingBottom: '10px'
     }
 }
- 
+
 
 // />
 const StyledRating = styled(Rating)({
@@ -59,7 +59,7 @@ export const RenderPassengerField = (
                           sx={rootSx}
                           max={7}
                           onChange={(...args) => {
-                              console.log(args);
+                              
 
                               input.onChange(...args);
 

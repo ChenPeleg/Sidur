@@ -21,7 +21,7 @@ export const configureStore = (middlewares = []) => {
                 },
 
                 dispatch(action: any) {
-                    // console.log('action', action)
+                  
                     if (!isPlainObject(action)) {
                         throw new Error(
                             'Actions must be plain objects. ' +

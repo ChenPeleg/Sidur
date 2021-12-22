@@ -8,6 +8,7 @@ import {VehicleModel} from '../../models/Vehicle.model';
 import {SketchDrive} from './SketchDrive';
 import {SketchPendingOrders} from './SketchPendeingOrders';
 import {SketchDriveEditDialog} from '../Dialogs/sketch-drive-edit-dialog';
+import {ActionsTypes} from '../../store/types.actions';
 
 const MOckDrive = {
     'id': '0',
@@ -40,9 +41,22 @@ export const Sketch = () => {
     const handleSketchDriveEditDelete = () => {
         setSketchDriveEditOpen(false);
     }
-    const handleSketchDriveEditClose = () => {
+
+
+    const handleSketchDriveEditClose = (value: DriveModel | null) => {
         setSketchDriveEditOpen(false);
-    }
+        if (value) {
+
+            dispatch({
+                type: ActionsTypes.UPDATE_SKETCH_DRIVE,
+                payload: {
+                    value
+                }
+            })
+
+
+        }
+    };
     useEffect(() => {
         if (!mock) {
             setTimeout(_ => {
@@ -78,9 +92,9 @@ export const Sketch = () => {
                 <SketchPendingOrders pendingOrders={sketchInEdit.unassignedOrders}/>
 
 
-                {sketchInEdit.vehicleSchedules.map((vehicleTimeTable: VehicleScheduleModel) => {
-                    return (<Box key={vehicleTimeTable.id}>
-                        <Box key={vehicleTimeTable.id} id={'vehicle-column'} sx={{
+                {sketchInEdit.vehicleSchedules.map((vehicleTimeTable: VehicleScheduleModel, i: number) => {
+                    return (<Box key={i}>
+                        <Box key={i} id={'vehicle-column'} sx={{
                             display: 'flex',
                             flexDirection: 'column',
                             alignItems: 'stretch',
@@ -90,10 +104,10 @@ export const Sketch = () => {
                             minWidth: '6vw',
                             minHeight: '60vh',
                         }}> <Typography variant={'h6'}>{getVehicleNameFromId(vehicleTimeTable.id)}  </Typography>
-                            {vehicleTimeTable.drives.map((drive: DriveModel) => {
+                            {vehicleTimeTable.drives.map((drive: DriveModel, i: number) => {
                                 return (
 
-                                    <SketchDrive sketchDriveClick={sketchDriveClickHandler} key={drive.id} drive={drive}/>
+                                    <SketchDrive sketchDriveClick={sketchDriveClickHandler} key={i} drive={drive}/>
 
 
                                 )

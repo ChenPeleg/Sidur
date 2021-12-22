@@ -10,6 +10,7 @@ import {ActionsTypes} from './types.actions';
 import {DisplayReducer} from './display.reducer';
 import {SketchReducer} from './sketch.reducer';
 import {PendingOrdersReducer} from './pendingOrders.reducer';
+import {SketchDriveReducer} from './sketch-drive.reducer';
 
 
 const startOrders: OrderModel[] = ['חן', 'אבי', 'רוני'].map((name: string, index: number): OrderModel => ({
@@ -112,6 +113,10 @@ const reducer = (state: SidurStore = initialState, action: IAction) => {
         case ActionsTypes.CLICKED_PENDING_ORDER:
         case ActionsTypes.CLICKED_CLOSE_PENDING_ORDER:
             return PendingOrdersReducer [action.type](newState, action)
+        case ActionsTypes.DELETE_SKETCH_DRIVE:
+        case ActionsTypes.UPDATE_SKETCH_DRIVE:
+            return SketchDriveReducer [action.type](newState, action)
+
 
         default:
             break;

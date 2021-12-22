@@ -109,9 +109,9 @@ export const SketchPendingOrderFull = (props: sketchPendingOrderProps) => {
             }}>
 
 
-                {[...pendingOrdersActions].map(n => (
-                    <Box sx={{p: '0.5em'}}> <OrderActionButton key={n.action.toString()} text={n.name} actionType={n.action}
-                                                               actionClickHandler={actionClickHandler}/>
+                {[...pendingOrdersActions].map((n, i: number) => (
+                    <Box key={i} sx={{p: '0.5em'}}> <OrderActionButton key={n.action.toString()} text={n.name} actionType={n.action}
+                                                                       actionClickHandler={actionClickHandler}/>
                     </Box>))}
                 <Box sx={{p: '0.5em'}}>
                     <Button

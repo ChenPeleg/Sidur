@@ -84,7 +84,7 @@ export const SketchDrive = (props: sketchDriveProps) => {
                         height: '10px'
                     }}/>
                     <Typography
-                        variant={'subtitle1'}>{driverAndLocation(drive)}  </Typography>
+                        variant={'subtitle1'}>{drive.description}  </Typography>
 
                 </Box>
             </Card>
