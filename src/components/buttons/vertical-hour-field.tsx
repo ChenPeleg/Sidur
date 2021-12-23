@@ -31,7 +31,7 @@ export const VerticalHourField = (
 
     const handleSliderChange = (event: Event, newValue: any) => {
         setValue(newValue);
-        const positiveNewValue: [number, number] = [(newValue[0] * -1), (newValue[1] * -1)]
+        const positiveNewValue: [number, number] = [(newValue[1] * -1), (newValue[0] * -1)]
         props.onHoursChange(event, positiveNewValue)
     };
     const negativeInitialInput: [number, number] = InitialInputAsNumbers.map(n => n * -1) as [number, number]

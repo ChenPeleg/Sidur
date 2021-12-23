@@ -5,6 +5,7 @@ import {Card, Typography} from '@mui/material';
 import {DriveModel} from '../../models/Sketch.model';
 import {locations} from '../../services/locations';
 import {LanguageUtilities} from '../../services/language-utilities';
+import {DriveType} from '../../models/DriveType.enum';
 
 
 interface sketchDriveProps {
@@ -58,16 +59,19 @@ export const SketchDrive = (props: sketchDriveProps) => {
                 }}>
                     <Typography dir="ltr"
                                 variant={'subtitle1'}>{drive.startHour}  </Typography>
-                    <Box sx={{
-                        width: '10px',
-                        height: '2px',
-                        borderBottom: '1px solid black',
-                        alignSelf: 'center'
-                    }}/>
-                    <Typography dir="ltr"
-                                variant={'subtitle1'}>{drive.finishHour}  </Typography>
+                    {drive.TypeOfDrive === DriveType.Tsamud || drive.TypeOfDrive === DriveType.TwoWay ?
+                        (<><Box sx={{
+                            width: '10px',
+                            height: '2px',
+                            borderBottom: '1px solid black',
+                            alignSelf: 'center'
+                        }}/>
+                            <Typography dir="ltr"
+                                        variant={'subtitle1'}>{drive.finishHour}  </Typography>
 
-                </Box>
+                        </>) : null
+                    }</Box>
+
                 <Box id={'drive-description'} sx={{
                     display: 'flex',
                     flexDirection: 'row',

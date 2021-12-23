@@ -5,6 +5,7 @@ import {OrderModel} from '../models/Order.model';
 import {Utils} from '../services/utils';
 import {LanguageUtilities} from '../services/language-utilities';
 import {locations} from '../services/locations';
+import {SidurBuilderTools} from './sidurBuilder.tools';
 
 interface OrdMetaScheduleData {
     start: number,
@@ -18,11 +19,12 @@ export const SidurBuilderBuildVehiclesAndUnAssigned = (orders: OrderMetaDataMode
     vehicleSchedules: VehicleScheduleModel[],
     unassignedOrders: OrderModel[]
 } => {
+    const enumerator = SidurBuilderTools.EnumeratorConstructor();
     const metaOrderScheduleData: OrdMetaScheduleData[] = orders.map((o: OrderMetaDataModel) => {
         return {
             start: o.start,
             finish: o.finish,
-            id: o.id,
+            id: enumerator.getStrId(),
             passengers: o.order.passengers
         }
     });
@@ -32,14 +34,13 @@ export const SidurBuilderBuildVehiclesAndUnAssigned = (orders: OrderMetaDataMode
     const vehicleSchedules: VehicleScheduleModel [] = vehicles.map((vehicle: VehicleModel) => {
         vehicleScheduleId++
         const vehicleSchedule: VehicleScheduleModel = {
-            id: vehicleScheduleId.toString(),
+            id: enumerator.getStrId(),
             VehicleId: vehicle.id,
             drives: [],
             Comments: vehicle.Comments
         }
         return vehicleSchedule
     })
-    let idDriveModel = 0;
     vehicleSchedules.forEach((schedule: VehicleScheduleModel) => {
         let currentHour: number = 0.1;
         metaOrderScheduleData.forEach(metaOrder => {
@@ -59,17 +60,19 @@ export const SidurBuilderBuildVehiclesAndUnAssigned = (orders: OrderMetaDataMode
                     implementsOrders: [relevantMetaDrive
                         .order.id],
                     description: '',
-                    id: idDriveModel.toString()
+                    id: enumerator.getStrId(),
                 }
                 const fakeOrder: OrderModel = {
                     ...relevantMetaDrive
                         .order,
                     startHour: Utils.DecimalTimeToHourText(metaOrder.start),
+
                     finishHour: Utils.DecimalTimeToHourText(metaOrder.finish),
+
 
                 }
                 newDrive.description = LanguageUtilities.buildBriefText(fakeOrder, locations).driverAndLocation;
-              
+
 
                 schedule.drives.push(newDrive);
                 relevantMetaDrive.status = OrderMetaStatus.Approved;

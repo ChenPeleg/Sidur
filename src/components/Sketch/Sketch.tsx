@@ -40,11 +40,13 @@ export const Sketch = () => {
     const [mock, setMock] = useState<boolean>(false)
     const handleSketchDriveEditDelete = () => {
         setSketchDriveEditOpen(false);
+        setChosenDrive(null);
     }
 
 
     const handleSketchDriveEditClose = (value: DriveModel | null) => {
         setSketchDriveEditOpen(false);
+        setChosenDrive(null);
         if (value) {
 
             dispatch({
@@ -60,9 +62,7 @@ export const Sketch = () => {
     useEffect(() => {
         if (!mock) {
             setTimeout(_ => {
-                setChosenDrive(MOckDrive as DriveModel)
-                setSketchDriveEditOpen(true);
-                setMock(true)
+
             }, 2000)
         }
     })
@@ -103,7 +103,7 @@ export const Sketch = () => {
                             justifyContent: 'start',
                             minWidth: '6vw',
                             minHeight: '60vh',
-                        }}> <Typography variant={'h6'}>{getVehicleNameFromId(vehicleTimeTable.id)}  </Typography>
+                        }}> <Typography variant={'h6'}>{getVehicleNameFromId(vehicleTimeTable.VehicleId)}  </Typography>
                             {vehicleTimeTable.drives.map((drive: DriveModel, i: number) => {
                                 return (
 

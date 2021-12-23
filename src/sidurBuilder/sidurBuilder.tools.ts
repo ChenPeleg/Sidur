@@ -15,5 +15,17 @@ export const SidurBuilderTools = {
                 return translations.number + ' ' + id
 
         }
+    },
+    EnumeratorConstructor(startId: number = 1): { getId: () => number, getStrId: () => string, } {
+        let currentId = startId;
+        return {
+            getId() {
+                return ++currentId
+            },
+            getStrId() {
+                return (++currentId).toString()
+            }
+        }
     }
+
 }

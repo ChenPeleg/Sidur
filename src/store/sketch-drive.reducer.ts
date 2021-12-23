@@ -15,6 +15,7 @@ export const SketchDriveReducer: Record<SketchDriveReducerFunctions, (state: Sid
         let newState = {...state}
         const sketchDriveChanged: DriveModel = action.payload.value
         const SketchIdInEdit = newState.SketchIdInEdit;
+        console.log(sketchDriveChanged)
 
         const sketchObj: SketchModel | undefined = newState.sketches.find((record: SketchModel) => record.id === SketchIdInEdit);
 
