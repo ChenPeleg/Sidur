@@ -16,6 +16,7 @@ export const SidurBuilder = (Sidur: SidurRecord, buildSettings: any = null): Ske
     const BuildResult = SidurBuilderBuildVehiclesAndUnAssigned(ordersMetaData, Sidur.vehicles, settings);
     const initialVehicles: VehicleScheduleModel [] = BuildResult.vehicleSchedules;
     const unassignedOrders: OrderModel [] = BuildResult.unassignedOrders;
+    const assignedOrders: OrderModel [] = BuildResult.assignedOrders;
 
 
     const baseSketch: SketchModel = {
@@ -23,7 +24,8 @@ export const SidurBuilder = (Sidur: SidurRecord, buildSettings: any = null): Ske
         name: 'first sketch',
         vehicleSchedules: initialVehicles,
         Comments: '',
-        unassignedOrders: unassignedOrders
+        unassignedOrders: unassignedOrders,
+        assignedOrders: assignedOrders
     };
 
     const newId = Utils.getNextId(Sidur.sketches.map(v => v.id));

@@ -7,18 +7,23 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
 import {translations} from '../../services/translations';
-import {Box, Typography} from '@mui/material';
+import {Box, Card, Typography} from '@mui/material';
 import {SxProps} from '@mui/system';
 import {Delete} from '@mui/icons-material';
-import {DriveModel} from '../../models/Sketch.model';
+import {DriveModel, SketchModel} from '../../models/Sketch.model';
 import {VerticalHourField} from '../buttons/vertical-hour-field';
 import {OrderModel} from '../../models/Order.model';
-import {useSelector} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import {Utils} from '../../services/utils';
+import {OrderActionButton} from '../buttons/order-action-button';
+import {SketchEditActionEnum} from '../../models/SketchEditAction.enum';
+import {ActionsTypes} from '../../store/types.actions';
+import {SidurStore} from '../../store/store.types';
 
 interface SketchDriveEditDialogProps {
     open: boolean;
-    sketchDriveData: DriveModel;
+    sketchDriveData: { drive: DriveModel, vehicleId: string };
+    vehicleId: string;
     onDelete: (id: string | null) => void;
     onClose: (vehicleUpdate: DriveModel | null) => void;
 }
@@ -30,25 +35,29 @@ export const SketchDriveEditDialog = (props: SketchDriveEditDialogProps) => {
         open,
         sketchDriveData
     } = props;
+    const vehicleId = sketchDriveData.vehicleId
+    const driveData = sketchDriveData.drive
+    const dispatch = useDispatch();
+    const SketchIdInEdit = useSelector((state: SidurStore) => state.SketchIdInEdit);
+    const sketches: SketchModel[] = useSelector((state: { sketches: SketchModel[] }) => state.sketches);
+    const sketchInEdit: SketchModel | null = sketches.find((sketch: SketchModel) => sketch.id === SketchIdInEdit) || null;
 
 
-    const [didDialogJustClosed, setDidDialogJustClosed] = useState(false);
+    const sketchOrders = useSelector((state: { orders: OrderModel[] }) => state.orders || []);
 
-    const orders = useSelector((state: { orders: OrderModel[] }) => state.orders || []);
-    const [sketchChangedData, setSketchChangedData] = useState<DriveModel>({...sketchDriveData});
+    const [driveChangedData, setDriveChangedData] = useState<DriveModel>({...driveData});
 
-    const nameValueRef: any = useRef('')
+
     const descriptionValueRef: any = useRef('')
     const filedWrapper: SxProps = {
         width: '230px'
     }
     const handleCloseCancel = () => {
         onClose(null);
-        setDidDialogJustClosed(true)
     };
 
     const handleCloseEdit = (): void => {
-        const editedData: DriveModel | null = {...sketchChangedData};
+        const editedData: DriveModel | null = {...driveChangedData};
         if (descriptionValueRef?.current?.value) {
             editedData.description = descriptionValueRef?.current?.value
         }
@@ -56,21 +65,33 @@ export const SketchDriveEditDialog = (props: SketchDriveEditDialogProps) => {
 
     };
     const handleCloseDelete = (): void => {
-        onDelete(sketchDriveData?.id || '');
-        setDidDialogJustClosed(true)
+        onDelete(driveData?.id || '');
     };
+    const addToPendingClickHandler = (event: Event, orderId: string) => {
+
+        dispatch({
+            type: ActionsTypes.REMOVE_ORDER_FROM_SKETCH_DRIVE,
+            payload: {
+                orderId,
+                sketchDriveId: driveData.id
+            }
+        })
+        const newDrive = {...driveChangedData};
+        newDrive.implementsOrders = newDrive.implementsOrders.filter(o => o !== orderId);
+        setDriveChangedData(newDrive)
+    }
     const handleHourChange =
         (event: Event, input: any) => {
 
 
-            const newSketchData = {...sketchChangedData};
+            const newSketchData = {...driveChangedData};
             newSketchData.startHour = Utils.DecimalTimeToHourText(input[0]);
             newSketchData.finishHour = Utils.DecimalTimeToHourText(input[1]);
-            setSketchChangedData(newSketchData);
+            setDriveChangedData(newSketchData);
 
 
         }
-    const implementedOrders = orders.filter((o: OrderModel) => sketchDriveData.implementsOrders.includes(o.id))
+    const implementedOrders = sketchOrders.filter((o: OrderModel) => driveChangedData.implementsOrders.includes(o.id))
 
     return (
 
@@ -98,7 +119,7 @@ export const SketchDriveEditDialog = (props: SketchDriveEditDialogProps) => {
                                     component="legend"><b>{translations.DriveTimes}</b>
                         </Typography>
 
-                        <VerticalHourField input={[sketchDriveData.startHour, sketchDriveData.finishHour]}
+                        <VerticalHourField input={[driveData.startHour, driveData.finishHour]}
                                            onHoursChange={handleHourChange}
                                            label={translations.Start}/>
 
@@ -123,7 +144,7 @@ export const SketchDriveEditDialog = (props: SketchDriveEditDialogProps) => {
                                 fullWidth
                                 multiline={true}
                                 variant="standard"
-                                defaultValue={sketchDriveData?.description || ''}
+                                defaultValue={driveData?.description || ''}
                                 inputRef={descriptionValueRef}
                                 onKeyUp={(event) => {
                                     if (event.key === 'Enter') {
@@ -140,9 +161,21 @@ export const SketchDriveEditDialog = (props: SketchDriveEditDialogProps) => {
                         </Typography>
                         <Box id={'connected-orders'}>
                             {implementedOrders.map((order: OrderModel, i: number) => (
-                                <Box key={i}>
-                                    {order.Comments}
-                                </Box>))}
+                                <Card key={i} sx={{
+                                    display: 'flex',
+                                    flexDirection: 'column',
+                                    p: '1em'
+                                }}>
+                                    <Box sx={{pb: '0.5em'}}>
+                                        {order.Comments}
+                                    </Box>
+
+                                    <OrderActionButton sx={{width: '100%'}} size={'small'}
+                                                       actionType={SketchEditActionEnum.AddToPending}
+                                                       text={'      ' + translations.SketchActionAddToPending}
+                                                       actionClickHandler={(event: any) => addToPendingClickHandler(event, order.id)}/>
+
+                                </Card>))}
                         </Box>
 
 
@@ -154,15 +187,15 @@ export const SketchDriveEditDialog = (props: SketchDriveEditDialogProps) => {
                             marginTop: '1em',
                             display: 'flex'
                         }}>
-                            {(sketchDriveData?.id !== '0') ? (
-                                <Button variant="contained" onClick={handleCloseDelete} aria-label="add" size="large">
-                                    <Delete/> {translations.Delete}
-                                </Button>) : null}
+
                         </Box>
                     </Box>
                 </Box>
             </DialogContent>
             <DialogActions>
+                <Button onClick={handleCloseDelete} aria-label="add" size="large">
+                    <Delete/> {translations.Delete}
+                </Button>
                 <Button id={'vehicle-edit-cancel-button'} onClick={handleCloseCancel}>{translations.Cancel}</Button>
                 <Button id={'vehicle-edit-approve-button'} onClick={handleCloseEdit}>{translations.Approve}</Button>
             </DialogActions>

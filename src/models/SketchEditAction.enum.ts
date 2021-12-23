@@ -6,4 +6,5 @@ export enum SketchEditActionEnum {
     ChangeTime = 5,
     ReplaceExisting = 6,
     publicTransport = 7,
+    AddToPending = 8
 }

@@ -52,6 +52,7 @@ export const translations = {
     'Approve': 'אישור',
     'Cancel': 'ביטול',
     'CreateSketch': 'צור סקיצה חדשה',
+    'NoSketchMessage': 'לא קיימות סקיצות לסידור, לאחר הזנת כל ההזמנות ניתן ללחוץ על "יצירת סקיצה חדשה"',
     'NewOrder': 'הזמנה חדשה',
     'PendingOrders': 'הזמנות לטיפול',
     'CopyOf': '(עותק)',
@@ -94,6 +95,7 @@ export const translations = {
     'SketchActionChangeTime': 'שינוי שעות של נסיעה קיימת',
     'SketchActionReplaceExisting': 'העבר לרכב במקום נסיעה קיימת',
     'SketchActionPublicTransport': 'צור פתרון בתחב"צ',
+    'SketchActionAddToPending': 'סמן כ"לא מטופלת"',
 
 
 }

@@ -17,14 +17,16 @@ interface OrdMetaScheduleData {
 
 export const SidurBuilderBuildVehiclesAndUnAssigned = (orders: OrderMetaDataModel[], vehicles: VehicleModel[], buildSettings: any = null): {
     vehicleSchedules: VehicleScheduleModel[],
-    unassignedOrders: OrderModel[]
+    unassignedOrders: OrderModel[],
+    assignedOrders: OrderModel[],
+
 } => {
     const enumerator = SidurBuilderTools.EnumeratorConstructor();
     const metaOrderScheduleData: OrdMetaScheduleData[] = orders.map((o: OrderMetaDataModel) => {
         return {
             start: o.start,
             finish: o.finish,
-            id: enumerator.getStrId(),
+            id: o.id,
             passengers: o.order.passengers
         }
     });
@@ -82,8 +84,11 @@ export const SidurBuilderBuildVehiclesAndUnAssigned = (orders: OrderMetaDataMode
         })
     })
     const unassignedOrders: OrderModel[] = orders.filter(o => o.status === OrderMetaStatus.None).map(o => o.order);
+
+    const assignedOrders: OrderModel[] = orders.filter(o => o.status !== OrderMetaStatus.None).map(o => o.order);
     return {
         vehicleSchedules,
-        unassignedOrders
+        unassignedOrders,
+        assignedOrders
     }
 }

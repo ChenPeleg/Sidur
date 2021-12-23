@@ -16,6 +16,7 @@ export interface DriveModel extends OrderModel {
      */
     implementsOrders: string [],
     description: string,
+    
 }
 
 export interface VehicleScheduleModel {
@@ -29,7 +30,8 @@ export interface SketchModel {
     id: string,
     name: string,
     vehicleSchedules: VehicleScheduleModel[],
-    unassignedOrders: OrderModel[]
+    unassignedOrders: OrderModel[],
+    assignedOrders: OrderModel[],
     Comments: string,
     suggestions?: any,
 }

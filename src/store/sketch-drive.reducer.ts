@@ -4,9 +4,10 @@ import {ActionsTypes} from './types.actions';
 import {IAction, SidurRecord, SidurStore} from './store.types';
 import {DriveModel, SketchModel, VehicleScheduleModel} from '../models/Sketch.model';
 import {CloneUtil} from '../services/clone-utility';
+import {OrderModel} from '../models/Order.model';
 
 export type SketchDriveReducerFunctions = ActionsTypes.DELETE_SKETCH_DRIVE
-                                          | ActionsTypes.UPDATE_SKETCH_DRIVE
+                                          | ActionsTypes.UPDATE_SKETCH_DRIVE | ActionsTypes.REMOVE_ORDER_FROM_SKETCH_DRIVE
 
 
 export const SketchDriveReducer: Record<SketchDriveReducerFunctions, (state: SidurStore, action: IAction) => SidurStore> = {
@@ -15,8 +16,7 @@ export const SketchDriveReducer: Record<SketchDriveReducerFunctions, (state: Sid
         let newState = {...state}
         const sketchDriveChanged: DriveModel = action.payload.value
         const SketchIdInEdit = newState.SketchIdInEdit;
-        console.log(sketchDriveChanged)
-
+ 
         const sketchObj: SketchModel | undefined = newState.sketches.find((record: SketchModel) => record.id === SketchIdInEdit);
 
         if (sketchObj !== undefined) {
@@ -38,6 +38,45 @@ export const SketchDriveReducer: Record<SketchDriveReducerFunctions, (state: Sid
 
     },
 
+    [ActionsTypes.REMOVE_ORDER_FROM_SKETCH_DRIVE]: (state: SidurStore, action: IAction): SidurStore => {
+        let newState = {...state}
+
+        const sketchDriveChangedId: string = action.payload.sketchDriveId
+        const orderIdToRemove: string = action.payload.orderId
+        const SketchIdInEdit = newState.SketchIdInEdit;
+
+
+        const sketchObj: SketchModel | undefined = newState.sketches.find((record: SketchModel) => record.id === SketchIdInEdit);
+
+        if (sketchObj !== undefined) {
+            const vehicleId = getVehicleIdFromDriveId(state, sketchDriveChangedId);
+            const relevantVehicle = sketchObj.vehicleSchedules.find(v => v.id === vehicleId);
+            if (relevantVehicle) {
+                relevantVehicle.drives = relevantVehicle.drives.map((d: DriveModel) => {
+                    if (d.id === sketchDriveChangedId) {
+                        const newDrive = {...d};
+                        newDrive.implementsOrders = (newDrive.implementsOrders).filter(ord => ord !== orderIdToRemove)
+
+                        return newDrive
+                    } else {
+                        return d
+                    }
+                })
+            }
+            let OrderToMoveToUnassinged: OrderModel | undefined = sketchObj.assignedOrders.find(o => o.id === orderIdToRemove);
+            if (OrderToMoveToUnassinged) {
+                sketchObj.assignedOrders = sketchObj.assignedOrders.filter(o => o.id !== orderIdToRemove);
+                sketchObj.unassignedOrders = [...sketchObj.unassignedOrders];
+                sketchObj.unassignedOrders.push(OrderToMoveToUnassinged);
+
+
+            }
+
+
+        }
+        return newState
+
+    },
     [ActionsTypes.DELETE_SKETCH_DRIVE]: (state: SidurStore, action: IAction): SidurStore => {
         let newState = {...state}
         const sketchToDelete = action.payload.id// newState.sidurId;

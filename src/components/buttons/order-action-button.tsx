@@ -8,17 +8,18 @@ export interface OrdeerActionButtonProps {
     sx?: SxProps,
     actionClickHandler: any,
     actionType: SketchEditActionEnum,
-    text: string
+    text: string,
+    size?: 'medium' | 'small'
 
 }
 
 export const OrderActionButton = (props: OrdeerActionButtonProps) => {
-
-
+    const size = props.size ? props.size : 'medium'
+    const sx = props.sx || {}
     return (
 
         <Box>
-            <Button id={'action-order-button'} variant="contained" onClick={props.actionClickHandler} aria-label="add" size="medium">
+            <Button sx={sx} id={'action-order-button'} variant="contained" onClick={props.actionClickHandler} aria-label="add" size={size}>
                 {props.text}
             </Button>
 

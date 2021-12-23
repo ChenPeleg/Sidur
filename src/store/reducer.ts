@@ -115,6 +115,7 @@ const reducer = (state: SidurStore = initialState, action: IAction) => {
             return PendingOrdersReducer [action.type](newState, action)
         case ActionsTypes.DELETE_SKETCH_DRIVE:
         case ActionsTypes.UPDATE_SKETCH_DRIVE:
+        case ActionsTypes.REMOVE_ORDER_FROM_SKETCH_DRIVE:
             return SketchDriveReducer [action.type](newState, action)
 
 

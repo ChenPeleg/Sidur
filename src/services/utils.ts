@@ -74,7 +74,8 @@ export const Utils = {
             id: '1',
             Comments: '',
             name: 'סידור בשני רכבים',
-            unassignedOrders: []
+            unassignedOrders: [],
+            assignedOrders: [],
         }
     },
     hourTextToDecimal(hourText: string): number {
