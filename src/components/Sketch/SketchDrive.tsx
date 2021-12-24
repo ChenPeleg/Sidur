@@ -6,6 +6,9 @@ import {DriveModel} from '../../models/Sketch.model';
 import {locations} from '../../services/locations';
 import {LanguageUtilities} from '../../services/language-utilities';
 import {DriveType} from '../../models/DriveType.enum';
+import {Utils} from '../../services/utils';
+import {translations} from '../../services/translations';
+import {ArrowDownward, ArrowUpward} from '@mui/icons-material';
 
 
 interface sketchDriveProps {
@@ -17,6 +20,12 @@ interface sketchDriveProps {
 
 const timeText = (drive: DriveModel) => LanguageUtilities.buildBriefText(drive, locations).timeText;
 const driverAndLocation = (drive: DriveModel) => LanguageUtilities.buildBriefText(drive, locations).driverAndLocation;
+
+function ArrowUpwardIcon() {
+    return null;
+}
+
+
 export const SketchDrive = (props: sketchDriveProps) => {
     const dispatch = useDispatch();
     const drive = props.drive;
@@ -27,10 +36,34 @@ export const SketchDrive = (props: sketchDriveProps) => {
     const onMouseOut = () => {
         setInHover(false)
     };
+    const calculateIfDrivesOverlap = (thisDrive: DriveModel, perviousDrive: DriveModel | null): DriveModel | null => {
+        if (!perviousDrive) {
+            return null
+        }
+        const prevFinish = Utils.hourTextToDecimal(perviousDrive.finishHour);
+        const thisStart = Utils.hourTextToDecimal(thisDrive.startHour);
+        if (prevFinish > thisStart) {
+            return perviousDrive
+        } else {
+            return null
+        }
+    }
+    const driveOverlap = !!calculateIfDrivesOverlap(props.drive, props.prevoiusDrive);
 
 
     return (
         <Box>
+            {driveOverlap ? <Card sx={{
+                m: '0.2em',
+                mb: '0.3em',
+                minHeight: '10vh',
+                display: 'flex',
+                flexDirection: 'row',
+                alignItems: 'stretch',
+                justifyContent: 'start',
+                cursor: 'default',
+                bgcolor: '#e6a5a5'
+            }}> <Box><ArrowDownward/> <b> {translations.OverlapingDrives}</b> <ArrowUpward/></Box></Card> : null}
             <Card onClick={(event: any) => props.sketchDriveClick(event, drive)} onMouseOver={onMouseOver}
                   onMouseOut={onMouseOut} elevation={inHover ? 8 : 2} sx={{
                 m: '0.2em',

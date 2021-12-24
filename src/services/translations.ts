@@ -4,6 +4,7 @@ export const translations = {
     'close': 'סגור',
     'DriveDescription': 'תאור הנסיעה',
     'DriveTimes': 'זמני הנסיעה',
+    'OverlapingDrives': 'חפיפה בין זמני הנסיעות',
     'EditDrive': 'עריכת נסיעה',
     'connectedOrders': ' הזמנות מקושרות',
     'All': 'הכל',

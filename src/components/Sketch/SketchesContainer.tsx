@@ -3,7 +3,7 @@ import {Box} from '@mui/system';
 import {useDispatch, useSelector} from 'react-redux';
 import {Button, Select, SelectChangeEvent, Typography} from '@mui/material';
 import {translations} from '../../services/translations';
-import {DriveModel, SketchModel} from '../../models/Sketch.model';
+import {SketchModel} from '../../models/Sketch.model';
 import {ActionsTypes} from '../../store/types.actions';
 import {SidurStore} from '../../store/store.types';
 import {SketchActionType} from '../../models/SketchMenuClickActionType.enum';
@@ -99,13 +99,13 @@ export const SketchesContainer = () => {
             }
         })
     }
-    const calculateIfDrivesOverlap = (thisDrive: DriveModel, perviousDrive: DriveModel) => {
-        
-    }
+
 
     const sketchInEdit: SketchModel | null = sketches.find((sketch: SketchModel) => sketch.id === SketchIdInEdit) || null;
 
     const sketchName = sketchInEdit ? sketchInEdit.name : '';
+
+
     return (
         <Box>
             {SketchIdInEdit ? <Box sx={{
