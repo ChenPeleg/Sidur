@@ -53,8 +53,11 @@ export const SketchDrive = (props: sketchDriveProps) => {
 
 
     return (
+
         <Box>
             {driveOverlap ? <Box sx={{
+                zIndex: 50,
+                position: 'relative',
                 m: '0.2em',
                 mb: '0.3em',
                 //minHeight: '10vh',
@@ -64,7 +67,7 @@ export const SketchDrive = (props: sketchDriveProps) => {
                 justifyContent: 'start',
                 cursor: 'default',
                 bgcolor: Colors.warningRed,
-                boxShadow: '0px 0px 7px 5px ' + Colors.warningRed.replace('1.0', '0.8'),
+                boxShadow: '0px -1px 7px 7px ' + Colors.warningRed.replace('1.0', '0.8'),
                 p: '0 0.5em'
             }}> <Box sx={{
                 ...Styles.flexRow,
@@ -83,6 +86,8 @@ export const SketchDrive = (props: sketchDriveProps) => {
                   onMouseOut={onMouseOut} elevation={inHover ? 8 : 2} sx={{
                 m: '0.2em',
                 mb: '0.3em',
+                position: 'relative',
+                zIndex: 40,
                 minHeight: '10vh',
                 display: 'flex',
                 flexDirection: 'row',

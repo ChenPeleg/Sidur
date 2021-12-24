@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react'
 import {Box} from '@mui/system';
 import {useDispatch, useSelector} from 'react-redux';
-import {Divider, Typography} from '@mui/material';
+import {Collapse, Divider, Typography} from '@mui/material';
 import {DriveModel, SketchModel, VehicleScheduleModel} from '../../models/Sketch.model';
 import {VehicleModel} from '../../models/Vehicle.model';
 import {SketchDrive} from './SketchDrive';
@@ -10,6 +10,8 @@ import {SketchDriveEditDialog} from '../Dialogs/sketch-drive-edit-dialog';
 import {ActionsTypes} from '../../store/types.actions';
 import {SidurStore} from '../../store/store.types';
 import {SketchNoSketchMessage} from './sketch-no-sketch-message';
+
+import {TransitionGroup} from 'react-transition-group';
 
 const MOckDrive = {
     'id': '0',
@@ -121,17 +123,19 @@ export const Sketch = () => {
                                 minWidth: '6vw',
                                 minHeight: '60vh',
                             }}> <Typography variant={'h6'}>{getVehicleNameFromId(vehicleTimeTable.VehicleId)}  </Typography>
-                                {vehicleTimeTable.drives.map((drive: DriveModel, i: number) => {
-                                    return (
+                                <TransitionGroup>
+                                    {vehicleTimeTable.drives.map((drive: DriveModel, i: number) => {
+                                        return (
+                                            <Collapse key={i}>
+                                                <SketchDrive
+                                                    sketchDriveClick={(event: React.MouseEvent<HTMLElement>, drive: DriveModel) => sketchDriveClickHandler(event, drive, vehicleTimeTable.id)}
+                                                    key={i} drive={drive} prevoiusDrive={vehicleTimeTable.drives[i - 1] || null}/>
+                                            </Collapse>
 
-                                        <SketchDrive
-                                            sketchDriveClick={(event: React.MouseEvent<HTMLElement>, drive: DriveModel) => sketchDriveClickHandler(event, drive, vehicleTimeTable.id)}
-                                            key={i} drive={drive} prevoiusDrive={vehicleTimeTable.drives[i - 1] || null}/>
+                                        )
 
-
-                                    )
-
-                                })}
+                                    })}
+                                </TransitionGroup>
 
                             </Box>
                             <Divider orientation="vertical" variant={'fullWidth'} sx={{borderRight: '2px solid black '}} flexItem/>

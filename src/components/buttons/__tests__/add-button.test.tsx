@@ -1,7 +1,7 @@
 import React from 'react';
 import '../../../setupTests'
 import {shallow} from 'enzyme';
-import {AddButton, AddButtonProps} from '../add-button';
+import {AddButton, AddButtonProps} from '../../Icons/add-button';
 import {translations} from '../../../services/translations';
 
 

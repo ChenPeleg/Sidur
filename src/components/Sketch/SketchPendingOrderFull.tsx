@@ -5,12 +5,12 @@ import {Button, Typography} from '@mui/material';
 import {locations} from '../../services/locations';
 import {LanguageUtilities} from '../../services/language-utilities';
 import {OrderModel} from '../../models/Order.model';
-import {SidurActionType} from '../../models/SidurMenuClickActionType.enum';
 import {ActionsTypes} from '../../store/types.actions';
 import {PendingOrderMenu} from './pending-order-menu';
 import MoreIcon from '@mui/icons-material/MoreVert';
 import {OrderActionButton} from '../buttons/order-action-button';
 import {translations} from '../../services/translations';
+import {SketchEditActionEnum} from '../../models/SketchEditAction.enum';
 
 
 interface sketchPendingOrderProps {
@@ -26,26 +26,14 @@ export const SketchPendingOrderFull = (props: sketchPendingOrderProps) => {
     const dispatch = useDispatch();
     const [pendingOrderAnchorEl, setPendingOrderAnchorEl] =
         React.useState<null | HTMLElement>(null);
-    const handleSidurMenuClick = (event: React.MouseEvent<HTMLElement>, clickAction: SidurActionType) => {
-        const sidurId = '1'
+    const handlePendingOrderMenuClick = (event: React.MouseEvent<HTMLElement>, clickAction: SketchEditActionEnum) => {
+        const orderId = props.order.id
         switch (clickAction) {
 
-            case SidurActionType.CreateCopy:
+            case SketchEditActionEnum.AddToPending:
                 dispatch({
                     type: ActionsTypes.CLONE_SIDUR,
-                    payload: {id: sidurId}
-                })
-                break;
-            case SidurActionType.Archive:
-                dispatch({
-                    type: ActionsTypes.ARCHIVE_SIDUR,
-                    payload: {id: sidurId}
-                })
-                break;
-            case SidurActionType.Delete:
-                dispatch({
-                    type: ActionsTypes.DELETE_SIDUR,
-                    payload: {id: '1'}
+                    payload: {id: orderId}
                 })
                 break;
 
@@ -71,7 +59,8 @@ export const SketchPendingOrderFull = (props: sketchPendingOrderProps) => {
             }
         })
     }
-    const pendingOrdersActions = LanguageUtilities.buildSketchEditActionsArray();
+    let pendingOrdersActions = LanguageUtilities.buildSketchEditActionsArray();
+    pendingOrdersActions = [];
     const order = props.order;
     const actionButtonSx: SxProps = {}
     const isSidurMenuOpen = Boolean(pendingOrderAnchorEl);
@@ -119,10 +108,29 @@ export const SketchPendingOrderFull = (props: sketchPendingOrderProps) => {
                         aria-label="show more"
                         aria-controls={pendingOrderMenuId}
                         aria-haspopup="true"
-                        onClick={handlePendingOrderMenuOpen}
+                        onClick={() => actionClickHandler()}
                         variant={'contained'}
-                    > {translations.moerActions}
-                        <MoreIcon/>
+                    > {translations.SketchActionRemove}
+                    </Button>
+                </Box>
+                <Box sx={{p: '0.5em'}}>
+                    <Button sx={{
+                        pl: '5px',
+                        pr: '5px'
+                    }}
+                            size="medium"
+                            aria-label="show more"
+                            aria-controls={pendingOrderMenuId}
+                            aria-haspopup="true"
+                            onClick={handlePendingOrderMenuOpen}
+                            variant={'contained'}
+                    >&nbsp; {translations.moerActions}
+                        <MoreIcon sx={{
+                            pl: 0,
+                            pr: 0,
+                            mr: 0,
+                            ml: 0
+                        }}/>
                     </Button>
                 </Box>
                 <Box sx={{p: '0.5em'}}>
@@ -134,7 +142,6 @@ export const SketchPendingOrderFull = (props: sketchPendingOrderProps) => {
                         onClick={handlePendingOrderClose}
                         variant={'contained'}
                     > {translations.close}
-                        <MoreIcon/>
                     </Button>
                 </Box>
 
@@ -142,7 +149,7 @@ export const SketchPendingOrderFull = (props: sketchPendingOrderProps) => {
             </Box>
             <PendingOrderMenu PendingOrderMenuAnchor={pendingOrderAnchorEl} PendingOrderMenuId={pendingOrderMenuId}
                               isPendingOrderMenuOpen={isSidurMenuOpen}
-                              handlePendingOrderMenuClick={handleSidurMenuClick} handlePendingOrderMenuClose={handleSidurMenuClose}/>
+                              handlePendingOrderMenuClick={handlePendingOrderMenuClick} handlePendingOrderMenuClose={handleSidurMenuClose}/>
         </Box>)
 
     )

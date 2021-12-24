@@ -88,14 +88,15 @@ export const LanguageUtilities = {
         const arr = new Array(numberOfBR)
         return str + arr.map(s => br).join('')
     },
-    buildSketchEditActionsArray(): { action: SketchEditActionEnum, name: string } [] {
-        const ret: { action: SketchEditActionEnum, name: string } [] = []
+    buildSketchEditActionsArray(): { action: SketchEditActionEnum, name: string, icon: string } [] {
+        const ret: { action: SketchEditActionEnum, name: string, icon: string } [] = []
         for (let sketchEditActionEnumKey in SketchEditActionEnum) {
             if (isNaN(Number(sketchEditActionEnumKey))) {
                 continue
             }
             let name = sketchEditActionEnumKey;
-            switch (Number(sketchEditActionEnumKey) as SketchEditActionEnum) {
+            const enumbEntry = Number(sketchEditActionEnumKey) as SketchEditActionEnum
+            switch (enumbEntry) {
                 case SketchEditActionEnum.Split:
 
 
@@ -123,7 +124,8 @@ export const LanguageUtilities = {
             }
             ret.push({
                 action: Number(sketchEditActionEnumKey),
-                name: name
+                name: name,
+                icon: SketchEditActionEnum[enumbEntry]
             })
         }
         return ret

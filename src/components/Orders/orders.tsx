@@ -5,7 +5,7 @@ import {OrderCar} from './order-car';
 import {useDispatch, useSelector} from 'react-redux';
 import {OrderModel} from '../../models/Order.model';
 import {ActionsTypes} from '../../store/types.actions';
-import {AddButton} from '../buttons/add-button';
+import {AddButton} from '../Icons/add-button';
 
 const TRL = translations;
 const useStyles = (() => ({
