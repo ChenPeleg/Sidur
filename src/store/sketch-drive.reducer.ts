@@ -16,7 +16,7 @@ export const SketchDriveReducer: Record<SketchDriveReducerFunctions, (state: Sid
         let newState = {...state}
         const sketchDriveChanged: DriveModel = action.payload.value
         const SketchIdInEdit = newState.SketchIdInEdit;
- 
+
         const sketchObj: SketchModel | undefined = newState.sketches.find((record: SketchModel) => record.id === SketchIdInEdit);
 
         if (sketchObj !== undefined) {
@@ -74,34 +74,35 @@ export const SketchDriveReducer: Record<SketchDriveReducerFunctions, (state: Sid
 
 
         }
+        updateSidurRecordWithSketchChanges(newState)
         return newState
 
     },
     [ActionsTypes.DELETE_SKETCH_DRIVE]: (state: SidurStore, action: IAction): SidurStore => {
         let newState = {...state}
-        const sketchToDelete = action.payload.id// newState.sidurId;
-        let posOfDeletedSketch = -1;
-        let deletedSketch: SketchModel | undefined = newState.sketches.find(s => s.id === sketchToDelete);
-        if (deletedSketch) {
-            posOfDeletedSketch = newState.sketches.indexOf(deletedSketch);
-            deletedSketch = {...deletedSketch};
-            deletedSketch.id = 'Del' + deletedSketch.id;
-            // newState.sidurArchive.push(deletedSketch);
-        }
+        const sketchDriveToDelete: DriveModel = action.payload.value
+        const SketchIdInEdit = newState.SketchIdInEdit;
 
-        newState.sketches = newState.sketches.filter(s => s.id !== sketchToDelete);
-        if (newState.sketches.length) {
-            const sketchesIds = newState.sketches.map(s => s.id);
-            if (posOfDeletedSketch > 1) {
-                newState.SketchIdInEdit = sketchesIds [posOfDeletedSketch - 1]
-            } else {
-                newState.SketchIdInEdit = sketchesIds [0]
+        const sketchObj: SketchModel | undefined = newState.sketches.find((record: SketchModel) => record.id === SketchIdInEdit);
+
+        if (sketchObj !== undefined) {
+            const vehicleId = getVehicleIdFromDriveId(state, sketchDriveToDelete.id);
+            const relevantVehicle = sketchObj.vehicleSchedules.find(v => v.id === vehicleId);
+            if (relevantVehicle) {
+
+                const newDrives: (DriveModel | null) [] = relevantVehicle.drives.map((d: DriveModel) => {
+                    if (d.id === sketchDriveToDelete.id) {
+                        return null
+                    } else {
+                        return d
+                    }
+                });
+                relevantVehicle.drives = newDrives.filter(d => d) as DriveModel[]
             }
-        } else {
-            newState.SketchIdInEdit = ''
-        }
 
-        newState = updateSidurRecordWithSketchChanges(newState)
+
+        }
+        updateSidurRecordWithSketchChanges(newState)
         return newState
 
     },
@@ -116,8 +117,7 @@ const updateSidurRecordWithSketchChanges = (state: SidurStore): SidurStore => {
     if (thisSidurInCollection) {
         thisSidurInCollection.sketches = newState.sketches.map(s => CloneUtil.deepCloneSketch(s))
     }
-
-
+ 
     return newState
 
 }

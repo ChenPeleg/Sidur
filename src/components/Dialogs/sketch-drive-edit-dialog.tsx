@@ -24,7 +24,7 @@ interface SketchDriveEditDialogProps {
     open: boolean;
     sketchDriveData: { drive: DriveModel, vehicleId: string };
     vehicleId: string;
-    onDelete: (id: string | null) => void;
+    onDelete: (sketchDriveData: { drive: DriveModel, vehicleId: string }) => void;
     onClose: (vehicleUpdate: DriveModel | null) => void;
 }
 
@@ -42,9 +42,7 @@ export const SketchDriveEditDialog = (props: SketchDriveEditDialogProps) => {
     const sketches: SketchModel[] = useSelector((state: { sketches: SketchModel[] }) => state.sketches);
     const sketchInEdit: SketchModel | null = sketches.find((sketch: SketchModel) => sketch.id === SketchIdInEdit) || null;
 
-
-    const sketchOrders = useSelector((state: { orders: OrderModel[] }) => state.orders || []);
-
+    const sketchOrders = sketchInEdit?.assignedOrders || [];
     const [driveChangedData, setDriveChangedData] = useState<DriveModel>({...driveData});
 
 
@@ -65,7 +63,9 @@ export const SketchDriveEditDialog = (props: SketchDriveEditDialogProps) => {
 
     };
     const handleCloseDelete = (): void => {
-        onDelete(driveData?.id || '');
+        const sketchDriveDataForDelete = {...sketchDriveData}
+        
+        onDelete(sketchDriveDataForDelete);
     };
     const addToPendingClickHandler = (event: Event, orderId: string) => {
 
@@ -144,7 +144,7 @@ export const SketchDriveEditDialog = (props: SketchDriveEditDialogProps) => {
                                 fullWidth
                                 multiline={true}
                                 variant="standard"
-                                defaultValue={driveData?.description || ''}
+                                defaultValue={(driveData?.description || '').replace('  ', ' ')}
                                 inputRef={descriptionValueRef}
                                 onKeyUp={(event) => {
                                     if (event.key === 'Enter') {
@@ -154,7 +154,7 @@ export const SketchDriveEditDialog = (props: SketchDriveEditDialogProps) => {
                             />
                         </Box>
                         <Typography align={'center'} sx={{mt: '1em'}}
-                                    component="legend"><b> {
+                                    component="legend"><b> {implementedOrders.length === 0 ? (translations.none + ' ') : null} {
                             translations
                                 .connectedOrders
                         }</b>

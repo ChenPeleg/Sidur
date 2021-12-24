@@ -10,6 +10,7 @@ import {DriveType} from '../../models/DriveType.enum';
 
 interface sketchDriveProps {
     drive: DriveModel,
+    prevoiusDrive: DriveModel | null,
     sketchDriveClick: (event: React.MouseEvent<HTMLElement>, drive: DriveModel) => void
 }
 

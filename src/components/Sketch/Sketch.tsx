@@ -42,9 +42,17 @@ export const Sketch = () => {
         React.useState<null | HTMLElement>(null);
     const [chosenDrive, setChosenDrive] = useState<{ drive: DriveModel, vehicleId: string } | null>(null);
     const [mock, setMock] = useState<boolean>(false)
-    const handleSketchDriveEditDelete = () => {
+    const handleSketchDriveEditDelete = (sketchDriveData: { drive: DriveModel, vehicleId: string }) => {
         setSketchDriveEditOpen(false);
         setChosenDrive(null);
+        const value = sketchDriveData.drive
+        dispatch({
+            type: ActionsTypes.DELETE_SKETCH_DRIVE,
+            payload: {
+                value
+            }
+        })
+
     }
 
 
@@ -118,7 +126,7 @@ export const Sketch = () => {
 
                                         <SketchDrive
                                             sketchDriveClick={(event: React.MouseEvent<HTMLElement>, drive: DriveModel) => sketchDriveClickHandler(event, drive, vehicleTimeTable.id)}
-                                            key={i} drive={drive}/>
+                                            key={i} drive={drive} prevoiusDrive={vehicleTimeTable.drives[i - 1] || null}/>
 
 
                                     )

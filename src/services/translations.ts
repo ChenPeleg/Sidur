@@ -67,7 +67,7 @@ export const translations = {
     'missingDetails': 'מידע חלקי',
 
     'onePassenger': 'נוסע/ת אחד/ת',
-
+    'none': 'אין',
     'exitTime': 'יציאה',
     'flexEarly': 'הקדמה',
     'min': 'דק\'',
