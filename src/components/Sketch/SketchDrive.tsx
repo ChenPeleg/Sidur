@@ -8,7 +8,8 @@ import {LanguageUtilities} from '../../services/language-utilities';
 import {DriveType} from '../../models/DriveType.enum';
 import {Utils} from '../../services/utils';
 import {translations} from '../../services/translations';
-import {ArrowDownward, ArrowUpward} from '@mui/icons-material';
+import {Colors, Styles} from '../../hoc/themes';
+import {WarningIcon} from '../buttons/warning-icon';
 
 
 interface sketchDriveProps {
@@ -53,17 +54,31 @@ export const SketchDrive = (props: sketchDriveProps) => {
 
     return (
         <Box>
-            {driveOverlap ? <Card sx={{
+            {driveOverlap ? <Box sx={{
                 m: '0.2em',
                 mb: '0.3em',
-                minHeight: '10vh',
+                //minHeight: '10vh',
                 display: 'flex',
                 flexDirection: 'row',
                 alignItems: 'stretch',
                 justifyContent: 'start',
                 cursor: 'default',
-                bgcolor: '#e6a5a5'
-            }}> <Box><ArrowDownward/> <b> {translations.OverlapingDrives}</b> <ArrowUpward/></Box></Card> : null}
+                bgcolor: Colors.warningRed,
+                boxShadow: '0px 0px 7px 5px ' + Colors.warningRed.replace('1.0', '0.8'),
+                p: '0 0.5em'
+            }}> <Box sx={{
+                ...Styles.flexRow,
+                alignItems: 'center',
+                justifyContent: 'center',
+                textAlign: 'center'
+            }}> < Box sx={Styles.flexColumn}> <WarningIcon/>
+            </Box><Box sx={{
+                ...Styles.flexRow,
+                alignItems: 'center',
+                justifyContent: 'center',
+                textAlign: 'center'
+            }}> <b> {translations.OverlapingDrives}</b></Box>
+            </Box></Box> : null}
             <Card onClick={(event: any) => props.sketchDriveClick(event, drive)} onMouseOver={onMouseOver}
                   onMouseOut={onMouseOut} elevation={inHover ? 8 : 2} sx={{
                 m: '0.2em',

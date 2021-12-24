@@ -13,7 +13,7 @@ import IconButton from '@mui/material/IconButton';
 import {Archive, Delete, DeleteForever, Edit, Unarchive} from '@mui/icons-material';
 import {SidurManagementActionType} from '../../models/SidurMenuClickActionType.enum';
 import {SxProps} from '@mui/system';
-import {customStyles} from '../../hoc/themes';
+import {Styles} from '../../hoc/themes';
 import {red} from '@mui/material/colors';
 import {ActionsTypes} from '../../store/types.actions';
 
@@ -78,29 +78,29 @@ export const SidurManagementDialog = (props: FileUploadProps) => {
                     return {
                         text: translations.DeleteForever,
                         icon: (<DeleteForever sx={{
-                            ...customStyles.smallIcons,
+                            ...Styles.smallIcons,
                             color: red
                         }}/>)
                     }
                 case SidurManagementActionType.MoveToArchive:
                     return {
                         text: translations.Archive,
-                        icon: (<Archive sx={customStyles.smallIcons}/>)
+                        icon: (<Archive sx={Styles.smallIcons}/>)
                     }
                 case SidurManagementActionType.MoveToTrash:
                     return {
                         text: translations.MoveToTrash,
-                        icon: (<Delete sx={customStyles.smallIcons}/>)
+                        icon: (<Delete sx={Styles.smallIcons}/>)
                     }
                 case SidurManagementActionType.Rename:
                     return {
                         text: translations.Rename,
-                        icon: (<Edit sx={customStyles.smallIcons}/>)
+                        icon: (<Edit sx={Styles.smallIcons}/>)
                     }
                 case SidurManagementActionType.MoveToActive:
                     return {
                         text: translations.MoveToActive,
-                        icon: (<Unarchive sx={customStyles.smallIcons}/>)
+                        icon: (<Unarchive sx={Styles.smallIcons}/>)
                     }
                 default:
                     return null

@@ -2,6 +2,7 @@
 import {createTheme, Theme} from '@mui/material';
 import {red} from '@mui/material/colors';
 import Assistant from '../assets/fonts/Assistant-Regular.ttf';
+import {SxProps} from '@mui/system';
 
 // @ts-ignore
 // @ts-ignore
@@ -53,9 +54,26 @@ export const themeMain: Theme = createTheme({
 
 });
 
-export const customStyles = {
+export const Colors: Record<string, string> = {
+    'warningRed': 'rgb(255,59,59)',
+    'warningYellow': '#fcd632'
+}
+export const Styles: Record<string, SxProps> = {
     smallIcons: {
         height: '0.7em',
         width: '0.7em'
-    }
+    },
+    flexRow: {
+        display: 'flex',
+        flexDirection: 'row',
+        alignItems: 'start',
+        alignContent: 'start'
+    },
+    flexColumn: {
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'start',
+        alignContent: 'start'
+    },
+
 }
