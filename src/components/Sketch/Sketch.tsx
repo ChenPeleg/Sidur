@@ -94,8 +94,6 @@ export const Sketch = () => {
 
     const sketchInEdit: SketchModel | null = sketches.find((sketch: SketchModel) => sketch.id === SketchIdInEdit) || null;
 
-    //  const sketchInEdit: SketchModel = sketches[0] || Utils.defaultSketchMMock();
-
 
     return (
         sketchInEdit ? (

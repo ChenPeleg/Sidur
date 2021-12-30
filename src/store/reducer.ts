@@ -27,6 +27,7 @@ const startVehicles: VehicleModel[] = ['סנאו', 'שלגיה', 'שכור', 'מ
 
 const defaultInitialState: SidurStore = {
     sidurArchive: [],
+    locationGroupInEdit: null,
     sidurCollection: [{
         id: '1',
         Name: 'סידור יום שני',
@@ -34,7 +35,10 @@ const defaultInitialState: SidurStore = {
         deletedOrders: [],
         vehicles: [defaultVehicleValues],
         sketches: [],
-        chosenSketch: ''
+        chosenSketch: '',
+        locationGroup: null,
+
+
     }, {
         id: '2',
         Name: 'סידור גנים',
@@ -42,7 +46,8 @@ const defaultInitialState: SidurStore = {
         deletedOrders: [],
         vehicles: [defaultVehicleValues],
         sketches: [],
-        chosenSketch: ''
+        chosenSketch: '',
+        locationGroup: null
     }
 
     ],
@@ -54,9 +59,11 @@ const defaultInitialState: SidurStore = {
     deletedOrders: [],
     defaultOrderValues: {...defaultOrderValues},
     sketches: [],
-    displaySetting: {view: 'both'},
+    displaySetting: {view: 'locationsView'},
     SketchIdInEdit: null,
-    pendingOrderIdInEdit: null
+    pendingOrderIdInEdit: null,
+    LocationGroups: []
+
 }
 
 const stateFromLocalStorage: SidurStore | undefined = SaveLoadService.loadFromLocalStorage('chen').data?.savedStore
@@ -112,6 +119,15 @@ const reducer = (state: SidurStore = initialState, action: IAction) => {
 
         case ActionsTypes.CLICKED_PENDING_ORDER:
         case ActionsTypes.CLICKED_CLOSE_PENDING_ORDER:
+        case ActionsTypes.CLICKED_REMOVE_PENDING_ORDER :
+        case ActionsTypes.CLICKED_MERGE_PENDING_ORDER :
+        case ActionsTypes.CLICKED_SPLIT_PENDING_ORDER :
+        case ActionsTypes.CLICKED_CHANGE_PENDING_ORDER  :
+        case ActionsTypes.CLICKED_CHANGE_TIME_PENDING_ORDER  :
+        case ActionsTypes.CLICKED_REPLACE_EXISTING_PENDING_ORDER  :
+        case ActionsTypes.CLICKED_PUBLIC_TRANSPORT_PENDING_ORDER  :
+        case ActionsTypes.CLICKED_ADD_TO_PENDING_PENDING_ORDER:
+
             return PendingOrdersReducer [action.type](newState, action)
         case ActionsTypes.DELETE_SKETCH_DRIVE:
         case ActionsTypes.UPDATE_SKETCH_DRIVE:

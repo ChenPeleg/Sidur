@@ -35,11 +35,11 @@ export const SidurBuilderBuildOrdersMetaData = (orders: OrderModel[], buildSetti
         const locationId = metaOrder.order.location;
         let locationObj = locations.find(l => l.id === locationId);
         if (!locationObj) {
-            locationObj = locations.find(l => l.Name === 'Other') ||
+            locationObj = locations.find(l => l.name === 'Other') ||
                 {
                     EnName: 'Other',
                     id: '999',
-                    Name: 'אחר',
+                    name: 'אחר',
                     ETA: 45,
                 }
 

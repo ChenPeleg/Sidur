@@ -1,6 +1,6 @@
 import React from 'react'
 import {Box} from '@mui/system';
-import {useDispatch, useSelector} from 'react-redux';
+import {useSelector} from 'react-redux';
 import {Typography} from '@mui/material';
 import {OrderModel} from '../../models/Order.model';
 import {translations} from '../../services/translations';
@@ -14,9 +14,9 @@ interface sketchPendingOrdersProps {
 
 
 export const SketchPendingOrders = (props: sketchPendingOrdersProps) => {
-    const dispatch = useDispatch();
+ 
     const pendingOrderInEdit = useSelector((state: SidurStore) => state.pendingOrderIdInEdit);
-    const drive = props.pendingOrders;
+
     return (<Box id={'pending-order-container'} sx={{
             m: '0.2em',
             mb: '0.3em',

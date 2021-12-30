@@ -67,7 +67,7 @@ export const LanguageUtilities = {
             const driveTimeLanguage = LanguageUtilities.getPrefixByDriveType(orderValues.TypeOfDrive);
             const location = locations.find(l => l.id === orderValues.location);
             if (location) {
-                briefText += ' ' + driveTimeLanguage.location + location.Name
+                briefText += ' ' + driveTimeLanguage.location + location.name
             }
 
         }
@@ -118,7 +118,7 @@ export const LanguageUtilities = {
                 case SketchEditActionEnum.publicTransport:
                     name = translations.SketchActionPublicTransport
                     break;
-                case SketchEditActionEnum.Remove:
+                case SketchEditActionEnum.RemoveFromPending:
                     name = translations.SketchActionRemove;
                     break;
             }

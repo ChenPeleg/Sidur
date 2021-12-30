@@ -9,7 +9,7 @@ const buildLocations = (): LocationModel[] => {
         return {
             EnName: En,
             id: ids.toString(),
-            Name: Heb,
+            name: Heb,
             ETA: ETA,
         }
     }

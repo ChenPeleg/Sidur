@@ -3,6 +3,7 @@ import {OrderModel} from '../models/Order.model';
 import {DriveType} from '../models/DriveType.enum';
 import {VehicleModel} from '../models/Vehicle.model';
 import {SketchModel} from '../models/Sketch.model';
+import {LocationGroup} from '../models/Location.model';
 
 export type ActionType = string;
 
@@ -19,11 +20,12 @@ export interface SidurRecord {
     deletedOrders: OrderModel[];
     defaultOrderValues?: OrderModel,
     sketches: SketchModel[],
-    chosenSketch: string
+    chosenSketch: string,
+    locationGroup: LocationGroup | null
 }
 
 export interface DisplaySettings {
-    view: 'orders' | 'sketch' | 'both'
+    view: 'orders' | 'sketch' | 'locationsView'
 }
 
 export interface SidurStore {
@@ -37,6 +39,9 @@ export interface SidurStore {
     displaySetting: DisplaySettings,
     sketches: SketchModel[];
     sidurId: string;
+    LocationGroups: null | LocationGroup[];
+
+    locationGroupInEdit: null | string;
     orderIdInEdit: null | string;
     pendingOrderIdInEdit: null | string;
     SketchIdInEdit: null | string;

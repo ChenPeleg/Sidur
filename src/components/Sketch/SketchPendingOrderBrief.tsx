@@ -13,7 +13,7 @@ interface sketchPendingOrderProps {
 }
 
 const getLocationFromId = (locationId: string): string | null => {
-    return locations.find(v => v.id === locationId)?.Name || locationId
+    return locations.find(v => v.id === locationId)?.name || locationId
 }
 const timeText = (drive: OrderModel) => LanguageUtilities.buildBriefText(drive, locations).timeText;
 const driverAndLocation = (drive: OrderModel) => LanguageUtilities.buildBriefText(drive, locations).driverAndLocation;

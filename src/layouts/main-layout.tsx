@@ -5,12 +5,14 @@ import {Vehicles} from '../components/Vehicles/vehicles';
 import {useSelector} from 'react-redux';
 import {DisplaySettings} from '../store/store.types';
 import {SketchesContainer} from '../components/Sketch/SketchesContainer';
+import {LocationsEdit} from '../components/LocationsEdit/locations-edit';
 
 
 export const MainLayout = () => {
     const displaySetting: DisplaySettings = useSelector((state: { displaySetting: DisplaySettings }) => state.displaySetting);
     let displaySketches: boolean = false;
     let displayOrders: boolean = true;
+    let displayLocations: boolean = false
 
     switch (displaySetting?.view) {
         case 'orders':
@@ -21,9 +23,10 @@ export const MainLayout = () => {
             displayOrders = false;
             displaySketches = true;
             break;
-        case 'both':
-            displayOrders = true;
-            displaySketches = true;
+        case 'locationsView':
+            displayOrders = false;
+            displaySketches = false;
+            displayLocations = true
             break;
         default:
             break;
@@ -44,6 +47,11 @@ export const MainLayout = () => {
 
                     <Vehicles/>
                     <Orders/>
+
+                </Box> : null}
+                {displayLocations ? <Box flexDirection="column" flexWrap="wrap" display="flex" alignItems="start" justifyContent="start">
+
+                    <LocationsEdit/>
 
                 </Box> : null}
 

@@ -134,13 +134,13 @@ const searchLocationInText = (text: string): { locationFound: LocationModel | nu
             null
     }
     allLocations.forEach((location: LocationModel) => {
-        if (text.includes(location.Name)) {
+        if (text.includes(location.name)) {
             results.locationFound = location;
         }
     });
 
     if (results.locationFound) {
-        const locName = results.locationFound.Name;
+        const locName = results.locationFound.name;
         const fromPrefixes = [translations.From, translations.fromLocationWithThe];
         const toPrefixes = [translations.toLocation, translations.toLocationLe];
         const tzamudPrefix = [translations.inLocation];

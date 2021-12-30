@@ -41,8 +41,7 @@ export const PendingOrderMenu = (props: PendingOrderMenuProps) => {
             open={isPendingOrderMenuOpen}
             onClose={handlePendingOrderMenuClose}
         >
-            {pendingOrdersActions.map(item => <MenuItem
-                onClick={(e) => handlePendingOrderMenuClick(e, item.action)}>
+            {pendingOrdersActions.map((item, i: number) => <MenuItem key={i} onClick={(e) => handlePendingOrderMenuClick(e, item.action)}>
                 {Icons[item.icon] as React.ReactElement} &nbsp;
                 {item.name}
             </MenuItem>)}

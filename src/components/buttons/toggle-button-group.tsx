@@ -13,7 +13,7 @@ export const ToggleButtons = () => {
         newAlignment: string,
     ) => {
         setAlignment(newAlignment);
-       
+
         dispatch({
             type: ActionsTypes.CHANGE_VIEW,
             payload: {
@@ -33,7 +33,7 @@ export const ToggleButtons = () => {
         >
             <ToggleButton sx={{color: 'white'}} value={'orders'}> {translations.Orders} </ToggleButton>
             <ToggleButton sx={{color: 'white'}} value={'sketch'}>{translations.Sketch}</ToggleButton>
-            <ToggleButton sx={{color: 'white'}} value={'both'}>{translations.All}</ToggleButton>
+            <ToggleButton sx={{color: 'white'}} value={'locationsView'}>{translations.Locations}</ToggleButton>
         </ToggleButtonGroup>
     );
 }

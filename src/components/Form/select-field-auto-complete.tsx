@@ -42,7 +42,7 @@ export const RenderSelectFieldAutoComplete = (
 ) => {
     const classes = useStyles()
     const options: Array<{ label: string, id: string }> = (custom.selectoptions || []).map((location: LocationModel) => ({
-        label: location.Name.replaceAll('  ', ' '),
+        label: location.name.replaceAll('  ', ' '),
         id: location.id
     }));
     const inputAsText = options.find(o => o.id === input.value)?.label || input.value
@@ -84,7 +84,7 @@ export const RenderSelectFieldAutoComplete = (
                         target: {...event.target}
                     };
                     clonedEvent.target.value = newValue.id
-                    
+
                     input.onChange(clonedEvent)
 
                 }}

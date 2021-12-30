@@ -131,7 +131,7 @@ const MaterialUiForm = (muiFormProps: MuiFormPropsModel) => {
                     <Field name={orderFields.location} component={RenderSelectFieldAutoComplete} label={TRL.Where}
                            selectoptions={allLocations.map((location: LocationModel) => ({
                                ...location,
-                               Name: driveTimelanguage.location + location.Name
+                               Name: driveTimelanguage.location + location.name
                            }))}>
 
                     </Field> </Box>

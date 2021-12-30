@@ -1,6 +1,7 @@
 import {AppConstants, SaveDataModel, SidurRecord, SidurStore} from './store.types';
 import {SaveLoadService} from '../services/save-load.service';
 import {hashFunction} from '../services/hash-function';
+import {CloneUtil} from '../services/clone-utility';
 
 
 export const StoreUtils = {
@@ -43,6 +44,18 @@ export const StoreUtils = {
             timeStamp: SaveLoadService.getTimeStampFromDate(),
             hash: hash.toString()
         }
+
+    },
+    updateSidurRecordWithSketchChanges(state: SidurStore): SidurStore {
+        const newState = {...state};
+        const thisSidurInCollection: SidurRecord | undefined = newState.sidurCollection.find((sidur: SidurRecord) => sidur.id === newState.sidurId);
+
+
+        if (thisSidurInCollection) {
+            thisSidurInCollection.sketches = newState.sketches.map(s => CloneUtil.deepCloneSketch(s))
+        }
+
+        return newState
 
     }
 }

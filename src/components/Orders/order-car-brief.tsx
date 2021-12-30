@@ -77,7 +77,7 @@ const buildBriefText = (orderValues: OrderModel): string => {
         const driveTimeLanguage = LanguageUtilities.getPrefixByDriveType(orderValues.TypeOfDrive);
         const location = allLocations.find(l => l.id === orderValues.location);
         if (location) {
-            briefText += ' ' + driveTimeLanguage.location + location.Name
+            briefText += ' ' + driveTimeLanguage.location + location.name
         }
 
     }

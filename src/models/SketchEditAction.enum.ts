@@ -1,5 +1,5 @@
 export enum SketchEditActionEnum {
-    Remove = 1,
+    RemoveFromPending = 1,
     Merge = 2,
     Split = 3,
     Change = 4,

@@ -7,11 +7,11 @@ import {CloneUtil} from '../services/clone-utility';
 import {OrderModel} from '../models/Order.model';
 import {StoreUtils} from './store-utils';
 
-export type SketchDriveReducerFunctions = ActionsTypes.DELETE_SKETCH_DRIVE
-                                          | ActionsTypes.UPDATE_SKETCH_DRIVE | ActionsTypes.REMOVE_ORDER_FROM_SKETCH_DRIVE
+export type LocationGroupReducerFunctions = ActionsTypes.DELETE_SKETCH_DRIVE
+                                            | ActionsTypes.UPDATE_SKETCH_DRIVE | ActionsTypes.REMOVE_ORDER_FROM_SKETCH_DRIVE
 
 
-export const SketchDriveReducer: Record<SketchDriveReducerFunctions, (state: SidurStore, action: IAction) => SidurStore> = {
+export const LocationGroupReducer: Record<LocationGroupReducerFunctions, (state: SidurStore, action: IAction) => SidurStore> = {
 
     [ActionsTypes.UPDATE_SKETCH_DRIVE]: (state: SidurStore, action: IAction): SidurStore => {
         let newState = {...state}

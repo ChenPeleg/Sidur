@@ -40,7 +40,7 @@ export const SketchReducer: Record<SketchReducerFunctions, (state: SidurStore, a
         }
 
 
-        newState = updateSidurRecordWithSketchChanges(newState)
+        newState = StoreUtils.updateSidurRecordWithSketchChanges(newState)
         StoreUtils.HandleReducerSaveToLocalStorage(newState);
         return newState
     },
@@ -85,7 +85,7 @@ export const SketchReducer: Record<SketchReducerFunctions, (state: SidurStore, a
                 return sketch
             }
         });
-        newState = updateSidurRecordWithSketchChanges(newState)
+        newState = StoreUtils.updateSidurRecordWithSketchChanges(newState)
         return newState
     },
     [ActionsTypes.DELETE_SKETCH]: (state: SidurStore, action: IAction): SidurStore => {
@@ -112,7 +112,7 @@ export const SketchReducer: Record<SketchReducerFunctions, (state: SidurStore, a
             newState.SketchIdInEdit = ''
         }
 
-        newState = updateSidurRecordWithSketchChanges(newState)
+        newState = StoreUtils.updateSidurRecordWithSketchChanges(newState)
         return newState
 
     },
@@ -131,28 +131,14 @@ export const SketchReducer: Record<SketchReducerFunctions, (state: SidurStore, a
             newState.SketchIdInEdit = newSketchId;
             // newState = setChosenSidur(newState, newSketch);
         }
-        newState = updateSidurRecordWithSketchChanges(newState)
+        newState = StoreUtils.updateSidurRecordWithSketchChanges(newState)
         return newState
 
     },
 
 
 }
-const updateSidurRecordWithSketchChanges = (state: SidurStore): SidurStore => {
-    const newState = {...state};
-    const thisSidurInCollection: SidurRecord | undefined = newState.sidurCollection.find((sidur: SidurRecord) => sidur.id === newState.sidurId);
-
-
-    if (thisSidurInCollection) {
-        thisSidurInCollection.sketches = newState.sketches.map(s => CloneUtil.deepCloneSketch(s))
-    }
-
-
-    return newState
-
-}
-
-
+ 
 const getAllSketchesIDs = (state: SidurStore): string[] => {
     const sketchesIds = state.sketches.map(o => o.id);
 

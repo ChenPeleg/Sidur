@@ -36,6 +36,12 @@ export const SketchPendingOrderFull = (props: sketchPendingOrderProps) => {
                     payload: {id: orderId}
                 })
                 break;
+            case SketchEditActionEnum.RemoveFromPending:
+                dispatch({
+                    type: ActionsTypes.CLICKED_REMOVE_PENDING_ORDER,
+                    payload: {id: orderId}
+                })
+                break;
 
 
             default:
@@ -108,7 +114,7 @@ export const SketchPendingOrderFull = (props: sketchPendingOrderProps) => {
                         aria-label="show more"
                         aria-controls={pendingOrderMenuId}
                         aria-haspopup="true"
-                        onClick={() => actionClickHandler()}
+                        onClick={(event) => handlePendingOrderMenuClick(event, SketchEditActionEnum.RemoveFromPending)}
                         variant={'contained'}
                     > {translations.SketchActionRemove}
                     </Button>
