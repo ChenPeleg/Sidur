@@ -2,14 +2,13 @@ import React from 'react';
 import {Box, Button, IconButton, MenuItem, Select, SelectChangeEvent, Typography} from '@mui/material';
 import {useDispatch, useSelector} from 'react-redux';
 import {Edit} from '@mui/icons-material';
-import {SketchMenu} from '../Sketch/sketch-menu';
 import {SketchActionType} from '../../models/SketchMenuClickActionType.enum';
 import {RenameDialog} from '../Dialogs/rename-dialog';
 import {SidurStore} from '../../store/store.types';
 import {ActionsTypes} from '../../store/types.actions';
 import {translations} from '../../services/translations';
-import {Sketch} from '../Sketch/Sketch';
 import {LocationGroup} from '../../models/Location.model';
+import {LocationGroupMenu} from './location-group-menu';
 
 
 export const LocationsEdit = () => {
@@ -98,13 +97,18 @@ export const LocationsEdit = () => {
     }
 
 
-    const locationGroupInEdit: LocationGroup | null = locationGroups.find((lGroup: LocationGroup) => lGroup.id === locationGroupInEditId) || null;
+    const locationGroupInEdit: LocationGroup | null = locationGroups.find((lGroup: LocationGroup) => lGroup.id === locationGroupInEditId) || {
+        Locations: [],
+        name: 'אשבל',
+        id: '1'
+    };
 
     const sketchName = locationGroupInEdit ? locationGroupInEdit.name : '';
 
 
     return (
         <Box>
+            fasdfasdfasdf
             {locationGroupInEdit ? <Box sx={{
                 display: 'flex',
                 flexDirection: 'row',
@@ -157,10 +161,10 @@ export const LocationsEdit = () => {
                              onClick={handleCreateSketch}>{translations.CreateSketch}</Button>}
 
 
-            <Sketch/>
-            <SketchMenu sketchMoreAnchorEl={locationGroupMoreAnchorEl} sketchMenuId={locationGroupInEditId || ''}
-                        isSketchMenuOpen={isLocationGroupMenuOpen}
-                        handleSketchMenuClick={handleSketchMenuClick} handleSketchMenuClose={handleSketchMenuClose}/>
+            <LocationGroupMenu locationGroupMoreAnchorEl={locationGroupMoreAnchorEl}
+                               locationGroupMenuId={locationGroupInEditId || ''}
+                               isLocationGroupMenuOpen={isLocationGroupMenuOpen}
+                               handleLocationGroupMenuClick={handleSketchMenuClose} handleLocationGroupMenuClose={handleSketchMenuClose}/>
             <RenameDialog open={RenameOpen} onClose={handleRenameClose} selectedValue={sketchName}/>
         </Box>
 
