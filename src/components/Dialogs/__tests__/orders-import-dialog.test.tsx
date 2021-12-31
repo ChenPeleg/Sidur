@@ -54,7 +54,7 @@ describe('Orders import Dialog', () => {
             component.find('#orders-import-approve-button').hostNodes().first().simulate('click');
             expect(component.find('#orders-import-approve-button').hostNodes().length).toBeGreaterThan(0);
             expect(onClose).toHaveBeenCalledWith();
-            console.log(store.getActions())
+             
             expect(store.getActions()).toEqual([{
                     'payload': {'importedOrders': 'orders as text'},
                     'type': 'IMPORT_ORDERS_AS_TEXT'

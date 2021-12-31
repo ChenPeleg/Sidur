@@ -28,19 +28,29 @@ export interface DisplaySettings {
     view: 'orders' | 'sketch' | 'locationsView'
 }
 
+export interface SessionModel {
+    locationGroupInEdit: null | string;
+    orderIdInEdit: null | string;
+    pendingOrderIdInEdit: null | string;
+    SketchIdInEdit: null | string;
+    LocationGroupTabOpen: null | string;
+    dataHolderForCurrentOrderInEdit: null | OrderModel
+}
+
 export interface SidurStore {
     sidurCollection: SidurRecord[];
     sidurArchive: SidurRecord[];
     orders: OrderModel[];
     vehicles: VehicleModel[];
     deletedOrders: OrderModel[];
-    dataHolderForCurrentOrderInEdit: OrderModel | null;
     defaultOrderValues: OrderModel,
     displaySetting: DisplaySettings,
     sketches: SketchModel[];
     sidurId: string;
     LocationGroups: null | LocationGroup[];
-
+    currentSessionState: SessionModel;
+    // Move to Session state
+    dataHolderForCurrentOrderInEdit: OrderModel | null;
     locationGroupInEdit: null | string;
     orderIdInEdit: null | string;
     pendingOrderIdInEdit: null | string;

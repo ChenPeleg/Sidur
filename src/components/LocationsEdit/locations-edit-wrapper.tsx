@@ -2,16 +2,16 @@ import React from 'react';
 import {Box, Button, IconButton, MenuItem, Select, SelectChangeEvent, Typography} from '@mui/material';
 import {useDispatch, useSelector} from 'react-redux';
 import {Edit} from '@mui/icons-material';
-import {SketchActionType} from '../../models/SketchMenuClickActionType.enum';
 import {RenameDialog} from '../Dialogs/rename-dialog';
 import {SidurStore} from '../../store/store.types';
 import {ActionsTypes} from '../../store/types.actions';
 import {translations} from '../../services/translations';
 import {LocationGroup} from '../../models/Location.model';
 import {LocationGroupMenu} from './location-group-menu';
+import {LocationGroupActionType} from '../../models/LocationGroupMenuClickActionType.enum';
 
 
-export const LocationsEdit = () => {
+export const LocationsEditWrapper = () => {
     const dispatch = useDispatch();
     const locationGroupInEditId = useSelector((state: SidurStore) => state.locationGroupInEdit);
     const locationGroups: LocationGroup[] = useSelector((state: { LocationGroups: LocationGroup[] }) => state.LocationGroups || []);
@@ -23,15 +23,15 @@ export const LocationsEdit = () => {
     const locationGroupMenuId = 'primary-location-group-menu';
     const [RenameOpen, setRenameOpen] = React.useState(false);
 
-    const handleSketchMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
+    const handleLocationGroupMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
         setLocationGroupMoreAnchorEl(event.currentTarget);
     };
     const handleRenameClose = (value: string | null) => {
         setRenameOpen(false);
-        const id = locationGroupInEdit;
+        const id = locationGroupInEditId;
         if (value) {
             dispatch({
-                type: ActionsTypes.RENAME_SKETCH,
+                type: ActionsTypes.RENAME_LOCATION_GROUP,
                 payload: {
                     value,
                     id
@@ -39,25 +39,24 @@ export const LocationsEdit = () => {
             })
         }
     };
-    const handleSketchMenuClick = (event: React.MouseEvent<HTMLElement>, clickAction: SketchActionType) => {
-
+    const handleLocationGroupMenuClick = (event: React.MouseEvent<HTMLElement>, clickAction: LocationGroupActionType) => {
 
         switch (clickAction) {
 
-            case SketchActionType.CreateCopy:
+            case LocationGroupActionType.CreateCopy:
                 dispatch({
-                    type: ActionsTypes.CLONE_SKETCH,
+                    type: ActionsTypes.CLONE_LOCATION_GROUP,
                     payload: {id: locationGroupInEdit}
                 })
                 break;
 
-            case SketchActionType.Delete:
+            case LocationGroupActionType.Delete:
                 dispatch({
-                    type: ActionsTypes.DELETE_SKETCH,
+                    type: ActionsTypes.DELETE_LOCATION_GROUP,
                     payload: {id: locationGroupInEdit}
                 })
                 break;
-            case SketchActionType.Rename:
+            case LocationGroupActionType.Rename:
                 setRenameOpen(true);
                 break;
 
@@ -69,27 +68,27 @@ export const LocationsEdit = () => {
     const handleSketchMenuClose = () => {
         setLocationGroupMoreAnchorEl(null);
     };
-    const handleSketchChanged = (event: any, child: React.ReactNode) => {
+    const handleLocationGroupChanged = (event: any, child: React.ReactNode) => {
 
         const chosenSketch = event.target.value as string;
         if (chosenSketch === 'NEW') {
             dispatch({
-                type: ActionsTypes.NEW_SKETCH,
+                type: ActionsTypes.NEW_LOCATION_GROUP,
                 payload: null
             });
 
         } else {
             dispatch({
-                type: ActionsTypes.CHOOSE_SKETCH,
+                type: ActionsTypes.CHOOSE_LOCATION_GROUP,
                 payload: {id: chosenSketch}
             })
         }
 
 
     }
-    const handleCreateSketch = () => {
+    const handleCreateLocationGroup = () => {
         dispatch({
-            type: ActionsTypes.NEW_SKETCH,
+            type: ActionsTypes.NEW_LOCATION_GROUP,
             payload: {
                 value: null,
             }
@@ -129,19 +128,19 @@ export const LocationsEdit = () => {
                     }}
                 >    &nbsp;
                     {translations.LocationBase} &nbsp;
-                    <Select dir={'rtl'} disableUnderline={true} variant={'standard'} value={locationGroupInEdit}
+                    <Select dir={'rtl'} disableUnderline={true} variant={'standard'} value={locationGroupInEditId}
                             sx={{
                                 //  color: 'black',
                                 fontSize: '1.25rem',
                                 fontWeight: 'normal'
                             }}
                             onChange={(event: SelectChangeEvent<any>, child: React.ReactNode) => {
-                                handleSketchChanged(event, child)
+                                handleLocationGroupChanged(event, child)
                             }}>
                         <MenuItem key={'NEW'}
-                                  value={'NEW'}> &nbsp; <b>{translations.CreateSketch}</b>  &nbsp;</MenuItem>
-                        {locationGroups.map((oneSketch: LocationGroup) => <MenuItem key={oneSketch.id}
-                                                                                    value={oneSketch.id}> {oneSketch.name} &nbsp; </MenuItem>)}
+                                  value={'NEW'}> &nbsp; <b>{translations.CreateLocationGroup}</b>  &nbsp;</MenuItem>
+                        {locationGroups.map((oneLocationGroup: LocationGroup) => <MenuItem key={oneLocationGroup.id}
+                                                                                           value={oneLocationGroup.id}> {oneLocationGroup.name} &nbsp; </MenuItem>)}
                     </Select>
                 </Typography>
 
@@ -150,7 +149,7 @@ export const LocationsEdit = () => {
                     aria-label="show more"
                     aria-controls={locationGroupMenuId}
                     aria-haspopup="true"
-                    onClick={handleSketchMenuOpen}
+                    onClick={handleLocationGroupMenuOpen}
                     color="inherit"
                 >
                     <Edit/>
@@ -158,13 +157,14 @@ export const LocationsEdit = () => {
 
 
             </Box> : <Button variant={'contained'} id={'sketches-create-sketch'}
-                             onClick={handleCreateSketch}>{translations.CreateSketch}</Button>}
+                             onClick={handleCreateLocationGroup}>{translations.CreateSketch}</Button>}
 
 
             <LocationGroupMenu locationGroupMoreAnchorEl={locationGroupMoreAnchorEl}
                                locationGroupMenuId={locationGroupInEditId || ''}
                                isLocationGroupMenuOpen={isLocationGroupMenuOpen}
-                               handleLocationGroupMenuClick={handleSketchMenuClose} handleLocationGroupMenuClose={handleSketchMenuClose}/>
+                               handleLocationGroupMenuClick={handleLocationGroupMenuClick}
+                               handleLocationGroupMenuClose={handleSketchMenuClose}/>
             <RenameDialog open={RenameOpen} onClose={handleRenameClose} selectedValue={sketchName}/>
         </Box>
 

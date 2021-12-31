@@ -8,7 +8,10 @@ import {StoreUtils} from './store-utils';
 export type LocationGroupReducerFunctions =
     ActionsTypes.UPDATE_LOCATION_GROUP |
     ActionsTypes.DELETE_LOCATION_GROUP |
-    ActionsTypes.NEW_LOCATION_GROUP | ActionsTypes.CLONE_LOCATION_GROUP | ActionsTypes.RENAME_LOCATION_GROUP
+    ActionsTypes.NEW_LOCATION_GROUP
+    | ActionsTypes.CLONE_LOCATION_GROUP
+    | ActionsTypes.RENAME_LOCATION_GROUP
+    | ActionsTypes.CHOOSE_LOCATION_GROUP
 
 
 export const LocationGroupReducer: Record<LocationGroupReducerFunctions, (state: SidurStore, action: IAction) => SidurStore> = {
@@ -47,7 +50,17 @@ export const LocationGroupReducer: Record<LocationGroupReducerFunctions, (state:
             id: newId,
             Locations: []
         })
+        StoreUtils.HandleReducerSaveToLocalStorage(newState);
+
         newState.locationGroupInEdit = newId
+
+        return newState
+    },
+    [ActionsTypes.CHOOSE_LOCATION_GROUP]: (state: SidurStore, action: IAction): SidurStore => {
+        let newState = {...state}
+        const groupIdWasChosen = action.payload.id;
+        newState.locationGroupInEdit = groupIdWasChosen;
+        StoreUtils.HandleReducerSaveToLocalStorage(newState);
 
         return newState
     },
@@ -56,6 +69,8 @@ export const LocationGroupReducer: Record<LocationGroupReducerFunctions, (state:
         if (!newState.LocationGroups) {
             newState.LocationGroups = [];
         }
+        StoreUtils.HandleReducerSaveToLocalStorage(newState);
+
         // const newId = Utils.getNextId(newState.sketches.map(v => v.id));
         //
         //
@@ -74,15 +89,15 @@ export const LocationGroupReducer: Record<LocationGroupReducerFunctions, (state:
 
         newState.LocationGroups = newState.LocationGroups.map(l => {
             if (l.id === groupToRenameId) {
-                return {
-                    ...l,
-                    name: newName
-                }
+                const newLG = {...l};
+                newLG.name = newName;
+                return newLG
+            } else {
+                return l
             }
-            return l
 
         })
-
+        console.log(newState.LocationGroups)
         StoreUtils.HandleReducerSaveToLocalStorage(newState);
         return newState
     },

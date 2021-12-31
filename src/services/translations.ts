@@ -53,6 +53,7 @@ export const translations = {
     'Approve': 'אישור',
     'Cancel': 'ביטול',
     'CreateSketch': 'צור סקיצה חדשה',
+    'CreateLocationGroup': 'צור בסיס סידור חדש',
     'NoSketchMessage': 'לא קיימות סקיצות לסידור, לאחר הזנת כל ההזמנות ניתן ללחוץ על "יצירת סקיצה חדשה"',
     'NewOrder': 'הזמנה חדשה',
     'PendingOrders': 'הזמנות לטיפול',

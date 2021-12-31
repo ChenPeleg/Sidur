@@ -1,5 +1,5 @@
 import {OrderModel} from '../models/Order.model';
-import {defaultOrderValues, defaultVehicleValues, IAction, SidurStore} from './store.types';
+import {defaultOrderValues, defaultVehicleValues, IAction, SessionModel, SidurStore} from './store.types';
 import {SaveLoadService} from '../services/save-load.service';
 import {SidurReducer} from './sidur.reducer';
 import {OrderReducer} from './order.reducer';
@@ -11,6 +11,7 @@ import {DisplayReducer} from './display.reducer';
 import {SketchReducer} from './sketch.reducer';
 import {PendingOrdersReducer} from './pendingOrders.reducer';
 import {SketchDriveReducer} from './sketch-drive.reducer';
+import {LocationGroupReducer} from './locationGroup.reducer';
 
 
 const startOrders: OrderModel[] = ['חן', 'אבי', 'רוני'].map((name: string, index: number): OrderModel => ({
@@ -24,7 +25,15 @@ const startVehicles: VehicleModel[] = ['סנאו', 'שלגיה', 'שכור', 'מ
     vehicleName: name,
 
 }))
+const sessionState: SessionModel = {
+    LocationGroupTabOpen: null,
+    SketchIdInEdit: null,
+    locationGroupInEdit: null,
+    orderIdInEdit: null,
+    pendingOrderIdInEdit: null,
+    dataHolderForCurrentOrderInEdit: null
 
+}
 const defaultInitialState: SidurStore = {
     sidurArchive: [],
     locationGroupInEdit: null,
@@ -62,6 +71,7 @@ const defaultInitialState: SidurStore = {
     displaySetting: {view: 'locationsView'},
     SketchIdInEdit: null,
     pendingOrderIdInEdit: null,
+    currentSessionState: sessionState,
     LocationGroups: []
 
 }
@@ -132,8 +142,16 @@ const reducer = (state: SidurStore = initialState, action: IAction) => {
         case ActionsTypes.DELETE_SKETCH_DRIVE:
         case ActionsTypes.UPDATE_SKETCH_DRIVE:
         case ActionsTypes.REMOVE_ORDER_FROM_SKETCH_DRIVE:
-            return SketchDriveReducer [action.type](newState, action)
+            return SketchDriveReducer [action.type](newState, action);
 
+        case   ActionsTypes.UPDATE_LOCATION_GROUP :
+        case  ActionsTypes.DELETE_LOCATION_GROUP :
+        case ActionsTypes.NEW_LOCATION_GROUP :
+        case ActionsTypes.CLONE_LOCATION_GROUP :
+        case ActionsTypes.RENAME_LOCATION_GROUP:
+        case ActionsTypes.CHOOSE_LOCATION_GROUP:
+
+            return LocationGroupReducer [action.type](newState, action)
 
         default:
             break;
