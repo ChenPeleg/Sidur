@@ -12,6 +12,7 @@ import {SketchReducer} from './sketch.reducer';
 import {PendingOrdersReducer} from './pendingOrders.reducer';
 import {SketchDriveReducer} from './sketch-drive.reducer';
 import {LocationGroupReducer} from './locationGroup.reducer';
+import {defaultSidurEshbal} from './store-inital-state';
 
 
 const startOrders: OrderModel[] = ['חן', 'אבי', 'רוני'].map((name: string, index: number): OrderModel => ({
@@ -31,25 +32,16 @@ const sessionState: SessionModel = {
     locationGroupInEdit: null,
     orderIdInEdit: null,
     pendingOrderIdInEdit: null,
-    dataHolderForCurrentOrderInEdit: null
+    dataHolderForCurrentOrderInEdit: null,
+    isAnimationRunning: true
 
 }
+// @ts-ignore
 const defaultInitialState: SidurStore = {
     sidurArchive: [],
     locationGroupInEdit: null,
     sidurCollection: [{
         id: '1',
-        Name: 'סידור יום שני',
-        orders: [],
-        deletedOrders: [],
-        vehicles: [defaultVehicleValues],
-        sketches: [],
-        chosenSketch: '',
-        locationGroup: null,
-
-
-    }, {
-        id: '2',
         Name: 'סידור גנים',
         orders: [],
         deletedOrders: [],
@@ -57,7 +49,7 @@ const defaultInitialState: SidurStore = {
         sketches: [],
         chosenSketch: '',
         locationGroup: null
-    }
+    }, defaultSidurEshbal
 
     ],
     sidurId: '1',
@@ -116,7 +108,11 @@ const reducer = (state: SidurStore = initialState, action: IAction) => {
         case ActionsTypes.DELETE_VEHICLE:
 
             return VehicleReducer[action.type](newState, action)
+
+
         case ActionsTypes.CHANGE_VIEW:
+        case ActionsTypes.START_LOADING_ANIMATION:
+        case ActionsTypes.STOP_LOADING_ANIMATION:
             return DisplayReducer[action.type](newState, action)
 
 
@@ -150,10 +146,13 @@ const reducer = (state: SidurStore = initialState, action: IAction) => {
         case ActionsTypes.CLONE_LOCATION_GROUP :
         case ActionsTypes.RENAME_LOCATION_GROUP:
         case ActionsTypes.CHOOSE_LOCATION_GROUP:
+        case ActionsTypes.CHOOSE_LOCATION_GROUP_TAB:
 
             return LocationGroupReducer [action.type](newState, action)
 
         default:
+            // @ts-ignore
+            // return LocationReducer [action.type](newState, action)
             break;
 
     }

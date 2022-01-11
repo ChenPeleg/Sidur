@@ -2,6 +2,7 @@ import {AppConstants, SaveDataModel, SidurRecord, SidurStore} from './store.type
 import {SaveLoadService} from '../services/save-load.service';
 import {hashFunction} from '../services/hash-function';
 import {CloneUtil} from '../services/clone-utility';
+import {ActionsTypes} from './types.actions';
 
 
 export const StoreUtils = {
@@ -57,5 +58,18 @@ export const StoreUtils = {
 
         return newState
 
-    }
+    },
+    shieldAnimationBeforeDispatch(dispatchingAction: () => void, dispatchFunct: any, delay: number = 600) {
+        const callArguments = {
+            type: ActionsTypes.START_LOADING_ANIMATION,
+            payload: {
+                value: null,
+            }
+        }
+        dispatchFunct(callArguments)
+        setTimeout(_ => {
+            dispatchingAction();
+        }, delay)
+
+    },
 }

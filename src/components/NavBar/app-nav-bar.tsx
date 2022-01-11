@@ -24,6 +24,7 @@ import {SidurManagementDialog} from '../Dialogs/sidur-management-dialog';
 import {OrderImportDialog} from '../Dialogs/orders-import-dialog';
 import {ToggleButtons} from '../buttons/toggle-button-group';
 import {RenameDialog} from '../Dialogs/rename-dialog';
+import {StoreUtils} from '../../store/store-utils';
 
 
 export const AppNavBar = () => {
@@ -123,10 +124,12 @@ export const AppNavBar = () => {
                 })
                 break;
             case ProfileMenuClickActionType.Export:
-                dispatch({
-                    type: ActionsTypes.EXPORT_ALL,
-                    payload: null
-                })
+                StoreUtils.shieldAnimationBeforeDispatch(() => {
+                    dispatch({
+                        type: ActionsTypes.EXPORT_ALL,
+                        payload: null
+                    })
+                }, dispatch)
                 break;
             case ProfileMenuClickActionType.Import:
                 setUploadOpen(true)
@@ -204,10 +207,11 @@ export const AppNavBar = () => {
                                 onChange={(event: SelectChangeEvent<any>, child: React.ReactNode) => {
                                     handleSidurChanged(event, child)
                                 }}>
-                            <MenuItem key={'NEW'}
+                            <MenuItem key={10000}
                                       value={'NEW'}> &nbsp;&nbsp;<b>{translations.NewSidur}</b> &nbsp;&nbsp;</MenuItem>
-                            {sidurCollection.map((sidurRecord: SidurRecord) => <MenuItem key={sidurRecord.id}
-                                                                                         value={sidurRecord.id}> &nbsp;&nbsp;{sidurRecord.Name} &nbsp;&nbsp;</MenuItem>)}
+
+                            {sidurCollection.map((sidurRecord: SidurRecord, i: number) => <MenuItem key={i}
+                                                                                                    value={sidurRecord.id}> &nbsp;&nbsp;{sidurRecord.Name} &nbsp;&nbsp;</MenuItem>)}
                         </Select>
                     </Typography>
                     <IconButton

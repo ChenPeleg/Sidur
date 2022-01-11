@@ -5,7 +5,7 @@ import {Vehicles} from '../components/Vehicles/vehicles';
 import {useSelector} from 'react-redux';
 import {DisplaySettings} from '../store/store.types';
 import {SketchesContainer} from '../components/Sketch/SketchesContainer';
-import {LocationsEditWrapper} from '../components/LocationsEdit/locations-edit-wrapper';
+import {LocationGroupEditWrapper} from '../components/LocationsEdit/location-group-edit-wrapper';
 
 
 export const MainLayout = () => {
@@ -51,7 +51,7 @@ export const MainLayout = () => {
                 </Box> : null}
                 {displayLocations ? <Box flexDirection="column" flexWrap="wrap" display="flex" alignItems="start" justifyContent="start">
 
-                    <LocationsEditWrapper/>
+                    <LocationGroupEditWrapper/>
 
                 </Box> : null}
 

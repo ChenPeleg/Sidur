@@ -12,6 +12,7 @@ export type LocationGroupReducerFunctions =
     | ActionsTypes.CLONE_LOCATION_GROUP
     | ActionsTypes.RENAME_LOCATION_GROUP
     | ActionsTypes.CHOOSE_LOCATION_GROUP
+    | ActionsTypes.CHOOSE_LOCATION_GROUP_TAB
 
 
 export const LocationGroupReducer: Record<LocationGroupReducerFunctions, (state: SidurStore, action: IAction) => SidurStore> = {
@@ -64,6 +65,26 @@ export const LocationGroupReducer: Record<LocationGroupReducerFunctions, (state:
 
         return newState
     },
+    [ActionsTypes.CHOOSE_LOCATION_GROUP_TAB]: (state: SidurStore, action: IAction): SidurStore => {
+        let newState = {...state}
+        const tabWasChosen = action.payload.id;
+        if (!newState.currentSessionState) {
+            newState.currentSessionState = {
+                LocationGroupTabOpen: null,
+                SketchIdInEdit: null,
+                dataHolderForCurrentOrderInEdit: null,
+                locationGroupInEdit: null,
+                orderIdInEdit: null,
+                pendingOrderIdInEdit: null,
+                isAnimationRunning: true
+            };
+        }
+        newState.currentSessionState = {...newState.currentSessionState};
+        newState.currentSessionState.LocationGroupTabOpen = tabWasChosen;
+        StoreUtils.HandleReducerSaveToLocalStorage(newState);
+
+        return newState
+    },
     [ActionsTypes.CLONE_LOCATION_GROUP]: (state: SidurStore, action: IAction): SidurStore => {
         let newState = {...state}
         if (!newState.LocationGroups) {
@@ -71,11 +92,6 @@ export const LocationGroupReducer: Record<LocationGroupReducerFunctions, (state:
         }
         StoreUtils.HandleReducerSaveToLocalStorage(newState);
 
-        // const newId = Utils.getNextId(newState.sketches.map(v => v.id));
-        //
-        //
-        // newState = StoreUtils.updateSidurRecordWithSketchChanges(newState)
-        // StoreUtils.HandleReducerSaveToLocalStorage(newState);
         return newState
     },
     [ActionsTypes.RENAME_LOCATION_GROUP]: (state: SidurStore, action: IAction): SidurStore => {

@@ -2,7 +2,8 @@ import {AppConstants, IAction, SidurStore} from './store.types';
 import {ActionsTypes} from './types.actions';
 
 export type DisplayReducerFunctions =
-    ActionsTypes.CHANGE_VIEW
+    ActionsTypes.CHANGE_VIEW | ActionsTypes.STOP_LOADING_ANIMATION |
+    ActionsTypes.START_LOADING_ANIMATION
 
 
 export const DisplayReducer: Record<DisplayReducerFunctions, (state: SidurStore, action: IAction) => SidurStore> = {
@@ -12,6 +13,18 @@ export const DisplayReducer: Record<DisplayReducerFunctions, (state: SidurStore,
         newState.displaySetting.view = action.payload.value
         return newState
     },
+    [ActionsTypes.STOP_LOADING_ANIMATION]: (state: SidurStore, action: IAction): SidurStore => {
+        let newState = {...state}
+        newState.currentSessionState = {...newState.currentSessionState};
+        newState.currentSessionState.isAnimationRunning = false
+        return newState
+    },
+    [ActionsTypes.START_LOADING_ANIMATION]: (state: SidurStore, action: IAction): SidurStore => {
+        let newState = {...state}
+        newState.currentSessionState = {...newState.currentSessionState};
+        newState.currentSessionState.isAnimationRunning = true
+        return newState
+    }
 
 
 }

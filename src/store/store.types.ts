@@ -34,7 +34,8 @@ export interface SessionModel {
     pendingOrderIdInEdit: null | string;
     SketchIdInEdit: null | string;
     LocationGroupTabOpen: null | string;
-    dataHolderForCurrentOrderInEdit: null | OrderModel
+    dataHolderForCurrentOrderInEdit: null | OrderModel,
+    isAnimationRunning: boolean,
 }
 
 export interface SidurStore {

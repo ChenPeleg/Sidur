@@ -55,8 +55,6 @@ export const RenderSelectFieldAutoComplete = (
     return (
         <>
 
-
-            {/*<InputLabel sx={{...labelSx}} id="select-liable">{label}</InputLabel>*/}
             <Autocomplete
                 fullWidth
                 isOptionEqualToValue={(option: { label: string, id: string }, value: string) => {

@@ -3,6 +3,11 @@ import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
+import {translations} from '../../services/translations';
+import {SidurStore} from '../../store/store.types';
+import {useDispatch, useSelector} from 'react-redux';
+import {ActionsTypes} from '../../store/types.actions';
+import {LocationsEdit} from './locations-edit';
 
 interface TabPanelProps {
     children?: React.ReactNode;
@@ -10,7 +15,7 @@ interface TabPanelProps {
     value: number;
 }
 
-function TabPanel(props: TabPanelProps) {
+const TabPanel = (props: TabPanelProps) => {
     const {
         children,
         value,
@@ -35,18 +40,25 @@ function TabPanel(props: TabPanelProps) {
     );
 }
 
-function a11yProps(index: number) {
+const a11yProps = (index: number) => {
     return {
         id: `simple-tab-${index}`,
         'aria-controls': `simple-tabpanel-${index}`,
     };
 }
 
+
 export const LocationsEditTabs = () => {
-    const [value, setValue] = React.useState(0);
+    const locationTabSelectedAsString: string = useSelector((state: SidurStore) => state.currentSessionState.LocationGroupTabOpen || '1');
+    const locationTabSelected = +locationTabSelectedAsString;
+    const dispatch = useDispatch()
 
     const handleChange = (event: React.SyntheticEvent, newValue: number) => {
-        setValue(newValue);
+
+        dispatch({
+            type: ActionsTypes.CHOOSE_LOCATION_GROUP_TAB,
+            payload: {id: newValue.toString()}
+        })
     };
 
     return (
@@ -55,19 +67,19 @@ export const LocationsEditTabs = () => {
                 borderBottom: 1,
                 borderColor: 'divider'
             }}>
-                <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
-                    <Tab label="Item One" {...a11yProps(0)} />
-                    <Tab label="Item Two" {...a11yProps(1)} />
-                    <Tab label="Item Three" {...a11yProps(2)} />
+                <Tabs value={locationTabSelected} onChange={handleChange} aria-label="basic tabs example">
+                    <Tab label={translations.Locations} {...a11yProps(0)} />
+                    <Tab label={translations.PublicTransport}  {...a11yProps(1)} />
+                    <Tab label={translations.roadTracks}   {...a11yProps(2)} />
                 </Tabs>
             </Box>
-            <TabPanel value={value} index={0}>
-                Item One
+            <TabPanel value={locationTabSelected} index={0}>
+                <LocationsEdit/>
             </TabPanel>
-            <TabPanel value={value} index={1}>
+            <TabPanel value={locationTabSelected} index={1}>
                 Item Two
             </TabPanel>
-            <TabPanel value={value} index={2}>
+            <TabPanel value={locationTabSelected} index={2}>
                 Item Three
             </TabPanel>
         </Box>

@@ -9,9 +9,10 @@ import {translations} from '../../services/translations';
 import {LocationGroup} from '../../models/Location.model';
 import {LocationGroupMenu} from './location-group-menu';
 import {LocationGroupActionType} from '../../models/LocationGroupMenuClickActionType.enum';
+import {LocationsEditTabs} from './location-group-edit-tabs';
 
 
-export const LocationsEditWrapper = () => {
+export const LocationGroupEditWrapper = () => {
     const dispatch = useDispatch();
     const locationGroupInEditId = useSelector((state: SidurStore) => state.locationGroupInEdit);
     const locationGroups: LocationGroup[] = useSelector((state: { LocationGroups: LocationGroup[] }) => state.LocationGroups || []);
@@ -159,7 +160,7 @@ export const LocationsEditWrapper = () => {
             </Box> : <Button variant={'contained'} id={'sketches-create-sketch'}
                              onClick={handleCreateLocationGroup}>{translations.CreateSketch}</Button>}
 
-
+            <LocationsEditTabs/>
             <LocationGroupMenu locationGroupMoreAnchorEl={locationGroupMoreAnchorEl}
                                locationGroupMenuId={locationGroupInEditId || ''}
                                isLocationGroupMenuOpen={isLocationGroupMenuOpen}
