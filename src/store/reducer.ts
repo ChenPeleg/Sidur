@@ -13,6 +13,7 @@ import {PendingOrdersReducer} from './pendingOrders.reducer';
 import {SketchDriveReducer} from './sketch-drive.reducer';
 import {LocationGroupReducer} from './locationGroup.reducer';
 import {defaultSidurEshbal} from './store-inital-state';
+import {LocationReducer} from './location.reducer';
 
 
 const startOrders: OrderModel[] = ['חן', 'אבי', 'רוני'].map((name: string, index: number): OrderModel => ({
@@ -149,10 +150,11 @@ const reducer = (state: SidurStore = initialState, action: IAction) => {
         case ActionsTypes.CHOOSE_LOCATION_GROUP_TAB:
 
             return LocationGroupReducer [action.type](newState, action)
+        case ActionsTypes.ADD_NEW_LOCATION:
+            return LocationReducer [action.type](newState, action)
 
         default:
             // @ts-ignore
-            // return LocationReducer [action.type](newState, action)
             break;
 
     }

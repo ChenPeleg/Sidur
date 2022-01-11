@@ -1,23 +1,9 @@
 import {Box} from '@mui/material';
-import {SxProps} from '@mui/system';
 import {useEffect} from 'react';
 import {useDispatch} from 'react-redux';
 import {ActionsTypes} from '../../store/types.actions';
 
 
-const sxShieldContainerBase: SxProps = {
-    position: 'absolute',
-}
-const getOpacityFromPosition = (pos: 1 | 2 | 3, stage: number): number => {
-    //  const isstageForPosition
-    return 0
-}
-const sxShieldBase: SxProps = {
-    //   position: 'relative',
-    height: '100px',
-    width: '100px',
-    color: 'green'
-}
 export const LoadingShield = () => {
     const dispatch = useDispatch();
     useEffect(() => {
@@ -37,7 +23,7 @@ export const LoadingShield = () => {
     return (<Box>
 
             <div style={{
-                'width': '200px',
+                'width': '100px',
                 'color': '#536377'
             }}>
                 <svg version="1.1" id="Capa_1" x="0px" y="0px" viewBox="0 0 460.384 460.384"

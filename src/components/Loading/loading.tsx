@@ -7,9 +7,9 @@ import {SessionModel} from '../../store/store.types';
 const loadingSx: SxProps = {
     position: 'absolute',
     top: '65px',
-    left: '20px',
-    height: '80px',
-    width: '80px',
+    left: '75px',
+    height: '50px',
+    width: '50px',
     zIndex: 10000
 }
 
@@ -17,7 +17,7 @@ const loadingSx: SxProps = {
 export const Loading = () => {
 
     const session: SessionModel = useSelector((state: { currentSessionState: SessionModel }) => state.currentSessionState);
-    const isAnimationRunning = session?.isAnimationRunning || true
+    const isAnimationRunning = session.isAnimationRunning
     return (
         <Fade in={isAnimationRunning} unmountOnExit>
             <Box sx={loadingSx}>

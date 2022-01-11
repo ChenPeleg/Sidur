@@ -108,7 +108,6 @@ export const LocationGroupEditWrapper = () => {
 
     return (
         <Box>
-            fasdfasdfasdf
             {locationGroupInEdit ? <Box sx={{
                 display: 'flex',
                 flexDirection: 'row',
