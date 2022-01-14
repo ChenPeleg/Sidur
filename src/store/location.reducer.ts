@@ -76,13 +76,18 @@ export const LocationReducer: Record<LocationReducerFunctions, (state: SidurStor
 
     [ActionsTypes.UPDATE_LOCATION]: (state: SidurStore, action: IAction): SidurStore => {
         let newState = {...state}
+        const locationToUpdate = action.payload;
         // newState.currentSessionState.locationMainInEdit = locationId;
         const currentLocationGroupId = newState.locationGroupInEdit;
         const currentLocationGroup: LocationGroup | undefined = newState.LocationGroups?.find(l => l.id === currentLocationGroupId);
-        if (currentLocationGroup) {
-
-            newState.currentSessionState.locationMainInEdit = null;
-
+        if (currentLocationGroup && locationToUpdate) {
+            currentLocationGroup.Locations =
+                currentLocationGroup.Locations.map(l => {
+                    if (l.id === locationToUpdate.id) {
+                        return locationToUpdate
+                    }
+                    return l
+                })
 
         }
 

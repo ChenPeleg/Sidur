@@ -14,7 +14,7 @@ import {LocationsEditTabs} from './location-group-edit-tabs';
 
 export const LocationGroupEditWrapper = () => {
     const dispatch = useDispatch();
-    const locationGroupInEditId = useSelector((state: SidurStore) => state.locationGroupInEdit);
+    const locationGroupInEditId = useSelector((state: SidurStore) => state.locationGroupInEdit || 'ESHBAL');
     const locationGroups: LocationGroup[] = useSelector((state: { LocationGroups: LocationGroup[] }) => state.LocationGroups || []);
 
     const [locationGroupMoreAnchorEl, setLocationGroupMoreAnchorEl] =
@@ -54,7 +54,7 @@ export const LocationGroupEditWrapper = () => {
             case LocationGroupActionType.Delete:
                 dispatch({
                     type: ActionsTypes.DELETE_LOCATION_GROUP,
-                    payload: {id: locationGroupInEdit}
+                    payload: {id: locationGroupInEdit?.id}
                 })
                 break;
             case LocationGroupActionType.Rename:
@@ -87,6 +87,7 @@ export const LocationGroupEditWrapper = () => {
 
 
     }
+    console.log(locationGroupInEditId)
     const handleCreateLocationGroup = () => {
         dispatch({
             type: ActionsTypes.NEW_LOCATION_GROUP,

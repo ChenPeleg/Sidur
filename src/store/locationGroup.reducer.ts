@@ -35,7 +35,12 @@ export const LocationGroupReducer: Record<LocationGroupReducerFunctions, (state:
 
             newState.LocationGroups = newState.LocationGroups.filter(l => l.id !== groupToDeleteId)
         }
-
+        if (newState.LocationGroups.length) {
+            newState.currentSessionState.locationGroupInEdit = newState.LocationGroups[0].id
+        } else {
+            newState.currentSessionState.locationGroupInEdit = null
+        }
+        newState.currentSessionState = {...newState.currentSessionState}
         StoreUtils.HandleReducerSaveToLocalStorage(newState);
         return newState
     },
