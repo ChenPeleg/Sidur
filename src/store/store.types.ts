@@ -54,11 +54,11 @@ export interface SidurStore {
 
 
     // Move to Session state
-    dataHolderForCurrentOrderInEdit: OrderModel | null;
-    locationGroupInEdit: null | string;
-    orderIdInEdit: null | string;
-    pendingOrderIdInEdit: null | string;
-    SketchIdInEdit: null | string;
+    // dataHolderForCurrentOrderInEdit: OrderModel | null;
+    // locationGroupInEdit: null | string;
+    // orderIdInEdit: null | string;
+    // pendingOrderIdInEdit: null | string;
+    // SketchIdInEdit: null | string;
 
 }
 

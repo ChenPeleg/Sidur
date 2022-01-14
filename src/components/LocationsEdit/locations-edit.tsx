@@ -9,7 +9,7 @@ import {ActionsTypes} from '../../store/types.actions';
 import {LocationForm} from './location-form';
 
 export const LocationsEdit = () => {
-    const locationGroupInEditId = useSelector((state: SidurStore) => state.locationGroupInEdit);
+    const locationGroupInEditId = useSelector((state: SidurStore) => state.sessionState.locationGroupInEdit);
     const locationGroups: LocationGroup[] = useSelector((state: { LocationGroups: LocationGroup[] }) => state.LocationGroups || []);
     const sessionState: SessionModel = useSelector((state: { sessionState: SessionModel }) => state.sessionState);
     const locationMainInEdit: string | null = useSelector((state: { sessionState: SessionModel }) => state.sessionState.locationMainInEdit);

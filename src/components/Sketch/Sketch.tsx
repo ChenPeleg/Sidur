@@ -13,29 +13,11 @@ import {SketchNoSketchMessage} from './sketch-no-sketch-message';
 
 import {TransitionGroup} from 'react-transition-group';
 
-const MOckDrive = {
-    'id': '0',
-    'flexibility': [
-        '-30',
-        '10'
-    ],
-    'passengers': '1',
-    'location': '6',
-    'TypeOfDrive': '2',
-    'startHour': '09:45',
-    'Comments': 'ורד תשמח לשעה במשגב, גמישה עד 1320. לא דחוף, רק אם מסתדר.',
-    'driverName': 'ורד',
-    'finishHour': '10:00',
-    'implementsOrders': [
-        '104'
-    ],
-    'description': ''
-}
 
 export const Sketch = () => {
     const dispatch = useDispatch()
 
-    const SketchIdInEdit = useSelector((state: SidurStore) => state.SketchIdInEdit);
+    const SketchIdInEdit = useSelector((state: SidurStore) => state.sessionState.SketchIdInEdit);
 
     const vehicles = useSelector((state: { vehicles: VehicleModel[] }) => state.vehicles);
     const sketches: SketchModel[] = useSelector((state: { sketches: SketchModel[] }) => state.sketches);

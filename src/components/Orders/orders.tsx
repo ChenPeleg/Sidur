@@ -6,6 +6,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import {OrderModel} from '../../models/Order.model';
 import {ActionsTypes} from '../../store/types.actions';
 import {AddButton} from '../Icons/add-button';
+import {SessionModel} from '../../store/store.types';
 
 const TRL = translations;
 const useStyles = (() => ({
@@ -29,7 +30,7 @@ const useStyles = (() => ({
 export const Orders = () => {
     const dispatch = useDispatch()
     const orders = useSelector((state: { orders: OrderModel[] }) => state.orders);
-    const orderIdInEdit = useSelector((state: { orderIdInEdit: string | null }) => state.orderIdInEdit);
+    const orderIdInEdit = useSelector((state: { sessionState: SessionModel }) => state.sessionState.orderIdInEdit);
     const classes = useStyles();
     const addClickHandler = (event: any) => {
         dispatch({

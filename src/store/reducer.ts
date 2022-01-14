@@ -35,13 +35,13 @@ const sessionState: SessionModel = {
     pendingOrderIdInEdit: null,
     dataHolderForCurrentOrderInEdit: null,
     isAnimationRunning: true,
-    locationMainInEdit: null
+    locationMainInEdit: null,
+
 
 }
 // @ts-ignore
 const defaultInitialState: SidurStore = {
     sidurArchive: [],
-    locationGroupInEdit: null,
     sidurCollection: [{
         id: '1',
         Name: 'סידור גנים',
@@ -57,14 +57,10 @@ const defaultInitialState: SidurStore = {
     sidurId: '1',
     orders: startOrders,
     vehicles: startVehicles,
-    orderIdInEdit: '1',
-    dataHolderForCurrentOrderInEdit: startOrders[0] || null,
     deletedOrders: [],
     defaultOrderValues: {...defaultOrderValues},
     sketches: [],
     displaySetting: {view: 'locationsView'},
-    SketchIdInEdit: null,
-    pendingOrderIdInEdit: null,
     sessionState: sessionState,
     LocationGroups: []
 

@@ -16,7 +16,7 @@ export const SketchDriveReducer: Record<SketchDriveReducerFunctions, (state: Sid
     [ActionsTypes.UPDATE_SKETCH_DRIVE]: (state: SidurStore, action: IAction): SidurStore => {
         let newState = {...state}
         const sketchDriveChanged: DriveModel = action.payload.value
-        const SketchIdInEdit = newState.SketchIdInEdit;
+        const SketchIdInEdit = newState.sessionState.SketchIdInEdit;
 
         const sketchObj: SketchModel | undefined = newState.sketches.find((record: SketchModel) => record.id === SketchIdInEdit);
 
@@ -44,7 +44,7 @@ export const SketchDriveReducer: Record<SketchDriveReducerFunctions, (state: Sid
 
         const sketchDriveChangedId: string = action.payload.sketchDriveId
         const orderIdToRemove: string = action.payload.orderId
-        const SketchIdInEdit = newState.SketchIdInEdit;
+        const SketchIdInEdit = newState.sessionState.SketchIdInEdit;
 
 
         const sketchObj: SketchModel | undefined = newState.sketches.find((record: SketchModel) => record.id === SketchIdInEdit);
@@ -82,7 +82,7 @@ export const SketchDriveReducer: Record<SketchDriveReducerFunctions, (state: Sid
     [ActionsTypes.DELETE_SKETCH_DRIVE]: (state: SidurStore, action: IAction): SidurStore => {
         let newState = {...state}
         const sketchDriveToDelete: DriveModel = action.payload.value
-        const SketchIdInEdit = newState.SketchIdInEdit;
+        const SketchIdInEdit = newState.sessionState.SketchIdInEdit;
 
         const sketchObj: SketchModel | undefined = newState.sketches.find((record: SketchModel) => record.id === SketchIdInEdit);
 
@@ -125,7 +125,7 @@ const updateSidurRecordWithSketchChanges = (state: SidurStore): SidurStore => {
 
 
 const getVehicleIdFromDriveId = (state: SidurStore, driveId: string): string => {
-    const SketchIdInEdit = state.SketchIdInEdit
+    const SketchIdInEdit = state.sessionState.SketchIdInEdit
     const sketchObj: SketchModel | undefined = state.sketches.find((record: SketchModel) => record.id === SketchIdInEdit);
     const vehicleSchedules = sketchObj?.vehicleSchedules || [];
     let vehicleId = '';

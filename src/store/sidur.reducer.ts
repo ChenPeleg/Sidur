@@ -234,8 +234,8 @@ const setChosenSidur = (state: SidurStore, chosenSidur: SidurRecord): SidurStore
     newState.vehicles = chosenSidur?.vehicles.map(o => ({...o})) || []
     newState.deletedOrders = chosenSidur?.deletedOrders?.map(o => ({...o})) || [];
     newState.sketches = chosenSidur?.sketches?.map(o => ({...o})) || [];
-    newState.orderIdInEdit = null;
-    newState.dataHolderForCurrentOrderInEdit = null;
+    newState.sessionState.orderIdInEdit = null;
+    newState.sessionState.dataHolderForCurrentOrderInEdit = null;
     return newState
 
 }

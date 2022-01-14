@@ -14,8 +14,8 @@ interface sketchPendingOrdersProps {
 
 
 export const SketchPendingOrders = (props: sketchPendingOrdersProps) => {
- 
-    const pendingOrderInEdit = useSelector((state: SidurStore) => state.pendingOrderIdInEdit);
+
+    const pendingOrderInEdit = useSelector((state: SidurStore) => state.sessionState.pendingOrderIdInEdit);
 
     return (<Box id={'pending-order-container'} sx={{
             m: '0.2em',

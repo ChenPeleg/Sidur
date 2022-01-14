@@ -36,7 +36,7 @@ export const SketchReducer: Record<SketchReducerFunctions, (state: SidurStore, a
                 newState.sketches = [];
             }
             newState.sketches.push(newSketch);
-            newState.SketchIdInEdit = newId;
+            newState.sessionState .SketchIdInEdit   = newId;
         }
 
 
@@ -47,11 +47,11 @@ export const SketchReducer: Record<SketchReducerFunctions, (state: SidurStore, a
     [ActionsTypes.CHOOSE_SKETCH]: (state: SidurStore, action: IAction): SidurStore => {
         let newState = {...state}
         const chosenSketchId = action.payload.id;
-        const previousSketchId = newState.SketchIdInEdit;
+        const previousSketchId = newState.sessionState .SketchIdInEdit  ;
         if (chosenSketchId === previousSketchId) {
             return newState
         }
-        newState.SketchIdInEdit = chosenSketchId;
+        newState.sessionState .SketchIdInEdit   = chosenSketchId;
         const chosenSketchObj: SketchModel | undefined = newState.sketches.find((record: SketchModel) => record.id === chosenSketchId);
         if (chosenSketchObj !== undefined) {
             const previousSketchObj: SketchModel | undefined = newState.sketches.find((record: SketchModel) => record.id === previousSketchId);
@@ -104,12 +104,12 @@ export const SketchReducer: Record<SketchReducerFunctions, (state: SidurStore, a
         if (newState.sketches.length) {
             const sketchesIds = newState.sketches.map(s => s.id);
             if (posOfDeletedSketch > 1) {
-                newState.SketchIdInEdit = sketchesIds [posOfDeletedSketch - 1]
+                newState.sessionState .SketchIdInEdit   = sketchesIds [posOfDeletedSketch - 1]
             } else {
-                newState.SketchIdInEdit = sketchesIds [0]
+                newState.sessionState .SketchIdInEdit   = sketchesIds [0]
             }
         } else {
-            newState.SketchIdInEdit = ''
+            newState.sessionState .SketchIdInEdit   = ''
         }
 
         newState = StoreUtils.updateSidurRecordWithSketchChanges(newState)
@@ -128,7 +128,7 @@ export const SketchReducer: Record<SketchReducerFunctions, (state: SidurStore, a
             newSketch.id = newSketchId
             newState.sketches = newState.sketches.map(c => c);
             newState.sketches.push(newSketch);
-            newState.SketchIdInEdit = newSketchId;
+            newState.sessionState .SketchIdInEdit   = newSketchId;
             // newState = setChosenSidur(newState, newSketch);
         }
         newState = StoreUtils.updateSidurRecordWithSketchChanges(newState)

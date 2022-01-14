@@ -38,11 +38,11 @@ const getAllOrdersIDs = (state: SidurStore): string[] => {
     return [...deletedIds, ...ordersIds]
 }
 const updateOrdersWithEditedOrder = (state: SidurStore): SidurStore => {
-    const currentOrderId = state?.dataHolderForCurrentOrderInEdit?.id
+    const currentOrderId = state?.sessionState?.dataHolderForCurrentOrderInEdit?.id
     if (currentOrderId) {
         state.orders = state.orders.map(order => {
-            if ((currentOrderId === order.id) && state.dataHolderForCurrentOrderInEdit) {
-                order = state.dataHolderForCurrentOrderInEdit
+            if ((currentOrderId === order.id) && state.sessionState.dataHolderForCurrentOrderInEdit) {
+                order = state.sessionState.dataHolderForCurrentOrderInEdit
             }
             return order
         });

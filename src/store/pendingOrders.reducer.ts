@@ -21,7 +21,7 @@ export const PendingOrdersReducer: Record<PendingOrdersReducerFunctions, (state:
     [ActionsTypes.CLICKED_PENDING_ORDER]: (state: SidurStore, action: IAction): SidurStore => {
         let newState = {...state}
         if (action.payload.id) {
-            newState.pendingOrderIdInEdit = action.payload.id;
+            newState.sessionState.pendingOrderIdInEdit = action.payload.id;
         }
 
         return newState
@@ -29,7 +29,7 @@ export const PendingOrdersReducer: Record<PendingOrdersReducerFunctions, (state:
     [ActionsTypes.CLICKED_CLOSE_PENDING_ORDER]: (state: SidurStore, action: IAction): SidurStore => {
         let newState = {...state}
 
-        newState.pendingOrderIdInEdit = null;
+        newState.sessionState.pendingOrderIdInEdit = null;
 
 
         return newState
@@ -38,7 +38,7 @@ export const PendingOrdersReducer: Record<PendingOrdersReducerFunctions, (state:
     [ActionsTypes.CLICKED_REMOVE_PENDING_ORDER]: (state: SidurStore, action: IAction): SidurStore => {
         let newState = {...state}
         const orderToRemoveId = action.payload.id
-        const SketchIdInEdit = state.SketchIdInEdit
+        const SketchIdInEdit = state.sessionState.SketchIdInEdit
 
         const sketchObj: SketchModel | undefined = state.sketches.find((record: SketchModel) => record.id === SketchIdInEdit);
         if (sketchObj) {
@@ -56,7 +56,7 @@ export const PendingOrdersReducer: Record<PendingOrdersReducerFunctions, (state:
                     }
                 });
             }
-            newState.pendingOrderIdInEdit = null;
+            newState.sessionState.pendingOrderIdInEdit = null;
         }
         StoreUtils.updateSidurRecordWithSketchChanges(newState)
         return newState

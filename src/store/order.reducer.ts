@@ -50,20 +50,20 @@ export const OrderReducer: Record<OrderReducerFunctions, (state: SidurStore, act
     },
     [ActionsTypes.UPDATE_ORDER_IN_EDIT]: (state: SidurStore, action: IAction): SidurStore => {
         let newState = {...state}
-        newState.dataHolderForCurrentOrderInEdit = action.payload;
+        newState.sessionState.dataHolderForCurrentOrderInEdit = action.payload;
         return newState
     },
     [ActionsTypes.UPDATE_ORDER]: (state: SidurStore, action: IAction): SidurStore => {
         let newState = {...state}
         const orderId = action.payload.id;
         newState.orders = newState.orders.map(order => {
-            if ((orderId === order.id) && newState.dataHolderForCurrentOrderInEdit) {
-                order = newState.dataHolderForCurrentOrderInEdit
+            if ((orderId === order.id) && newState.sessionState.dataHolderForCurrentOrderInEdit) {
+                order = newState.sessionState.dataHolderForCurrentOrderInEdit
             }
             return order
         });
-        newState.dataHolderForCurrentOrderInEdit = null;
-        newState.orderIdInEdit = null;
+        newState.sessionState.dataHolderForCurrentOrderInEdit = null;
+        newState.sessionState.orderIdInEdit = null;
         newState.sidurCollection = StoreUtils.UpdateSidurCollectionWithCurrenSidur(newState)
         StoreUtils.HandleReducerSaveToLocalStorage(newState);
         return newState
@@ -72,19 +72,19 @@ export const OrderReducer: Record<OrderReducerFunctions, (state: SidurStore, act
         let newState = {...state}
         const clickedOrderId = action.payload.id;
         newState = updateOrdersWithEditedOrder(newState)
-        newState.dataHolderForCurrentOrderInEdit = null;
-        newState.orderIdInEdit = clickedOrderId
+        newState.sessionState.dataHolderForCurrentOrderInEdit = null;
+        newState.sessionState.orderIdInEdit = clickedOrderId
         return newState
     },
     [ActionsTypes.DELETE_ORDER]: (state: SidurStore, action: IAction): SidurStore => {
         let newState = {...state}
         const deleteOrderId = action.payload.id;
         newState.orders = newState.orders.filter(order => deleteOrderId !== order.id)
-        if (newState.dataHolderForCurrentOrderInEdit && newState.dataHolderForCurrentOrderInEdit.id === deleteOrderId) {
-            newState.dataHolderForCurrentOrderInEdit = null;
+        if (newState.sessionState.dataHolderForCurrentOrderInEdit && newState.sessionState.dataHolderForCurrentOrderInEdit.id === deleteOrderId) {
+            newState.sessionState.dataHolderForCurrentOrderInEdit = null;
         }
-        if (newState.orderIdInEdit === deleteOrderId) {
-            newState.orderIdInEdit = null;
+        if (newState.sessionState.orderIdInEdit === deleteOrderId) {
+            newState.sessionState.orderIdInEdit = null;
         }
         newState.sidurCollection = StoreUtils.UpdateSidurCollectionWithCurrenSidur(newState)
         StoreUtils.HandleReducerSaveToLocalStorage(newState);
@@ -101,11 +101,11 @@ const getAllOrdersIDs = (state: SidurStore): string[] => {
     return [...deletedIds, ...ordersIds]
 }
 const updateOrdersWithEditedOrder = (state: SidurStore): SidurStore => {
-    const currentOrderId = state?.dataHolderForCurrentOrderInEdit?.id
+    const currentOrderId = state?.sessionState?.dataHolderForCurrentOrderInEdit?.id
     if (currentOrderId) {
         state.orders = state.orders.map(order => {
-            if ((currentOrderId === order.id) && state.dataHolderForCurrentOrderInEdit) {
-                order = state.dataHolderForCurrentOrderInEdit
+            if ((currentOrderId === order.id) && state.sessionState.dataHolderForCurrentOrderInEdit) {
+                order = state.sessionState.dataHolderForCurrentOrderInEdit
             }
             return order
         });

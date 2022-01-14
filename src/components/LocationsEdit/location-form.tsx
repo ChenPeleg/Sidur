@@ -13,7 +13,7 @@ interface LocationFormProps extends LocationModel {
 }
 
 export const LocationForm = (props: LocationFormProps) => {
-    const locationGroupInEditId = useSelector((state: SidurStore) => state.locationGroupInEdit);
+    const locationGroupInEditId = useSelector((state: SidurStore) => state.sessionState.locationGroupInEdit );
     const locationGroups: LocationGroup[] = useSelector((state: { LocationGroups: LocationGroup[] }) => state.LocationGroups || []);
     const currentLocationGroup: LocationGroup | undefined = locationGroups.find(l => l.id === locationGroupInEditId)
     const [wasJustEdited, setWasJustEdited] = useState<boolean>(false)

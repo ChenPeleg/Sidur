@@ -13,7 +13,7 @@ export type LocationReducerFunctions =
 export const LocationReducer: Record<LocationReducerFunctions, (state: SidurStore, action: IAction) => SidurStore> = {
     [ActionsTypes.ADD_NEW_LOCATION]: (state: SidurStore, action: IAction): SidurStore => {
         let newState = {...state}
-        const currentLocationGroupId = newState.locationGroupInEdit;
+        const currentLocationGroupId = newState.sessionState.locationGroupInEdit;
         const currentLocationGroup: LocationGroup | undefined = newState.LocationGroups?.find(l => l.id === currentLocationGroupId);
         if (currentLocationGroup) {
             const newId = Utils.getNextId(currentLocationGroup.Locations.map(l => l.id))
@@ -43,7 +43,7 @@ export const LocationReducer: Record<LocationReducerFunctions, (state: SidurStor
         let newState = {...state}
         const locationId = action.payload.id
         newState.sessionState.locationMainInEdit = locationId;
-        const currentLocationGroupId = newState.locationGroupInEdit;
+        const currentLocationGroupId = newState.sessionState.locationGroupInEdit;
         const currentLocationGroup: LocationGroup | undefined = newState.LocationGroups?.find(l => l.id === currentLocationGroupId);
         if (currentLocationGroup) {
             const location = currentLocationGroup.Locations.find(l => l.id === locationId);
@@ -61,7 +61,7 @@ export const LocationReducer: Record<LocationReducerFunctions, (state: SidurStor
     [ActionsTypes.STOP_EDIT_LOCATION]: (state: SidurStore, action: IAction): SidurStore => {
         let newState = {...state}
         // newState.sessionState.locationMainInEdit = locationId;
-        const currentLocationGroupId = newState.locationGroupInEdit;
+        const currentLocationGroupId = newState.sessionState.locationGroupInEdit;
         const currentLocationGroup: LocationGroup | undefined = newState.LocationGroups?.find(l => l.id === currentLocationGroupId);
         if (currentLocationGroup) {
 
@@ -78,7 +78,7 @@ export const LocationReducer: Record<LocationReducerFunctions, (state: SidurStor
         let newState = {...state}
         const locationToUpdate = action.payload;
         // newState.sessionState.locationMainInEdit = locationId;
-        const currentLocationGroupId = newState.locationGroupInEdit;
+        const currentLocationGroupId = newState.sessionState.locationGroupInEdit;
         const currentLocationGroup: LocationGroup | undefined = newState.LocationGroups?.find(l => l.id === currentLocationGroupId);
         if (currentLocationGroup && locationToUpdate) {
             currentLocationGroup.Locations =

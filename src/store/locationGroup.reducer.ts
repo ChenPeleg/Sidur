@@ -58,14 +58,14 @@ export const LocationGroupReducer: Record<LocationGroupReducerFunctions, (state:
         })
         StoreUtils.HandleReducerSaveToLocalStorage(newState);
 
-        newState.locationGroupInEdit = newId
+        newState.sessionState.locationGroupInEdit = newId
 
         return newState
     },
     [ActionsTypes.CHOOSE_LOCATION_GROUP]: (state: SidurStore, action: IAction): SidurStore => {
         let newState = {...state}
         const groupIdWasChosen = action.payload.id;
-        newState.locationGroupInEdit = groupIdWasChosen;
+        newState.sessionState.locationGroupInEdit = groupIdWasChosen;
         StoreUtils.HandleReducerSaveToLocalStorage(newState);
 
         return newState

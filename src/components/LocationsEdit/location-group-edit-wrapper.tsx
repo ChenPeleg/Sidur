@@ -14,7 +14,7 @@ import {LocationsEditTabs} from './location-group-edit-tabs';
 
 export const LocationGroupEditWrapper = () => {
     const dispatch = useDispatch();
-    const locationGroupInEditId = useSelector((state: SidurStore) => state.locationGroupInEdit || 'ESHBAL');
+    const locationGroupInEditId = useSelector((state: SidurStore) => state.sessionState.locationGroupInEdit || 'ESHBAL');
     const locationGroups: LocationGroup[] = useSelector((state: { LocationGroups: LocationGroup[] }) => state.LocationGroups || []);
 
     const [locationGroupMoreAnchorEl, setLocationGroupMoreAnchorEl] =
