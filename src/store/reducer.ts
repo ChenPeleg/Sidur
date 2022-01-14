@@ -34,7 +34,8 @@ const sessionState: SessionModel = {
     orderIdInEdit: null,
     pendingOrderIdInEdit: null,
     dataHolderForCurrentOrderInEdit: null,
-    isAnimationRunning: true
+    isAnimationRunning: true,
+    locationMainInEdit: null
 
 }
 // @ts-ignore
@@ -151,6 +152,9 @@ const reducer = (state: SidurStore = initialState, action: IAction) => {
 
             return LocationGroupReducer [action.type](newState, action)
         case ActionsTypes.ADD_NEW_LOCATION:
+        case ActionsTypes.START_EDIT_LOCATION:
+        case ActionsTypes.STOP_EDIT_LOCATION:
+        case ActionsTypes.UPDATE_LOCATION:
             return LocationReducer [action.type](newState, action)
 
         default:

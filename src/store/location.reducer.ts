@@ -2,10 +2,11 @@ import {IAction, SidurStore} from './store.types';
 import {StoreUtils} from './store-utils';
 import {ActionsTypes} from './types.actions';
 import {LocationGroup, LocationModel} from '../models/Location.model';
+import {Utils} from '../services/utils';
+import {translations} from '../services/translations';
 
 export type LocationReducerFunctions =
-    ActionsTypes.ADD_NEW_LOCATION
-// | ActionsTypes.UPDATE_LOCATION
+    ActionsTypes.ADD_NEW_LOCATION | ActionsTypes.START_EDIT_LOCATION | ActionsTypes.STOP_EDIT_LOCATION | ActionsTypes.UPDATE_LOCATION
 // | ActionsTypes.DELETE_LOCATION
 
 
@@ -15,23 +16,79 @@ export const LocationReducer: Record<LocationReducerFunctions, (state: SidurStor
         const currentLocationGroupId = newState.locationGroupInEdit;
         const currentLocationGroup: LocationGroup | undefined = newState.LocationGroups?.find(l => l.id === currentLocationGroupId);
         if (currentLocationGroup) {
-            const newId = '1';// Utils.getNextId(getAllOrdersIDs(state))
+            const newId = Utils.getNextId(currentLocationGroup.Locations.map(l => l.id))
+            const name = translations.Locations + ' ' + newId.toString();
             const newLocation: LocationModel = {
                 ETA: 25,
                 EnName: '',
-                name: '',
+                name: name,
                 id: newId
             }
             currentLocationGroup.Locations = [...currentLocationGroup.Locations]
             currentLocationGroup.Locations.push(newLocation);
 
+            newState.LocationGroups = (newState.LocationGroups || []).map(g => {
+                if (g.id === currentLocationGroup.id) {
+                    return currentLocationGroup
+                }
+                return g
+            })
         }
 
 
         StoreUtils.HandleReducerSaveToLocalStorage(newState);
         return newState
     },
+    [ActionsTypes.START_EDIT_LOCATION]: (state: SidurStore, action: IAction): SidurStore => {
+        let newState = {...state}
+        const locationId = action.payload.id
+        newState.currentSessionState.locationMainInEdit = locationId;
+        const currentLocationGroupId = newState.locationGroupInEdit;
+        const currentLocationGroup: LocationGroup | undefined = newState.LocationGroups?.find(l => l.id === currentLocationGroupId);
+        if (currentLocationGroup) {
+            const location = currentLocationGroup.Locations.find(l => l.id === locationId);
+            if (location) {
+                newState.currentSessionState.locationMainInEdit = locationId;
 
+            }
+
+
+        }
+
+        StoreUtils.HandleReducerSaveToLocalStorage(newState);
+        return newState
+    },
+    [ActionsTypes.STOP_EDIT_LOCATION]: (state: SidurStore, action: IAction): SidurStore => {
+        let newState = {...state}
+        // newState.currentSessionState.locationMainInEdit = locationId;
+        const currentLocationGroupId = newState.locationGroupInEdit;
+        const currentLocationGroup: LocationGroup | undefined = newState.LocationGroups?.find(l => l.id === currentLocationGroupId);
+        if (currentLocationGroup) {
+
+            newState.currentSessionState.locationMainInEdit = null;
+
+
+        }
+
+        StoreUtils.HandleReducerSaveToLocalStorage(newState);
+        return newState
+    },
+
+    [ActionsTypes.UPDATE_LOCATION]: (state: SidurStore, action: IAction): SidurStore => {
+        let newState = {...state}
+        // newState.currentSessionState.locationMainInEdit = locationId;
+        const currentLocationGroupId = newState.locationGroupInEdit;
+        const currentLocationGroup: LocationGroup | undefined = newState.LocationGroups?.find(l => l.id === currentLocationGroupId);
+        if (currentLocationGroup) {
+
+            newState.currentSessionState.locationMainInEdit = null;
+
+
+        }
+
+        StoreUtils.HandleReducerSaveToLocalStorage(newState);
+        return newState
+    },
 
 }
 

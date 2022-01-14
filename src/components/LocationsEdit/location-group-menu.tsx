@@ -22,6 +22,7 @@ export const LocationGroupMenu = (props: LocationGroupMenuProps) => {
         handleLocationGroupMenuClick,
         handleLocationGroupMenuClose
     } = props;
+    const isEditable = locationGroupMenuId !== 'ESHBAL'
     return (
         <Menu
             anchorEl={locationGroupMoreAnchorEl}
@@ -38,17 +39,25 @@ export const LocationGroupMenu = (props: LocationGroupMenuProps) => {
             open={isLocationGroupMenuOpen}
             onClose={handleLocationGroupMenuClose}
         >
+            {isEditable ?
 
-            <MenuItem onClick={(e) => handleLocationGroupMenuClick(e, LocationGroupActionType.Rename)}>
 
-                <DriveFileRenameOutline/>&nbsp;
-                {translations.Rename}
-            </MenuItem>
-            <MenuItem onClick={(e) => handleLocationGroupMenuClick(e, LocationGroupActionType.Delete)}>
+                <MenuItem onClick={(e) => handleLocationGroupMenuClick(e, LocationGroupActionType.Rename)}>
 
-                <Delete/>&nbsp;
-                {translations.Delete}
-            </MenuItem>
+                    <DriveFileRenameOutline/>&nbsp;
+                    {translations.Rename}
+                </MenuItem>
+
+
+                : null}
+            {isEditable ?
+                <MenuItem onClick={(e) => handleLocationGroupMenuClick(e, LocationGroupActionType.Delete)}>
+
+                    <Delete/>&nbsp;
+                    {translations.Delete}
+                </MenuItem>
+                : null}
+
             <MenuItem onClick={(e) => handleLocationGroupMenuClick(e, LocationGroupActionType.CreateCopy)}>
 
                 <FileCopy/>&nbsp;

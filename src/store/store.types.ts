@@ -36,6 +36,7 @@ export interface SessionModel {
     LocationGroupTabOpen: null | string;
     dataHolderForCurrentOrderInEdit: null | OrderModel,
     isAnimationRunning: boolean,
+    locationMainInEdit: null | string
 }
 
 export interface SidurStore {

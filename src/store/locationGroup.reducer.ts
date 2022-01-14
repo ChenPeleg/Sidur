@@ -76,7 +76,8 @@ export const LocationGroupReducer: Record<LocationGroupReducerFunctions, (state:
                 locationGroupInEdit: null,
                 orderIdInEdit: null,
                 pendingOrderIdInEdit: null,
-                isAnimationRunning: true
+                isAnimationRunning: true,
+                locationMainInEdit: null
             };
         }
         newState.currentSessionState = {...newState.currentSessionState};

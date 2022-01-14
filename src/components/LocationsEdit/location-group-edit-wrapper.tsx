@@ -1,7 +1,7 @@
 import React from 'react';
 import {Box, Button, IconButton, MenuItem, Select, SelectChangeEvent, Typography} from '@mui/material';
 import {useDispatch, useSelector} from 'react-redux';
-import {Edit} from '@mui/icons-material';
+import {Edit, LockTwoTone} from '@mui/icons-material';
 import {RenameDialog} from '../Dialogs/rename-dialog';
 import {SidurStore} from '../../store/store.types';
 import {ActionsTypes} from '../../store/types.actions';
@@ -126,23 +126,29 @@ export const LocationGroupEditWrapper = () => {
                             fontWight: 'regular'
                         }
                     }}
-                >    &nbsp;
-                    {translations.LocationBase} &nbsp;
-                    <Select dir={'rtl'} disableUnderline={true} variant={'standard'} value={locationGroupInEditId}
-                            sx={{
-                                //  color: 'black',
-                                fontSize: '1.25rem',
-                                fontWeight: 'normal'
-                            }}
-                            onChange={(event: SelectChangeEvent<any>, child: React.ReactNode) => {
-                                handleLocationGroupChanged(event, child)
-                            }}>
-                        <MenuItem key={'NEW'}
-                                  value={'NEW'}> &nbsp; <b>{translations.CreateLocationGroup}</b>  &nbsp;</MenuItem>
-                        {locationGroups.map((oneLocationGroup: LocationGroup) => <MenuItem key={oneLocationGroup.id}
-                                                                                           value={oneLocationGroup.id}> {oneLocationGroup.name} &nbsp; </MenuItem>)}
-                    </Select>
-                </Typography>
+                > </Typography>   &nbsp;
+                {translations.LocationBase} &nbsp;
+                <Select dir={'rtl'} disableUnderline={true} variant={'standard'} value={locationGroupInEditId}
+                        sx={{
+                            //  color: 'black',
+                            fontSize: '1.25rem',
+                            fontWeight: 'normal'
+                        }}
+                        onChange={(event: SelectChangeEvent<any>, child: React.ReactNode) => {
+                            handleLocationGroupChanged(event, child)
+                        }}>
+                    <MenuItem key={'ESHBAL'} sx={{verticalAlign: 'center'}}
+                              value={'ESHBAL'}> &nbsp;  {translations.Eshbal} <LockTwoTone sx={{
+                        height: '17px',
+                        opacity: '0.7',
+                        color: 'grey'
+                    }}/></MenuItem>
+                    <MenuItem key={'NEW'}
+                              value={'NEW'}> &nbsp; <b>{translations.CreateLocationGroup}</b>  &nbsp;</MenuItem>
+                    {locationGroups.map((oneLocationGroup: LocationGroup) => <MenuItem key={oneLocationGroup.id}
+                                                                                       value={oneLocationGroup.id}> {oneLocationGroup.name} &nbsp; </MenuItem>)}
+                </Select>
+
 
                 <IconButton
                     size="small"
