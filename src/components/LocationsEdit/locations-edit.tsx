@@ -11,8 +11,8 @@ import {LocationForm} from './location-form';
 export const LocationsEdit = () => {
     const locationGroupInEditId = useSelector((state: SidurStore) => state.locationGroupInEdit);
     const locationGroups: LocationGroup[] = useSelector((state: { LocationGroups: LocationGroup[] }) => state.LocationGroups || []);
-    const currentSessionState: SessionModel = useSelector((state: { currentSessionState: SessionModel }) => state.currentSessionState);
-    const locationMainInEdit: string | null = useSelector((state: { currentSessionState: SessionModel }) => state.currentSessionState.locationMainInEdit);
+    const sessionState: SessionModel = useSelector((state: { sessionState: SessionModel }) => state.sessionState);
+    const locationMainInEdit: string | null = useSelector((state: { sessionState: SessionModel }) => state.sessionState.locationMainInEdit);
     const currentLocationGroup: LocationGroup | undefined = locationGroups.find(l => l.id === locationGroupInEditId)
     const allLocations: LocationModel[] = currentLocationGroup?.Locations || [];
 
