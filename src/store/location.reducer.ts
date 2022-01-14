@@ -42,13 +42,13 @@ export const LocationReducer: Record<LocationReducerFunctions, (state: SidurStor
     [ActionsTypes.START_EDIT_LOCATION]: (state: SidurStore, action: IAction): SidurStore => {
         let newState = {...state}
         const locationId = action.payload.id
-        newState.currentSessionState.locationMainInEdit = locationId;
+        newState.sessionState.locationMainInEdit = locationId;
         const currentLocationGroupId = newState.locationGroupInEdit;
         const currentLocationGroup: LocationGroup | undefined = newState.LocationGroups?.find(l => l.id === currentLocationGroupId);
         if (currentLocationGroup) {
             const location = currentLocationGroup.Locations.find(l => l.id === locationId);
             if (location) {
-                newState.currentSessionState.locationMainInEdit = locationId;
+                newState.sessionState.locationMainInEdit = locationId;
 
             }
 
@@ -60,12 +60,12 @@ export const LocationReducer: Record<LocationReducerFunctions, (state: SidurStor
     },
     [ActionsTypes.STOP_EDIT_LOCATION]: (state: SidurStore, action: IAction): SidurStore => {
         let newState = {...state}
-        // newState.currentSessionState.locationMainInEdit = locationId;
+        // newState.sessionState.locationMainInEdit = locationId;
         const currentLocationGroupId = newState.locationGroupInEdit;
         const currentLocationGroup: LocationGroup | undefined = newState.LocationGroups?.find(l => l.id === currentLocationGroupId);
         if (currentLocationGroup) {
 
-            newState.currentSessionState.locationMainInEdit = null;
+            newState.sessionState.locationMainInEdit = null;
 
 
         }
@@ -77,7 +77,7 @@ export const LocationReducer: Record<LocationReducerFunctions, (state: SidurStor
     [ActionsTypes.UPDATE_LOCATION]: (state: SidurStore, action: IAction): SidurStore => {
         let newState = {...state}
         const locationToUpdate = action.payload;
-        // newState.currentSessionState.locationMainInEdit = locationId;
+        // newState.sessionState.locationMainInEdit = locationId;
         const currentLocationGroupId = newState.locationGroupInEdit;
         const currentLocationGroup: LocationGroup | undefined = newState.LocationGroups?.find(l => l.id === currentLocationGroupId);
         if (currentLocationGroup && locationToUpdate) {

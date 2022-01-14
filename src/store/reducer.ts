@@ -65,7 +65,7 @@ const defaultInitialState: SidurStore = {
     displaySetting: {view: 'locationsView'},
     SketchIdInEdit: null,
     pendingOrderIdInEdit: null,
-    currentSessionState: sessionState,
+    sessionState: sessionState,
     LocationGroups: []
 
 }

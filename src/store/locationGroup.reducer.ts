@@ -36,11 +36,11 @@ export const LocationGroupReducer: Record<LocationGroupReducerFunctions, (state:
             newState.LocationGroups = newState.LocationGroups.filter(l => l.id !== groupToDeleteId)
         }
         if (newState.LocationGroups.length) {
-            newState.currentSessionState.locationGroupInEdit = newState.LocationGroups[0].id
+            newState.sessionState.locationGroupInEdit = newState.LocationGroups[0].id
         } else {
-            newState.currentSessionState.locationGroupInEdit = null
+            newState.sessionState.locationGroupInEdit = null
         }
-        newState.currentSessionState = {...newState.currentSessionState}
+        newState.sessionState = {...newState.sessionState}
         StoreUtils.HandleReducerSaveToLocalStorage(newState);
         return newState
     },
@@ -73,8 +73,8 @@ export const LocationGroupReducer: Record<LocationGroupReducerFunctions, (state:
     [ActionsTypes.CHOOSE_LOCATION_GROUP_TAB]: (state: SidurStore, action: IAction): SidurStore => {
         let newState = {...state}
         const tabWasChosen = action.payload.id;
-        if (!newState.currentSessionState) {
-            newState.currentSessionState = {
+        if (!newState.sessionState) {
+            newState.sessionState = {
                 LocationGroupTabOpen: null,
                 SketchIdInEdit: null,
                 dataHolderForCurrentOrderInEdit: null,
@@ -85,8 +85,8 @@ export const LocationGroupReducer: Record<LocationGroupReducerFunctions, (state:
                 locationMainInEdit: null
             };
         }
-        newState.currentSessionState = {...newState.currentSessionState};
-        newState.currentSessionState.LocationGroupTabOpen = tabWasChosen;
+        newState.sessionState = {...newState.sessionState};
+        newState.sessionState.LocationGroupTabOpen = tabWasChosen;
         StoreUtils.HandleReducerSaveToLocalStorage(newState);
 
         return newState

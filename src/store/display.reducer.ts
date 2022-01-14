@@ -15,15 +15,15 @@ export const DisplayReducer: Record<DisplayReducerFunctions, (state: SidurStore,
     },
     [ActionsTypes.STOP_LOADING_ANIMATION]: (state: SidurStore, action: IAction): SidurStore => {
         let newState = {...state}
-        newState.currentSessionState = {...newState.currentSessionState};
-        newState.currentSessionState.isAnimationRunning = false;
+        newState.sessionState = {...newState.sessionState};
+        newState.sessionState.isAnimationRunning = false;
         console.log('stop')
         return newState
     },
     [ActionsTypes.START_LOADING_ANIMATION]: (state: SidurStore, action: IAction): SidurStore => {
         let newState = {...state}
-        newState.currentSessionState = {...newState.currentSessionState};
-        newState.currentSessionState.isAnimationRunning = true
+        newState.sessionState = {...newState.sessionState};
+        newState.sessionState.isAnimationRunning = true
         return newState
     }
 

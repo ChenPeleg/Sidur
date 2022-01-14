@@ -50,8 +50,8 @@ export interface SidurStore {
     sketches: SketchModel[];
     sidurId: string;
     LocationGroups: null | LocationGroup[];
-    currentSessionState: SessionModel;
-    
+    sessionState: SessionModel;
+
 
     // Move to Session state
     dataHolderForCurrentOrderInEdit: OrderModel | null;

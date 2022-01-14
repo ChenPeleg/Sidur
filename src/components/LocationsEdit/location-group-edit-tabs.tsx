@@ -48,7 +48,7 @@ const a11yProps = (index: number) => {
 
 
 export const LocationsEditTabs = () => {
-    const locationTabSelectedAsString: string = useSelector((state: SidurStore) => state.currentSessionState.LocationGroupTabOpen || '1');
+    const locationTabSelectedAsString: string = useSelector((state: SidurStore) => state.sessionState.LocationGroupTabOpen || '1');
     const locationTabSelected = +locationTabSelectedAsString;
     const dispatch = useDispatch()
 
