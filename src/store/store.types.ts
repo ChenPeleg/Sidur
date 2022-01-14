@@ -51,6 +51,8 @@ export interface SidurStore {
     sidurId: string;
     LocationGroups: null | LocationGroup[];
     currentSessionState: SessionModel;
+    
+
     // Move to Session state
     dataHolderForCurrentOrderInEdit: OrderModel | null;
     locationGroupInEdit: null | string;
