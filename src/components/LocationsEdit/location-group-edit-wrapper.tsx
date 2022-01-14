@@ -10,6 +10,7 @@ import {LocationGroup} from '../../models/Location.model';
 import {LocationGroupMenu} from './location-group-menu';
 import {LocationGroupActionType} from '../../models/LocationGroupMenuClickActionType.enum';
 import {LocationsEditTabs} from './location-group-edit-tabs';
+import {LocationCantEditMessage} from './location-cant-edit-message';
 
 
 export const LocationGroupEditWrapper = () => {
@@ -127,8 +128,8 @@ export const LocationGroupEditWrapper = () => {
                             fontWight: 'regular'
                         }
                     }}
-                > </Typography>   &nbsp;
-                {translations.LocationBase} &nbsp;
+                >  &nbsp;
+                    {translations.LocationBase} &nbsp; </Typography>
                 <Select dir={'rtl'} disableUnderline={true} variant={'standard'} value={locationGroupInEditId}
                         sx={{
                             //  color: 'black',
@@ -166,7 +167,7 @@ export const LocationGroupEditWrapper = () => {
             </Box> : <Button variant={'contained'} id={'sketches-create-sketch'}
                              onClick={handleCreateLocationGroup}>{translations.CreateSketch}</Button>}
 
-            <LocationsEditTabs/>
+            {locationGroupInEditId === 'ESHBAL' ? <LocationCantEditMessage/> : <LocationsEditTabs/>}
             <LocationGroupMenu locationGroupMoreAnchorEl={locationGroupMoreAnchorEl}
                                locationGroupMenuId={locationGroupInEditId || ''}
                                isLocationGroupMenuOpen={isLocationGroupMenuOpen}

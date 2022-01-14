@@ -1,10 +1,8 @@
-import {OrderModel} from '../models/Order.model';
 import {defaultOrderValues, defaultVehicleValues, IAction, SessionModel, SidurStore} from './store.types';
 import {SaveLoadService} from '../services/save-load.service';
 import {SidurReducer} from './sidur.reducer';
 import {OrderReducer} from './order.reducer';
 import {ImportExportReducer} from './import-export.reducer';
-import {VehicleModel} from '../models/Vehicle.model';
 import {VehicleReducer} from './vehicle.reducer';
 import {ActionsTypes} from './types.actions';
 import {DisplayReducer} from './display.reducer';
@@ -12,21 +10,10 @@ import {SketchReducer} from './sketch.reducer';
 import {PendingOrdersReducer} from './pendingOrders.reducer';
 import {SketchDriveReducer} from './sketch-drive.reducer';
 import {LocationGroupReducer} from './locationGroup.reducer';
-import {defaultSidurEshbal} from './store-inital-state';
 import {LocationReducer} from './location.reducer';
+import {defaultSidurEshbal} from './store-inital-state';
 
 
-const startOrders: OrderModel[] = ['חן', 'אבי', 'רוני'].map((name: string, index: number): OrderModel => ({
-    ...defaultOrderValues,
-    id: (index + 1).toString(),
-    driverName: name
-}));
-const startVehicles: VehicleModel[] = ['סנאו', 'שלגיה', 'שכור', 'מאזדה'].map((name: string, index: number): VehicleModel => ({
-    ...defaultVehicleValues,
-    id: (index + 1).toString(),
-    vehicleName: name,
-
-}))
 const sessionState: SessionModel = {
     LocationGroupTabOpen: null,
     SketchIdInEdit: null,
@@ -39,24 +26,24 @@ const sessionState: SessionModel = {
 
 
 }
-// @ts-ignore
+
 const defaultInitialState: SidurStore = {
     sidurArchive: [],
     sidurCollection: [{
         id: '1',
-        Name: 'סידור גנים',
+        Name: 'סידור לדוגמה',
         orders: [],
         deletedOrders: [],
         vehicles: [defaultVehicleValues],
         sketches: [],
         chosenSketch: '',
         locationGroup: null
-    }, defaultSidurEshbal
+    }
 
     ],
     sidurId: '1',
-    orders: startOrders,
-    vehicles: startVehicles,
+    orders: [],
+    vehicles: [],
     deletedOrders: [],
     defaultOrderValues: {...defaultOrderValues},
     sketches: [],
@@ -65,9 +52,10 @@ const defaultInitialState: SidurStore = {
     LocationGroups: []
 
 }
-
-const stateFromLocalStorage: SidurStore | undefined = SaveLoadService.loadFromLocalStorage('chen').data?.savedStore
-const initialState = stateFromLocalStorage || defaultInitialState;
+const stateFromLocalStorage: SidurStore | undefined = SaveLoadService.loadFromLocalStorage('chen').data?.savedStore;
+//defaultInitialState.sidurCollection.push(defaultSidurEshbal.sidurCollection[0])
+const initialState = stateFromLocalStorage || defaultSidurEshbal; //defaultInitialState;
+console.log(initialState);
 
 const reducer = (state: SidurStore = initialState, action: IAction) => {
     let newState = {
