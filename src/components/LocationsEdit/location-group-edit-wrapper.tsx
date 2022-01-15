@@ -113,7 +113,7 @@ export const LocationGroupEditWrapper = () => {
             {locationGroupInEdit ? <Box sx={{
                 display: 'flex',
                 flexDirection: 'row',
-                alignItems: 'start',
+                alignItems: 'center',
                 justifyContent: 'start',
                 mb: '10px'
             }}>

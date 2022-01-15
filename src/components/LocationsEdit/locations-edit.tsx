@@ -54,7 +54,7 @@ export const LocationsEdit = () => {
             <Button variant="contained" onClick={handleAddLocation} aria-label="add" size="large">
                 {translations.addLocation}
             </Button>
-            <Box id={'loactions-container'} onBlur={handleStopEditLocation}>
+            <Box sx={{mt: '1em'}} id={'loactions-container'} onBlur={handleStopEditLocation}>
                 {allLocations.map((l: LocationModel, i: number) =>
                     <Box key={i} onClick={(event) => handleStartEditLocation(event, l.id)}>
 

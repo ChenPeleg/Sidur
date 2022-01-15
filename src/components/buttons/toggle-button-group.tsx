@@ -1,9 +1,10 @@
 import * as React from 'react';
 import ToggleButton from '@mui/material/ToggleButton';
-import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
 import {translations} from '../../services/translations';
 import {useDispatch} from 'react-redux';
 import {ActionsTypes} from '../../store/types.actions';
+import {StyledToggleButtonGroup} from './styled-toggle-button';
+
 
 export const ToggleButtons = () => {
     const [alignment, setAlignment] = React.useState('web');
@@ -24,16 +25,21 @@ export const ToggleButtons = () => {
     };
 
     return (
-        <ToggleButtonGroup
+        <StyledToggleButtonGroup
             value={alignment}
             exclusive
-            sx={{color: 'white'}}
+            sx={{
+                color: 'white',
+                direction: 'ltr'
+            }}
+            color={'standard'}
 
             onChange={handleChange}
         >
-            <ToggleButton sx={{color: 'white'}} value={'orders'}> {translations.Orders} </ToggleButton>
-            <ToggleButton sx={{color: 'white'}} value={'sketch'}>{translations.Sketch}</ToggleButton>
+
             <ToggleButton sx={{color: 'white'}} value={'locationsView'}>{translations.Locations}</ToggleButton>
-        </ToggleButtonGroup>
+            <ToggleButton sx={{color: 'white'}} value={'sketch'}>{translations.Sketch}</ToggleButton>
+            <ToggleButton sx={{color: 'white'}} value={'orders'}> {translations.Orders} </ToggleButton>
+        </StyledToggleButtonGroup>
     );
 }

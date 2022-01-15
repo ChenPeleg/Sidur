@@ -13,7 +13,7 @@ interface LocationFormProps extends LocationModel {
 }
 
 export const LocationForm = (props: LocationFormProps) => {
-    const locationGroupInEditId = useSelector((state: SidurStore) => state.sessionState.locationGroupInEdit );
+    const locationGroupInEditId = useSelector((state: SidurStore) => state.sessionState.locationGroupInEdit);
     const locationGroups: LocationGroup[] = useSelector((state: { LocationGroups: LocationGroup[] }) => state.LocationGroups || []);
     const currentLocationGroup: LocationGroup | undefined = locationGroups.find(l => l.id === locationGroupInEditId)
     const [wasJustEdited, setWasJustEdited] = useState<boolean>(false)
@@ -51,10 +51,10 @@ export const LocationForm = (props: LocationFormProps) => {
                 m: '0.2em',
                 mb: '0.3em',
 
-
-                minHeight: '8vh',
-                minWidth: '50vw',
-                maxWidth: '70vw',
+                //
+                // minHeight: '8vh',
+                // minWidth: '50vw',
+                // maxWidth: '70vw',
                 cursor: 'pointer',
                 display: 'flex',
                 flexDirection: 'row',
@@ -134,6 +134,10 @@ export const LocationForm = (props: LocationFormProps) => {
                     < Typography component={'span'} variant={'caption'}>{translations.ETAtext}</Typography>
 
                 </Box>
+                <Box id={'caption-container'} sx={{
+                    width: '80px',
+                    height: '20px'
+                }}/>
             </Card>
         </Box>
     )
