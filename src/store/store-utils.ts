@@ -79,7 +79,9 @@ export const StoreUtils = {
         const eshablLocationGrouop: LocationGroup = {
             Locations: [...locations],
             id: 'ESHBAL',
-            name: translations.Eshbal
+            name: translations.Eshbal,
+            Transports: [],
+            Routs: [],
         }
         return eshablLocationGrouop;
     }

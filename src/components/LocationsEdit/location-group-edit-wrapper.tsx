@@ -99,11 +99,8 @@ export const LocationGroupEditWrapper = () => {
     }
 
 
-    const locationGroupInEdit: LocationGroup | null = locationGroups.find((lGroup: LocationGroup) => lGroup.id === locationGroupInEditId) || {
-        Locations: [],
-        name: 'אשבל',
-        id: '1'
-    };
+    const locationGroupInEdit: LocationGroup = locationGroups.find((lGroup: LocationGroup) => lGroup.id === locationGroupInEditId) || locationGroups[0] as LocationGroup;
+
 
     const sketchName = locationGroupInEdit ? locationGroupInEdit.name : '';
 

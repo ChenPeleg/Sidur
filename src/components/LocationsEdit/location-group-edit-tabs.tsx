@@ -7,6 +7,7 @@ import {SidurStore} from '../../store/store.types';
 import {useDispatch, useSelector} from 'react-redux';
 import {ActionsTypes} from '../../store/types.actions';
 import {LocationsEdit} from './locations-edit';
+import {LocationsRoutesEdit} from './locations-routes-edit';
 
 interface TabPanelProps {
     children?: React.ReactNode;
@@ -68,15 +69,15 @@ export const LocationsEditTabs = () => {
             }}>
                 <Tabs value={locationTabSelected} onChange={handleChange} aria-label="basic tabs example">
                     <Tab label={translations.Locations} {...a11yProps(0)} />
-                    <Tab label={translations.PublicTransport}  {...a11yProps(1)} />
-                    <Tab label={translations.roadTracks}   {...a11yProps(2)} />
+                    <Tab label={translations.roadTracks}   {...a11yProps(1)} />
+                    <Tab label={translations.PublicTransport}  {...a11yProps(2)} />
                 </Tabs>
             </Box>
             <TabPanel value={locationTabSelected} index={0}>
                 <LocationsEdit/>
             </TabPanel>
             <TabPanel value={locationTabSelected} index={1}>
-                Item Two
+                <LocationsRoutesEdit/>
             </TabPanel>
             <TabPanel value={locationTabSelected} index={2}>
                 Item Three
