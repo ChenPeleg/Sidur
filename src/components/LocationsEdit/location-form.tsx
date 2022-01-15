@@ -6,6 +6,8 @@ import * as React from 'react';
 import {useRef, useState} from 'react';
 import TextField from '@mui/material/TextField';
 import {translations} from '../../services/translations';
+import {DeleteButton} from '../buttons/delete-button';
+import {ActionsTypes} from '../../store/types.actions';
 
 interface LocationFormProps extends LocationModel {
     onUpdate: (locationUpdate: LocationModel) => void,
@@ -44,6 +46,16 @@ export const LocationForm = (props: LocationFormProps) => {
 
     }
 
+    const deleteClickHandler = (event: any) => {
+        event.stopPropagation();
+        dispatch({
+            type: ActionsTypes.DELETE_LOCATION,
+            payload: {
+                id: props.id
+            }
+        })
+
+    }
     return (
 
         <Box sx={{display: 'flex'}}>
@@ -136,6 +148,11 @@ export const LocationForm = (props: LocationFormProps) => {
                 </Box>
                 <Box id={'caption-container'} sx={{
                     width: '80px',
+                    height: '20px'
+                }}/>
+                <DeleteButton deleteClickHandler={deleteClickHandler} sx={{fontSize: '14px'}}/>
+                <Box id={'caption-container'} sx={{
+                    width: '5px',
                     height: '20px'
                 }}/>
             </Card>

@@ -22,6 +22,7 @@ export const translations = {
     'DeleteAndImportAllData': 'מחק הכל והחלף ביבוא הכל',
     'ImportPart': 'יבוא חלקי',
     'NewName': 'שם חדש',
+    'searchLocation': 'חיפוש מיקום',
     'PastHere': 'הדבק כאן את הטקסט',
     'NewSidur': 'סידור חדש',
     'ManageAllSidrurim': 'ניהול סידורים',

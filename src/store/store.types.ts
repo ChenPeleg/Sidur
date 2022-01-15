@@ -49,7 +49,7 @@ export interface SidurStore {
     displaySetting: DisplaySettings,
     sketches: SketchModel[];
     sidurId: string;
-    LocationGroups: null | LocationGroup[];
+    LocationGroups: LocationGroup[];
     sessionState: SessionModel;
 
 

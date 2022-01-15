@@ -112,3 +112,27 @@
 
 
 }
+
+::-webkit-scrollbar {
+    direction: rtl;
+    width: 5px;
+    height: 10px;
+    border-radius: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background: #bcc8f5;
+    border-radius: 10px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #677498;
+    border-radius: 10px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #334c94;
+}

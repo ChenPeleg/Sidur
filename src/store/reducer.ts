@@ -150,6 +150,8 @@ const reducer = (state: SidurStore = initialState, action: IAction) => {
         case ActionsTypes.START_EDIT_LOCATION:
         case ActionsTypes.STOP_EDIT_LOCATION:
         case ActionsTypes.UPDATE_LOCATION:
+        case ActionsTypes.DELETE_LOCATION :
+            
             return LocationReducer [action.type](newState, action)
 
         default:

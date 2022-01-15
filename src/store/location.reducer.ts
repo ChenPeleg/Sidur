@@ -6,8 +6,11 @@ import {Utils} from '../services/utils';
 import {translations} from '../services/translations';
 
 export type LocationReducerFunctions =
-    ActionsTypes.ADD_NEW_LOCATION | ActionsTypes.START_EDIT_LOCATION | ActionsTypes.STOP_EDIT_LOCATION | ActionsTypes.UPDATE_LOCATION
-// | ActionsTypes.DELETE_LOCATION
+    ActionsTypes.ADD_NEW_LOCATION
+    | ActionsTypes.START_EDIT_LOCATION
+    | ActionsTypes.STOP_EDIT_LOCATION
+    | ActionsTypes.UPDATE_LOCATION
+    | ActionsTypes.DELETE_LOCATION
 
 
 export const LocationReducer: Record<LocationReducerFunctions, (state: SidurStore, action: IAction) => SidurStore> = {
@@ -89,6 +92,21 @@ export const LocationReducer: Record<LocationReducerFunctions, (state: SidurStor
                     return l
                 })
 
+        }
+
+        StoreUtils.HandleReducerSaveToLocalStorage(newState);
+        return newState
+    },
+
+    [ActionsTypes.DELETE_LOCATION]: (state: SidurStore, action: IAction): SidurStore => {
+        let newState = {...state}
+        const locationToDeleteId = action.payload.id;
+        const currentLocationGroupId = newState.sessionState.locationGroupInEdit;
+        const currentLocationGroup: LocationGroup | undefined = newState.LocationGroups?.find(l => l.id === currentLocationGroupId);
+        if (currentLocationGroup) {
+            currentLocationGroup.Locations =
+                currentLocationGroup.Locations.filter(l => l.id !== locationToDeleteId);
+            newState.LocationGroups = newState.LocationGroups.map(l => l.id === currentLocationGroup.id ? currentLocationGroup : l)
         }
 
         StoreUtils.HandleReducerSaveToLocalStorage(newState);

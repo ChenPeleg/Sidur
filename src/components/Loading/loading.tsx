@@ -17,7 +17,8 @@ const loadingSx: SxProps = {
 export const Loading = () => {
 
     const session: SessionModel = useSelector((state: { sessionState: SessionModel }) => state.sessionState);
-    const isAnimationRunning = session.isAnimationRunning
+    const isAnimationRunning = session ? session.isAnimationRunning : true;
+
     return (
         <Fade in={isAnimationRunning} unmountOnExit>
             <Box sx={loadingSx}>
