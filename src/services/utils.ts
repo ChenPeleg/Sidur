@@ -5,7 +5,7 @@ import {DriveType} from '../models/DriveType.enum';
 
 export const Utils = {
     getNextId: (currentIds: string[]): string => {
-        const allIds: number [] = currentIds.map(id => Number(id));
+        const allIds: number [] = currentIds.map(id => Number(id) || 0);
         allIds.push(0)
         const newId = Math.max(...allIds) + 1;
         return newId.toString()

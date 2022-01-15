@@ -1,6 +1,7 @@
 import {DriveModel, SketchModel, VehicleScheduleModel} from '../models/Sketch.model';
 import {OrderModel} from '../models/Order.model';
 import {SidurRecord} from '../store/store.types';
+import {LocationGroup} from '../models/Location.model';
 
 
 export class CloneUtil {
@@ -36,6 +37,11 @@ export class CloneUtil {
 
     static deepCloneSketch(obj: SketchModel): SketchModel {
         obj.vehicleSchedules = obj.vehicleSchedules.map(vs => CloneUtil.deepCloneVehicleSchedules(vs))
+        return {...obj}
+    }
+
+    static deepCloneLocationGroup(obj: LocationGroup): LocationGroup {
+        obj.Locations = obj.Locations.map(l => ({...l}))
         return {...obj}
     }
 

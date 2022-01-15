@@ -12,7 +12,46 @@ import {SketchDriveReducer} from './sketch-drive.reducer';
 import {LocationGroupReducer} from './locationGroup.reducer';
 import {LocationReducer} from './location.reducer';
 import {defaultSidurEshbal} from './store-inital-state';
+import {StoreUtils} from './store-utils';
 
+const buildInintialState = (): SidurStore => {
+    const defaultInitialState: SidurStore = {
+        sidurArchive: [],
+        sidurCollection: [{
+            id: '1',
+            Name: 'סידור לדוגמה',
+            orders: [],
+            deletedOrders: [],
+            vehicles: [defaultVehicleValues],
+            sketches: [],
+            chosenSketch: '',
+            locationGroup: null
+        }
+
+        ],
+        sidurId: '1',
+        orders: [],
+        vehicles: [],
+        deletedOrders: [],
+        defaultOrderValues: {...defaultOrderValues},
+        sketches: [],
+        displaySetting: {view: 'locationsView'},
+        sessionState: sessionState,
+        LocationGroups: []
+
+    }
+    const stateFromLocalStorage: SidurStore | undefined = SaveLoadService.loadFromLocalStorage('chen').data?.savedStore;
+    //defaultInitialState.sidurCollection.push(defaultSidurEshbal.sidurCollection[0])
+    const initialState: SidurStore = (stateFromLocalStorage || defaultSidurEshbal) as SidurStore;
+    const eshabalLocationGroup = initialState.LocationGroups?.find(l => l.id === 'ESHBAL');
+    if (!eshabalLocationGroup) {
+        initialState.LocationGroups = initialState.LocationGroups || [];
+        initialState.LocationGroups.push(StoreUtils.defaultEshbalLocationGroup());
+    }
+    //defaultInitialState;
+    console.log(initialState);
+    return initialState;
+}
 
 const sessionState: SessionModel = {
     LocationGroupTabOpen: null,
@@ -27,36 +66,8 @@ const sessionState: SessionModel = {
 
 }
 
-const defaultInitialState: SidurStore = {
-    sidurArchive: [],
-    sidurCollection: [{
-        id: '1',
-        Name: 'סידור לדוגמה',
-        orders: [],
-        deletedOrders: [],
-        vehicles: [defaultVehicleValues],
-        sketches: [],
-        chosenSketch: '',
-        locationGroup: null
-    }
 
-    ],
-    sidurId: '1',
-    orders: [],
-    vehicles: [],
-    deletedOrders: [],
-    defaultOrderValues: {...defaultOrderValues},
-    sketches: [],
-    displaySetting: {view: 'locationsView'},
-    sessionState: sessionState,
-    LocationGroups: []
-
-}
-const stateFromLocalStorage: SidurStore | undefined = SaveLoadService.loadFromLocalStorage('chen').data?.savedStore;
-//defaultInitialState.sidurCollection.push(defaultSidurEshbal.sidurCollection[0])
-const initialState = stateFromLocalStorage || defaultSidurEshbal; //defaultInitialState;
-console.log(initialState);
-
+const initialState = buildInintialState()
 const reducer = (state: SidurStore = initialState, action: IAction) => {
     let newState = {
         ...state

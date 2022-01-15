@@ -4,6 +4,9 @@ import {ActionsTypes} from './types.actions';
 import {IAction, SidurStore} from './store.types';
 import {Utils} from '../services/utils';
 import {StoreUtils} from './store-utils';
+import {CloneUtil} from '../services/clone-utility';
+import {translations} from '../services/translations';
+import {LocationGroup} from '../models/Location.model';
 
 export type LocationGroupReducerFunctions =
     ActionsTypes.UPDATE_LOCATION_GROUP |
@@ -93,8 +96,18 @@ export const LocationGroupReducer: Record<LocationGroupReducerFunctions, (state:
     },
     [ActionsTypes.CLONE_LOCATION_GROUP]: (state: SidurStore, action: IAction): SidurStore => {
         let newState = {...state}
-        if (!newState.LocationGroups) {
-            newState.LocationGroups = [];
+        const locationGroupIdToClone = action.payload.id;// newState.sidurId;
+        let locationGroupForCloning: LocationGroup | undefined = newState.LocationGroups?.find(s => s.id === locationGroupIdToClone);
+
+        if (locationGroupForCloning) {
+            const newLocGroup: LocationGroup = CloneUtil.deepCloneLocationGroup(locationGroupForCloning);
+            newLocGroup.name = translations.CopyOf + ' ' + newLocGroup.name;
+            const newLocGroupId = Utils.getNextId(newState.LocationGroups?.map(l => l.id) || ['']);
+            newLocGroup.id = newLocGroupId;
+            newState.LocationGroups = newState.LocationGroups?.map(c => c) || [];
+            newState.LocationGroups.push(newLocGroup);
+            newState.sessionState.locationGroupInEdit = newLocGroupId;
+            // newState = setChosenSidur(newState, newSketch);
         }
         StoreUtils.HandleReducerSaveToLocalStorage(newState);
 

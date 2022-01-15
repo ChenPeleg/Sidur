@@ -48,7 +48,7 @@ export const LocationGroupEditWrapper = () => {
             case LocationGroupActionType.CreateCopy:
                 dispatch({
                     type: ActionsTypes.CLONE_LOCATION_GROUP,
-                    payload: {id: locationGroupInEdit}
+                    payload: {id: locationGroupInEditId}
                 })
                 break;
 
@@ -147,8 +147,9 @@ export const LocationGroupEditWrapper = () => {
                     }}/></MenuItem>
                     <MenuItem key={'NEW'}
                               value={'NEW'}> &nbsp; <b>{translations.CreateLocationGroup}</b>  &nbsp;</MenuItem>
-                    {locationGroups.map((oneLocationGroup: LocationGroup) => <MenuItem key={oneLocationGroup.id}
-                                                                                       value={oneLocationGroup.id}> {oneLocationGroup.name} &nbsp; </MenuItem>)}
+                    {locationGroups.filter(l => l.id !== 'ESHBAL').map((oneLocationGroup: LocationGroup) => <MenuItem
+                        key={oneLocationGroup.id}
+                        value={oneLocationGroup.id}> {oneLocationGroup.name} &nbsp; </MenuItem>)}
                 </Select>
 
 
