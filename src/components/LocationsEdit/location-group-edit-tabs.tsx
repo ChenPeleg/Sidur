@@ -7,7 +7,7 @@ import {SidurStore} from '../../store/store.types';
 import {useDispatch, useSelector} from 'react-redux';
 import {ActionsTypes} from '../../store/types.actions';
 import {LocationsEdit} from './locations-edit';
-import {LocationsRoutesEdit} from './locations-routes-edit';
+import {LocationsRoutesEditWrapper} from './locations-routes-edit-wrapper';
 
 interface TabPanelProps {
     children?: React.ReactNode;
@@ -77,7 +77,7 @@ export const LocationsEditTabs = () => {
                 <LocationsEdit/>
             </TabPanel>
             <TabPanel value={locationTabSelected} index={1}>
-                <LocationsRoutesEdit/>
+                <LocationsRoutesEditWrapper/>
             </TabPanel>
             <TabPanel value={locationTabSelected} index={2}>
                 Item Three

@@ -13,6 +13,7 @@ import {LocationGroupReducer} from './locationGroup.reducer';
 import {LocationReducer} from './location.reducer';
 import {defaultSidurEshbal} from './store-inital-state';
 import {StoreUtils} from './store-utils';
+import {RouteReducer} from './route.reducer';
 
 const buildInintialState = (): SidurStore => {
     const defaultInitialState: SidurStore = {
@@ -151,8 +152,16 @@ const reducer = (state: SidurStore = initialState, action: IAction) => {
         case ActionsTypes.STOP_EDIT_LOCATION:
         case ActionsTypes.UPDATE_LOCATION:
         case ActionsTypes.DELETE_LOCATION :
-            
+
             return LocationReducer [action.type](newState, action)
+
+        case ActionsTypes.ADD_NEW_ROUTE:
+        case ActionsTypes.START_EDIT_ROUTE:
+        case ActionsTypes.STOP_EDIT_ROUTE:
+        case ActionsTypes.UPDATE_ROUTE:
+        case ActionsTypes.DELETE_ROUTE :
+
+            return RouteReducer [action.type](newState, action)
 
         default:
             // @ts-ignore

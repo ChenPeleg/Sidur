@@ -81,7 +81,7 @@ export const StoreUtils = {
             id: 'ESHBAL',
             name: translations.Eshbal,
             Transports: [],
-            Routs: [],
+            Routes: [],
         }
         return eshablLocationGrouop;
     }

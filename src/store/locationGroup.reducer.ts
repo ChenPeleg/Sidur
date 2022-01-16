@@ -58,7 +58,7 @@ export const LocationGroupReducer: Record<LocationGroupReducerFunctions, (state:
             name: 'בסיס סידור ' + newId,
             id: newId,
             Locations: [],
-            Routs: [],
+            Routes: [],
             Transports: []
         })
         StoreUtils.HandleReducerSaveToLocalStorage(newState);

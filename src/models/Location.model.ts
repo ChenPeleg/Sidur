@@ -20,7 +20,7 @@ export interface RoutStopModel {
     position: number
 }
 
-export interface RoutModel {
+export interface RouteModel {
     id: string,
     name: string,
     comments: string,
@@ -31,6 +31,6 @@ export interface LocationGroup {
     id: string,
     name: string,
     Locations: LocationModel[],
-    Routs: RoutModel[],
+    Routes: RouteModel[],
     Transports: TransportModel[]
 }
