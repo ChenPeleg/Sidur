@@ -1,7 +1,7 @@
 import {Box} from '@mui/material';
 import {useDispatch, useSelector} from 'react-redux';
 import {SessionModel, SidurStore} from '../../store/store.types';
-import {LocationGroup, LocationModel} from '../../models/Location.model';
+import {LocationGroup, LocationModel, RouteModel} from '../../models/Location.model';
 import {translations} from '../../services/translations';
 import * as React from 'react';
 import {useState} from 'react';
@@ -10,6 +10,7 @@ import {Styles} from '../../hoc/themes';
 import TextField from '@mui/material/TextField';
 import {LocationChooseButton} from './location-choose-button';
 import Button from '@mui/material/Button';
+import {LocationRouteEdit, RouteEditAction} from './location-route-edit';
 
 export const LocationsRoutesEditWrapper = () => {
     const locationGroupInEditId = useSelector((state: SidurStore) => state.sessionState.locationGroupInEdit);
@@ -19,6 +20,7 @@ export const LocationsRoutesEditWrapper = () => {
     const allLocations: LocationModel[] = currentLocationGroup?.Locations || [];
     const [filterLocationText, setFilterLocationText] = useState<string>('')
     const [filterRouteText, setFilterRouteText] = useState<string>('')
+    const RouteIdInEdit: string | null = useSelector((state: { sessionState: SessionModel }) => state.sessionState.routeIdInEdit);
     const dispatch = useDispatch();
 
     const handleAddLocation = () => {
@@ -27,6 +29,7 @@ export const LocationsRoutesEditWrapper = () => {
             type: ActionsTypes.ADD_NEW_ROUTE
         })
     }
+
     const handleStartEditLocation = (event: any, id: string) => {
         if (locationMainInEdit === id) {
             return
@@ -47,9 +50,9 @@ export const LocationsRoutesEditWrapper = () => {
         })
     }
 
-    const handleLocationUpdate = (updatedLocation: LocationModel) => {
+    const handleLocationAdd = (updatedLocation: LocationModel) => {
         dispatch({
-            type: ActionsTypes.UPDATE_LOCATION,
+            type: ActionsTypes.ADD_LOCATION_TO_ROUTE,
             payload: updatedLocation
         })
     }
@@ -61,9 +64,12 @@ export const LocationsRoutesEditWrapper = () => {
     }
     const handleFilterRouteValueChanged = (event: any) => {
         if (locationMainInEdit) {
-            handleStopEditLocation(null);
+            // handleStopEditLocation(null);
         }
-        setFilterLocationText(event.target.value);
+        setFilterRouteText(event.target.value);
+    }
+    const routeEditAction = (updatedRout: RouteModel, actionType: RouteEditAction) => {
+
     }
     const filteredLocations = filterLocationText.trim() === '' ? allLocations.filter(l => l) :
         allLocations.filter(l => l.name.includes(filterLocationText.trim()));
@@ -100,7 +106,7 @@ export const LocationsRoutesEditWrapper = () => {
                         {filteredLocations.map((l: LocationModel, i: number) =>
                             <Box key={l.id} onClick={(event) => handleStartEditLocation(event, l.id)}>
 
-                                <LocationChooseButton    {...l} onUpdate={handleLocationUpdate} key={i}/>
+                                <LocationChooseButton    {...l} onClick={handleLocationAdd} key={i}/>
                             </Box>
                         )}
                     </Box>
@@ -136,7 +142,14 @@ export const LocationsRoutesEditWrapper = () => {
                     />
                 </Box>
 
+                <Box sx={{
+                    height: '10px',
+                    width: '20px'
+                }}/>
+                {currentLocationGroup?.Routes[0] ?
+                    <LocationRouteEdit route={currentLocationGroup.Routes[0]} routeEditActon={routeEditAction}/> : null}
             </Box>
+
         </Box>
     )
 }

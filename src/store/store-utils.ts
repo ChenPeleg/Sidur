@@ -1,4 +1,4 @@
-import {AppConstants, SaveDataModel, SidurRecord, SidurStore} from './store.types';
+import {AppConstants, SaveDataModel, SessionModel, SidurRecord, SidurStore} from './store.types';
 import {SaveLoadService} from '../services/save-load.service';
 import {hashFunction} from '../services/hash-function';
 import {CloneUtil} from '../services/clone-utility';
@@ -84,5 +84,21 @@ export const StoreUtils = {
             Routes: [],
         }
         return eshablLocationGrouop;
+    },
+    defaultSessionState(): SessionModel {
+        const defaultSession: SessionModel = {
+            LocationGroupTabOpen: null,
+            SketchIdInEdit: null,
+            dataHolderForCurrentOrderInEdit: null,
+            isAnimationRunning: true,
+            locationGroupInEdit: null,
+            locationMainInEdit: null,
+            orderIdInEdit: null,
+            pendingOrderIdInEdit: null,
+            routeIdInEdit: null,
+            transportIdInEdit: null
+
+        }
+        return defaultSession
     }
 }

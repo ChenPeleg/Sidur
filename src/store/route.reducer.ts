@@ -11,10 +11,41 @@ export type RouteReducerFunctions =
     | ActionsTypes.STOP_EDIT_ROUTE
     | ActionsTypes.UPDATE_ROUTE
     | ActionsTypes.DELETE_ROUTE
+    | ActionsTypes.ADD_LOCATION_TO_ROUTE
 
 
 export const RouteReducer: Record<RouteReducerFunctions, (state: SidurStore, action: IAction) => SidurStore> = {
     [ActionsTypes.ADD_NEW_ROUTE]: (state: SidurStore, action: IAction): SidurStore => {
+        let newState = {...state}
+        const currentLocationGroupId = newState.sessionState.locationGroupInEdit;
+        const currentLocationGroup: LocationGroup | undefined = newState.LocationGroups?.find(l => l.id === currentLocationGroupId);
+
+        if (currentLocationGroup) {
+            currentLocationGroup.Routes = currentLocationGroup.Routes || [];
+            const newId = Utils.getNextId(currentLocationGroup.Routes.map(l => l.id))
+            const name = translations.Route + ' ' + newId.toString();
+            const newRoute: RouteModel = {
+                name: name,
+                id: newId,
+                comments: '',
+                routStops: []
+            }
+            currentLocationGroup.Routes = [...currentLocationGroup.Routes]
+            currentLocationGroup.Routes.push(newRoute);
+
+            newState.LocationGroups = (newState.LocationGroups || []).map(g => {
+                if (g.id === currentLocationGroup.id) {
+                    return currentLocationGroup
+                }
+                return g
+            })
+        }
+
+
+        StoreUtils.HandleReducerSaveToLocalStorage(newState);
+        return newState
+    },
+    [ActionsTypes.ADD_LOCATION_TO_ROUTE]: (state: SidurStore, action: IAction): SidurStore => {
         let newState = {...state}
         const currentLocationGroupId = newState.sessionState.locationGroupInEdit;
         const currentLocationGroup: LocationGroup | undefined = newState.LocationGroups?.find(l => l.id === currentLocationGroupId);

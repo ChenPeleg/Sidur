@@ -31,6 +31,8 @@ export interface DisplaySettings {
 export interface SessionModel {
     locationGroupInEdit: null | string;
     orderIdInEdit: null | string;
+    routeIdInEdit: null | string;
+    transportIdInEdit: null | string;
     pendingOrderIdInEdit: null | string;
     SketchIdInEdit: null | string;
     LocationGroupTabOpen: null | string;

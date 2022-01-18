@@ -1,4 +1,4 @@
-import {defaultOrderValues, defaultVehicleValues, IAction, SessionModel, SidurStore} from './store.types';
+import {defaultOrderValues, defaultVehicleValues, IAction, SidurStore} from './store.types';
 import {SaveLoadService} from '../services/save-load.service';
 import {SidurReducer} from './sidur.reducer';
 import {OrderReducer} from './order.reducer';
@@ -37,7 +37,7 @@ const buildInintialState = (): SidurStore => {
         defaultOrderValues: {...defaultOrderValues},
         sketches: [],
         displaySetting: {view: 'locationsView'},
-        sessionState: sessionState,
+        sessionState: StoreUtils.defaultSessionState(),
         LocationGroups: []
 
     }
@@ -52,19 +52,6 @@ const buildInintialState = (): SidurStore => {
     //defaultInitialState;
     console.log(initialState);
     return initialState;
-}
-
-const sessionState: SessionModel = {
-    LocationGroupTabOpen: null,
-    SketchIdInEdit: null,
-    locationGroupInEdit: null,
-    orderIdInEdit: null,
-    pendingOrderIdInEdit: null,
-    dataHolderForCurrentOrderInEdit: null,
-    isAnimationRunning: true,
-    locationMainInEdit: null,
-
-
 }
 
 
@@ -159,7 +146,8 @@ const reducer = (state: SidurStore = initialState, action: IAction) => {
         case ActionsTypes.START_EDIT_ROUTE:
         case ActionsTypes.STOP_EDIT_ROUTE:
         case ActionsTypes.UPDATE_ROUTE:
-        case ActionsTypes.DELETE_ROUTE :
+        case ActionsTypes.DELETE_ROUTE:
+        case ActionsTypes.ADD_LOCATION_TO_ROUTE:
 
             return RouteReducer [action.type](newState, action)
 

@@ -79,16 +79,8 @@ export const LocationGroupReducer: Record<LocationGroupReducerFunctions, (state:
         let newState = {...state}
         const tabWasChosen = action.payload.id;
         if (!newState.sessionState) {
-            newState.sessionState = {
-                LocationGroupTabOpen: null,
-                SketchIdInEdit: null,
-                dataHolderForCurrentOrderInEdit: null,
-                locationGroupInEdit: null,
-                orderIdInEdit: null,
-                pendingOrderIdInEdit: null,
-                isAnimationRunning: true,
-                locationMainInEdit: null
-            };
+
+            newState.sessionState = StoreUtils.defaultSessionState()
         }
         newState.sessionState = {...newState.sessionState};
         newState.sessionState.LocationGroupTabOpen = tabWasChosen;

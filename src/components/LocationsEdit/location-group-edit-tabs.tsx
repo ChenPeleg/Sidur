@@ -7,7 +7,7 @@ import {SidurStore} from '../../store/store.types';
 import {useDispatch, useSelector} from 'react-redux';
 import {ActionsTypes} from '../../store/types.actions';
 import {LocationsEdit} from './locations-edit';
-import {LocationsRoutesEditWrapper} from './locations-routes-edit-wrapper';
+import {LocationsRoutesEditWrapper} from '../LocationsEditRoutes/locations-routes-edit-wrapper';
 
 interface TabPanelProps {
     children?: React.ReactNode;
