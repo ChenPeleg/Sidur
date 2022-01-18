@@ -11,12 +11,14 @@ import TextField from '@mui/material/TextField';
 import {LocationChooseButton} from './location-choose-button';
 import Button from '@mui/material/Button';
 import {LocationRouteEdit, RouteEditAction} from './location-route-edit';
+import {LocationRouteChooseRoute} from './location-route-choose-route';
 
 export const LocationsRoutesEditWrapper = () => {
     const locationGroupInEditId = useSelector((state: SidurStore) => state.sessionState.locationGroupInEdit);
+    const routeIdInEdit = useSelector((state: SidurStore) => state.sessionState.routeIdInEdit);
     const locationGroups: LocationGroup[] = useSelector((state: { LocationGroups: LocationGroup[] }) => state.LocationGroups || []);
     const locationMainInEdit: string | null = useSelector((state: { sessionState: SessionModel }) => state.sessionState.locationMainInEdit);
-    const currentLocationGroup: LocationGroup | undefined = locationGroups.find(l => l.id === locationGroupInEditId)
+    const currentLocationGroup: LocationGroup | undefined = locationGroups.find(l => l.id === locationGroupInEditId) as LocationGroup
     const allLocations: LocationModel[] = currentLocationGroup?.Locations || [];
     const [filterLocationText, setFilterLocationText] = useState<string>('')
     const [filterRouteText, setFilterRouteText] = useState<string>('')
@@ -68,12 +70,24 @@ export const LocationsRoutesEditWrapper = () => {
         }
         setFilterRouteText(event.target.value);
     }
+    const routeClickedHandler = (routId: string) => {
+        if (routeIdInEdit !== routId) {
+            dispatch(
+                {
+                    type: ActionsTypes.START_EDIT_ROUTE,
+                    payload: {id: routId}
+                }
+            )
+        }
+    }
     const routeEditAction = (updatedRout: RouteModel, actionType: RouteEditAction) => {
 
     }
     const filteredLocations = filterLocationText.trim() === '' ? allLocations.filter(l => l) :
         allLocations.filter(l => l.name.includes(filterLocationText.trim()));
     filteredLocations.sort((a, b) => +a.id > +b.id ? -1 : 1)
+
+    const routInEdit: RouteModel | undefined = currentLocationGroup.Routes.find(r => r.id === routeIdInEdit);
     return (<Box sx={{...Styles.flexRow}}>
             <Box sx={{...Styles.flexCol}}>
                 <Box sx={{...Styles.flexRow}}>
@@ -133,10 +147,10 @@ export const LocationsRoutesEditWrapper = () => {
                         placeholder={translations.searchRoute}
                         type="text"
                         variant="standard"
-                        value={filterLocationText}
+                        value={filterRouteText}
                         onChange={(event) => {
 
-                            return handleFilterLocationValueChanged(event);
+                            return handleFilterRouteValueChanged(event);
                         }}
 
                     />
@@ -146,8 +160,21 @@ export const LocationsRoutesEditWrapper = () => {
                     height: '10px',
                     width: '20px'
                 }}/>
-                {currentLocationGroup?.Routes[0] ?
-                    <LocationRouteEdit route={currentLocationGroup.Routes[0]} routeEditActon={routeEditAction}/> : null}
+                {routInEdit ?
+                    <LocationRouteEdit route={routInEdit} routeEditActon={routeEditAction}/> : null}
+            </Box>
+            <Box sx={{...Styles.flexCol}}>
+                <Box sx={{
+                    mt: '1em',
+                    overflowY: 'auto',
+                    maxHeight: '50vh',
+                    direction: 'ltr'
+                }}>
+                    <Box sx={{direction: 'rtl'}} id={'routes-container'}>
+                        {currentLocationGroup.Routes.map((r: RouteModel) => (
+                            <LocationRouteChooseRoute key={r.id} route={r} routeClicked={routeClickedHandler}/>))}
+                    </Box>
+                </Box>
             </Box>
 
         </Box>

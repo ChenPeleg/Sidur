@@ -110,15 +110,15 @@ export const RouteReducer: Record<RouteReducerFunctions, (state: SidurStore, act
 
     [ActionsTypes.UPDATE_ROUTE]: (state: SidurStore, action: IAction): SidurStore => {
         let newState = {...state}
-        const locationToUpdate = action.payload;
+        const routeToUpdate = action.payload;
         // newState.sessionState.locationMainInEdit = locationId;
         const currentLocationGroupId = newState.sessionState.locationGroupInEdit;
         const currentLocationGroup: LocationGroup | undefined = newState.LocationGroups?.find(l => l.id === currentLocationGroupId);
-        if (currentLocationGroup && locationToUpdate) {
+        if (currentLocationGroup && routeToUpdate) {
             currentLocationGroup.Routes =
                 currentLocationGroup.Routes.map(l => {
-                    if (l.id === locationToUpdate.id) {
-                        return locationToUpdate
+                    if (l.id === routeToUpdate.id) {
+                        return routeToUpdate
                     }
                     return l
                 })
