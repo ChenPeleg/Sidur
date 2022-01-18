@@ -25,6 +25,7 @@ export const translations = {
     'searchLocation': 'חיפוש מיקום',
     'searchRoute': 'חיפוש מסלול נסיעה',
     'Route': 'מסלול נסיעה',
+    'newRoute': 'מסלול חדש',
     'PastHere': 'הדבק כאן את הטקסט',
     'NewSidur': 'סידור חדש',
     'ManageAllSidrurim': 'ניהול סידורים',

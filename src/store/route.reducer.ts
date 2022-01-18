@@ -3,7 +3,7 @@ import {StoreUtils} from './store-utils';
 import {ActionsTypes} from './types.actions';
 import {Utils} from '../services/utils';
 import {translations} from '../services/translations';
-import {LocationGroup, RouteModel} from '../models/Location.model';
+import {LocationGroup, LocationModel, RouteModel} from '../models/Location.model';
 
 export type RouteReducerFunctions =
     ActionsTypes.ADD_NEW_ROUTE
@@ -30,9 +30,11 @@ export const RouteReducer: Record<RouteReducerFunctions, (state: SidurStore, act
                 comments: '',
                 routStops: []
             }
+            newRoute.name = buildRouteName(newRoute, currentLocationGroup.Locations)
+
             currentLocationGroup.Routes = [...currentLocationGroup.Routes]
             currentLocationGroup.Routes.push(newRoute);
-
+            newState.sessionState.routeIdInEdit = newId;
             newState.LocationGroups = (newState.LocationGroups || []).map(g => {
                 if (g.id === currentLocationGroup.id) {
                     return currentLocationGroup
@@ -75,14 +77,14 @@ export const RouteReducer: Record<RouteReducerFunctions, (state: SidurStore, act
     },
     [ActionsTypes.START_EDIT_ROUTE]: (state: SidurStore, action: IAction): SidurStore => {
         let newState = {...state}
-        const locationId = action.payload.id
-        newState.sessionState.locationMainInEdit = locationId;
+        const routId = action.payload.id
+        newState.sessionState.locationMainInEdit = routId;
         const currentLocationGroupId = newState.sessionState.locationGroupInEdit;
         const currentLocationGroup: LocationGroup | undefined = newState.LocationGroups?.find(l => l.id === currentLocationGroupId);
         if (currentLocationGroup) {
-            const location = currentLocationGroup.Routes.find(l => l.id === locationId);
-            if (location) {
-                newState.sessionState.locationMainInEdit = locationId;
+            const route = currentLocationGroup.Routes.find(l => l.id === routId);
+            if (route) {
+                newState.sessionState.routeIdInEdit = routId;
 
             }
 
@@ -122,6 +124,7 @@ export const RouteReducer: Record<RouteReducerFunctions, (state: SidurStore, act
                     }
                     return l
                 })
+            newState.LocationGroups = newState.LocationGroups.map(lg => lg.id === currentLocationGroup.id ? currentLocationGroup : lg)
 
         }
 
@@ -131,12 +134,12 @@ export const RouteReducer: Record<RouteReducerFunctions, (state: SidurStore, act
 
     [ActionsTypes.DELETE_ROUTE]: (state: SidurStore, action: IAction): SidurStore => {
         let newState = {...state}
-        const locationToDeleteId = action.payload.id;
+        const routeToDeleteId = action.payload.id;
         const currentLocationGroupId = newState.sessionState.locationGroupInEdit;
         const currentLocationGroup: LocationGroup | undefined = newState.LocationGroups?.find(l => l.id === currentLocationGroupId);
         if (currentLocationGroup) {
             currentLocationGroup.Routes =
-                currentLocationGroup.Routes.filter(l => l.id !== locationToDeleteId);
+                currentLocationGroup.Routes.filter(l => l.id !== routeToDeleteId);
             newState.LocationGroups = newState.LocationGroups.map(l => l.id === currentLocationGroup.id ? currentLocationGroup : l)
         }
 
@@ -144,5 +147,29 @@ export const RouteReducer: Record<RouteReducerFunctions, (state: SidurStore, act
         return newState
     },
 
+
 }
+const buildRouteName = (route: RouteModel, locations: LocationModel[]): string => {
+    if (route.routStops.length === 0) {
+        return translations.newRoute + ' ' + route.id.toString();
+    } else if (route.routStops.length === 1) {
+
+        return translations.newRoute + ' ' + route.id.toString() + ' - ' + getLocationName(route.routStops[0].locationId, locations);
+    } else {
+        route.routStops.map(s => getLocationName(s.locationId, locations)).join(' - ')
+    }
+    return ''
+
+
+}
+const getLocationName = (id: string, locations: LocationModel[]): string => {
+    let name = ' ';
+    locations.forEach((l: LocationModel) => {
+        if (l.id === id) {
+            name = l.name;
+        }
+    })
+    return name
+}
+
 

@@ -2,7 +2,6 @@ import {Box, Card, IconButton} from '@mui/material';
 import {RouteModel} from '../../models/Location.model';
 import * as React from 'react';
 import {ActionsTypes} from '../../store/types.actions';
-import {SketchActionType} from '../../models/SketchMenuClickActionType.enum';
 import {useDispatch} from 'react-redux';
 import {RouteEditMenu} from './location-edite-route-menu';
 import {Edit} from '@mui/icons-material';
@@ -17,7 +16,7 @@ export enum RouteEditAction {
 
 interface LocationRouteEditProps {
     route: RouteModel,
-    routeEditActon: (route: RouteModel, actionType: RouteEditAction) => void
+
 }
 
 export const LocationRouteEdit = (props: LocationRouteEditProps) => {
@@ -36,16 +35,21 @@ export const LocationRouteEdit = (props: LocationRouteEditProps) => {
     const handleRouteMenuClose = () => {
         setRouteMoreAnchorEl(null);
     };
-    const handleRouteMenuClick = (event: React.MouseEvent<HTMLElement>, clickAction: SketchActionType) => {
-        setRouteMoreAnchorEl(null)
+    const handleRouteMenuClick = (event: React.MouseEvent<HTMLElement>, clickAction: RouteEditAction) => {
+        setRouteMoreAnchorEl(null);
+
         switch (clickAction) {
-            case SketchActionType.Archive:
+
+            case RouteEditAction.CloneRoute:
                 break;
-            case SketchActionType.CreateNew:
+            case RouteEditAction.DeleteRoute:
+                dispatch({
+                    type: ActionsTypes.DELETE_ROUTE,
+                    payload: {id: props.route.id}
+                })
                 break;
-            case SketchActionType.Delete:
-                break;
-            case SketchActionType.Rename:
+
+            case RouteEditAction.RenameRoute:
                 setRenameOpen(true)
                 break;
             default:
