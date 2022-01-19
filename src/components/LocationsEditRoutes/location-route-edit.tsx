@@ -1,11 +1,14 @@
-import {Box, Card, IconButton} from '@mui/material';
-import {RouteModel} from '../../models/Location.model';
+import {Box, Card, IconButton, Select, SelectChangeEvent} from '@mui/material';
+import {LocationModel, RouteModel, RoutStopModel} from '../../models/Location.model';
 import * as React from 'react';
 import {ActionsTypes} from '../../store/types.actions';
 import {useDispatch} from 'react-redux';
 import {RouteEditMenu} from './location-edite-route-menu';
-import {Edit} from '@mui/icons-material';
+import {ArrowBack, Edit} from '@mui/icons-material';
 import {RenameDialog} from '../Dialogs/rename-dialog';
+import {ConfigService} from '../../services/config-service';
+import MenuItem from '@mui/material/MenuItem';
+import {translations} from '../../services/translations';
 
 export enum RouteEditAction {
     RenameRoute = 1,
@@ -14,11 +17,18 @@ export enum RouteEditAction {
     EditRoute = 4
 }
 
+interface Stops extends RoutStopModel {
+    locationName: string,
+    minuetsFromLastCode: number
+}
+
 interface LocationRouteEditProps {
     route: RouteModel,
+    allLocations: LocationModel[]
 
 }
 
+//const routStops
 export const LocationRouteEdit = (props: LocationRouteEditProps) => {
     const dispatch = useDispatch();
 
@@ -70,6 +80,31 @@ export const LocationRouteEdit = (props: LocationRouteEditProps) => {
             })
         }
     };
+    const allStops: Stops[] = props.route.routStops.map((r: RoutStopModel) => {
+        const location = props.allLocations.find(l => l.id === r.locationId)
+
+        if (location) {
+            const stop: Stops = {
+                ...r,
+                locationName: location.name,
+                minuetsFromLastCode: 30
+
+            }
+            return stop
+
+        } else {
+            return null
+        }
+    }).filter(s => s) as Stops[];
+    const minutesFromLastOptions = ConfigService.Constants.RoutesMinutesOptions.map(value => ({
+        value: value,
+        text: value.toString() + ' ' + translations.min  //+ ' ' + translations.Nesia
+    }));
+
+    const handleDriveLengthChanged = (event: SelectChangeEvent<any>, child: React.ReactNode): void => {
+
+    }
+
     return (
         <Box>
             <Card sx={{
@@ -87,6 +122,52 @@ export const LocationRouteEdit = (props: LocationRouteEditProps) => {
                         onClick={handleRouteMenuOpen}
                         color="inherit"
                     ><Edit fontSize={'small'}/></IconButton>
+                </Box>
+                <Box sx={{
+                    pr: '1em',
+                    pl: '1em',
+                    flex: 'row',
+                    flexWrap: 'wrap'
+                }}>
+                    {allStops.map((stop: Stops) => (<Box sx={{
+                        display: 'inline',
+                        p: '0.1em',
+                    }}>
+
+                        {
+                            stop.locationName
+                        }
+                        <Box sx={{
+                            width: '15px',
+                            height: '5px',
+                            display: 'inline-flex'
+                        }}/>
+                        <ArrowBack sx={{mb: '-5px'}} fontSize={'small'}/>
+                        <Select disableUnderline={true} variant={'standard'} value={stop.minuetsFromLastCode}
+                                sx={{
+                                    //  color: 'black',
+                                    //  fontSize: '1.25rem',
+                                    fontWeight: 'normal'
+                                }}
+                                onChange={(event: SelectChangeEvent<any>, child: React.ReactNode) => {
+                                    handleDriveLengthChanged(event, child)
+                                }}>
+                            {minutesFromLastOptions.map((option) => <MenuItem key={option.value}
+                                                                              value={option.value}>&nbsp; {option.text}  </MenuItem>)}
+                        </Select>
+                        <Box sx={{
+                            width: '15px',
+                            height: '5px',
+                            display: 'inline-flex'
+                        }}/>
+                        <ArrowBack sx={{mb: '-5px'}} fontSize={'small'}/>
+                        <Box sx={{
+                            width: '15px',
+                            height: '5px',
+                            display: 'inline-flex'
+                        }}/>
+
+                    </Box>))}
                 </Box>
 
             </Card>

@@ -33,10 +33,10 @@ export const LocationsRoutesEditWrapper = () => {
             type: ActionsTypes.ADD_NEW_ROUTE
         })
     }
-    const handleAddLocationToRoute = (updatedLocation: LocationModel) => {
+    const handleAddLocationToRoute = (location: LocationModel) => {
         dispatch({
             type: ActionsTypes.ADD_LOCATION_TO_ROUTE,
-            payload: updatedLocation
+            payload: location
         })
     }
     const handleFilterLocationValueChanged = (event: any) => {
@@ -142,7 +142,7 @@ export const LocationsRoutesEditWrapper = () => {
                     width: '20px'
                 }}/>
                 {routInEdit ?
-                    <LocationRouteEdit route={routInEdit}/> : null}
+                    <LocationRouteEdit allLocations={allLocations} route={routInEdit}/> : null}
             </Box>
             <Box sx={{...Styles.flexCol}}>
                 <Box sx={{

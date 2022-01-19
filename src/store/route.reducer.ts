@@ -3,7 +3,7 @@ import {StoreUtils} from './store-utils';
 import {ActionsTypes} from './types.actions';
 import {Utils} from '../services/utils';
 import {translations} from '../services/translations';
-import {LocationGroup, LocationModel, RouteModel} from '../models/Location.model';
+import {LocationGroup, LocationModel, RouteModel, RoutStopModel} from '../models/Location.model';
 
 export type RouteReducerFunctions =
     ActionsTypes.ADD_NEW_ROUTE
@@ -49,26 +49,35 @@ export const RouteReducer: Record<RouteReducerFunctions, (state: SidurStore, act
     },
     [ActionsTypes.ADD_LOCATION_TO_ROUTE]: (state: SidurStore, action: IAction): SidurStore => {
         let newState = {...state}
+        const locationToAdd = action.payload;
         const currentLocationGroupId = newState.sessionState.locationGroupInEdit;
         const currentLocationGroup: LocationGroup | undefined = newState.LocationGroups?.find(l => l.id === currentLocationGroupId);
-        if (currentLocationGroup) {
-            const newId = Utils.getNextId(currentLocationGroup.Routes.map(l => l.id))
-            const name = translations.Route + ' ' + newId.toString();
-            const newRoute: RouteModel = {
-                name: name,
-                id: newId,
-                comments: '',
-                routStops: []
-            }
-            currentLocationGroup.Routes = [...currentLocationGroup.Routes]
-            currentLocationGroup.Routes.push(newRoute);
+        if (currentLocationGroup && locationToAdd) {
+            const routeIdInEdit = newState.sessionState.routeIdInEdit;
+            const routeInEdit: RouteModel | undefined = currentLocationGroup.Routes.find(r => r.id === routeIdInEdit);
+            if (routeInEdit) {
+                const allPositions = routeInEdit.routStops.map(s => s.position);
+                allPositions.push(0)
+                const maxPosition = Math.max(...allPositions)
 
-            newState.LocationGroups = (newState.LocationGroups || []).map(g => {
-                if (g.id === currentLocationGroup.id) {
-                    return currentLocationGroup
+                const routeStop: RoutStopModel = {
+                    locationId: locationToAdd.id,
+                    minuetsFromLast: 20,
+                    position: maxPosition + 1
                 }
-                return g
-            })
+                routeInEdit.routStops.push(routeStop)
+                currentLocationGroup.Routes = currentLocationGroup.Routes.map(r => r.id === routeInEdit.id ? routeInEdit : r);
+                
+                newState.LocationGroups = (newState.LocationGroups || []).map(g => {
+                    if (g.id === currentLocationGroup.id) {
+                        return currentLocationGroup
+                    }
+                    return g
+                })
+            }
+            // currentLocationGroup.Routes.push(newRoute);
+
+
         }
 
 
