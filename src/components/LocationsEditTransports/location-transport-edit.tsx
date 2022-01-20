@@ -3,12 +3,13 @@ import {LocationModel, RoadStopModel, RouteModel} from '../../models/Location.mo
 import * as React from 'react';
 import {ActionsTypes} from '../../store/types.actions';
 import {useDispatch} from 'react-redux';
-import {RouteTransportEditMenu} from '../LocationsEdit/location-edit-transport-route-menu';
+
 import {ArrowBack, Delete, Edit} from '@mui/icons-material';
 import {RenameDialog} from '../Dialogs/rename-dialog';
 import {ConfigService} from '../../services/config-service';
 import MenuItem from '@mui/material/MenuItem';
 import {translations} from '../../services/translations';
+import {RouteTransportEditMenu} from '../LocationsEdit/location-edit-transport-route-menu';
 
 export enum RouteOrTransEditAction {
     RenameRoute = 1,
@@ -29,7 +30,7 @@ interface LocationRouteEditProps {
 }
 
 //const routStops
-export const LocationRouteEdit = (props: LocationRouteEditProps) => {
+export const LocationTransportEdit = (props: LocationRouteEditProps) => {
     const dispatch = useDispatch();
 
     const [RenameOpen, setRenameOpen] = React.useState(false);

@@ -10,10 +10,10 @@ import {Styles} from '../../hoc/themes';
 import TextField from '@mui/material/TextField';
 import {LocationChooseButton} from '../LocationsEdit/location-choose-button';
 import Button from '@mui/material/Button';
-import {LocationRouteEdit} from './location-route-edit';
+import {LocationTransportEdit} from './location-transport-edit';
 import {LocationRouteTransportChoose} from '../LocationsEdit/location-route-transport-choose';
 
-export const LocationsRoutesEditWrapper = () => {
+export const LocationsTransportEditWrapper = () => {
     const locationGroupInEditId = useSelector((state: SidurStore) => state.sessionState.locationGroupInEdit);
     const routeIdInEdit = useSelector((state: SidurStore) => state.sessionState.routeIdInEdit);
     const locationGroups: LocationGroup[] = useSelector((state: { LocationGroups: LocationGroup[] }) => state.LocationGroups || []);
@@ -145,7 +145,7 @@ export const LocationsRoutesEditWrapper = () => {
                     width: '20px'
                 }}/>
                 {routInEdit ?
-                    <LocationRouteEdit allLocations={allLocations} route={routInEdit}/> : null}
+                    <LocationTransportEdit allLocations={allLocations} route={routInEdit}/> : null}
             </Box>
             <Box sx={{...Styles.flexCol}}>
                 <Box sx={{

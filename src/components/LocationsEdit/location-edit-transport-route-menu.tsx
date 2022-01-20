@@ -3,7 +3,7 @@ import MenuItem from '@mui/material/MenuItem';
 import * as React from 'react';
 import {Delete, DriveFileRenameOutline, FileCopy} from '@mui/icons-material';
 import {translations} from '../../services/translations';
-import {RouteEditAction} from './location-route-edit';
+import {RouteOrTransEditAction} from '../LocationsEditRoutes/location-route-edit';
 
 
 interface LocationEditMenuProps {
@@ -14,7 +14,7 @@ interface LocationEditMenuProps {
     handleRouteMenuClose: () => void
 }
 
-export const RouteEditMenu = (props: LocationEditMenuProps) => {
+export const RouteTransportEditMenu = (props: LocationEditMenuProps) => {
     const {
         routeMoreAnchorEl,
         routeMenuId,
@@ -39,17 +39,17 @@ export const RouteEditMenu = (props: LocationEditMenuProps) => {
             onClose={handleRouteMenuClose}
         >
 
-            <MenuItem onClick={(e) => handleRouteMenuClick(e, RouteEditAction.RenameRoute)}>
+            <MenuItem onClick={(e) => handleRouteMenuClick(e, RouteOrTransEditAction.RenameRoute)}>
 
                 <DriveFileRenameOutline/>&nbsp;
                 {translations.Rename}
             </MenuItem>
-            <MenuItem onClick={(e) => handleRouteMenuClick(e, RouteEditAction.DeleteRoute)}>
+            <MenuItem onClick={(e) => handleRouteMenuClick(e, RouteOrTransEditAction.DeleteRoute)}>
 
                 <Delete/>&nbsp;
                 {translations.Delete}
             </MenuItem>
-            <MenuItem onClick={(e) => handleRouteMenuClick(e, RouteEditAction.CloneRoute)}>
+            <MenuItem onClick={(e) => handleRouteMenuClick(e, RouteOrTransEditAction.CloneRoute)}>
 
                 <FileCopy/>&nbsp;
                 {translations.CreateCopy}

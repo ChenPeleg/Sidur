@@ -1,15 +1,15 @@
 import {Box, Card} from '@mui/material';
-import {RouteModel} from '../../models/Location.model';
+import {RouteModel, TransportModel} from '../../models/Location.model';
 import * as React from 'react';
 import {useState} from 'react';
 
 
 interface LocationRouteChooseRouteEditProps {
-    route: RouteModel,
+    route: RouteModel | TransportModel
     routeClicked: (routeId: string) => void
 }
 
-export const LocationRouteChooseRoute = (props: LocationRouteChooseRouteEditProps) => {
+export const LocationRouteTransportChoose = (props: LocationRouteChooseRouteEditProps) => {
 
     const [inHover, setInHover] = useState(false);
 
@@ -29,8 +29,6 @@ export const LocationRouteChooseRoute = (props: LocationRouteChooseRouteEditProp
             }} onClick={() => props.routeClicked(props.route.id)}
                   onMouseOver={onMouseOver}
                   onMouseOut={onMouseOut} elevation={inHover ? 6 : 2}>
-
-
                 {props.route.name}
             </Card>
 
