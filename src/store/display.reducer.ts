@@ -17,7 +17,7 @@ export const DisplayReducer: Record<DisplayReducerFunctions, (state: SidurStore,
         let newState = {...state}
         newState.sessionState = {...newState.sessionState};
         newState.sessionState.isAnimationRunning = false;
-        console.log('stop')
+     
         return newState
     },
     [ActionsTypes.START_LOADING_ANIMATION]: (state: SidurStore, action: IAction): SidurStore => {

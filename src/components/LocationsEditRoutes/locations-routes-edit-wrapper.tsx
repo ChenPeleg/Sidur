@@ -59,8 +59,12 @@ export const LocationsRoutesEditWrapper = () => {
         }
     }
 
-    const filteredLocations = filterLocationText.trim() === '' ? allLocations.filter(l => l) :
+    const routInEdit: RouteModel | undefined = currentLocationGroup.Routes.find(r => r.id === routeIdInEdit);
+    const filteredLocationsBeforeRouteCalc = filterLocationText.trim() === '' ? allLocations.filter(l => l) :
         allLocations.filter(l => l.name.includes(filterLocationText.trim()));
+    const routInEditLocations: string [] = routInEdit ? routInEdit.routStops.map(rs => rs.locationId) : [];
+
+    const filteredLocations = filteredLocationsBeforeRouteCalc.filter(l => !routInEditLocations.includes(l.id));
     filteredLocations.sort((a, b) => +a.id > +b.id ? -1 : 1)
 
 
@@ -68,7 +72,6 @@ export const LocationsRoutesEditWrapper = () => {
         allRoutes.filter(l => l.name.includes(filterRouteText.trim()));
     filteredRoutes.sort((a, b) => +a.id > +b.id ? -1 : 1)
 
-    const routInEdit: RouteModel | undefined = currentLocationGroup.Routes.find(r => r.id === routeIdInEdit);
     return (<Box sx={{...Styles.flexRow}}>
             <Box sx={{...Styles.flexCol}}>
                 <Box sx={{...Styles.flexRow}}>

@@ -8,13 +8,11 @@ export interface LocationModel {
 export interface TransportModel {
     id: string,
     name: string,
-    destinationId: string,
-    busStopLocationId: string,
-    hours: string[]
-
+    comments: string,
+    TransportStops: RoadStopModel[]
 }
 
-export interface RoutStopModel {
+export interface RoadStopModel {
     locationId: string,
     minuetsFromLast: number,
     position: number
@@ -24,7 +22,7 @@ export interface RouteModel {
     id: string,
     name: string,
     comments: string,
-    routStops: RoutStopModel[]
+    routStops: RoadStopModel[]
 }
 
 export interface LocationGroup {

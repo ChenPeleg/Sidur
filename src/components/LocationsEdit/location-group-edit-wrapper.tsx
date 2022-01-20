@@ -88,7 +88,6 @@ export const LocationGroupEditWrapper = () => {
 
 
     }
-    console.log(locationGroupInEditId)
     const handleCreateLocationGroup = () => {
         dispatch({
             type: ActionsTypes.NEW_LOCATION_GROUP,

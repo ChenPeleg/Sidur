@@ -1,5 +1,5 @@
 import {Box, Card, IconButton, Select, SelectChangeEvent} from '@mui/material';
-import {LocationModel, RouteModel, RoutStopModel} from '../../models/Location.model';
+import {LocationModel, RoadStopModel, RouteModel} from '../../models/Location.model';
 import * as React from 'react';
 import {ActionsTypes} from '../../store/types.actions';
 import {useDispatch} from 'react-redux';
@@ -17,7 +17,7 @@ export enum RouteEditAction {
     EditRoute = 4
 }
 
-interface StopModel extends RoutStopModel {
+interface StopModel extends RoadStopModel {
     locationName: string,
     minuetsFromLastCode: number
 }
@@ -51,7 +51,12 @@ export const LocationRouteEdit = (props: LocationRouteEditProps) => {
         switch (clickAction) {
 
             case RouteEditAction.CloneRoute:
+                dispatch({
+                    type: ActionsTypes.CLONE_ROUTE,
+                    payload: {id: props.route.id}
+                })
                 break;
+
             case RouteEditAction.DeleteRoute:
                 dispatch({
                     type: ActionsTypes.DELETE_ROUTE,
@@ -80,7 +85,7 @@ export const LocationRouteEdit = (props: LocationRouteEditProps) => {
             })
         }
     };
-    const allStops: StopModel[] = props.route.routStops.map((r: RoutStopModel) => {
+    const allStops: StopModel[] = props.route.routStops.map((r: RoadStopModel) => {
         const location = props.allLocations.find(l => l.id === r.locationId)
 
         if (location) {
@@ -102,6 +107,7 @@ export const LocationRouteEdit = (props: LocationRouteEditProps) => {
     }));
     const handleRemoveLast = (event: any) => {
         const updatedRout = {...props.route}
+        updatedRout.routStops = [...updatedRout.routStops]
         updatedRout.routStops.pop();
         dispatch({
             type: ActionsTypes.UPDATE_ROUTE,
@@ -126,7 +132,7 @@ export const LocationRouteEdit = (props: LocationRouteEditProps) => {
         })
     }
     const isLongRoute: boolean = allStops?.length > 5
-    console.dir(allStops)
+
     return (
         <Box>
             <Card sx={{

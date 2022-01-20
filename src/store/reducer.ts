@@ -50,7 +50,7 @@ const buildInintialState = (): SidurStore => {
         initialState.LocationGroups.push(StoreUtils.defaultEshbalLocationGroup());
     }
     //defaultInitialState;
-    console.log(initialState);
+
     return initialState;
 }
 
@@ -148,6 +148,7 @@ const reducer = (state: SidurStore = initialState, action: IAction) => {
         case ActionsTypes.UPDATE_ROUTE:
         case ActionsTypes.DELETE_ROUTE:
         case ActionsTypes.ADD_LOCATION_TO_ROUTE:
+        case ActionsTypes.CLONE_ROUTE:
 
             return RouteReducer [action.type](newState, action)
 

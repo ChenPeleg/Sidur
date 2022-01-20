@@ -93,7 +93,6 @@ const MaterialUiForm = (muiFormProps: MuiFormPropsModel) => {
         display: isAdvanced ? 'initial' : 'none'
     }
     const driveTimelanguage = LanguageUtilities.getPrefixByDriveType(typeOfDrive)
-    //console.log(typeOfDrive, driveTimelanguage.location)
     return (
 
         <form onSubmit={(...args) => submitting(...args)} dir={'rtl'}>
