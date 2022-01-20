@@ -4,7 +4,7 @@ import * as React from 'react';
 import {ActionsTypes} from '../../store/types.actions';
 import {useDispatch} from 'react-redux';
 import {RouteEditMenu} from './location-edite-route-menu';
-import {ArrowBack, Edit} from '@mui/icons-material';
+import {ArrowBack, Delete, Edit} from '@mui/icons-material';
 import {RenameDialog} from '../Dialogs/rename-dialog';
 import {ConfigService} from '../../services/config-service';
 import MenuItem from '@mui/material/MenuItem';
@@ -17,7 +17,7 @@ export enum RouteEditAction {
     EditRoute = 4
 }
 
-interface Stops extends RoutStopModel {
+interface StopModel extends RoutStopModel {
     locationName: string,
     minuetsFromLastCode: number
 }
@@ -80,14 +80,14 @@ export const LocationRouteEdit = (props: LocationRouteEditProps) => {
             })
         }
     };
-    const allStops: Stops[] = props.route.routStops.map((r: RoutStopModel) => {
+    const allStops: StopModel[] = props.route.routStops.map((r: RoutStopModel) => {
         const location = props.allLocations.find(l => l.id === r.locationId)
 
         if (location) {
-            const stop: Stops = {
+            const stop: StopModel = {
                 ...r,
                 locationName: location.name,
-                minuetsFromLastCode: 30
+                minuetsFromLastCode: r.minuetsFromLast || 30
 
             }
             return stop
@@ -95,16 +95,38 @@ export const LocationRouteEdit = (props: LocationRouteEditProps) => {
         } else {
             return null
         }
-    }).filter(s => s) as Stops[];
+    }).filter(s => s) as StopModel[];
     const minutesFromLastOptions = ConfigService.Constants.RoutesMinutesOptions.map(value => ({
         value: value,
         text: value.toString() + ' ' + translations.min  //+ ' ' + translations.Nesia
     }));
-
-    const handleDriveLengthChanged = (event: SelectChangeEvent<any>, child: React.ReactNode): void => {
-
+    const handleRemoveLast = (event: any) => {
+        const updatedRout = {...props.route}
+        updatedRout.routStops.pop();
+        dispatch({
+            type: ActionsTypes.UPDATE_ROUTE,
+            payload: updatedRout
+        })
     }
+    const handleDriveLengthChanged = (event: SelectChangeEvent<any>, stop: StopModel): void => {
+        const updatedRout = {...props.route}
+        // const updatedValue = minutesFromLastOptions.find(o => o.value === event.target.value)
 
+        updatedRout.routStops = updatedRout.routStops.map(s => {
+            if (s.locationId === stop.locationId) {
+                const newStop = {...s};
+                newStop.minuetsFromLast = event.target.value;
+                return newStop
+            }
+            return s
+        })
+        dispatch({
+            type: ActionsTypes.UPDATE_ROUTE,
+            payload: updatedRout
+        })
+    }
+    const isLongRoute: boolean = allStops?.length > 5
+    console.dir(allStops)
     return (
         <Box>
             <Card sx={{
@@ -112,7 +134,8 @@ export const LocationRouteEdit = (props: LocationRouteEditProps) => {
                 height: '300px'
             }}>
                 <Box sx={{
-                    m: '1em'
+                    m: '1em',
+                    mb: '0px'
                 }}> <b>{props.route.name}</b>
                     <IconButton
                         size="small"
@@ -127,45 +150,57 @@ export const LocationRouteEdit = (props: LocationRouteEditProps) => {
                     pr: '1em',
                     pl: '1em',
                     flex: 'row',
+
                     flexWrap: 'wrap'
                 }}>
-                    {allStops.map((stop: Stops) => (<Box sx={{
-                        display: 'inline',
+                    {allStops.map((stop: StopModel, i: number) => (<Box sx={{
+                        display: isLongRoute ? 'inline' : 'block',
                         p: '0.1em',
+
                     }}>
 
-                        {
-                            stop.locationName
-                        }
-                        <Box sx={{
-                            width: '15px',
-                            height: '5px',
-                            display: 'inline-flex'
-                        }}/>
-                        <ArrowBack sx={{mb: '-5px'}} fontSize={'small'}/>
-                        <Select disableUnderline={true} variant={'standard'} value={stop.minuetsFromLastCode}
-                                sx={{
-                                    //  color: 'black',
-                                    //  fontSize: '1.25rem',
-                                    fontWeight: 'normal'
-                                }}
-                                onChange={(event: SelectChangeEvent<any>, child: React.ReactNode) => {
-                                    handleDriveLengthChanged(event, child)
-                                }}>
+
+                        {i > 0 ? <><Select disableUnderline={true} variant={'standard'} value={stop.minuetsFromLastCode}
+                                           sx={{
+                                               //  color: 'black',
+                                               //  fontSize: '1.25rem',
+                                               fontWeight: 'normal'
+                                           }}
+                                           onChange={(event: SelectChangeEvent<any>, child: React.ReactNode) => {
+                                               handleDriveLengthChanged(event, stop)
+                                           }}>
                             {minutesFromLastOptions.map((option) => <MenuItem key={option.value}
-                                                                              value={option.value}>&nbsp; {option.text}  </MenuItem>)}
-                        </Select>
-                        <Box sx={{
-                            width: '15px',
+                                                                              value={option.value}> {option.text}  &nbsp;&nbsp; </MenuItem>)}
+                        </Select> <Box sx={{
+                            width: isLongRoute ? '15px' : '5px',
                             height: '5px',
                             display: 'inline-flex'
                         }}/>
-                        <ArrowBack sx={{mb: '-5px'}} fontSize={'small'}/>
+                            <ArrowBack sx={{mb: '-5px'}} fontSize={'small'}/>
+                            <Box sx={{
+                                width: '15px',
+                                height: '5px',
+                                display: 'inline-flex'
+                            }}/></> : null}
+                        <Card sx={{
+                            maxWidth: '100px',
+                            display: 'inline-flex',
+                            p: '4px'
+                        }}>{
+                            stop.locationName
+                        } </Card>
+
+
                         <Box sx={{
                             width: '15px',
                             height: '5px',
-                            display: 'inline-flex'
+                            display: 'inline-flex',
+                            mb: isLongRoute ? '1.3em' : '1.6em'
                         }}/>
+                        {i + 1 === allStops.length ? <IconButton size="small"
+                                                                 onClick={handleRemoveLast}
+                                                                 color="inherit"
+                        ><Delete fontSize={'small'}/> </IconButton> : <ArrowBack sx={{mb: '-5px'}} fontSize={'small'}/>}
 
                     </Box>))}
                 </Box>
