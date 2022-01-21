@@ -40,7 +40,7 @@ export const LocationRouteEdit = (props: LocationRouteEditProps) => {
     const handleRouteMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
         setRouteMoreAnchorEl(event.currentTarget);
     };
-    const sketchMenuId = 'primary-route-menu';
+    const sketchMenuId = 'primary-transportRoute-menu';
 
     const handleRouteMenuClose = () => {
         setRouteMoreAnchorEl(null);

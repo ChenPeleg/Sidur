@@ -1,5 +1,5 @@
 import {Box, Card, IconButton, Select, SelectChangeEvent} from '@mui/material';
-import {LocationModel, RoadStopModel, RouteModel} from '../../models/Location.model';
+import {LocationModel, RoadStopModel, TransportModel} from '../../models/Location.model';
 import * as React from 'react';
 import {ActionsTypes} from '../../store/types.actions';
 import {useDispatch} from 'react-redux';
@@ -10,6 +10,8 @@ import {ConfigService} from '../../services/config-service';
 import MenuItem from '@mui/material/MenuItem';
 import {translations} from '../../services/translations';
 import {RouteTransportEditMenu} from '../LocationsEdit/location-edit-transport-route-menu';
+import Button from '@mui/material/Button';
+import {TransportScheduleDialog} from '../Dialogs/transport-schedual-dialog';
 
 export enum RouteOrTransEditAction {
     RenameRoute = 1,
@@ -24,16 +26,18 @@ interface StopModel extends RoadStopModel {
 }
 
 interface LocationRouteEditProps {
-    route: RouteModel,
+    transportRoute: TransportModel,
     allLocations: LocationModel[]
 
 }
 
-//const routStops
+const maxHoursToSHow = 7;
+//const TransportStops
 export const LocationTransportEdit = (props: LocationRouteEditProps) => {
     const dispatch = useDispatch();
 
     const [RenameOpen, setRenameOpen] = React.useState(false);
+    const [scheduleOpen, setScheduleOpen] = React.useState(true);
     const [routeMoreAnchorEl, setRouteMoreAnchorEl] =
         React.useState<null | HTMLElement>(null);
     const isRouteMenuOpen = Boolean(routeMoreAnchorEl);
@@ -42,7 +46,9 @@ export const LocationTransportEdit = (props: LocationRouteEditProps) => {
         setRouteMoreAnchorEl(event.currentTarget);
     };
     const sketchMenuId = 'primary-transport-menu';
-
+    const handleEditTransportTimes = (event: any) => {
+        setScheduleOpen(true)
+    }
     const handleRouteMenuClose = () => {
         setRouteMoreAnchorEl(null);
     };
@@ -54,14 +60,14 @@ export const LocationTransportEdit = (props: LocationRouteEditProps) => {
             case RouteOrTransEditAction.CloneRoute:
                 dispatch({
                     type: ActionsTypes.CLONE_TRANSPORT,
-                    payload: {id: props.route.id}
+                    payload: {id: props.transportRoute.id}
                 })
                 break;
 
             case RouteOrTransEditAction.DeleteRoute:
                 dispatch({
                     type: ActionsTypes.DELETE_TRANSPORT,
-                    payload: {id: props.route.id}
+                    payload: {id: props.transportRoute.id}
                 })
                 break;
 
@@ -73,12 +79,22 @@ export const LocationTransportEdit = (props: LocationRouteEditProps) => {
         }
 
     }
-
+    const handleScheduleClose = (value: any) => {
+        setScheduleOpen(false)
+        if (value && value.length) {
+            const updatedRout = {...props.transportRoute}
+            updatedRout.TransportTime = value;
+            dispatch({
+                type: ActionsTypes.UPDATE_TRANSPORT,
+                payload: updatedRout
+            })
+        }
+    }
     const handleRenameClose = (value: string | null) => {
         setRenameOpen(false);
-        const id = props.route.id;
+        const id = props.transportRoute.id;
         if (value) {
-            const updatedRout = {...props.route}
+            const updatedRout = {...props.transportRoute}
             updatedRout.name = value;
             dispatch({
                 type: ActionsTypes.UPDATE_TRANSPORT,
@@ -86,7 +102,7 @@ export const LocationTransportEdit = (props: LocationRouteEditProps) => {
             })
         }
     };
-    const allStops: StopModel[] = props.route.routStops.map((r: RoadStopModel) => {
+    const allStops: StopModel[] = props.transportRoute.TransportStops.map((r: RoadStopModel) => {
         const location = props.allLocations.find(l => l.id === r.locationId)
 
         if (location) {
@@ -107,19 +123,19 @@ export const LocationTransportEdit = (props: LocationRouteEditProps) => {
         text: value.toString() + ' ' + translations.min  //+ ' ' + translations.Nesia
     }));
     const handleRemoveLast = (event: any) => {
-        const updatedRout = {...props.route}
-        updatedRout.routStops = [...updatedRout.routStops]
-        updatedRout.routStops.pop();
+        const updatedRout = {...props.transportRoute}
+        updatedRout.TransportStops = [...updatedRout.TransportStops]
+        updatedRout.TransportStops.pop();
         dispatch({
             type: ActionsTypes.UPDATE_TRANSPORT,
             payload: updatedRout
         })
     }
     const handleDriveLengthChanged = (event: SelectChangeEvent<any>, stop: StopModel): void => {
-        const updatedRout = {...props.route}
+        const updatedRout = {...props.transportRoute}
         // const updatedValue = minutesFromLastOptions.find(o => o.value === event.target.value)
 
-        updatedRout.routStops = updatedRout.routStops.map(s => {
+        updatedRout.TransportStops = updatedRout.TransportStops.map(s => {
             if (s.locationId === stop.locationId) {
                 const newStop = {...s};
                 newStop.minuetsFromLast = event.target.value;
@@ -133,96 +149,139 @@ export const LocationTransportEdit = (props: LocationRouteEditProps) => {
         })
     }
     const isLongRoute: boolean = allStops?.length > 5
+    const timeTableBrief = props.transportRoute.TransportTime?.filter((t, i) => i < maxHoursToSHow ? t : '') || [];
 
     return (
         <Box>
             <Card sx={{
-                width: '400px',
-                height: '300px'
+
+                height: '300px',
+                display: 'flex',
+                flexDirection: 'row'
             }}>
                 <Box sx={{
-                    m: '1em',
-                    mb: '0px'
-                }}> <b>{props.route.name}</b>
-                    <IconButton
-                        size="small"
-                        aria-label="show more"
-                        aria-controls={sketchMenuId}
-                        aria-haspopup="true"
-                        onClick={handleRouteMenuOpen}
-                        color="inherit"
-                    ><Edit fontSize={'small'}/></IconButton>
-                </Box>
-                <Box sx={{
-                    pr: '1em',
-                    pl: '1em',
-                    flex: 'row',
-
-                    flexWrap: 'wrap'
+                    width: '400px',
+                    display: 'flex',
+                    flexDirection: 'column'
                 }}>
+                    <Box sx={{
+                        m: '1em',
+                        mb: '0px'
+                    }}> <b>{props.transportRoute.name}</b>
+                        <IconButton
+                            size="small"
+                            aria-label="show more"
+                            aria-controls={sketchMenuId}
+                            aria-haspopup="true"
+                            onClick={handleRouteMenuOpen}
+                            color="inherit"
+                        ><Edit fontSize={'small'}/></IconButton>
+                    </Box>
+                    <Box sx={{
+                        pr: '1em',
+                        pl: '1em',
+                        flex: 'row',
 
-                    {allStops.map((stop: StopModel, i: number) => (<Box sx={{
-                        display: isLongRoute ? 'inline' : 'block',
-                        p: '0.1em',
-
+                        flexWrap: 'wrap'
                     }}>
 
+                        {allStops.map((stop: StopModel, i: number) => (<Box sx={{
+                            display: isLongRoute ? 'inline' : 'block',
+                            p: '0.1em',
 
-                        {i > 0 ? <><Select disableUnderline={true} variant={'standard'} value={stop.minuetsFromLastCode}
-                                           sx={{
-                                               //  color: 'black',
-                                               //  fontSize: '1.25rem',
-                                               fontWeight: 'normal'
-                                           }}
-                                           onChange={(event: SelectChangeEvent<any>, child: React.ReactNode) => {
-                                               handleDriveLengthChanged(event, stop)
-                                           }}>
-                            {minutesFromLastOptions.map((option) => <MenuItem key={option.value}
-                                                                              value={option.value}> {option.text}  &nbsp;&nbsp; </MenuItem>)}
-                        </Select> <Box sx={{
-                            width: isLongRoute ? '15px' : '5px',
-                            height: '5px',
-                            display: 'inline-flex'
-                        }}/>
-                         
-                        </> : null}
-                        {i === 0 ? <DirectionsBusFilled sx={{mb: '-5px'}} fontSize={'small'}/> :
-                            <LocationOn sx={{mb: '-5px'}} fontSize={'small'}/>}
-                        <Box sx={{
-                            width: '15px',
-                            height: '5px',
-                            display: 'inline-flex'
-                        }}/>
+                        }}>
 
 
-                        <Card sx={{
-                            maxWidth: '100px',
-                            display: 'inline-flex',
-                            p: '4px'
-                        }}>{
-                            stop.locationName
-                        } </Card>
+                            {i > 0 ? <><Select disableUnderline={true} variant={'standard'} value={stop.minuetsFromLastCode}
+                                               sx={{
+                                                   //  color: 'black',
+                                                   //  fontSize: '1.25rem',
+                                                   fontWeight: 'normal'
+                                               }}
+                                               onChange={(event: SelectChangeEvent<any>, child: React.ReactNode) => {
+                                                   handleDriveLengthChanged(event, stop)
+                                               }}>
+                                {minutesFromLastOptions.map((option) => <MenuItem key={option.value}
+                                                                                  value={option.value}> {option.text}  &nbsp;&nbsp; </MenuItem>)}
+                            </Select> <Box sx={{
+                                width: isLongRoute ? '15px' : '5px',
+                                height: '5px',
+                                display: 'inline-flex'
+                            }}/>
+
+                            </> : null}
+                            {i === 0 ? <DirectionsBusFilled sx={{mb: '-5px'}} fontSize={'small'}/> :
+                                <LocationOn sx={{mb: '-5px'}} fontSize={'small'}/>}
+                            <Box sx={{
+                                width: '15px',
+                                height: '5px',
+                                display: 'inline-flex'
+                            }}/>
 
 
-                        <Box sx={{
-                            width: '15px',
-                            height: '5px',
-                            display: 'inline-flex',
-                            mb: isLongRoute ? '1.3em' : '1.6em'
-                        }}/>
-                        {i + 1 === allStops.length ? <IconButton size="small"
-                                                                 onClick={handleRemoveLast}
-                                                                 color="inherit"
-                        ><Delete fontSize={'small'}/> </IconButton> : null}
+                            <Card sx={{
+                                maxWidth: '100px',
+                                display: 'inline-flex',
+                                p: '4px'
+                            }}>{
+                                stop.locationName
+                            } </Card>
 
-                    </Box>))}
+
+                            <Box sx={{
+                                width: '15px',
+                                height: '5px',
+                                display: 'inline-flex',
+                                mb: isLongRoute ? '1.3em' : '1.6em'
+                            }}/>
+                            {i + 1 === allStops.length ? <IconButton size="small"
+                                                                     onClick={handleRemoveLast}
+                                                                     color="inherit"
+                            ><Delete fontSize={'small'}/> </IconButton> : null}
+
+                        </Box>))}
+                    </Box>
+                </Box>
+                <hr/>
+
+
+                <Box sx={{
+
+                    flexDirection: 'column',
+                    alignItems: 'center',
+                    justifyContent: 'center'
+                }}>
+                    <Box sx={{
+                        m: '1em',
+                        width: '150px',
+                        // mb: '0px'
+                    }}> <b>{translations.exitTime}</b>
+                        <Button variant="contained" onClick={handleEditTransportTimes} aria-label="add" size="small">
+                            {translations.addTransportRoute}
+                        </Button>
+                        {timeTableBrief.map((t, i) => (<Box key={i.toString() + props.transportRoute.id} sx={{
+                            m: '2em',
+                            mb: '5px',
+                            mt: '5px',
+                            fontSize: 'large'
+
+                        }}>
+                            {(i + 1) === maxHoursToSHow ? '...' : t}
+                        </Box>))}
+
+                    </Box>
+
+
                 </Box>
 
             </Card>
-            <RouteTransportEditMenu routeMoreAnchorEl={routeMoreAnchorEl} routeMenuId={props.route.id} isRouteMenuOpen={isRouteMenuOpen}
+            <RouteTransportEditMenu routeMoreAnchorEl={routeMoreAnchorEl} routeMenuId={props.transportRoute.id}
+                                    isRouteMenuOpen={isRouteMenuOpen}
                                     handleRouteMenuClick={handleRouteMenuClick} handleRouteMenuClose={handleRouteMenuClose}/>
-            <RenameDialog open={RenameOpen} onClose={handleRenameClose} selectedValue={props.route.name}/>
-
+            <RenameDialog key={props.transportRoute.id} open={RenameOpen} onClose={handleRenameClose}
+                          selectedValue={props.transportRoute.name}/>
+            <TransportScheduleDialog key={props.transportRoute.id} open={scheduleOpen} onClose={handleScheduleClose}
+                                     transport={props.transportRoute}/>
         </Box>
     )
 }

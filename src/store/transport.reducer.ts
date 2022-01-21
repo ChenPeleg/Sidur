@@ -3,9 +3,9 @@ import {StoreUtils} from './store-utils';
 import {ActionsTypes} from './types.actions';
 import {Utils} from '../services/utils';
 import {translations} from '../services/translations';
-import {LocationGroup, LocationModel, RoadStopModel, RouteModel} from '../models/Location.model';
+import {LocationGroup, LocationModel, RoadStopModel, TransportModel} from '../models/Location.model';
 
-export type RouteReducerFunctions =
+export type TransportReducerFunctions =
     ActionsTypes.ADD_NEW_TRANSPORT
     | ActionsTypes.START_EDIT_TRANSPORT
     | ActionsTypes.STOP_EDIT_TRANSPORT
@@ -15,27 +15,28 @@ export type RouteReducerFunctions =
     | ActionsTypes.CLONE_TRANSPORT
 
 
-export const TransportReducer: Record<RouteReducerFunctions, (state: SidurStore, action: IAction) => SidurStore> = {
+export const TransportReducer: Record<TransportReducerFunctions, (state: SidurStore, action: IAction) => SidurStore> = {
     [ActionsTypes.ADD_NEW_TRANSPORT]: (state: SidurStore, action: IAction): SidurStore => {
         let newState = {...state}
         const currentLocationGroupId = newState.sessionState.locationGroupInEdit;
         const currentLocationGroup: LocationGroup | undefined = newState.LocationGroups?.find(l => l.id === currentLocationGroupId);
 
         if (currentLocationGroup) {
-            currentLocationGroup.Routes = currentLocationGroup.Routes || [];
-            const newId = Utils.getNextId(currentLocationGroup.Routes.map(l => l.id))
+            currentLocationGroup.Transports = currentLocationGroup.Transports || [];
+            const newId = Utils.getNextId(currentLocationGroup.Transports.map(l => l.id))
             const name = translations.Route + ' ' + newId.toString();
-            const newRoute: RouteModel = {
+            const newTransport: TransportModel = {
                 name: name,
                 id: newId,
                 comments: '',
-                routStops: []
+                TransportStops: [],
+                TransportTime: []
             }
-            newRoute.name = buildRouteName(newRoute, currentLocationGroup.Locations)
+            newTransport.name = buildTransportName(newTransport, currentLocationGroup.Locations)
 
-            currentLocationGroup.Routes = [...currentLocationGroup.Routes]
-            currentLocationGroup.Routes.push(newRoute);
-            newState.sessionState.routeIdInEdit = newId;
+            currentLocationGroup.Transports = [...currentLocationGroup.Transports]
+            currentLocationGroup.Transports.push(newTransport);
+            newState.sessionState.transportIdInEdit = newId;
             newState.LocationGroups = (newState.LocationGroups || []).map(g => {
                 if (g.id === currentLocationGroup.id) {
                     return currentLocationGroup
@@ -54,24 +55,24 @@ export const TransportReducer: Record<RouteReducerFunctions, (state: SidurStore,
         const currentLocationGroupId = newState.sessionState.locationGroupInEdit;
         const currentLocationGroup: LocationGroup | undefined = newState.LocationGroups?.find(l => l.id === currentLocationGroupId);
         if (currentLocationGroup && locationToAdd) {
-            const routeIdInEdit = newState.sessionState.routeIdInEdit;
-            const routeInEdit: RouteModel | undefined = currentLocationGroup.Routes.find(r => r.id === routeIdInEdit);
-            if (routeInEdit) {
-                const isNameAutoBuild = routeInEdit.name === buildRouteName(routeInEdit, currentLocationGroup.Locations)
-                const allPositions = routeInEdit.routStops.map(s => s.position);
+            const transportIdInEdit = newState.sessionState.transportIdInEdit;
+            const transportInEdit: TransportModel | undefined = currentLocationGroup.Transports.find(r => r.id === transportIdInEdit);
+            if (transportInEdit) {
+                const isNameAutoBuild = transportInEdit.name === buildTransportName(transportInEdit, currentLocationGroup.Locations)
+                const allPositions = transportInEdit.TransportStops.map(s => s.position);
                 allPositions.push(0)
                 const maxPosition = Math.max(...allPositions)
 
-                const routeStop: RoadStopModel = {
+                const transportStop: RoadStopModel = {
                     locationId: locationToAdd.id,
                     minuetsFromLast: 20,
                     position: maxPosition + 1
                 }
-                routeInEdit.routStops.push(routeStop);
+                transportInEdit.TransportStops.push(transportStop);
                 if (isNameAutoBuild) {
-                    routeInEdit.name = buildRouteName(routeInEdit, currentLocationGroup.Locations)
+                    transportInEdit.name = buildTransportName(transportInEdit, currentLocationGroup.Locations)
                 }
-                currentLocationGroup.Routes = currentLocationGroup.Routes.map(r => r.id === routeInEdit.id ? routeInEdit : r);
+                currentLocationGroup.Transports = currentLocationGroup.Transports.map(r => r.id === transportInEdit.id ? transportInEdit : r);
 
                 newState.LocationGroups = (newState.LocationGroups || []).map(g => {
                     if (g.id === currentLocationGroup.id) {
@@ -80,7 +81,7 @@ export const TransportReducer: Record<RouteReducerFunctions, (state: SidurStore,
                     return g
                 })
             }
-            // currentLocationGroup.Routes.push(newRoute);
+            // currentLocationGroup.Transports.push(newTransport);
 
 
         }
@@ -91,14 +92,14 @@ export const TransportReducer: Record<RouteReducerFunctions, (state: SidurStore,
     },
     [ActionsTypes.START_EDIT_TRANSPORT]: (state: SidurStore, action: IAction): SidurStore => {
         let newState = {...state}
-        const routId = action.payload.id
-        newState.sessionState.locationMainInEdit = routId;
+        const transportId = action.payload.id
+        newState.sessionState.locationMainInEdit = transportId;
         const currentLocationGroupId = newState.sessionState.locationGroupInEdit;
         const currentLocationGroup: LocationGroup | undefined = newState.LocationGroups?.find(l => l.id === currentLocationGroupId);
         if (currentLocationGroup) {
-            const route = currentLocationGroup.Routes.find(l => l.id === routId);
-            if (route) {
-                newState.sessionState.routeIdInEdit = routId;
+            const transport = currentLocationGroup.Transports.find(l => l.id === transportId);
+            if (transport) {
+                newState.sessionState.transportIdInEdit = transportId;
 
             }
 
@@ -126,22 +127,22 @@ export const TransportReducer: Record<RouteReducerFunctions, (state: SidurStore,
 
     [ActionsTypes.UPDATE_TRANSPORT]: (state: SidurStore, action: IAction): SidurStore => {
         let newState = {...state}
-        const routeToUpdate = action.payload;
+        const transportToUpdate = action.payload;
         // newState.sessionState.locationMainInEdit = locationId;
         const currentLocationGroupId = newState.sessionState.locationGroupInEdit;
         const currentLocationGroup: LocationGroup | undefined = newState.LocationGroups?.find(l => l.id === currentLocationGroupId);
-        if (currentLocationGroup && routeToUpdate) {
-            const routBeforeUpdate = currentLocationGroup.Routes.find(r => r.id === routeToUpdate.id) as RouteModel;
+        if (currentLocationGroup && transportToUpdate) {
+            const routBeforeUpdate = currentLocationGroup.Transports.find(r => r.id === transportToUpdate.id) as TransportModel;
 
-            const isNameAutoBuild = routBeforeUpdate.name === buildRouteName(routBeforeUpdate, currentLocationGroup.Locations);
+            const isNameAutoBuild = routBeforeUpdate.name === buildTransportName(routBeforeUpdate, currentLocationGroup.Locations);
 
-            if (isNameAutoBuild && routBeforeUpdate.name === routeToUpdate.name) {
-                routeToUpdate.name = buildRouteName(routeToUpdate, currentLocationGroup.Locations)
+            if (isNameAutoBuild && routBeforeUpdate.name === transportToUpdate.name) {
+                transportToUpdate.name = buildTransportName(transportToUpdate, currentLocationGroup.Locations)
             }
-            currentLocationGroup.Routes =
-                currentLocationGroup.Routes.map(l => {
-                    if (l.id === routeToUpdate.id) {
-                        return routeToUpdate
+            currentLocationGroup.Transports =
+                currentLocationGroup.Transports.map(l => {
+                    if (l.id === transportToUpdate.id) {
+                        return transportToUpdate
                     }
                     return l
                 })
@@ -155,12 +156,12 @@ export const TransportReducer: Record<RouteReducerFunctions, (state: SidurStore,
 
     [ActionsTypes.DELETE_TRANSPORT]: (state: SidurStore, action: IAction): SidurStore => {
         let newState = {...state}
-        const routeToDeleteId = action.payload.id;
+        const transportToDeleteId = action.payload.id;
         const currentLocationGroupId = newState.sessionState.locationGroupInEdit;
         const currentLocationGroup: LocationGroup | undefined = newState.LocationGroups?.find(l => l.id === currentLocationGroupId);
         if (currentLocationGroup) {
-            currentLocationGroup.Routes =
-                currentLocationGroup.Routes.filter(l => l.id !== routeToDeleteId);
+            currentLocationGroup.Transports =
+                currentLocationGroup.Transports.filter(l => l.id !== transportToDeleteId);
             newState.LocationGroups = newState.LocationGroups.map(l => l.id === currentLocationGroup.id ? currentLocationGroup : l)
         }
 
@@ -169,21 +170,21 @@ export const TransportReducer: Record<RouteReducerFunctions, (state: SidurStore,
     },
     [ActionsTypes.CLONE_TRANSPORT]: (state: SidurStore, action: IAction): SidurStore => {
         let newState = {...state}
-        const routeToCloneId = action.payload.id;
+        const transportToCloneId = action.payload.id;
         const currentLocationGroupId = newState.sessionState.locationGroupInEdit;
         const currentLocationGroup: LocationGroup | undefined = newState.LocationGroups?.find(l => l.id === currentLocationGroupId);
         if (currentLocationGroup) {
-            const routeToClone: RouteModel | undefined = currentLocationGroup.Routes.find(r => r.id === routeToCloneId);
+            const transportToClone: TransportModel | undefined = currentLocationGroup.Transports.find(r => r.id === transportToCloneId);
 
-            if (routeToClone) {
-                const newRoute = {...routeToClone};
-                const newId = Utils.getNextId(currentLocationGroup.Routes.map(l => l.id));
-                newRoute.id = newId;
-                newRoute.routStops = newRoute.routStops.map(rs => ({...rs}));
-                newRoute.name = buildRouteName(newRoute, currentLocationGroup.Locations)
-                currentLocationGroup.Routes =
-                    currentLocationGroup.Routes.map(l => l);
-                currentLocationGroup.Routes.push(newRoute);
+            if (transportToClone) {
+                const newTransport = {...transportToClone};
+                const newId = Utils.getNextId(currentLocationGroup.Transports.map(l => l.id));
+                newTransport.id = newId;
+                newTransport.TransportStops = newTransport.TransportStops.map(rs => ({...rs}));
+                newTransport.name = buildTransportName(newTransport, currentLocationGroup.Locations)
+                currentLocationGroup.Transports =
+                    currentLocationGroup.Transports.map(l => l);
+                currentLocationGroup.Transports.push(newTransport);
                 newState.LocationGroups = newState.LocationGroups.map(l => l.id === currentLocationGroup.id ? currentLocationGroup : l)
             }
 
@@ -196,15 +197,15 @@ export const TransportReducer: Record<RouteReducerFunctions, (state: SidurStore,
 
 
 }
-const buildRouteName = (route: RouteModel, locations: LocationModel[]): string => {
-    if (route.routStops.length === 0) {
-        return translations.newRoute + ' ' + route.id.toString();
-    } else if (route.routStops.length === 1) {
-        return translations.newRoute + ' ' + route.id.toString() + ' - ' + getLocationName(route.routStops[0].locationId, locations);
-    } else if (route.routStops.length > 1 && route.routStops.length < 4) {
-        return route.routStops.map(s => getLocationName(s.locationId, locations)).join(' - ')
+const buildTransportName = (transport: TransportModel, locations: LocationModel[]): string => {
+    if (transport.TransportStops.length === 0) {
+        return translations.newTransport + ' ' + transport.id.toString();
+    } else if (transport.TransportStops.length === 1) {
+        return translations.newTransport + ' ' + transport.id.toString() + ' - ' + getLocationName(transport.TransportStops[0].locationId, locations);
+    } else if (transport.TransportStops.length > 1 && transport.TransportStops.length < 4) {
+        return transport.TransportStops.map(s => getLocationName(s.locationId, locations)).join(' - ')
     } else {
-        return route.routStops.map(s => getLocationName(s.locationId, locations)).filter((l, i) => (i == 0 || (i + 2) > route.routStops.length) || Math.floor(route.routStops.length / 2) === i).join(' - ')
+        return transport.TransportStops.map(s => getLocationName(s.locationId, locations)).filter((l, i) => (i == 0 || (i + 2) > transport.TransportStops.length) || Math.floor(transport.TransportStops.length / 2) === i).join(' - ')
     }
     return ''
 

@@ -1,7 +1,7 @@
 import {Box} from '@mui/material';
 import {useDispatch, useSelector} from 'react-redux';
 import {SessionModel, SidurStore} from '../../store/store.types';
-import {LocationGroup, LocationModel, RouteModel, RouteOrTransport} from '../../models/Location.model';
+import {LocationGroup, LocationModel, RouteOrTransport, TransportModel} from '../../models/Location.model';
 import {translations} from '../../services/translations';
 import * as React from 'react';
 import {useState} from 'react';
@@ -15,13 +15,12 @@ import {LocationRouteTransportChoose} from '../LocationsEdit/location-route-tran
 
 export const LocationsTransportEditWrapper = () => {
     const locationGroupInEditId = useSelector((state: SidurStore) => state.sessionState.locationGroupInEdit);
-    const routeIdInEdit = useSelector((state: SidurStore) => state.sessionState.routeIdInEdit);
+    const transportRouteIdInEdit = useSelector((state: SidurStore) => state.sessionState.transportIdInEdit);
     const locationGroups: LocationGroup[] = useSelector((state: { LocationGroups: LocationGroup[] }) => state.LocationGroups || []);
     const locationMainInEdit: string | null = useSelector((state: { sessionState: SessionModel }) => state.sessionState.locationMainInEdit);
     const currentLocationGroup: LocationGroup | undefined = locationGroups.find(l => l.id === locationGroupInEditId) as LocationGroup
     const allLocations: LocationModel[] = currentLocationGroup?.Locations || [];
-    const allRoutes: RouteModel[] = currentLocationGroup?.Routes || [];
-
+    const allTransportRoutes: TransportModel[] = currentLocationGroup?.Transports || [];
     const [filterLocationText, setFilterLocationText] = useState<string>('')
     const [filterRouteText, setFilterRouteText] = useState<string>('')
 
@@ -50,7 +49,7 @@ export const LocationsTransportEditWrapper = () => {
         setFilterRouteText(event.target.value);
     }
     const routeClickedHandler = (routId: string) => {
-        if (routeIdInEdit !== routId) {
+        if (transportRouteIdInEdit !== routId) {
             dispatch(
                 {
                     type: ActionsTypes.START_EDIT_TRANSPORT,
@@ -60,17 +59,17 @@ export const LocationsTransportEditWrapper = () => {
         }
     }
 
-    const routInEdit: RouteModel | undefined = currentLocationGroup.Routes.find(r => r.id === routeIdInEdit);
+    const transportRoutInEdit: TransportModel | undefined = currentLocationGroup.Transports.find(r => r.id === transportRouteIdInEdit);
     const filteredLocationsBeforeRouteCalc = filterLocationText.trim() === '' ? allLocations.filter(l => l) :
         allLocations.filter(l => l.name.includes(filterLocationText.trim()));
-    const routInEditLocations: string [] = routInEdit ? routInEdit.routStops.map(rs => rs.locationId) : [];
+    const routInEditLocations: string [] = transportRoutInEdit ? transportRoutInEdit.TransportStops.map(rs => rs.locationId) : [];
 
     const filteredLocations = filteredLocationsBeforeRouteCalc.filter(l => !routInEditLocations.includes(l.id));
     filteredLocations.sort((a, b) => +a.id > +b.id ? -1 : 1)
 
 
-    const filteredRoutes = filterRouteText.trim() === '' ? allRoutes.filter(l => l) :
-        allRoutes.filter(l => l.name.includes(filterRouteText.trim()));
+    const filteredRoutes = filterRouteText.trim() === '' ? allTransportRoutes.filter(l => l) :
+        allTransportRoutes.filter(l => l.name.includes(filterRouteText.trim()));
     filteredRoutes.sort((a, b) => +a.id > +b.id ? -1 : 1)
 
     return (<Box sx={{...Styles.flexRow}}>
@@ -145,8 +144,8 @@ export const LocationsTransportEditWrapper = () => {
                     height: '10px',
                     width: '20px'
                 }}/>
-                {routInEdit ?
-                    <LocationTransportEdit allLocations={allLocations} route={routInEdit}/> : null}
+                {transportRoutInEdit ?
+                    <LocationTransportEdit allLocations={allLocations} transportRoute={transportRoutInEdit}/> : null}
             </Box>
             <Box sx={{...Styles.flexCol}}>
                 <Box sx={{
@@ -156,7 +155,7 @@ export const LocationsTransportEditWrapper = () => {
                     direction: 'ltr'
                 }}>
                     <Box sx={{direction: 'rtl'}} id={'routes-container'}>
-                        {filteredRoutes.map((r: RouteModel) => (
+                        {filteredRoutes.map((r: TransportModel) => (
                             <LocationRouteTransportChoose routeOrTransport={RouteOrTransport.Transport} key={r.id} route={r}
                                                           routeClicked={routeClickedHandler}/>))}
                     </Box>

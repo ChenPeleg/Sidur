@@ -9,7 +9,8 @@ export interface TransportModel {
     id: string,
     name: string,
     comments: string,
-    TransportStops: RoadStopModel[]
+    TransportStops: RoadStopModel[],
+    TransportTime: string[]
 }
 
 export interface RoadStopModel {
