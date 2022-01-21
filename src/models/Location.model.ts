@@ -18,6 +18,11 @@ export interface RoadStopModel {
     position: number
 }
 
+export enum RouteOrTransport {
+    Route = 1,
+    Transport = 2
+}
+
 export interface RouteModel {
     id: string,
     name: string,

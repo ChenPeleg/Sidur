@@ -4,7 +4,7 @@ import * as React from 'react';
 import {ActionsTypes} from '../../store/types.actions';
 import {useDispatch} from 'react-redux';
 
-import {ArrowBack, Delete, Edit} from '@mui/icons-material';
+import {Delete, DirectionsBusFilled, Edit, LocationOn} from '@mui/icons-material';
 import {RenameDialog} from '../Dialogs/rename-dialog';
 import {ConfigService} from '../../services/config-service';
 import MenuItem from '@mui/material/MenuItem';
@@ -41,7 +41,7 @@ export const LocationTransportEdit = (props: LocationRouteEditProps) => {
     const handleRouteMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
         setRouteMoreAnchorEl(event.currentTarget);
     };
-    const sketchMenuId = 'primary-route-menu';
+    const sketchMenuId = 'primary-transport-menu';
 
     const handleRouteMenuClose = () => {
         setRouteMoreAnchorEl(null);
@@ -53,14 +53,14 @@ export const LocationTransportEdit = (props: LocationRouteEditProps) => {
 
             case RouteOrTransEditAction.CloneRoute:
                 dispatch({
-                    type: ActionsTypes.CLONE_ROUTE,
+                    type: ActionsTypes.CLONE_TRANSPORT,
                     payload: {id: props.route.id}
                 })
                 break;
 
             case RouteOrTransEditAction.DeleteRoute:
                 dispatch({
-                    type: ActionsTypes.DELETE_ROUTE,
+                    type: ActionsTypes.DELETE_TRANSPORT,
                     payload: {id: props.route.id}
                 })
                 break;
@@ -81,7 +81,7 @@ export const LocationTransportEdit = (props: LocationRouteEditProps) => {
             const updatedRout = {...props.route}
             updatedRout.name = value;
             dispatch({
-                type: ActionsTypes.UPDATE_ROUTE,
+                type: ActionsTypes.UPDATE_TRANSPORT,
                 payload: updatedRout
             })
         }
@@ -111,7 +111,7 @@ export const LocationTransportEdit = (props: LocationRouteEditProps) => {
         updatedRout.routStops = [...updatedRout.routStops]
         updatedRout.routStops.pop();
         dispatch({
-            type: ActionsTypes.UPDATE_ROUTE,
+            type: ActionsTypes.UPDATE_TRANSPORT,
             payload: updatedRout
         })
     }
@@ -128,7 +128,7 @@ export const LocationTransportEdit = (props: LocationRouteEditProps) => {
             return s
         })
         dispatch({
-            type: ActionsTypes.UPDATE_ROUTE,
+            type: ActionsTypes.UPDATE_TRANSPORT,
             payload: updatedRout
         })
     }
@@ -160,6 +160,7 @@ export const LocationTransportEdit = (props: LocationRouteEditProps) => {
 
                     flexWrap: 'wrap'
                 }}>
+
                     {allStops.map((stop: StopModel, i: number) => (<Box sx={{
                         display: isLongRoute ? 'inline' : 'block',
                         p: '0.1em',
@@ -183,12 +184,17 @@ export const LocationTransportEdit = (props: LocationRouteEditProps) => {
                             height: '5px',
                             display: 'inline-flex'
                         }}/>
-                            <ArrowBack sx={{mb: '-5px'}} fontSize={'small'}/>
-                            <Box sx={{
-                                width: '15px',
-                                height: '5px',
-                                display: 'inline-flex'
-                            }}/></> : null}
+                         
+                        </> : null}
+                        {i === 0 ? <DirectionsBusFilled sx={{mb: '-5px'}} fontSize={'small'}/> :
+                            <LocationOn sx={{mb: '-5px'}} fontSize={'small'}/>}
+                        <Box sx={{
+                            width: '15px',
+                            height: '5px',
+                            display: 'inline-flex'
+                        }}/>
+
+
                         <Card sx={{
                             maxWidth: '100px',
                             display: 'inline-flex',
@@ -207,7 +213,7 @@ export const LocationTransportEdit = (props: LocationRouteEditProps) => {
                         {i + 1 === allStops.length ? <IconButton size="small"
                                                                  onClick={handleRemoveLast}
                                                                  color="inherit"
-                        ><Delete fontSize={'small'}/> </IconButton> : <ArrowBack sx={{mb: '-5px'}} fontSize={'small'}/>}
+                        ><Delete fontSize={'small'}/> </IconButton> : null}
 
                     </Box>))}
                 </Box>

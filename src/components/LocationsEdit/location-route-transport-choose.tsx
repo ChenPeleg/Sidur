@@ -1,12 +1,14 @@
 import {Box, Card} from '@mui/material';
-import {RouteModel, TransportModel} from '../../models/Location.model';
+import {RouteModel, RouteOrTransport, TransportModel} from '../../models/Location.model';
 import * as React from 'react';
 import {useState} from 'react';
 
 
 interface LocationRouteChooseRouteEditProps {
-    route: RouteModel | TransportModel
-    routeClicked: (routeId: string) => void
+    route: RouteModel | TransportModel;
+    routeClicked: (routeId: string) => void;
+    routeOrTransport: RouteOrTransport;
+
 }
 
 export const LocationRouteTransportChoose = (props: LocationRouteChooseRouteEditProps) => {
@@ -19,11 +21,11 @@ export const LocationRouteTransportChoose = (props: LocationRouteChooseRouteEdit
     const onMouseOut = () => {
         setInHover(false)
     };
-
+    const width = props.routeOrTransport === RouteOrTransport.Route ? '400px' : '200px';
     return (
         <Box sx={{m: '0.6em'}}>
             <Card sx={{
-                width: '400px',
+                width: width,
                 p: '0.6em',
                 cursor: 'pointer',
             }} onClick={() => props.routeClicked(props.route.id)}

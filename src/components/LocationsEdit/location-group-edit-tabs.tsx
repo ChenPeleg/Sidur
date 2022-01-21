@@ -8,6 +8,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import {ActionsTypes} from '../../store/types.actions';
 import {LocationsEdit} from './locations-edit';
 import {LocationsRoutesEditWrapper} from '../LocationsEditRoutes/locations-routes-edit-wrapper';
+import {LocationsTransportEditWrapper} from '../LocationsEditTransports/locations-transport-edit-wrapper';
 
 interface TabPanelProps {
     children?: React.ReactNode;
@@ -80,7 +81,7 @@ export const LocationsEditTabs = () => {
                 <LocationsRoutesEditWrapper/>
             </TabPanel>
             <TabPanel value={locationTabSelected} index={2}>
-                Item Three
+                <LocationsTransportEditWrapper/>
             </TabPanel>
         </Box>
     );

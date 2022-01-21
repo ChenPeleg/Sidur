@@ -1,7 +1,7 @@
 import {Box} from '@mui/material';
 import {useDispatch, useSelector} from 'react-redux';
 import {SessionModel, SidurStore} from '../../store/store.types';
-import {LocationGroup, LocationModel, RouteModel} from '../../models/Location.model';
+import {LocationGroup, LocationModel, RouteModel, RouteOrTransport} from '../../models/Location.model';
 import {translations} from '../../services/translations';
 import * as React from 'react';
 import {useState} from 'react';
@@ -156,7 +156,8 @@ export const LocationsRoutesEditWrapper = () => {
                 }}>
                     <Box sx={{direction: 'rtl'}} id={'routes-container'}>
                         {filteredRoutes.map((r: RouteModel) => (
-                            <LocationRouteTransportChoose key={r.id} route={r} routeClicked={routeClickedHandler}/>))}
+                            <LocationRouteTransportChoose key={r.id} route={r} routeOrTransport={RouteOrTransport.Route}
+                                                          routeClicked={routeClickedHandler}/>))}
                     </Box>
                 </Box>
             </Box>
