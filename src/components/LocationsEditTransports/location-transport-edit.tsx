@@ -35,7 +35,6 @@ const maxHoursToSHow = 6;
 //const TransportStops
 export const LocationTransportEdit = (props: LocationRouteEditProps) => {
     const dispatch = useDispatch();
-
     const [RenameOpen, setRenameOpen] = React.useState(false);
     const [scheduleOpen, setScheduleOpen] = React.useState(false);
     const [routeMoreAnchorEl, setRouteMoreAnchorEl] =

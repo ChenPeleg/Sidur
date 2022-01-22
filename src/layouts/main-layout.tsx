@@ -6,6 +6,7 @@ import {useSelector} from 'react-redux';
 import {DisplaySettings} from '../store/store.types';
 import {SketchesContainer} from '../components/Sketch/SketchesContainer';
 import {LocationGroupEditWrapper} from '../components/LocationsEdit/location-group-edit-wrapper';
+import {LocationGroupSelect} from '../components/LocationGroupSelect/location-group-select';
 
 
 export const MainLayout = () => {
@@ -44,7 +45,7 @@ export const MainLayout = () => {
 
                 </Box> : null}
                 {displayOrders ? <Box flexDirection="column" flexWrap="wrap" display="flex" alignItems="start" justifyContent="start">
-
+                    <LocationGroupSelect/>
                     <Vehicles/>
                     <Orders/>
 

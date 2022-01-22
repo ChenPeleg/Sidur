@@ -22,7 +22,7 @@ export interface SidurRecord {
     defaultOrderValues?: OrderModel,
     sketches: SketchModel[],
     chosenSketch: string,
-    locationGroup: LocationGroup | null
+    locationGroupIdForSidur: string;
 }
 
 export interface DisplaySettings {

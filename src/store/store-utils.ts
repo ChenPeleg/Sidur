@@ -1,4 +1,4 @@
-import {AppConstants, SaveDataModel, SessionModel, SidurRecord, SidurStore} from './store.types';
+import {AppConstants, RecordBriefModel, SaveDataModel, SessionModel, SidurRecord, SidurStore, TypeOfRecord} from './store.types';
 import {SaveLoadService} from '../services/save-load.service';
 import {hashFunction} from '../services/hash-function';
 import {CloneUtil} from '../services/clone-utility';
@@ -16,6 +16,34 @@ export const StoreUtils = {
     HandleReducerSaveToLocalStorage: (state: SidurStore): void => {
         const saveObj: SaveDataModel = StoreUtils.buildSaveDataModel(state, 'chen', 'chen')
         SaveLoadService.saveToLocalStorage(saveObj);
+    },
+    updateRecordBrief: (state: SidurStore): SidurStore => {
+        const newState = {...state}
+        const allSiduresVisiable = newState.sidurCollection.concat(newState.sidurArchive);
+        const allLocationGroups = [...newState.LocationGroups]
+        const sidurRecords: RecordBriefModel[] = allSiduresVisiable.map(s => {
+            const newSidurRecord: RecordBriefModel = {
+                dbId: s.dbId,
+                id: s.id,
+                locationGroupOrSidurId: s.locationGroupIdForSidur,
+                name: s.Name,
+                typeOfRecord: TypeOfRecord.Sidur
+            }
+            return newSidurRecord
+        })
+        const locationRecords: RecordBriefModel[] = allLocationGroups.map(s => {
+            const newSidurRecord: RecordBriefModel = {
+                dbId: s.dbId,
+                id: s.id,
+                locationGroupOrSidurId: s.id,
+                name: s.name,
+                typeOfRecord: TypeOfRecord.LocationGroup
+            }
+            return newSidurRecord
+        })
+
+        newState.recordBriefs = sidurRecords.concat(locationRecords)
+        return newState
     },
 
     UpdateSidurCollectionWithCurrenSidur: (state: SidurStore): SidurRecord[] => {

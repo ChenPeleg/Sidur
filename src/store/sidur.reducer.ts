@@ -15,6 +15,7 @@ export type SidurReducerFunctions =
     | ActionsTypes.ARCHIVE_SIDUR
     | ActionsTypes.MOVE_TO_ACTIVE_SIDUR
     | ActionsTypes.DELETE_FOREVER_SIDUR
+    | ActionsTypes.CHANGE_SIDUR_LOCATION_GROUP
 
 const DefaultSidur: SidurRecord = {
     id: '1',
@@ -25,7 +26,7 @@ const DefaultSidur: SidurRecord = {
     vehicles: [defaultVehicleValues],
     sketches: [],
     chosenSketch: '',
-    locationGroup: null
+    locationGroupIdForSidur: ''
 
 }
 
@@ -74,6 +75,7 @@ export const SidurReducer: Record<SidurReducerFunctions, (state: SidurStore, act
 
 
         }
+        newState = StoreUtils.updateRecordBrief(newState);
         return newState
 
     },
@@ -93,6 +95,24 @@ export const SidurReducer: Record<SidurReducerFunctions, (state: SidurStore, act
                 return sidur
             }
         });
+        newState = StoreUtils.updateRecordBrief(newState);
+        return newState
+    },
+    [ActionsTypes.CHANGE_SIDUR_LOCATION_GROUP]: (state: SidurStore, action: IAction): SidurStore => {
+        let newState = {...state}
+        const sidurId = newState.sidurId;
+        const locationGroupId = action.payload.id;
+
+        newState.sidurCollection = newState.sidurCollection.map((sidur: SidurRecord) => {
+            if (sidur.id === sidurId) {
+                const updatedSidur = {...sidur};
+                updatedSidur.locationGroupIdForSidur = locationGroupId;
+                return updatedSidur
+            } else {
+                return sidur
+            }
+        });
+        newState = StoreUtils.updateRecordBrief(newState);
         return newState
     },
     [ActionsTypes.DELETE_SIDUR]: (state: SidurStore, action: IAction): SidurStore => {
@@ -126,7 +146,7 @@ export const SidurReducer: Record<SidurReducerFunctions, (state: SidurStore, act
             newState = setChosenSidur(newState, chosenSidurAfterDelete);
         }
 
-
+        newState = StoreUtils.updateRecordBrief(newState);
         return newState
     },
     [ActionsTypes.ARCHIVE_SIDUR]: (state: SidurStore, action: IAction): SidurStore => {
@@ -161,13 +181,13 @@ export const SidurReducer: Record<SidurReducerFunctions, (state: SidurStore, act
             newState.sidurId = chosenSidurAfterArchive.id
             newState = setChosenSidur(newState, chosenSidurAfterArchive);
         }
-
+        newState = StoreUtils.updateRecordBrief(newState);
         return newState
     },
     [ActionsTypes.ADD_NEW_SIDUR]: (state: SidurStore, action: IAction): SidurStore => {
         let newState = {...state}
-
-        const newSidurId = Utils.getNextId(getAllSidurIDs(state))
+        const newSidurId = Utils.getNextId(getAllSidurIDs(state));
+        const loactionGroupId = newState.sessionState.locationGroupInEdit || newState.LocationGroups[0].id as string;
         const newSidur: SidurRecord = {
             id: newSidurId,
             dbId: '',
@@ -178,12 +198,13 @@ export const SidurReducer: Record<SidurReducerFunctions, (state: SidurStore, act
             defaultOrderValues: newState.defaultOrderValues,
             sketches: [],
             chosenSketch: '',
-            locationGroup: null,
+            locationGroupIdForSidur: loactionGroupId,
         }
         newState.sidurCollection = newState.sidurCollection.map(c => c);
         newState.sidurCollection.push(newSidur);
         newState.sidurId = newSidurId;
         newState = setChosenSidur(newState, newSidur);
+        newState = StoreUtils.updateRecordBrief(newState);
         return newState
     },
     [ActionsTypes.CLONE_SIDUR]: (state: SidurStore, action: IAction): SidurStore => {
@@ -202,7 +223,7 @@ export const SidurReducer: Record<SidurReducerFunctions, (state: SidurStore, act
             newState.sidurId = newSidurId;
             newState = setChosenSidur(newState, newSidur);
         }
-
+        newState = StoreUtils.updateRecordBrief(newState);
         return newState
     },
     [ActionsTypes.MOVE_TO_ACTIVE_SIDUR]: (state: SidurStore, action: IAction): SidurStore => {
@@ -218,13 +239,14 @@ export const SidurReducer: Record<SidurReducerFunctions, (state: SidurStore, act
             newState.sidurArchive = newState.sidurArchive.filter(s => s.id !== sidurIdToActivate);
         }
 
-
+        newState = StoreUtils.updateRecordBrief(newState);
         return newState
     },
     [ActionsTypes.DELETE_FOREVER_SIDUR]: (state: SidurStore, action: IAction): SidurStore => {
         let newState = {...state}
         const sidurIdToDeleteForever = action.payload.id;
         newState.sidurArchive = newState.sidurArchive.filter(s => s.id !== sidurIdToDeleteForever);
+        newState = StoreUtils.updateRecordBrief(newState);
         return newState
     },
 

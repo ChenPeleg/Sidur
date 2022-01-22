@@ -17,7 +17,7 @@ import {RouteReducer} from './route.reducer';
 import {TransportReducer} from './transport.reducer';
 
 const buildInintialState = (): SidurStore => {
-    
+
     const stateFromLocalStorage: SidurStore | undefined = SaveLoadService.loadFromLocalStorage('chen').data?.savedStore;
     //defaultInitialState.sidurCollection.push(defaultSidurEshbal.sidurCollection[0])
     const initialState: SidurStore = (stateFromLocalStorage || defaultSidurEshbal) as SidurStore;
@@ -47,6 +47,7 @@ const reducer = (state: SidurStore = initialState, action: IAction) => {
         case ActionsTypes.ARCHIVE_SIDUR:
         case ActionsTypes.MOVE_TO_ACTIVE_SIDUR:
         case  ActionsTypes.DELETE_FOREVER_SIDUR:
+        case  ActionsTypes.CHANGE_SIDUR_LOCATION_GROUP:
 
             return SidurReducer[action.type](newState, action)
 

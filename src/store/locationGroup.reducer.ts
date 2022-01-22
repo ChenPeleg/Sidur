@@ -25,7 +25,7 @@ export const LocationGroupReducer: Record<LocationGroupReducerFunctions, (state:
             newState.LocationGroups = [];
         }
 
-
+        newState = StoreUtils.updateRecordBrief(newState);
         StoreUtils.HandleReducerSaveToLocalStorage(newState);
         return newState
     },
@@ -44,7 +44,9 @@ export const LocationGroupReducer: Record<LocationGroupReducerFunctions, (state:
             newState.sessionState.locationGroupInEdit = null
         }
         newState.sessionState = {...newState.sessionState}
+        newState = StoreUtils.updateRecordBrief(newState);
         StoreUtils.HandleReducerSaveToLocalStorage(newState);
+
         return newState
     },
     [ActionsTypes.NEW_LOCATION_GROUP]: (state: SidurStore, action: IAction): SidurStore => {
@@ -55,7 +57,7 @@ export const LocationGroupReducer: Record<LocationGroupReducerFunctions, (state:
         const newId = Utils.getNextId(newState.LocationGroups.map(l => l.id))
         newState.LocationGroups = [...newState.LocationGroups];
         newState.LocationGroups.push({
-            name: 'בסיס סידור ' + newId,
+            name: translations.newLocationGroup + ' ' + newId,
             id: newId,
 
             dbId: '',
@@ -66,13 +68,14 @@ export const LocationGroupReducer: Record<LocationGroupReducerFunctions, (state:
         StoreUtils.HandleReducerSaveToLocalStorage(newState);
 
         newState.sessionState.locationGroupInEdit = newId
-
+        newState = StoreUtils.updateRecordBrief(newState);
         return newState
     },
     [ActionsTypes.CHOOSE_LOCATION_GROUP]: (state: SidurStore, action: IAction): SidurStore => {
         let newState = {...state}
         const groupIdWasChosen = action.payload.id;
         newState.sessionState.locationGroupInEdit = groupIdWasChosen;
+        newState = StoreUtils.updateRecordBrief(newState);
         StoreUtils.HandleReducerSaveToLocalStorage(newState);
 
         return newState
@@ -86,6 +89,7 @@ export const LocationGroupReducer: Record<LocationGroupReducerFunctions, (state:
         }
         newState.sessionState = {...newState.sessionState};
         newState.sessionState.LocationGroupTabOpen = tabWasChosen;
+        newState = StoreUtils.updateRecordBrief(newState);
         StoreUtils.HandleReducerSaveToLocalStorage(newState);
 
         return newState
@@ -106,6 +110,7 @@ export const LocationGroupReducer: Record<LocationGroupReducerFunctions, (state:
             newState.sessionState.locationGroupInEdit = newLocGroupId;
             // newState = setChosenSidur(newState, newSketch);
         }
+        newState = StoreUtils.updateRecordBrief(newState);
         StoreUtils.HandleReducerSaveToLocalStorage(newState);
 
         return newState
@@ -129,7 +134,7 @@ export const LocationGroupReducer: Record<LocationGroupReducerFunctions, (state:
             }
 
         })
-
+        newState = StoreUtils.updateRecordBrief(newState);
         StoreUtils.HandleReducerSaveToLocalStorage(newState);
         return newState
     },
