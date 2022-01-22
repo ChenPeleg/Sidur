@@ -18,9 +18,10 @@ import {StoreUtils} from '../../store/store-utils';
 
 export const SketchesContainer = () => {
     const dispatch = useDispatch();
-    const SketchIdInEdit = useSelector((state: SidurStore) =>   state.sessionState .SketchIdInEdit  );
+    const SketchIdInEdit = useSelector((state: SidurStore) => state.sessionState.SketchIdInEdit);
     const sketches: SketchModel[] = useSelector((state: { sketches: SketchModel[] }) => state.sketches);
 
+ 
     const [sketchMoreAnchorEl, setSketchMoreAnchorEl] =
         React.useState<null | HTMLElement>(null);
     const isSketchMenuOpen = Boolean(sketchMoreAnchorEl);

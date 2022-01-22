@@ -5,6 +5,7 @@ import {Utils} from '../services/utils';
 import {translations} from '../services/translations';
 import {StoreUtils} from './store-utils';
 import {CloneUtil} from '../services/clone-utility';
+import {LocationGroup} from '../models/Location.model';
 
 export type SidurReducerFunctions =
     ActionsTypes.RENAME_SIDUR
@@ -112,6 +113,8 @@ export const SidurReducer: Record<SidurReducerFunctions, (state: SidurStore, act
                 return sidur
             }
         });
+        const newLocationGroup = newState.LocationGroups.find(lg => lg.id === locationGroupId) as LocationGroup;
+        newState.Locations = newLocationGroup.Locations;
         newState = StoreUtils.updateRecordBrief(newState);
         return newState
     },
@@ -261,6 +264,8 @@ const setChosenSidur = (state: SidurStore, chosenSidur: SidurRecord): SidurStore
     newState.sketches = chosenSidur?.sketches?.map(o => ({...o})) || [];
     newState.sessionState.orderIdInEdit = null;
     newState.sessionState.dataHolderForCurrentOrderInEdit = null;
+    const newLocationGroup = newState.LocationGroups.find(lg => lg.id === chosenSidur.locationGroupIdForSidur) as LocationGroup;
+    newState.Locations = newLocationGroup.Locations;
     return newState
 
 }

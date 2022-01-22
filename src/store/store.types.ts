@@ -3,7 +3,7 @@ import {OrderModel} from '../models/Order.model';
 import {DriveType} from '../models/DriveType.enum';
 import {VehicleModel} from '../models/Vehicle.model';
 import {SketchModel} from '../models/Sketch.model';
-import {LocationGroup} from '../models/Location.model';
+import {LocationGroup, LocationModel} from '../models/Location.model';
 
 export type ActionType = string;
 
@@ -65,6 +65,7 @@ export interface SidurStore {
     displaySetting: DisplaySettings,
     sketches: SketchModel[];
     sidurId: string;
+    Locations: LocationModel[];
     LocationGroups: LocationGroup[];
     sessionState: SessionModel;
     recordBriefs: RecordBriefModel[]

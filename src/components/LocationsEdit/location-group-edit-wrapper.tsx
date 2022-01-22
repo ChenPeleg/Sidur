@@ -50,9 +50,10 @@ export const LocationGroupEditWrapper = () => {
             retText = translations.thisCollectionIsInUse + ':';
             sidurim.forEach((s, i) => {
                 let suffix = ''
+              
                 if (s.id.includes(AppConstants.ArchiveIdPrefix)) {
                     suffix = translations.InArchive
-                } else if (s.id.includes(AppConstants.ArchiveIdPrefix)) {
+                } else if (s.id.includes(AppConstants.deleteIdPrefix)) {
                     suffix = translations.InTrash
                 }
                 if (suffix !== '') {
@@ -74,7 +75,7 @@ export const LocationGroupEditWrapper = () => {
     }
 
     const isLocationInSidur: RecordBriefModel [] | [] = recordBriefs.filter(lb => lb.typeOfRecord === TypeOfRecord.Sidur && lb.locationGroupOrSidurId === locationGroupInEditId);
-   
+
     const handleLocationGroupMenuClick = (event: React.MouseEvent<HTMLElement>, clickAction: LocationGroupActionType) => {
 
         switch (clickAction) {

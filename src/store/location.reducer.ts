@@ -1,4 +1,4 @@
-import {IAction, SidurStore} from './store.types';
+import {IAction, SidurRecord, SidurStore} from './store.types';
 import {StoreUtils} from './store-utils';
 import {ActionsTypes} from './types.actions';
 import {LocationGroup, LocationModel} from '../models/Location.model';
@@ -36,6 +36,10 @@ export const LocationReducer: Record<LocationReducerFunctions, (state: SidurStor
                 }
                 return g
             })
+            const currentSidur = newState.sidurCollection.find(s => s.id === newState.sidurId) as SidurRecord;
+            if (currentLocationGroupId === currentSidur.locationGroupIdForSidur) {
+                state.Locations = currentLocationGroup.Locations;
+            }
         }
 
 
@@ -92,7 +96,13 @@ export const LocationReducer: Record<LocationReducerFunctions, (state: SidurStor
                     return l
                 })
 
+            const currentSidur = newState.sidurCollection.find(s => s.id === newState.sidurId) as SidurRecord;
+            if (currentLocationGroupId === currentSidur.locationGroupIdForSidur) {
+                state.Locations = currentLocationGroup.Locations;
+            }
         }
+        ;
+
 
         StoreUtils.HandleReducerSaveToLocalStorage(newState);
         return newState
