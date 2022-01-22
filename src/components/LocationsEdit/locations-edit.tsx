@@ -105,7 +105,8 @@ export const LocationsEdit = () => {
                     {filteredLocations.map((l: LocationModel, i: number) =>
                         <Box key={l.id} onClick={(event) => handleStartEditLocation(event, l.id)}>
 
-                            <LocationForm isInEdit={locationMainInEdit === l.id}  {...l} onUpdate={handleLocationUpdate} key={i}/>
+                            <LocationForm preventDelete={true} isInEdit={locationMainInEdit === l.id}  {...l}
+                                          onUpdate={handleLocationUpdate} key={i}/>
                         </Box>
                     )}
                 </Box>

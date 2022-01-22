@@ -11,7 +11,8 @@ import {ActionsTypes} from '../../store/types.actions';
 
 interface LocationFormProps extends LocationModel {
     onUpdate: (locationUpdate: LocationModel) => void,
-    isInEdit: boolean
+    isInEdit: boolean,
+    preventDelete: boolean
 }
 
 export const LocationForm = (props: LocationFormProps) => {
@@ -150,7 +151,10 @@ export const LocationForm = (props: LocationFormProps) => {
                     width: '80px',
                     height: '20px'
                 }}/>
-                <DeleteButton deleteClickHandler={deleteClickHandler} sx={{fontSize: '14px'}}/>
+                <DeleteButton deleteClickHandler={deleteClickHandler} sx={{
+                    fontSize: '14px',
+                    visibility: props.preventDelete ? 'hidden' : 'visible'
+                }}/>
                 <Box id={'caption-container'} sx={{
                     width: '5px',
                     height: '20px'

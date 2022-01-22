@@ -11,7 +11,8 @@ interface LocationGroupMenuProps {
     locationGroupMenuId: string,
     isLocationGroupMenuOpen: boolean,
     handleLocationGroupMenuClick: (event: React.MouseEvent<HTMLElement>, clickAction: LocationGroupActionType) => void
-    handleLocationGroupMenuClose: () => void
+    handleLocationGroupMenuClose: () => void,
+    preventDelete: boolean
 }
 
 export const LocationGroupMenu = (props: LocationGroupMenuProps) => {
@@ -20,7 +21,8 @@ export const LocationGroupMenu = (props: LocationGroupMenuProps) => {
         locationGroupMenuId,
         isLocationGroupMenuOpen,
         handleLocationGroupMenuClick,
-        handleLocationGroupMenuClose
+        handleLocationGroupMenuClose,
+        preventDelete
     } = props;
     const isEditable = locationGroupMenuId !== 'ESHBAL'
     return (
@@ -50,7 +52,7 @@ export const LocationGroupMenu = (props: LocationGroupMenuProps) => {
 
 
                 : null}
-            {isEditable ?
+            {isEditable && !preventDelete ?
                 <MenuItem onClick={(e) => handleLocationGroupMenuClick(e, LocationGroupActionType.Delete)}>
 
                     <Delete/>&nbsp;

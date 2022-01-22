@@ -3,7 +3,7 @@ import {Box, Button, IconButton, MenuItem, Select, SelectChangeEvent, Typography
 import {useDispatch, useSelector} from 'react-redux';
 import {Edit, LockTwoTone} from '@mui/icons-material';
 import {RenameDialog} from '../Dialogs/rename-dialog';
-import {SidurStore} from '../../store/store.types';
+import {AppConstants, RecordBriefModel, SidurStore, TypeOfRecord} from '../../store/store.types';
 import {ActionsTypes} from '../../store/types.actions';
 import {translations} from '../../services/translations';
 import {LocationGroup} from '../../models/Location.model';
@@ -17,6 +17,7 @@ export const LocationGroupEditWrapper = () => {
     const dispatch = useDispatch();
     const locationGroupInEditId = useSelector((state: SidurStore) => state.sessionState.locationGroupInEdit || 'ESHBAL');
     const locationGroups: LocationGroup[] = useSelector((state: { LocationGroups: LocationGroup[] }) => state.LocationGroups || []);
+    const recordBriefs: RecordBriefModel[] = useSelector((state: { recordBriefs: RecordBriefModel[] }) => state.recordBriefs || []);
 
     const [locationGroupMoreAnchorEl, setLocationGroupMoreAnchorEl] =
         React.useState<null | HTMLElement>(null);
@@ -41,6 +42,39 @@ export const LocationGroupEditWrapper = () => {
             })
         }
     };
+    const buildTextForLocationInSidurim = (sidurim: RecordBriefModel []): string => {
+        let retText = ''
+        if (sidurim.length === 0) {
+            return ''
+        } else if (sidurim.length > 0) {
+            retText = translations.thisCollectionIsInUse + ':';
+            sidurim.forEach((s, i) => {
+                let suffix = ''
+                if (s.id.includes(AppConstants.ArchiveIdPrefix)) {
+                    suffix = translations.InArchive
+                } else if (s.id.includes(AppConstants.ArchiveIdPrefix)) {
+                    suffix = translations.InTrash
+                }
+                if (suffix !== '') {
+                    suffix = ' (' + suffix + ')'
+                }
+                if (i > 0) {
+                    retText += ', '
+                }
+                retText += s.name + suffix
+            })
+        }
+        if (sidurim.length >= 4) {
+            retText += ', ' + translations.thisCollectionIsInUseandAnother + ' ' +
+                (sidurim.length - 1).toString() + ' ' + translations.thisCollectionIsInUseandAnothersidurim;
+        }
+        retText += '. ' + translations.thisCollectionIsInUsedCannotbeDeleted
+        return retText
+
+    }
+
+    const isLocationInSidur: RecordBriefModel [] | [] = recordBriefs.filter(lb => lb.typeOfRecord === TypeOfRecord.Sidur && lb.locationGroupOrSidurId === locationGroupInEditId);
+   
     const handleLocationGroupMenuClick = (event: React.MouseEvent<HTMLElement>, clickAction: LocationGroupActionType) => {
 
         switch (clickAction) {
@@ -159,6 +193,13 @@ export const LocationGroupEditWrapper = () => {
                 >
                     <Edit/>
                 </IconButton>
+                <Box
+                    sx={{
+                        fontSize: 'small',
+                        maxWidth: '50vw',
+                        pr: '20px',
+                        pl: '20px'
+                    }}> {locationGroupInEditId === 'ESHBAL' ? null : buildTextForLocationInSidurim(isLocationInSidur)}</Box>
 
 
             </Box> : <Button variant={'contained'} id={'sketches-create-sketch'}
@@ -169,7 +210,7 @@ export const LocationGroupEditWrapper = () => {
                                locationGroupMenuId={locationGroupInEditId || ''}
                                isLocationGroupMenuOpen={isLocationGroupMenuOpen}
                                handleLocationGroupMenuClick={handleLocationGroupMenuClick}
-                               handleLocationGroupMenuClose={handleSketchMenuClose}/>
+                               handleLocationGroupMenuClose={handleSketchMenuClose} preventDelete={isLocationInSidur.length > 0}/>
             <RenameDialog open={RenameOpen} onClose={handleRenameClose} selectedValue={sketchName}/>
         </Box>
 

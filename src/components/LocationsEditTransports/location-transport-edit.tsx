@@ -188,7 +188,7 @@ export const LocationTransportEdit = (props: LocationRouteEditProps) => {
                             display: isLongRoute ? 'inline' : 'block',
                             p: '0.1em',
 
-                        }}>
+                        }} key={stop.locationId + i.toString()}>
 
 
                             {i > 0 ? <><Select disableUnderline={true} variant={'standard'} value={stop.minuetsFromLastCode}
@@ -200,8 +200,8 @@ export const LocationTransportEdit = (props: LocationRouteEditProps) => {
                                                onChange={(event: SelectChangeEvent<any>, child: React.ReactNode) => {
                                                    handleDriveLengthChanged(event, stop)
                                                }}>
-                                {minutesFromLastOptions.map((option) => <MenuItem key={option.value}
-                                                                                  value={option.value}> {option.text}  &nbsp;&nbsp; </MenuItem>)}
+                                {minutesFromLastOptions.map((option, i) => <MenuItem key={option.value + i.toString()}
+                                                                                     value={option.value}> {option.text}  &nbsp;&nbsp; </MenuItem>)}
                             </Select> <Box sx={{
                                 width: isLongRoute ? '15px' : '5px',
                                 height: '5px',
