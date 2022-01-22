@@ -1,4 +1,4 @@
-import {defaultOrderValues, defaultVehicleValues, IAction, SidurStore} from './store.types';
+import {IAction, SidurStore} from './store.types';
 import {SaveLoadService} from '../services/save-load.service';
 import {SidurReducer} from './sidur.reducer';
 import {OrderReducer} from './order.reducer';
@@ -17,31 +17,7 @@ import {RouteReducer} from './route.reducer';
 import {TransportReducer} from './transport.reducer';
 
 const buildInintialState = (): SidurStore => {
-    const defaultInitialState: SidurStore = {
-        sidurArchive: [],
-        sidurCollection: [{
-            id: '1',
-            Name: 'סידור לדוגמה',
-            orders: [],
-            deletedOrders: [],
-            vehicles: [defaultVehicleValues],
-            sketches: [],
-            chosenSketch: '',
-            locationGroup: null
-        }
-
-        ],
-        sidurId: '1',
-        orders: [],
-        vehicles: [],
-        deletedOrders: [],
-        defaultOrderValues: {...defaultOrderValues},
-        sketches: [],
-        displaySetting: {view: 'locationsView'},
-        sessionState: StoreUtils.defaultSessionState(),
-        LocationGroups: []
-
-    }
+    
     const stateFromLocalStorage: SidurStore | undefined = SaveLoadService.loadFromLocalStorage('chen').data?.savedStore;
     //defaultInitialState.sidurCollection.push(defaultSidurEshbal.sidurCollection[0])
     const initialState: SidurStore = (stateFromLocalStorage || defaultSidurEshbal) as SidurStore;

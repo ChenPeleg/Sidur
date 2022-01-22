@@ -9,7 +9,8 @@ import DialogTitle from '@mui/material/DialogTitle';
 import {translations} from '../../services/translations';
 import {TransportModel} from '../../models/Location.model';
 import {Theme} from '@mui/system';
-import {Box} from '@mui/material';
+import {Box, IconButton} from '@mui/material';
+import {Delete} from '@mui/icons-material';
 
 interface RenameProps {
     open: boolean;
@@ -33,7 +34,7 @@ export const TransportScheduleDialog = (props: RenameProps) => {
             // padding: '10px'
         }
     }
-    const emptyValues = ['', '', '', '', '', '']
+    const emptyValues = ['', '', '', '', ''];
     const transportTimes = transport.TransportTime || []
     const allTimes = transportTimes.concat(emptyValues);
 
@@ -42,13 +43,26 @@ export const TransportScheduleDialog = (props: RenameProps) => {
         onClose(null);
     };
     const handleCloseHours = () => {
-        onClose(hourValues.filter(v => v && v.length));
+        onClose(hourValues.filter(v => v && v.length && v.trim()));
     };
+    const handleAddHours = () => {
+        setHourValues(hourValues.concat(emptyValues))
+    }
 
 
     const onChangeHour = (changeEvent: React.ChangeEvent<HTMLInputElement>, index: number) => {
         const newHourValues = [...hourValues];
         const newValue = changeEvent.target.value;
+        const changedHourValues = newHourValues.map((h: string, i: number) => i === index ? newValue : h)
+        if (newValue) {
+            setHourValues(changedHourValues)
+
+        }
+        // console.log(changeEvent, index)
+    }
+    const onDeleteHour = (index: number) => {
+        const newHourValues = [...hourValues];
+        const newValue = ' ';
         const changedHourValues = newHourValues.map((h: string, i: number) => i === index ? newValue : h)
         if (newValue) {
             setHourValues(changedHourValues)
@@ -63,21 +77,42 @@ export const TransportScheduleDialog = (props: RenameProps) => {
             <Dialog open={open} onClose={handleCloseCancel}>
                 <DialogTitle> {transport.name + ' ' + translations.exitTime + ':'}</DialogTitle>
                 <DialogContent>
-                    {hourValues.map((s: string, i: number) => (
-                        <Box sx={{'display': 'inline-flex'}}>
+                    <Box sx={{
+                        display: 'flex',
+                        flexDirection: 'column'
+                    }}>
+                        <Box sx={{
+                            'display': 'flex',
+                            flexDirection: 'row',
+                            flexWrap: 'wrap'
+                        }}>
+                            {hourValues.map((s: string, i: number) => (
+                                <Box sx={{'display': 'inline-flex'}}>
 
-                            <Box id={'divider-hours'} sx={{
-                                width: '55px',
-                                height: '20px'
-                            }}/>
+                                    <Box id={'divider-hours'} sx={{
+                                        width: '55px',
+                                        height: '20px'
+                                    }}/>
 
-                            <TextField variant={'standard'}
-                                       sx={{...sxRoot}}
-                                       type="time"
-                                       value={s}
-                                       onChange={(event: React.ChangeEvent<HTMLInputElement>) => onChangeHour(event, i)}/>
-                        </Box>))}
-
+                                    <IconButton size="small"
+                                                onClick={(e) => onDeleteHour(i)}
+                                                color="inherit"
+                                    ><Delete fontSize={'small'}/> </IconButton>
+                                    <TextField variant={'standard'}
+                                               sx={{...sxRoot}}
+                                               type="time"
+                                               value={s}
+                                               onChange={(event: React.ChangeEvent<HTMLInputElement>) => onChangeHour(event, i)}/>
+                                </Box>))}
+                        </Box>
+                        <Button sx={{
+                            maxWidth: '100%',
+                            mt: '1em',
+                            alignSelf: 'center'
+                        }} variant="contained" onClick={handleAddHours} aria-label="add" size="medium">
+                            &nbsp;&nbsp;&nbsp; {translations.addHours}&nbsp;&nbsp;&nbsp;
+                        </Button>
+                    </Box>
                 </DialogContent>
                 <DialogActions>
                     <Button id={'sidur-rename-cancel-button'} onClick={handleCloseCancel}>{translations.Cancel}</Button>

@@ -31,13 +31,13 @@ interface LocationRouteEditProps {
 
 }
 
-const maxHoursToSHow = 7;
+const maxHoursToSHow = 6;
 //const TransportStops
 export const LocationTransportEdit = (props: LocationRouteEditProps) => {
     const dispatch = useDispatch();
 
     const [RenameOpen, setRenameOpen] = React.useState(false);
-    const [scheduleOpen, setScheduleOpen] = React.useState(true);
+    const [scheduleOpen, setScheduleOpen] = React.useState(false);
     const [routeMoreAnchorEl, setRouteMoreAnchorEl] =
         React.useState<null | HTMLElement>(null);
     const isRouteMenuOpen = Boolean(routeMoreAnchorEl);
@@ -253,14 +253,20 @@ export const LocationTransportEdit = (props: LocationRouteEditProps) => {
                 }}>
                     <Box sx={{
                         m: '1em',
-                        width: '150px',
+                        width: '100px',
+                        display: 'flex',
+                        flexDirection: 'column',
+                        alignItems: 'center'
                         // mb: '0px'
                     }}> <b>{translations.exitTime}</b>
-                        <Button variant="contained" onClick={handleEditTransportTimes} aria-label="add" size="small">
-                            {translations.addTransportRoute}
+                        <Button sx={{
+                            mb: '0.3em',
+                            mt: '0.3em'
+                        }} variant="contained" onClick={handleEditTransportTimes} aria-label="add" size="small">
+                            {translations.editTimeStarts}
                         </Button>
                         {timeTableBrief.map((t, i) => (<Box key={i.toString() + props.transportRoute.id} sx={{
-                            m: '2em',
+                            m: '1em',
                             mb: '5px',
                             mt: '5px',
                             fontSize: 'large'

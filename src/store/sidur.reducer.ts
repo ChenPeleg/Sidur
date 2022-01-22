@@ -18,6 +18,7 @@ export type SidurReducerFunctions =
 
 const DefaultSidur: SidurRecord = {
     id: '1',
+    dbId: '',
     Name: 'הסידור החדש שלי',
     orders: [],
     deletedOrders: [],
@@ -169,6 +170,7 @@ export const SidurReducer: Record<SidurReducerFunctions, (state: SidurStore, act
         const newSidurId = Utils.getNextId(getAllSidurIDs(state))
         const newSidur: SidurRecord = {
             id: newSidurId,
+            dbId: '',
             Name: translations.Sidur + ' ' + newSidurId,
             orders: [],
             deletedOrders: [],
@@ -193,7 +195,8 @@ export const SidurReducer: Record<SidurReducerFunctions, (state: SidurStore, act
             const newSidur: SidurRecord = CloneUtil.deepCloneSidur(sidurForCloning);
             newSidur.Name = translations.CopyOf + ' ' + newSidur.Name;
             const newSidurId = Utils.getNextId(getAllSidurIDs(state));
-            newSidur.id = newSidurId
+            newSidur.dbId = '';
+            newSidur.id = newSidurId;
             newState.sidurCollection = newState.sidurCollection.map(c => c);
             newState.sidurCollection.push(newSidur);
             newState.sidurId = newSidurId;

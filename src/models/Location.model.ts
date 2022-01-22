@@ -32,7 +32,9 @@ export interface RouteModel {
 }
 
 export interface LocationGroup {
+
     id: string,
+    dbId: string,
     name: string,
     Locations: LocationModel[],
     Routes: RouteModel[],

@@ -78,6 +78,7 @@ export const StoreUtils = {
     defaultEshbalLocationGroup(): LocationGroup {
         const eshablLocationGrouop: LocationGroup = {
             Locations: [...locations],
+            dbId: '',
             id: 'ESHBAL',
             name: translations.Eshbal,
             Transports: [],

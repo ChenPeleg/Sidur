@@ -14,6 +14,7 @@ export type IAction = {
 
 export interface SidurRecord {
     id: string,
+    dbId: string,
     Name: string,
     orders: OrderModel[];
     vehicles: VehicleModel[];
@@ -41,6 +42,19 @@ export interface SessionModel {
     locationMainInEdit: null | string
 }
 
+export enum TypeOfRecord {
+    Sidur = 1,
+    LocationGroup = 2
+}
+
+export interface RecordBriefModel {
+    id: string,
+    dbId: string,
+    name: string,
+    typeOfRecord: TypeOfRecord,
+    locationGroupOrSidurId: string
+}
+
 export interface SidurStore {
     sidurCollection: SidurRecord[];
     sidurArchive: SidurRecord[];
@@ -53,14 +67,8 @@ export interface SidurStore {
     sidurId: string;
     LocationGroups: LocationGroup[];
     sessionState: SessionModel;
+    recordBriefs: RecordBriefModel[]
 
-
-    // Move to Session state
-    // dataHolderForCurrentOrderInEdit: OrderModel | null;
-    // locationGroupInEdit: null | string;
-    // orderIdInEdit: null | string;
-    // pendingOrderIdInEdit: null | string;
-    // SketchIdInEdit: null | string;
 
 }
 

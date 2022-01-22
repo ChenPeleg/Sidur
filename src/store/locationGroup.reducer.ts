@@ -57,6 +57,8 @@ export const LocationGroupReducer: Record<LocationGroupReducerFunctions, (state:
         newState.LocationGroups.push({
             name: 'בסיס סידור ' + newId,
             id: newId,
+
+            dbId: '',
             Locations: [],
             Routes: [],
             Transports: []
@@ -98,6 +100,7 @@ export const LocationGroupReducer: Record<LocationGroupReducerFunctions, (state:
             newLocGroup.name = translations.CopyOf + ' ' + newLocGroup.name;
             const newLocGroupId = Utils.getNextId(newState.LocationGroups?.map(l => l.id) || ['']);
             newLocGroup.id = newLocGroupId;
+            newLocGroup.dbId = '';
             newState.LocationGroups = newState.LocationGroups?.map(c => c) || [];
             newState.LocationGroups.push(newLocGroup);
             newState.sessionState.locationGroupInEdit = newLocGroupId;
@@ -126,7 +129,7 @@ export const LocationGroupReducer: Record<LocationGroupReducerFunctions, (state:
             }
 
         })
-       
+
         StoreUtils.HandleReducerSaveToLocalStorage(newState);
         return newState
     },
