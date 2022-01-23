@@ -1,40 +1,33 @@
-import {HashRouter, Link, Route, Routes} from 'react-router-dom';
+import {HashRouter, Route, Routes} from 'react-router-dom';
 
 
-export const RouterMain = () => {
+export const RouterMain = ({
+                               children
+
+                           }: any) => {
 
     return (
-        <HashRouter>
-            <div>
-                <ul>
-                    <li>
-                        <Link to="/">Home</Link>
-                    </li>
-                    <li>
-                        <Link to="/about">About</Link>
-                    </li>
-                    <li>
-                        <Link to="/dashboard">Dashboard</Link>
-                    </li>
-                </ul>
-
-                <hr/>
+        <HashRouter basename={'h/'}>
 
 
-                <Routes>
-                    <Route path="/" element={<Home/>}>
+            <Routes>
+                <Route path="/" element={<Home/>}>
 
-                    </Route>
-                    <Route path="/about" element={<About/>}>
+                </Route>
+                <Route path="/about" element={<About/>}>
 
-                    </Route>
-                    <Route path="/dashboard" element={<Dashboard/>}>
+                </Route>
+                <Route path="/dashboard" element={<Dashboard/>}>
 
-                    </Route>
-                </Routes>
-            </div>
+                </Route>
+            </Routes>
+
+            {
+                children
+            }
         </HashRouter>
-    );
+    )
+
 }
 
 // You can think of these components as "pages"

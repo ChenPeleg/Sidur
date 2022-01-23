@@ -5,6 +5,7 @@ import {MainLayout} from './main-layout';
 import {ThemeProvider} from '@mui/material';
 import {AppNavBar} from '../components/NavBar/app-nav-bar';
 import {Loading} from '../components/Loading/loading';
+import {RouterMain} from '../router/router-main';
 
 
 export const AppLayout = () => {
@@ -15,10 +16,13 @@ export const AppLayout = () => {
     return (
         <ThemeProvider theme={themeMain}>
             <div className="app-background" dir={'rtl'}>
-                <AppNavBar/>
-                <Loading/>
+                <RouterMain>
+                    <AppNavBar/>
+                    <Loading/>
 
-                <MainLayout/>
+                    <MainLayout/>
+
+                </RouterMain>
 
             </div>
         </ThemeProvider>

@@ -4,6 +4,7 @@ import {translations} from '../../services/translations';
 import {useDispatch} from 'react-redux';
 import {ActionsTypes} from '../../store/types.actions';
 import {StyledToggleButtonGroup} from './styled-toggle-button';
+import {Link} from 'react-router-dom';
 
 
 export const ToggleButtons = () => {
@@ -37,9 +38,14 @@ export const ToggleButtons = () => {
             onChange={handleChange}
         >
 
-            <ToggleButton sx={{color: 'white'}} value={'locationsView'}>{translations.Locations}</ToggleButton>
-            <ToggleButton sx={{color: 'white'}} value={'sketch'}>{translations.Sketch}</ToggleButton>
-            <ToggleButton sx={{color: 'white'}} value={'orders'}> {translations.Orders} </ToggleButton>
+            <ToggleButton component={Link} to="/locations" sx={{color: 'white'}}
+                          value={'locationsView'}>{translations.Locations}</ToggleButton>
+
+       
+            <ToggleButton component={Link} to="/sketch" sx={{color: 'white'}} value={'sketch'}>{translations.Sketch}</ToggleButton>
+
+            <ToggleButton component={Link} to="/orders" sx={{color: 'white'}} value={'orders'}> {translations.Orders} </ToggleButton>
+
         </StyledToggleButtonGroup>
     );
 }
