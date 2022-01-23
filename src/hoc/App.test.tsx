@@ -21,7 +21,7 @@ describe('basic app rendering', () => {
     });
 
     it('renders correctly', () => {
-        // console.log(wrapped);
+       
 
         expect(wrapped).toEqual({});
     });

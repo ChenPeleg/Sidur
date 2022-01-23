@@ -3,7 +3,6 @@ import {useDispatch} from 'react-redux';
 import {OrderModel} from '../../models/Order.model';
 import {SketchPendingOrderBrief} from './SketchPendingOrderBrief';
 import {ActionsTypes} from '../../store/types.actions';
-import {SxProps} from '@mui/system';
 import {Box, Card, Collapse} from '@mui/material';
 import {SketchPendingOrderFull} from './SketchPendingOrderFull';
 
@@ -32,15 +31,7 @@ export const SketchPendingOrder = (props: sketchPendingOrderProps) => {
         })
     }
 
-
-    const briefOrderStyle: SxProps = props.isInEdit ? {} : {
-        cursor: 'pointer',
-        bgcolor: {
-            transition: ' ease-in-out 100ms',
-        },
-
-
-    }
+ 
     const order = props.order;
     return (<>
             <Box sx={{display: 'flex'}}>

@@ -27,11 +27,10 @@ export const PendingOrdersReducer: Record<PendingOrdersReducerFunctions, (state:
         return newState
     },
     [ActionsTypes.CLICKED_CLOSE_PENDING_ORDER]: (state: SidurStore, action: IAction): SidurStore => {
+       
         let newState = {...state}
-
         newState.sessionState.pendingOrderIdInEdit = null;
-
-
+        newState.sessionState = {...newState.sessionState}
         return newState
     },
 

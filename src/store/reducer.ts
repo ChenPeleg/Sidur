@@ -20,7 +20,7 @@ const buildInintialState = (): SidurStore => {
     const stateFromLocalStorage: SidurStore | undefined = SaveLoadService.loadFromLocalStorage('chen').data?.savedStore;
 
     const initialState: SidurStore = (stateFromLocalStorage || DefaultSidurFetching) as SidurStore;
-     
+
     return initialState;
 }
 
@@ -30,6 +30,7 @@ const reducer = (state: SidurStore = initialState, action: IAction) => {
     let newState = {
         ...state
     }
+
 
     switch (action.type) {
         case ActionsTypes.CHOOSE_SIDUR:
@@ -84,12 +85,12 @@ const reducer = (state: SidurStore = initialState, action: IAction) => {
         case ActionsTypes.CLICKED_REMOVE_PENDING_ORDER :
         case ActionsTypes.CLICKED_MERGE_PENDING_ORDER :
         case ActionsTypes.CLICKED_SPLIT_PENDING_ORDER :
-        case ActionsTypes.CLICKED_CHANGE_PENDING_ORDER  :
-        case ActionsTypes.CLICKED_CHANGE_TIME_PENDING_ORDER  :
-        case ActionsTypes.CLICKED_REPLACE_EXISTING_PENDING_ORDER  :
-        case ActionsTypes.CLICKED_PUBLIC_TRANSPORT_PENDING_ORDER  :
+        case ActionsTypes.CLICKED_CHANGE_PENDING_ORDER :
+        case ActionsTypes.CLICKED_CHANGE_TIME_PENDING_ORDER :
+        case ActionsTypes.CLICKED_REPLACE_EXISTING_PENDING_ORDER :
+        case ActionsTypes.CLICKED_PUBLIC_TRANSPORT_PENDING_ORDER :
         case ActionsTypes.CLICKED_ADD_TO_PENDING_PENDING_ORDER:
-
+            console.log(action.type)
             return PendingOrdersReducer [action.type](newState, action)
         case ActionsTypes.DELETE_SKETCH_DRIVE:
         case ActionsTypes.UPDATE_SKETCH_DRIVE:

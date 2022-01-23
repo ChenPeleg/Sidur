@@ -58,7 +58,7 @@ export const TransportScheduleDialog = (props: RenameProps) => {
             setHourValues(changedHourValues)
 
         }
-        // console.log(changeEvent, index)
+
     }
     const onDeleteHour = (index: number) => {
         const newHourValues = [...hourValues];
@@ -68,7 +68,7 @@ export const TransportScheduleDialog = (props: RenameProps) => {
             setHourValues(changedHourValues)
 
         }
-        // console.log(changeEvent, index)
+      
     }
 
     return (
