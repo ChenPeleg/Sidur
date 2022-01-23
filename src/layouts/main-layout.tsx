@@ -7,6 +7,7 @@ import {DisplaySettings} from '../store/store.types';
 import {SketchesContainer} from '../components/Sketch/SketchesContainer';
 import {LocationGroupEditWrapper} from '../components/LocationsEdit/location-group-edit-wrapper';
 import {LocationGroupSelect} from '../components/LocationGroupSelect/location-group-select';
+import {RouterMain} from '../router/router-main';
 
 
 export const MainLayout = () => {
@@ -37,6 +38,7 @@ export const MainLayout = () => {
     return (
 
         <main>
+            <RouterMain/>
             <Box sx={{margin: '20px'}} flexDirection="row" display="flex" alignItems="start" justifyContent="start">
 
                 {displaySketches ? <Box flexDirection="column" flexWrap="wrap" display="flex" alignItems="start" justifyContent="start">
