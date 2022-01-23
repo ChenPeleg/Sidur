@@ -74,6 +74,7 @@ export const translations = {
     'thisCollectionIsInUseandAnother': '  ובעוד ',
     'thisCollectionIsInUseandAnothersidurim': 'סידורים ',
     'thisCollectionIsInUsedCannotbeDeleted': 'לא ניתן למחוק את האוסף או  את המקומות הקיימים בו. ',
+    'cantDeleteLocation': 'לא ניתן למחוק מיקום המשמש במסלולים / תחב"צ',
 
     'newLocationGroup': 'אוסף מיקומים חדש',
     'Eshbal': 'אשבל',

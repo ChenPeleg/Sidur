@@ -50,7 +50,7 @@ export const LocationGroupEditWrapper = () => {
             retText = translations.thisCollectionIsInUse + ':';
             sidurim.forEach((s, i) => {
                 let suffix = ''
-              
+
                 if (s.id.includes(AppConstants.ArchiveIdPrefix)) {
                     suffix = translations.InArchive
                 } else if (s.id.includes(AppConstants.deleteIdPrefix)) {

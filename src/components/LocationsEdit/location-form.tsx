@@ -8,13 +8,31 @@ import TextField from '@mui/material/TextField';
 import {translations} from '../../services/translations';
 import {DeleteButton} from '../buttons/delete-button';
 import {ActionsTypes} from '../../store/types.actions';
+import {LightTooltip} from '../styled/light-tool-tip';
 
 interface LocationFormProps extends LocationModel {
     onUpdate: (locationUpdate: LocationModel) => void,
     isInEdit: boolean,
-    preventDelete: boolean
+    preventDelete: boolean,
+    usedIn: string []
+
 }
 
+const buildCantDeleteText = (uses: string []): string => {
+    if (uses.length === 0) {
+        return ''
+    }
+    let txt = translations.cantDeleteLocation + ': '
+    uses.forEach((u, i) => {
+        if (txt.length < 80) {
+            if (i > 0) {
+                txt += ', '
+            }
+            txt += u
+        }
+    })
+    return txt + '.'
+}
 export const LocationForm = (props: LocationFormProps) => {
     const locationGroupInEditId = useSelector((state: SidurStore) => state.sessionState.locationGroupInEdit);
     const locationGroups: LocationGroup[] = useSelector((state: { LocationGroups: LocationGroup[] }) => state.LocationGroups || []);
@@ -34,7 +52,7 @@ export const LocationForm = (props: LocationFormProps) => {
             ETA: props.ETA,
             name: props.name,
             EnName: props.EnName
-            
+
         };
         const refName = valueNameRef.current.value;
         const refMinutes = valueMinutesRef.current.value;
@@ -152,10 +170,18 @@ export const LocationForm = (props: LocationFormProps) => {
                     width: '80px',
                     height: '20px'
                 }}/>
-                <DeleteButton deleteClickHandler={deleteClickHandler} sx={{
-                    fontSize: '14px',
-                    visibility: props.preventDelete ? 'hidden' : 'visible'
-                }}/>
+                <LightTooltip title={props.preventDelete ? '' : buildCantDeleteText(props.usedIn)}>
+                    <Box>
+                        <DeleteButton deleteClickHandler={deleteClickHandler}
+                                      disabled={props.usedIn.length > 0} sx={{
+                            fontSize: '14px',
+                            visibility: props.preventDelete ? 'hidden' : 'visible'
+                        }}/>
+                    </Box>
+
+                </LightTooltip>
+
+
                 <Box id={'caption-container'} sx={{
                     width: '5px',
                     height: '20px'

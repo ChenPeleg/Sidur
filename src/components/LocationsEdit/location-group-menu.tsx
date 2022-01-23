@@ -25,6 +25,7 @@ export const LocationGroupMenu = (props: LocationGroupMenuProps) => {
         preventDelete
     } = props;
     const isEditable = locationGroupMenuId !== 'ESHBAL'
+    console.log(isEditable, preventDelete)
     return (
         <Menu
             anchorEl={locationGroupMoreAnchorEl}
