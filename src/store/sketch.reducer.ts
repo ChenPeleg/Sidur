@@ -54,10 +54,8 @@ export const SketchReducer: Record<SketchReducerFunctions, (state: SidurStore, a
         newState.sessionState.SketchIdInEdit = chosenSketchId;
         const chosenSketchObj: SketchModel | undefined = newState.sketches.find((record: SketchModel) => record.id === chosenSketchId);
         if (chosenSketchObj !== undefined) {
-            const previousSketchObj: SketchModel | undefined = newState.sketches.find((record: SketchModel) => record.id === previousSketchId);
-            if (previousSketchObj !== undefined) {
-                const NewPreviousSketchObj = {...previousSketchObj};
-            }
+            
+
             const thisSidurInCollection: SidurRecord | undefined = newState.sidurCollection.find((sidur: SidurRecord) => sidur.id === newState.sidurId);
 
             if (thisSidurInCollection) {
@@ -90,7 +88,7 @@ export const SketchReducer: Record<SketchReducerFunctions, (state: SidurStore, a
     },
     [ActionsTypes.DELETE_SKETCH]: (state: SidurStore, action: IAction): SidurStore => {
         let newState = {...state}
-        const sketchToDelete = action.payload.id// newState.sidurId;
+        const sketchToDelete = action.payload.id;
         let posOfDeletedSketch = -1;
         let deletedSketch: SketchModel | undefined = newState.sketches.find(s => s.id === sketchToDelete);
         if (deletedSketch) {
@@ -104,9 +102,9 @@ export const SketchReducer: Record<SketchReducerFunctions, (state: SidurStore, a
         if (newState.sketches.length) {
             const sketchesIds = newState.sketches.map(s => s.id);
             if (posOfDeletedSketch > 1) {
-                newState.sessionState.SketchIdInEdit = sketchesIds [posOfDeletedSketch - 1]
+                newState.sessionState.SketchIdInEdit = sketchesIds[posOfDeletedSketch - 1]
             } else {
-                newState.sessionState.SketchIdInEdit = sketchesIds [0]
+                newState.sessionState.SketchIdInEdit = sketchesIds[0]
             }
         } else {
             newState.sessionState.SketchIdInEdit = ''

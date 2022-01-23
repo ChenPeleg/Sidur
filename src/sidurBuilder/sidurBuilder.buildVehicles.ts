@@ -32,9 +32,7 @@ export const SidurBuilderBuildVehiclesAndUnAssigned = (orders: OrderMetaDataMode
     });
     metaOrderScheduleData.sort((a, b) => (a.start > b.start) ? 1 : -1);
 
-    let vehicleScheduleId = 0;
     const vehicleSchedules: VehicleScheduleModel [] = vehicles.map((vehicle: VehicleModel) => {
-        vehicleScheduleId++
         const vehicleSchedule: VehicleScheduleModel = {
             id: enumerator.getStrId(),
             VehicleId: vehicle.id,

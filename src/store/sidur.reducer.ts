@@ -59,9 +59,8 @@ export const SidurReducer: Record<SidurReducerFunctions, (state: SidurStore, act
                 }));
 
                 NewPreviousSidurObj.defaultOrderValues = {
-                    ...
-                        NewPreviousSidurObj
-                            .defaultOrderValues
+                    ...NewPreviousSidurObj
+                        .defaultOrderValues
                 } as OrderModel;
                 newState.sidurCollection = newState.sidurCollection.map((sidur: SidurRecord) => {
                     if (sidur.id === previousSidurId) {

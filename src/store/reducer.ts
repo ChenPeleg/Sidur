@@ -15,17 +15,14 @@ import {DefaultSidurFetching} from './store-inital-state';
 import {RouteReducer} from './route.reducer';
 import {TransportReducer} from './transport.reducer';
 
-const buildInintialState = (): SidurStore => {
+const buildInitialState = (): SidurStore => {
 
     const stateFromLocalStorage: SidurStore | undefined = SaveLoadService.loadFromLocalStorage('chen').data?.savedStore;
-
-    const initialState: SidurStore = (stateFromLocalStorage || DefaultSidurFetching) as SidurStore;
-
-    return initialState;
+    return (stateFromLocalStorage || DefaultSidurFetching) as SidurStore;
 }
 
 
-const initialState = buildInintialState()
+const initialState = buildInitialState()
 const reducer = (state: SidurStore = initialState, action: IAction) => {
     let newState = {
         ...state
@@ -40,8 +37,8 @@ const reducer = (state: SidurStore = initialState, action: IAction) => {
         case ActionsTypes.CLONE_SIDUR:
         case ActionsTypes.ARCHIVE_SIDUR:
         case ActionsTypes.MOVE_TO_ACTIVE_SIDUR:
-        case  ActionsTypes.DELETE_FOREVER_SIDUR:
-        case  ActionsTypes.CHANGE_SIDUR_LOCATION_GROUP:
+        case ActionsTypes.DELETE_FOREVER_SIDUR:
+        case ActionsTypes.CHANGE_SIDUR_LOCATION_GROUP:
 
             return SidurReducer[action.type](newState, action)
 
@@ -75,44 +72,44 @@ const reducer = (state: SidurStore = initialState, action: IAction) => {
 
         case ActionsTypes.NEW_SKETCH:
         case ActionsTypes.CHOOSE_SKETCH:
-        case  ActionsTypes.CLONE_SKETCH:
+        case ActionsTypes.CLONE_SKETCH:
         case ActionsTypes.RENAME_SKETCH:
         case ActionsTypes.DELETE_SKETCH:
-            return SketchReducer [action.type](newState, action)
+            return SketchReducer[action.type](newState, action)
 
         case ActionsTypes.CLICKED_PENDING_ORDER:
         case ActionsTypes.CLICKED_CLOSE_PENDING_ORDER:
-        case ActionsTypes.CLICKED_REMOVE_PENDING_ORDER :
-        case ActionsTypes.CLICKED_MERGE_PENDING_ORDER :
-        case ActionsTypes.CLICKED_SPLIT_PENDING_ORDER :
-        case ActionsTypes.CLICKED_CHANGE_PENDING_ORDER :
-        case ActionsTypes.CLICKED_CHANGE_TIME_PENDING_ORDER :
-        case ActionsTypes.CLICKED_REPLACE_EXISTING_PENDING_ORDER :
-        case ActionsTypes.CLICKED_PUBLIC_TRANSPORT_PENDING_ORDER :
+        case ActionsTypes.CLICKED_REMOVE_PENDING_ORDER:
+        case ActionsTypes.CLICKED_MERGE_PENDING_ORDER:
+        case ActionsTypes.CLICKED_SPLIT_PENDING_ORDER:
+        case ActionsTypes.CLICKED_CHANGE_PENDING_ORDER:
+        case ActionsTypes.CLICKED_CHANGE_TIME_PENDING_ORDER:
+        case ActionsTypes.CLICKED_REPLACE_EXISTING_PENDING_ORDER:
+        case ActionsTypes.CLICKED_PUBLIC_TRANSPORT_PENDING_ORDER:
         case ActionsTypes.CLICKED_ADD_TO_PENDING_PENDING_ORDER:
-            console.log(action.type)
-            return PendingOrdersReducer [action.type](newState, action)
+
+            return PendingOrdersReducer[action.type](newState, action)
         case ActionsTypes.DELETE_SKETCH_DRIVE:
         case ActionsTypes.UPDATE_SKETCH_DRIVE:
         case ActionsTypes.REMOVE_ORDER_FROM_SKETCH_DRIVE:
-            return SketchDriveReducer [action.type](newState, action);
+            return SketchDriveReducer[action.type](newState, action);
 
-        case   ActionsTypes.UPDATE_LOCATION_GROUP :
-        case  ActionsTypes.DELETE_LOCATION_GROUP :
-        case ActionsTypes.NEW_LOCATION_GROUP :
-        case ActionsTypes.CLONE_LOCATION_GROUP :
+        case ActionsTypes.UPDATE_LOCATION_GROUP:
+        case ActionsTypes.DELETE_LOCATION_GROUP:
+        case ActionsTypes.NEW_LOCATION_GROUP:
+        case ActionsTypes.CLONE_LOCATION_GROUP:
         case ActionsTypes.RENAME_LOCATION_GROUP:
         case ActionsTypes.CHOOSE_LOCATION_GROUP:
         case ActionsTypes.CHOOSE_LOCATION_GROUP_TAB:
 
-            return LocationGroupReducer [action.type](newState, action)
+            return LocationGroupReducer[action.type](newState, action)
         case ActionsTypes.ADD_NEW_LOCATION:
         case ActionsTypes.START_EDIT_LOCATION:
         case ActionsTypes.STOP_EDIT_LOCATION:
         case ActionsTypes.UPDATE_LOCATION:
-        case ActionsTypes.DELETE_LOCATION :
+        case ActionsTypes.DELETE_LOCATION:
 
-            return LocationReducer [action.type](newState, action)
+            return LocationReducer[action.type](newState, action)
 
         case ActionsTypes.ADD_NEW_ROUTE:
         case ActionsTypes.START_EDIT_ROUTE:
@@ -122,7 +119,7 @@ const reducer = (state: SidurStore = initialState, action: IAction) => {
         case ActionsTypes.ADD_LOCATION_TO_ROUTE:
         case ActionsTypes.CLONE_ROUTE:
 
-            return RouteReducer [action.type](newState, action)
+            return RouteReducer[action.type](newState, action)
 
         case ActionsTypes.ADD_NEW_TRANSPORT:
         case ActionsTypes.START_EDIT_TRANSPORT:
@@ -132,7 +129,7 @@ const reducer = (state: SidurStore = initialState, action: IAction) => {
         case ActionsTypes.ADD_LOCATION_TO_TRANSPORT:
         case ActionsTypes.CLONE_TRANSPORT:
 
-            return TransportReducer  [action.type](newState, action)
+            return TransportReducer[action.type](newState, action)
 
         default:
             // @ts-ignore

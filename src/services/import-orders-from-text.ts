@@ -18,7 +18,7 @@ const stringIntoRows = (str: string): string [] => {
 }
 
 const DetectFormRows = (completeText: string): string => {
-    return completeText.replace(/\n((0?[1-9]|[12][0-9]|3[01])[\/\-](0?[1-9]|1[012])[\/\-]\d{4})/g, NewRowToken + '\$1');
+    return completeText.replace(/\n((0?[1-9]|[12][0-9]|3[01])[/-](0?[1-9]|1[012])[/-]\d{4})/g, NewRowToken + '$1');
 }
 const rowsToEshbalOrders = (rows: string [][]): EshbalOrder[] => {
     let EshbalOrders: EshbalOrder[] = [];

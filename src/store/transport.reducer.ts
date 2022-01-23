@@ -205,10 +205,9 @@ const buildTransportName = (transport: TransportModel, locations: LocationModel[
     } else if (transport.TransportStops.length > 1 && transport.TransportStops.length < 4) {
         return transport.TransportStops.map(s => getLocationName(s.locationId, locations)).join(' - ')
     } else {
-        return transport.TransportStops.map(s => getLocationName(s.locationId, locations)).filter((l, i) => (i == 0 || (i + 2) > transport.TransportStops.length) || Math.floor(transport.TransportStops.length / 2) === i).join(' - ')
+        return transport.TransportStops.map(s => getLocationName(s.locationId, locations)).filter((l, i) => (i === 0 || (i + 2) > transport.TransportStops.length) || Math.floor(transport.TransportStops.length / 2) === i).join(' - ')
     }
-    return ''
-
+ 
 
 }
 const getLocationName = (id: string, locations: LocationModel[]): string => {

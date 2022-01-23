@@ -1,9 +1,8 @@
 import {ActionsTypes} from './types.actions';
 
 
-import {IAction, SidurRecord, SidurStore} from './store.types';
+import {IAction, SidurStore} from './store.types';
 import {DriveModel, SketchModel, VehicleScheduleModel} from '../models/Sketch.model';
-import {CloneUtil} from '../services/clone-utility';
 import {OrderModel} from '../models/Order.model';
 import {StoreUtils} from './store-utils';
 
@@ -110,19 +109,7 @@ export const SketchDriveReducer: Record<SketchDriveReducerFunctions, (state: Sid
 
 
 }
-const updateSidurRecordWithSketchChanges = (state: SidurStore): SidurStore => {
-    const newState = {...state};
-    const thisSidurInCollection: SidurRecord | undefined = newState.sidurCollection.find((sidur: SidurRecord) => sidur.id === newState.sidurId);
-
-
-    if (thisSidurInCollection) {
-        thisSidurInCollection.sketches = newState.sketches.map(s => CloneUtil.deepCloneSketch(s))
-    }
-
-    return newState
-
-}
-
+ 
 
 const getVehicleIdFromDriveId = (state: SidurStore, driveId: string): string => {
     const SketchIdInEdit = state.sessionState.SketchIdInEdit
