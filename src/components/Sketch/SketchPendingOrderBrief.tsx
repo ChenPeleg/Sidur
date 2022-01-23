@@ -1,10 +1,10 @@
 import React from 'react'
 import {Box} from '@mui/system';
-import {useDispatch} from 'react-redux';
+import {useSelector} from 'react-redux';
 import {Typography} from '@mui/material';
-import {locations} from '../../services/locations';
 import {LanguageUtilities} from '../../services/language-utilities';
 import {OrderModel} from '../../models/Order.model';
+import {LocationModel} from '../../models/Location.model';
 
 
 interface sketchPendingOrderProps {
@@ -12,14 +12,13 @@ interface sketchPendingOrderProps {
     isInEdit: boolean
 }
 
-const getLocationFromId = (locationId: string): string | null => {
-    return locations.find(v => v.id === locationId)?.name || locationId
-}
-const timeText = (drive: OrderModel) => LanguageUtilities.buildBriefText(drive, locations).timeText;
-const driverAndLocation = (drive: OrderModel) => LanguageUtilities.buildBriefText(drive, locations).driverAndLocation;
+
+const timeText = (drive: OrderModel, locations: LocationModel[]) => LanguageUtilities.buildBriefText(drive, locations).timeText;
+const driverAndLocation = (drive: OrderModel, locations: LocationModel[]) => LanguageUtilities.buildBriefText(drive, locations).driverAndLocation;
 export const SketchPendingOrderBrief = (props: sketchPendingOrderProps) => {
-    const dispatch = useDispatch();
+
     const order = props.order;
+    const locations = useSelector(((state: { Locations: LocationModel[] }) => state.Locations));
 
 
     return ((<Box id={'pending-order'}>
@@ -31,7 +30,7 @@ export const SketchPendingOrderBrief = (props: sketchPendingOrderProps) => {
                     height: '10px'
                 }}/>
                 <Typography
-                    variant={'subtitle1'}>{timeText(order) + ' ' + driverAndLocation(order)}  </Typography>
+                    variant={'subtitle1'}>{timeText(order, locations) + ' ' + driverAndLocation(order, locations)}  </Typography>
 
             </Box>
 

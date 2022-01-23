@@ -6,14 +6,15 @@ import {SidurBuilderBuildVehiclesAndUnAssigned} from './sidurBuilder.buildVehicl
 import {SidurBuilderTools} from './sidurBuilder.tools';
 import {Utils} from '../services/utils';
 import {OrderModel} from '../models/Order.model';
+import {LocationModel} from '../models/Location.model';
 
-export const SidurBuilder = (Sidur: SidurRecord, buildSettings: any = null): SketchModel => {
+export const SidurBuilder = (Sidur: SidurRecord, locations: LocationModel[], buildSettings: any = null): SketchModel => {
     if (Sidur === null) {
         Sidur = mockSidur as any;
     }
     const settings: SidurBuildSettings = {custom: null}
-    const ordersMetaData: OrderMetaDataModel[] = SidurBuilderBuildOrdersMetaData(Sidur.orders, settings)
-    const BuildResult = SidurBuilderBuildVehiclesAndUnAssigned(ordersMetaData, Sidur.vehicles, settings);
+    const ordersMetaData: OrderMetaDataModel[] = SidurBuilderBuildOrdersMetaData(Sidur.orders, locations, settings)
+    const BuildResult = SidurBuilderBuildVehiclesAndUnAssigned(ordersMetaData, Sidur.vehicles, locations, settings);
     const initialVehicles: VehicleScheduleModel [] = BuildResult.vehicleSchedules;
     const unassignedOrders: OrderModel [] = BuildResult.unassignedOrders;
     const assignedOrders: OrderModel [] = BuildResult.assignedOrders;

@@ -4,8 +4,8 @@ import {OrderMetaDataModel, OrderMetaStatus} from './models/sidurBuilder.models'
 import {OrderModel} from '../models/Order.model';
 import {Utils} from '../services/utils';
 import {LanguageUtilities} from '../services/language-utilities';
-import {locations} from '../services/locations';
 import {SidurBuilderTools} from './sidurBuilder.tools';
+import {LocationModel} from '../models/Location.model';
 
 interface OrdMetaScheduleData {
     start: number,
@@ -15,7 +15,7 @@ interface OrdMetaScheduleData {
 
 }
 
-export const SidurBuilderBuildVehiclesAndUnAssigned = (orders: OrderMetaDataModel[], vehicles: VehicleModel[], buildSettings: any = null): {
+export const SidurBuilderBuildVehiclesAndUnAssigned = (orders: OrderMetaDataModel[], vehicles: VehicleModel[], locations: LocationModel[], buildSettings: any = null): {
     vehicleSchedules: VehicleScheduleModel[],
     unassignedOrders: OrderModel[],
     assignedOrders: OrderModel[],

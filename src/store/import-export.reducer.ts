@@ -52,16 +52,9 @@ export const ImportExportReducer: Record<ImportReducerFunctions, (state: SidurSt
     [ActionsTypes.IMPORT_ORDERS_AS_TEXT]: (state: SidurStore, action: IAction): SidurStore => {
         let newState = {...state}
         const importedOrders: string = action.payload.importedOrders;
-        const modeledImportedOrders: OrderModel[] = ImportOrdersFromText(importedOrders);
+        const modeledImportedOrders: OrderModel[] = ImportOrdersFromText(importedOrders, newState.Locations);
         newState.orders = newState.orders.concat(modeledImportedOrders)
-        // try {
-        //
-        //
-        // } catch (e) {
-        //
-        // } finally {
-        //
-        // }
+      
         return newState
 
 

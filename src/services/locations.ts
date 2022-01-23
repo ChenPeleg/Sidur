@@ -32,5 +32,5 @@ const buildLocations = (): LocationModel[] => {
     ]
 }
 
-export const locations: LocationModel[] = buildLocations();
+export const locationsLegacyObject: LocationModel[] = buildLocations();
 

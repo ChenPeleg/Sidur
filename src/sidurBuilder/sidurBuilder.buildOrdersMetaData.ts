@@ -1,11 +1,11 @@
 import {OrderModel} from '../models/Order.model';
 import {OrderMetaDataModel, OrderMetaStatus} from './models/sidurBuilder.models';
 import {DriveType} from '../models/DriveType.enum';
-import {locations} from '../services/locations';
 import {CloneUtil} from '../services/clone-utility';
 import {Utils} from '../services/utils';
+import {LocationModel} from '../models/Location.model';
 
-export const SidurBuilderBuildOrdersMetaData = (orders: OrderModel[], buildSettings: any = null): OrderMetaDataModel[] => {
+export const SidurBuilderBuildOrdersMetaData = (orders: OrderModel[], locations: LocationModel[], buildSettings: any = null): OrderMetaDataModel[] => {
     let idCount: number = 1;
     const clonedOrders: OrderModel[] = orders.map((o: OrderModel) => CloneUtil.deep(o, 'OrderModel'));
 

@@ -1,7 +1,6 @@
 import {OrderModel} from '../models/Order.model';
 import {DriveType} from '../models/DriveType.enum';
 import {defaultOrderValues} from '../store/store.types';
-import {locations} from './locations';
 import {LocationModel} from '../models/Location.model';
 import {translations} from './translations';
 
@@ -126,7 +125,7 @@ const searchAnotherTimeInText = (order: OrderModel): { anotherTime: string | nul
 
     return results
 }
-const searchLocationInText = (text: string): { locationFound: LocationModel | null, typeOfDrive: DriveType | null } => {
+const searchLocationInText = (text: string, locations: LocationModel[]): { locationFound: LocationModel | null, typeOfDrive: DriveType | null } => {
     const allLocations: LocationModel[] = [...locations];
     const results: { locationFound: LocationModel | null, typeOfDrive: DriveType | null } = {
         locationFound: null,
@@ -174,9 +173,9 @@ const convert2DigitTimeTo4Digits = (time: string): string => {
         return time
     }
 }
-const getLocationAndTypeFromComments = (orders: OrderModel[]): OrderModel[] => {
+const getLocationAndTypeFromComments = (orders: OrderModel[], locations: LocationModel[]): OrderModel[] => {
     orders.map(order => {
-        const LocationSearchResult = searchLocationInText(order.Comments);
+        const LocationSearchResult = searchLocationInText(order.Comments, locations);
         if (LocationSearchResult.locationFound) {
             order.location = LocationSearchResult.locationFound.id
         }
@@ -191,7 +190,7 @@ const getLocationAndTypeFromComments = (orders: OrderModel[]): OrderModel[] => {
     })
     return orders
 }
-export const ImportOrdersFromText = (text: string): OrderModel[] => {
+export const ImportOrdersFromText = (text: string, locations: LocationModel[]): OrderModel[] => {
     // text = stringValue;
     const rowsWithoutUserLineBreaks = DetectFormRows(text)
     const rows = stringIntoRows(rowsWithoutUserLineBreaks);
@@ -199,7 +198,7 @@ export const ImportOrdersFromText = (text: string): OrderModel[] => {
     const orders: EshbalOrder[] = rowsToEshbalOrders(rowsWithColumns);
     let appOrders: OrderModel[] = ordersToOrderModel(orders)
     //TODO - AD 19 Ad 6
-    return getLocationAndTypeFromComments(appOrders);
+    return getLocationAndTypeFromComments(appOrders, locations);
 
 
 }

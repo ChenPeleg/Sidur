@@ -34,6 +34,7 @@ export const LocationForm = (props: LocationFormProps) => {
             ETA: props.ETA,
             name: props.name,
             EnName: props.EnName
+            
         };
         const refName = valueNameRef.current.value;
         const refMinutes = valueMinutesRef.current.value;

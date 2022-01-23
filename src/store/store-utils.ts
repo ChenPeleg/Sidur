@@ -3,9 +3,6 @@ import {SaveLoadService} from '../services/save-load.service';
 import {hashFunction} from '../services/hash-function';
 import {CloneUtil} from '../services/clone-utility';
 import {ActionsTypes} from './types.actions';
-import {LocationGroup} from '../models/Location.model';
-import {translations} from '../services/translations';
-import {locations} from '../services/locations';
 
 
 export const StoreUtils = {
@@ -103,17 +100,7 @@ export const StoreUtils = {
         }, delay)
 
     },
-    defaultEshbalLocationGroup(): LocationGroup {
-        const eshablLocationGrouop: LocationGroup = {
-            Locations: [...locations],
-            dbId: '',
-            id: 'ESHBAL',
-            name: translations.Eshbal,
-            Transports: [],
-            Routes: [],
-        }
-        return eshablLocationGrouop;
-    },
+    
     defaultSessionState(): SessionModel {
         const defaultSession: SessionModel = {
             LocationGroupTabOpen: null,

@@ -1,10 +1,7 @@
 import React, {useState} from 'react'
 import {Box} from '@mui/system';
-import {useDispatch} from 'react-redux';
 import {Card, Typography} from '@mui/material';
 import {DriveModel} from '../../models/Sketch.model';
-import {locations} from '../../services/locations';
-import {LanguageUtilities} from '../../services/language-utilities';
 import {DriveType} from '../../models/DriveType.enum';
 import {Utils} from '../../services/utils';
 import {translations} from '../../services/translations';
@@ -19,16 +16,8 @@ interface sketchDriveProps {
 }
 
 
-const timeText = (drive: DriveModel) => LanguageUtilities.buildBriefText(drive, locations).timeText;
-const driverAndLocation = (drive: DriveModel) => LanguageUtilities.buildBriefText(drive, locations).driverAndLocation;
-
-function ArrowUpwardIcon() {
-    return null;
-}
-
-
 export const SketchDrive = (props: sketchDriveProps) => {
-    const dispatch = useDispatch();
+ 
     const drive = props.drive;
     const [inHover, setInHover] = useState(false);
     const onMouseOver = () => {

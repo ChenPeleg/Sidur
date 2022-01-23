@@ -8,7 +8,6 @@ import {Add, TimeToLeave} from '@mui/icons-material';
 import {Badge, Box, Button} from '@mui/material';
 import {VehicleEditDialog} from '../Dialogs/vehicle-edit-dialog';
 import {defaultVehicleValues} from '../../store/store.types';
-import {ImportOrdersFromText} from '../../services/import-orders-from-text';
 
 
 export const Vehicles = () => {
@@ -16,7 +15,7 @@ export const Vehicles = () => {
     const [vehicleClicked, setVehicleClicked] = useState(null);
     const dispatch = useDispatch();
     const vehicles = useSelector((state: { vehicles: VehicleModel[] }) => state.vehicles || []);
-    const t = ImportOrdersFromText('');
+   
     const vehicleButtonDesign: { boxSX: SxProps, variant: 'text' | 'outlined' | 'contained' } = {
         boxSX: {
             display: 'flex',

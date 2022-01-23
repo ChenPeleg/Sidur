@@ -12,7 +12,6 @@ import {SketchDriveReducer} from './sketch-drive.reducer';
 import {LocationGroupReducer} from './locationGroup.reducer';
 import {LocationReducer} from './location.reducer';
 import {DefaultSidurFetching} from './store-inital-state';
-import {StoreUtils} from './store-utils';
 import {RouteReducer} from './route.reducer';
 import {TransportReducer} from './transport.reducer';
 
@@ -21,14 +20,7 @@ const buildInintialState = (): SidurStore => {
     const stateFromLocalStorage: SidurStore | undefined = SaveLoadService.loadFromLocalStorage('chen').data?.savedStore;
 
     const initialState: SidurStore = (stateFromLocalStorage || DefaultSidurFetching) as SidurStore;
-    console.log(DefaultSidurFetching)
-    const eshabalLocationGroup = initialState.LocationGroups?.find(l => l.id === 'ESHBAL');
-    if (!eshabalLocationGroup) {
-        initialState.LocationGroups = initialState.LocationGroups || [];
-        initialState.LocationGroups.push(StoreUtils.defaultEshbalLocationGroup());
-    }
-    //defaultInitialState;
-
+     
     return initialState;
 }
 
