@@ -19,7 +19,7 @@ export const LocationGroupSelect = () => {
     const isNewSidur: boolean = orders.length === 0 && sketches.length === 0
 
 
-    const handleLocationGroupChanged = (event: any, child: React.ReactNode) => {
+    const handleLocationGroupChanged = (event: any, _child: React.ReactNode) => {
 
         const chosenLocationGroup = event.target.value as string;
 

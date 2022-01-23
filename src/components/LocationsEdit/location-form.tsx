@@ -1,7 +1,6 @@
 import {Box, Card, Typography} from '@mui/material';
-import {useDispatch, useSelector} from 'react-redux';
-import {SidurStore} from '../../store/store.types';
-import {LocationGroup, LocationModel} from '../../models/Location.model';
+import {useDispatch} from 'react-redux';
+import {LocationModel} from '../../models/Location.model';
 import * as React from 'react';
 import {useRef, useState} from 'react';
 import TextField from '@mui/material/TextField';
@@ -20,7 +19,7 @@ interface LocationFormProps extends LocationModel {
 
 const buildCantDeleteText = (uses: string []): string => {
     if (uses.length === 0) {
-        return ''
+        return translations.Delete
     }
     let txt = translations.cantDeleteLocation + ': '
     uses.forEach((u, i) => {
@@ -34,9 +33,6 @@ const buildCantDeleteText = (uses: string []): string => {
     return txt + '.'
 }
 export const LocationForm = (props: LocationFormProps) => {
-    const locationGroupInEditId = useSelector((state: SidurStore) => state.sessionState.locationGroupInEdit);
-    const locationGroups: LocationGroup[] = useSelector((state: { LocationGroups: LocationGroup[] }) => state.LocationGroups || []);
-    const currentLocationGroup: LocationGroup | undefined = locationGroups.find(l => l.id === locationGroupInEditId)
     const [wasJustEdited, setWasJustEdited] = useState<boolean>(false)
     const [nameValue, setNameValue] = useState<string>(props.name)
     const [etaValue, setEtaValue] = useState<number>(props.ETA);
@@ -46,7 +42,6 @@ export const LocationForm = (props: LocationFormProps) => {
 
     if (wasJustEdited && !props.isInEdit) {
         setWasJustEdited(false);
-        const id = props.id;
         const updatedLocation: LocationModel = {
             id: props.id,
             ETA: props.ETA,
@@ -62,9 +57,7 @@ export const LocationForm = (props: LocationFormProps) => {
 
         props.onUpdate(updatedLocation);
     }
-    const handleAddLocation = () => {
 
-    }
 
     const deleteClickHandler = (event: any) => {
         event.stopPropagation();
@@ -170,7 +163,7 @@ export const LocationForm = (props: LocationFormProps) => {
                     width: '80px',
                     height: '20px'
                 }}/>
-                <LightTooltip title={props.preventDelete ? '' : buildCantDeleteText(props.usedIn)}>
+                <LightTooltip title={props.preventDelete ? '' : buildCantDeleteText(props.usedIn).trim()}>
                     <Box>
                         <DeleteButton deleteClickHandler={deleteClickHandler}
                                       disabled={props.usedIn.length > 0} sx={{

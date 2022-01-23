@@ -4,7 +4,7 @@ import {Box, Button} from '@mui/material';
 import {SketchEditActionEnum} from '../../models/SketchEditAction.enum';
 
 
-export interface OrdeerActionButtonProps {
+export interface OrderActionButtonProps {
     sx?: SxProps,
     actionClickHandler: any,
     actionType: SketchEditActionEnum,
@@ -13,7 +13,7 @@ export interface OrdeerActionButtonProps {
 
 }
 
-export const OrderActionButton = (props: OrdeerActionButtonProps) => {
+export const OrderActionButton = (props: OrderActionButtonProps) => {
     const size = props.size ? props.size : 'medium'
     const sx = props.sx || {}
     return (

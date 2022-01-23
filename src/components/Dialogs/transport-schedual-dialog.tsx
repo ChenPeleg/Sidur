@@ -68,7 +68,7 @@ export const TransportScheduleDialog = (props: RenameProps) => {
             setHourValues(changedHourValues)
 
         }
-      
+
     }
 
     return (
@@ -95,7 +95,7 @@ export const TransportScheduleDialog = (props: RenameProps) => {
                                     }}/>
 
                                     <IconButton size="small"
-                                                onClick={(e) => onDeleteHour(i)}
+                                                onClick={(_e) => onDeleteHour(i)}
                                                 color="inherit"
                                     ><Delete fontSize={'small'}/> </IconButton>
                                     <TextField variant={'standard'}

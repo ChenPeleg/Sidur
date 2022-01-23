@@ -1,7 +1,6 @@
 import React, {useState} from 'react'
 
 import {OrderCarForm} from './order-car-form';
-import {translations} from '../../services/translations';
 import {Box, Card, Collapse} from '@mui/material';
 import {OrderCarBrief} from './order-car-brief';
 import {SxProps} from '@mui/system';
@@ -16,7 +15,7 @@ type AppProps = {
     orderId: string;
     isInEdit: boolean;
 };
-const TRL = translations;
+
 const useStyles = (() => ({
     cardBase: {
         padding: '10px',
@@ -49,7 +48,7 @@ export const OrderCar = (props: AppProps) => {
         setInHover(false)
     };
     const dispatch = useDispatch();
-    const cardClickHandler = (event: MouseEvent) => {
+    const cardClickHandler = (_event: MouseEvent) => {
         dispatch({
             type: ActionsTypes.CLICKED_ORDER,
             payload: {

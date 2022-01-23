@@ -3,7 +3,7 @@ import {translations} from '../../services/translations';
 import {Box, Card, CardContent} from '@mui/material';
 
 
-export const SketchNoSketchMessage = (props: any) => {
+export const SketchNoSketchMessage = () => {
 
     return (
         <Box>

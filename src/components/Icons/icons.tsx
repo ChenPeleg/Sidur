@@ -1,6 +1,5 @@
 import React from 'react';
 import {Add, AddBox, BusAlert, ChangeCircle, MergeType, Remove, ReplayCircleFilled, Splitscreen, Timer} from '@mui/icons-material';
-import {jsx} from '@emotion/react';
 
 
 export const Icons: Record<string, React.ReactElement> = {

@@ -105,7 +105,7 @@ export const LocationGroupEditWrapper = () => {
     const handleSketchMenuClose = () => {
         setLocationGroupMoreAnchorEl(null);
     };
-    const handleLocationGroupChanged = (event: any, child: React.ReactNode) => {
+    const handleLocationGroupChanged = (event: any, _child: React.ReactNode) => {
 
         const chosenSketch = event.target.value as string;
         if (chosenSketch === 'NEW') {

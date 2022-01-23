@@ -35,7 +35,7 @@ export const SketchDriveEditDialog = (props: SketchDriveEditDialogProps) => {
         open,
         sketchDriveData
     } = props;
-    const vehicleId = sketchDriveData.vehicleId
+    
     const driveData = sketchDriveData.drive
     const dispatch = useDispatch();
     const SketchIdInEdit = useSelector((state: SidurStore) => state.sessionState.SketchIdInEdit);

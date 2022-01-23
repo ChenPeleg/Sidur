@@ -19,18 +19,14 @@ const sliderSx = {
 
 const renderFlexibilityText = (flexValues: [number, number]): string => {
     const absValue = (n: number): string => Math.abs(n).toString()
-    let text = translations.flexEarly + ' ' + absValue(flexValues[0]) + ' ' + translations.min + ', ' +
-        translations.flexLate + ' ' + absValue(flexValues[1]) + ' ' + translations.min;
-    return text
+    return translations.flexEarly + ' ' + absValue(flexValues[0]) + ' ' + translations.min + ', ' +
+        translations.flexLate + ' ' + absValue(flexValues[1]) + ' ' + translations.min
 }
 export const RenderFlexibilityField = (
     {
         input,
         label,
-        meta: {
-            touched,
-            error
-        },
+        meta: {},
         ...custom
     }: TextFieldPropertiesModel,
 ) => {

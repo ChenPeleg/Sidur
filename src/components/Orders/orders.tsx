@@ -1,5 +1,4 @@
 import React from 'react'
-import {translations} from '../../services/translations';
 import {Box} from '@mui/system';
 import {OrderCar} from './order-car';
 import {useDispatch, useSelector} from 'react-redux';
@@ -8,31 +7,12 @@ import {ActionsTypes} from '../../store/types.actions';
 import {AddButton} from '../Icons/add-button';
 import {SessionModel} from '../../store/store.types';
 
-const TRL = translations;
-const useStyles = (() => ({
-    cardBase: {
-        padding: '10px',
-        cursor: 'pointer',
-        width: '50vw',
-
-        borderRadius: '15px'
-
-    },
-    cardHeader: {
-        paddingBottom: 0,
-        paddingTop: '10px'
-    },
-    additionalText: {
-        fontSize: '14px'
-    }
-}))
 
 export const Orders = () => {
     const dispatch = useDispatch()
     const orders = useSelector((state: { orders: OrderModel[] }) => state.orders);
     const orderIdInEdit = useSelector((state: { sessionState: SessionModel }) => state.sessionState.orderIdInEdit);
-    const classes = useStyles();
-    const addClickHandler = (event: any) => {
+    const addClickHandler = (_event: any) => {
         dispatch({
             type: ActionsTypes.ADD_NEW_ORDER,
             payload: {}

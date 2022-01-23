@@ -26,7 +26,7 @@ export const LoadingShield = () => {
                 'width': '100px',
                 'color': '#536377'
             }}>
-                <svg version="1.1" id="Capa_1" x="0px" y="0px" viewBox="0 0 460.384 460.384"
+                <svg version="1.1" id="Cap_1" x="0px" y="0px" viewBox="0 0 460.384 460.384"
 
 
                      xmlns="http://www.w3.org/2000/svg">

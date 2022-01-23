@@ -2,10 +2,10 @@ import {styled} from '@mui/system';
 import {ToggleButtonGroup} from '@mui/material';
 
 
-export const StyledToggleButtonGroup = styled(ToggleButtonGroup)(({theme}) => ({
+export const StyledToggleButtonGroup = styled(ToggleButtonGroup)(({theme: _theme}) => ({
     '& .MuiToggleButtonGroup-grouped': {
         backgroundColor: 'rgba(255,255,255,0.11)',
-        // margin: theme.spacing(0.5),
+        // margin: _theme.spacing(0.5),
         // border: 0,
         '&.Mui-disabled': {
             // border: 0,
@@ -15,10 +15,10 @@ export const StyledToggleButtonGroup = styled(ToggleButtonGroup)(({theme}) => ({
             // border: 0,
         },
         '&:not(:first-of-type)': {
-            // borderRadius: theme.shape.borderRadius,
+            // borderRadius: _theme.shape.borderRadius,
         },
         '&:first-of-type': {
-            // borderRadius: theme.shape.borderRadius,
+            // borderRadius: _theme.shape.borderRadius,
         },
     },
 }));

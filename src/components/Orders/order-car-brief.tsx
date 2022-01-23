@@ -1,7 +1,7 @@
 import React from 'react';
 import {useSelector} from 'react-redux';
-import {OrderFields, OrderModel} from '../../models/Order.model';
-import {Box, SxProps, Theme} from '@mui/system';
+import {OrderModel} from '../../models/Order.model';
+import {Box, SxProps} from '@mui/system';
 import {Typography} from '@mui/material';
 import {translations} from '../../services/translations';
 import {LanguageUtilities} from '../../services/language-utilities';
@@ -17,38 +17,6 @@ type AppProps = {
     isInEdit: boolean
 };
  
-const useStyles: any = (() => ({
-    root: {
-        direction: (theme: Theme) => theme.direction,
-        '& .MuiFormLabel-root': {
-            left: 'inherit'
-        }
-    },
-    fieldWrapper: {
-        display: 'inline-flex',
-        padding: '10px'
-    },
-    fieldWrapperText: {
-        display: 'inline-flex',
-        padding: '10px',
-        maxWidth: '150px'
-    },
-    cardBase: {
-        direction: (theme: Theme) => theme.direction,
-        padding: '10px',
-        cursor: 'pointer',
-        width: '90%',
-        display: 'flex',
-        flexDirection: 'column',
-        justifyContent: 'center',
-        alignItems: 'center'
-
-    },
-    additionalText: {
-        fontSize: '14px'
-    }
-}))
-const orderFields: OrderModel = new OrderFields();
 
 const areDetailsMissing = (orderValues: OrderModel): boolean => {
     if (!orderValues.TypeOfDrive || !orderValues.driverName || !orderValues.startHour) {

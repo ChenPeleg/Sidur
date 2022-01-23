@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react'
+import React, {useState} from 'react'
 import {Box} from '@mui/system';
 import {useDispatch, useSelector} from 'react-redux';
 import {Collapse, Divider, Typography} from '@mui/material';
@@ -22,10 +22,7 @@ export const Sketch = () => {
     const vehicles = useSelector((state: { vehicles: VehicleModel[] }) => state.vehicles);
     const sketches: SketchModel[] = useSelector((state: { sketches: SketchModel[] }) => state.sketches);
     const [sketchDriveEditOpen, setSketchDriveEditOpen] = React.useState(false);
-    const [sketchMoreAnchorEl, setSketchMoreAnchorEl] =
-        React.useState<null | HTMLElement>(null);
     const [chosenDrive, setChosenDrive] = useState<{ drive: DriveModel, vehicleId: string } | null>(null);
-    const [mock, setMock] = useState<boolean>(false)
     const handleSketchDriveEditDelete = (sketchDriveData: { drive: DriveModel, vehicleId: string }) => {
         setSketchDriveEditOpen(false);
         setChosenDrive(null);
@@ -55,13 +52,7 @@ export const Sketch = () => {
 
         }
     };
-    useEffect(() => {
-        if (!mock) {
-            setTimeout(_ => {
 
-            }, 2000)
-        }
-    })
     const sketchDriveClickHandler = (event: React.MouseEvent<HTMLElement>, drive: DriveModel, vehicleId: string) => {
         setChosenDrive({
             drive: drive,

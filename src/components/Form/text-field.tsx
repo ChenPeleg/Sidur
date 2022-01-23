@@ -21,10 +21,7 @@ export const RenderTextField = (
     {
         input,
         label,
-        meta: {
-            touched,
-            error
-        },
+        meta: {},
         ...custom
     }: TextFieldPropertiesModel,
 ) => (

@@ -5,7 +5,7 @@ import {LockTwoTone} from '@mui/icons-material';
 import {Styles} from '../../hoc/themes';
 
 
-export const LocationCantEditMessage = (props: any) => {
+export const LocationCantEditMessage = () => {
 
     return (
         <Box>

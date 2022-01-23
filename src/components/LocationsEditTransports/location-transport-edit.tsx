@@ -17,7 +17,7 @@ export enum RouteOrTransEditAction {
     RenameRoute = 1,
     DeleteRoute = 2,
     CloneRoute = 3,
-    EditRoute = 4
+
 }
 
 interface StopModel extends RoadStopModel {
@@ -45,7 +45,7 @@ export const LocationTransportEdit = (props: LocationRouteEditProps) => {
         setRouteMoreAnchorEl(event.currentTarget);
     };
     const sketchMenuId = 'primary-transport-menu';
-    const handleEditTransportTimes = (event: any) => {
+    const handleEditTransportTimes = (_event: any) => {
         setScheduleOpen(true)
     }
     const handleRouteMenuClose = () => {
@@ -91,7 +91,6 @@ export const LocationTransportEdit = (props: LocationRouteEditProps) => {
     }
     const handleRenameClose = (value: string | null) => {
         setRenameOpen(false);
-        const id = props.transportRoute.id;
         if (value) {
             const updatedRout = {...props.transportRoute}
             updatedRout.name = value;
@@ -119,9 +118,9 @@ export const LocationTransportEdit = (props: LocationRouteEditProps) => {
     }).filter(s => s) as StopModel[];
     const minutesFromLastOptions = ConfigService.Constants.RoutesMinutesOptions.map(value => ({
         value: value,
-        text: value.toString() + ' ' + translations.min  //+ ' ' + translations.Nesia
+        text: value.toString() + ' ' + translations.min
     }));
-    const handleRemoveLast = (event: any) => {
+    const handleRemoveLast = (_event: any) => {
         const updatedRout = {...props.transportRoute}
         updatedRout.TransportStops = [...updatedRout.TransportStops]
         updatedRout.TransportStops.pop();
@@ -197,7 +196,7 @@ export const LocationTransportEdit = (props: LocationRouteEditProps) => {
                                                    //  fontSize: '1.25rem',
                                                    fontWeight: 'normal'
                                                }}
-                                               onChange={(event: SelectChangeEvent<any>, child: React.ReactNode) => {
+                                               onChange={(event: SelectChangeEvent<any>, _child: React.ReactNode) => {
                                                    handleDriveLengthChanged(event, stop)
                                                }}>
                                 {minutesFromLastOptions.map((option, i) => <MenuItem key={option.value + i.toString()}

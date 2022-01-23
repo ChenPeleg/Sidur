@@ -14,7 +14,7 @@ export enum RouteOrTransEditAction {
     RenameRoute = 1,
     DeleteRoute = 2,
     CloneRoute = 3,
-    EditRoute = 4
+
 }
 
 interface StopModel extends RoadStopModel {
@@ -75,7 +75,6 @@ export const LocationRouteEdit = (props: LocationRouteEditProps) => {
 
     const handleRenameClose = (value: string | null) => {
         setRenameOpen(false);
-        const id = props.route.id;
         if (value) {
             const updatedRout = {...props.route}
             updatedRout.name = value;
@@ -103,11 +102,11 @@ export const LocationRouteEdit = (props: LocationRouteEditProps) => {
     }).filter(s => s) as StopModel[];
     const minutesFromLastOptions = ConfigService.Constants.RoutesMinutesOptions.map(value => ({
         value: value,
-        text: value.toString() + ' ' + translations.min  //+ ' ' + translations.Nesia
+        text: value.toString() + ' ' + translations.min
     }));
-    const handleRemoveLast = (event: any) => {
-        const updatedRout = {...props.route}
-        updatedRout.routStops = [...updatedRout.routStops]
+    const handleRemoveLast = (_event: any) => {
+        const updatedRout = {...props.route};
+        updatedRout.routStops = [...updatedRout.routStops];
         updatedRout.routStops.pop();
         dispatch({
             type: ActionsTypes.UPDATE_ROUTE,
@@ -172,7 +171,7 @@ export const LocationRouteEdit = (props: LocationRouteEditProps) => {
                                                //  fontSize: '1.25rem',
                                                fontWeight: 'normal'
                                            }}
-                                           onChange={(event: SelectChangeEvent<any>, child: React.ReactNode) => {
+                                           onChange={(event: SelectChangeEvent<any>, _child: React.ReactNode) => {
                                                handleDriveLengthChanged(event, stop)
                                            }}>
                             {minutesFromLastOptions.map((option) => <MenuItem key={option.value}

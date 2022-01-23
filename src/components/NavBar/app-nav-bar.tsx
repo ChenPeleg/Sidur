@@ -17,7 +17,6 @@ import {ActionsTypes} from '../../store/types.actions';
 import {SidurMenu} from './sidur-menu';
 import {SidurActionType} from '../../models/SidurMenuClickActionType.enum';
 import {ProfileMenuClickActionType} from '../../models/profile-menu-click-action-type.enum';
-import {Utils} from '../../services/utils';
 import {FileUploadType, SidurRecord, SidurStore} from '../../store/store.types';
 import {FileUploadDialog} from '../Dialogs/file-uplaod-dialog';
 import {SidurManagementDialog} from '../Dialogs/sidur-management-dialog';
@@ -34,13 +33,11 @@ export const AppNavBar = () => {
     const [UploadOpen, setUploadOpen] = React.useState(false);
     const [ManageSidurimOpen, setManageSidurimOpen] = React.useState(false);
     const [importOrdersOpen, setImportOrdersOpen] = React.useState(false);
-    const [uploadDialogOpen, setUploadDialogOpen] = React.useState(false);
     const [sidurMoreAnchorEl, setSidurMoreAnchorEl] =
         React.useState<null | HTMLElement>(null);
     const sidurId = useSelector((state: SidurStore) => state.sidurId);
     const sidurCollection = useSelector((state: SidurStore) => state.sidurCollection);
     const sidurSelected = sidurCollection.find((sidurRecord: SidurRecord) => sidurRecord.id === sidurId);
-    const nextSidurId = Utils.getNextId(sidurCollection.map(c => c.id));
 
     const sidurName = sidurSelected?.Name || '';
 
@@ -145,7 +142,7 @@ export const AppNavBar = () => {
     const handleSidurMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
         setSidurMoreAnchorEl(event.currentTarget);
     };
-    const handleSidurChanged = (event: any, child: React.ReactNode) => {
+    const handleSidurChanged = (event: any, _child: React.ReactNode) => {
 
         const chosenSidur = event.target.value as string;
         if (chosenSidur === 'NEW') {

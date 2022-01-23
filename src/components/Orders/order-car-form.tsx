@@ -8,7 +8,7 @@ import {OrderFields, OrderModel} from '../../models/Order.model';
 import {RenderTextField} from '../Form/text-field';
 import {RenderSelectField} from '../Form/select-field';
 import {DriveType} from '../../models/DriveType.enum';
-import {Box, SxProps, Theme} from '@mui/system';
+import {Box, SxProps} from '@mui/system';
 import {Button, MenuItem} from '@mui/material';
 import {translations} from '../../services/translations';
 import {ActionsTypes} from '../../store/types.actions';
@@ -22,36 +22,6 @@ import {RenderSelectFieldAutoComplete} from '../Form/select-field-auto-complete'
 const TRL = translations;
 
 
-const useStyles: any = (() => ({
-    root: {
-        direction: (theme: Theme) => theme.direction,
-        '& .MuiFormLabel-root': {
-            left: 'inherit'
-        }
-    },
-    fieldWrapper: {
-        padding: '10px'
-    },
-    fieldWrapperText: {
-        display: 'inline-flex',
-        padding: '10px',
-        maxWidth: '150px'
-    },
-    cardBase: {
-        direction: (theme: Theme) => theme.direction,
-        padding: '10px',
-        cursor: 'pointer',
-        width: '90%',
-        display: 'flex',
-        flexDirection: 'column',
-        justifyContent: 'center',
-        alignItems: 'center'
-
-    },
-    additionalText: {
-        fontSize: '14px'
-    }
-}));
 const fieldWrapper: SxProps = {
     padding: '10px'
 }
@@ -77,13 +47,11 @@ const Divider = () => (<Box sx={{
 const MaterialUiForm = (muiFormProps: MuiFormPropsModel) => {
     const {
         handleSubmit,
-        pristine,
-        reset,
+
         submitting,
         typeOfDrive,
         locations
     } = muiFormProps;
-    const classes = useStyles();
     const [isAdvanced, setIsAdvanced] = useState(false);
     const handleSetAdvanced = (value: boolean = true) => {
         setIsAdvanced(value)
@@ -92,7 +60,7 @@ const MaterialUiForm = (muiFormProps: MuiFormPropsModel) => {
         ...fieldWrapper,
         display: isAdvanced ? 'initial' : 'none'
     }
-    const driveTimelanguage = LanguageUtilities.getPrefixByDriveType(typeOfDrive)
+    const driveTimeLanguage = LanguageUtilities.getPrefixByDriveType(typeOfDrive)
     return (
 
         <form onSubmit={(...args) => submitting(...args)} dir={'rtl'}>
@@ -130,7 +98,7 @@ const MaterialUiForm = (muiFormProps: MuiFormPropsModel) => {
                     <Field name={orderFields.location} component={RenderSelectFieldAutoComplete} label={TRL.Where}
                            selectoptions={locations.map((location: LocationModel) => ({
                                ...location,
-                               Name: driveTimelanguage.location + location.name
+                               Name: driveTimeLanguage.location + location.name
                            }))}>
 
                     </Field> </Box>
@@ -138,12 +106,12 @@ const MaterialUiForm = (muiFormProps: MuiFormPropsModel) => {
                     sx={fieldWrapper}
                 >
                     <Field name={orderFields.startHour} component={HourPicker}
-                           label={driveTimelanguage.timeStart}/>
+                           label={driveTimeLanguage.timeStart}/>
                 </Box>
                 <Box sx={fieldWrapper}
                 >
                     <Field name={orderFields.finishHour} custom={{inActive: typeOfDrive !== DriveType.Tsamud}} component={HourPicker}
-                           label={driveTimelanguage.timeEnd}/>
+                           label={driveTimeLanguage.timeEnd}/>
                 </Box>
 
                 <Box
@@ -200,18 +168,16 @@ export const OrderCarForm = (formProps: MuiFormPropsModel) => {
 
     const id = formProps.orderId;
     const orders = useSelector((state: { orders: OrderModel[] }) => state.orders);
-    const locations = useSelector(((state: { Locations: LocationModel[] }) => state.Locations));
 
     const initialValues = orders.find(order => order.id === id);
-    // @ts-ignore
-    const [_typeOfDrive, set_typeOfDrive] = useState(initialValues.TypeOfDrive as DriveType)
-    let formValues = {...initialValues};
+
+    const [_typeOfDrive, set_typeOfDrive] = useState(initialValues?.TypeOfDrive as DriveType)
 
 
     return (
         <Form
             initialValues={initialValues}
-            onSubmit={(values: any) => {
+            onSubmit={(_values: any) => {
             }}
             validate={(values: any) => {
 
@@ -229,7 +195,7 @@ export const OrderCarForm = (formProps: MuiFormPropsModel) => {
                 }
                 return {} // validate(values)
             }}
-            handleSubmit={(event: Event, values: any) => {
+            handleSubmit={(_event: Event, _values: any) => {
                 if (!formProps.isInEdit) {
                     return
                 }

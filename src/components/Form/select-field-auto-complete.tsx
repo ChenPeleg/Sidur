@@ -1,5 +1,5 @@
 import React, {ChangeEvent} from 'react';
-import {SxProps, Theme} from '@mui/system';
+import {Theme} from '@mui/system';
 import {Autocomplete, TextField} from '@mui/material';
 import {LocationModel} from '../../models/Location.model';
 
@@ -23,19 +23,13 @@ const useStyles = () => ({
 
     }
 })
-const labelSx: SxProps = {
-    fontSize: (theme) => '0.7em'
 
-}
 
 export const RenderSelectFieldAutoComplete = (
     {
         input,
         label,
-        meta: {
-            touched,
-            error
-        },
+        meta: {},
         children,
         ...custom
     }: any,
@@ -49,7 +43,7 @@ export const RenderSelectFieldAutoComplete = (
     const inputWithTextValue = {...input};
     inputWithTextValue.value = inputAsText;
 
-    const onTextFieldChange = (event: any, params: any) => {
+    const onTextFieldChange = (_event: any, _params: any) => {
     }
 
     return (

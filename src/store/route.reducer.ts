@@ -206,7 +206,6 @@ const buildRouteName = (route: RouteModel, locations: LocationModel[]): string =
     } else {
         return route.routStops.map(s => getLocationName(s.locationId, locations)).filter((l, i) => (i == 0 || (i + 2) > route.routStops.length) || Math.floor(route.routStops.length / 2) === i).join(' - ')
     }
-    return ''
 
 
 }

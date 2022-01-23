@@ -11,8 +11,10 @@ const useStyles = () => ({
 
     }
 })
-const lableSx: SxProps = {
-    fontSize: (theme) => '0.7em'
+const labelSx: SxProps = {
+    fontSize(_theme) {
+        return '0.7em';
+    }
 
 }
 
@@ -20,10 +22,7 @@ export const RenderSelectField = (
     {
         input,
         label,
-        meta: {
-            touched,
-            error
-        },
+        meta: {},
         children,
         ...custom
     }: any,
@@ -33,7 +32,7 @@ export const RenderSelectField = (
         <>
 
 
-            <InputLabel sx={{...lableSx}} id="select-liable">{label}</InputLabel>
+            <InputLabel sx={{...labelSx}} id="select-liable">{label}</InputLabel>
             <Select variant={'standard'}
                     sx={{
                         ...
@@ -44,7 +43,7 @@ export const RenderSelectField = (
                     label={label}
 
                     {...input}
-                    onChange={(event: any, child: any) => {
+                    onChange={(event: any, _child: any) => {
 
                         input.onChange(event)
                     }}

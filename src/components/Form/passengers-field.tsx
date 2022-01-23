@@ -34,10 +34,7 @@ export const RenderPassengerField = (
     {
         input,
         label,
-        meta: {
-            touched,
-            error
-        },
+        meta: {},
         ...custom
     }: TextFieldPropertiesModel,
 ) => {
@@ -59,7 +56,7 @@ export const RenderPassengerField = (
                           sx={rootSx}
                           max={7}
                           onChange={(...args) => {
-                              
+
 
                               input.onChange(...args);
 

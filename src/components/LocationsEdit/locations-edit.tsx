@@ -11,8 +11,6 @@ import {LocationForm} from './location-form';
 import {Styles} from '../../hoc/themes';
 import TextField from '@mui/material/TextField';
 
-type deleteButtonStatus = 'active' | 'missing' | 'warning'
-
 interface LocationWithUses extends LocationModel {
     usedIn: string[]
 }
@@ -20,7 +18,6 @@ interface LocationWithUses extends LocationModel {
 export const LocationsEdit = () => {
     const locationGroupInEditId = useSelector((state: SidurStore) => state.sessionState.locationGroupInEdit);
     const locationGroups: LocationGroup[] = useSelector((state: { LocationGroups: LocationGroup[] }) => state.LocationGroups || []);
-    const sessionState: SessionModel = useSelector((state: { sessionState: SessionModel }) => state.sessionState);
     const locationMainInEdit: string | null = useSelector((state: { sessionState: SessionModel }) => state.sessionState.locationMainInEdit);
     const recordBriefs: RecordBriefModel [] = useSelector((state: { recordBriefs: RecordBriefModel[] }) => state.recordBriefs);
 
@@ -48,7 +45,7 @@ export const LocationsEdit = () => {
             }
         }
     );
-   
+
     const [filterText, setFilterText] = useState<string>('')
     const dispatch = useDispatch();
 
@@ -69,7 +66,7 @@ export const LocationsEdit = () => {
             }
         })
     }
-    const handleStopEditLocation = (event: any) => {
+    const handleStopEditLocation = (_event: any) => {
 
 
         dispatch({
@@ -132,7 +129,7 @@ export const LocationsEdit = () => {
                 direction: 'ltr'
             }}>
 
-                <Box sx={{direction: 'rtl'}} id={'loactions-container'} onBlur={handleStopEditLocation}>
+                <Box sx={{direction: 'rtl'}} id={'locations-container'} onBlur={handleStopEditLocation}>
                     {filteredLocations.map((l: LocationWithUses, i: number) =>
                         <Box key={l.id} onClick={(event) => handleStartEditLocation(event, l.id)}>
 

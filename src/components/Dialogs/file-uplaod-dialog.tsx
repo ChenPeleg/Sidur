@@ -51,17 +51,20 @@ export const FileUploadDialog = (props: FileUploadProps) => {
         selectedValue,
         open
     } = props;
-    const [uploadType, setUploadType] = useState(defaultId)
+    const [uploadType, setUploadType] = useState<string>(defaultId)
     const handleCloseCancel = () => {
         onClose(null);
     };
     if (selectedValue) {
-        
+
     }
 
 
     const onFileLoadChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const files = event.target?.files;
+        if (uploadType === '3') {
+            return
+        }
         if (files?.length) {
             const file = files[0];
             const reader = new FileReader();
@@ -101,7 +104,7 @@ export const FileUploadDialog = (props: FileUploadProps) => {
                                     fontSize: '1.25rem',
                                     fontWeight: 'normal'
                                 }}
-                                onChange={(event: SelectChangeEvent<any>, child: React.ReactNode) => {
+                                onChange={(event: SelectChangeEvent<any>, _child: React.ReactNode) => {
                                     const chosenId = event.target.value as string;
                                     //  const typeOfUploadChosen: FileUploadType = fileUploadTypes.find(upload => upload.id.toString() === chosenId)?.type || defaultUploadType
                                     setUploadType(chosenId)

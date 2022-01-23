@@ -16,10 +16,7 @@ const sxRoot = {
 export const HourPicker = ({
                                input,
                                label,
-                               meta: {
-                                   touched,
-                                   error
-                               },
+                               meta: {},
                                ...custom
                            }: TextFieldPropertiesModel) => {
 

@@ -1,5 +1,4 @@
 import {Box, Card} from '@mui/material';
-import {useDispatch} from 'react-redux';
 import {LocationModel} from '../../models/Location.model';
 import * as React from 'react';
 import {useState} from 'react';
@@ -18,7 +17,6 @@ export const LocationChooseButton = (props: LocationFormProps) => {
         onClick: null
     }
     const [inHover, setInHover] = useState(false);
-    const dispatch = useDispatch();
     const onMouseOver = () => {
         setInHover(true)
     };
@@ -40,7 +38,7 @@ export const LocationChooseButton = (props: LocationFormProps) => {
                 justifyContent: 'start',
                 backgroundColor: inHover ? '#e7f2f7' : '',
             }} onMouseOver={onMouseOver}
-                  onMouseOut={onMouseOut} elevation={inHover ? 6 : 2} onClick={(event) => props.onClick(justLocationObject)}>
+                  onMouseOut={onMouseOut} elevation={inHover ? 6 : 2} onClick={(_event) => props.onClick(justLocationObject)}>
                 <Box id={'text-field-container'}
                      sx={{
                          m: '0.5em',
