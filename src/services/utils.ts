@@ -133,14 +133,14 @@ export const Utils = {
 
     minutesToFraction(minute: string | number): number {
         const minAsNumber = Number(minute) || 0;
-        if (minAsNumber == 0) {
+        if (minAsNumber === 0) {
             return 0
         }
         return Math.floor((minAsNumber / 60) * 100) / 100
     },
     FractionToMinutes(minute: number): number {
         const minAsNumber = Number(minute) || 0;
-        if (minAsNumber == 0) {
+        if (minAsNumber === 0) {
             return 0
         }
         return Math.floor((minAsNumber / 100) * 60)

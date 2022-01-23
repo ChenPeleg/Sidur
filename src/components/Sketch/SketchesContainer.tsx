@@ -21,7 +21,7 @@ export const SketchesContainer = () => {
     const SketchIdInEdit = useSelector((state: SidurStore) => state.sessionState.SketchIdInEdit);
     const sketches: SketchModel[] = useSelector((state: { sketches: SketchModel[] }) => state.sketches);
 
- 
+
     const [sketchMoreAnchorEl, setSketchMoreAnchorEl] =
         React.useState<null | HTMLElement>(null);
     const isSketchMenuOpen = Boolean(sketchMoreAnchorEl);
@@ -75,7 +75,7 @@ export const SketchesContainer = () => {
     const handleSketchMenuClose = () => {
         setSketchMoreAnchorEl(null);
     };
-    const handleSketchChanged = (event: any, child: React.ReactNode) => {
+    const handleSketchChanged = (event: any, _child: React.ReactNode) => {
 
         const chosenSketch = event.target.value as string;
         if (chosenSketch === 'NEW') {

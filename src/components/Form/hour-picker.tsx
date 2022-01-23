@@ -16,15 +16,14 @@ const sxRoot = {
 export const HourPicker = ({
                                input,
                                label,
-                               meta: {},
+                               meta,
                                ...custom
                            }: TextFieldPropertiesModel) => {
 
     const inActive: boolean = custom?.custom?.inActive || false;
     const sxExtra: SxProps = {
         visibility: inActive ? 'hidden' : 'visible',
-        //display: inActive ? 'none' : 'initial'
-        //visibility: 'hidden'
+        
     };
     return (
 

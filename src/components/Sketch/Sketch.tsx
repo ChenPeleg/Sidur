@@ -100,7 +100,7 @@ export const Sketch = () => {
                                             <Collapse key={i}>
                                                 <SketchDrive
                                                     sketchDriveClick={(event: React.MouseEvent<HTMLElement>, drive: DriveModel) => sketchDriveClickHandler(event, drive, vehicleTimeTable.id)}
-                                                    key={i} drive={drive} prevoiusDrive={vehicleTimeTable.drives[i - 1] || null}/>
+                                                    key={i} drive={drive} previousDrive={vehicleTimeTable.drives[i - 1] || null}/>
                                             </Collapse>
 
                                         )

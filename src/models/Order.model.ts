@@ -22,8 +22,5 @@ export class OrderFields implements OrderModel {
     location: string = 'location';
     passengers: string = 'passengers';
     flexibility: [string, string] = ['flexibility', 'flexibility']
-
-    constructor() {
-
-    }
+ 
 }

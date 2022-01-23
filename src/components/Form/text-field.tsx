@@ -21,7 +21,7 @@ export const RenderTextField = (
     {
         input,
         label,
-        meta: {},
+        meta,
         ...custom
     }: TextFieldPropertiesModel,
 ) => (
@@ -33,9 +33,8 @@ export const RenderTextField = (
                }}
                label={label}
                sx={{
-                   ...
-                       useStyles()
-                           .root
+                   ...useStyles()
+                       .root
                }}
                onChange={input.onChange}
                {...input}

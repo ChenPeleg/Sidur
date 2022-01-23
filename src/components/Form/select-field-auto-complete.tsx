@@ -29,7 +29,7 @@ export const RenderSelectFieldAutoComplete = (
     {
         input,
         label,
-        meta: {},
+        meta,
         children,
         ...custom
     }: any,
@@ -85,9 +85,8 @@ export const RenderSelectFieldAutoComplete = (
                 options={options}
 
                 renderInput={(params) => <TextField onChange={(event: ChangeEvent) => onTextFieldChange(event, params)} sx={{
-                    ...
-                        classes
-                            .root
+                    ...classes
+                        .root
                 }} {...params} variant="standard" label={label}> </TextField>}
 
                 {...custom}

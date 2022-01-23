@@ -1,5 +1,5 @@
 import React from 'react'
-import {Box, SxProps} from '@mui/system';
+import {Box} from '@mui/system';
 import {useDispatch} from 'react-redux';
 import {Button, Typography} from '@mui/material';
 import {LanguageUtilities} from '../../services/language-utilities';
@@ -16,7 +16,7 @@ interface sketchPendingOrderProps {
     order: OrderModel,
     isInEdit: boolean
 }
- 
+
 const pendingOrderMenuId = 'sketch-pending-menu-button';
 
 export const SketchPendingOrderFull = (props: sketchPendingOrderProps) => {
@@ -62,10 +62,9 @@ export const SketchPendingOrderFull = (props: sketchPendingOrderProps) => {
             }
         })
     }
-    let pendingOrdersActions = LanguageUtilities.buildSketchEditActionsArray();
+    let pendingOrdersActions: any;
     pendingOrdersActions = [];
     const order = props.order;
-    const actionButtonSx: SxProps = {}
     const isSidurMenuOpen = Boolean(pendingOrderAnchorEl);
 
     return ((<Box id={'pending-order'}>

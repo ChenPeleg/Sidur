@@ -11,13 +11,13 @@ import {WarningIcon} from '../buttons/warning-icon';
 
 interface sketchDriveProps {
     drive: DriveModel,
-    prevoiusDrive: DriveModel | null,
+    previousDrive: DriveModel | null,
     sketchDriveClick: (event: React.MouseEvent<HTMLElement>, drive: DriveModel) => void
 }
 
 
 export const SketchDrive = (props: sketchDriveProps) => {
- 
+
     const drive = props.drive;
     const [inHover, setInHover] = useState(false);
     const onMouseOver = () => {
@@ -26,19 +26,19 @@ export const SketchDrive = (props: sketchDriveProps) => {
     const onMouseOut = () => {
         setInHover(false)
     };
-    const calculateIfDrivesOverlap = (thisDrive: DriveModel, perviousDrive: DriveModel | null): DriveModel | null => {
-        if (!perviousDrive) {
+    const calculateIfDrivesOverlap = (thisDrive: DriveModel, previousDrive: DriveModel | null): DriveModel | null => {
+        if (!previousDrive) {
             return null
         }
-        const prevFinish = Utils.hourTextToDecimal(perviousDrive.finishHour);
+        const prevFinish = Utils.hourTextToDecimal(previousDrive.finishHour);
         const thisStart = Utils.hourTextToDecimal(thisDrive.startHour);
         if (prevFinish > thisStart) {
-            return perviousDrive
+            return previousDrive
         } else {
             return null
         }
     }
-    const driveOverlap = !!calculateIfDrivesOverlap(props.drive, props.prevoiusDrive);
+    const driveOverlap = !!calculateIfDrivesOverlap(props.drive, props.previousDrive);
 
 
     return (

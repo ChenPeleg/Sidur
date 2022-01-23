@@ -6,7 +6,7 @@ import {ActionsTypes} from '../../store/types.actions';
 
 export const LoadingShield = () => {
     const dispatch = useDispatch();
-    useEffect(() => {
+    const activeEffect = () => {
         const inter: any = setInterval(() => {
             dispatch({
                 type: ActionsTypes.STOP_LOADING_ANIMATION,
@@ -17,7 +17,8 @@ export const LoadingShield = () => {
         return () => {
             clearInterval(inter)
         }
-    }, [])
+    }
+    useEffect(activeEffect, [activeEffect])
 
 
     return (<Box>

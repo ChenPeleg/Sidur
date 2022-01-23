@@ -15,7 +15,7 @@ interface OrdMetaScheduleData {
 
 }
 
-export const SidurBuilderBuildVehiclesAndUnAssigned = (orders: OrderMetaDataModel[], vehicles: VehicleModel[], locations: LocationModel[], buildSettings: any = null): {
+export const SidurBuilderBuildVehiclesAndUnAssigned = (orders: OrderMetaDataModel[], vehicles: VehicleModel[], locations: LocationModel[], _buildSettings: any = null): {
     vehicleSchedules: VehicleScheduleModel[],
     unassignedOrders: OrderModel[],
     assignedOrders: OrderModel[],

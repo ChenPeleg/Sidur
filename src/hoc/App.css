@@ -11,7 +11,7 @@
     min-height: 5vh
 }
 
-.svg-componenet-shadow {
+.svg-component-shadow {
     filter: drop-shadow(3px 3px 15px rgba(58, 58, 55, 0.699));
 
 }

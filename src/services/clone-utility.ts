@@ -5,8 +5,7 @@ import {LocationGroup} from '../models/Location.model';
 
 
 export class CloneUtil {
-    constructor() {
-    }
+ 
 
     static deepCloneOrder(obj: OrderModel): OrderModel {
         const cloned: OrderModel = {...obj}

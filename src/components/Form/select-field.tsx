@@ -22,7 +22,7 @@ export const RenderSelectField = (
     {
         input,
         label,
-        meta: {},
+        meta,
         children,
         ...custom
     }: any,
@@ -35,9 +35,8 @@ export const RenderSelectField = (
             <InputLabel sx={{...labelSx}} id="select-liable">{label}</InputLabel>
             <Select variant={'standard'}
                     sx={{
-                        ...
-                            classes
-                                .root
+                        ...classes
+                            .root
                     }}
                     labelId="select-liable"
                     label={label}

@@ -22,7 +22,7 @@ export const SketchPendingOrder = (props: sketchPendingOrderProps) => {
         setInHover(false)
     };
     const dispatch = useDispatch();
-    const cardClickHandler = (event: MouseEvent) => {
+    const cardClickHandler = (_event: MouseEvent) => {
         dispatch({
             type: ActionsTypes.CLICKED_PENDING_ORDER,
             payload: {
@@ -31,7 +31,7 @@ export const SketchPendingOrder = (props: sketchPendingOrderProps) => {
         })
     }
 
- 
+
     const order = props.order;
     return (<>
             <Box sx={{display: 'flex'}}>

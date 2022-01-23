@@ -26,7 +26,7 @@ export const RenderFlexibilityField = (
     {
         input,
         label,
-        meta: {},
+        meta,
         ...custom
     }: TextFieldPropertiesModel,
 ) => {

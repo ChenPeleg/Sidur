@@ -10,8 +10,8 @@ const store = createStore(reducer,
     (window as any).__REDUX_DEVTOOLS_EXTENSION__());
 
 export const Root = ({
-                         children,
-                         initialState = {}
+                         children
+
                      }: any) => (
     <React.StrictMode> <Provider store={store}>{children}</Provider></React.StrictMode>
 );

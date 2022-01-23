@@ -8,7 +8,7 @@ import {Utils} from '../services/utils';
 import {OrderModel} from '../models/Order.model';
 import {LocationModel} from '../models/Location.model';
 
-export const SidurBuilder = (Sidur: SidurRecord, locations: LocationModel[], buildSettings: any = null): SketchModel => {
+export const SidurBuilder = (Sidur: SidurRecord, locations: LocationModel[], _buildSettings: any = null): SketchModel => {
     if (Sidur === null) {
         Sidur = mockSidur as any;
     }
@@ -29,8 +29,7 @@ export const SidurBuilder = (Sidur: SidurRecord, locations: LocationModel[], bui
         assignedOrders: assignedOrders
     };
 
-    const newId = Utils.getNextId(Sidur.sketches.map(v => v.id));
-    baseSketch.id = newId;
+    baseSketch.id = Utils.getNextId(Sidur.sketches.map(v => v.id));
     baseSketch.name = SidurBuilderTools.createSketchName(baseSketch.id);
 
     return baseSketch

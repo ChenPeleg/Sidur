@@ -5,7 +5,7 @@ import {CloneUtil} from '../services/clone-utility';
 import {Utils} from '../services/utils';
 import {LocationModel} from '../models/Location.model';
 
-export const SidurBuilderBuildOrdersMetaData = (orders: OrderModel[], locations: LocationModel[], buildSettings: any = null): OrderMetaDataModel[] => {
+export const SidurBuilderBuildOrdersMetaData = (orders: OrderModel[], locations: LocationModel[], _buildSettings: any = null): OrderMetaDataModel[] => {
     let idCount: number = 1;
     const clonedOrders: OrderModel[] = orders.map((o: OrderModel) => CloneUtil.deep(o, 'OrderModel'));
 
@@ -54,7 +54,7 @@ export const SidurBuilderBuildOrdersMetaData = (orders: OrderModel[], locations:
                 metaOrder.start = metaOrder.start - EtaInHours;
                 break;
         }
-        ;
+        
         metaOrder.length = metaOrder.finish - metaOrder.start;
 
 
