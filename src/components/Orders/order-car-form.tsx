@@ -13,7 +13,6 @@ import {Button, MenuItem} from '@mui/material';
 import {translations} from '../../services/translations';
 import {ActionsTypes} from '../../store/types.actions';
 import {LocationModel} from '../../models/Location.model';
-import {locations} from '../../services/locations';
 import {LanguageUtilities} from '../../services/language-utilities';
 import {RenderPassengerField} from '../Form/passengers-field';
 import {RenderFlexibilityField} from '../Form/flexibility-field';
@@ -66,7 +65,7 @@ const fieldWrapperText = {
     padding: '10px',
     maxWidth: '150px'
 };
-const allLocations: LocationModel[] = locations.map(o => ({...o}))
+
 const orderFields: OrderModel = new OrderFields();
 
 const Divider = () => (<Box sx={{
@@ -81,7 +80,8 @@ const MaterialUiForm = (muiFormProps: MuiFormPropsModel) => {
         pristine,
         reset,
         submitting,
-        typeOfDrive
+        typeOfDrive,
+        locations
     } = muiFormProps;
     const classes = useStyles();
     const [isAdvanced, setIsAdvanced] = useState(false);
@@ -128,7 +128,7 @@ const MaterialUiForm = (muiFormProps: MuiFormPropsModel) => {
                 <Box sx={selectFieldWrapper}>
 
                     <Field name={orderFields.location} component={RenderSelectFieldAutoComplete} label={TRL.Where}
-                           selectoptions={allLocations.map((location: LocationModel) => ({
+                           selectoptions={locations.map((location: LocationModel) => ({
                                ...location,
                                Name: driveTimelanguage.location + location.name
                            }))}>
@@ -200,6 +200,7 @@ export const OrderCarForm = (formProps: MuiFormPropsModel) => {
 
     const id = formProps.orderId;
     const orders = useSelector((state: { orders: OrderModel[] }) => state.orders);
+    const locations = useSelector(((state: { Locations: LocationModel[] }) => state.Locations));
 
     const initialValues = orders.find(order => order.id === id);
     // @ts-ignore

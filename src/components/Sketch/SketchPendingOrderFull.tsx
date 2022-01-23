@@ -2,7 +2,6 @@ import React from 'react'
 import {Box, SxProps} from '@mui/system';
 import {useDispatch} from 'react-redux';
 import {Button, Typography} from '@mui/material';
-import {locations} from '../../services/locations';
 import {LanguageUtilities} from '../../services/language-utilities';
 import {OrderModel} from '../../models/Order.model';
 import {ActionsTypes} from '../../store/types.actions';
@@ -17,11 +16,9 @@ interface sketchPendingOrderProps {
     order: OrderModel,
     isInEdit: boolean
 }
-
-
+ 
 const pendingOrderMenuId = 'sketch-pending-menu-button';
-const timeText = (drive: OrderModel) => LanguageUtilities.buildBriefText(drive, locations).timeText;
-const driverAndLocation = (drive: OrderModel) => LanguageUtilities.buildBriefText(drive, locations).driverAndLocation;
+
 export const SketchPendingOrderFull = (props: sketchPendingOrderProps) => {
     const dispatch = useDispatch();
     const [pendingOrderAnchorEl, setPendingOrderAnchorEl] =

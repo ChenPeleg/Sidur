@@ -1,4 +1,5 @@
 import {DriveType} from './DriveType.enum';
+import {LocationModel} from './Location.model';
 
 export interface MuiFormPropsModel {
     handleSubmit: any,
@@ -7,6 +8,7 @@ export interface MuiFormPropsModel {
     submitting: any,
     orderId: any,
     isInEdit: boolean,
-    typeOfDrive?: DriveType
+    typeOfDrive?: DriveType,
+    locations: LocationModel[]
 
 }

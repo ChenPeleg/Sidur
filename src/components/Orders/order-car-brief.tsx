@@ -6,7 +6,6 @@ import {Typography} from '@mui/material';
 import {translations} from '../../services/translations';
 import {LanguageUtilities} from '../../services/language-utilities';
 import {LocationModel} from '../../models/Location.model';
-import {locations} from '../../services/locations';
 import {DriveType} from '../../models/DriveType.enum';
 
 
@@ -17,7 +16,7 @@ type AppProps = {
     sx: SxProps,
     isInEdit: boolean
 };
-const allLocations: LocationModel[] = locations.map(o => ({...o}))
+ 
 const useStyles: any = (() => ({
     root: {
         direction: (theme: Theme) => theme.direction,
@@ -63,7 +62,7 @@ const areDetailsMissing = (orderValues: OrderModel): boolean => {
     return false
 }
 
-const buildBriefText = (orderValues: OrderModel): string => {
+const buildBriefText = (orderValues: OrderModel, locations: LocationModel[]): string => {
     const isWithName = orderValues.driverName.trim() !== '';
     if (!isWithName) {
         return translations.NewOrder
@@ -75,7 +74,7 @@ const buildBriefText = (orderValues: OrderModel): string => {
     let briefText = timeText + ' ' + orderValues.driverName;
     if (orderValues.TypeOfDrive && orderValues.location) {
         const driveTimeLanguage = LanguageUtilities.getPrefixByDriveType(orderValues.TypeOfDrive);
-        const location = allLocations.find(l => l.id === orderValues.location);
+        const location = locations.find(l => l.id === orderValues.location);
         if (location) {
             briefText += ' ' + driveTimeLanguage.location + location.name
         }
@@ -89,6 +88,8 @@ export const OrderCarBrief = (props: AppProps) => {
     const orderValues = useSelector((state: { orders: OrderModel[] }) => {
         return state.orders.find(order => order.id === id) as OrderModel;
     });
+    const locations = useSelector(((state: { Locations: LocationModel[] }) => state.Locations));
+
     const missingDetailsShown: boolean = areDetailsMissing(orderValues) && !props.isInEdit;
 
 
@@ -101,7 +102,7 @@ export const OrderCarBrief = (props: AppProps) => {
             alignItems: 'start'
         }}>
             <Typography fontWeight={props.isInEdit ? 'bold' : 'initial'} fontSize={'large'} padding={'initial'}>
-                {buildBriefText(orderValues)}
+                {buildBriefText(orderValues, locations)}
             </Typography>
             <Typography fontSize={'large'} color={'red'} padding={'initial'}>  &nbsp;
                 {missingDetailsShown ? ' (' + translations.missingDetails + ') ' : null}

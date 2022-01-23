@@ -5,10 +5,11 @@ import {translations} from '../../services/translations';
 import {Box, Card, Collapse} from '@mui/material';
 import {OrderCarBrief} from './order-car-brief';
 import {SxProps} from '@mui/system';
-import {useDispatch} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import {ActionsTypes} from '../../store/types.actions';
 import {DeleteButton} from '../buttons/delete-button';
 import {CloneButton} from '../buttons/clone-button';
+import {LocationModel} from '../../models/Location.model';
 
 
 type AppProps = {
@@ -38,6 +39,8 @@ const useStyles = (() => ({
 
 export const OrderCar = (props: AppProps) => {
     const classes = useStyles();
+    const locations = useSelector(((state: { Locations: LocationModel[] }) => state.Locations));
+
     const [inHover, setInHover] = useState(false);
     const onMouseOver = () => {
         setInHover(!props.isInEdit)
@@ -111,15 +114,13 @@ export const OrderCar = (props: AppProps) => {
                     </div>
 
                     {props.isInEdit ? <>
-                        {/*    <CardHeader sx={{*/}
-                        {/*    ...classes*/}
-                        {/*        .cardHeader*/}
-                        {/*}} title={TRL.Order}/>*/}
+
                     </> : null}
 
                     <Collapse in={props.isInEdit} unmountOnExit>
 
-                        <OrderCarForm isInEdit={props.isInEdit} orderId={props.orderId} handleSubmit={'d'} pristine={'b'} reset={'c'}
+                        <OrderCarForm locations={locations} isInEdit={props.isInEdit} orderId={props.orderId} handleSubmit={'d'}
+                                      pristine={'b'} reset={'c'}
                                       submitting={'d'}/>
 
                     </Collapse>
