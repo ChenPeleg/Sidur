@@ -1,4 +1,4 @@
-import {HashRouter, Route, Routes} from 'react-router-dom';
+import {HashRouter} from 'react-router-dom';
 
 
 export const RouterMain = ({
@@ -9,18 +9,6 @@ export const RouterMain = ({
     return (
         <HashRouter basename={'h/'}>
 
-
-            <Routes>
-                <Route path="/" element={<Home/>}>
-
-                </Route>
-                <Route path="/about" element={<About/>}>
-
-                </Route>
-                <Route path="/dashboard" element={<Dashboard/>}>
-
-                </Route>
-            </Routes>
 
             {
                 children
