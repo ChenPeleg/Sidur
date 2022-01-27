@@ -1,46 +1,28 @@
-import {HashRouter} from 'react-router-dom';
+import {HashRouter, Navigate, Route, Routes} from 'react-router-dom';
+import React from 'react';
 
 
+const ChildrenWrapper = (props: { childrenForRef: any }) => (<> {props.childrenForRef}</>)
 export const RouterMain = ({
                                children
 
                            }: any) => {
+    const c = children;
 
+    // @ts-ignore
     return (
-        <HashRouter basename={'h/'}>
+        <HashRouter key={'all-routes-container'}>
+            <Routes>
+                <Route key={'home-father-path'} path="/h" element={<ChildrenWrapper childrenForRef={c}></ChildrenWrapper>}>
+                    {/*{children}*/}
 
+                </Route>
 
-            {
-                children
-            }
+            </Routes>
+            <Navigate to={'/h'}/>
+
         </HashRouter>
     )
 
 }
 
-// You can think of these components as "pages"
-// in your app.
-
-function Home() {
-    return (
-        <div>
-            <h2>Home</h2>
-        </div>
-    );
-}
-
-function About() {
-    return (
-        <div>
-            <h2>About</h2>
-        </div>
-    );
-}
-
-function Dashboard() {
-    return (
-        <div>
-            <h2>Dashboard</h2>
-        </div>
-    );
-}
