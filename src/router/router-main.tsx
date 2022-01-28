@@ -7,11 +7,7 @@ export const RouterMain = ({
                            }: any) => {
 
     return (
-        
-
         <HashRouter basename={'h/'}>
-
-
             {
                 children
             }
