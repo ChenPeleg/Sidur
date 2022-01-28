@@ -24,7 +24,7 @@ export const PendingOrderMenu = (props: PendingOrderMenuProps) => {
     } = props;
 
     let pendingOrdersActions: { action: SketchEditActionEnum, name: string, icon: string } [] = LanguageUtilities.buildSketchEditActionsArray();
-
+    pendingOrdersActions.pop();
     return (
         <Menu
             anchorEl={PendingOrderMenuAnchor}

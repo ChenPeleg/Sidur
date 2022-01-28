@@ -1,9 +1,10 @@
 import React from 'react';
-import {Add, AddBox, BusAlert, ChangeCircle, MergeType, Remove, ReplayCircleFilled, Splitscreen, Timer} from '@mui/icons-material';
+import {Add, AddBox, BusAlert, ChangeCircle, Check, MergeType, Remove, ReplayCircleFilled, Splitscreen, Timer} from '@mui/icons-material';
 
 
 export const Icons: Record<string, React.ReactElement> = {
     'add': (<Add/>),
+    'RemoveFromPending': (<Check/>),
     'Remove': (<Remove/>),
     'Merge': (<MergeType/>),
     'Split': (<Splitscreen/>),

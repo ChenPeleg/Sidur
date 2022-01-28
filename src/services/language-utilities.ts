@@ -95,13 +95,11 @@ export const LanguageUtilities = {
                 continue
             }
             let name = sketchEditActionEnumKey;
-            const enumbEntry = Number(sketchEditActionEnumKey) as SketchEditActionEnum
+            const enumbEntry = Number(sketchEditActionEnumKey) as SketchEditActionEnum;
+            let icon = SketchEditActionEnum[enumbEntry]
             switch (enumbEntry) {
                 case SketchEditActionEnum.Split:
-
-
                     name = translations.SketchActionSplit;
-
                     break;
                 case SketchEditActionEnum.Merge:
                     name = translations.SketchActionMerge;
@@ -120,12 +118,13 @@ export const LanguageUtilities = {
                     break;
                 case SketchEditActionEnum.RemoveFromPending:
                     name = translations.SketchActionRemove;
+                    
                     break;
             }
             ret.push({
                 action: Number(sketchEditActionEnumKey),
                 name: name,
-                icon: SketchEditActionEnum[enumbEntry]
+                icon: icon
             })
         }
         return ret
