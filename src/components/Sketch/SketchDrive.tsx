@@ -1,5 +1,5 @@
 import React, {useState} from 'react'
-import {Box} from '@mui/system';
+import {Box, SxProps} from '@mui/system';
 import {Card, Typography} from '@mui/material';
 import {DriveModel} from '../../models/Sketch.model';
 import {DriveType} from '../../models/DriveType.enum';
@@ -8,14 +8,40 @@ import {translations} from '../../services/translations';
 import {Colors, Styles} from '../../hoc/themes';
 import {WarningIcon} from '../buttons/warning-icon';
 
+export enum ChooseDriveMode {
+    NotActive = 0,
+    selectable = 1,
+    nonSelectable = 2,
+
+}
 
 interface sketchDriveProps {
+    chooseDriveMode: ChooseDriveMode
     drive: DriveModel,
     previousDrive: DriveModel | null,
     sketchDriveClick: (event: React.MouseEvent<HTMLElement>, drive: DriveModel) => void
 }
 
+const custumSxMaker = (chooseDriveMode: ChooseDriveMode): SxProps => {
+    switch (chooseDriveMode) {
 
+
+        case ChooseDriveMode.nonSelectable:
+            return {
+                filter: 'grayscale(120%);',
+                opacity: '0.5'
+            }
+        case ChooseDriveMode.selectable:
+            return {
+                filter: `drop-shadow(0px 0px 3px ${'#00b705'})`,
+
+            }
+        case ChooseDriveMode.NotActive:
+        default:
+            return {};
+
+    }
+}
 export const SketchDrive = (props: sketchDriveProps) => {
 
     const drive = props.drive;
@@ -41,6 +67,7 @@ export const SketchDrive = (props: sketchDriveProps) => {
     const driveOverlap = !!calculateIfDrivesOverlap(props.drive, props.previousDrive);
 
 
+    const customSx = custumSxMaker(props.chooseDriveMode)
     return (
 
         <Box>
@@ -49,7 +76,7 @@ export const SketchDrive = (props: sketchDriveProps) => {
                 position: 'relative',
                 m: '0.2em',
                 mb: '0.3em',
-                //minHeight: '10vh',
+
                 display: 'flex',
                 flexDirection: 'row',
                 alignItems: 'stretch',
@@ -76,13 +103,15 @@ export const SketchDrive = (props: sketchDriveProps) => {
                 m: '0.2em',
                 mb: '0.3em',
                 position: 'relative',
+
                 zIndex: 40,
                 minHeight: '10vh',
                 display: 'flex',
                 flexDirection: 'row',
                 alignItems: 'stretch',
                 justifyContent: 'start',
-                cursor: 'default'
+                cursor: 'default',
+                ...customSx
             }}>
                 <Box id={'drive-hour'} sx={{
                     display: 'flex',

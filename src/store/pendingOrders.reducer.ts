@@ -3,6 +3,8 @@ import {ActionsTypes} from './types.actions';
 import {SketchModel} from '../models/Sketch.model';
 import {OrderModel} from '../models/Order.model';
 import {StoreUtils} from './store-utils';
+import {SketchEditActionEnum} from '../models/SketchEditAction.enum';
+import {SidurEditorService} from '../sidurEditor/sidurEditor.service';
 
 export type PendingOrdersReducerFunctions =
     ActionsTypes.CLICKED_PENDING_ORDER
@@ -22,14 +24,16 @@ export const PendingOrdersReducer: Record<PendingOrdersReducerFunctions, (state:
         let newState = {...state}
         if (action.payload.id) {
             newState.sessionState.pendingOrderIdInEdit = action.payload.id;
+            StoreUtils.abortSessionPendingOrderState(newState);
         }
 
         return newState
     },
     [ActionsTypes.CLICKED_CLOSE_PENDING_ORDER]: (state: SidurStore, action: IAction): SidurStore => {
-       
+
         let newState = {...state}
         newState.sessionState.pendingOrderIdInEdit = null;
+        StoreUtils.abortSessionPendingOrderState(newState);
         newState.sessionState = {...newState.sessionState}
         return newState
     },
@@ -57,11 +61,21 @@ export const PendingOrdersReducer: Record<PendingOrdersReducerFunctions, (state:
             }
             newState.sessionState.pendingOrderIdInEdit = null;
         }
+        StoreUtils.abortSessionPendingOrderState(newState);
         StoreUtils.updateSidurRecordWithSketchChanges(newState)
         return newState
     },
     [ActionsTypes.CLICKED_MERGE_PENDING_ORDER]: (state: SidurStore, action: IAction): SidurStore => {
-        let newState = {...state}
+        let newState = {...state};
+        newState.sessionState.pendingOrderInEditAction = SketchEditActionEnum.Merge;
+        const SketchIdInEdit = state.sessionState.SketchIdInEdit
+
+        const sketchObj: SketchModel = state.sketches.find((record: SketchModel) => record.id === SketchIdInEdit) as SketchModel;
+        const relavantDrives = SidurEditorService.getRelevantDriveIdsToChoose(sketchObj, newState.sessionState.pendingOrderIdInEdit as string);
+        if (relavantDrives.length > 0) {
+            newState.sessionState.pendingOrderInEditActionSelectDrives = relavantDrives;
+        }
+
         return newState
     },
     [ActionsTypes.CLICKED_SPLIT_PENDING_ORDER]: (state: SidurStore, action: IAction): SidurStore => {

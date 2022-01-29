@@ -100,7 +100,7 @@ export const StoreUtils = {
         }, delay)
 
     },
-    
+
     defaultSessionState(): SessionModel {
         const defaultSession: SessionModel = {
             LocationGroupTabOpen: null,
@@ -110,11 +110,17 @@ export const StoreUtils = {
             locationGroupInEdit: null,
             locationMainInEdit: null,
             orderIdInEdit: null,
+            pendingOrderInEditAction: null,
+            pendingOrderInEditActionSelectDrives: null,
             pendingOrderIdInEdit: null,
             routeIdInEdit: null,
             transportIdInEdit: null
 
         }
         return defaultSession
+    },
+    abortSessionPendingOrderState(state: SidurStore) {
+        state.sessionState.pendingOrderInEditActionSelectDrives = [];
+        state.sessionState.pendingOrderInEditAction = null;
     }
 }

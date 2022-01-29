@@ -27,15 +27,21 @@ export const SketchPendingOrderFull = (props: sketchPendingOrderProps) => {
         const orderId = props.order.id
         switch (clickAction) {
 
-            case SketchEditActionEnum.AddToPending:
-                dispatch({
-                    type: ActionsTypes.CLONE_SIDUR,
-                    payload: {id: orderId}
-                })
-                break;
+            // case SketchEditActionEnum.AddToPending:
+            //     dispatch({
+            //         type: ActionsTypes.CLONE_SIDUR,
+            //         payload: {id: orderId}
+            //     })
+            //     break;
             case SketchEditActionEnum.RemoveFromPending:
                 dispatch({
                     type: ActionsTypes.CLICKED_REMOVE_PENDING_ORDER,
+                    payload: {id: orderId}
+                })
+                break;
+            case SketchEditActionEnum.Merge:
+                dispatch({
+                    type: ActionsTypes.CLICKED_MERGE_PENDING_ORDER,
                     payload: {id: orderId}
                 })
                 break;

@@ -4,7 +4,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import {Collapse, Divider, Typography} from '@mui/material';
 import {DriveModel, SketchModel, VehicleScheduleModel} from '../../models/Sketch.model';
 import {VehicleModel} from '../../models/Vehicle.model';
-import {SketchDrive} from './SketchDrive';
+import {ChooseDriveMode, SketchDrive} from './SketchDrive';
 import {SketchPendingOrders} from './SketchPendeingOrders';
 import {SketchDriveEditDialog} from '../Dialogs/sketch-drive-edit-dialog';
 import {ActionsTypes} from '../../store/types.actions';
@@ -18,6 +18,7 @@ export const Sketch = () => {
     const dispatch = useDispatch()
 
     const SketchIdInEdit = useSelector((state: SidurStore) => state.sessionState.SketchIdInEdit);
+    const pendingOrderInEditActionSelectDrives = useSelector((state: SidurStore) => state.sessionState.pendingOrderInEditActionSelectDrives || []);
 
     const vehicles = useSelector((state: { vehicles: VehicleModel[] }) => state.vehicles);
     const sketches: SketchModel[] = useSelector((state: { sketches: SketchModel[] }) => state.sketches);
@@ -96,11 +97,20 @@ export const Sketch = () => {
                             }}> <Typography variant={'h6'}>{getVehicleNameFromId(vehicleTimeTable.VehicleId)}  </Typography>
                                 <TransitionGroup>
                                     {vehicleTimeTable.drives.map((drive: DriveModel, i: number) => {
+                                        let chooseDriveMode = ChooseDriveMode.NotActive
+                                        if (pendingOrderInEditActionSelectDrives.length > 0) {
+                                            if (pendingOrderInEditActionSelectDrives.includes(drive.id)) {
+                                                chooseDriveMode = ChooseDriveMode.selectable
+                                            } else {
+                                                chooseDriveMode = ChooseDriveMode.nonSelectable
+                                            }
+                                        }
+
                                         return (
                                             <Collapse key={i}>
-                                                <SketchDrive
-                                                    sketchDriveClick={(event: React.MouseEvent<HTMLElement>, drive: DriveModel) => sketchDriveClickHandler(event, drive, vehicleTimeTable.id)}
-                                                    key={i} drive={drive} previousDrive={vehicleTimeTable.drives[i - 1] || null}/>
+                                                <SketchDrive chooseDriveMode={chooseDriveMode}
+                                                             sketchDriveClick={(event: React.MouseEvent<HTMLElement>, drive: DriveModel) => sketchDriveClickHandler(event, drive, vehicleTimeTable.id)}
+                                                             key={i} drive={drive} previousDrive={vehicleTimeTable.drives[i - 1] || null}/>
                                             </Collapse>
 
                                         )
