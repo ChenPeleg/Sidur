@@ -14,6 +14,7 @@ import {Sketch} from './Sketch';
 import MenuItem from '@mui/material/MenuItem';
 import {RenameDialog} from '../Dialogs/rename-dialog';
 import {StoreUtils} from '../../store/store-utils';
+import {SketchesContainerMessage} from './SketchesContainerMessage';
 
 
 export const SketchesContainer = () => {
@@ -159,6 +160,7 @@ export const SketchesContainer = () => {
                 >
                     <Edit/>
                 </IconButton>
+                <SketchesContainerMessage sketch={sketchInEdit}/>
 
 
             </Box> : <Button variant={'contained'} id={'sketches-create-sketch'}

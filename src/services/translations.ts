@@ -123,6 +123,8 @@ export const translations = {
     'moerActions': 'פעולות נוספות',
     'SketchActionRemove': 'סמן כטופלה',
     'SketchActionMerge': 'מזג עם נסיעה אחרת',
+    'SketchActionMergeInfoMessage': 'בחר נסיעה למיזוג עם',
+    'SketchActionReplaceInfoMessage': 'בחר נסיעה להחלפה עם',
     'SketchActionSplit': 'פיצול להסעה ואיסוף',
     'SketchActionChange': 'שינוי נסיעה',
     'SketchActionChangeTime': 'שינוי שעות של נסיעה קיימת',
