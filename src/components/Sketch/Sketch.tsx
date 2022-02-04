@@ -72,6 +72,13 @@ export const Sketch = () => {
             })
 
 
+        } else {
+            dispatch({
+                type: ActionsTypes.REMOVE_PENDING_ORDER_STATUS,
+                payload: {
+                    value
+                }
+            })
         }
     };
     const HandleDriveMerge = (pendingOrderToMerge: OrderModel, driveToMerge: DriveModel, vehicleId: string): void => {

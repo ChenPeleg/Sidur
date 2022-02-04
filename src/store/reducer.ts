@@ -87,6 +87,7 @@ const reducer = (state: SidurStore = initialState, action: IAction) => {
         case ActionsTypes.CLICKED_REPLACE_EXISTING_PENDING_ORDER:
         case ActionsTypes.CLICKED_PUBLIC_TRANSPORT_PENDING_ORDER:
         case ActionsTypes.CLICKED_ADD_TO_PENDING_PENDING_ORDER:
+        case ActionsTypes.REMOVE_PENDING_ORDER_STATUS:
 
             return PendingOrdersReducer[action.type](newState, action)
         case ActionsTypes.DELETE_SKETCH_DRIVE:

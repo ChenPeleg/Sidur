@@ -17,6 +17,7 @@ export type PendingOrdersReducerFunctions =
     | ActionsTypes.CLICKED_REPLACE_EXISTING_PENDING_ORDER
     | ActionsTypes.CLICKED_PUBLIC_TRANSPORT_PENDING_ORDER
     | ActionsTypes.CLICKED_ADD_TO_PENDING_PENDING_ORDER
+    | ActionsTypes.REMOVE_PENDING_ORDER_STATUS
 
 
 export const PendingOrdersReducer: Record<PendingOrdersReducerFunctions, (state: SidurStore, action: IAction) => SidurStore> = {
@@ -75,6 +76,19 @@ export const PendingOrdersReducer: Record<PendingOrdersReducerFunctions, (state:
         if (relavantDrives.length > 0) {
             newState.sessionState.pendingOrderInEditActionSelectDrives = relavantDrives;
         }
+
+        return newState
+    },
+    [ActionsTypes.REMOVE_PENDING_ORDER_STATUS]: (state: SidurStore, action: IAction): SidurStore => {
+        let newState = {...state};
+        newState.sessionState.pendingOrderInEditAction = SketchEditActionEnum.Merge;
+        // const SketchIdInEdit = state.sessionState.SketchIdInEdit
+        //
+        // const sketchObj: SketchModel = state.sketches.find((record: SketchModel) => record.id === SketchIdInEdit) as SketchModel;
+        // const relavantDrives = SidurEditorService.getRelevantDriveIdsToChoose(sketchObj, newState.sessionState.pendingOrderIdInEdit as string);
+        newState.sessionState.pendingOrderInEditAction = null;
+        newState.sessionState.pendingOrderInEditActionSelectDrives = null;
+
 
         return newState
     },
