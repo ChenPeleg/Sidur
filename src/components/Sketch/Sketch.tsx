@@ -18,7 +18,6 @@ import {OrderModel} from '../../models/Order.model';
 
 export const Sketch = () => {
     const dispatch = useDispatch()
-
     const SketchIdInEdit = useSelector((state: SidurStore) => state.sessionState.SketchIdInEdit);
     const pendingOrderInEditActionSelectDrives = useSelector((state: SidurStore) => state.sessionState.pendingOrderInEditActionSelectDrives || []);
     const sessionState = useSelector((state: SidurStore) => state.sessionState);
@@ -60,12 +59,14 @@ export const Sketch = () => {
         }
     };
     const handleSketchDriveMergeClose = (value: DriveModel | null) => {
-        setSketchDriveEditOpen(false);
+
+        setSketchDriveMergeOpen(false);
+
         setChosenDrive(null);
         if (value) {
 
             dispatch({
-                type: ActionsTypes.UPDATE_SKETCH_DRIVE,
+                type: ActionsTypes.UPDATE_SKETCH_DRIVE_WITH_MERGED_ORDER,
                 payload: {
                     value
                 }
@@ -89,7 +90,7 @@ export const Sketch = () => {
         setSketchDriveMergeOpen(true);
     }
     const sketchDriveClickHandler = (event: React.MouseEvent<HTMLElement>, drive: DriveModel, vehicleId: string) => {
-
+        console.log(sketchDriveMergeOpen)
         if (sessionState.pendingOrderInEditAction && sessionState.pendingOrderIdInEdit) {
             const Order = sketchInEdit?.unassignedOrders.find(o => o.id === sessionState.pendingOrderIdInEdit)
             if (Order) {
@@ -172,7 +173,7 @@ export const Sketch = () => {
                     <SketchDriveEditDialog vehicleId={'1'} open={sketchDriveEditOpen} onClose={handleSketchDriveEditClose}
                                            sketchDriveData={chosenDrive}
                                            onDelete={handleSketchDriveEditDelete}/> : null}
-                {chosenDrive && sessionState.pendingOrderIdInEdit ?
+                {chosenDrive && sessionState.pendingOrderIdInEdit && sketchDriveMergeOpen ?
                     <SketchDriveMergeDialog vehicleId={'1'} open={sketchDriveMergeOpen} onClose={handleSketchDriveMergeClose}
                                             sketchDriveData={chosenDrive}
                                             PendingOrderToMergeId={sessionState.pendingOrderIdInEdit}

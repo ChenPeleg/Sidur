@@ -145,5 +145,12 @@ export const Utils = {
         }
         return Math.floor((minAsNumber / 100) * 60)
     },
+    HourDecimalToMinutes(hourDecimal: number): number {
+        const hourAsNumber = Number(hourDecimal) || 0;
+        if (hourAsNumber === 0) {
+            return 0
+        }
+        return Math.floor((hourAsNumber) * 60)
+    },
 
 }

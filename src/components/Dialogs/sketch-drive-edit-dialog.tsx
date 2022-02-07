@@ -19,6 +19,8 @@ import {OrderActionButton} from '../buttons/order-action-button';
 import {SketchEditActionEnum} from '../../models/SketchEditAction.enum';
 import {ActionsTypes} from '../../store/types.actions';
 import {SidurStore} from '../../store/store.types';
+import {SidurEditorService} from '../../sidurEditor/sidurEditor.service';
+import {DriveType} from '../../models/DriveType.enum';
 
 interface SketchDriveEditDialogProps {
     open: boolean;
@@ -35,7 +37,7 @@ export const SketchDriveEditDialog = (props: SketchDriveEditDialogProps) => {
         open,
         sketchDriveData
     } = props;
-    
+
     const driveData = sketchDriveData.drive
     const dispatch = useDispatch();
     const SketchIdInEdit = useSelector((state: SidurStore) => state.sessionState.SketchIdInEdit);
@@ -58,6 +60,9 @@ export const SketchDriveEditDialog = (props: SketchDriveEditDialogProps) => {
         const editedData: DriveModel | null = {...driveChangedData};
         if (descriptionValueRef?.current?.value) {
             editedData.description = descriptionValueRef?.current?.value
+        }
+        if (SidurEditorService.getDriveDurationInHours(editedData) > 1.2) {
+            editedData.TypeOfDrive = DriveType.Tsamud
         }
         onClose(editedData);
 

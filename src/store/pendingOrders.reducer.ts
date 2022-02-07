@@ -81,7 +81,7 @@ export const PendingOrdersReducer: Record<PendingOrdersReducerFunctions, (state:
     },
     [ActionsTypes.REMOVE_PENDING_ORDER_STATUS]: (state: SidurStore, action: IAction): SidurStore => {
         let newState = {...state};
-        newState.sessionState.pendingOrderInEditAction = SketchEditActionEnum.Merge;
+        // newState.sessionState.pendingOrderInEditAction = SketchEditActionEnum.Merge;
         // const SketchIdInEdit = state.sessionState.SketchIdInEdit
         //
         // const sketchObj: SketchModel = state.sketches.find((record: SketchModel) => record.id === SketchIdInEdit) as SketchModel;

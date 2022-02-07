@@ -71,7 +71,9 @@ export const translations = {
     'AddOrder': 'הוסף נסיעה ',
     'Comments': 'הערות ',
     'Approve': 'אישור',
+    'ApproveMerge': 'אישור מיזוג',
     'Cancel': 'ביטול',
+    'CancelMerge': 'ביטול מיזוג',
     'CreateSketch': 'צור סקיצה חדשה',
     'CreateLocationGroup': 'צור אוסף חדש',
     'thisCollectionIsInUse': 'אוסף זה נמצא בשימוש בסידורים ',
@@ -135,6 +137,12 @@ export const translations = {
     'SketchActionReplaceExisting': 'העבר לרכב במקום נסיעה קיימת',
     'SketchActionPublicTransport': 'צור פתרון בתחב"צ',
     'SketchActionAddToPending': 'סמן כ"לא מטופלת"',
+
+    'gapForMergeDrives1': 'קיים פער של ',
+
+    'gapForMergeDrives3StartTimes': 'דקות בין זמני היציאה של הנסיעות',
+    'gapForMergeDrives3FinishTimes': 'דקות בין זמני הסיום של הנסיעות',
+    'issues': 'הערות',
 
 
 }

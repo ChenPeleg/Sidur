@@ -6,8 +6,11 @@ import {DriveModel, SketchModel, VehicleScheduleModel} from '../models/Sketch.mo
 import {OrderModel} from '../models/Order.model';
 import {StoreUtils} from './store-utils';
 
-export type SketchDriveReducerFunctions = ActionsTypes.DELETE_SKETCH_DRIVE
-                                          | ActionsTypes.UPDATE_SKETCH_DRIVE | ActionsTypes.REMOVE_ORDER_FROM_SKETCH_DRIVE
+export type SketchDriveReducerFunctions =
+    ActionsTypes.DELETE_SKETCH_DRIVE
+    | ActionsTypes.UPDATE_SKETCH_DRIVE
+    | ActionsTypes.REMOVE_ORDER_FROM_SKETCH_DRIVE
+    | ActionsTypes.UPDATE_SKETCH_DRIVE_WITH_MERGED_ORDER
 
 
 export const SketchDriveReducer: Record<SketchDriveReducerFunctions, (state: SidurStore, action: IAction) => SidurStore> = {
@@ -30,6 +33,42 @@ export const SketchDriveReducer: Record<SketchDriveReducerFunctions, (state: Sid
                         return d
                     }
                 })
+            }
+
+
+        }
+        return newState
+
+    },
+    [ActionsTypes.UPDATE_SKETCH_DRIVE_WITH_MERGED_ORDER]: (state: SidurStore, action: IAction): SidurStore => {
+        let newState = {...state}
+        const sketchDriveChanged: DriveModel = action.payload.value
+        const SketchIdInEdit = newState.sessionState.SketchIdInEdit;
+        newState.sessionState.pendingOrderInEditAction = null;
+        newState.sessionState.pendingOrderInEditActionSelectDrives = null;
+        const sketchObj: SketchModel | undefined = newState.sketches.find((record: SketchModel) => record.id === SketchIdInEdit);
+
+        if (sketchObj !== undefined) {
+            const vehicleId = getVehicleIdFromDriveId(state, sketchDriveChanged.id);
+            const relevantVehicle = sketchObj.vehicleSchedules.find(v => v.id === vehicleId);
+            let pendingOrdersToPassToAssigned: string [] | null = null;
+            if (relevantVehicle) {
+                relevantVehicle.drives = relevantVehicle.drives.map((d: DriveModel) => {
+                    if (d.id === sketchDriveChanged.id) {
+                        pendingOrdersToPassToAssigned = d.implementsOrders
+                        return sketchDriveChanged
+                    } else {
+                        return d
+                    }
+                })
+            }
+            if (pendingOrdersToPassToAssigned !== null) {
+                const implementedOrders: string [] = pendingOrdersToPassToAssigned as string [];
+                const ordersToMoveToAssigned: OrderModel [] = sketchObj.unassignedOrders.filter((o: OrderModel) => implementedOrders.includes(o.id))
+                sketchObj.assignedOrders = sketchObj.assignedOrders.concat(ordersToMoveToAssigned);
+                sketchObj.unassignedOrders = sketchObj.unassignedOrders.filter((o: OrderModel) => !implementedOrders.includes(o.id))
+
+
             }
 
 
@@ -109,7 +148,7 @@ export const SketchDriveReducer: Record<SketchDriveReducerFunctions, (state: Sid
 
 
 }
- 
+
 
 const getVehicleIdFromDriveId = (state: SidurStore, driveId: string): string => {
     const SketchIdInEdit = state.sessionState.SketchIdInEdit
@@ -127,3 +166,4 @@ const getVehicleIdFromDriveId = (state: SidurStore, driveId: string): string => 
     return vehicleId
 
 }
+

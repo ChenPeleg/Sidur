@@ -7,18 +7,20 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
 import {translations} from '../../services/translations';
-import {Box, Card, Typography} from '@mui/material';
+import {Box, Typography} from '@mui/material';
 import {SxProps} from '@mui/system';
-import {Delete, MergeType} from '@mui/icons-material';
+import {MergeType} from '@mui/icons-material';
 import {DriveModel, SketchModel} from '../../models/Sketch.model';
 import {VerticalHourField} from '../buttons/vertical-hour-field';
 import {OrderModel} from '../../models/Order.model';
 import {useDispatch, useSelector} from 'react-redux';
 import {Utils} from '../../services/utils';
-import {ActionsTypes} from '../../store/types.actions';
 import {SidurStore} from '../../store/store.types';
 import {LocationModel} from '../../models/Location.model';
 import {SidurEditorService} from '../../sidurEditor/sidurEditor.service';
+import {LanguageUtilities} from '../../services/language-utilities';
+import {Styles} from '../../hoc/themes';
+import {DriveType} from '../../models/DriveType.enum';
 
 interface SketchDriveMergeDialogProps {
     open: boolean;
@@ -26,6 +28,7 @@ interface SketchDriveMergeDialogProps {
     PendingOrderToMergeId: string
     vehicleId: string;
     onDelete: (sketchDriveData: { drive: DriveModel, vehicleId: string }) => void;
+
     onClose: (vehicleUpdate: DriveModel | null) => void;
 }
 
@@ -45,15 +48,19 @@ export const SketchDriveMergeDialog = (props: SketchDriveMergeDialogProps) => {
     const sketchOrders = sketchInEdit?.assignedOrders || [];
     const locations = useSelector(((state: { Locations: LocationModel[] }) => state.Locations));
     const originalDriveData = sketchDriveData.drive;
-    const driveData = SidurEditorService.SuggestMergedDrive(originalDriveData, orderToMerge, locations)
+    const driveDataAndIssues = SidurEditorService.SuggestMergedDrive(originalDriveData, orderToMerge, locations);
 
+    const driveData = driveDataAndIssues.suggestedDrive;
+    const issues = driveDataAndIssues.issues;
+
+    const orderToMergeBrief = LanguageUtilities.buildBriefText(orderToMerge, locations);
 
     const [driveChangedData, setDriveChangedData] = useState<DriveModel>({...driveData});
 
 
     const descriptionValueRef: any = useRef('')
     const filedWrapper: SxProps = {
-        width: '230px'
+        //  width: '320px'
     }
     const handleCloseCancel = () => {
         onClose(null);
@@ -64,35 +71,22 @@ export const SketchDriveMergeDialog = (props: SketchDriveMergeDialogProps) => {
         if (descriptionValueRef?.current?.value) {
             editedData.description = descriptionValueRef?.current?.value
         }
+        if (orderToMerge.TypeOfDrive === DriveType.Tsamud) {
+            editedData.TypeOfDrive = DriveType.Tsamud;
+
+        }
+        editedData.implementsOrders.push(PendingOrderToMergeId);
         onClose(editedData);
 
     };
-    const handleCloseDelete = (): void => {
-        const sketchDriveDataForDelete = {...sketchDriveData}
 
-        onDelete(sketchDriveDataForDelete);
-    };
-    const addToPendingClickHandler = (event: Event, orderId: string) => {
 
-        dispatch({
-            type: ActionsTypes.REMOVE_ORDER_FROM_SKETCH_DRIVE,
-            payload: {
-                orderId,
-                sketchDriveId: driveData.id
-            }
-        })
-        const newDrive = {...driveChangedData};
-        newDrive.implementsOrders = newDrive.implementsOrders.filter(o => o !== orderId);
-        setDriveChangedData(newDrive)
-    }
     const handleHourChange =
         (event: Event, input: any) => {
-
-
-            const newSketchData = {...driveChangedData};
-            newSketchData.startHour = Utils.DecimalTimeToHourText(input[0]);
-            newSketchData.finishHour = Utils.DecimalTimeToHourText(input[1]);
-            setDriveChangedData(newSketchData);
+            const newriveData = {...driveChangedData};
+            newriveData.startHour = Utils.DecimalTimeToHourText(input[0]);
+            newriveData.finishHour = Utils.DecimalTimeToHourText(input[1]);
+            setDriveChangedData(newriveData);
 
 
         }
@@ -101,7 +95,7 @@ export const SketchDriveMergeDialog = (props: SketchDriveMergeDialogProps) => {
     return (
 
 
-        <Dialog open={open} onClose={handleCloseCancel}>
+        <Dialog open={open} onClose={handleCloseCancel} fullWidth>
             <DialogTitle sx={{
                 fontSize: '22px',
                 textAlign: 'center',
@@ -135,13 +129,17 @@ export const SketchDriveMergeDialog = (props: SketchDriveMergeDialogProps) => {
                                            label={translations.Start}/>
 
                     </Box>
+                    <Box id={'divider-in-main-row'} sx={{
+                        width: '20px',
+                        height: '100px'
+                    }}/>
                     <Box sx={{
                         ...filedWrapper,
                         display: 'flex',
                         flexDirection: 'column'
                     }}>
-                        <Typography align={'center'}
-                                    component="legend"><b>{translations.DriveDescriptionNew}</b>
+                        <Typography
+                            component="legend"><b>{translations.DriveDescriptionNew}</b>
                         </Typography>
 
                         <Box sx={{...filedWrapper}}>
@@ -162,34 +160,49 @@ export const SketchDriveMergeDialog = (props: SketchDriveMergeDialogProps) => {
                                 }}
                             />
                         </Box>
-                        <Typography align={'center'} sx={{mt: '1em'}}
+                        <Typography sx={{mt: '1em'}}
                                     component="legend"><b> {newImplementedOrders.length === 0 ? (translations.none + ' ') : null} {
                             translations
-                                .newMergedOrder
+                                .issues + ':'
                         }</b>
-                        </Typography>
+                            <Box id={'issues'}>
+                                {issues.map((issue: string, i: number) => (
+                                    <Box key={i} sx={{
+                                        display: 'flex',
+                                        flexDirection: 'column',
+                                        p: '0.0em'
+                                    }}>
+                                        <Box sx={{pb: '0em'}}>
+                                            {(i + 1).toString() + '. '}{issue}
+                                        </Box>
+
+
+                                    </Box>))}
+                            </Box>
+                        </Typography> <Typography sx={{mt: '1em'}}
+                                                  component="legend"><b> {newImplementedOrders.length === 0 ? (translations.none + ' ') : null} {
+                        translations
+                            .newMergedOrder
+                    }</b>
+                    </Typography>
 
                         <Box id={'connected-orders'}>
                             {newImplementedOrders.map((order: OrderModel, i: number) => (
-                                <Card key={i} sx={{
+                                <Box key={i} sx={{
                                     display: 'flex',
                                     flexDirection: 'column',
-                                    p: '1em'
+                                    p: '0.2em'
                                 }}>
-                                    <Box sx={{pb: '0.5em'}}>
-                                        {order.Comments}
+                                    <Box sx={{pb: '0.2em'}}>
+                                        {orderToMergeBrief.timeText + ' ' + orderToMergeBrief.driverAndLocation + ', ' + order.Comments}
                                     </Box>
 
-                                    {/*<OrderActionButton sx={{width: '100%'}} size={'small'}*/}
-                                    {/*                   actionType={SketchEditActionEnum.AddToPending}*/}
-                                    {/*                   text={'      ' + translations.SketchActionAddToPending}*/}
-                                    {/*                   actionClickHandler={(event: any) => addToPendingClickHandler(event, order.id)}/>*/}
 
-                                </Card>))}
+                                </Box>))}
                         </Box>
 
 
-                        <Typography align={'center'} sx={{mt: '1em'}}
+                        <Typography sx={{mt: '0.2em'}}
                                     component="legend"><b> {implementedOrders.length === 0 ? (translations.none + ' ') : null} {
                             translations
                                 .connectedOrders
@@ -198,21 +211,16 @@ export const SketchDriveMergeDialog = (props: SketchDriveMergeDialogProps) => {
 
                         <Box id={'connected-orders'}>
                             {implementedOrders.map((order: OrderModel, i: number) => (
-                                <Card key={i} sx={{
+                                <Box key={i} sx={{
                                     display: 'flex',
                                     flexDirection: 'column',
-                                    p: '1em'
+                                    p: '0.2em'
                                 }}>
                                     <Box sx={{pb: '0.5em'}}>
-                                        {order.Comments}
+                                        {(i + 1).toString() + '. '}{order.Comments}
                                     </Box>
 
-                                    {/*<OrderActionButton sx={{width: '100%'}} size={'small'}*/}
-                                    {/*                   actionType={SketchEditActionEnum.AddToPending}*/}
-                                    {/*                   text={'      ' + translations.SketchActionAddToPending}*/}
-                                    {/*                   actionClickHandler={(event: any) => addToPendingClickHandler(event, order.id)}/>*/}
-
-                                </Card>))}
+                                </Box>))}
                         </Box>
 
 
@@ -229,12 +237,19 @@ export const SketchDriveMergeDialog = (props: SketchDriveMergeDialogProps) => {
                     </Box>
                 </Box>
             </DialogContent>
-            <DialogActions>
-                <Button onClick={handleCloseDelete} aria-label="add" size="large">
-                    <Delete/> {translations.Delete}
-                </Button>
-                <Button id={'vehicle-edit-cancel-button'} onClick={handleCloseCancel}>{translations.Cancel}</Button>
-                <Button id={'vehicle-edit-approve-button'} onClick={handleCloseEdit}>{translations.Approve}</Button>
+            <DialogActions sx={{
+                ...Styles.flexRow,
+                justifyContent: 'center'
+            }}>
+
+                <Button size={'large'} variant={'outlined'} id={'vehicle-edit-cancel-button'}
+                        onClick={handleCloseCancel}>{translations.CancelMerge}</Button>
+                <Box sx={{
+                    width: '30px',
+                    height: '10px'
+                }}/>
+                <Button size={'large'} variant={'contained'} id={'vehicle-edit-approve-button'}
+                        onClick={handleCloseEdit}>{translations.ApproveMerge}</Button>
             </DialogActions>
         </Dialog>
 
