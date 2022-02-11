@@ -16,7 +16,7 @@ import {OrderModel} from '../../models/Order.model';
 import {useDispatch, useSelector} from 'react-redux';
 import {Utils} from '../../services/utils';
 import {OrderActionButton} from '../buttons/order-action-button';
-import {SketchEditActionEnum} from '../../models/SketchEditAction.enum';
+import {SketchOrderEditActionEnum} from '../../models/SketchOrderEditActionEnum';
 import {ActionsTypes} from '../../store/types.actions';
 import {SidurStore} from '../../store/store.types';
 import {SidurEditorService} from '../../sidurEditor/sidurEditor.service';
@@ -176,7 +176,7 @@ export const SketchDriveEditDialog = (props: SketchDriveEditDialogProps) => {
                                     </Box>
 
                                     <OrderActionButton sx={{width: '100%'}} size={'small'}
-                                                       actionType={SketchEditActionEnum.AddToPending}
+                                                       actionType={SketchOrderEditActionEnum.AddToPending}
                                                        text={'      ' + translations.SketchActionAddToPending}
                                                        actionClickHandler={(event: any) => addToPendingClickHandler(event, order.id)}/>
 

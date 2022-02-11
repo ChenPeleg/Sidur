@@ -1,5 +1,18 @@
 import React from 'react';
-import {Add, AddBox, BusAlert, ChangeCircle, Check, MergeType, Remove, ReplayCircleFilled, Splitscreen, Timer} from '@mui/icons-material';
+import {
+    Add,
+    AddBox,
+    ArrowCircleDown,
+    ArrowCircleUp,
+    BusAlert,
+    ChangeCircle,
+    Check,
+    MergeType,
+    Remove,
+    ReplayCircleFilled,
+    Splitscreen,
+    Timer
+} from '@mui/icons-material';
 
 
 export const Icons: Record<string, React.ReactElement> = {
@@ -13,6 +26,8 @@ export const Icons: Record<string, React.ReactElement> = {
     'ReplaceExisting': (<ReplayCircleFilled/>),
     'publicTransport': (<BusAlert/>),
     'AddToPending': (<AddBox/>),
+    'MoveToTop': (<ArrowCircleUp/>),
+    'MoveToBottom': (<ArrowCircleDown/>),
 }
 
 

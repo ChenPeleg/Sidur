@@ -90,7 +90,7 @@ export const Sketch = () => {
         setSketchDriveMergeOpen(true);
     }
     const sketchDriveClickHandler = (event: React.MouseEvent<HTMLElement>, drive: DriveModel, vehicleId: string) => {
-        console.log(sketchDriveMergeOpen)
+
         if (sessionState.pendingOrderInEditAction && sessionState.pendingOrderIdInEdit) {
             const Order = sketchInEdit?.unassignedOrders.find(o => o.id === sessionState.pendingOrderIdInEdit)
             if (Order) {

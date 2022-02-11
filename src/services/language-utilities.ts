@@ -3,7 +3,7 @@ import {translations} from './translations';
 import {OrderModel} from '../models/Order.model';
 import {LocationModel} from '../models/Location.model';
 import {DriveModel} from '../models/Sketch.model';
-import {SketchEditActionEnum} from '../models/SketchEditAction.enum';
+import {SketchOrderEditActionEnum} from '../models/SketchOrderEditActionEnum';
 
 interface driveHourPrefixes {
     timeStart: string,
@@ -89,38 +89,54 @@ export const LanguageUtilities = {
         const arr = new Array(numberOfBR)
         return str + arr.map(s => br).join('')
     },
-    buildSketchEditActionsArray(): { action: SketchEditActionEnum, name: string, icon: string } [] {
-        const ret: { action: SketchEditActionEnum, name: string, icon: string } [] = []
-        for (let sketchEditActionEnumKey in SketchEditActionEnum) {
+    buildSketchEditActionsArray(): { action: SketchOrderEditActionEnum, name: string, icon: string } [] {
+        const ret: { action: SketchOrderEditActionEnum, name: string, icon: string } [] = []
+        for (let sketchEditActionEnumKey in SketchOrderEditActionEnum) {
             if (isNaN(Number(sketchEditActionEnumKey))) {
                 continue
             }
             let name = sketchEditActionEnumKey;
-            const enumbEntry = Number(sketchEditActionEnumKey) as SketchEditActionEnum;
-            let icon = SketchEditActionEnum[enumbEntry]
+            const enumbEntry = Number(sketchEditActionEnumKey) as SketchOrderEditActionEnum;
+            let icon = SketchOrderEditActionEnum[enumbEntry];
+            let isDisabled: boolean = false
             switch (enumbEntry) {
-                case SketchEditActionEnum.Split:
+                case SketchOrderEditActionEnum.Split:
                     name = translations.SketchActionSplit;
                     break;
-                case SketchEditActionEnum.Merge:
+                case SketchOrderEditActionEnum.Merge:
                     name = translations.SketchActionMerge;
                     break;
-                case SketchEditActionEnum.Change:
+                case SketchOrderEditActionEnum.Change:
                     name = translations.SketchActionChange;
+                    isDisabled = true;
                     break;
-                case SketchEditActionEnum.ChangeTime:
+                case SketchOrderEditActionEnum.ChangeTime:
                     name = translations.SketchActionChangeTime;
+                    isDisabled = true;
                     break;
-                case SketchEditActionEnum.ReplaceExisting:
+                case SketchOrderEditActionEnum.ReplaceExisting:
                     name = translations.SketchActionReplaceExisting;
                     break;
-                case SketchEditActionEnum.publicTransport:
+                case SketchOrderEditActionEnum.publicTransport:
                     name = translations.SketchActionPublicTransport
                     break;
-                case SketchEditActionEnum.RemoveFromPending:
+                case SketchOrderEditActionEnum.RemoveFromPending:
                     name = translations.SketchActionRemove;
-
+                    isDisabled = true;
                     break;
+                case SketchOrderEditActionEnum.AddToPending:
+                    name = translations.SketchActionAddToPending;
+                    isDisabled = true;
+                    break;
+                case SketchOrderEditActionEnum.MoveToTop:
+                    name = translations.SketchActionMoveToTop;
+                    break;
+                case SketchOrderEditActionEnum.MoveToBottom:
+                    name = translations.SketchActionMoverToBottom;
+                    break;
+            }
+            if (isDisabled) {
+                continue
             }
             ret.push({
                 action: Number(sketchEditActionEnumKey),

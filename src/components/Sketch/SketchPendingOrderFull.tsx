@@ -9,7 +9,7 @@ import {PendingOrderMenu} from './pending-order-menu';
 import MoreIcon from '@mui/icons-material/MoreVert';
 import {OrderActionButton} from '../buttons/order-action-button';
 import {translations} from '../../services/translations';
-import {SketchEditActionEnum} from '../../models/SketchEditAction.enum';
+import {SketchOrderEditActionEnum} from '../../models/SketchOrderEditActionEnum';
 
 
 interface sketchPendingOrderProps {
@@ -23,29 +23,41 @@ export const SketchPendingOrderFull = (props: sketchPendingOrderProps) => {
     const dispatch = useDispatch();
     const [pendingOrderAnchorEl, setPendingOrderAnchorEl] =
         React.useState<null | HTMLElement>(null);
-    const handlePendingOrderMenuClick = (event: React.MouseEvent<HTMLElement>, clickAction: SketchEditActionEnum) => {
+    const handlePendingOrderMenuClick = (event: React.MouseEvent<HTMLElement>, clickAction: SketchOrderEditActionEnum) => {
         const orderId = props.order.id
         switch (clickAction) {
 
-            // case SketchEditActionEnum.AddToPending:
+            // case SketchOrderEditActionEnum.AddToPending:
             //     dispatch({
             //         type: ActionsTypes.CLONE_SIDUR,
             //         payload: {id: orderId}
             //     })
             //     break;
-            case SketchEditActionEnum.RemoveFromPending:
+            case SketchOrderEditActionEnum.MoveToTop:
+                dispatch({
+                    type: ActionsTypes.CLICKED_MOVE_TO_TOP_PENDING_ORDER,
+                    payload: {id: orderId}
+                })
+                break;
+            case SketchOrderEditActionEnum.MoveToBottom:
+                dispatch({
+                    type: ActionsTypes.CLICKED_MOVE_TO_BOTTOM_PENDING_ORDER,
+                    payload: {id: orderId}
+                })
+                break;
+            case SketchOrderEditActionEnum.RemoveFromPending:
                 dispatch({
                     type: ActionsTypes.CLICKED_REMOVE_PENDING_ORDER,
                     payload: {id: orderId}
                 })
                 break;
-            case SketchEditActionEnum.Split:
+            case SketchOrderEditActionEnum.Split:
                 dispatch({
-                    type: ActionsTypes.CLICKED_REMOVE_PENDING_ORDER,
+                    type: ActionsTypes.CLICKED_SPLIT_PENDING_ORDER,
                     payload: {id: orderId}
                 })
                 break;
-            case SketchEditActionEnum.Merge:
+            case SketchOrderEditActionEnum.Merge:
                 dispatch({
                     type: ActionsTypes.CLICKED_MERGE_PENDING_ORDER,
                     payload: {id: orderId}
@@ -122,7 +134,7 @@ export const SketchPendingOrderFull = (props: sketchPendingOrderProps) => {
                         aria-label="show more"
                         aria-controls={pendingOrderMenuId}
                         aria-haspopup="true"
-                        onClick={(event) => handlePendingOrderMenuClick(event, SketchEditActionEnum.RemoveFromPending)}
+                        onClick={(event) => handlePendingOrderMenuClick(event, SketchOrderEditActionEnum.RemoveFromPending)}
                         variant={'contained'}
                     > {translations.SketchActionRemove}
                     </Button>

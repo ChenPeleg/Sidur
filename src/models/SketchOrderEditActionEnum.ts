@@ -1,4 +1,4 @@
-export enum SketchEditActionEnum {
+export enum SketchOrderEditActionEnum {
     RemoveFromPending = 1,
     Merge = 2,
     Split = 3,
@@ -6,5 +6,7 @@ export enum SketchEditActionEnum {
     ChangeTime = 5,
     ReplaceExisting = 6,
     publicTransport = 7,
-    AddToPending = 8
+    AddToPending = 8,
+    MoveToTop = 9,
+    MoveToBottom = 10
 }

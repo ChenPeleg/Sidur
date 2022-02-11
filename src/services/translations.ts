@@ -137,6 +137,8 @@ export const translations = {
     'SketchActionReplaceExisting': 'העבר לרכב במקום נסיעה קיימת',
     'SketchActionPublicTransport': 'צור פתרון בתחב"צ',
     'SketchActionAddToPending': 'סמן כ"לא מטופלת"',
+    'SketchActionMoveToTop': 'העבר לתחילת הרשימה',
+    'SketchActionMoverToBottom': 'העבר לסוף הרשימה',
 
     'gapForMergeDrives1': 'קיים פער של ',
     'beforeSplit': 'בוצע פיצול נסיעה',

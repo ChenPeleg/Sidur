@@ -2,7 +2,7 @@ import {Box, Typography} from '@mui/material';
 import {Styles} from '../../hoc/themes';
 import {useSelector} from 'react-redux';
 import {SidurStore} from '../../store/store.types';
-import {SketchEditActionEnum} from '../../models/SketchEditAction.enum';
+import {SketchOrderEditActionEnum} from '../../models/SketchOrderEditActionEnum';
 import {SketchModel} from '../../models/Sketch.model';
 import {OrderModel} from '../../models/Order.model';
 import {translations} from '../../services/translations';
@@ -20,11 +20,11 @@ export const SketchesContainerMessage = (props: { sketch: SketchModel | null }) 
         const pendingOrderIdInEdit = sessionState.pendingOrderIdInEdit;
         const pendingORderInEdit: OrderModel | undefined = props.sketch?.unassignedOrders.find(o => o.id === pendingOrderIdInEdit)
         switch (sessionState.pendingOrderInEditAction) {
-            case SketchEditActionEnum.Merge:
+            case SketchOrderEditActionEnum.Merge:
 
                 messageText += translations.SketchActionMergeInfoMessage
                 break;
-            case SketchEditActionEnum.ReplaceExisting:
+            case SketchOrderEditActionEnum.ReplaceExisting:
                 messageText += translations.SketchActionReplaceInfoMessage
                 break;
         }

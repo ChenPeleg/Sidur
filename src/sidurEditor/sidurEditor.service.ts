@@ -96,17 +96,17 @@ export const SidurEditorService = {
     splitTsamudOrder(order: OrderModel, locations: LocationModel[]): [OrderModel, OrderModel] {
         const location = locations.find((l: LocationModel) => l.id === order.location)
         const eta = location?.ETA || 30;
-        const order1 = CloneUtil.deepCloneOrder(order);
-        const order2 = CloneUtil.deepCloneOrder(order);
+        const orderTo = CloneUtil.deepCloneOrder(order);
+        const orderFrom = CloneUtil.deepCloneOrder(order);
 
-        order1.finishHour = Utils.DecimalTimeToHourText(Utils.hourTextToDecimal(order1.startHour) + Math.floor(((eta + 5) * 2) / 60));
-        order1.TypeOfDrive = DriveType.OneWayTo;
-        order1.Comments = translations.beforeSplit + ': ' + order1.Comments
+        orderTo.finishHour = Utils.DecimalTimeToHourText(Utils.hourTextToDecimal(orderTo.startHour) + Math.floor(((eta + 5) * 2) / 60));
+        orderTo.TypeOfDrive = DriveType.OneWayTo;
+        orderTo.Comments = translations.beforeSplit + ': ' + orderTo.Comments
 
 
-        order2.startHour = Utils.DecimalTimeToHourText(Utils.hourTextToDecimal(order1.startHour) - Math.floor(((eta + 5) * 2) / 60));
-        order2.TypeOfDrive = DriveType.OneWayFrom;
-        order1.Comments = translations.beforeSplit + ': ' + order2.Comments
-        return [order1, order2]
+        orderFrom.startHour = Utils.DecimalTimeToHourText(Utils.hourTextToDecimal(orderFrom.finishHour) - Math.floor(((eta + 5) * 2) / 60));
+        orderFrom.TypeOfDrive = DriveType.OneWayFrom;
+        orderTo.Comments = translations.beforeSplit + ': ' + orderFrom.Comments
+        return [orderTo, orderFrom]
     }
 }
