@@ -39,6 +39,12 @@ export const SketchPendingOrderFull = (props: sketchPendingOrderProps) => {
                     payload: {id: orderId}
                 })
                 break;
+            case SketchEditActionEnum.Split:
+                dispatch({
+                    type: ActionsTypes.CLICKED_REMOVE_PENDING_ORDER,
+                    payload: {id: orderId}
+                })
+                break;
             case SketchEditActionEnum.Merge:
                 dispatch({
                     type: ActionsTypes.CLICKED_MERGE_PENDING_ORDER,

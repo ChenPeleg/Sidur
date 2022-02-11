@@ -5,6 +5,7 @@ import {OrderModel} from '../models/Order.model';
 import {StoreUtils} from './store-utils';
 import {SketchEditActionEnum} from '../models/SketchEditAction.enum';
 import {SidurEditorService} from '../sidurEditor/sidurEditor.service';
+import {Utils} from '../services/utils';
 
 export type PendingOrdersReducerFunctions =
     ActionsTypes.CLICKED_PENDING_ORDER
@@ -81,11 +82,7 @@ export const PendingOrdersReducer: Record<PendingOrdersReducerFunctions, (state:
     },
     [ActionsTypes.REMOVE_PENDING_ORDER_STATUS]: (state: SidurStore, action: IAction): SidurStore => {
         let newState = {...state};
-        // newState.sessionState.pendingOrderInEditAction = SketchEditActionEnum.Merge;
-        // const SketchIdInEdit = state.sessionState.SketchIdInEdit
-        //
-        // const sketchObj: SketchModel = state.sketches.find((record: SketchModel) => record.id === SketchIdInEdit) as SketchModel;
-        // const relavantDrives = SidurEditorService.getRelevantDriveIdsToChoose(sketchObj, newState.sessionState.pendingOrderIdInEdit as string);
+
         newState.sessionState.pendingOrderInEditAction = null;
         newState.sessionState.pendingOrderInEditActionSelectDrives = null;
 
@@ -94,6 +91,41 @@ export const PendingOrdersReducer: Record<PendingOrdersReducerFunctions, (state:
     },
     [ActionsTypes.CLICKED_SPLIT_PENDING_ORDER]: (state: SidurStore, action: IAction): SidurStore => {
         let newState = {...state}
+        const orderToSplitId = action.payload.id
+        const SketchIdInEdit = state.sessionState.SketchIdInEdit
+
+        const sketchObj: SketchModel | undefined = state.sketches.find((record: SketchModel) => record.id === SketchIdInEdit);
+        if (sketchObj) {
+            const orderToSplit: OrderModel | undefined = sketchObj.unassignedOrders.find(o => o.id === orderToSplitId);
+            if (orderToSplit) {
+                const newOrders = SidurEditorService.splitTsamudOrder(orderToSplit, newState.Locations);
+                const allSketchOrders = sketchObj.unassignedOrders.concat(sketchObj.assignedOrders);
+
+                const newId1 = Utils.getNextId(allSketchOrders.map(o => o.id))
+                const newId2 = (+newId1 + 1).toString();
+                newOrders[0].id = newId1;
+                newOrders[1].id = newId2;
+                sketchObj.unassignedOrders = sketchObj.unassignedOrders.filter(o => o.id !== orderToSplit.id);
+
+                sketchObj.unassignedOrders = [newOrders[0], newOrders[1], ...sketchObj.unassignedOrders]
+
+                //SidurEditorService.  splitTsamudOrder(orderToSplit,)
+                // sketchObj.assignedOrders = [...sketchObj.assignedOrders]
+                // sketchObj.assignedOrders.push(orderToSplit);
+                // sketchObj.unassignedOrders = [...sketchObj.unassignedOrders];
+                // sketchObj.unassignedOrders = sketchObj.unassignedOrders.filter(o => o.id !== orderToSplitId);
+                newState.sketches = newState.sketches.map((sketch: SketchModel) => {
+                    if (sketch.id === SketchIdInEdit) {
+                        return {...sketchObj}
+                    } else {
+                        return sketch
+                    }
+                });
+            }
+            newState.sessionState.pendingOrderIdInEdit = null;
+        }
+        StoreUtils.abortSessionPendingOrderState(newState);
+        StoreUtils.updateSidurRecordWithSketchChanges(newState)
         return newState
     },
     [ActionsTypes.CLICKED_CHANGE_PENDING_ORDER]: (state: SidurStore, action: IAction): SidurStore => {

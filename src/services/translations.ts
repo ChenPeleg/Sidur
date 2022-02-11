@@ -139,6 +139,7 @@ export const translations = {
     'SketchActionAddToPending': 'סמן כ"לא מטופלת"',
 
     'gapForMergeDrives1': 'קיים פער של ',
+    'beforeSplit': 'בוצע פיצול נסיעה',
 
     'gapForMergeDrives3StartTimes': 'דקות בין זמני היציאה של הנסיעות',
     'gapForMergeDrives3FinishTimes': 'דקות בין זמני הסיום של הנסיעות',
