@@ -3,7 +3,7 @@ import {ActionsTypes} from './types.actions';
 import {SketchModel} from '../models/Sketch.model';
 import {OrderModel} from '../models/Order.model';
 import {StoreUtils} from './store-utils';
-import {SketchOrderEditActionEnum} from '../models/SketchOrderEditActionEnum';
+import {SketchDriveOrderEditActionEnum} from '../models/SketchDriveOrderEditActionEnum';
 import {SidurEditorService} from '../sidurEditor/sidurEditor.service';
 import {Utils} from '../services/utils';
 
@@ -21,6 +21,7 @@ export type PendingOrdersReducerFunctions =
     | ActionsTypes.REMOVE_PENDING_ORDER_STATUS
     | ActionsTypes.CLICKED_MOVE_TO_TOP_PENDING_ORDER
     | ActionsTypes.CLICKED_MOVE_TO_BOTTOM_PENDING_ORDER
+    | ActionsTypes.CLICKED_ADD_TO_VEHICLE_PENDING_ORDER
 
 
 export const PendingOrdersReducer: Record<PendingOrdersReducerFunctions, (state: SidurStore, action: IAction) => SidurStore> = {
@@ -128,7 +129,7 @@ export const PendingOrdersReducer: Record<PendingOrdersReducerFunctions, (state:
     },
     [ActionsTypes.CLICKED_MERGE_PENDING_ORDER]: (state: SidurStore, action: IAction): SidurStore => {
         let newState = {...state};
-        newState.sessionState.pendingOrderInEditAction = SketchOrderEditActionEnum.Merge;
+        newState.sessionState.pendingOrderInEditAction = SketchDriveOrderEditActionEnum.Merge;
         const SketchIdInEdit = state.sessionState.SketchIdInEdit
 
         const sketchObj: SketchModel = state.sketches.find((record: SketchModel) => record.id === SketchIdInEdit) as SketchModel;
@@ -136,6 +137,20 @@ export const PendingOrdersReducer: Record<PendingOrdersReducerFunctions, (state:
         if (relavantDrives.length > 0) {
             newState.sessionState.pendingOrderInEditActionSelectDrives = relavantDrives;
         }
+
+        StoreUtils.HandleReducerSaveToLocalStorage(newState);
+        return newState
+    },
+    [ActionsTypes.CLICKED_ADD_TO_VEHICLE_PENDING_ORDER]: (state: SidurStore, action: IAction): SidurStore => {
+        let newState = {...state};
+        newState.sessionState.pendingOrderInEditAction = SketchDriveOrderEditActionEnum.AddToVehicle;
+        const SketchIdInEdit = state.sessionState.SketchIdInEdit
+
+        const sketchObj: SketchModel = state.sketches.find((record: SketchModel) => record.id === SketchIdInEdit) as SketchModel;
+       
+
+        newState.sessionState.pendingOrderInEditActionSelectDrives = ['noDrivesRealyNeeded'];
+
 
         StoreUtils.HandleReducerSaveToLocalStorage(newState);
         return newState
@@ -193,17 +208,14 @@ export const PendingOrdersReducer: Record<PendingOrdersReducerFunctions, (state:
     },
     [ActionsTypes.CLICKED_CHANGE_TIME_PENDING_ORDER]: (state: SidurStore, action: IAction): SidurStore => {
         let newState = {...state}
-
         StoreUtils.HandleReducerSaveToLocalStorage(newState);
         return newState
     },
     [ActionsTypes.CLICKED_REPLACE_EXISTING_PENDING_ORDER]: (state: SidurStore, action: IAction): SidurStore => {
         let newState = {...state};
-        newState.sessionState.pendingOrderInEditAction = SketchOrderEditActionEnum.ReplaceExisting;
+        newState.sessionState.pendingOrderInEditAction = SketchDriveOrderEditActionEnum.ReplaceExisting;
         const SketchIdInEdit = state.sessionState.SketchIdInEdit
-        /**
-         * TODO - stopped development here
-         * **/
+
         const sketchObj: SketchModel = state.sketches.find((record: SketchModel) => record.id === SketchIdInEdit) as SketchModel;
         const relavantDrives = SidurEditorService.getRelevantDriveIdsToChoose(sketchObj, newState.sessionState.pendingOrderIdInEdit as string);
         if (relavantDrives.length > 0) {

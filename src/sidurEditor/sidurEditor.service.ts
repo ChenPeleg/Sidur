@@ -32,6 +32,31 @@ export const SidurEditorService = {
 
         return allRelevantDrives.map(d => d.id)
     },
+    getOnlyOneRelevantDriveIdsToChoose(sketch: SketchModel, pendingOrderId: string): string [] {
+        const pendingOrder = sketch.unassignedOrders.find(o => o.id === pendingOrderId);
+        if (!pendingOrder) {
+            return []
+        }
+        const originOrd = {
+            start: Utils.hourTextToDecimal(pendingOrder.startHour),
+            finish: Utils.hourTextToDecimal(pendingOrder.finishHour)
+
+        }
+
+
+        const allRelevantDrives: DriveModel[] = [];
+        sketch.vehicleSchedules.forEach(v => {
+            let currentVehicleClosestDrive: string | null = null;
+            v.drives.forEach(d => {
+                if (currentVehicleClosestDrive) {
+                    currentVehicleClosestDrive = null
+                }
+
+            })
+        })
+
+        return allRelevantDrives.map(d => d.id)
+    },
     getAllDrivesFromSketch(sketch: SketchModel): DriveModel[] {
         const allDrives: DriveModel[] = []
 
@@ -53,6 +78,7 @@ export const SidurEditorService = {
         const dest: number [] = hours(destination.start, destination.finish)
         return org.some(n => dest.includes(n))
     },
+
     SuggestMergedDrive(drive: DriveModel, orderToMerge: OrderModel, locations: LocationModel[]): { suggestedDrive: DriveModel, issues: string[] } {
         const h2n = (h: string): number => {
             return Utils.hourTextToDecimal(h)

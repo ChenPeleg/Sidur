@@ -28,6 +28,7 @@ export const Icons: Record<string, React.ReactElement> = {
     'AddToPending': (<AddBox/>),
     'MoveToTop': (<ArrowCircleUp/>),
     'MoveToBottom': (<ArrowCircleDown/>),
+    'AddToVehicle': (<AddBox/>)
 }
 
 

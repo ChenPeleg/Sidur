@@ -3,7 +3,7 @@ import {translations} from './translations';
 import {OrderModel} from '../models/Order.model';
 import {LocationModel} from '../models/Location.model';
 import {DriveModel} from '../models/Sketch.model';
-import {SketchOrderEditActionEnum} from '../models/SketchOrderEditActionEnum';
+import {SketchDriveOrderEditActionEnum} from '../models/SketchDriveOrderEditActionEnum';
 
 interface driveHourPrefixes {
     timeStart: string,
@@ -89,50 +89,53 @@ export const LanguageUtilities = {
         const arr = new Array(numberOfBR)
         return str + arr.map(s => br).join('')
     },
-    buildSketchEditActionsArray(): { action: SketchOrderEditActionEnum, name: string, icon: string } [] {
-        const ret: { action: SketchOrderEditActionEnum, name: string, icon: string } [] = []
-        for (let sketchEditActionEnumKey in SketchOrderEditActionEnum) {
+    buildSketchEditActionsArray(): { action: SketchDriveOrderEditActionEnum, name: string, icon: string } [] {
+        const ret: { action: SketchDriveOrderEditActionEnum, name: string, icon: string } [] = []
+        for (let sketchEditActionEnumKey in SketchDriveOrderEditActionEnum) {
             if (isNaN(Number(sketchEditActionEnumKey))) {
                 continue
             }
             let name = sketchEditActionEnumKey;
-            const enumbEntry = Number(sketchEditActionEnumKey) as SketchOrderEditActionEnum;
-            let icon = SketchOrderEditActionEnum[enumbEntry];
+            const enumbEntry = Number(sketchEditActionEnumKey) as SketchDriveOrderEditActionEnum;
+            let icon = SketchDriveOrderEditActionEnum[enumbEntry];
             let isDisabled: boolean = false
             switch (enumbEntry) {
-                case SketchOrderEditActionEnum.Split:
+                case SketchDriveOrderEditActionEnum.Split:
                     name = translations.SketchActionSplit;
                     break;
-                case SketchOrderEditActionEnum.Merge:
+                case SketchDriveOrderEditActionEnum.Merge:
                     name = translations.SketchActionMerge;
                     break;
-                case SketchOrderEditActionEnum.Change:
+                case SketchDriveOrderEditActionEnum.Change:
                     name = translations.SketchActionChange;
                     isDisabled = true;
                     break;
-                case SketchOrderEditActionEnum.ChangeTime:
+                case SketchDriveOrderEditActionEnum.ChangeTime:
                     name = translations.SketchActionChangeTime;
                     isDisabled = true;
                     break;
-                case SketchOrderEditActionEnum.ReplaceExisting:
+                case SketchDriveOrderEditActionEnum.ReplaceExisting:
                     name = translations.SketchActionReplaceExisting;
                     break;
-                case SketchOrderEditActionEnum.publicTransport:
+                case SketchDriveOrderEditActionEnum.publicTransport:
                     name = translations.SketchActionPublicTransport
                     break;
-                case SketchOrderEditActionEnum.RemoveFromPending:
+                case SketchDriveOrderEditActionEnum.RemoveFromPending:
                     name = translations.SketchActionRemove;
                     isDisabled = true;
                     break;
-                case SketchOrderEditActionEnum.AddToPending:
+                case SketchDriveOrderEditActionEnum.AddToPending:
                     name = translations.SketchActionAddToPending;
                     isDisabled = true;
                     break;
-                case SketchOrderEditActionEnum.MoveToTop:
+                case SketchDriveOrderEditActionEnum.MoveToTop:
                     name = translations.SketchActionMoveToTop;
                     break;
-                case SketchOrderEditActionEnum.MoveToBottom:
+                case SketchDriveOrderEditActionEnum.MoveToBottom:
                     name = translations.SketchActionMoverToBottom;
+                    break;
+                case SketchDriveOrderEditActionEnum.AddToVehicle:
+                    name = translations.SketchActionAddToVehicle;
                     break;
             }
             if (isDisabled) {

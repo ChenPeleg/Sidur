@@ -9,7 +9,7 @@ import {PendingOrderMenu} from './pending-order-menu';
 import MoreIcon from '@mui/icons-material/MoreVert';
 import {OrderActionButton} from '../buttons/order-action-button';
 import {translations} from '../../services/translations';
-import {SketchOrderEditActionEnum} from '../../models/SketchOrderEditActionEnum';
+import {SketchDriveOrderEditActionEnum} from '../../models/SketchDriveOrderEditActionEnum';
 
 
 interface sketchPendingOrderProps {
@@ -23,42 +23,47 @@ export const SketchPendingOrderFull = (props: sketchPendingOrderProps) => {
     const dispatch = useDispatch();
     const [pendingOrderAnchorEl, setPendingOrderAnchorEl] =
         React.useState<null | HTMLElement>(null);
-    const handlePendingOrderMenuClick = (event: React.MouseEvent<HTMLElement>, clickAction: SketchOrderEditActionEnum) => {
+    const handlePendingOrderMenuClick = (event: React.MouseEvent<HTMLElement>, clickAction: SketchDriveOrderEditActionEnum) => {
         const orderId = props.order.id
         switch (clickAction) {
+            case SketchDriveOrderEditActionEnum.AddToVehicle:
+                dispatch({
+                    type: ActionsTypes.CLICKED_ADD_TO_VEHICLE_PENDING_ORDER,
+                    payload: {id: orderId}
+                })
+                break;
 
-
-            case SketchOrderEditActionEnum.MoveToTop:
+            case SketchDriveOrderEditActionEnum.MoveToTop:
                 dispatch({
                     type: ActionsTypes.CLICKED_MOVE_TO_TOP_PENDING_ORDER,
                     payload: {id: orderId}
                 })
                 break;
-            case SketchOrderEditActionEnum.MoveToBottom:
+            case SketchDriveOrderEditActionEnum.MoveToBottom:
                 dispatch({
                     type: ActionsTypes.CLICKED_MOVE_TO_BOTTOM_PENDING_ORDER,
                     payload: {id: orderId}
                 })
                 break;
-            case SketchOrderEditActionEnum.RemoveFromPending:
+            case SketchDriveOrderEditActionEnum.RemoveFromPending:
                 dispatch({
                     type: ActionsTypes.CLICKED_REMOVE_PENDING_ORDER,
                     payload: {id: orderId}
                 })
                 break;
-            case SketchOrderEditActionEnum.Split:
+            case SketchDriveOrderEditActionEnum.Split:
                 dispatch({
                     type: ActionsTypes.CLICKED_SPLIT_PENDING_ORDER,
                     payload: {id: orderId}
                 })
                 break;
-            case SketchOrderEditActionEnum.Merge:
+            case SketchDriveOrderEditActionEnum.Merge:
                 dispatch({
                     type: ActionsTypes.CLICKED_MERGE_PENDING_ORDER,
                     payload: {id: orderId}
                 })
                 break;
-            case SketchOrderEditActionEnum.ReplaceExisting:
+            case SketchDriveOrderEditActionEnum.ReplaceExisting:
                 dispatch({
                     type: ActionsTypes.CLICKED_REPLACE_EXISTING_PENDING_ORDER,
                     payload: {id: orderId}
@@ -135,7 +140,7 @@ export const SketchPendingOrderFull = (props: sketchPendingOrderProps) => {
                         aria-label="show more"
                         aria-controls={pendingOrderMenuId}
                         aria-haspopup="true"
-                        onClick={(event) => handlePendingOrderMenuClick(event, SketchOrderEditActionEnum.RemoveFromPending)}
+                        onClick={(event) => handlePendingOrderMenuClick(event, SketchDriveOrderEditActionEnum.RemoveFromPending)}
                         variant={'contained'}
                     > {translations.SketchActionRemove}
                     </Button>

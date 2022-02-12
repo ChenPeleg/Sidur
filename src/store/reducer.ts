@@ -90,6 +90,7 @@ const reducer = (state: SidurStore = initialState, action: IAction) => {
         case ActionsTypes.REMOVE_PENDING_ORDER_STATUS:
         case ActionsTypes.CLICKED_MOVE_TO_TOP_PENDING_ORDER:
         case ActionsTypes.CLICKED_MOVE_TO_BOTTOM_PENDING_ORDER:
+        case ActionsTypes.CLICKED_ADD_TO_VEHICLE_PENDING_ORDER:
 
             return PendingOrdersReducer[action.type](newState, action)
         case ActionsTypes.DELETE_SKETCH_DRIVE:
@@ -97,6 +98,7 @@ const reducer = (state: SidurStore = initialState, action: IAction) => {
         case ActionsTypes.REMOVE_ORDER_FROM_SKETCH_DRIVE:
         case ActionsTypes.UPDATE_SKETCH_DRIVE_WITH_MERGED_ORDER:
         case ActionsTypes.REPLACE_SKETCH_DRIVE_WITH_ORDER:
+        case ActionsTypes.ADD_SKETCH_DRIVE_FROM_PENDING_ORDER:
             return SketchDriveReducer[action.type](newState, action);
 
         case ActionsTypes.UPDATE_LOCATION_GROUP:

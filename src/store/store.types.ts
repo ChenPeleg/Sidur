@@ -4,7 +4,7 @@ import {DriveType} from '../models/DriveType.enum';
 import {VehicleModel} from '../models/Vehicle.model';
 import {SketchModel} from '../models/Sketch.model';
 import {LocationGroup, LocationModel} from '../models/Location.model';
-import {SketchOrderEditActionEnum} from '../models/SketchOrderEditActionEnum';
+import {SketchDriveOrderEditActionEnum} from '../models/SketchDriveOrderEditActionEnum';
 
 export type ActionType = string;
 
@@ -36,7 +36,7 @@ export interface SessionModel {
     routeIdInEdit: null | string;
     transportIdInEdit: null | string;
     pendingOrderIdInEdit: null | string;
-    pendingOrderInEditAction: null | SketchOrderEditActionEnum;
+    pendingOrderInEditAction: null | SketchDriveOrderEditActionEnum;
     pendingOrderInEditActionSelectDrives: null | string[];
     SketchIdInEdit: null | string;
     LocationGroupTabOpen: null | string;

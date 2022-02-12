@@ -14,6 +14,7 @@ export type SketchDriveReducerFunctions =
     | ActionsTypes.REMOVE_ORDER_FROM_SKETCH_DRIVE
     | ActionsTypes.UPDATE_SKETCH_DRIVE_WITH_MERGED_ORDER
     | ActionsTypes.REPLACE_SKETCH_DRIVE_WITH_ORDER
+    | ActionsTypes.ADD_SKETCH_DRIVE_FROM_PENDING_ORDER
 
 
 export const SketchDriveReducer: Record<SketchDriveReducerFunctions, (state: SidurStore, action: IAction) => SidurStore> = {
@@ -41,6 +42,7 @@ export const SketchDriveReducer: Record<SketchDriveReducerFunctions, (state: Sid
 
 
         }
+        StoreUtils.HandleReducerSaveToLocalStorage(newState);
         return newState
 
     },
@@ -78,6 +80,8 @@ export const SketchDriveReducer: Record<SketchDriveReducerFunctions, (state: Sid
 
 
         }
+
+        StoreUtils.HandleReducerSaveToLocalStorage(newState);
         return newState
 
     },
@@ -128,6 +132,46 @@ export const SketchDriveReducer: Record<SketchDriveReducerFunctions, (state: Sid
 
 
         }
+        StoreUtils.HandleReducerSaveToLocalStorage(newState);
+        return newState
+
+    },
+
+    [ActionsTypes.ADD_SKETCH_DRIVE_FROM_PENDING_ORDER]: (state: SidurStore, action: IAction): SidurStore => {
+        let newState = {...state}
+        const vehicleTimeTableId: string = action.payload.value;
+        const SketchIdInEdit = newState.sessionState.SketchIdInEdit;
+        const pendingOrderId = newState.sessionState.pendingOrderIdInEdit;
+        newState.sessionState.pendingOrderInEditAction = null;
+        newState.sessionState.pendingOrderInEditActionSelectDrives = null;
+        const sketchObj: SketchModel | undefined = newState.sketches.find((record: SketchModel) => record.id === SketchIdInEdit);
+        const pendingOrder = sketchObj?.unassignedOrders.find(o => o.id === pendingOrderId);
+
+
+        if (sketchObj && pendingOrder) {
+            const newDriveId = getNewDriveIdFromSketch(sketchObj);
+            const newDriveToInsert: DriveModel = {
+                ...pendingOrder,
+                id: newDriveId,
+                implementsOrders: [pendingOrder.id],
+                description: LanguageUtilities.buildBriefText(pendingOrder, newState.Locations).driverAndLocation
+            }
+
+            const relevantVehicle = sketchObj.vehicleSchedules.find(v => v.id === vehicleTimeTableId);
+           
+            if (relevantVehicle) {
+
+                relevantVehicle.drives.push(newDriveToInsert);
+                sortVehicleByStartHour(relevantVehicle);
+            }
+
+            sketchObj.unassignedOrders = sketchObj.unassignedOrders.filter((o: OrderModel) => o.id !== pendingOrderId);
+            sketchObj.assignedOrders.push(pendingOrder)
+
+
+        }
+        StoreUtils.updateSidurRecordWithSketchChanges(newState)
+        StoreUtils.HandleReducerSaveToLocalStorage(newState);
         return newState
 
     },
@@ -170,6 +214,7 @@ export const SketchDriveReducer: Record<SketchDriveReducerFunctions, (state: Sid
 
         }
         StoreUtils.updateSidurRecordWithSketchChanges(newState)
+        StoreUtils.HandleReducerSaveToLocalStorage(newState);
         return newState
 
     },
@@ -199,6 +244,7 @@ export const SketchDriveReducer: Record<SketchDriveReducerFunctions, (state: Sid
 
         }
         StoreUtils.updateSidurRecordWithSketchChanges(newState)
+        StoreUtils.HandleReducerSaveToLocalStorage(newState);
         return newState
 
     },

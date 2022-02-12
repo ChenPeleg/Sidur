@@ -1,13 +1,13 @@
 import {SxProps} from '@mui/system';
 import React from 'react';
 import {Box, Button} from '@mui/material';
-import {SketchOrderEditActionEnum} from '../../models/SketchOrderEditActionEnum';
+import {SketchDriveOrderEditActionEnum} from '../../models/SketchDriveOrderEditActionEnum';
 
 
 export interface OrderActionButtonProps {
     sx?: SxProps,
     actionClickHandler: any,
-    actionType: SketchOrderEditActionEnum,
+    actionType: SketchDriveOrderEditActionEnum,
     text: string,
     size?: 'medium' | 'small'
 

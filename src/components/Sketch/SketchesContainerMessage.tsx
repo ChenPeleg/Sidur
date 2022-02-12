@@ -2,7 +2,7 @@ import {Box, Typography} from '@mui/material';
 import {Styles} from '../../hoc/themes';
 import {useSelector} from 'react-redux';
 import {SidurStore} from '../../store/store.types';
-import {SketchOrderEditActionEnum} from '../../models/SketchOrderEditActionEnum';
+import {SketchDriveOrderEditActionEnum} from '../../models/SketchDriveOrderEditActionEnum';
 import {SketchModel} from '../../models/Sketch.model';
 import {OrderModel} from '../../models/Order.model';
 import {translations} from '../../services/translations';
@@ -13,21 +13,28 @@ export const SketchesContainerMessage = (props: { sketch: SketchModel | null }) 
 
     const sessionState = useSelector((state: SidurStore) => state.sessionState);
     const locations = useSelector(((state: { Locations: LocationModel[] }) => state.Locations));
+    const pendingOrderInEditAction = useSelector((state: SidurStore) => state.sessionState.pendingOrderInEditAction);
+    const pendingOrderIdInEdit = useSelector((state: SidurStore) => state.sessionState.pendingOrderIdInEdit);
+
 
     let messageText = ''
-    if (sessionState.pendingOrderInEditAction) {
+    if (pendingOrderInEditAction) {
 
-        const pendingOrderIdInEdit = sessionState.pendingOrderIdInEdit;
+
         const pendingORderInEdit: OrderModel | undefined = props.sketch?.unassignedOrders.find(o => o.id === pendingOrderIdInEdit)
         switch (sessionState.pendingOrderInEditAction) {
-            case SketchOrderEditActionEnum.Merge:
+            case SketchDriveOrderEditActionEnum.Merge:
 
                 messageText += translations.SketchActionMergeInfoMessage
                 break;
-            case SketchOrderEditActionEnum.ReplaceExisting:
+            case SketchDriveOrderEditActionEnum.ReplaceExisting:
                 messageText += translations.SketchActionReplaceInfoMessage
                 break;
+            case SketchDriveOrderEditActionEnum.AddToVehicle:
+                messageText += translations.SketchActionAddToVehicleInfoMessage
+                break;
         }
+
         if (pendingORderInEdit) {
             messageText += ' ' + LanguageUtilities.buildBriefText(pendingORderInEdit, locations).driverAndLocation;
         }

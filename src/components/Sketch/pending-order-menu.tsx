@@ -2,7 +2,7 @@ import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import * as React from 'react';
 import {LanguageUtilities} from '../../services/language-utilities';
-import {SketchOrderEditActionEnum} from '../../models/SketchOrderEditActionEnum';
+import {SketchDriveOrderEditActionEnum} from '../../models/SketchDriveOrderEditActionEnum';
 import {Icons} from '../Icons/icons';
 
 
@@ -10,7 +10,7 @@ interface PendingOrderMenuProps {
     PendingOrderMenuAnchor: Element | ((element: Element) => Element) | null | undefined;
     PendingOrderMenuId: string,
     isPendingOrderMenuOpen: boolean,
-    handlePendingOrderMenuClick: (event: React.MouseEvent<HTMLElement>, action: SketchOrderEditActionEnum) => void
+    handlePendingOrderMenuClick: (event: React.MouseEvent<HTMLElement>, action: SketchDriveOrderEditActionEnum) => void
     handlePendingOrderMenuClose: () => void
 }
 
@@ -23,8 +23,8 @@ export const PendingOrderMenu = (props: PendingOrderMenuProps) => {
         handlePendingOrderMenuClose
     } = props;
 
-    let pendingOrdersActions: { action: SketchOrderEditActionEnum, name: string, icon: string } [] = LanguageUtilities.buildSketchEditActionsArray();
-  
+    let pendingOrdersActions: { action: SketchDriveOrderEditActionEnum, name: string, icon: string } [] = LanguageUtilities.buildSketchEditActionsArray();
+
     return (
         <Menu
             anchorEl={PendingOrderMenuAnchor}
