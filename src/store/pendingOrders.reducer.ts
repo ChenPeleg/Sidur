@@ -170,11 +170,7 @@ export const PendingOrdersReducer: Record<PendingOrdersReducerFunctions, (state:
 
                 sketchObj.unassignedOrders = [newOrders[0], newOrders[1], ...sketchObj.unassignedOrders]
 
-                //SidurEditorService.  splitTsamudOrder(orderToSplit,)
-                // sketchObj.assignedOrders = [...sketchObj.assignedOrders]
-                // sketchObj.assignedOrders.push(orderToSplit);
-                // sketchObj.unassignedOrders = [...sketchObj.unassignedOrders];
-                // sketchObj.unassignedOrders = sketchObj.unassignedOrders.filter(o => o.id !== orderToSplitId);
+
                 newState.sketches = newState.sketches.map((sketch: SketchModel) => {
                     if (sketch.id === SketchIdInEdit) {
                         return {...sketchObj}
@@ -202,7 +198,18 @@ export const PendingOrdersReducer: Record<PendingOrdersReducerFunctions, (state:
         return newState
     },
     [ActionsTypes.CLICKED_REPLACE_EXISTING_PENDING_ORDER]: (state: SidurStore, action: IAction): SidurStore => {
-        let newState = {...state}
+        let newState = {...state};
+        newState.sessionState.pendingOrderInEditAction = SketchOrderEditActionEnum.ReplaceExisting;
+        const SketchIdInEdit = state.sessionState.SketchIdInEdit
+        /**
+         * TODO - stopped development here
+         * **/
+        const sketchObj: SketchModel = state.sketches.find((record: SketchModel) => record.id === SketchIdInEdit) as SketchModel;
+        const relavantDrives = SidurEditorService.getRelevantDriveIdsToChoose(sketchObj, newState.sessionState.pendingOrderIdInEdit as string);
+        if (relavantDrives.length > 0) {
+            newState.sessionState.pendingOrderInEditActionSelectDrives = relavantDrives;
+        }
+
         StoreUtils.HandleReducerSaveToLocalStorage(newState);
         return newState
     },

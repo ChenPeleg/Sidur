@@ -14,6 +14,7 @@ import {SketchNoSketchMessage} from './sketch-no-sketch-message';
 import {TransitionGroup} from 'react-transition-group';
 import {SketchDriveMergeDialog} from '../Dialogs/sketch-drive-merge-dialog';
 import {OrderModel} from '../../models/Order.model';
+import {SketchOrderEditActionEnum} from '../../models/SketchOrderEditActionEnum';
 
 
 export const Sketch = () => {
@@ -89,12 +90,35 @@ export const Sketch = () => {
         })
         setSketchDriveMergeOpen(true);
     }
+    const HandleDriveReplace = (pendingOrder: OrderModel, driveToReplace: DriveModel, vehicleId: string): void => {
+        dispatch({
+            type: ActionsTypes.REPLACE_SKETCH_DRIVE_WITH_ORDER,
+            payload: {
+                value: driveToReplace
+
+            }
+        })
+
+        // setChosenDrive({
+        //     drive: driveToMerge,
+        //     vehicleId: vehicleId
+        // })
+        // setSketchDriveMergeOpen(true);
+    }
     const sketchDriveClickHandler = (event: React.MouseEvent<HTMLElement>, drive: DriveModel, vehicleId: string) => {
 
         if (sessionState.pendingOrderInEditAction && sessionState.pendingOrderIdInEdit) {
             const Order = sketchInEdit?.unassignedOrders.find(o => o.id === sessionState.pendingOrderIdInEdit)
             if (Order) {
-                HandleDriveMerge(Order, drive, vehicleId)
+                switch (sessionState.pendingOrderInEditAction) {
+                    case SketchOrderEditActionEnum.ReplaceExisting:
+                        HandleDriveReplace(Order, drive, vehicleId)
+
+                        break;
+                    case SketchOrderEditActionEnum.Merge:
+                        HandleDriveMerge(Order, drive, vehicleId)
+                        break;
+                }
             }
             return;
         }

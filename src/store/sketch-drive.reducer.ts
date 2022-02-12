@@ -11,6 +11,7 @@ export type SketchDriveReducerFunctions =
     | ActionsTypes.UPDATE_SKETCH_DRIVE
     | ActionsTypes.REMOVE_ORDER_FROM_SKETCH_DRIVE
     | ActionsTypes.UPDATE_SKETCH_DRIVE_WITH_MERGED_ORDER
+    | ActionsTypes.REPLACE_SKETCH_DRIVE_WITH_ORDER
 
 
 export const SketchDriveReducer: Record<SketchDriveReducerFunctions, (state: SidurStore, action: IAction) => SidurStore> = {
@@ -57,6 +58,42 @@ export const SketchDriveReducer: Record<SketchDriveReducerFunctions, (state: Sid
                     if (d.id === sketchDriveChanged.id) {
                         pendingOrdersToPassToAssigned = d.implementsOrders
                         return sketchDriveChanged
+                    } else {
+                        return d
+                    }
+                })
+            }
+            if (pendingOrdersToPassToAssigned !== null) {
+                const implementedOrders: string [] = pendingOrdersToPassToAssigned as string [];
+                const ordersToMoveToAssigned: OrderModel [] = sketchObj.unassignedOrders.filter((o: OrderModel) => implementedOrders.includes(o.id))
+                sketchObj.assignedOrders = sketchObj.assignedOrders.concat(ordersToMoveToAssigned);
+                sketchObj.unassignedOrders = sketchObj.unassignedOrders.filter((o: OrderModel) => !implementedOrders.includes(o.id))
+
+
+            }
+
+
+        }
+        return newState
+
+    },
+    [ActionsTypes.REPLACE_SKETCH_DRIVE_WITH_ORDER]: (state: SidurStore, action: IAction): SidurStore => {
+        let newState = {...state}
+        const sketchDriveToReplace: DriveModel = action.payload.value;
+        const SketchIdInEdit = newState.sessionState.SketchIdInEdit;
+        newState.sessionState.pendingOrderInEditAction = null;
+        newState.sessionState.pendingOrderInEditActionSelectDrives = null;
+        const sketchObj: SketchModel | undefined = newState.sketches.find((record: SketchModel) => record.id === SketchIdInEdit);
+
+        if (sketchObj !== undefined) {
+            const vehicleId = getVehicleIdFromDriveId(state, sketchDriveToReplace.id);
+            const relevantVehicle = sketchObj.vehicleSchedules.find(v => v.id === vehicleId);
+            let pendingOrdersToPassToAssigned: string [] | null = null;
+            if (relevantVehicle) {
+                relevantVehicle.drives = relevantVehicle.drives.map((d: DriveModel) => {
+                    if (d.id === sketchDriveToReplace.id) {
+                        pendingOrdersToPassToAssigned = d.implementsOrders
+                        return sketchDriveToReplace
                     } else {
                         return d
                     }

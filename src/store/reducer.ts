@@ -96,6 +96,7 @@ const reducer = (state: SidurStore = initialState, action: IAction) => {
         case ActionsTypes.UPDATE_SKETCH_DRIVE:
         case ActionsTypes.REMOVE_ORDER_FROM_SKETCH_DRIVE:
         case ActionsTypes.UPDATE_SKETCH_DRIVE_WITH_MERGED_ORDER:
+        case ActionsTypes.REPLACE_SKETCH_DRIVE_WITH_ORDER:
             return SketchDriveReducer[action.type](newState, action);
 
         case ActionsTypes.UPDATE_LOCATION_GROUP:
