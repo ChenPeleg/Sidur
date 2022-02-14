@@ -87,7 +87,7 @@ export const TransportScheduleDialog = (props: RenameProps) => {
                             flexWrap: 'wrap'
                         }}>
                             {hourValues.map((s: string, i: number) => (
-                                <Box sx={{'display': 'inline-flex'}}>
+                                <Box key={'hourValues' + i.toString()} sx={{'display': 'inline-flex'}}>
 
                                     <Box id={'divider-hours'} sx={{
                                         width: '55px',

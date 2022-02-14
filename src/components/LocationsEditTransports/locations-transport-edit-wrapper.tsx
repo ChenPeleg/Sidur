@@ -12,6 +12,7 @@ import {LocationChooseButton} from '../LocationsEdit/location-choose-button';
 import Button from '@mui/material/Button';
 import {LocationTransportEdit} from './location-transport-edit';
 import {LocationRouteTransportChoose} from '../LocationsEdit/location-route-transport-choose';
+import {ConfigService} from '../../services/config-service';
 
 export const LocationsTransportEditWrapper = () => {
     const locationGroupInEditId = useSelector((state: SidurStore) => state.sessionState.locationGroupInEdit);
@@ -19,10 +20,16 @@ export const LocationsTransportEditWrapper = () => {
     const locationGroups: LocationGroup[] = useSelector((state: { LocationGroups: LocationGroup[] }) => state.LocationGroups || []);
     const locationMainInEdit: string | null = useSelector((state: { sessionState: SessionModel }) => state.sessionState.locationMainInEdit);
     const currentLocationGroup: LocationGroup | undefined = locationGroups.find(l => l.id === locationGroupInEditId) as LocationGroup
-    const allLocations: LocationModel[] = currentLocationGroup?.Locations || [];
+    const allLocationsFromStore: LocationModel[] = currentLocationGroup?.Locations || [];
     const allTransportRoutes: TransportModel[] = currentLocationGroup?.Transports || [];
     const [filterLocationText, setFilterLocationText] = useState<string>('')
     const [filterRouteText, setFilterRouteText] = useState<string>('')
+    const HomeLocation: LocationModel = ConfigService.Constants.HomeLocation;
+
+    const allLocations = [...allLocationsFromStore];
+    if (allLocations.length) {
+        allLocations.unshift(HomeLocation)
+    }
 
     const dispatch = useDispatch();
 
@@ -85,7 +92,6 @@ export const LocationsTransportEditWrapper = () => {
                         variant="standard"
                         value={filterLocationText}
                         onChange={(event) => {
-
                             return handleFilterLocationValueChanged(event);
                         }}
 

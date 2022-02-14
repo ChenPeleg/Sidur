@@ -51,6 +51,7 @@ export const translations = {
     'Hour': 'שעה',
     'From': 'מ',
     'Until': 'עד',
+    'Home': 'בית',
     'toWhere': 'למקום',
     'Where': 'מקום',
     'addLocation': 'הוסף מקום',

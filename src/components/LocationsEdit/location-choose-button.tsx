@@ -2,16 +2,15 @@ import {Box, Card} from '@mui/material';
 import {LocationModel} from '../../models/Location.model';
 import * as React from 'react';
 import {useState} from 'react';
+import {ConfigService} from '../../services/config-service';
+import {Home} from '@mui/icons-material';
 
 interface LocationFormProps extends LocationModel {
     onClick: (locationUpdate: LocationModel) => void,
 }
 
 export const LocationChooseButton = (props: LocationFormProps) => {
-    // const locationGroupInEditId = useSelector((state: SidurStore) => state.sessionState.locationGroupInEdit);
-    // const locationGroups: LocationGroup[] = useSelector((state: { LocationGroups: LocationGroup[] }) => state.LocationGroups || []);
-    //const currentLocationGroup: LocationGroup | undefined = locationGroups.find(l => l.id === locationGroupInEditId)
-    //const [wasJustEdited, setWasJustEdited] = useState<boolean>(false);
+
     const justLocationObject = {
         ...props,
         onClick: null
@@ -23,6 +22,7 @@ export const LocationChooseButton = (props: LocationFormProps) => {
     const onMouseOut = () => {
         setInHover(false)
     };
+    const isHome: boolean = props.id === ConfigService.Constants.HomeLocationId
 
     return (
 
@@ -39,6 +39,18 @@ export const LocationChooseButton = (props: LocationFormProps) => {
                 backgroundColor: inHover ? '#e7f2f7' : '',
             }} onMouseOver={onMouseOver}
                   onMouseOut={onMouseOut} elevation={inHover ? 6 : 2} onClick={(_event) => props.onClick(justLocationObject)}>
+                {isHome ? <Box sx={{
+                    p: '0px',
+                    display: 'inline-flex'
+                }}> <Box id={'divider'} sx={{
+                    'width': '20px',
+                    'height': '20px'
+                }}/> <Home sx={{
+                    m: '0px',
+                    p: 0,
+                    mr: '-10px',
+                    ml: '-10px'
+                }}/></Box> : null}
                 <Box id={'text-field-container'}
                      sx={{
                          m: '0.5em',
@@ -46,6 +58,7 @@ export const LocationChooseButton = (props: LocationFormProps) => {
                          ml: '1em',
                      }
                      }>
+
 
                     {props.name}
 

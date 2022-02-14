@@ -187,7 +187,7 @@ export const LocationTransportEdit = (props: LocationRouteEditProps) => {
                             display: isLongRoute ? 'inline' : 'block',
                             p: '0.1em',
 
-                        }} key={stop.locationId + i.toString()}>
+                        }} key={'stop.locationId' + stop.locationId + i.toString()}>
 
 
                             {i > 0 ? <><Select disableUnderline={true} variant={'standard'} value={stop.minuetsFromLastCode}
@@ -199,7 +199,7 @@ export const LocationTransportEdit = (props: LocationRouteEditProps) => {
                                                onChange={(event: SelectChangeEvent<any>, _child: React.ReactNode) => {
                                                    handleDriveLengthChanged(event, stop)
                                                }}>
-                                {minutesFromLastOptions.map((option, i) => <MenuItem key={option.value + i.toString()}
+                                {minutesFromLastOptions.map((option, i) => <MenuItem key={'option.value' + option.value + i.toString()}
                                                                                      value={option.value}> {option.text}  &nbsp;&nbsp; </MenuItem>)}
                             </Select> <Box sx={{
                                 width: isLongRoute ? '15px' : '5px',
@@ -263,7 +263,7 @@ export const LocationTransportEdit = (props: LocationRouteEditProps) => {
                         }} variant="contained" onClick={handleEditTransportTimes} aria-label="add" size="small">
                             {translations.editTimeStarts}
                         </Button>
-                        {timeTableBrief.map((t, i) => (<Box key={i.toString() + props.transportRoute.id} sx={{
+                        {timeTableBrief.map((t, i) => (<Box key={'props.transportRoute.id' + i.toString() + props.transportRoute.id} sx={{
                             m: '1em',
                             mb: '5px',
                             mt: '5px',
@@ -282,9 +282,10 @@ export const LocationTransportEdit = (props: LocationRouteEditProps) => {
             <RouteTransportEditMenu routeMoreAnchorEl={routeMoreAnchorEl} routeMenuId={props.transportRoute.id}
                                     isRouteMenuOpen={isRouteMenuOpen}
                                     handleRouteMenuClick={handleRouteMenuClick} handleRouteMenuClose={handleRouteMenuClose}/>
-            <RenameDialog key={props.transportRoute.id} open={RenameOpen} onClose={handleRenameClose}
+            <RenameDialog key={'RenameDialog.transportRoute.id' + props.transportRoute.id} open={RenameOpen} onClose={handleRenameClose}
                           selectedValue={props.transportRoute.name}/>
-            <TransportScheduleDialog key={props.transportRoute.id} open={scheduleOpen} onClose={handleScheduleClose}
+            <TransportScheduleDialog key={'TransportScheduleDialog.transportRoute.id' + props.transportRoute.id} open={scheduleOpen}
+                                     onClose={handleScheduleClose}
                                      transport={props.transportRoute}/>
         </Box>
     )
