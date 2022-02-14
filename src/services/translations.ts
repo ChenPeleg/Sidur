@@ -26,6 +26,7 @@ export const translations = {
     'DeleteAndImportAllData': 'מחק הכל והחלף ביבוא הכל',
     'ImportPart': 'יבוא חלקי',
     'NewName': 'שם חדש',
+    'nameExists': 'השם כבר קיים',
     'searchLocation': 'חיפוש מיקום',
     'searchRoute': 'חיפוש מסלול נסיעה',
     'searchTransport': 'חיפוש מסלול תחב"צ',

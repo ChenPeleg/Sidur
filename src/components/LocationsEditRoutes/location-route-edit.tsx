@@ -136,7 +136,7 @@ export const LocationRouteEdit = (props: LocationRouteEditProps) => {
         <Box>
             <Card sx={{
                 width: '400px',
-                height: '300px'
+                minHeight: '300px'
             }}>
                 <Box sx={{
                     m: '1em',
@@ -158,7 +158,7 @@ export const LocationRouteEdit = (props: LocationRouteEditProps) => {
 
                     flexWrap: 'wrap'
                 }}>
-                    {allStops.map((stop: StopModel, i: number) => (<Box sx={{
+                    {allStops.map((stop: StopModel, i: number) => (<Box key={stop.locationId + i.toString()} sx={{
                         display: isLongRoute ? 'inline' : 'block',
                         p: '0.1em',
 

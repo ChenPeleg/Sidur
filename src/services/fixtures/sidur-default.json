@@ -481,6 +481,15 @@
             "kmLimit": "",
             "seats": "5",
             "Comments": ""
+          },
+          {
+            "id": "6",
+            "vehicleName": "שכור 1",
+            "startHour": "08:00",
+            "endHour": "09:00",
+            "kmLimit": "",
+            "seats": "5",
+            "Comments": ""
           }
         ],
         "sketches": [],
@@ -962,6 +971,15 @@
         "kmLimit": "",
         "seats": "5",
         "Comments": ""
+      },
+      {
+        "id": "6",
+        "vehicleName": "שכור 1",
+        "startHour": "08:00",
+        "endHour": "09:00",
+        "kmLimit": "",
+        "seats": "5",
+        "Comments": ""
       }
     ],
     "orderIdInEdit": null,
@@ -983,12 +1001,12 @@
     },
     "sketches": [],
     "displaySetting": {
-      "view": "orders"
+      "view": "locationsView"
     },
     "SketchIdInEdit": null,
     "pendingOrderIdInEdit": null,
     "sessionState": {
-      "LocationGroupTabOpen": "0",
+      "LocationGroupTabOpen": "1",
       "SketchIdInEdit": "",
       "locationGroupInEdit": "1",
       "orderIdInEdit": null,
@@ -997,7 +1015,8 @@
       "isAnimationRunning": true,
       "locationMainInEdit": null,
       "pendingOrderInEditActionSelectDrives": [],
-      "pendingOrderInEditAction": null
+      "pendingOrderInEditAction": null,
+      "routeIdInEdit": "6"
     },
     "LocationGroups": [
       {
@@ -1081,13 +1100,120 @@
             "ETA": 25
           },
           {
-            "EnName": "Other",
             "id": "14",
-            "name": "אחר",
-            "ETA": 60
+            "ETA": "60",
+            "name": "תל אביב",
+            "EnName": "Other"
+          },
+          {
+            "id": "15",
+            "ETA": "45",
+            "name": "חברתי קריות",
+            "EnName": ""
+          },
+          {
+            "id": "16",
+            "ETA": "25",
+            "name": "ראש פינה",
+            "EnName": ""
+          },
+          {
+            "id": "17",
+            "ETA": "25",
+            "name": "גולן",
+            "EnName": ""
+          },
+          {
+            "id": "18",
+            "ETA": "25",
+            "name": "צפת",
+            "EnName": ""
+          },
+          {
+            "id": "19",
+            "ETA": "20",
+            "name": "שעב",
+            "EnName": ""
+          },
+          {
+            "id": "20",
+            "ETA": "40",
+            "name": "קריית חיים",
+            "EnName": ""
+          },
+          {
+            "id": "21",
+            "ETA": "45",
+            "name": "טבעון",
+            "EnName": ""
+          },
+          {
+            "id": "22",
+            "ETA": "25",
+            "name": "דמיידה",
+            "EnName": ""
+          },
+          {
+            "id": "23",
+            "ETA": "25",
+            "name": "אשחר",
+            "EnName": ""
+          },
+          {
+            "id": "24",
+            "ETA": "30",
+            "name": "טל-אל",
+            "EnName": ""
+          },
+          {
+            "id": "25",
+            "ETA": "35",
+            "name": "כפר ורדים",
+            "EnName": ""
+          },
+          {
+            "id": "26",
+            "ETA": "25",
+            "name": "תפן",
+            "EnName": ""
+          },
+          {
+            "id": "27",
+            "ETA": "50",
+            "name": "נהריה",
+            "EnName": ""
+          },
+          {
+            "id": "28",
+            "ETA": "60",
+            "name": "ראש הנקרה",
+            "EnName": ""
+          },
+          {
+            "id": "29",
+            "ETA": "20",
+            "name": "דיר אל אסד",
+            "EnName": ""
+          },
+          {
+            "id": "30",
+            "ETA": "25",
+            "name": "נחף",
+            "EnName": ""
+          },
+          {
+            "id": "31",
+            "ETA": "25",
+            "name": "מג'דל כרום",
+            "EnName": ""
+          },
+          {
+            "ETA": 25,
+            "EnName": "",
+            "name": "מקומות 32",
+            "id": "32"
           }
         ],
-        "dbId": "",
         "id": "ESHBAL",
         "name": "אשבל",
         "Transports": [],
@@ -1174,33 +1300,580 @@
             "ETA": 25
           },
           {
-            "EnName": "Other",
             "id": "14",
-            "name": "אחר",
-            "ETA": 60
+            "ETA": "60",
+            "name": "תל אביב",
+            "EnName": "Other"
           },
           {
             "id": "15",
+            "ETA": "45",
+            "name": "חברתי קריות",
+            "EnName": ""
+          },
+          {
+            "id": "16",
             "ETA": "25",
+            "name": "ראש פינה",
+            "EnName": ""
+          },
+          {
+            "id": "17",
+            "ETA": "25",
+            "name": "גולן",
+            "EnName": ""
+          },
+          {
+            "id": "18",
+            "ETA": "25",
+            "name": "צפת",
+            "EnName": ""
+          },
+          {
+            "id": "19",
+            "ETA": "20",
+            "name": "שעב",
+            "EnName": ""
+          },
+          {
+            "id": "20",
+            "ETA": "40",
+            "name": "קריית חיים",
+            "EnName": ""
+          },
+          {
+            "id": "21",
+            "ETA": "45",
             "name": "טבעון",
+            "EnName": ""
+          },
+          {
+            "id": "22",
+            "ETA": "25",
+            "name": "דמיידה",
+            "EnName": ""
+          },
+          {
+            "id": "23",
+            "ETA": "25",
+            "name": "אשחר",
+            "EnName": ""
+          },
+          {
+            "id": "24",
+            "ETA": "30",
+            "name": "טל-אל",
+            "EnName": ""
+          },
+          {
+            "id": "25",
+            "ETA": "35",
+            "name": "כפר ורדים",
+            "EnName": ""
+          },
+          {
+            "id": "26",
+            "ETA": "25",
+            "name": "תפן",
+            "EnName": ""
+          },
+          {
+            "id": "27",
+            "ETA": "50",
+            "name": "נהריה",
+            "EnName": ""
+          },
+          {
+            "id": "28",
+            "ETA": "60",
+            "name": "ראש הנקרה",
+            "EnName": ""
+          },
+          {
+            "id": "29",
+            "ETA": "20",
+            "name": "דיר אל אסד",
+            "EnName": ""
+          },
+          {
+            "id": "30",
+            "ETA": "25",
+            "name": "נחף",
+            "EnName": ""
+          },
+          {
+            "id": "31",
+            "ETA": "25",
+            "name": "מג'דל כרום",
+            "EnName": ""
+          },
+          {
+            "id": "32",
+            "ETA": "25",
+            "name": "מורשת",
+            "EnName": ""
+          },
+          {
+            "id": "33",
+            "ETA": "25",
+            "name": "כפר מנדא",
+            "EnName": ""
+          },
+          {
+            "id": "34",
+            "ETA": "25",
+            "name": "חנתון",
+            "EnName": ""
+          },
+          {
+            "id": "35",
+            "ETA": "35",
+            "name": "אלון הגליל",
+            "EnName": ""
+          },
+          {
+            "id": "36",
+            "ETA": "45",
+            "name": "תמרת",
+            "EnName": ""
+          },
+          {
+            "id": "37",
+            "ETA": "40",
+            "name": "רמת ישי",
+            "EnName": ""
+          },
+          {
+            "id": "38",
+            "ETA": "50",
+            "name": "עמק הירדן",
+            "EnName": ""
+          },
+          {
+            "id": "39",
+            "ETA": "50",
+            "name": "גליל עליון",
+            "EnName": ""
+          },
+          {
+            "id": "40",
+            "ETA": "50",
+            "name": "דלית אל כרמל",
+            "EnName": ""
+          },
+          {
+            "id": "41",
+            "ETA": "25",
+            "name": "קריות",
+            "EnName": ""
+          },
+          {
+            "id": "42",
+            "ETA": "49",
+            "name": "יקנעם",
+            "EnName": ""
+          },
+          {
+            "id": "43",
+            "ETA": "25",
+            "name": "זכרון יעקוב",
+            "EnName": ""
+          },
+          {
+            "id": "44",
+            "ETA": "45",
+            "name": "טירת הכרמל",
+            "EnName": ""
+          },
+          {
+            "id": "45",
+            "ETA": "50",
+            "name": "הגושרים",
+            "EnName": ""
+          },
+          {
+            "id": "46",
+            "ETA": "60",
+            "name": "קרית שמונה",
+            "EnName": ""
+          },
+          {
+            "id": "47",
+            "ETA": "55",
+            "name": "נצרת",
+            "EnName": ""
+          },
+          {
+            "id": "48",
+            "ETA": "50",
+            "name": "עפולה",
+            "EnName": ""
+          },
+          {
+            "id": "49",
+            "ETA": "20",
+            "name": "שורשים",
+            "EnName": ""
+          },
+          {
+            "id": "50",
+            "ETA": "40",
+            "name": "עין המפרץ",
+            "EnName": ""
+          },
+          {
+            "id": "51",
+            "ETA": "40",
+            "name": "רגבה",
+            "EnName": ""
+          },
+          {
+            "id": "52",
+            "ETA": "25",
+            "name": "שמרת",
+            "EnName": ""
+          },
+          {
+            "id": "53",
+            "ETA": "25",
+            "name": "מנוף",
+            "EnName": ""
+          },
+          {
+            "id": "54",
+            "ETA": "25",
+            "name": "יודפת",
+            "EnName": ""
+          },
+          {
+            "id": "55",
+            "ETA": "25",
+            "name": "תל יודפת",
+            "EnName": ""
+          },
+          {
+            "id": "56",
+            "ETA": "25",
+            "name": "אבלין",
+            "EnName": ""
+          },
+          {
+            "id": "57",
+            "ETA": "30",
+            "name": "קריית אתא",
+            "EnName": ""
+          },
+          {
+            "id": "58",
+            "ETA": "45",
+            "name": "לב המפרץ",
+            "EnName": ""
+          },
+          {
+            "id": "59",
+            "ETA": "33",
+            "name": "ראמה",
+            "EnName": ""
+          },
+          {
+            "id": "60",
+            "ETA": "45",
+            "name": "רביד",
+            "EnName": ""
+          },
+          {
+            "id": "61",
+            "ETA": "50",
+            "name": "גינוסר",
+            "EnName": ""
+          },
+          {
+            "id": "62",
+            "ETA": "50",
+            "name": "חוקוק",
+            "EnName": ""
+          },
+          {
+            "id": "63",
+            "ETA": "50",
+            "name": "כינרת",
+            "EnName": ""
+          },
+          {
+            "id": "64",
+            "ETA": "50",
+            "name": "טבריה",
             "EnName": ""
           }
         ],
-        "dbId": "",
         "id": "1",
-        "name": " אשבל אוריגינל",
+        "name": "(עותק) אשבל",
         "Transports": [],
-        "Routes": []
+        "Routes": [
+          {
+            "name": "כביש 748 לאלון הגליל",
+            "id": "1",
+            "comments": "",
+            "routStops": [
+              {
+                "locationId": "10",
+                "minuetsFromLast": 20,
+                "position": 1
+              },
+              {
+                "locationId": "2",
+                "minuetsFromLast": 10,
+                "position": 2
+              },
+              {
+                "locationId": "32",
+                "minuetsFromLast": 15,
+                "position": 3
+              },
+              {
+                "locationId": "33",
+                "minuetsFromLast": 10,
+                "position": 4
+              },
+              {
+                "locationId": "34",
+                "minuetsFromLast": 10,
+                "position": 5
+              },
+              {
+                "locationId": "35",
+                "minuetsFromLast": 10,
+                "position": 6
+              }
+            ]
+          },
+          {
+            "name": "כרמיאל עכו נהרייה ראש הנקרה",
+            "id": "2",
+            "comments": "",
+            "routStops": [
+              {
+                "locationId": "10",
+                "minuetsFromLast": 20,
+                "position": 1
+              },
+              {
+                "locationId": "49",
+                "minuetsFromLast": 10,
+                "position": 2
+              },
+              {
+                "locationId": "1",
+                "minuetsFromLast": 10,
+                "position": 3
+              },
+              {
+                "locationId": "13",
+                "minuetsFromLast": 5,
+                "position": 4
+              },
+              {
+                "locationId": "4",
+                "minuetsFromLast": 20,
+                "position": 5
+              },
+              {
+                "locationId": "51",
+                "minuetsFromLast": 5,
+                "position": 6
+              },
+              {
+                "locationId": "52",
+                "minuetsFromLast": 5,
+                "position": 7
+              },
+              {
+                "locationId": "50",
+                "minuetsFromLast": 20,
+                "position": 8
+              },
+              {
+                "locationId": "27",
+                "minuetsFromLast": 20,
+                "position": 9
+              },
+              {
+                "locationId": "28",
+                "minuetsFromLast": 20,
+                "position": 10
+              }
+            ]
+          },
+          {
+            "name": "מנוף יודפת",
+            "id": "3",
+            "comments": "",
+            "routStops": [
+              {
+                "locationId": "10",
+                "minuetsFromLast": 20,
+                "position": 1
+              },
+              {
+                "locationId": "2",
+                "minuetsFromLast": 10,
+                "position": 2
+              },
+              {
+                "locationId": "53",
+                "minuetsFromLast": 20,
+                "position": 3
+              },
+              {
+                "locationId": "55",
+                "minuetsFromLast": 20,
+                "position": 4
+              },
+              {
+                "locationId": "54",
+                "minuetsFromLast": 10,
+                "position": 5
+              }
+            ]
+          },
+          {
+            "name": "יובלים - קריית אתא - חיפה",
+            "id": "4",
+            "comments": "",
+            "routStops": [
+              {
+                "locationId": "10",
+                "minuetsFromLast": 20,
+                "position": 1
+              },
+              {
+                "locationId": "6",
+                "minuetsFromLast": 90,
+                "position": 2
+              },
+              {
+                "locationId": "2",
+                "minuetsFromLast": 5,
+                "position": 3
+              },
+              {
+                "locationId": "32",
+                "minuetsFromLast": 10,
+                "position": 4
+              },
+              {
+                "locationId": "56",
+                "minuetsFromLast": 10,
+                "position": 5
+              },
+              {
+                "locationId": "57",
+                "minuetsFromLast": 20,
+                "position": 6
+              },
+              {
+                "locationId": "41",
+                "minuetsFromLast": 20,
+                "position": 7
+              },
+              {
+                "locationId": "20",
+                "minuetsFromLast": 20,
+                "position": 8
+              },
+              {
+                "locationId": "58",
+                "minuetsFromLast": 20,
+                "position": 9
+              },
+              {
+                "locationId": "3",
+                "minuetsFromLast": 20,
+                "position": 10
+              }
+            ]
+          },
+          {
+            "name": "יובלים - ראמה - טבריה",
+            "id": "5",
+            "comments": "",
+            "routStops": [
+              {
+                "locationId": "10",
+                "minuetsFromLast": 20,
+                "position": 1
+              },
+              {
+                "locationId": "1",
+                "minuetsFromLast": 15,
+                "position": 2
+              },
+              {
+                "locationId": "30",
+                "minuetsFromLast": 10,
+                "position": 3
+              },
+              {
+                "locationId": "59",
+                "minuetsFromLast": 10,
+                "position": 4
+              },
+              {
+                "locationId": "62",
+                "minuetsFromLast": 30,
+                "position": 5
+              },
+              {
+                "locationId": "61",
+                "minuetsFromLast": 10,
+                "position": 6
+              },
+              {
+                "locationId": "64",
+                "minuetsFromLast": 10,
+                "position": 7
+              }
+            ]
+          },
+          {
+            "name": "אשחר - יעד - שעב",
+            "id": "6",
+            "comments": "",
+            "routStops": [
+              {
+                "locationId": "23",
+                "minuetsFromLast": 20,
+                "position": 1
+              },
+              {
+                "locationId": "10",
+                "minuetsFromLast": 20,
+                "position": 2
+              },
+              {
+                "locationId": "11",
+                "minuetsFromLast": 20,
+                "position": 3
+              },
+              {
+                "locationId": "19",
+                "minuetsFromLast": 20,
+                "position": 4
+              }
+            ]
+          }
+        ],
+        "dbId": ""
       }
     ],
     "recordBriefs": [
       {
         "id": "5",
+        "locationGroupOrSidurId": "ESHBAL",
         "name": "סידור לדוגמה",
         "typeOfRecord": 1
       },
       {
-        "dbId": "",
         "id": "ESHBAL",
         "locationGroupOrSidurId": "ESHBAL",
         "name": "אשבל",
@@ -1210,7 +1883,7 @@
         "dbId": "",
         "id": "1",
         "locationGroupOrSidurId": "1",
-        "name": " אשבל אוריגינל",
+        "name": "(עותק) אשבל",
         "typeOfRecord": 2
       }
     ],
@@ -1301,6 +1974,6 @@
       }
     ]
   },
-  "timeStamp": "1644590819922",
+  "timeStamp": "1644847897416",
   "hash": "0"
 }

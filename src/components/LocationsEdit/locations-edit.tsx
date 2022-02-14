@@ -12,7 +12,8 @@ import {Styles} from '../../hoc/themes';
 import TextField from '@mui/material/TextField';
 
 interface LocationWithUses extends LocationModel {
-    usedIn: string[]
+    usedIn: string[],
+    IsValid: boolean
 }
 
 export const LocationsEdit = () => {
@@ -36,11 +37,23 @@ export const LocationsEdit = () => {
             locations: r.TransportStops.map(rs => rs.locationId)
         }
     })
+    const locationsNames = allRawLocations.map(l => l.name.trim());
+    const setOfNames = new Set<string>();
+    const repeatingNames: string [] = []
+    locationsNames.forEach(name => {
+        if (setOfNames.has(name)) {
+            repeatingNames.push(name)
+        }
+        setOfNames.add(name)
+    })
+
     const allLocations: LocationWithUses[] = allRawLocations.map(l => {
             const usesRoutes = routeStopsWithLocations.filter(s => s.locations.includes(l.id)).map(s => s.name)
             const usesTransports = transportsWithLocations.filter(s => s.locations.includes(l.id)).map(s => s.name)
+
             return {
                 ...l,
+                IsValid: !repeatingNames.includes(l.name.trim()),
                 usedIn: usesRoutes.concat(usesTransports)
             }
         }
@@ -48,6 +61,7 @@ export const LocationsEdit = () => {
 
     const [filterText, setFilterText] = useState<string>('')
     const dispatch = useDispatch();
+    const allLocationNames = allLocations.map(l => l.name);
 
     const handleAddLocation = () => {
         setFilterText('')
@@ -76,6 +90,10 @@ export const LocationsEdit = () => {
     }
 
     const handleLocationUpdate = (updatedLocation: LocationModel) => {
+        // if (allLocationNames.includes(updatedLocation.name)) {
+        //
+        // }
+
         dispatch({
             type: ActionsTypes.UPDATE_LOCATION,
             payload: updatedLocation
@@ -134,7 +152,7 @@ export const LocationsEdit = () => {
                         <Box key={l.id} onClick={(event) => handleStartEditLocation(event, l.id)}>
 
                             <LocationForm preventDelete={isLocationInSidur.length > 0} isInEdit={locationMainInEdit === l.id}  {...l}
-                                          onUpdate={handleLocationUpdate} key={i}/>
+                                          isLocationNameValid={l.IsValid} onUpdate={handleLocationUpdate} key={i}/>
                         </Box>
                     )}
                 </Box>

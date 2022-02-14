@@ -94,7 +94,7 @@ export const PendingOrdersReducer: Record<PendingOrdersReducerFunctions, (state:
                     }
                 });
             }
-            newState.sessionState.pendingOrderIdInEdit = null;
+            // newState.sessionState.pendingOrderIdInEdit = null;
         }
         StoreUtils.abortSessionPendingOrderState(newState);
         StoreUtils.updateSidurRecordWithSketchChanges(newState)
@@ -147,7 +147,7 @@ export const PendingOrdersReducer: Record<PendingOrdersReducerFunctions, (state:
         const SketchIdInEdit = state.sessionState.SketchIdInEdit
 
         const sketchObj: SketchModel = state.sketches.find((record: SketchModel) => record.id === SketchIdInEdit) as SketchModel;
-       
+
 
         newState.sessionState.pendingOrderInEditActionSelectDrives = ['noDrivesRealyNeeded'];
 

@@ -11,6 +11,7 @@ import {LightTooltip} from '../styled/light-tool-tip';
 
 interface LocationFormProps extends LocationModel {
     onUpdate: (locationUpdate: LocationModel) => void,
+    isLocationNameValid: boolean,
     isInEdit: boolean,
     preventDelete: boolean,
     usedIn: string []
@@ -36,6 +37,7 @@ export const LocationForm = (props: LocationFormProps) => {
     const [wasJustEdited, setWasJustEdited] = useState<boolean>(false)
     const [nameValue, setNameValue] = useState<string>(props.name)
     const [etaValue, setEtaValue] = useState<number>(props.ETA);
+
     const dispatch = useDispatch();
     const valueNameRef: any = useRef('');
     const valueMinutesRef: any = useRef('');
@@ -76,10 +78,6 @@ export const LocationForm = (props: LocationFormProps) => {
                 m: '0.2em',
                 mb: '0.3em',
 
-                //
-                // minHeight: '8vh',
-                // minWidth: '50vw',
-                // maxWidth: '70vw',
                 cursor: 'pointer',
                 display: 'flex',
                 flexDirection: 'row',
@@ -91,6 +89,8 @@ export const LocationForm = (props: LocationFormProps) => {
                          m: '0.3em',
                          mr: '1em',
                          ml: '1em',
+                         display: 'flex',
+                         flexDirection: 'column'
                      }
                      }>
 
@@ -98,7 +98,12 @@ export const LocationForm = (props: LocationFormProps) => {
                     <TextField
 
                         margin="dense"
-                        InputProps={{disableUnderline: !props.isInEdit}}
+                        InputProps={{
+                            disableUnderline: !props.isInEdit,
+                            sx: {
+                                color: props.isLocationNameValid ? 'initial' : 'red'
+                            }
+                        }}
 
                         id={'sidur-rename-dialog-text-field'}
 
@@ -106,6 +111,7 @@ export const LocationForm = (props: LocationFormProps) => {
                         variant="standard"
                         inputRef={valueNameRef}
                         value={nameValue}
+
                         onChange={(event) => {
                             if (props.isInEdit) {
                                 setNameValue(event.target.value)
@@ -114,6 +120,15 @@ export const LocationForm = (props: LocationFormProps) => {
                         }}
 
                     />
+                    {props.isLocationNameValid ? '' : <Typography variant={'subtitle2'} sx={{
+                        fontSize: '11px',
+                        marginTop: '-4px',
+                        lineHeight: '80%',
+                        color: 'red'
+                    }}>
+                        {translations.nameExists}
+                    </Typography>}
+
 
                 </Box>
 
