@@ -9,7 +9,7 @@ import {translations} from '../../services/translations';
 import {LanguageUtilities} from '../../services/language-utilities';
 import {LocationModel} from '../../models/Location.model';
 
-export const SketchesContainerMessage = (props: { sketch: SketchModel | null }) => {
+export const SketchesContainerMessage = (props: { sketch: SketchModel | null, clickCancel: () => void }) => {
 
     const sessionState = useSelector((state: SidurStore) => state.sessionState);
     const locations = useSelector(((state: { Locations: LocationModel[] }) => state.Locations));
@@ -24,7 +24,6 @@ export const SketchesContainerMessage = (props: { sketch: SketchModel | null }) 
         const pendingORderInEdit: OrderModel | undefined = props.sketch?.unassignedOrders.find(o => o.id === pendingOrderIdInEdit)
         switch (sessionState.pendingOrderInEditAction) {
             case SketchDriveOrderEditActionEnum.Merge:
-
                 messageText += translations.SketchActionMergeInfoMessage
                 break;
             case SketchDriveOrderEditActionEnum.ReplaceExisting:
@@ -33,10 +32,14 @@ export const SketchesContainerMessage = (props: { sketch: SketchModel | null }) 
             case SketchDriveOrderEditActionEnum.AddToVehicle:
                 messageText += translations.SketchActionAddToVehicleInfoMessage
                 break;
+
         }
 
         if (pendingORderInEdit) {
             messageText += ' ' + LanguageUtilities.buildBriefText(pendingORderInEdit, locations).driverAndLocation;
+        }
+        if (sessionState.pendingOrderInEditAction === SketchDriveOrderEditActionEnum.publicTransport) {
+            messageText = ''
         }
 
 
@@ -50,7 +53,16 @@ export const SketchesContainerMessage = (props: { sketch: SketchModel | null }) 
             width: '20vw',
             height: '10px'
         }}/>
-        <Typography variant={'h5'}>{messageText}</Typography>
+        <Typography variant={'h5'}>{messageText}  </Typography>
+        {messageText ? <>&nbsp; &nbsp;
+            <Typography sx={{
+                p: '0.2em',
+                cursor: 'pointer',
+                textDecoration: 'underline'
+            }} onClick={props.clickCancel} variant={'subtitle1'}> {translations.cancellation}  </Typography>
+        </> : null
+        }
+
 
     </Box>)
 }

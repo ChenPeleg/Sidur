@@ -69,6 +69,12 @@ export const SketchPendingOrderFull = (props: sketchPendingOrderProps) => {
                     payload: {id: orderId}
                 })
                 break;
+            case SketchDriveOrderEditActionEnum.publicTransport:
+                dispatch({
+                    type: ActionsTypes.CLICKED_PUBLIC_TRANSPORT_PENDING_ORDER,
+                    payload: {id: orderId}
+                })
+                break;
 
 
             default:

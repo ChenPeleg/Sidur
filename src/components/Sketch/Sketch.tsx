@@ -16,23 +16,28 @@ import {SketchDriveMergeDialog} from '../Dialogs/sketch-drive-merge-dialog';
 import {OrderModel} from '../../models/Order.model';
 import {SketchDriveOrderEditActionEnum} from '../../models/SketchDriveOrderEditActionEnum';
 import {SketchVehicleAddButton} from '../buttons/sketch-vehicle-add-button';
+import {SketchOrderToTransportDialog} from '../Dialogs/sketch-order-to-transport-dialog';
 
 
 export const Sketch = () => {
     const dispatch = useDispatch()
     const SketchIdInEdit = useSelector((state: SidurStore) => state.sessionState.SketchIdInEdit);
     const pendingOrderInEditActionSelectDrives = useSelector((state: SidurStore) => state.sessionState.pendingOrderInEditActionSelectDrives || []);
-    const pendingOrderInEditAction = useSelector((state: SidurStore) => state.sessionState.pendingOrderInEditAction);
+    const pendingOrderInEditAction: SketchDriveOrderEditActionEnum | null = useSelector((state: SidurStore) => state.sessionState.pendingOrderInEditAction);
     const sessionState = useSelector((state: SidurStore) => state.sessionState);
 
     const vehicles = useSelector((state: { vehicles: VehicleModel[] }) => state.vehicles);
     const sketches: SketchModel[] = useSelector((state: { sketches: SketchModel[] }) => state.sketches);
     const [sketchDriveEditOpen, setSketchDriveEditOpen] = React.useState(false);
     const [sketchDriveMergeOpen, setSketchDriveMergeOpen] = React.useState(false);
+    const [sketchOrderToTransportOpen, setSketchOrderToTransportOpen] = React.useState(false);
 
     const [chosenDrive, setChosenDrive] = useState<{ drive: DriveModel, vehicleId: string } | null>(null);
 
+    if (pendingOrderInEditAction === SketchDriveOrderEditActionEnum.publicTransport && !sketchOrderToTransportOpen) {
+        setSketchOrderToTransportOpen(true);
 
+    }
     const addToVehicleButtonShown = pendingOrderInEditAction === SketchDriveOrderEditActionEnum.AddToVehicle;
     const handleSketchDriveEditDelete = (sketchDriveData: { drive: DriveModel, vehicleId: string }) => {
         setSketchDriveEditOpen(false);
@@ -61,6 +66,30 @@ export const Sketch = () => {
             })
 
 
+        }
+    };
+    const handleSketchOrderToTransportClose = (value: OrderModel | null) => {
+
+        setSketchOrderToTransportOpen(false);
+
+        setChosenDrive(null);
+        if (value) {
+
+            dispatch({
+                type: ActionsTypes.UPDATE_SKETCH_DRIVE_WITH_MERGED_ORDER,
+                payload: {
+                    value
+                }
+            })
+
+
+        } else {
+            dispatch({
+                type: ActionsTypes.REMOVE_PENDING_ORDER_STATUS,
+                payload: {
+                    value
+                }
+            })
         }
     };
     const handleSketchDriveMergeClose = (value: DriveModel | null) => {
@@ -220,6 +249,10 @@ export const Sketch = () => {
                                                 sketchDriveData={chosenDrive}
                                                 PendingOrderToMergeId={sessionState.pendingOrderIdInEdit}
                                                 onDelete={handleSketchDriveEditDelete}/> : null}
+                    {sessionState.pendingOrderIdInEdit && sketchOrderToTransportOpen ?
+                        <SketchOrderToTransportDialog open={sketchOrderToTransportOpen} onClose={handleSketchOrderToTransportClose}
+                                                      PendingOrderToTransportId={sessionState.pendingOrderIdInEdit}
+                        /> : null}
 
 
                 </Box>)

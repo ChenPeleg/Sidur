@@ -105,6 +105,13 @@ export const SketchesContainer = () => {
             })
         }, dispatch)
     }
+    const handleSketchActionCancelClick = () => {
+        dispatch({
+            type: ActionsTypes.CLICKED_CLOSE_PENDING_ORDER,
+            payload: null
+        })
+
+    }
 
 
     const sketchInEdit: SketchModel | null = sketches.find((sketch: SketchModel) => sketch.id === SketchIdInEdit) || null;
@@ -160,7 +167,7 @@ export const SketchesContainer = () => {
                 >
                     <Edit/>
                 </IconButton>
-                <SketchesContainerMessage sketch={sketchInEdit}/>
+                <SketchesContainerMessage clickCancel={handleSketchActionCancelClick} sketch={sketchInEdit}/>
 
 
             </Box> : <Button variant={'contained'} id={'sketches-create-sketch'}

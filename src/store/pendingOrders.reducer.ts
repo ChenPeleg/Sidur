@@ -226,7 +226,10 @@ export const PendingOrdersReducer: Record<PendingOrdersReducerFunctions, (state:
         return newState
     },
     [ActionsTypes.CLICKED_PUBLIC_TRANSPORT_PENDING_ORDER]: (state: SidurStore, action: IAction): SidurStore => {
-        let newState = {...state}
+        let newState = {...state};
+        newState.sessionState.pendingOrderInEditAction = SketchDriveOrderEditActionEnum.publicTransport;
+        newState.sessionState.pendingOrderIdInEdit = action.payload.id;
+        newState.sessionState.pendingOrderInEditActionSelectDrives = null;
         StoreUtils.HandleReducerSaveToLocalStorage(newState);
         return newState
     },
