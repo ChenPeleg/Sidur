@@ -1001,224 +1001,25 @@
     },
     "sketches": [],
     "displaySetting": {
-      "view": "locationsView"
+      "view": "sketch"
     },
     "SketchIdInEdit": null,
     "pendingOrderIdInEdit": null,
     "sessionState": {
-      "LocationGroupTabOpen": "1",
+      "LocationGroupTabOpen": "0",
       "SketchIdInEdit": "",
-      "locationGroupInEdit": "1",
+      "locationGroupInEdit": "ESHBAL",
       "orderIdInEdit": null,
       "pendingOrderIdInEdit": null,
       "dataHolderForCurrentOrderInEdit": null,
       "isAnimationRunning": true,
-      "locationMainInEdit": null,
+      "locationMainInEdit": "2",
       "pendingOrderInEditActionSelectDrives": [],
       "pendingOrderInEditAction": null,
-      "routeIdInEdit": "6"
+      "routeIdInEdit": "8",
+      "transportIdInEdit": "2"
     },
     "LocationGroups": [
-      {
-        "Locations": [
-          {
-            "EnName": "Karmiel",
-            "id": "1",
-            "name": "כרמיאל",
-            "ETA": 30
-          },
-          {
-            "EnName": "Rakefet",
-            "id": "2",
-            "name": "רקפת",
-            "ETA": 30
-          },
-          {
-            "EnName": "Haifa",
-            "id": "3",
-            "name": "חיפה",
-            "ETA": 50
-          },
-          {
-            "EnName": "Acre",
-            "id": "4",
-            "name": "עכו",
-            "ETA": 45
-          },
-          {
-            "EnName": "Hevrati",
-            "id": "5",
-            "name": "חברתי",
-            "ETA": 50
-          },
-          {
-            "EnName": "misgav",
-            "id": "6",
-            "name": "משגב",
-            "ETA": 30
-          },
-          {
-            "EnName": "Tzurit",
-            "id": "7",
-            "name": "צורית",
-            "ETA": 30
-          },
-          {
-            "EnName": "MaromGalil",
-            "id": "8",
-            "name": "מרום גליל",
-            "ETA": 30
-          },
-          {
-            "EnName": "Merkaz",
-            "id": "9",
-            "name": "מרכז",
-            "ETA": 30
-          },
-          {
-            "EnName": "Yuvalim",
-            "id": "10",
-            "name": "יובלים",
-            "ETA": 30
-          },
-          {
-            "EnName": "Yaad",
-            "id": "11",
-            "name": "יעד",
-            "ETA": 30
-          },
-          {
-            "EnName": "Sachnin",
-            "id": "12",
-            "name": "סכנין",
-            "ETA": 30
-          },
-          {
-            "EnName": "RailKarmiel",
-            "id": "13",
-            "name": "רכבת כרמיאל",
-            "ETA": 25
-          },
-          {
-            "id": "14",
-            "ETA": "60",
-            "name": "תל אביב",
-            "EnName": "Other"
-          },
-          {
-            "id": "15",
-            "ETA": "45",
-            "name": "חברתי קריות",
-            "EnName": ""
-          },
-          {
-            "id": "16",
-            "ETA": "25",
-            "name": "ראש פינה",
-            "EnName": ""
-          },
-          {
-            "id": "17",
-            "ETA": "25",
-            "name": "גולן",
-            "EnName": ""
-          },
-          {
-            "id": "18",
-            "ETA": "25",
-            "name": "צפת",
-            "EnName": ""
-          },
-          {
-            "id": "19",
-            "ETA": "20",
-            "name": "שעב",
-            "EnName": ""
-          },
-          {
-            "id": "20",
-            "ETA": "40",
-            "name": "קריית חיים",
-            "EnName": ""
-          },
-          {
-            "id": "21",
-            "ETA": "45",
-            "name": "טבעון",
-            "EnName": ""
-          },
-          {
-            "id": "22",
-            "ETA": "25",
-            "name": "דמיידה",
-            "EnName": ""
-          },
-          {
-            "id": "23",
-            "ETA": "25",
-            "name": "אשחר",
-            "EnName": ""
-          },
-          {
-            "id": "24",
-            "ETA": "30",
-            "name": "טל-אל",
-            "EnName": ""
-          },
-          {
-            "id": "25",
-            "ETA": "35",
-            "name": "כפר ורדים",
-            "EnName": ""
-          },
-          {
-            "id": "26",
-            "ETA": "25",
-            "name": "תפן",
-            "EnName": ""
-          },
-          {
-            "id": "27",
-            "ETA": "50",
-            "name": "נהריה",
-            "EnName": ""
-          },
-          {
-            "id": "28",
-            "ETA": "60",
-            "name": "ראש הנקרה",
-            "EnName": ""
-          },
-          {
-            "id": "29",
-            "ETA": "20",
-            "name": "דיר אל אסד",
-            "EnName": ""
-          },
-          {
-            "id": "30",
-            "ETA": "25",
-            "name": "נחף",
-            "EnName": ""
-          },
-          {
-            "id": "31",
-            "ETA": "25",
-            "name": "מג'דל כרום",
-            "EnName": ""
-          },
-          {
-            "ETA": 25,
-            "EnName": "",
-            "name": "מקומות 32",
-            "id": "32"
-          }
-        ],
-        "id": "ESHBAL",
-        "name": "אשבל",
-        "Transports": [],
-        "Routes": []
-      },
       {
         "Locations": [
           {
@@ -1604,11 +1405,262 @@
             "ETA": "50",
             "name": "טבריה",
             "EnName": ""
+          },
+          {
+            "id": "65",
+            "ETA": "10",
+            "name": "צומת אשבל",
+            "EnName": ""
+          },
+          {
+            "id": "66",
+            "ETA": "10",
+            "name": "צומת יובלים",
+            "EnName": ""
+          },
+          {
+            "id": "67",
+            "ETA": "20",
+            "name": "צומת כרמיאל מערב",
+            "EnName": ""
+          },
+          {
+            "id": "68",
+            "ETA": "30",
+            "name": "צומת המוביל",
+            "EnName": ""
+          },
+          {
+            "id": "69",
+            "ETA": "40",
+            "name": "צומת אלונים",
+            "EnName": ""
+          },
+          {
+            "id": "70",
+            "ETA": "15",
+            "name": "צומת משגב",
+            "EnName": ""
+          },
+          {
+            "id": "71",
+            "ETA": "25",
+            "name": "צומת אחיהוד",
+            "EnName": ""
           }
         ],
-        "id": "1",
-        "name": "(עותק) אשבל",
-        "Transports": [],
+        "id": "ESHBAL",
+        "name": "אשבל",
+        "Transports": [
+          {
+            "name": "169 מצומת יובלים לחיפה",
+            "id": "1",
+            "comments": "",
+            "TransportStops": [
+              {
+                "locationId": "66",
+                "minuetsFromLast": 20,
+                "position": 1
+              },
+              {
+                "locationId": "3",
+                "minuetsFromLast": 45,
+                "position": 2
+              }
+            ],
+            "TransportTime": [
+              "05:15",
+              "06:15",
+              "07:15",
+              "09:10",
+              "09:00",
+              "11:00",
+              "13:00",
+              "15:30",
+              "16:30"
+            ]
+          },
+          {
+            "name": "קו 42 מאשבל לכרמיאל",
+            "id": "2",
+            "comments": "",
+            "TransportStops": [
+              {
+                "locationId": "HOME_LOCATION",
+                "minuetsFromLast": 20,
+                "position": 1
+              },
+              {
+                "locationId": "65",
+                "minuetsFromLast": 15,
+                "position": 2
+              },
+              {
+                "locationId": "1",
+                "minuetsFromLast": 20,
+                "position": 3
+              },
+              {
+                "locationId": "13",
+                "minuetsFromLast": 5,
+                "position": 4
+              }
+            ],
+            "TransportTime": [
+              "07:00",
+              "09:40",
+              "10:40",
+              "11:40",
+              "14:05",
+              "15:05",
+              "17:05",
+              "20:40",
+              "23:25"
+            ]
+          },
+          {
+            "name": "קו 42 מכרמיאל לאשבל",
+            "id": "3",
+            "comments": "",
+            "TransportStops": [
+              {
+                "locationId": "13",
+                "minuetsFromLast": 20,
+                "position": 1
+              },
+              {
+                "locationId": "1",
+                "minuetsFromLast": 5,
+                "position": 2
+              },
+              {
+                "locationId": "HOME_LOCATION",
+                "minuetsFromLast": 30,
+                "position": 3
+              }
+            ],
+            "TransportTime": [
+              "07:40",
+              "08:40",
+              "10:40",
+              "12:40",
+              "14:10",
+              "16:10",
+              "19:40",
+              "21:40"
+            ]
+          },
+          {
+            "name": "169 מחיפה לצומת יובלים",
+            "id": "4",
+            "comments": "",
+            "TransportStops": [
+              {
+                "locationId": "3",
+                "minuetsFromLast": 20,
+                "position": 1
+              },
+              {
+                "locationId": "70",
+                "minuetsFromLast": 45,
+                "position": 2
+              },
+              {
+                "locationId": "66",
+                "minuetsFromLast": 5,
+                "position": 3
+              }
+            ],
+            "TransportTime": [
+              "12:30",
+              "13:20",
+              "14:15",
+              "15:10",
+              "16:10",
+              "17:30",
+              "19:00",
+              "20:30"
+            ]
+          },
+          {
+            "name": "265 חיפה צומת יובלים",
+            "id": "5",
+            "comments": "",
+            "TransportStops": [
+              {
+                "locationId": "3",
+                "minuetsFromLast": 20,
+                "position": 1
+              },
+              {
+                "locationId": "70",
+                "minuetsFromLast": 45,
+                "position": 2
+              },
+              {
+                "locationId": "66",
+                "minuetsFromLast": 5,
+                "position": 3
+              }
+            ],
+            "TransportTime": [
+              "06:35",
+              "08:10",
+              "09:00",
+              "10:05",
+              "11:30",
+              "13:05",
+              "15:10",
+              "15:45",
+              "16:50",
+              "17:50",
+              "18:50",
+              "19:50",
+              "20:15",
+              "21:20",
+              "22:45"
+            ]
+          },
+          {
+            "name": "265 צומת יובלים חיפה",
+            "id": "6",
+            "comments": "",
+            "TransportStops": [
+              {
+                "locationId": "66",
+                "minuetsFromLast": 20,
+                "position": 1
+              },
+              {
+                "locationId": "70",
+                "minuetsFromLast": 5,
+                "position": 2
+              },
+              {
+                "locationId": "3",
+                "minuetsFromLast": 45,
+                "position": 3
+              }
+            ],
+            "TransportTime": [
+              "05:55",
+              "06:50",
+              "07:25",
+              "07:55",
+              "08:55",
+              "10:25",
+              "11:55",
+              "12:55",
+              "14:25",
+              "16:15",
+              "17:25",
+              "18:25",
+              "19:25",
+              "21:25",
+              "22:55"
+            ]
+          }
+        ],
         "Routes": [
           {
             "name": "כביש 748 לאלון הגליל",
@@ -1861,6 +1913,65 @@
                 "position": 4
               }
             ]
+          },
+          {
+            "name": "צמתים צ. אשבל  עד צ. אלונים",
+            "id": "7",
+            "comments": "",
+            "routStops": [
+              {
+                "locationId": "65",
+                "minuetsFromLast": 20,
+                "position": 1
+              },
+              {
+                "locationId": "66",
+                "minuetsFromLast": 5,
+                "position": 2
+              },
+              {
+                "locationId": "70",
+                "minuetsFromLast": 5,
+                "position": 3
+              },
+              {
+                "locationId": "68",
+                "minuetsFromLast": 20,
+                "position": 4
+              },
+              {
+                "locationId": "69",
+                "minuetsFromLast": 15,
+                "position": 5
+              }
+            ]
+          },
+          {
+            "name": "צמתים צ. אשבל עד צ. אחיהוד",
+            "id": "8",
+            "comments": "",
+            "routStops": [
+              {
+                "locationId": "65",
+                "minuetsFromLast": 20,
+                "position": 1
+              },
+              {
+                "locationId": "66",
+                "minuetsFromLast": 5,
+                "position": 2
+              },
+              {
+                "locationId": "67",
+                "minuetsFromLast": 10,
+                "position": 3
+              },
+              {
+                "locationId": "71",
+                "minuetsFromLast": 15,
+                "position": 4
+              }
+            ]
           }
         ],
         "dbId": ""
@@ -1874,16 +1985,10 @@
         "typeOfRecord": 1
       },
       {
+        "dbId": "",
         "id": "ESHBAL",
         "locationGroupOrSidurId": "ESHBAL",
         "name": "אשבל",
-        "typeOfRecord": 2
-      },
-      {
-        "dbId": "",
-        "id": "1",
-        "locationGroupOrSidurId": "1",
-        "name": "(עותק) אשבל",
         "typeOfRecord": 2
       }
     ],
@@ -1974,6 +2079,6 @@
       }
     ]
   },
-  "timeStamp": "1644847897416",
+  "timeStamp": "1644934333338",
   "hash": "0"
 }
