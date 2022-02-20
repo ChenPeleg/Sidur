@@ -11,10 +11,8 @@ import {Box, Typography} from '@mui/material';
 import {SxProps} from '@mui/system';
 import {MergeType} from '@mui/icons-material';
 import {DriveModel, SketchModel} from '../../models/Sketch.model';
-import {VerticalHourField} from '../buttons/vertical-hour-field';
 import {OrderModel} from '../../models/Order.model';
 import {useDispatch, useSelector} from 'react-redux';
-import {Utils} from '../../services/utils';
 import {SidurStore} from '../../store/store.types';
 import {LocationModel} from '../../models/Location.model';
 import {LanguageUtilities} from '../../services/language-utilities';
@@ -64,11 +62,12 @@ export const SketchOrderToTransportDialog = (props: SketchOrderToTransportDialog
     const orderToMergeBrief = LanguageUtilities.buildBriefText(orderToMerge, locations);
 
     const [driveChangedData, setDriveChangedData] = useState<DriveModel>({...driveData});
-
+    const secondOrderToMergeBrief = {...orderToMergeBrief};
 
     const descriptionValueRef: any = useRef('')
+    const secondDescriptionValueRef: any = useRef('')
     const filedWrapper: SxProps = {
-        //  width: '320px'
+        width: '100%'
     }
     const handleCloseCancel = () => {
         onClose(null);
@@ -87,22 +86,9 @@ export const SketchOrderToTransportDialog = (props: SketchOrderToTransportDialog
         onClose(editedData);
 
     };
-
-
-    const handleHourChange =
-        (event: Event, input: any) => {
-            const newriveData = {...driveChangedData};
-            newriveData.startHour = Utils.DecimalTimeToHourText(input[0]);
-            newriveData.finishHour = Utils.DecimalTimeToHourText(input[1]);
-            setDriveChangedData(newriveData);
-
-
-        }
     const implementedOrders = sketchOrders.filter((o: OrderModel) => driveChangedData.implementsOrders.includes(o.id))
-    const newImplementedOrders = [orderToMerge]
+
     return (
-
-
         <Dialog open={open} onClose={handleCloseCancel} fullWidth>
             <DialogTitle sx={{
                 fontSize: '22px',
@@ -120,23 +106,6 @@ export const SketchOrderToTransportDialog = (props: SketchOrderToTransportDialog
                 }}>
 
 
-                    <Box sx={{
-                        ...filedWrapper,
-                        display: 'flex',
-                        flexDirection: 'column',
-                        maxWidth: '160px',
-                        p: '0 0.2em',
-
-                    }}>
-                        <Typography align={'center'}
-                                    component="legend"><b>{translations.DriveTimesAfterMerge}</b>
-                        </Typography>
-
-                        <VerticalHourField input={[driveData.startHour, driveData.finishHour]}
-                                           onHoursChange={handleHourChange}
-                                           label={translations.Start}/>
-
-                    </Box>
                     <Box id={'divider-in-main-row'} sx={{
                         width: '20px',
                         height: '100px'
@@ -146,9 +115,7 @@ export const SketchOrderToTransportDialog = (props: SketchOrderToTransportDialog
                         display: 'flex',
                         flexDirection: 'column'
                     }}>
-                        <Typography
-                            component="legend"><b>{translations.DriveDescriptionNew}</b>
-                        </Typography>
+
 
                         <Box sx={{...filedWrapper}}>
                             <TextField
@@ -159,7 +126,7 @@ export const SketchOrderToTransportDialog = (props: SketchOrderToTransportDialog
                                 fullWidth
                                 multiline={true}
                                 variant="standard"
-                                defaultValue={(driveData?.description || '').replace('  ', ' ')}
+                                defaultValue={((orderToMergeBrief.timeText + ' ' + orderToMergeBrief.driverAndLocation) || '').replace('  ', ' ')}
                                 inputRef={descriptionValueRef}
                                 onKeyUp={(event) => {
                                     if (event.key === 'Enter') {
@@ -168,46 +135,36 @@ export const SketchOrderToTransportDialog = (props: SketchOrderToTransportDialog
                                 }}
                             />
                         </Box>
-                        <Typography sx={{mt: '1em'}}
-                                    component="legend"><b> {newImplementedOrders.length === 0 ? (translations.none + ' ') : null} {
+
+
+                        <Typography sx={{mt: '0.2em'}}
+                                    component="legend"><b> {implementedOrders.length === 0 ? (translations.none + ' ') : null} {
                             translations
-                                .issues + ':'
+                                .connectedOrders
                         }</b>
-                            <Box id={'issues'}>
-                                {issues.map((issue: string, i: number) => (
-                                    <Box key={i} sx={{
-                                        display: 'flex',
-                                        flexDirection: 'column',
-                                        p: '0.0em'
-                                    }}>
-                                        <Box sx={{pb: '0em'}}>
-                                            {(i + 1).toString() + '. '}{issue}
-                                        </Box>
+                        </Typography>
+                        {
+                            secondOrderToMergeBrief ? (
 
-
-                                    </Box>))}
-                            </Box>
-                        </Typography> <Typography sx={{mt: '1em'}}
-                                                  component="legend"><b> {newImplementedOrders.length === 0 ? (translations.none + ' ') : null} {
-                        translations
-                            .newMergedOrder
-                    }</b>
-                    </Typography>
-
-                        <Box id={'connected-orders'}>
-                            {newImplementedOrders.map((order: OrderModel, i: number) => (
-                                <Box key={i} sx={{
-                                    display: 'flex',
-                                    flexDirection: 'column',
-                                    p: '0.2em'
-                                }}>
-                                    <Box sx={{pb: '0.2em'}}>
-                                        {orderToMergeBrief.timeText + ' ' + orderToMergeBrief.driverAndLocation + ', ' + order.Comments}
-                                    </Box>
-
-
-                                </Box>))}
-                        </Box>
+                                <Box sx={{...filedWrapper}}>
+                                    <TextField
+                                        size={'medium'}
+                                        margin="dense"
+                                        id="vehicle-comments-dialog-text-field"
+                                        type="text"
+                                        fullWidth
+                                        multiline={true}
+                                        variant="standard"
+                                        defaultValue={((secondOrderToMergeBrief.timeText + ' ' + secondOrderToMergeBrief.driverAndLocation) || '').replace('  ', ' ')}
+                                        inputRef={secondDescriptionValueRef}
+                                        onKeyUp={(event) => {
+                                            if (event.key === 'Enter') {
+                                                handleCloseEdit()
+                                            }
+                                        }}
+                                    />
+                                </Box>) : null
+                        }
 
 
                         <Typography sx={{mt: '0.2em'}}
@@ -251,13 +208,13 @@ export const SketchOrderToTransportDialog = (props: SketchOrderToTransportDialog
             }}>
 
                 <Button size={'large'} variant={'outlined'} id={'vehicle-edit-cancel-button'}
-                        onClick={handleCloseCancel}>{translations.CancelMerge}</Button>
+                        onClick={handleCloseCancel}>{translations.Cancel}</Button>
                 <Box sx={{
                     width: '30px',
                     height: '10px'
                 }}/>
                 <Button size={'large'} variant={'contained'} id={'vehicle-edit-approve-button'}
-                        onClick={handleCloseEdit}>{translations.ApproveMerge}</Button>
+                        onClick={handleCloseEdit}>{translations.Update}</Button>
             </DialogActions>
         </Dialog>
 

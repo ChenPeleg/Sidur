@@ -76,6 +76,7 @@ export const translations = {
     'Comments': 'הערות ',
     'Approve': 'אישור',
     'ApproveMerge': 'אישור מיזוג',
+    'Update': 'עדכן',
     'Cancel': 'ביטול',
     'CancelMerge': 'ביטול מיזוג',
     'CreateSketch': 'צור סקיצה חדשה',
