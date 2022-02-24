@@ -63,7 +63,6 @@ export const SketchOrderToTransportDialog = (props: SketchOrderToTransportDialog
 
     const [driveChangedData, setDriveChangedData] = useState<DriveModel>({...driveData});
     const secondOrderToMergeBrief = {...orderToMergeBrief};
-
     const descriptionValueRef: any = useRef('')
     const secondDescriptionValueRef: any = useRef('')
     const filedWrapper: SxProps = {
