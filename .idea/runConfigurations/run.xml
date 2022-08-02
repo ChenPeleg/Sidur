@@ -1,0 +1,7 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="run" type="NodeJSConfigurationType" node-parameters="start" working-dir="$PROJECT_DIR$">
+    <method v="2">
+      <option name="LaunchBrowser.Before.Run" url="http://localhost:3000/#/h/locations" />
+    </method>
+  </configuration>
+</component>
