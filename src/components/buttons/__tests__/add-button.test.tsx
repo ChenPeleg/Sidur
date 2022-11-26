@@ -1,33 +1,30 @@
-import React from 'react';
-import '../../../setupTests'
-import {shallow} from 'enzyme';
-import {AddButton, AddButtonProps} from '../../Icons/add-button';
-import {translations} from '../../../services/translations';
+import React from "react";
+import "../../../setupTests";
 
+import { AddButton, AddButtonProps } from "../../Icons/add-button";
+import { translations } from "../../../services/translations";
+import { render, screen } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 
-const clickMock = jest.fn()
+const clickMock = jest.fn();
 const props: AddButtonProps = {
     sx: null,
-    addClickHandler: clickMock
-}
-const addButton = shallow(<AddButton addClickHandler={props.addClickHandler}/>);
-describe('Add Button', () => {
-
-
-    it('only one button', () => {
-        expect(addButton.children()).toHaveLength(1);
+    addClickHandler: clickMock,
+};
+describe("Add Button", () => {
+    it("only one button last", () => {
+        render(<AddButton addClickHandler={props.addClickHandler} />);
+        expect(screen.getAllByRole("button")).toHaveLength(1);
     });
-    it('only have text  AddOrder', () => {
-        // expect(addButton.children()).toHaveLength(1);
-        expect(addButton.text().includes(translations.AddOrder)).toBe(true);
+    it("only have text  AddPreference", () => {
+        render(<AddButton addClickHandler={props.addClickHandler} />);
+        expect(screen.getAllByRole("button")[0].textContent).toContain(
+            translations.AddOrder
+        );
     });
-    it('click triggers click handler', () => {
-
-        addButton.find('#add-order-button').simulate('click');
-        expect(clickMock).toHaveBeenCalled()
+    it("click triggers click handler", async () => {
+        render(<AddButton addClickHandler={props.addClickHandler} />);
+        await userEvent.click(screen.getByRole("button"));
+        expect(clickMock).toHaveBeenCalled();
     });
-
-})
-
-
-
+});
