@@ -1,4 +1,4 @@
-import {HashRouter} from 'react-router-dom';
+import {HashRouter, Navigate, Route, Routes} from 'react-router-dom';
 
 
 export const RouterMain = ({
@@ -6,7 +6,13 @@ export const RouterMain = ({
                            }: any) => {
 
     return (
-        <HashRouter basename={'h/'}>
+        // basename={'h/'}
+        <HashRouter>
+            <Routes>
+                <Route path="/" element={<Navigate replace to="/orders"/>}/>
+
+            </Routes>
+
             {
                 children
             }
