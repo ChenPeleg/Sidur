@@ -1,32 +1,28 @@
-import React from 'react';
-import {shallow} from 'enzyme';
-import App from './App';
-import {Root} from './Root';
-import '../setupTests'
+import React from "react";
 
-let wrapped: any;
-describe('basic app rendering', () => {
+import App from "./App";
+import { Root } from "./Root";
+import "../setupTests";
+import { render, screen } from "@testing-library/react";
+
+let component: HTMLElement;
+describe("basic app rendering", () => {
     beforeEach(() => {
-        wrapped = shallow(
+        render(
             <Root>
-                <App/>
+                <App />
             </Root>
         );
+        component = screen.getByTestId("test-app-back-ground");
     });
 
     afterEach(() => {
-        if (wrapped) {
-            wrapped.unmount();
-        }
+        // if (wrapped) {
+        //     wrapped.unmount();
+        // }
     });
 
-    it('renders correctly', () => {
-       
-
-        expect(wrapped).toEqual({});
+    it("renders correctly", () => {
+        expect(component).toBeTruthy();
     });
-
-})
-
-
-
+});
