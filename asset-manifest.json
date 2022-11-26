@@ -1,23 +1,16 @@
 {
   "files": {
-    "main.css": "/static/css/main.9e97f47d.chunk.css",
-    "main.js": "/static/js/main.916932d8.chunk.js",
-    "main.js.map": "/static/js/main.916932d8.chunk.js.map",
-    "runtime-main.js": "/static/js/runtime-main.3eae375c.js",
-    "runtime-main.js.map": "/static/js/runtime-main.3eae375c.js.map",
-    "static/js/2.c01c6f77.chunk.js": "/static/js/2.c01c6f77.chunk.js",
-    "static/js/2.c01c6f77.chunk.js.map": "/static/js/2.c01c6f77.chunk.js.map",
-    "static/js/3.023441e8.chunk.js": "/static/js/3.023441e8.chunk.js",
-    "static/js/3.023441e8.chunk.js.map": "/static/js/3.023441e8.chunk.js.map",
-    "index.html": "/index.html",
-    "static/css/main.9e97f47d.chunk.css.map": "/static/css/main.9e97f47d.chunk.css.map",
-    "static/js/2.c01c6f77.chunk.js.LICENSE.txt": "/static/js/2.c01c6f77.chunk.js.LICENSE.txt",
-    "static/media/Assistant-Regular.e0bb8a20.ttf": "/static/media/Assistant-Regular.e0bb8a20.ttf"
+    "main.css": "/Sidur/static/css/main.e7d1066e.css",
+    "main.js": "/Sidur/static/js/main.9c386f9c.js",
+    "static/js/787.a3df450b.chunk.js": "/Sidur/static/js/787.a3df450b.chunk.js",
+    "static/media/Assistant-Regular.ttf": "/Sidur/static/media/Assistant-Regular.e0bb8a20557f3925f263.ttf",
+    "index.html": "/Sidur/index.html",
+    "main.e7d1066e.css.map": "/Sidur/static/css/main.e7d1066e.css.map",
+    "main.9c386f9c.js.map": "/Sidur/static/js/main.9c386f9c.js.map",
+    "787.a3df450b.chunk.js.map": "/Sidur/static/js/787.a3df450b.chunk.js.map"
   },
   "entrypoints": [
-    "static/js/runtime-main.3eae375c.js",
-    "static/js/2.c01c6f77.chunk.js",
-    "static/css/main.9e97f47d.chunk.css",
-    "static/js/main.916932d8.chunk.js"
+    "static/css/main.e7d1066e.css",
+    "static/js/main.9c386f9c.js"
   ]
 }
