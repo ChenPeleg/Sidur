@@ -6,6 +6,8 @@ import {OrderModel} from '../../models/Order.model';
 import {ActionsTypes} from '../../store/types.actions';
 import {AddButton} from '../Icons/add-button';
 import {SessionModel} from '../../store/store.types';
+import {AppButton} from '../buttons/app-button';
+import {translations} from '../../services/translations';
 
 
 export const Orders = () => {
@@ -17,6 +19,11 @@ export const Orders = () => {
             type: ActionsTypes.ADD_NEW_ORDER,
             payload: {}
         })
+    }    ;
+    const importOrdersClickHandler = (_event: any) => {
+        dispatch({
+            type: ActionsTypes.OPEN_IMPORT_SHEETS_MODAL,
+        })
     }
 
     return (
@@ -27,9 +34,13 @@ export const Orders = () => {
                 alignItems: 'center',
                 mb: '10px',
                 justifyContent: 'center',
+                gap : '20px',
                 minWidth: '30vw',
             }}>
                 <AddButton addClickHandler={addClickHandler}/>
+
+                <AppButton iconType={'ImportContacts'} color={'secondary'} text={translations.ImportOrders}  addClickHandler={importOrdersClickHandler}/>
+
             </Box>
             <Box>
                 {orders.map((o) => (

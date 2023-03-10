@@ -173,3 +173,44 @@ export const ImportOrdersFromText = (text: string, locations: LocationModel[]): 
 
 
 }
+export const validateImportedData = (orderPreferences: OrderModel[]) => {
+    const errors = [];
+    const driverWithoutName = orderPreferences
+        .map((p, i) => ({
+            driverName: p.driverName,
+            row: i + 1,
+        }))
+        .filter((g) => g.driverName?.trim() === "")
+        .map((g) => g.row.toString());
+
+    const driverWithoutHours = orderPreferences.filter(
+        (p) => p.startHour
+    );
+    if (orderPreferences.length < 5) {
+        errors.push(
+            orderPreferences.length
+                ? "only " + orderPreferences.length + " rows were found"
+                : "no driver duty google sheets rows were found"
+        );
+    }
+    if (driverWithoutHours[0]) {
+        errors.push("Driver " + driverWithoutHours[0].driverName + " has no dates");
+    }
+    if (driverWithoutName[0]) {
+        errors.push("Row " + driverWithoutName[0] + " has no name");
+    }
+    const driverWithError = orderPreferences.filter((p) =>
+        p.driverName.toLowerCase().includes("error")
+    );
+    if (driverWithError[0]) {
+        errors.push("Row " + orderPreferences.indexOf(driverWithError[0]) + " has an error");
+    }
+    if (errors.length) {
+        const text = errors.join("; ");
+        throw {
+            message: text,
+        };
+    }
+
+    return true;
+};

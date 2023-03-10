@@ -24,6 +24,7 @@ import {OrderImportDialog} from '../Dialogs/orders-import-dialog';
 import {ToggleButtons} from '../buttons/toggle-button-group';
 import {RenameDialog} from '../Dialogs/rename-dialog';
 import {StoreUtils} from '../../store/store-utils';
+import {ImportSheetsDialog} from '../Dialogs/import-sheets-dialog';
 
 
 export const AppNavBar = () => {
@@ -32,7 +33,9 @@ export const AppNavBar = () => {
     const [RenameOpen, setRenameOpen] = React.useState(false);
     const [UploadOpen, setUploadOpen] = React.useState(false);
     const [ManageSidurimOpen, setManageSidurimOpen] = React.useState(false);
-    const [importOrdersOpen, setImportOrdersOpen] = React.useState(false);
+
+    const importOrdersOpen = useSelector((state: SidurStore) => state.sessionState.openDialog === 'importOrders');
+
     const [sidurMoreAnchorEl, setSidurMoreAnchorEl] =
         React.useState<null | HTMLElement>(null);
     const sidurId = useSelector((state: SidurStore) => state.sidurId);
@@ -41,6 +44,11 @@ export const AppNavBar = () => {
 
     const sidurName = sidurSelected?.Name || '';
 
+    const openImportSheetModal = ( ) => {
+        dispatch({
+            type: ActionsTypes.OPEN_IMPORT_SHEETS_MODAL,
+        })
+    }
 
     const isProfileMenuOpen = Boolean(anchorEl);
     const isSidurMenuOpen = Boolean(sidurMoreAnchorEl);
@@ -100,7 +108,7 @@ export const AppNavBar = () => {
                 setManageSidurimOpen(true);
                 break;
             case SidurActionType.ImportOrders:
-                setImportOrdersOpen(true);
+                openImportSheetModal( )
                 break;
 
             default:
@@ -275,9 +283,8 @@ export const AppNavBar = () => {
             <SidurManagementDialog open={ManageSidurimOpen} onClose={() => {
                 setManageSidurimOpen(false)
             }}/>
-            <OrderImportDialog open={importOrdersOpen} onClose={() => {
-                setImportOrdersOpen(false)
-            }}/>
+            <ImportSheetsDialog open={importOrdersOpen}
+              selectedValue={sidurName}/>
 
         </Box>
     );
