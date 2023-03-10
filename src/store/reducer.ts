@@ -54,7 +54,8 @@ const reducer = (state: SidurStore = initialState, action: IAction) => {
         case ActionsTypes.EXPORT_ALL:
         case ActionsTypes.IMPORT_FILE_UPLOADED:
         case ActionsTypes.IMPORT_ORDERS_AS_TEXT:
-        case ActionsTypes.OPEN_CLOSE_IMPORT_DIALOG:
+        case ActionsTypes.OPEN_IMPORT_SHEETS_MODAL:
+        case ActionsTypes.CLOSE_IMPORT_SHEETS_MODAL:
 
             return ImportExportReducer[action.type](newState, action);
 

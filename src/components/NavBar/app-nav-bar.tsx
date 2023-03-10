@@ -24,6 +24,7 @@ import {OrderImportDialog} from '../Dialogs/orders-import-dialog';
 import {ToggleButtons} from '../buttons/toggle-button-group';
 import {RenameDialog} from '../Dialogs/rename-dialog';
 import {StoreUtils} from '../../store/store-utils';
+import {ImportSheetsDialog} from '../Dialogs/import-sheets-dialog';
 
 
 export const AppNavBar = () => {
@@ -33,7 +34,6 @@ export const AppNavBar = () => {
     const [UploadOpen, setUploadOpen] = React.useState(false);
     const [ManageSidurimOpen, setManageSidurimOpen] = React.useState(false);
 
-    // const [importOrdersOpen, closeOpenImportOrders] = React.useState(false);
     const importOrdersOpen = useSelector((state: SidurStore) => state.sessionState.openDialog === 'importOrders');
 
     const [sidurMoreAnchorEl, setSidurMoreAnchorEl] =
@@ -44,10 +44,9 @@ export const AppNavBar = () => {
 
     const sidurName = sidurSelected?.Name || '';
 
-    const closeOpenImportOrders = (action : 'close' | 'open') => {
+    const openImportSheetModal = ( ) => {
         dispatch({
-            type: ActionsTypes.OPEN_CLOSE_IMPORT_DIALOG,
-            payload : action === 'open' ? 'importOrders' :  null
+            type: ActionsTypes.OPEN_IMPORT_SHEETS_MODAL,
         })
     }
 
@@ -109,7 +108,7 @@ export const AppNavBar = () => {
                 setManageSidurimOpen(true);
                 break;
             case SidurActionType.ImportOrders:
-                closeOpenImportOrders('open')
+                openImportSheetModal( )
                 break;
 
             default:
@@ -284,9 +283,8 @@ export const AppNavBar = () => {
             <SidurManagementDialog open={ManageSidurimOpen} onClose={() => {
                 setManageSidurimOpen(false)
             }}/>
-            <OrderImportDialog open={importOrdersOpen} onClose={() => {
-                closeOpenImportOrders('close')
-            }}/>
+            <ImportSheetsDialog open={importOrdersOpen}
+              selectedValue={sidurName}/>
 
         </Box>
     );

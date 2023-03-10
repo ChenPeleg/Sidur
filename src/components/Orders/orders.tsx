@@ -22,8 +22,7 @@ export const Orders = () => {
     }    ;
     const importOrdersClickHandler = (_event: any) => {
         dispatch({
-            type: ActionsTypes.OPEN_CLOSE_IMPORT_DIALOG,
-            payload: 'importOrders'
+            type: ActionsTypes.OPEN_IMPORT_SHEETS_MODAL,
         })
     }
 
