@@ -16,13 +16,13 @@ describe("Vehicle edit  Dialog", () => {
   let onClose: Mock = jest.fn();
   let onDelete: Mock = jest.fn();
   const mockVehicleData: VehicleModel = {
+    startHour: '',
     id: "1",
     vehicleName: "1",
     seats: "7",
     kmLimit: "1",
-    optionalGuardDaysByDates: "1",
     endHour: "1",
-    Comments: "1",
+    Comments: "1"
   };
   beforeEach(async () => {
     onClose = jest.fn();
@@ -80,7 +80,7 @@ describe("Vehicle edit  Dialog", () => {
         id: "1",
         kmLimit: "1",
         seats: "7",
-        optionalGuardDaysByDates: "1",
+        "startHour": "",
         vehicleName: "rename car",
       });
     });
