@@ -53,8 +53,8 @@ export const RenameDialog = (props: RenameProps) => {
                     />
                 </DialogContent>
                 <DialogActions>
-                    <Button id={'sidur-rename-cancel-button'} onClick={handleCloseCancel}>{translations.Cancel}</Button>
-                    <Button id={'sidur-rename-approve-button'} onClick={handleCloseRename}>{translations.Approve}</Button>
+                    <Button id={'sidur-rename-cancel-button'} data-testid="sidur-rename-cancel-button" onClick={handleCloseCancel}>{translations.Cancel}</Button>
+                    <Button id={'sidur-rename-approve-button'} data-testid="sidur-rename-approve-button" onClick={handleCloseRename}>{translations.Approve}</Button>
                 </DialogActions>
             </Dialog>
         </div>

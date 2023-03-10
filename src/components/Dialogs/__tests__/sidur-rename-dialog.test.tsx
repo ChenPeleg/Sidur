@@ -7,7 +7,7 @@ import { RenameDialog } from "../rename-dialog";
 import Mock = jest.Mock;
 import userEvent from "@testing-library/user-event";
 
-describe("ShmiraList rename import Dialog", () => {
+describe("Sidur rename import Dialog", () => {
   let fileDialog: any = null;
   let component: HTMLElement;
   let _baseElement: any = null;
@@ -44,7 +44,7 @@ describe("ShmiraList rename import Dialog", () => {
   });
   it("closes dialog on press cancel", async () => {
     const cancelButton = (await screen.getByTestId(
-      "shmiraList-rename-cancel-button"
+      "sidur-rename-cancel-button"
     )) as HTMLElement;
     await userEvent.click(cancelButton);
     expect(onClose).toHaveBeenCalledWith(null);
@@ -52,11 +52,11 @@ describe("ShmiraList rename import Dialog", () => {
   it("entering value and pressing approve triggers dispatch", async () => {
     await act(async () => {
       const input: HTMLInputElement = component.querySelector(
-        "input#shmiraList-rename-dialog-text-field"
+        "input#sidur-rename-dialog-text-field"
       ) as HTMLInputElement;
       input.value = "rename shmiraList";
       const aprvButton = (await component.querySelector(
-        "#shmiraList-rename-approve-button"
+        "#sidur-rename-approve-button"
       )) as HTMLElement;
       await userEvent.click(aprvButton);
 

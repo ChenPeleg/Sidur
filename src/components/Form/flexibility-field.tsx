@@ -36,7 +36,7 @@ export const RenderFlexibilityField = (
         <>
             <Typography component="legend"><b>{translations.flexibility}: </b>{renderFlexibilityText(input.value)}</Typography>
 
-            <Box sx={{width: '250px'}}>
+            <Box sx={{width: '250px'}} role={'button'}>
 
                 <Slider variant={'standard'}
                         sx={sliderSx}

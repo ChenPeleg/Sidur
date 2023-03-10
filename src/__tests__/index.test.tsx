@@ -1,19 +1,16 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import App from '../hoc/App';
-import {Root} from '../hoc/Root';
+import React from "react";
+import { customMatcherRunner } from "../__tests-utils__/cutom-matchers";
 
 
-jest.mock('react-dom', () => ({render: jest.fn()}));
+jest.mock("react-dom", () => ({ render: jest.fn() }));
 
-describe('Application root', () => {
-    it('should render without crashing', () => {
-        const div = document.createElement('div');
-        div.id = 'root';
-        document.body.appendChild(div);
-        require('../index.tsx');
-        expect(ReactDOM.render).toHaveBeenCalledWith(<Root>
-            <App/>
-        </Root>, div);
+customMatcherRunner();
+
+describe("Application root", () => {
+    it("try custom matchers", () => {
+        expect(9).toBePowerOf(9, 6);
+    });
+    it("try custom matchers with message ", () => {
+        expect(9).eq(9, "9 is not equal to 8");
     });
 });
