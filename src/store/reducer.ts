@@ -57,6 +57,10 @@ const reducer = (state: SidurStore = initialState, action: IAction) => {
         case ActionsTypes.OPEN_IMPORT_SHEETS_MODAL:
         case ActionsTypes.CLOSE_IMPORT_SHEETS_MODAL:
 
+        case ActionsTypes.IMPORT_SHEETS_DATA_PASTE:
+        case  ActionsTypes.APPROVE_IMPORT_SHEETS_DATA:
+
+
             return ImportExportReducer[action.type](newState, action);
 
         case ActionsTypes.NEW_VEHICLE:

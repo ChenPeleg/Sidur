@@ -33,7 +33,9 @@ export const ImportExportReducer: Record<ImportReducerFunctions, (state: SidurSt
             return newState;
         }
 
+
         newState.sessionState.importSheetCheckStatus = "OK";
+        console.log( newState.sessionState.importSheetCheckStatus)
         return newState;
     },
     [ActionsTypes.APPROVE_IMPORT_SHEETS_DATA]: (
@@ -42,52 +44,22 @@ export const ImportExportReducer: Record<ImportReducerFunctions, (state: SidurSt
     ): SidurStore => {
         const newState = { ...state };
         newState.sessionState = { ...newState.sessionState };
-        // const modeledImportedPreferences: PreferenceModel[] =
-        //     ImportPreferencesFromText(action.payload);
-        // try {
-        //     validateImportedData(modeledImportedPreferences);
-        // } catch (err: any) {
-        //     newState.sessionState.importSheetCheckStatus =
-        //         "Error: " + err.message || "Error";
-        //     return newState;
-        // }
-        //
-        // newState.preferences = newState.preferences.concat(
-        //     modeledImportedPreferences
-        // );
+        const importedOrders: string = action.payload.importedOrders;
+        const modeledImportedOrders: OrderModel[] =
+            ImportOrdersFromText(importedOrders, newState.Locations);
 
-        // newState.sessionState.importSheetCheckStatus = false;
-        // newState.sessionState.isImportSheetModalOpen = false;
-        //
-        // const currentShmiraId = newState.shmiraListId;
-        // const CurrentShmiraList: ShmiraListRecord | undefined =
-        //     newState.shmiraListCollection?.find((l) => l.id === currentShmiraId);
-        //
-        // const dateRange = getDatesFromImportedPreferences(
-        //     modeledImportedPreferences
-        // );
-        //
-        // if (CurrentShmiraList) {
-        //     const sheetsFrom = +dateRange[0];
-        //     const sheetsTo = +dateRange[1];
-        //     let from = +CurrentShmiraList.DateFrom;
-        //     let to = +CurrentShmiraList.DateTo;
-        //     if (sheetsFrom < from || true) {
-        //         from = sheetsFrom - 1;
-        //     }
-        //     if (sheetsTo > to || true) {
-        //         to = sheetsTo + 1;
-        //     }
-        //     CurrentShmiraList.DateFrom = from.toString();
-        //     CurrentShmiraList.DateTo = to.toString();
-        //     newState.shmiraListCollection = newState.shmiraListCollection.map((s) => {
-        //         if (s.id === currentShmiraId) {
-        //             return { ...CurrentShmiraList };
-        //         } else {
-        //             return s;
-        //         }
-        //     });
-        // }
+        try {
+            validateImportedData(modeledImportedOrders);
+            newState.orders = newState.orders.concat(modeledImportedOrders);
+        } catch (err: any) {
+            newState.sessionState.importSheetCheckStatus =
+                "Error: " + err.message || "Error";
+            return newState;
+        }
+
+        newState.sessionState.importSheetCheckStatus = "OK";
+        return newState;
+
 
         StoreUtils.HandleReducerSaveToLocalStorage(newState);
         return newState;
