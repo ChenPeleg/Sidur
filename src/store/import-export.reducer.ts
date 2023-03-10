@@ -42,7 +42,7 @@ export const ImportExportReducer: Record<ImportReducerFunctions, (state: SidurSt
     ): SidurStore => {
         const newState = { ...state };
         newState.sessionState = { ...newState.sessionState };
-        const importedOrders: string = action.payload.importedOrders;
+        const importedOrders: string = action.payload;
         const modeledImportedOrders: OrderModel[] =
             ImportOrdersFromText(importedOrders, newState.Locations);
 
@@ -55,9 +55,10 @@ export const ImportExportReducer: Record<ImportReducerFunctions, (state: SidurSt
             return newState;
         }
 
-        newState.sessionState.importSheetCheckStatus = "OK";
+        newState.sessionState.openDialog = null
+
         StoreUtils.HandleReducerSaveToLocalStorage(newState);
-        return newState;
+
 
 
         return newState;
@@ -72,7 +73,8 @@ export const ImportExportReducer: Record<ImportReducerFunctions, (state: SidurSt
 
     },
     [ActionsTypes.OPEN_IMPORT_SHEETS_MODAL]: (state: SidurStore, action: IAction): SidurStore => {
-        let newState = {...state}
+        let newState = {...state};
+        newState.sessionState.importSheetCheckStatus = false
         newState.sessionState.openDialog = 'importOrders'
         return newState
 
@@ -117,7 +119,7 @@ export const ImportExportReducer: Record<ImportReducerFunctions, (state: SidurSt
         const importedOrders: string = action.payload.importedOrders;
         const modeledImportedOrders: OrderModel[] = ImportOrdersFromText(importedOrders, newState.Locations);
         newState.orders = newState.orders.concat(modeledImportedOrders)
-      
+
         return newState
 
 
