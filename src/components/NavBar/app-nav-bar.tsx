@@ -33,14 +33,9 @@ export const AppNavBar = () => {
     const [UploadOpen, setUploadOpen] = React.useState(false);
     const [ManageSidurimOpen, setManageSidurimOpen] = React.useState(false);
 
-    const [importOrdersOpen, setImportOrdersOpen] = React.useState(false);
+    // const [importOrdersOpen, closeOpenImportOrders] = React.useState(false);
+    const importOrdersOpen = useSelector((state: SidurStore) => state.sessionState.openDialog === 'importOrders');
 
-    const closeImportOrders = () => {
-        dispatch({
-            type: ActionsTypes.OPEN_CLOSE_IMPORT_DIALOG,
-            payload:  null
-        })
-    }
     const [sidurMoreAnchorEl, setSidurMoreAnchorEl] =
         React.useState<null | HTMLElement>(null);
     const sidurId = useSelector((state: SidurStore) => state.sidurId);
@@ -49,6 +44,12 @@ export const AppNavBar = () => {
 
     const sidurName = sidurSelected?.Name || '';
 
+    const closeOpenImportOrders = (action : 'close' | 'open') => {
+        dispatch({
+            type: ActionsTypes.OPEN_CLOSE_IMPORT_DIALOG,
+            payload:action === 'open' ? 'importOrders' :  null
+        })
+    }
 
     const isProfileMenuOpen = Boolean(anchorEl);
     const isSidurMenuOpen = Boolean(sidurMoreAnchorEl);
@@ -108,7 +109,7 @@ export const AppNavBar = () => {
                 setManageSidurimOpen(true);
                 break;
             case SidurActionType.ImportOrders:
-                setImportOrdersOpen(true);
+                closeOpenImportOrders('open')
                 break;
 
             default:
@@ -284,7 +285,7 @@ export const AppNavBar = () => {
                 setManageSidurimOpen(false)
             }}/>
             <OrderImportDialog open={importOrdersOpen} onClose={() => {
-                setImportOrdersOpen(false)
+                closeOpenImportOrders('close')
             }}/>
 
         </Box>
