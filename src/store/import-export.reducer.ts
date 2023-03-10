@@ -9,7 +9,7 @@ import {OrderModel} from '../models/Order.model';
 export type ImportReducerFunctions =
     ActionsTypes.EXPORT_ALL |
     ActionsTypes.IMPORT_FILE_UPLOADED |
-    ActionsTypes.IMPORT_ORDERS_AS_TEXT
+    ActionsTypes.IMPORT_ORDERS_AS_TEXT | ActionsTypes.OPEN_CLOSE_IMPORT_DIALOG
 
 export const ImportExportReducer: Record<ImportReducerFunctions, (state: SidurStore, action: IAction) => SidurStore> = {
     [ActionsTypes.EXPORT_ALL]: (state: SidurStore, action: IAction): SidurStore => {
@@ -17,6 +17,12 @@ export const ImportExportReducer: Record<ImportReducerFunctions, (state: SidurSt
         newState.sidurCollection = StoreUtils.UpdateSidurCollectionWithCurrenSidur(newState);
         const saveObj: SaveDataModel = StoreUtils.buildSaveDataModel(newState)
         DownloadFile('sidur.json', JSON.stringify(saveObj))
+        return newState
+
+    },
+    [ActionsTypes.OPEN_CLOSE_IMPORT_DIALOG]: (state: SidurStore, action: IAction): SidurStore => {
+        let newState = {...state}
+        newState.sessionState.openDialog = action.payload = 'importOrders' ? 'importOrders' : null
         return newState
 
     },

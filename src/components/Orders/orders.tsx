@@ -19,6 +19,12 @@ export const Orders = () => {
             type: ActionsTypes.ADD_NEW_ORDER,
             payload: {}
         })
+    }    ;
+    const importOrdersClickHandler = (_event: any) => {
+        dispatch({
+            type: ActionsTypes.OPEN_MY_PROFILE,
+            payload: {}
+        })
     }
 
     return (
@@ -34,7 +40,7 @@ export const Orders = () => {
             }}>
                 <AddButton addClickHandler={addClickHandler}/>
 
-                <AppButton iconType={'ImportContacts'} color={'secondary'} text={translations.ImportOrders}  addClickHandler={addClickHandler}/>
+                <AppButton iconType={'ImportContacts'} color={'secondary'} text={translations.ImportOrders}  addClickHandler={importOrdersClickHandler}/>
 
             </Box>
             <Box>

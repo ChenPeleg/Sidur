@@ -42,7 +42,8 @@ export interface SessionModel {
     LocationGroupTabOpen: null | string;
     dataHolderForCurrentOrderInEdit: null | OrderModel,
     isAnimationRunning: boolean,
-    locationMainInEdit: null | string
+    locationMainInEdit: null | string,
+    openDialog : null | 'importOrders'
 }
 
 export enum TypeOfRecord {
@@ -72,8 +73,6 @@ export interface SidurStore {
     LocationGroups: LocationGroup[];
     sessionState: SessionModel;
     recordBriefs: RecordBriefModel[]
-
-
 }
 
 export const defaultOrderValues: OrderModel = {

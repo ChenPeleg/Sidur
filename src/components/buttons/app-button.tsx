@@ -22,6 +22,7 @@ export const AppButton = (props: AddButtonProps) => {
         <Box>
             <Button id={'app-button'} color={props.color ? props.color : undefined} variant="contained" onClick={props.addClickHandler} aria-label="add" size="large">
                 {props.iconType ? Icons[props.iconType] as React.ReactElement : null}
+                &nbsp; &nbsp;
                 {props.text}
             </Button>
 
