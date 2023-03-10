@@ -30,6 +30,7 @@ export const Orders = () => {
                 minWidth: '30vw',
             }}>
                 <AddButton addClickHandler={addClickHandler}/>
+                <AddButton addClickHandler={addClickHandler}/>
             </Box>
             <Box>
                 {orders.map((o) => (
