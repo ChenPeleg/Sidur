@@ -158,7 +158,7 @@ export const translations = {
     ImportFromSheets: "יבוא מטופס הבקשות",
     ImportFromSheetsApprove: "יבוא נתונים ",
     ImportFromSheetsPastSuccess:
-        "נמצאו נתונים תקינים, האם ליבא את הנתונים לתוך רשימת השמירה החדשה ?",
+        "נמצאו נתונים תקינים, האם ליבא את הנתונים לתוך הבקשות בסידור ?",
     ImportFromSheetsPastFail:
         "לא ניתן ליבא את הנתונים, שימו לב שהנתונים בגליון תקינים, ושהעתקתם את כל הגליון",
     ImportFromSheetsPastValidating: "הנתונים נבדקים, נא להמתין...",

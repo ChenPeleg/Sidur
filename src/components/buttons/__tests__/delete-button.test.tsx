@@ -1,30 +1,34 @@
-import React from 'react';
-import '../../../setupTests'
-import {shallow} from 'enzyme';
-import {DeleteButton, DeleteButtonProps} from '../delete-button';
+import React from "react";
+import "../../../setupTests";
+import { DeleteButton, DeleteButtonProps } from "../delete-button";
+import { render, screen } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 
-
-const clickMock = jest.fn()
+const clickMock = jest.fn();
 const props: DeleteButtonProps = {
-    sx: null,
-    deleteClickHandler: clickMock
-}
-const component = shallow(<DeleteButton deleteClickHandler={props.deleteClickHandler} sx={null}/>);
-describe('Delete Button', () => {
+  sx: null,
+  deleteClickHandler: clickMock,
+};
 
+describe("Delete Button", () => {
+  it("contains only one button", () => {
+    render(
+      <DeleteButton deleteClickHandler={props.deleteClickHandler} sx={null} />
+    );
+    expect(screen.getAllByRole("button")).toHaveLength(1);
+  });
+  it("only have delete icon", () => {
+    render(
+      <DeleteButton deleteClickHandler={props.deleteClickHandler} sx={null} />
+    );
 
-    it('contains only one button', () => {
-        expect(component.children()).toHaveLength(1);
-    });
-    it('only have delete icon', () => {
-        expect(component.html()).toContain('DeleteIcon');
-    });
-    it('click triggers click handler', () => {
-        component.find('#delete-button').simulate('click');
-        expect(clickMock).toHaveBeenCalled()
-    });
-
-})
-
-
-
+    expect(screen.getAllByRole("button")[0].innerHTML).toContain("DeleteIcon");
+  });
+  it("click triggers click handler", async () => {
+    render(
+      <DeleteButton deleteClickHandler={props.deleteClickHandler} sx={null} />
+    );
+    await userEvent.click(screen.getByRole("button"));
+    expect(clickMock).toHaveBeenCalled();
+  });
+});

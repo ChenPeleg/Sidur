@@ -14,12 +14,8 @@ export const AppLayout = () => {
 
     return (
         <ThemeProvider theme={themeMain}>
-            <div className="app-background" dir={'rtl'}>
-                {/*<Routes>*/}
-                {/*    <Route path="/">*/}
-                {/*        /!*<Navigate to="/dashboard"/>*!/*/}
-                {/*    </Route>*/}
-                {/*</Routes>*/}
+            <div className="app-background"     data-testid={"test-app-back-ground"} dir={'rtl'}>
+
                 <RouterMain>
                     <AppNavBar/>
                     <Loading/>
