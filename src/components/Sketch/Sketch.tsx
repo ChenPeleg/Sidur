@@ -181,86 +181,91 @@ export const Sketch = () => {
 
     return (
         sketchInEdit ? (
-
-                <Box sx={{
-                    overflow : "scroll",
-                    width : '100vw',
+                <Box id={'sketch--scroll-container'} sx={{
+                    overflow: 'auto',
+                    width: '100vw',
                 }}>
-                    <Box id={'sketch-wrapper-row'} sx={{
-                        padding  : "0 200px",
-                        display: 'flex',
-                        flexDirection: 'row',
-                        alignItems: 'start',
-                        mb: '10px',
-                        justifyContent: 'center',
-                        minWidth: '30vw',
+                    <Box id={'sketch-container'} sx={{
+                        display : "inline-block"
                     }}>
-                        <SketchPendingOrders pendingOrders={sketchInEdit.unassignedOrders}/>
+
+                        <Box id={'sketch-wrapper-row'} sx={{
+                            paddingRight: '20px',
+                            paddingLeft: '80px',
+                            display: 'flex',
+                            flexDirection: 'row',
+                            alignItems: 'start',
+                            mb: '10px',
+                            justifyContent: 'center',
+                            minWidth: '30vw',
+                        }}>
+                            <SketchPendingOrders pendingOrders={sketchInEdit.unassignedOrders}/>
 
 
-                        {sketchInEdit.vehicleSchedules.map((vehicleTimeTable: VehicleScheduleModel, i: number) => {
-                            return (<Box key={i}>
-                                <Box key={i} id={'vehicle-column'} sx={{
-                                    display: 'flex',
-                                    flexDirection: 'column',
-                                    alignItems: 'stretch',
-                                    m: '15px',
-                                    mt: '0px',
-                                    justifyContent: 'start',
-                                    minWidth: '6vw',
-                                    minHeight: '60vh',
-                                }}> <Typography variant={'h6'}>{getVehicleNameFromId(vehicleTimeTable.VehicleId)}  </Typography>
-                                    {addToVehicleButtonShown ? <SketchVehicleAddButton sketchDriveClick={(ev) => {
-                                        HandleAddDrive(vehicleTimeTable.id)
-                                    }}/> : null}
-                                    <TransitionGroup>
-                                        {vehicleTimeTable.drives.map((drive: DriveModel, i: number) => {
-                                            let chooseDriveMode = ChooseDriveMode.NotActive
-                                            if (pendingOrderInEditActionSelectDrives.length > 0) {
-                                                if (pendingOrderInEditActionSelectDrives.includes(drive.id)) {
-                                                    chooseDriveMode = ChooseDriveMode.selectable
-                                                } else {
-                                                    chooseDriveMode = ChooseDriveMode.nonSelectable
+                            {sketchInEdit.vehicleSchedules.map((vehicleTimeTable: VehicleScheduleModel, i: number) => {
+                                return (<Box key={i}>
+                                    <Box key={i} id={'vehicle-column'} sx={{
+                                        display: 'flex',
+                                        flexDirection: 'column',
+                                        alignItems: 'stretch',
+                                        m: '15px',
+                                        mt: '0px',
+                                        justifyContent: 'start',
+                                        minWidth: '6vw',
+                                        minHeight: '60vh',
+                                    }}> <Typography variant={'h6'}>{getVehicleNameFromId(vehicleTimeTable.VehicleId)}  </Typography>
+                                        {addToVehicleButtonShown ? <SketchVehicleAddButton sketchDriveClick={(ev) => {
+                                            HandleAddDrive(vehicleTimeTable.id)
+                                        }}/> : null}
+                                        <TransitionGroup>
+                                            {vehicleTimeTable.drives.map((drive: DriveModel, i: number) => {
+                                                let chooseDriveMode = ChooseDriveMode.NotActive
+                                                if (pendingOrderInEditActionSelectDrives.length > 0) {
+                                                    if (pendingOrderInEditActionSelectDrives.includes(drive.id)) {
+                                                        chooseDriveMode = ChooseDriveMode.selectable
+                                                    } else {
+                                                        chooseDriveMode = ChooseDriveMode.nonSelectable
+                                                    }
                                                 }
-                                            }
 
-                                            return (
-                                                <Collapse key={i}>
-                                                    <SketchDrive chooseDriveMode={chooseDriveMode}
-                                                                 sketchDriveClick={(event: React.MouseEvent<HTMLElement>, drive: DriveModel) => sketchDriveClickHandler(event, drive, vehicleTimeTable.id)}
-                                                                 key={i} drive={drive}
-                                                                 previousDrive={vehicleTimeTable.drives[i - 1] || null}/>
-                                                </Collapse>
+                                                return (
+                                                    <Collapse key={i}>
+                                                        <SketchDrive chooseDriveMode={chooseDriveMode}
+                                                                     sketchDriveClick={(event: React.MouseEvent<HTMLElement>, drive: DriveModel) => sketchDriveClickHandler(event, drive, vehicleTimeTable.id)}
+                                                                     key={i} drive={drive}
+                                                                     previousDrive={vehicleTimeTable.drives[i - 1] || null}/>
+                                                    </Collapse>
 
-                                            )
+                                                )
 
-                                        })}
-                                    </TransitionGroup>
+                                            })}
+                                        </TransitionGroup>
 
-                                </Box>
-                                <Divider orientation="vertical" variant={'fullWidth'} sx={{borderRight: '2px solid black '}} flexItem/>
-                            </Box>)
+                                    </Box>
+                                    <Divider orientation="vertical" variant={'fullWidth'} sx={{borderRight: '2px solid black '}} flexItem/>
+                                </Box>)
 
 
-                        })}
+                            })}
+
+                        </Box>
+                        {chosenDrive ?
+                            <SketchDriveEditDialog vehicleId={'1'} open={sketchDriveEditOpen} onClose={handleSketchDriveEditClose}
+                                                   sketchDriveData={chosenDrive}
+                                                   onDelete={handleSketchDriveEditDelete}/> : null}
+                        {chosenDrive && sessionState.pendingOrderIdInEdit && sketchDriveMergeOpen ?
+                            <SketchDriveMergeDialog vehicleId={'1'} open={sketchDriveMergeOpen} onClose={handleSketchDriveMergeClose}
+                                                    sketchDriveData={chosenDrive}
+                                                    PendingOrderToMergeId={sessionState.pendingOrderIdInEdit}
+                                                    onDelete={handleSketchDriveEditDelete}/> : null}
+                        {sessionState.pendingOrderIdInEdit && sketchOrderToTransportOpen ?
+                            <SketchOrderToTransportDialog open={sketchOrderToTransportOpen} onClose={handleSketchOrderToTransportClose}
+                                                          PendingOrderToTransportId={sessionState.pendingOrderIdInEdit}
+                            /> : null}
 
                     </Box>
-                    {chosenDrive ?
-                        <SketchDriveEditDialog vehicleId={'1'} open={sketchDriveEditOpen} onClose={handleSketchDriveEditClose}
-                                               sketchDriveData={chosenDrive}
-                                               onDelete={handleSketchDriveEditDelete}/> : null}
-                    {chosenDrive && sessionState.pendingOrderIdInEdit && sketchDriveMergeOpen ?
-                        <SketchDriveMergeDialog vehicleId={'1'} open={sketchDriveMergeOpen} onClose={handleSketchDriveMergeClose}
-                                                sketchDriveData={chosenDrive}
-                                                PendingOrderToMergeId={sessionState.pendingOrderIdInEdit}
-                                                onDelete={handleSketchDriveEditDelete}/> : null}
-                    {sessionState.pendingOrderIdInEdit && sketchOrderToTransportOpen ?
-                        <SketchOrderToTransportDialog open={sketchOrderToTransportOpen} onClose={handleSketchOrderToTransportClose}
-                                                      PendingOrderToTransportId={sessionState.pendingOrderIdInEdit}
-                        /> : null}
-
-
                 </Box>)
+
             :
             <SketchNoSketchMessage/>
     )
