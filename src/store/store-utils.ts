@@ -115,7 +115,8 @@ export const StoreUtils = {
             pendingOrderIdInEdit: null,
             routeIdInEdit: null,
             transportIdInEdit: null,
-            openDialog : null
+            openDialog : null,
+            importSheetCheckStatus : false
         }
         return defaultSession
     },

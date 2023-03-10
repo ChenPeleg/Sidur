@@ -10,8 +10,6 @@ export type ImportReducerFunctions =
     ActionsTypes.EXPORT_ALL |
     ActionsTypes.IMPORT_FILE_UPLOADED |
     ActionsTypes.IMPORT_ORDERS_AS_TEXT | ActionsTypes.OPEN_CLOSE_IMPORT_DIALOG
-    | ActionsTypes.OPEN_IMPORT_SHEETS_MODAL
-    | ActionsTypes.CLOSE_IMPORT_SHEETS_MODAL
     | ActionsTypes.IMPORT_SHEETS_DATA_PASTE
     | ActionsTypes.APPROVE_IMPORT_SHEETS_DATA;
 
