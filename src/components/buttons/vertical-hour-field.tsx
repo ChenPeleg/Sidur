@@ -21,7 +21,8 @@ interface VerticalHourFieldProps {
 }
 
 const formatHourLabel = (hourInNumber: number) =>
-    Utils.DecimalTimeToHourText(hourInNumber)
+    `${Utils.DecimalTimeToHourText(hourInNumber)}`;
+
 export const VerticalHourField = (
     props: VerticalHourFieldProps
 ) => {
