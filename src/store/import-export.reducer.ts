@@ -33,9 +33,7 @@ export const ImportExportReducer: Record<ImportReducerFunctions, (state: SidurSt
             return newState;
         }
 
-
         newState.sessionState.importSheetCheckStatus = "OK";
-        console.log( newState.sessionState.importSheetCheckStatus)
         return newState;
     },
     [ActionsTypes.APPROVE_IMPORT_SHEETS_DATA]: (
@@ -58,10 +56,10 @@ export const ImportExportReducer: Record<ImportReducerFunctions, (state: SidurSt
         }
 
         newState.sessionState.importSheetCheckStatus = "OK";
+        StoreUtils.HandleReducerSaveToLocalStorage(newState);
         return newState;
 
 
-        StoreUtils.HandleReducerSaveToLocalStorage(newState);
         return newState;
     },
 
