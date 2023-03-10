@@ -22,8 +22,8 @@ export const Orders = () => {
     }    ;
     const importOrdersClickHandler = (_event: any) => {
         dispatch({
-            type: ActionsTypes.OPEN_MY_PROFILE,
-            payload: {}
+            type: ActionsTypes.OPEN_CLOSE_IMPORT_DIALOG,
+            payload: 'importOrders'
         })
     }
 

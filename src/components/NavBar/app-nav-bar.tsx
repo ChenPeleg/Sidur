@@ -32,7 +32,15 @@ export const AppNavBar = () => {
     const [RenameOpen, setRenameOpen] = React.useState(false);
     const [UploadOpen, setUploadOpen] = React.useState(false);
     const [ManageSidurimOpen, setManageSidurimOpen] = React.useState(false);
+
     const [importOrdersOpen, setImportOrdersOpen] = React.useState(false);
+
+    const closeImportOrders = () => {
+        dispatch({
+            type: ActionsTypes.OPEN_CLOSE_IMPORT_DIALOG,
+            payload:  null
+        })
+    }
     const [sidurMoreAnchorEl, setSidurMoreAnchorEl] =
         React.useState<null | HTMLElement>(null);
     const sidurId = useSelector((state: SidurStore) => state.sidurId);
