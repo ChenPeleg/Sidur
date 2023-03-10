@@ -1,4 +1,3 @@
-import {mount} from 'enzyme';
 
 import React from 'react';
 import {act, render} from '@testing-library/react';
@@ -22,7 +21,7 @@ describe('Orders import Dialog', () => {
         const mockStore = configureStore(middlewares);
         store = mockStore({});
         fileDialog = (<Provider store={store}><OrderImportDialog open={true} key={'1'} onClose={onClose}/> </Provider>);
-        component = mount(fileDialog);
+
 
         const {baseElement} = render(fileDialog);
         _baseElement = baseElement
