@@ -114,8 +114,8 @@ export const StoreUtils = {
             pendingOrderInEditActionSelectDrives: null,
             pendingOrderIdInEdit: null,
             routeIdInEdit: null,
-            transportIdInEdit: null
-
+            transportIdInEdit: null,
+            openDialog : null
         }
         return defaultSession
     },
