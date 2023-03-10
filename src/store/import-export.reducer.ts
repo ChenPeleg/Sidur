@@ -3,7 +3,7 @@ import {StoreUtils} from './store-utils';
 import {DownloadFile} from '../services/download-file';
 import {Utils} from '../services/utils';
 import {ActionsTypes} from './types.actions';
-import {ImportOrdersFromText} from '../services/import-orders-from-text';
+import {ImportOrdersFromText, validateImportedData} from '../services/import-orders-from-text';
 import {OrderModel} from '../models/Order.model';
 
 export type ImportReducerFunctions =
@@ -23,15 +23,15 @@ export const ImportExportReducer: Record<ImportReducerFunctions, (state: SidurSt
     ): SidurStore => {
         const newState = { ...state };
         newState.sessionState = { ...newState.sessionState };
-        // const modeledImportedPreferences: PreferenceModel[] =
-        //     ImportPreferencesFromText(action.payload);
-        // try {
-        //     validateImportedData(modeledImportedPreferences);
-        // } catch (err: any) {
-        //     newState.sessionState.importSheetCheckStatus =
-        //         "Error: " + err.message || "Error";
-        //     return newState;
-        // }
+        const modeledImportedOrders: OrderModel[] =
+            ImportOrdersFromText(action.payload, newState.Locations);
+        try {
+            validateImportedData(modeledImportedOrders);
+        } catch (err: any) {
+            newState.sessionState.importSheetCheckStatus =
+                "Error: " + err.message || "Error";
+            return newState;
+        }
 
         newState.sessionState.importSheetCheckStatus = "OK";
         return newState;

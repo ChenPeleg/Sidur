@@ -155,7 +155,7 @@ export const translations = {
     'issues': 'הערות',
 
 
-    ImportFromSheets: "יבוא מטופס שמירה",
+    ImportFromSheets: "יבוא מטופס הבקשות",
     ImportFromSheetsApprove: "יבוא נתונים ",
     ImportFromSheetsPastSuccess:
         "נמצאו נתונים תקינים, האם ליבא את הנתונים לתוך רשימת השמירה החדשה ?",
