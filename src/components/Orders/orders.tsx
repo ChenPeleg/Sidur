@@ -19,7 +19,7 @@ export const Orders = () => {
             type: ActionsTypes.ADD_NEW_ORDER,
             payload: {}
         })
-    }    ;
+    };
     const importOrdersClickHandler = (_event: any) => {
         dispatch({
             type: ActionsTypes.OPEN_IMPORT_SHEETS_MODAL,
@@ -34,13 +34,14 @@ export const Orders = () => {
                 alignItems: 'center',
                 mb: '10px',
                 justifyContent: 'center',
-                gap : '20px',
+                gap: '20px',
                 minWidth: '30vw',
             }}>
                 <AddButton addClickHandler={addClickHandler}/>
 
-                <AppButton iconType={'ImportContacts'} color={'secondary'} text={translations.ImportOrders}  addClickHandler={importOrdersClickHandler}/>
-
+                {orders.length ? null : <AppButton iconType={'ImportContacts'} color={'secondary'} text={translations.ImportOrders}
+                                            addClickHandler={importOrdersClickHandler}/>
+                 }
             </Box>
             <Box>
                 {orders.map((o) => (
