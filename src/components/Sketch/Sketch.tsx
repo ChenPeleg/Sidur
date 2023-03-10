@@ -181,8 +181,13 @@ export const Sketch = () => {
 
     return (
         sketchInEdit ? (
-                <Box>
+
+                <Box sx={{
+                    overflow : "scroll",
+                    width : '100vw',
+                }}>
                     <Box id={'sketch-wrapper-row'} sx={{
+                        padding  : "0 200px",
                         display: 'flex',
                         flexDirection: 'row',
                         alignItems: 'start',

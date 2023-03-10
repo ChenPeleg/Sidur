@@ -14,7 +14,7 @@ export const AppLayout = () => {
 
     return (
         <ThemeProvider theme={themeMain}>
-            <div className="app-background"     data-testid={"test-app-back-ground"} dir={'rtl'}>
+            <div className="app-background"  data-testid={"test-app-back-ground"} dir={'rtl'}>
 
                 <RouterMain>
                     <AppNavBar/>

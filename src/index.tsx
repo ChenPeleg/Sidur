@@ -13,7 +13,6 @@ root.render(
     <Root>
       <App />
     </Root>
-    ,
   </React.StrictMode>
 );
 
