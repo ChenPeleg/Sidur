@@ -41,6 +41,7 @@ export const AirbnbSlider = styled(Slider)(({theme}) => ({
         position: 'absolute',
         //bottom: '-10px',
         top: '32px',
+        left : '32px',
         backgroundColor: 'unset',
         color: theme.palette.text.primary,
         '&:before': {
@@ -73,9 +74,10 @@ export const AirbnbThumbComponent = (props: AirbnbThumbComponentProps, _data: an
         children,
         ...other
     } = props;
+    console.log(children)
 
     return (
-        <Box key={Math.random().toString()}> <SliderThumb {...other}    >   {children}
+        <Box key={Math.random().toString()}> <SliderThumb {...other}    > <Box> fff {children} </Box>
 
         </SliderThumb>
         </Box>
