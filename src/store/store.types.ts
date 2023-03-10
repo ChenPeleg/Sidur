@@ -43,7 +43,8 @@ export interface SessionModel {
     dataHolderForCurrentOrderInEdit: null | OrderModel,
     isAnimationRunning: boolean,
     locationMainInEdit: null | string,
-    openDialog : null | 'importOrders'
+    openDialog : null | 'importOrders',
+    importSheetCheckStatus: false | "OK" | string;
 }
 
 export enum TypeOfRecord {

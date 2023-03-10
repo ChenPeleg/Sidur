@@ -47,7 +47,7 @@ export const AppNavBar = () => {
     const closeOpenImportOrders = (action : 'close' | 'open') => {
         dispatch({
             type: ActionsTypes.OPEN_CLOSE_IMPORT_DIALOG,
-            payload:action === 'open' ? 'importOrders' :  null
+            payload : action === 'open' ? 'importOrders' :  null
         })
     }
 
