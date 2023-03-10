@@ -23,7 +23,7 @@ const DetectFormRows = (completeText: string): string => {
 const rowsToEshbalOrders = (rows: string [][]): EshbalOrder[] => {
     let EshbalOrders: EshbalOrder[] = [];
     rows.forEach((row: string[], index: number) => {
-        if (row[1].length > 1 && index > 0) {
+        if (row[1] && row[1].length > 1 && index > 0) {
             let name = row[1];
             for (let c = 2; c < 8; c += 2) {
                 if (row[c].length > 1) {
@@ -184,13 +184,13 @@ export const validateImportedData = (orderPreferences: OrderModel[]) => {
         .map((g) => g.row.toString());
 
     const driverWithoutHours = orderPreferences.filter(
-        (p) => p.startHour
+        (p) => !p.startHour
     );
     if (orderPreferences.length < 5) {
         errors.push(
             orderPreferences.length
                 ? "only " + orderPreferences.length + " rows were found"
-                : "no driver duty google sheets rows were found"
+                : "no drives were found"
         );
     }
     if (driverWithoutHours[0]) {
