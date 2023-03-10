@@ -17,7 +17,81 @@ export type ImportReducerFunctions =
 
 export const ImportExportReducer: Record<ImportReducerFunctions, (state: SidurStore, action: IAction) => SidurStore> = {
 
+    [ActionsTypes.IMPORT_SHEETS_DATA_PASTE]: (
+        state: SidurStore,
+        action: IAction
+    ): SidurStore => {
+        const newState = { ...state };
+        newState.sessionState = { ...newState.sessionState };
+        // const modeledImportedPreferences: PreferenceModel[] =
+        //     ImportPreferencesFromText(action.payload);
+        // try {
+        //     validateImportedData(modeledImportedPreferences);
+        // } catch (err: any) {
+        //     newState.sessionState.importSheetCheckStatus =
+        //         "Error: " + err.message || "Error";
+        //     return newState;
+        // }
 
+        newState.sessionState.importSheetCheckStatus = "OK";
+        return newState;
+    },
+    [ActionsTypes.APPROVE_IMPORT_SHEETS_DATA]: (
+        state: SidurStore,
+        action: IAction
+    ): SidurStore => {
+        const newState = { ...state };
+        newState.sessionState = { ...newState.sessionState };
+        // const modeledImportedPreferences: PreferenceModel[] =
+        //     ImportPreferencesFromText(action.payload);
+        // try {
+        //     validateImportedData(modeledImportedPreferences);
+        // } catch (err: any) {
+        //     newState.sessionState.importSheetCheckStatus =
+        //         "Error: " + err.message || "Error";
+        //     return newState;
+        // }
+        //
+        // newState.preferences = newState.preferences.concat(
+        //     modeledImportedPreferences
+        // );
+
+        // newState.sessionState.importSheetCheckStatus = false;
+        // newState.sessionState.isImportSheetModalOpen = false;
+        //
+        // const currentShmiraId = newState.shmiraListId;
+        // const CurrentShmiraList: ShmiraListRecord | undefined =
+        //     newState.shmiraListCollection?.find((l) => l.id === currentShmiraId);
+        //
+        // const dateRange = getDatesFromImportedPreferences(
+        //     modeledImportedPreferences
+        // );
+        //
+        // if (CurrentShmiraList) {
+        //     const sheetsFrom = +dateRange[0];
+        //     const sheetsTo = +dateRange[1];
+        //     let from = +CurrentShmiraList.DateFrom;
+        //     let to = +CurrentShmiraList.DateTo;
+        //     if (sheetsFrom < from || true) {
+        //         from = sheetsFrom - 1;
+        //     }
+        //     if (sheetsTo > to || true) {
+        //         to = sheetsTo + 1;
+        //     }
+        //     CurrentShmiraList.DateFrom = from.toString();
+        //     CurrentShmiraList.DateTo = to.toString();
+        //     newState.shmiraListCollection = newState.shmiraListCollection.map((s) => {
+        //         if (s.id === currentShmiraId) {
+        //             return { ...CurrentShmiraList };
+        //         } else {
+        //             return s;
+        //         }
+        //     });
+        // }
+
+        StoreUtils.HandleReducerSaveToLocalStorage(newState);
+        return newState;
+    },
 
     [ActionsTypes.EXPORT_ALL]: (state: SidurStore, action: IAction): SidurStore => {
         let newState = {...state}
