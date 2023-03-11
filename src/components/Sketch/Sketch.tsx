@@ -199,6 +199,7 @@ export const Sketch = () => {
                             justifyContent: 'center',
                             minWidth: '30vw',
                         }}>
+
                             <SketchPendingOrders pendingOrders={sketchInEdit.unassignedOrders}/>
 
 
@@ -213,7 +214,7 @@ export const Sketch = () => {
                                         justifyContent: 'start',
                                         minWidth: '6vw',
                                         minHeight: '60vh',
-                                    }}> <Typography variant={'h6'}>{getVehicleNameFromId(vehicleTimeTable.VehicleId)}  </Typography>
+                                    }}> <Typography variant={'h6'}>&nbsp;{ getVehicleNameFromId(vehicleTimeTable.VehicleId)}  </Typography>
                                         {addToVehicleButtonShown ? <SketchVehicleAddButton sketchDriveClick={(ev) => {
                                             HandleAddDrive(vehicleTimeTable.id)
                                         }}/> : null}
