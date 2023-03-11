@@ -38,6 +38,7 @@ export const translations = {
     'NewSidur': 'סידור חדש',
     'ManageAllSidrurim': 'ניהול סידורים',
     'Delete': 'מחק',
+    'AndDelete': 'ומחק',
     'ExportToFile': 'יצא לקובץ',
     'ImportFromFile': 'יבא מקובץ',
     'ImportOrders': 'יבוא הזמנות',

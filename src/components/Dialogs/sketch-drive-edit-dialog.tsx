@@ -69,7 +69,6 @@ export const SketchDriveEditDialog = (props: SketchDriveEditDialogProps) => {
     };
     const handleCloseDelete = (): void => {
         const sketchDriveDataForDelete = {...sketchDriveData}
-
         onDelete(sketchDriveDataForDelete);
     };
     const addToPendingClickHandler = (event: Event, orderId: string) => {
@@ -84,6 +83,20 @@ export const SketchDriveEditDialog = (props: SketchDriveEditDialogProps) => {
         const newDrive = {...driveChangedData};
         newDrive.implementsOrders = newDrive.implementsOrders.filter(o => o !== orderId);
         setDriveChangedData(newDrive)
+    }
+    const addToPendingAndDeleteClickHandler = (event: Event, orderId: string) => {
+        addToPendingClickHandler(event,orderId);
+        handleCloseDelete();
+        // dispatch({
+        //     type: ActionsTypes.REMOVE_ORDER_FROM_SKETCH_DRIVE_AND_DELETE,
+        //     payload: {
+        //         orderId,
+        //         sketchDriveId: driveData.id
+        //     }
+        // })
+        // const newDrive = {...driveChangedData};
+        // newDrive.implementsOrders = newDrive.implementsOrders.filter(o => o !== orderId);
+        // setDriveChangedData(newDrive)
     }
     const handleHourChange =
         (event: Event, input: any) => {
@@ -179,6 +192,11 @@ export const SketchDriveEditDialog = (props: SketchDriveEditDialogProps) => {
                                                        actionType={SketchDriveOrderEditActionEnum.AddToPending}
                                                        text={'      ' + translations.SketchActionAddToPending}
                                                        actionClickHandler={(event: any) => addToPendingClickHandler(event, order.id)}/>
+
+                                    <OrderActionButton sx={{width: '100%', mt : '5px'}} size={'small'}
+                                                       actionType={SketchDriveOrderEditActionEnum.AddToPending}
+                                                       text={'      ' + translations.SketchActionAddToPending + ' ' + translations.AndDelete}
+                                                       actionClickHandler={(event: any) => addToPendingAndDeleteClickHandler(event, order.id)}/>
 
                                 </Card>))}
                         </Box>
