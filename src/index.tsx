@@ -4,6 +4,8 @@ import App from "./hoc/App";
 import reportWebVitals from "./reportWebVitals";
 import { Root } from "./hoc/Root";
 import ReactDOM from "react-dom/client";
+import {ImportOrdersFromText} from './services/import-orders-from-text';
+import {sidurFromDocsMock} from './__tests__/mocks/sidurFromDocsMock';
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
@@ -15,17 +17,7 @@ root.render(
     </Root>
   </React.StrictMode>
 );
-
+ImportOrdersFromText(sidurFromDocsMock,[]);
 reportWebVitals();
 
-export const getEnumKey = <T extends {}>(theEnum: T, keyValue:T[keyof T] ) =>
-    (Object.keys(theEnum) as (keyof T)[])
-        .find((k ) => theEnum[k] === keyValue) as keyof T || null ;
 
-enum Friends {
-    John = 0,
-    James = 1,
-    Lea = 3
-}
-const friendName = getEnumKey(Friends,Friends.James)
-console.log(friendName)

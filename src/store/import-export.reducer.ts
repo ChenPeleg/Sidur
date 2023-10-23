@@ -40,11 +40,13 @@ export const ImportExportReducer: Record<ImportReducerFunctions, (state: SidurSt
         state: SidurStore,
         action: IAction
     ): SidurStore => {
+
         const newState = { ...state };
         newState.sessionState = { ...newState.sessionState };
         const importedOrders: string = action.payload;
         const modeledImportedOrders: OrderModel[] =
             ImportOrdersFromText(importedOrders, newState.Locations);
+
 
         try {
             validateImportedData(modeledImportedOrders);

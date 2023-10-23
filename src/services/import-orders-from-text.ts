@@ -17,8 +17,16 @@ const stringIntoRows = (str: string): string [] => {
     return str.split(NewRowToken).filter(s => s.replace(/\t/g, '').length > 5);
 }
 
-const DetectFormRows = (completeText: string): string => {
+const DetectFormRowsWithFullDate = (completeText: string): string => {
     return completeText.replace(/\n((0?[1-9]|[12][0-9]|3[01])[/-](0?[1-9]|1[012])[/-]\d{4})/g, NewRowToken + '$1');
+}
+const DetectIfRowsHas6figuersDatesInThem = (completeText: string): boolean => {
+    const match = completeText.match(/\n((0?[1-9]|[12][0-9]|3[01])[/-](0?[1-9]|1[012])[/-]\d{4})/g)
+    console.log(match)
+    return  !!match && match.length > 3
+}
+const DetectFormRowsWithOnlyYear = (completeText: string): string => {
+    return completeText.replace(/\n((0?[1-9]|[12][0-9]|3[01])[/-](0?[1-9]|1[012])[/-]\d{2})/g, NewRowToken + '$1');
 }
 const rowsToEshbalOrders = (rows: string [][]): EshbalOrder[] => {
     let EshbalOrders: EshbalOrder[] = [];
@@ -96,7 +104,10 @@ const searchAnotherTimeInText = (order: OrderModel): { anotherTime: string | nul
 
     return results
 }
-const searchLocationInText = (text: string, locations: LocationModel[]): { locationFound: LocationModel | null, typeOfDrive: DriveType | null } => {
+const searchLocationInText = (text: string, locations: LocationModel[]): {
+    locationFound: LocationModel | null,
+    typeOfDrive: DriveType | null
+} => {
     const allLocations: LocationModel[] = [...locations];
     const results: { locationFound: LocationModel | null, typeOfDrive: DriveType | null } = {
         locationFound: null,
@@ -162,8 +173,9 @@ const getLocationAndTypeFromComments = (orders: OrderModel[], locations: Locatio
     return orders
 }
 export const ImportOrdersFromText = (text: string, locations: LocationModel[]): OrderModel[] => {
-    // text = stringValue;
-    const rowsWithoutUserLineBreaks = DetectFormRows(text)
+    const isNewDateFormat = !DetectIfRowsHas6figuersDatesInThem(text)
+    const rowsWithoutUserLineBreaks = isNewDateFormat ? DetectFormRowsWithOnlyYear(text) : DetectFormRowsWithFullDate(text)
+console.log('rowsWithoutUserLineBreaks',rowsWithoutUserLineBreaks)
     const rows = stringIntoRows(rowsWithoutUserLineBreaks);
     const rowsWithColumns = rows.map(r => r.split(/\t/g));
     const orders: EshbalOrder[] = rowsToEshbalOrders(rowsWithColumns);
@@ -180,7 +192,7 @@ export const validateImportedData = (orderPreferences: OrderModel[]) => {
             driverName: p.driverName,
             row: i + 1,
         }))
-        .filter((g) => g.driverName?.trim() === "")
+        .filter((g) => g.driverName?.trim() === '')
         .map((g) => g.row.toString());
 
     const driverWithoutHours = orderPreferences.filter(
@@ -189,24 +201,24 @@ export const validateImportedData = (orderPreferences: OrderModel[]) => {
     if (orderPreferences.length < 5) {
         errors.push(
             orderPreferences.length
-                ? "only " + orderPreferences.length + " rows were found"
-                : "no drives were found"
+                ? 'only ' + orderPreferences.length + ' rows were found'
+                : 'no drives were found'
         );
     }
     if (driverWithoutHours[0]) {
-        errors.push("Driver " + driverWithoutHours[0].driverName + " has no dates");
+        errors.push('Driver ' + driverWithoutHours[0].driverName + ' has no dates');
     }
     if (driverWithoutName[0]) {
-        errors.push("Row " + driverWithoutName[0] + " has no name");
+        errors.push('Row ' + driverWithoutName[0] + ' has no name');
     }
     const driverWithError = orderPreferences.filter((p) =>
-        p.driverName.toLowerCase().includes("error")
+        p.driverName.toLowerCase().includes('error')
     );
     if (driverWithError[0]) {
-        errors.push("Row " + orderPreferences.indexOf(driverWithError[0]) + " has an error");
+        errors.push('Row ' + orderPreferences.indexOf(driverWithError[0]) + ' has an error');
     }
     if (errors.length) {
-        const text = errors.join("; ");
+        const text = errors.join('; ');
         throw {
             message: text,
         };
