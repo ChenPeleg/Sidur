@@ -17,3 +17,15 @@ root.render(
 );
 
 reportWebVitals();
+
+export const getEnumKey = <T extends {}>(theEnum: T, keyValue:T[keyof T] ) =>
+    (Object.keys(theEnum) as (keyof T)[])
+        .find((k ) => theEnum[k] === keyValue) as keyof T || null ;
+
+enum Friends {
+    John = 0,
+    James = 1,
+    Lea = 3
+}
+const friendName = getEnumKey(Friends,Friends.James)
+console.log(friendName)
