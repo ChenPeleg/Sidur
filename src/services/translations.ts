@@ -27,6 +27,8 @@ export const translations = {
     'ImportAllData': 'יבוא הכל',
     'DeleteAndImportAllData': 'מחק הכל והחלף ביבוא הכל',
     'ImportPart': 'יבוא חלקי',
+
+    'downloadAsCSV': "הורדה כטבלה",
     'NewName': 'שם חדש',
     'nameExists': 'השם כבר קיים',
     'searchLocation': 'חיפוש מיקום',
