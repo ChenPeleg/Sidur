@@ -177,7 +177,7 @@ export const SketchesContainer = () => {
                 </IconButton>
                 <Box
                   sx={{
-                      width: "100px",
+                      width: "30px",
                       height: "12px",
                   }}
                 />
