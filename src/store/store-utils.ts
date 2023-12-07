@@ -3,9 +3,13 @@ import {SaveLoadService} from '../services/save-load.service';
 import {hashFunction} from '../services/hash-function';
 import {CloneUtil} from '../services/clone-utility';
 import {ActionsTypes} from './types.actions';
+import { SketchModel } from "../models/Sketch.model";
 
 
 export const StoreUtils = {
+    buildCSVFileFromSketch: (sketchObj: SketchModel, preferences: any): string => {
+        return ',,,,,,,,,,,,,'
+    },
     removeIdPrefix: (id: string): string => {
         const replaceIdsNames: RegExp = new RegExp(AppConstants.ArchiveIdPrefix + '|' + AppConstants.deleteIdPrefix, 'g');
         return id.replace(replaceIdsNames, '')

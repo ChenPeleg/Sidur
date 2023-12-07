@@ -8,13 +8,14 @@ import {SidurBuilder} from '../sidurBuilder/sidurBuilder.main';
 import {SketchModel} from '../models/Sketch.model';
 import {CloneUtil} from '../services/clone-utility';
 import {translations} from '../services/translations';
+import { DownloadCSVFile } from "../services/downloadFile";
 
 export type SketchReducerFunctions =
     | ActionsTypes.NEW_SKETCH
     | ActionsTypes.CHOOSE_SKETCH
     | ActionsTypes.RENAME_SKETCH
     | ActionsTypes.DELETE_SKETCH
-    | ActionsTypes.CLONE_SKETCH;
+    | ActionsTypes.CLONE_SKETCH | ActionsTypes.DOWNLOAD_SKETCH;
 
 
 export const SketchReducer: Record<SketchReducerFunctions, (state: SidurStore, action: IAction) => SidurStore> = {
@@ -42,6 +43,28 @@ export const SketchReducer: Record<SketchReducerFunctions, (state: SidurStore, a
 
         newState = StoreUtils.updateSidurRecordWithSketchChanges(newState)
         StoreUtils.HandleReducerSaveToLocalStorage(newState);
+        return newState
+    },
+    [ActionsTypes.DOWNLOAD_SKETCH]: (state: SidurStore, action: IAction): SidurStore => {
+        let newState = {...state}
+        const sketchId = action.payload.id
+        const sketchToDownload = newState.sketches.find(s => s.id === sketchId);
+        if (sketchToDownload) {
+            const saveObj: string = StoreUtils.buildCSVFileFromSketch(
+              sketchToDownload, {}
+            );
+            const thisSidurInCollection: SidurRecord | undefined = newState.sidurCollection.find((sidur: SidurRecord) => sidur.id === newState.sidurId);
+            const sidurName = thisSidurInCollection?.Name || ''
+            const name =
+              sidurName +
+              " " +
+              translations.Sketch +
+              " " +
+              sketchToDownload.name +
+              ".csv";
+            DownloadCSVFile(name, saveObj);
+        }
+        newState = StoreUtils.updateSidurRecordWithSketchChanges(newState)
         return newState
     },
     [ActionsTypes.CHOOSE_SKETCH]: (state: SidurStore, action: IAction): SidurStore => {
