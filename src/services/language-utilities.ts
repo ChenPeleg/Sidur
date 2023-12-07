@@ -50,7 +50,7 @@ export const LanguageUtilities = {
     },
 
     buildBriefText(orderValues: OrderModel | DriveModel, locations: LocationModel[]): { timeText: string, driverAndLocation: string } {
-        //console.log(orderValues)
+
         const isWithName = orderValues.driverName.trim() !== '';
         if (!isWithName) {
             return {

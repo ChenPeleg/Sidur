@@ -32,7 +32,7 @@ export const SketchOrderToTransportDialog = (props: SketchOrderToTransportDialog
         PendingOrderToTransportId
     } = props;
     const dispatch = useDispatch();
-    console.log('in order transport popup')
+
     const SketchIdInEdit = useSelector((state: SidurStore) => state.sessionState.SketchIdInEdit);
     const sketches: SketchModel[] = useSelector((state: { sketches: SketchModel[] }) => state.sketches);
     const sketchInEdit: SketchModel = sketches.find((sketch: SketchModel) => sketch.id === SketchIdInEdit) as SketchModel;

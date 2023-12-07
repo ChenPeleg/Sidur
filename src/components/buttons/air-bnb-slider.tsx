@@ -74,7 +74,7 @@ export const AirbnbThumbComponent = (props: AirbnbThumbComponentProps, _data: an
         children,
         ...other
     } = props;
-    console.log(children)
+
 
     return (
         <Box key={Math.random().toString()}> <SliderThumb {...other}    > <Box> fff {children} </Box>
