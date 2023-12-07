@@ -50,7 +50,7 @@ export const ImportSheetsDialog = (props: ImportSheetsProps) => {
   };
   const handleApproveImport = () => {
     const data = valueRef.current.value;
-    console.log (data)
+
     dispatch({ type: ActionsTypes.APPROVE_IMPORT_SHEETS_DATA, payload: data });
   };
   const handleClearData = () => {

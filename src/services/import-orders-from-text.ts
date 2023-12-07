@@ -22,7 +22,7 @@ const DetectFormRowsWithFullDate = (completeText: string): string => {
 }
 const DetectIfRowsHas6figuersDatesInThem = (completeText: string): boolean => {
     const match = completeText.match(/\n((0?[1-9]|[12][0-9]|3[01])[/-](0?[1-9]|1[012])[/-]\d{4})/g)
-    console.log(match)
+
     return  !!match && match.length > 3
 }
 const DetectFormRowsWithOnlyYear = (completeText: string): string => {

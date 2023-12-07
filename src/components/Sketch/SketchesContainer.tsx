@@ -101,9 +101,7 @@ export const SketchesContainer = () => {
         StoreUtils.shieldAnimationBeforeDispatch(() => {
             dispatch({
                 type: ActionsTypes.DOWNLOAD_SKETCH,
-                payload: {
-                    value: null,
-                },
+                payload: sketchInEdit
             });
         }, dispatch);
     };
@@ -125,7 +123,7 @@ export const SketchesContainer = () => {
 
 
     const sketchInEdit: SketchModel | null = sketches.find((sketch: SketchModel) => sketch.id === SketchIdInEdit) || null;
-
+console.log('sketchInEdit',sketchInEdit)
     const sketchName = sketchInEdit ? sketchInEdit.name : '';
 
 
