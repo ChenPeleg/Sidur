@@ -175,7 +175,7 @@ const getLocationAndTypeFromComments = (orders: OrderModel[], locations: Locatio
 export const ImportOrdersFromText = (text: string, locations: LocationModel[]): OrderModel[] => {
     const isNewDateFormat = !DetectIfRowsHas6figuersDatesInThem(text)
     const rowsWithoutUserLineBreaks = isNewDateFormat ? DetectFormRowsWithOnlyYear(text) : DetectFormRowsWithFullDate(text)
-console.log('rowsWithoutUserLineBreaks',rowsWithoutUserLineBreaks)
+
     const rows = stringIntoRows(rowsWithoutUserLineBreaks);
     const rowsWithColumns = rows.map(r => r.split(/\t/g));
     const orders: EshbalOrder[] = rowsToEshbalOrders(rowsWithColumns);

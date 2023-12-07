@@ -123,7 +123,7 @@ export const SketchesContainer = () => {
 
 
     const sketchInEdit: SketchModel | null = sketches.find((sketch: SketchModel) => sketch.id === SketchIdInEdit) || null;
-console.log('sketchInEdit',sketchInEdit)
+
     const sketchName = sketchInEdit ? sketchInEdit.name : '';
 
 
