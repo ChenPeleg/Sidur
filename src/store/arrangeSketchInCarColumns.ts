@@ -1,4 +1,6 @@
 import { SketchModel, VehicleScheduleModel } from "../models/Sketch.model";
+import { SidurRecord } from "./store.types";
+import { VehicleModel } from "../models/Vehicle.model";
 
 type VehicleSketchColumn = {
     vehicleSchedule: VehicleScheduleModel;
@@ -30,8 +32,18 @@ const vehicleSketchModelToVehicleSketchColumn = (
     };
 };
 
+const buildCSVRow = (
+    vColumn: VehicleSketchColumn,
+    rowNumber: number
+): string => {
+    if (rowNumber === 0) {
+        return vColumn.vehicleSchedule.vehicleId;
+    }
+    return "";
+};
 export const arrangeSketchInCarColumns = (
     sketchObj: SketchModel,
+    vehicles: VehicleModel[],
     preferences: any
 ): string => {
     const numberOfRows = calculateNumberOfRows(sketchObj);
