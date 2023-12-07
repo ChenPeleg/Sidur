@@ -4,11 +4,12 @@ import {hashFunction} from '../services/hash-function';
 import {CloneUtil} from '../services/clone-utility';
 import {ActionsTypes} from './types.actions';
 import { SketchModel } from "../models/Sketch.model";
+import { arrangeSketchInCarColumns } from "./arrangeSketchInCarColumns";
 
 
 export const StoreUtils = {
     buildCSVFileFromSketch: (sketchObj: SketchModel, preferences: any): string => {
-        return ',,,,,,,,,,,,,'
+        return arrangeSketchInCarColumns(sketchObj, preferences)
     },
     removeIdPrefix: (id: string): string => {
         const replaceIdsNames: RegExp = new RegExp(AppConstants.ArchiveIdPrefix + '|' + AppConstants.deleteIdPrefix, 'g');
