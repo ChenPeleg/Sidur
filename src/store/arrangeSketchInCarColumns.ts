@@ -5,6 +5,7 @@ import { VehicleModel } from "../models/Vehicle.model";
 type VehicleSketchColumn = {
     vehicleSchedule: VehicleScheduleModel;
     numberOfColumns: number;
+    vehicleName: string;
     position: number;
 };
 
@@ -23,10 +24,14 @@ const calculateNumberOfRows = (sketchObj: SketchModel): number => {
 
 const vehicleSketchModelToVehicleSketchColumn = (
     vehicleSchedule: VehicleScheduleModel,
+    vehicles: VehicleModel[],
     numberOfColumns: number
-) => {
+): VehicleSketchColumn => {
     return {
         vehicleSchedule,
+        vehicleName:
+            vehicles.find((v) => v.id === vehicleSchedule.id)?.vehicleName ||
+            "",
         numberOfColumns: numberOfColumns,
         position: 0,
     };
@@ -37,7 +42,7 @@ const buildCSVRow = (
     rowNumber: number
 ): string => {
     if (rowNumber === 0) {
-        return vColumn.vehicleSchedule.vehicleId;
+        return vColumn.vehicleName + ",,,";
     }
     return "";
 };
@@ -50,6 +55,7 @@ export const arrangeSketchInCarColumns = (
     const vehicleSketchColumns = sketchObj.vehicleSchedules.map((v) =>
         vehicleSketchModelToVehicleSketchColumn(
             v,
+            vehicles,
             NUMBER_OF_COLUMNS_FOR_VEHICLE
         )
     );
