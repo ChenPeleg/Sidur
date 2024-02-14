@@ -17,7 +17,7 @@ jobs:
         run: ls -al
       - name: Trigger the repository dispatch event
         run: |
-        curl -X POST -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" https://api.github.com/repos/ChenPeleg/app-links-portal/dispatches
+          curl -X POST -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" https://api.github.com/repos/ChenPeleg/app-links-portal/dispatches
 
 #        run: |
 #          curl -XPOST -u "USERNAME:${{ secrets.GITHUB_TOKEN }}" \
