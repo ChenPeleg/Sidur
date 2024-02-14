@@ -22,6 +22,8 @@ jobs:
 
       - name: Hosting - Install and build Production
         run: npm ci && npm run build:prod
+      - name: Copy files from build to dist
+        run: ls
       - name: Hosting - deploy to firebase Production
         uses: FirebaseExtended/action-hosting-deploy@v0
         with:
