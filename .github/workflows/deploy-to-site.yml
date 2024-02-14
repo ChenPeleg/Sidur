@@ -16,8 +16,8 @@ jobs:
       - name: list all files
         run: ls -al
       - name: Trigger the repository dispatch event
-        #        run: |
-        #          curl -X POST -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" https://api.github.com/repos/ChenPeleg/app-links-portal/dispatches
+        #    run: |
+        #     curl -X POST -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" https://api.github.com/repos/ChenPeleg/app-links-portal/dispatches
 
         run: |
           curl -L \
