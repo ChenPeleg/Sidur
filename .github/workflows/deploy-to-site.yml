@@ -2,13 +2,17 @@
 # https://github.com/firebase/firebase-tools
 
 name: Deploy to Production on merge
-"on":
-  workflow_run:
-    workflows: [ "Node.js CI" ]
-    types:
-      - completed
-    branches:
-      - prod
+on:
+  push:
+  pull_request:
+    branches: [ "main" ]
+#"on":
+#  workflow_run:
+#    workflows: [ "Node.js CI" ]
+#    types:
+#      - completed
+#    branches:
+#      - prod
 jobs:
   build_and_deploy:
     runs-on: ubuntu-latest
