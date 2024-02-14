@@ -28,6 +28,7 @@ jobs:
         uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: "${{ secrets.GITHUB_TOKEN }}"
-          firebaseServiceAccount: "${{ secrets.FIREBASE_SERVICE_ACCOUNT_WISH_MACHINE_PROD }}"
+          firebaseServiceAccount: "${{ secrets.FIREBASE_SERVICE_ACCOUNT_APP_LINKS_PROD }}"
+          target: "sidur-rechev"
           channelId: live
-          projectId: wish-machine-prod
+          projectId: apps-links
