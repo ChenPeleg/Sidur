@@ -1,6 +1,6 @@
 {
   "hosting": {
-    "site": "/sidur-rechev",
+    "site": "sidur-rechev",
     "public": "dist",
     "ignore": [
       "firebase.json",
