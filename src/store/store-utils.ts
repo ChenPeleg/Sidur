@@ -23,6 +23,7 @@ export const StoreUtils = {
     ): string => {
         return arrangeSketchInCarColumns(sketchObj, vehicles, preferences);
     },
+
     removeIdPrefix: (id: string): string => {
         const replaceIdsNames: RegExp = new RegExp(
             AppConstants.ArchiveIdPrefix + "|" + AppConstants.deleteIdPrefix,
