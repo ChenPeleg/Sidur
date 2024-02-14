@@ -4,28 +4,22 @@
 name: Deploy to Production on merge
 on:
   push:
-  pull_request:
-    branches: [ "main" ]
+    branches: [ "production" ]
 #"on":
 #  workflow_run:
 #    workflows: [ "Node.js CI" ]
 #    types:
 #      - completed
 #    branches:
-#      - prod
+#      - production
 jobs:
   build_and_deploy:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
         with:
-          ref: prod
-      - name: Get git Hash in app
-        run: echo "GIT_HASH=$(git rev-parse --short HEAD)" >> $GITHUB_ENV
-      - name: Write hash to app
-        run: echo "export const git_hash='$GIT_HASH';" > ./src/environments/version.ts
-      - name: Check hash
-        run: cat ./src/environments/version.ts
+          ref: production
+
       - name: Hosting - Install and build Production
         run: npm ci && npm run build:prod
       - name: Hosting - deploy to firebase Production

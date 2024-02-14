@@ -33,6 +33,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
+    "build:prod": "react-scripts build",
     "test": "react-scripts test --silent=false --watchAll=false",
     "test:last": "react-scripts test -t last --silent=false --watchAll=false",
     "test:watch": "react-scripts test",
