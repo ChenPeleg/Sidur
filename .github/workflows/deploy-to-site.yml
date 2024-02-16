@@ -30,6 +30,7 @@ jobs:
             "repo": "${{ github.repository }}",
             "branch": "production",
             "command": "build:site",
+            "nodeversion": "18",
             "dist": "dist1",
             "custom": "custom data"
           }
