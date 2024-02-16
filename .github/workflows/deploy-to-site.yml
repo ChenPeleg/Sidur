@@ -33,5 +33,5 @@ jobs:
             "dist": "dist1",
             "custom": "custom data"
           }
-      }'
+          }'
 
