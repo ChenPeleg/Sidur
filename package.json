@@ -36,7 +36,7 @@
     "build:gh-pages": "react-scripts build",
     "build:site": "react-scripts build",
     "build:prod": "react-scripts build",
-    "postbuild:site": "cp -rf build temp/Sidur && cp -r temp/Sidur/* build && rm -rf temp/Sidur",
+    "postbuild:site": "mkdir temp && mkdir temp/Sidur && cp -rf build temp/Sidur && cp -r temp/Sidur/* build && rm -rf temp/Sidur",
     "test": "react-scripts test --silent=false --watchAll=false",
     "test:last": "react-scripts test -t last --silent=false --watchAll=false",
     "test:watch": "react-scripts test",
