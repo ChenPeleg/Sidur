@@ -34,9 +34,9 @@
   "scripts": {
     "start": "cross-env REACT_APP_ENV=dev react-scripts start",
     "build": "cross-env REACT_APP_ENV=prod-gen react-scripts build",
-    "build:gh-pages": "cross-env REACT_APP_ENV=prod-github &&react-scripts build",
-    "build:site": "cross-env REACT_APP_ENV=prod-firebase && react-scripts build",
-    "build:prod": "cross-env REACT_APP_ENV=prod-firebase && react-scripts build",
+    "build:gh-pages": "cross-env REACT_APP_ENV=prod-github react-scripts build",
+    "build:site": "cross-env REACT_APP_ENV=prod-firebase react-scripts build",
+    "build:prod": "cross-env REACT_APP_ENV=prod-firebase react-scripts build",
     "postbuild:site": "mkdir temp && mkdir temp/Sidur && cp -rf build/* temp/Sidur && cp -rf temp/* build && rm -rf temp/Sidur",
     "test": "cross-env REACT_APP_ENV=test react-scripts test --silent=false --watchAll=false",
     "test:last": "cross-env REACT_APP_ENV=test react-scripts test -t last --silent=false --watchAll=false",
