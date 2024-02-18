@@ -17,6 +17,6 @@ root.render(
         </Root>
     </React.StrictMode>
 );
-console.log("NODE_ENV", process.env.ENV_MODE);
+console.log("NODE_ENV", process.env);
 ImportOrdersFromText(sidurFromDocsMock, []);
 reportWebVitals();

@@ -31,11 +31,11 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "cross-env ENV_MODE=development  react-scripts start",
-    "build": "cross-env ENV_MODE=production react-scripts build",
-    "build:gh-pages": "cross-env ENV_MODE=prodgh react-scripts build",
-    "build:site": "cross-env ENV_MODE=prodsite react-scripts build",
-    "build:prod": "cross-env ENV_MODE=prod react-scripts build",
+    "start": " react-scripts start",
+    "build": "react-scripts build",
+    "build:gh-pages": "react-scripts build",
+    "build:site": "react-scripts build",
+    "build:prod": "react-scripts build",
     "postbuild:site": "mkdir temp && mkdir temp/Sidur && cp -rf build/* temp/Sidur && cp -rf temp/* build && rm -rf temp/Sidur",
     "test": "cross-env ENV_MODE=test react-scripts test --silent=false --watchAll=false",
     "test:last": "react-scripts test -t last --silent=false --watchAll=false",
