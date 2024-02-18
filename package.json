@@ -32,7 +32,7 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "set REACT_APP_ENV=dev123 & react-scripts start",
+    "start": "set REACT_APP_ENV=dev123 && react-scripts start",
     "build": "react-scripts build",
     "build:gh-pages": "export REACT_APP_ENV=github & set REACT_APP_ENV=github & react-scripts build",
     "build:site": "export REACT_APP_ENV=site123 && react-scripts build",
