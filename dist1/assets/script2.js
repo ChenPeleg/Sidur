@@ -1,1 +1,1 @@
-console.log("script2.js");
+console.log("assets/script2.js no crossorigin");

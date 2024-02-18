@@ -1,1 +1,1 @@
-console.log("script1.js");
+console.log("assets/script1.js");
