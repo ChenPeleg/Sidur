@@ -18,6 +18,7 @@
     "@types/node": "^16.11.56",
     "@types/react": "^18.0.18",
     "@types/react-dom": "^18.0.6",
+    "cross-env": "^7.0.3",
     "date-fns": "^2.29.3",
     "final-form": "^4.20.7",
     "react": "^18.2.0",
@@ -31,10 +32,10 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "export REACT_APP_NOT_SECRET_CODE=abc123 & set REACT_APP_NOT_SECRET_CODE=abc123 && react-scripts start",
+    "start": "export REACT_APP_ENV=abc123 & set REACT_APP_ENV=abc123 && react-scripts start",
     "build": "react-scripts build",
     "build:gh-pages": "react-scripts build",
-    "build:site": "react-scripts build",
+    "build:site": "export REACT_APP_ENV=abc123 & set REACT_APP_ENV=abc123 && react-scripts start react-scripts build",
     "build:prod": "set NODE_ENV=prod-site react-scripts build",
     "postbuild:site": "mkdir temp && mkdir temp/Sidur && cp -rf build/* temp/Sidur && cp -rf temp/* build && rm -rf temp/Sidur",
     "test": "react-scripts test --silent=false --watchAll=false",
