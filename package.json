@@ -32,10 +32,10 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "export REACT_APP_ENV=dev123 & set REACT_APP_ENV=dev123 & react-scripts start",
+    "start": "set REACT_APP_ENV=dev123 & react-scripts start",
     "build": "react-scripts build",
     "build:gh-pages": "export REACT_APP_ENV=github & set REACT_APP_ENV=github & react-scripts build",
-    "build:site": "export REACT_APP_ENV=site123 & set REACT_APP_ENV=site123 & react-scripts build",
+    "build:site": "export REACT_APP_ENV=site123 && react-scripts build",
     "build:prod": "set NODE_ENV=prod-site react-scripts build",
     "postbuild:site": "mkdir temp && mkdir temp/Sidur && cp -rf build/* temp/Sidur && cp -rf temp/* build && rm -rf temp/Sidur",
     "test": "react-scripts test --silent=false --watchAll=false",
