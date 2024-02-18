@@ -31,7 +31,7 @@ jobs:
             "branch": "production",
             "command": "build:site",
             "nodeversion": "18",
-            "dist": "dist1",
+            "dist": "build",
             "custom": "custom data"
           }
           }'
