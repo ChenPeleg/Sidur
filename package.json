@@ -31,7 +31,7 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "set NODE_ENV=development && react-scripts start",
+    "start": "set REACT_APP_NOT_SECRET_CODE=abc123 && react-scripts start",
     "build": "react-scripts build",
     "build:gh-pages": "react-scripts build",
     "build:site": "react-scripts build",
