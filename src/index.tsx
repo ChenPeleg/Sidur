@@ -4,20 +4,19 @@ import App from "./hoc/App";
 import reportWebVitals from "./reportWebVitals";
 import { Root } from "./hoc/Root";
 import ReactDOM from "react-dom/client";
-import {ImportOrdersFromText} from './services/import-orders-from-text';
-import {sidurFromDocsMock} from './mocks/sidurFromDocsMock';
+import { ImportOrdersFromText } from "./services/import-orders-from-text";
+import { sidurFromDocsMock } from "./mocks/sidurFromDocsMock";
 
 const root = ReactDOM.createRoot(
-  document.getElementById("root") as HTMLElement
+    document.getElementById("root") as HTMLElement
 );
 root.render(
-  <React.StrictMode>
-    <Root>
-      <App />
-    </Root>
-  </React.StrictMode>
+    <React.StrictMode>
+        <Root>
+            <App />
+        </Root>
+    </React.StrictMode>
 );
-ImportOrdersFromText(sidurFromDocsMock,[]);
+console.log("NODE_ENV", process.env.ENV_MODE);
+ImportOrdersFromText(sidurFromDocsMock, []);
 reportWebVitals();
-
-
