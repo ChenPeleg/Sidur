@@ -1,4 +1,3 @@
-import React from "react";
 import "../../../setupTests";
 
 import { AddButton, AddButtonProps } from "../../Icons/add-button";
