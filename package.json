@@ -5,7 +5,7 @@
     "homepage": "https://chenpeleg.github.io/Sidur",
     "homepage-gh-pages": "https://chenpeleg.github.io/Sidur",
     "engines": {
-        "node": "20"
+        "node": "24.x"
     },
     "dependencies": {
         "@emotion/react": "^11.14.0",
