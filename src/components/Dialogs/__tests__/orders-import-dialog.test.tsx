@@ -5,7 +5,7 @@ import {OrderImportDialog} from '../orders-import-dialog';
 import {Provider} from 'react-redux';
 import configureStore from '../../../__tests-utils__/redux-mock-store';
 import {TextField} from '@mui/material';
-import Mock = jest.Mock;
+import { vi, Mock } from 'vitest';
 
 
 describe('Orders import Dialog', () => {
@@ -13,9 +13,9 @@ describe('Orders import Dialog', () => {
     let component: any = null;
     let _baseElement: any = null;
     let store: any;
-    let onClose: Mock = jest.fn();
+    let onClose: Mock = vi.fn();
     beforeEach(async () => {
-        onClose = jest.fn();
+        onClose = vi.fn();
 
         const middlewares: any = []
         const mockStore = configureStore(middlewares);
