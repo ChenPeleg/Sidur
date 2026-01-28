@@ -17,6 +17,6 @@ root.render(
         </Root>
     </React.StrictMode>
 );
-console.log("REACT_APP_ENV", process.env.REACT_APP_ENV);
+console.log("REACT_APP_ENV", import.meta.env.VITE_APP_ENV);
 ImportOrdersFromText(sidurFromDocsMock, []);
 reportWebVitals();
