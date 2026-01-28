@@ -2,6 +2,7 @@ import React from "react";
 import { render, screen } from "@testing-library/react";
 import { TextFieldPropertiesModel } from "../../../models/text-field-properties.model";
 import {RenderFlexibilityField} from '../flexibility-field';
+import { vi } from "vitest";
 
 
 describe("Form Flexibility field ", () => {
@@ -9,7 +10,7 @@ describe("Form Flexibility field ", () => {
   let wrapper: HTMLElement;
   let _baseElement: any = null;
 
-  const onChangeStub = jest.fn();
+  const onChangeStub = vi.fn();
   const TextFieldProps: TextFieldPropertiesModel = {
     input: {
       value: [-10, 20],

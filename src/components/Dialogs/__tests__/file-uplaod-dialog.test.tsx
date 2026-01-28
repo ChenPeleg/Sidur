@@ -4,14 +4,14 @@ import React from "react";
 import { render, screen } from "@testing-library/react";
 // @ts-ignore
 import userEvent, { TargetElement } from "@testing-library/user-event";
-import Mock = jest.Mock;
+import { vi, Mock } from "vitest";
 
 describe("File Upload Dialog", () => {
   let fileDialog: any = null;
   let component: HTMLElement;
-  let onClose: Mock = jest.fn();
+  let onClose: Mock = vi.fn();
   beforeEach(async () => {
-    onClose = jest.fn();
+    onClose = vi.fn();
     fileDialog = (
       <FileUploadDialog
         selectedValue={"abc"}
