@@ -5,7 +5,7 @@ import configureStore from "../../../__tests-utils__/redux-mock-store";
 
 import { VehicleEditDialog } from "../vehicle-edit-dialog";
 import { VehicleModel } from "../../../models/Vehicle.model";
-import Mock = jest.Mock;
+import { vi, Mock } from "vitest";
 import userEvent from "@testing-library/user-event";
 
 describe("Vehicle edit  Dialog", () => {
@@ -13,8 +13,8 @@ describe("Vehicle edit  Dialog", () => {
   let component: HTMLElement;
   let _baseElement: any = null;
   let store: any;
-  let onClose: Mock = jest.fn();
-  let onDelete: Mock = jest.fn();
+  let onClose: Mock = vi.fn();
+  let onDelete: Mock = vi.fn();
   const mockVehicleData: VehicleModel = {
     startHour: '',
     id: "1",
@@ -25,7 +25,8 @@ describe("Vehicle edit  Dialog", () => {
     Comments: "1"
   };
   beforeEach(async () => {
-    onClose = jest.fn();
+    onClose = vi.fn();
+    onDelete = vi.fn();
 
     const middlewares: any = [];
     const mockStore = configureStore(middlewares);

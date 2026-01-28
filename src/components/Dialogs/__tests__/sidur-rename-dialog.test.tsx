@@ -4,7 +4,7 @@ import { Provider } from "react-redux";
 import configureStore from "../../../__tests-utils__/redux-mock-store";
 
 import { RenameDialog } from "../rename-dialog";
-import Mock = jest.Mock;
+import { vi, Mock } from "vitest";
 import userEvent from "@testing-library/user-event";
 
 describe("Sidur rename import Dialog", () => {
@@ -12,10 +12,10 @@ describe("Sidur rename import Dialog", () => {
   let component: HTMLElement;
   let _baseElement: any = null;
   let store: any;
-  let onClose: Mock = jest.fn();
+  let onClose: Mock = vi.fn();
   const shmiraListDefaultName = "name of shmiraList";
   beforeEach(async () => {
-    onClose = jest.fn();
+    onClose = vi.fn();
 
     const middlewares: any = [];
     const mockStore = configureStore(middlewares);
