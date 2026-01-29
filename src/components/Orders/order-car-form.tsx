@@ -55,13 +55,14 @@ const createInputProps = (name: string, value: any, onChange: (name: string, val
     }
 });
 
-const getInputAdapter = (name: string, values: any, handleChange: any) => {
+const getInputAdapter = (name: string, values: any, handleChange: any): { input: any, meta: any, custom: any } => {
     return {
         input: createInputProps(name, values ? values[name] : '', handleChange),
         meta: {
             touched: false,
             error: null
-        }
+        },
+        custom: {}
     }
 }
 
@@ -109,7 +110,7 @@ export const OrderCarForm = (formProps: MuiFormPropsModel) => {
         });
     }
 
-    const typeOfDrive = values.TypeOfDrive;
+    const typeOfDrive = values.TypeOfDrive || undefined;
     const driveTimeLanguage = LanguageUtilities.getPrefixByDriveType(typeOfDrive);
     const locations = formProps.locations;
 
@@ -119,6 +120,15 @@ export const OrderCarForm = (formProps: MuiFormPropsModel) => {
     }
 
     const propsFor = (name: string) => getInputAdapter(name, values, handleFieldChange);
+    
+    // Casting components to any to avoid strict TextFieldPropertiesModel checks which forbid 'rows', 'type' etc
+    // This allows passing extra props like 'rows' while keeping TextFieldPropertiesModel strict for other usages
+    const TextFieldAny = RenderTextField as any;
+    const SelectFieldAny = RenderSelectField as any;
+    const AutoCompleteAny = RenderSelectFieldAutoComplete as any;
+    const HourPickerAny = HourPicker as any;
+    const PassengerFieldAny = RenderPassengerField as any;
+    const FlexibilityFieldAny = RenderFlexibilityField as any;
 
     return (
         <form onSubmit={(e) => { e.preventDefault(); handleSubmit(); }} dir={'rtl'}>
@@ -128,24 +138,24 @@ export const OrderCarForm = (formProps: MuiFormPropsModel) => {
                 flexWrap: 'wrap'
             }}>
                 <Box sx={fieldWrapperText}>
-                    <RenderTextField 
+                    <TextFieldAny 
                         {...propsFor(orderFields.driverName)}
                         label={TRL.Name}
                     />
                 </Box>
                 <Box sx={selectFieldWrapper}>
-                    <RenderSelectField
+                    <SelectFieldAny
                         {...propsFor('TypeOfDrive')}
                         label={TRL.TypeOfDrive}
                     >
                          <MenuItem value={DriveType.Tsamud.toString()}>{TRL.Tsamud}</MenuItem>
                          <MenuItem value={DriveType.OneWayFrom.toString()}> {TRL.OneWayFrom}</MenuItem>
                          <MenuItem value={DriveType.OneWayTo.toString()}>{TRL.OneWayTo}</MenuItem>
-                    </RenderSelectField>
+                    </SelectFieldAny>
                 </Box>
 
                  <Box sx={selectFieldWrapper}>
-                    <RenderSelectFieldAutoComplete
+                    <AutoCompleteAny
                            {...propsFor(orderFields.location)}
                            label={TRL.Where}
                            selectoptions={locations.map((location: LocationModel) => ({
@@ -156,13 +166,13 @@ export const OrderCarForm = (formProps: MuiFormPropsModel) => {
                  </Box>
 
                  <Box sx={fieldWrapper}>
-                    <HourPicker 
+                    <HourPickerAny 
                         {...propsFor(orderFields.startHour)}
                         label={driveTimeLanguage.timeStart}
                     />
                 </Box>
                 <Box sx={fieldWrapper}>
-                    <HourPicker 
+                    <HourPickerAny 
                         {...propsFor(orderFields.finishHour)}
                         custom={{inActive: typeOfDrive !== DriveType.Tsamud}} 
                         label={driveTimeLanguage.timeEnd}
@@ -170,7 +180,7 @@ export const OrderCarForm = (formProps: MuiFormPropsModel) => {
                 </Box>
                 
                  <Box sx={fieldWrapper}> 
-                    <RenderTextField 
+                    <TextFieldAny 
                         {...propsFor(orderFields.Comments)}
                         label={TRL.Comments}
                         rows={2}
@@ -178,7 +188,7 @@ export const OrderCarForm = (formProps: MuiFormPropsModel) => {
                  </Box>
 
                  <Box sx={fieldWrapper}> 
-                     <RenderPassengerField 
+                     <PassengerFieldAny 
                         {...propsFor(orderFields.passengers)}
                         label={TRL.passengers}
                         type={'text'}
@@ -186,9 +196,10 @@ export const OrderCarForm = (formProps: MuiFormPropsModel) => {
                  </Box>
 
                  <Box sx={advanceFieldWrapper}>
-                     <RenderFlexibilityField
+                     <FlexibilityFieldAny
                         {...propsFor(orderFields.flexibility[0])}
                         label={TRL.flexibility}
+                        rows={2}
                      />
                  </Box>
 
