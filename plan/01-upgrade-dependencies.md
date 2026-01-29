@@ -126,9 +126,7 @@ After each phase:
 6. ✅ Test production build: `npm run build:prod`
 
 ## Rollback Plan
-
-- ⬜ Create git branch before each phase
-- ⬜ Commit after each successful upgrade
+ 
 - ⬜ Document any issues encountered
 - ⬜ Keep package-lock.json for quick rollback
 
