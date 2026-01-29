@@ -49,17 +49,9 @@ This document outlines the dependencies that need to be upgraded and the steps r
 7. ✅ Verify date formatting and localization still works
 
 #### 🟡 **Final Form 4 → 5** (Moderate Impact)
-- **Current**: 4.20.10
-- **Latest**: 5.0.0
-- **Impact**: MEDIUM - Form library upgrade
-- **Note**: Also requires upgrading `react-final-form` to v7
-
-**Upgrade Steps**:
-1. ✅ Review final-form / react-final-form v5+ upgrade notes
-2. ✅ Update both packages: `npm install final-form@5 react-final-form@7`
-3. ✅ Test all forms in the application
-4. ✅ Check for API changes in field validators and form subscriptions
-5. ✅ Verify form submission and validation logic
+- **Status**: N/A - These packages are not currently installed
+- **Note**: Per plan document `02-replace-react-final-form.md`, the project plans to use vanilla React form handling instead of react-final-form
+- **Impact**: No action needed for this upgrade
 
 #### 🟡 **Web Vitals 4 → 5** (Low Impact)
 - **Current**: 4.2.4
@@ -94,9 +86,7 @@ This document outlines the dependencies that need to be upgraded and the steps r
    - ✅ `web-vitals@latest`
 
 2. **Phase 2: Form Libraries** (before React 19)
-   - ✅ `final-form@5`
-   - ✅ `react-final-form@7`
-   - ✅ Test all forms thoroughly
+   - ✅ N/A - final-form and react-final-form are not installed (project uses custom form handling)
 
 3. **Phase 3: React 19 Upgrade** (Major)
    - ⚠️ Create a separate branch (skipped: per request “do not do git actions”)
@@ -130,9 +120,9 @@ This document outlines the dependencies that need to be upgraded and the steps r
 After each phase:
 1. ✅ Run TypeScript compiler: `npm run build`
 2. ✅ Run tests: `npm test`
-3. ⬜ Start dev server: `npm run dev`
-4. ⬜ Manual testing of affected features
-5. ⬜ Check browser console for warnings/errors
+3. ✅ Start dev server: `npm run dev` - Server running on http://localhost:3003/
+4. ⚠️ Manual testing of affected features - Ready for manual testing
+5. ⚠️ Check browser console for warnings/errors - Ready for manual testing
 6. ✅ Test production build: `npm run build:prod`
 
 ## Rollback Plan
