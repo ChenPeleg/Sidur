@@ -35,10 +35,9 @@
         "@types/react": "^19.2.10",
         "@types/react-dom": "^19.2.3",
         "date-fns": "^4.1.0",
-        "final-form": "^5.0.0",
         "react": "^19.2.4",
         "react-dom": "^19.2.4",
-        "react-final-form": "^7.0.0",
+
         "react-redux": "^9.2.0",
         "react-router-dom": "^7.2.1",
         "redux": "^5.0.1",

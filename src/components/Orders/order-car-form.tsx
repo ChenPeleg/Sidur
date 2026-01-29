@@ -1,6 +1,4 @@
-import React, {useState} from 'react';
-
-import {Field, Form} from 'react-final-form';
+import React, {useState, useEffect} from 'react';
 import {MuiFormPropsModel} from '../../models/mui-form-props.model';
 import {useDispatch, useSelector} from 'react-redux';
 import {HourPicker} from '../Form/hour-picker';
@@ -21,7 +19,6 @@ import {RenderSelectFieldAutoComplete} from '../Form/select-field-auto-complete'
 
 
 const TRL = translations;
-
 
 const fieldWrapper: SxProps = {
     padding: '10px'
@@ -44,175 +41,170 @@ const Divider = () => (<Box sx={{
     height: '5px'
 }}/>)
 
-
-const MaterialUiForm = (muiFormProps: MuiFormPropsModel) => {
-    const {
-        handleSubmit,
-
-        submitting,
-        typeOfDrive,
-        locations
-    } = muiFormProps;
-    const [isAdvanced, setIsAdvanced] = useState(false);
-    const handleSetAdvanced = (value: boolean = true) => {
-        setIsAdvanced(value)
+const createInputProps = (name: string, value: any, onChange: (name: string, val: any) => void) => ({
+    name,
+    value: value === undefined || value === null ? '' : value,
+    onChange: (eventOrValue: any, possibleValue?: any) => {
+         let val = eventOrValue;
+         if (possibleValue !== undefined) {
+             val = possibleValue;
+         } else if (eventOrValue && eventOrValue.target && eventOrValue.target.value !== undefined) {
+             val = eventOrValue.target.value;
+         }
+         onChange(name, val);
     }
+});
+
+const getInputAdapter = (name: string, values: any, handleChange: any) => {
+    return {
+        input: createInputProps(name, values ? values[name] : '', handleChange),
+        meta: {
+            touched: false,
+            error: null
+        }
+    }
+}
+
+export const OrderCarForm = (formProps: MuiFormPropsModel) => {
+    const dispatch = useDispatch();
+    const id = formProps.orderId;
+    const orders = useSelector((state: { orders: OrderModel[] }) => state.orders);
+    
+    // Find initial order
+    const initialValues = orders.find(order => order.id === id);
+
+    // State
+    const [values, setValues] = useState<OrderModel | undefined>(initialValues);
+    const [isAdvanced, setIsAdvanced] = useState(false);
+
+    useEffect(() => {
+        if (initialValues && !values) {
+             setValues(initialValues);
+        }
+    }, [initialValues, values]);
+
+    if (!values) return <div>Loading...</div>;
+
+    const handleFieldChange = (name: string, value: any) => {
+        const newValues = { ...values, [name]: value };
+        setValues(newValues);
+
+        if (formProps.isInEdit) {
+             dispatch({
+                type: ActionsTypes.UPDATE_ORDER_IN_EDIT,
+                payload: newValues
+            })
+        }
+    }
+
+    const handleSubmit = () => {
+         if (!formProps.isInEdit) {
+            return;
+        }
+        dispatch({
+            type: ActionsTypes.UPDATE_ORDER,
+            payload: {
+                id: id,
+            },
+        });
+    }
+
+    const typeOfDrive = values.TypeOfDrive;
+    const driveTimeLanguage = LanguageUtilities.getPrefixByDriveType(typeOfDrive);
+    const locations = formProps.locations;
+
     const advanceFieldWrapper: SxProps = {
         ...fieldWrapper as SxProps,
         display: isAdvanced ? 'initial' : 'none'
     }
-    const driveTimeLanguage = LanguageUtilities.getPrefixByDriveType(typeOfDrive)
-    return (
 
-        <form onSubmit={(...args) => submitting(...args)} dir={'rtl'}>
+    const propsFor = (name: string) => getInputAdapter(name, values, handleFieldChange);
+
+    return (
+        <form onSubmit={(e) => { e.preventDefault(); handleSubmit(); }} dir={'rtl'}>
             <Box id={'form-wrapper'} sx={{
                 display: 'flex',
                 flexDirection: 'row',
                 flexWrap: 'wrap'
             }}>
-
-
-                <Box
-                    sx={fieldWrapperText}
-                >
-                    <Field name={orderFields.driverName}
-                           component={RenderTextField}
-                           label={TRL.Name}
+                <Box sx={fieldWrapperText}>
+                    <RenderTextField 
+                        {...propsFor(orderFields.driverName)}
+                        label={TRL.Name}
                     />
                 </Box>
                 <Box sx={selectFieldWrapper}>
-                    <Field
-                        name={'TypeOfDrive'}
-                        component={RenderSelectField}
+                    <RenderSelectField
+                        {...propsFor('TypeOfDrive')}
                         label={TRL.TypeOfDrive}
                     >
-                        <MenuItem value={DriveType.Tsamud.toString()}>{TRL.Tsamud}</MenuItem>
-                        <MenuItem value={DriveType.OneWayFrom.toString()}> {TRL.OneWayFrom}</MenuItem>
-                        <MenuItem value={DriveType.OneWayTo.toString()}>{TRL.OneWayTo}</MenuItem>
-
-                    </Field>
-
+                         <MenuItem value={DriveType.Tsamud.toString()}>{TRL.Tsamud}</MenuItem>
+                         <MenuItem value={DriveType.OneWayFrom.toString()}> {TRL.OneWayFrom}</MenuItem>
+                         <MenuItem value={DriveType.OneWayTo.toString()}>{TRL.OneWayTo}</MenuItem>
+                    </RenderSelectField>
                 </Box>
 
-                <Box sx={selectFieldWrapper}>
-
-                    <Field name={orderFields.location} component={RenderSelectFieldAutoComplete} label={TRL.Where}
+                 <Box sx={selectFieldWrapper}>
+                    <RenderSelectFieldAutoComplete
+                           {...propsFor(orderFields.location)}
+                           label={TRL.Where}
                            selectoptions={locations.map((location: LocationModel) => ({
                                ...location,
                                Name: driveTimeLanguage.location + location.name
-                           }))}>
+                           }))}
+                    />
+                 </Box>
 
-                    </Field> </Box>
-                <Box
-                    sx={fieldWrapper}
-                >
-                    <Field name={orderFields.startHour} component={HourPicker}
-                           label={driveTimeLanguage.timeStart}/>
+                 <Box sx={fieldWrapper}>
+                    <HourPicker 
+                        {...propsFor(orderFields.startHour)}
+                        label={driveTimeLanguage.timeStart}
+                    />
                 </Box>
-                <Box sx={fieldWrapper}
-                >
-                    <Field name={orderFields.finishHour} custom={{inActive: typeOfDrive !== DriveType.Tsamud}} component={HourPicker}
-                           label={driveTimeLanguage.timeEnd}/>
+                <Box sx={fieldWrapper}>
+                    <HourPicker 
+                        {...propsFor(orderFields.finishHour)}
+                        custom={{inActive: typeOfDrive !== DriveType.Tsamud}} 
+                        label={driveTimeLanguage.timeEnd}
+                    />
                 </Box>
+                
+                 <Box sx={fieldWrapper}> 
+                    <RenderTextField 
+                        {...propsFor(orderFields.Comments)}
+                        label={TRL.Comments}
+                        rows={2}
+                    />
+                 </Box>
 
-                <Box
-                    sx={fieldWrapper}> <Field name={orderFields.Comments}
-                                              component={RenderTextField}
-                                              label={TRL.Comments}
-                    // multiLine={true}
-                                              rows={2}
-                />
-                </Box>
+                 <Box sx={fieldWrapper}> 
+                     <RenderPassengerField 
+                        {...propsFor(orderFields.passengers)}
+                        label={TRL.passengers}
+                        type={'text'}
+                    />
+                 </Box>
 
+                 <Box sx={advanceFieldWrapper}>
+                     <RenderFlexibilityField
+                        {...propsFor(orderFields.flexibility[0])}
+                        label={TRL.flexibility}
+                     />
+                 </Box>
 
-                <Box
-                    sx={fieldWrapper}> <Field name={orderFields.passengers}
-                                              component={RenderPassengerField}
-                                              label={TRL.passengers}
-                                              type={'text'}
-                                              rows={2}
-                />
-                </Box>
-                <Box
-                    sx={advanceFieldWrapper}> <Field name={orderFields.flexibility[0]}
-                                                     component={RenderFlexibilityField}
-                                                     label={TRL.flexibility}
-                                                     rows={2}
-                />
-
-
-                </Box>
-
-                <Box sx={{
+                 <Box sx={{
                     ...fieldWrapper as SxProps,
                     display: 'flex',
                     flexDirection: 'row'
-                }}
-                >
+                }}>
                     <Button sx={{display: isAdvanced ? 'none' : 'initial'}} variant="text" type="button"
-                            onClick={() => handleSetAdvanced(true)}>{TRL.Advanced}</Button>
+                            onClick={() => setIsAdvanced(true)}>{TRL.Advanced}</Button>
                     <Divider/>
                     <Button sx={{m: '5px'}} variant="contained" color={'primary' as any} type="button"
                             onClick={handleSubmit}>{TRL.Submit}</Button>
-
-
                 </Box>
 
             </Box>
         </form>
-    );
-};
-
-export const OrderCarForm = (formProps: MuiFormPropsModel) => {
-
-    const dispatch = useDispatch();
-
-    const id = formProps.orderId;
-    const orders = useSelector((state: { orders: OrderModel[] }) => state.orders);
-
-    const initialValues = orders.find(order => order.id === id);
-
-    const [_typeOfDrive, set_typeOfDrive] = useState(initialValues?.TypeOfDrive as DriveType)
-
-
-    return (
-        <Form
-            initialValues={initialValues as any}
-            onSubmit={(_values: any) => {
-                if (!formProps.isInEdit) {
-                    return;
-                }
-                dispatch({
-                    type: ActionsTypes.UPDATE_ORDER,
-                    payload: {
-                        id: id,
-                    },
-                });
-            }}
-            validate={(values: any) => {
-
-                if (!formProps.isInEdit) {
-                    return
-                }
-                dispatch({
-                    type: ActionsTypes.UPDATE_ORDER_IN_EDIT,
-                    payload: {
-                        ...values
-                    }
-                })
-                if (values?.TypeOfDrive && values?.TypeOfDrive !== _typeOfDrive) {
-                    set_typeOfDrive(values.TypeOfDrive)
-                }
-                return {} // validate(values)
-            }}
-            render={({handleSubmit}: any) => (MaterialUiForm({
-                ...formProps,
-                typeOfDrive: _typeOfDrive,
-                handleSubmit,
-            }))
-
-            }/>
     )
 }
-
-
