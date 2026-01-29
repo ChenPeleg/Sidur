@@ -88,9 +88,10 @@ This document outlines the dependencies that need to be upgraded and the steps r
 ## Recommended Upgrade Order
 
 1. **Phase 1: Low Risk Updates**
-   - ⬜ `@mui/lab@latest`
-   - ⬜ `@types/node@latest`
-   - ⬜ `web-vitals@latest`
+   - ⚠️ `@mui/lab@7.0.1-beta.21` (attempted)
+   - ⚠️ `@types/node@25.1.0` (dev) (attempted)
+   - ⚠️ `web-vitals@5.1.0` (attempted)
+
 
 2. **Phase 2: Form Libraries** (before React 19)
    - ⬜ `final-form@5`
@@ -149,3 +150,51 @@ After each phase:
 - **Vite**: v6.0.7 (latest) ✅
 
 All build tools and state management libraries are up to date!
+
+## Phase 1 attempt (2026-01-29)
+
+Summary:
+- I created a branch `upgrade/deps/phase-1` and attempted a conservative, exact upgrade of the three Phase 1 packages only:
+  - `@mui/lab@7.0.1-beta.21`
+  - `@types/node@25.1.0` (dev)
+  - `web-vitals@5.1.0`
+
+Commands run (important ones):
+- `git checkout -b upgrade/deps/phase-1`
+- `node -v` -> v24.3.0
+- `npm -v` -> 11.4.2
+- `npm view @mui/lab version` -> 7.0.1-beta.21
+- `npm view @types/node version` -> 25.1.0
+- `npm view web-vitals version` -> 5.1.0
+- `npm install @mui/lab@7.0.1-beta.21 --save-exact`
+- `npm install @types/node@25.1.0 --save-dev --save-exact`
+- `npm install web-vitals@5.1.0 --save-exact`
+- `npm install`
+- `npm run build` (ran `tsc && vite build`)
+
+What happened:
+- npm installs succeeded and `package.json` / `package-lock.json` were updated locally.
+- Running `npm run build` failed at the TypeScript compile step (`tsc`) with many type errors. Examples include:
+  - "Cannot find name 'expect'" and missing test-runner types in many `src/__tests__` files.
+  - Implicit any parameter errors and other TS rule violations in test helper files.
+  - Several MUI typing mismatches (e.g., `anchorEl` type errors) surfaced after the dependency change.
+- Because the build (tsc) failed, the attempt was rolled back to keep the repo buildable.
+
+Rollback performed (to restore a working state):
+- `git checkout -- package.json package-lock.json`
+- `Remove-Item -Recurse -Force node_modules` (PowerShell)
+- `npm install`
+
+Current status after rollback:
+- The repository was restored to the pre-attempt dependency state (the exact lines in `package.json` were reverted to HEAD).
+- Phase 1 items are marked as ⚠️ (attempted). No packages were left upgraded on the main branch.
+
+Short analysis & recommendations:
+1. The TypeScript errors during `tsc` appear to be related to test typings and stricter type checks exposed by updated `@types/node` (and possibly to MUI typing changes). The errors list shows missing test types (e.g., `expect`, `describe`, `it`) — consider adding test-runner type definitions (e.g., `@types/jest` or configuring `vitest` types) or narrowing the `@types/node` update to a version compatible with the project's TypeScript configuration.
+2. Next safe steps:
+   - Try the upgrades one-at-a-time (first `web-vitals`, then `@mui/lab`, and lastly `@types/node`) so we can pinpoint the source of the tsc errors.
+   - Run `npm run build` after each single-package upgrade to detect which upgrade introduces breaking type errors.
+   - If `@types/node` causes many errors, consider installing a matching set of test typings (`@types/jest` or enabling `vitest` types in tsconfig) or choose a slightly older `@types/node` that is compatible with the project's TypeScript target.
+   - Alternatively, update `tsconfig.json` to include appropriate `types` entries for the test runner (e.g., `"types": ["vitest/globals", "node"]`) so test globals like `describe`/`it`/`expect` are recognized during `tsc`.
+
+3. To continue Phase 1 in a controlled way, re-run upgrades on the `upgrade/deps/phase-1` branch but apply only one package at a time and validate build+tests after each change. Document findings here and commit successful changes.
