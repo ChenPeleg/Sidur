@@ -20,7 +20,7 @@ export default defineConfig(({ mode }) => {
             rollupOptions: {
                 output: {
                     manualChunks: {
-                        vendor: ["react", "react-dom", "react-router"],
+                        vendor: ["react", "react-router"],
                         mui: [
                             "@mui/material",
                             "@mui/icons-material",
