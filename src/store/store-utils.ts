@@ -140,7 +140,7 @@ export const StoreUtils = {
             },
         };
         dispatchFunct(callArguments);
-        setTimeout((_) => {
+        setTimeout(() => {
             dispatchingAction();
         }, delay);
     },
