@@ -17,19 +17,6 @@ export default defineConfig(({ mode }) => {
         build: {
             outDir: "build",
             sourcemap: true,
-            rollupOptions: {
-                output: {
-                    manualChunks: {
-                        vendor: ["react", "react-router"],
-                        mui: [
-                            "@mui/material",
-                            "@mui/icons-material",
-                            "@mui/lab",
-                        ],
-                        redux: ["redux", "react-redux"],
-                    },
-                },
-            },
         },
         server: {
             port: 3000,
