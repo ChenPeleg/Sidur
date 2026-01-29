@@ -1,5 +1,5 @@
 
-name: Deploy static content to Github Pages
+name: Deploy ontent to Github Pages
 
 on:
   push:
