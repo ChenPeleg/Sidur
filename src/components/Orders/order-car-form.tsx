@@ -8,7 +8,8 @@ import {OrderFields, OrderModel} from '../../models/Order.model';
 import {RenderTextField} from '../Form/text-field';
 import {RenderSelectField} from '../Form/select-field';
 import {DriveType} from '../../models/DriveType.enum';
-import {Box, SxProps} from '@mui/system';
+import { Box  } from "@mui/system";
+import type {   SxProps } from "@mui/system";
 import {Button, MenuItem} from '@mui/material';
 import {translations} from '../../services/translations';
 import {ActionsTypes} from '../../store/types.actions';
@@ -26,7 +27,7 @@ const fieldWrapper: SxProps = {
     padding: '10px'
 }
 const selectFieldWrapper: SxProps = {
-    ...fieldWrapper,
+    ...fieldWrapper as SxProps,
     paddingBottom: '0px'
 }
 
@@ -57,7 +58,7 @@ const MaterialUiForm = (muiFormProps: MuiFormPropsModel) => {
         setIsAdvanced(value)
     }
     const advanceFieldWrapper: SxProps = {
-        ...fieldWrapper,
+        ...fieldWrapper as SxProps,
         display: isAdvanced ? 'initial' : 'none'
     }
     const driveTimeLanguage = LanguageUtilities.getPrefixByDriveType(typeOfDrive)
@@ -176,7 +177,7 @@ export const OrderCarForm = (formProps: MuiFormPropsModel) => {
 
     return (
         <Form
-            initialValues={initialValues}
+            initialValues={initialValues as any}
             onSubmit={(_values: any) => {
                 if (!formProps.isInEdit) {
                     return;
