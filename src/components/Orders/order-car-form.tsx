@@ -121,8 +121,10 @@ export const OrderCarForm = (formProps: MuiFormPropsModel) => {
 
     const propsFor = (name: string) => getInputAdapter(name, values, handleFieldChange);
     
-    // Casting components to any to avoid strict TextFieldPropertiesModel checks which forbid 'rows', 'type' etc
-    // This allows passing extra props like 'rows' while keeping TextFieldPropertiesModel strict for other usages
+    // TODO: (Refactor) Remove these `any` casts.
+    // The `TextFieldPropertiesModel` is currently too strict (missing optional props like `rows`, `type`, `multiline`).
+    // We cast to `any` here to allow passing these props without changing the shared model which affects other components.
+    // A proper fix would be to create a more flexible interface or update the existing one + fix all consumers.
     const TextFieldAny = RenderTextField as any;
     const SelectFieldAny = RenderSelectField as any;
     const AutoCompleteAny = RenderSelectFieldAutoComplete as any;
