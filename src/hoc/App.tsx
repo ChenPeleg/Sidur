@@ -1,13 +1,10 @@
-import React from 'react';
-import './App.css';
+import React from "react";
+import "./App.css";
 
-import {AppLayout} from '../layouts/app-layout';
+import { AppLayout } from "../layouts/app-layout";
 
 function App() {
-   
-    return (
-        <AppLayout/>
-    );
+    return <AppLayout />;
 }
 
 export default App;

@@ -6,7 +6,6 @@ import { AppNavBar } from "../components/NavBar/app-nav-bar";
 import { Loading } from "../components/Loading/loading";
 import { RouterMain } from "../router/router-main";
 import { MainLayout } from "./main-layout";
-import { HashRouter, Navigate, Route, Routes } from "react-router";
 
 export const AppLayout = () => {
     return (

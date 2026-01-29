@@ -32,6 +32,7 @@
         "@mui/material": "^7.3.7",
         "@mui/x-date-pickers": "^8.26.0",
         "@redux-devtools/extension": "^3.3.0",
+        "@reduxjs/toolkit": "^2.11.2",
         "@types/react": "^19.2.10",
         "@types/react-dom": "^19.2.3",
         "date-fns": "^4.1.0",
@@ -40,8 +41,7 @@
         "react-redux": "^9.2.0",
         "react-router": "^7.13.0",
         "redux": "^5.0.1",
-        "typescript": "^5.9.3",
-        "web-vitals": "^5.1.0"
+        "typescript": "^5.9.3"
     },
     "devDependencies": {
         "@testing-library/jest-dom": "^6.9.1",
