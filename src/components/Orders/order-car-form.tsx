@@ -144,7 +144,7 @@ const MaterialUiForm = (muiFormProps: MuiFormPropsModel) => {
                 </Box>
 
                 <Box sx={{
-                    ...fieldWrapper,
+                    ...fieldWrapper as SxProps,
                     display: 'flex',
                     flexDirection: 'row'
                 }}
@@ -152,7 +152,7 @@ const MaterialUiForm = (muiFormProps: MuiFormPropsModel) => {
                     <Button sx={{display: isAdvanced ? 'none' : 'initial'}} variant="text" type="button"
                             onClick={() => handleSetAdvanced(true)}>{TRL.Advanced}</Button>
                     <Divider/>
-                    <Button sx={{m: '5px'}} variant="contained" color={'primary'} type="button"
+                    <Button sx={{m: '5px'}} variant="contained" color={'primary' as any} type="button"
                             onClick={handleSubmit}>{TRL.Submit}</Button>
 
 
