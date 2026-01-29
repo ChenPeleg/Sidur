@@ -7,7 +7,7 @@ import {SidurActionType} from '../../models/SidurMenuClickActionType.enum';
 
 
 interface sidurMenuProps {
-    sidurMoreAnchorEl: Element | ((element: Element) => Element) | null | undefined;
+    sidurMoreAnchorEl: HTMLElement | null | undefined;
     sidurMenuId: string,
     isSidurMenuOpen: boolean,
     handleSidurMenuClick: (event: React.MouseEvent<HTMLElement>, clickAction: SidurActionType) => void

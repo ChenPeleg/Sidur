@@ -178,6 +178,15 @@ export const OrderCarForm = (formProps: MuiFormPropsModel) => {
         <Form
             initialValues={initialValues}
             onSubmit={(_values: any) => {
+                if (!formProps.isInEdit) {
+                    return;
+                }
+                dispatch({
+                    type: ActionsTypes.UPDATE_ORDER,
+                    payload: {
+                        id: id,
+                    },
+                });
             }}
             validate={(values: any) => {
 
@@ -194,18 +203,6 @@ export const OrderCarForm = (formProps: MuiFormPropsModel) => {
                     set_typeOfDrive(values.TypeOfDrive)
                 }
                 return {} // validate(values)
-            }}
-            handleSubmit={(_event: Event, _values: any) => {
-                if (!formProps.isInEdit) {
-                    return
-                }
-                dispatch({
-                    type: ActionsTypes.UPDATE_ORDER,
-                    payload: {
-                        id: id
-                    }
-                })
-
             }}
             render={({handleSubmit}: any) => (MaterialUiForm({
                 ...formProps,

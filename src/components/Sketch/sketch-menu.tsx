@@ -7,7 +7,7 @@ import {SketchActionType} from '../../models/SketchMenuClickActionType.enum';
 
 
 interface SketchMenuProps {
-    sketchMoreAnchorEl: Element | ((element: Element) => Element) | null | undefined;
+    sketchMoreAnchorEl: HTMLElement | null | undefined;
     sketchMenuId: string,
     isSketchMenuOpen: boolean,
     handleSketchMenuClick: (event: React.MouseEvent<HTMLElement>, clickAction: SketchActionType) => void

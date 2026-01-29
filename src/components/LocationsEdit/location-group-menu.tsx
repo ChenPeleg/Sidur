@@ -7,7 +7,7 @@ import {LocationGroupActionType} from '../../models/LocationGroupMenuClickAction
 
 
 interface LocationGroupMenuProps {
-    locationGroupMoreAnchorEl: Element | ((element: Element) => Element) | null | undefined;
+    locationGroupMoreAnchorEl: HTMLElement | null | undefined;
     locationGroupMenuId: string,
     isLocationGroupMenuOpen: boolean,
     handleLocationGroupMenuClick: (event: React.MouseEvent<HTMLElement>, clickAction: LocationGroupActionType) => void
