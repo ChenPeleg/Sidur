@@ -6,7 +6,7 @@ import {ImportExport, Person} from '@mui/icons-material';
 import {ProfileMenuClickActionType} from '../../models/profile-menu-click-action-type.enum';
 
 interface profileMenuProps {
-    anchorEl: Element | ((element: Element) => Element) | null | undefined;
+    anchorEl: HTMLElement | null | undefined;
     menuId: string,
     isMenuOpen: boolean,
     handleMenuClose: (result: any, action?: ProfileMenuClickActionType) => void

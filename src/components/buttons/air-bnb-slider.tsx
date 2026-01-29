@@ -69,7 +69,7 @@ export const AirbnbSlider = styled(Slider)(({theme}) => ({
 export interface AirbnbThumbComponentProps extends React.HTMLAttributes<unknown> {
 }
 
-export const AirbnbThumbComponent = (props: AirbnbThumbComponentProps, _data: any): any => {
+export const AirbnbThumbComponent = (props: AirbnbThumbComponentProps) => {
     const {
         children,
         ...other
@@ -77,9 +77,8 @@ export const AirbnbThumbComponent = (props: AirbnbThumbComponentProps, _data: an
 
 
     return (
-        <Box key={Math.random().toString()}> <SliderThumb {...other}    > <Box> fff {children} </Box>
-
-        </SliderThumb>
+        <Box>
+            <SliderThumb {...other}>{children}</SliderThumb>
         </Box>
     );
 }

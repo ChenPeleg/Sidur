@@ -7,7 +7,7 @@ import {Icons} from '../Icons/icons';
 
 
 interface PendingOrderMenuProps {
-    PendingOrderMenuAnchor: Element | ((element: Element) => Element) | null | undefined;
+    PendingOrderMenuAnchor: HTMLElement | null | undefined;
     PendingOrderMenuId: string,
     isPendingOrderMenuOpen: boolean,
     handlePendingOrderMenuClick: (event: React.MouseEvent<HTMLElement>, action: SketchDriveOrderEditActionEnum) => void

@@ -7,7 +7,7 @@ import {RouteOrTransEditAction} from '../LocationsEditRoutes/location-route-edit
 
 
 interface LocationEditMenuProps {
-    routeMoreAnchorEl: Element | ((element: Element) => Element) | null | undefined;
+    routeMoreAnchorEl: HTMLElement | null | undefined;
     routeMenuId: string,
     isRouteMenuOpen: boolean,
     handleRouteMenuClick: (event: React.MouseEvent<HTMLElement>, clickAction: any) => void
