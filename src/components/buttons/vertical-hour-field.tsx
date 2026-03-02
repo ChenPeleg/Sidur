@@ -66,7 +66,7 @@ export const VerticalHourField = (
                     disableSwap
                     min={minSlider}
                     max={maxSlider}
-                    scale={x => -x}
+                    scale={(x: number) => -x}
 
                     step={0.0833333333333}
                     value={value}

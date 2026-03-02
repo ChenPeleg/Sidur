@@ -55,11 +55,8 @@ export const RenderPassengerField = (
                           label={label}
                           sx={rootSx}
                           max={7}
-                          onChange={(...args) => {
-
-
-                              input.onChange(...args);
-
+                          onChange={(event: React.SyntheticEvent, value: number | null) => {
+                              input.onChange(event, value);
                           }}
                           icon={<Person fontSize="inherit"/>}
                           emptyIcon={<Person fontSize="inherit"/>}
