@@ -1,11 +1,11 @@
-import {OrderModel} from '../../models/Order.model';
+import { OrderModel } from "../../models/Order.model";
 
 export interface SuggestionModel {
-    driveId: string | string [];
+    driveId: string | string[];
 }
 
 export interface SidurBuildSettings {
-    custom: any
+    custom: any;
 }
 
 export enum OrderMetaStatus {
@@ -15,14 +15,14 @@ export enum OrderMetaStatus {
 }
 
 export interface OrderMetaDataModel {
-    id: string
-    order: OrderModel,
-    start: number
-    finish: number,
-    length: number,
-    status: OrderMetaStatus
+    id: string;
+    order: OrderModel;
+    start: number;
+    finish: number;
+    length: number;
+    status: OrderMetaStatus;
 }
 
 export const BuilderConstants: Object = {
-    drivesToResolve: 'DtoRes'
-}
+    drivesToResolve: "DtoRes",
+};

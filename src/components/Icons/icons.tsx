@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import {
     Add,
     AddBox,
@@ -6,30 +6,28 @@ import {
     ArrowCircleUp,
     BusAlert,
     ChangeCircle,
-    Check, ImportContacts,
+    Check,
+    ImportContacts,
     MergeType,
     Remove,
     ReplayCircleFilled,
     Splitscreen,
-    Timer
-} from '@mui/icons-material';
-
+    Timer,
+} from "@mui/icons-material";
 
 export const Icons: Record<string, React.ReactElement> = {
-    'add': (<Add/>),
-    'RemoveFromPending': (<Check/>),
-    'Remove': (<Remove/>),
-    'Merge': (<MergeType/>),
-    'Split': (<Splitscreen/>),
-    'Change': (<ChangeCircle/>),
-    'ChangeTime': (<Timer/>),
-    'ReplaceExisting': (<ReplayCircleFilled/>),
-    'publicTransport': (<BusAlert/>),
-    'AddToPending': (<AddBox/>),
-    'MoveToTop': (<ArrowCircleUp/>),
-    'MoveToBottom': (<ArrowCircleDown/>),
-    'AddToVehicle': (<AddBox/>),
-    'ImportContacts' : (<ImportContacts/>)
-}
-
-
+    add: <Add />,
+    RemoveFromPending: <Check />,
+    Remove: <Remove />,
+    Merge: <MergeType />,
+    Split: <Splitscreen />,
+    Change: <ChangeCircle />,
+    ChangeTime: <Timer />,
+    ReplaceExisting: <ReplayCircleFilled />,
+    publicTransport: <BusAlert />,
+    AddToPending: <AddBox />,
+    MoveToTop: <ArrowCircleUp />,
+    MoveToBottom: <ArrowCircleDown />,
+    AddToVehicle: <AddBox />,
+    ImportContacts: <ImportContacts />,
+};

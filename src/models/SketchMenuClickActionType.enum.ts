@@ -5,5 +5,3 @@ export enum SketchActionType {
     Archive = 4,
     CreateNew = 5,
 }
-
-

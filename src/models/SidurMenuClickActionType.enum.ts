@@ -5,7 +5,7 @@ export enum SidurActionType {
     CreateCopy = 4,
     Archive = 5,
     CreateNew = 6,
-    ImportOrders = 7
+    ImportOrders = 7,
 }
 
 export enum SidurManagementActionType {
@@ -14,5 +14,5 @@ export enum SidurManagementActionType {
     MoveToArchive = 3,
     MoveToActive = 4,
     DeleteForever = 5,
-    EmptyTrash = 6
+    EmptyTrash = 6,
 }

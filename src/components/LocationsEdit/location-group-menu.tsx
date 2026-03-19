@@ -1,18 +1,20 @@
-import Menu from '@mui/material/Menu';
-import MenuItem from '@mui/material/MenuItem';
-import * as React from 'react';
-import {Delete, DriveFileRenameOutline, FileCopy} from '@mui/icons-material';
-import {translations} from '../../services/translations';
-import {LocationGroupActionType} from '../../models/LocationGroupMenuClickActionType.enum';
-
+import Menu from "@mui/material/Menu";
+import MenuItem from "@mui/material/MenuItem";
+import * as React from "react";
+import { Delete, DriveFileRenameOutline, FileCopy } from "@mui/icons-material";
+import { translations } from "../../services/translations";
+import { LocationGroupActionType } from "../../models/LocationGroupMenuClickActionType.enum";
 
 interface LocationGroupMenuProps {
     locationGroupMoreAnchorEl: HTMLElement | null | undefined;
-    locationGroupMenuId: string,
-    isLocationGroupMenuOpen: boolean,
-    handleLocationGroupMenuClick: (event: React.MouseEvent<HTMLElement>, clickAction: LocationGroupActionType) => void
-    handleLocationGroupMenuClose: () => void,
-    preventDelete: boolean
+    locationGroupMenuId: string;
+    isLocationGroupMenuOpen: boolean;
+    handleLocationGroupMenuClick: (
+        event: React.MouseEvent<HTMLElement>,
+        clickAction: LocationGroupActionType
+    ) => void;
+    handleLocationGroupMenuClose: () => void;
+    preventDelete: boolean;
 }
 
 export const LocationGroupMenu = (props: LocationGroupMenuProps) => {
@@ -22,54 +24,67 @@ export const LocationGroupMenu = (props: LocationGroupMenuProps) => {
         isLocationGroupMenuOpen,
         handleLocationGroupMenuClick,
         handleLocationGroupMenuClose,
-        preventDelete
+        preventDelete,
     } = props;
-    const isEditable = locationGroupMenuId !== 'ESHBAL'
-     
+    const isEditable = locationGroupMenuId !== "ESHBAL";
+
     return (
         <Menu
             anchorEl={locationGroupMoreAnchorEl}
             anchorOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
+                vertical: "top",
+                horizontal: "right",
             }}
             id={locationGroupMenuId}
             keepMounted
             transformOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
+                vertical: "top",
+                horizontal: "right",
             }}
             open={isLocationGroupMenuOpen}
             onClose={handleLocationGroupMenuClose}
         >
-            {isEditable ?
-
-
-                <MenuItem onClick={(e) => handleLocationGroupMenuClick(e, LocationGroupActionType.Rename)}>
-
-                    <DriveFileRenameOutline/>&nbsp;
+            {isEditable ? (
+                <MenuItem
+                    onClick={(e) =>
+                        handleLocationGroupMenuClick(
+                            e,
+                            LocationGroupActionType.Rename
+                        )
+                    }
+                >
+                    <DriveFileRenameOutline />
+                    &nbsp;
                     {translations.Rename}
                 </MenuItem>
-
-
-                : null}
-            {isEditable && !preventDelete ?
-                <MenuItem onClick={(e) => handleLocationGroupMenuClick(e, LocationGroupActionType.Delete)}>
-
-                    <Delete/>&nbsp;
+            ) : null}
+            {isEditable && !preventDelete ? (
+                <MenuItem
+                    onClick={(e) =>
+                        handleLocationGroupMenuClick(
+                            e,
+                            LocationGroupActionType.Delete
+                        )
+                    }
+                >
+                    <Delete />
+                    &nbsp;
                     {translations.Delete}
                 </MenuItem>
-                : null}
+            ) : null}
 
-            <MenuItem onClick={(e) => handleLocationGroupMenuClick(e, LocationGroupActionType.CreateCopy)}>
-
-                <FileCopy/>&nbsp;
+            <MenuItem
+                onClick={(e) =>
+                    handleLocationGroupMenuClick(
+                        e,
+                        LocationGroupActionType.CreateCopy
+                    )
+                }
+            >
+                <FileCopy />
+                &nbsp;
                 {translations.CreateCopy}
             </MenuItem>
-
-
         </Menu>
     );
-
-
-}
+};

@@ -1,33 +1,31 @@
-import {IAction, SidurStore} from './store.types';
-import {SaveLoadService} from '../services/save-load.service';
-import {SidurReducer} from './sidur.reducer';
-import {OrderReducer} from './order.reducer';
-import {ImportExportReducer} from './import-export.reducer';
-import {VehicleReducer} from './vehicle.reducer';
-import {ActionsTypes} from './types.actions';
-import {DisplayReducer} from './display.reducer';
-import {SketchReducer} from './sketch.reducer';
-import {PendingOrdersReducer} from './pendingOrders.reducer';
-import {SketchDriveReducer} from './sketch-drive.reducer';
-import {LocationGroupReducer} from './locationGroup.reducer';
-import {LocationReducer} from './location.reducer';
-import {DefaultSidurFetching} from './store-inital-state';
-import {RouteReducer} from './route.reducer';
-import {TransportReducer} from './transport.reducer';
+import { IAction, SidurStore } from "./store.types";
+import { SaveLoadService } from "../services/save-load.service";
+import { SidurReducer } from "./sidur.reducer";
+import { OrderReducer } from "./order.reducer";
+import { ImportExportReducer } from "./import-export.reducer";
+import { VehicleReducer } from "./vehicle.reducer";
+import { ActionsTypes } from "./types.actions";
+import { DisplayReducer } from "./display.reducer";
+import { SketchReducer } from "./sketch.reducer";
+import { PendingOrdersReducer } from "./pendingOrders.reducer";
+import { SketchDriveReducer } from "./sketch-drive.reducer";
+import { LocationGroupReducer } from "./locationGroup.reducer";
+import { LocationReducer } from "./location.reducer";
+import { DefaultSidurFetching } from "./store-inital-state";
+import { RouteReducer } from "./route.reducer";
+import { TransportReducer } from "./transport.reducer";
 
 const buildInitialState = (): SidurStore => {
-
-    const stateFromLocalStorage: SidurStore | undefined = SaveLoadService.loadFromLocalStorage('chen').data?.savedStore;
+    const stateFromLocalStorage: SidurStore | undefined =
+        SaveLoadService.loadFromLocalStorage("chen").data?.savedStore;
     return (stateFromLocalStorage || DefaultSidurFetching) as SidurStore;
-}
+};
 
-
-const initialState = buildInitialState()
+const initialState = buildInitialState();
 const reducer = (state: SidurStore = initialState, action: IAction) => {
     let newState = {
-        ...state
-    }
-
+        ...state,
+    };
 
     switch (action.type) {
         case ActionsTypes.CHOOSE_SIDUR:
@@ -39,8 +37,7 @@ const reducer = (state: SidurStore = initialState, action: IAction) => {
         case ActionsTypes.MOVE_TO_ACTIVE_SIDUR:
         case ActionsTypes.DELETE_FOREVER_SIDUR:
         case ActionsTypes.CHANGE_SIDUR_LOCATION_GROUP:
-
-            return SidurReducer[action.type](newState, action)
+            return SidurReducer[action.type](newState, action);
 
         case ActionsTypes.CLICKED_ORDER:
         case ActionsTypes.UPDATE_ORDER:
@@ -48,8 +45,7 @@ const reducer = (state: SidurStore = initialState, action: IAction) => {
         case ActionsTypes.DELETE_ORDER:
         case ActionsTypes.ADD_NEW_ORDER:
         case ActionsTypes.CLONE_ORDER:
-
-            return OrderReducer[action.type](newState, action)
+            return OrderReducer[action.type](newState, action);
 
         case ActionsTypes.EXPORT_ALL:
         case ActionsTypes.IMPORT_FILE_UPLOADED:
@@ -58,32 +54,26 @@ const reducer = (state: SidurStore = initialState, action: IAction) => {
         case ActionsTypes.CLOSE_IMPORT_SHEETS_MODAL:
 
         case ActionsTypes.IMPORT_SHEETS_DATA_PASTE:
-        case  ActionsTypes.APPROVE_IMPORT_SHEETS_DATA:
-
-
+        case ActionsTypes.APPROVE_IMPORT_SHEETS_DATA:
             return ImportExportReducer[action.type](newState, action);
 
         case ActionsTypes.NEW_VEHICLE:
         case ActionsTypes.UPDATE_VEHICLE:
         case ActionsTypes.DELETE_VEHICLE:
-
-            return VehicleReducer[action.type](newState, action)
-
+            return VehicleReducer[action.type](newState, action);
 
         case ActionsTypes.CHANGE_VIEW:
         case ActionsTypes.START_LOADING_ANIMATION:
         case ActionsTypes.STOP_LOADING_ANIMATION:
-            return DisplayReducer[action.type](newState, action)
-
+            return DisplayReducer[action.type](newState, action);
 
         case ActionsTypes.NEW_SKETCH:
         case ActionsTypes.CHOOSE_SKETCH:
         case ActionsTypes.CLONE_SKETCH:
         case ActionsTypes.RENAME_SKETCH:
         case ActionsTypes.DELETE_SKETCH:
-            case ActionsTypes.DOWNLOAD_SKETCH:
-
-            return SketchReducer[action.type](newState, action)
+        case ActionsTypes.DOWNLOAD_SKETCH:
+            return SketchReducer[action.type](newState, action);
 
         case ActionsTypes.CLICKED_PENDING_ORDER:
         case ActionsTypes.CLICKED_CLOSE_PENDING_ORDER:
@@ -99,8 +89,7 @@ const reducer = (state: SidurStore = initialState, action: IAction) => {
         case ActionsTypes.CLICKED_MOVE_TO_TOP_PENDING_ORDER:
         case ActionsTypes.CLICKED_MOVE_TO_BOTTOM_PENDING_ORDER:
         case ActionsTypes.CLICKED_ADD_TO_VEHICLE_PENDING_ORDER:
-
-            return PendingOrdersReducer[action.type](newState, action)
+            return PendingOrdersReducer[action.type](newState, action);
         case ActionsTypes.DELETE_SKETCH_DRIVE:
         case ActionsTypes.UPDATE_SKETCH_DRIVE:
         case ActionsTypes.REMOVE_ORDER_FROM_SKETCH_DRIVE:
@@ -116,15 +105,13 @@ const reducer = (state: SidurStore = initialState, action: IAction) => {
         case ActionsTypes.RENAME_LOCATION_GROUP:
         case ActionsTypes.CHOOSE_LOCATION_GROUP:
         case ActionsTypes.CHOOSE_LOCATION_GROUP_TAB:
-
-            return LocationGroupReducer[action.type](newState, action)
+            return LocationGroupReducer[action.type](newState, action);
         case ActionsTypes.ADD_NEW_LOCATION:
         case ActionsTypes.START_EDIT_LOCATION:
         case ActionsTypes.STOP_EDIT_LOCATION:
         case ActionsTypes.UPDATE_LOCATION:
         case ActionsTypes.DELETE_LOCATION:
-
-            return LocationReducer[action.type](newState, action)
+            return LocationReducer[action.type](newState, action);
 
         case ActionsTypes.ADD_NEW_ROUTE:
         case ActionsTypes.START_EDIT_ROUTE:
@@ -133,8 +120,7 @@ const reducer = (state: SidurStore = initialState, action: IAction) => {
         case ActionsTypes.DELETE_ROUTE:
         case ActionsTypes.ADD_LOCATION_TO_ROUTE:
         case ActionsTypes.CLONE_ROUTE:
-
-            return RouteReducer[action.type](newState, action)
+            return RouteReducer[action.type](newState, action);
 
         case ActionsTypes.ADD_NEW_TRANSPORT:
         case ActionsTypes.START_EDIT_TRANSPORT:
@@ -143,15 +129,13 @@ const reducer = (state: SidurStore = initialState, action: IAction) => {
         case ActionsTypes.DELETE_TRANSPORT:
         case ActionsTypes.ADD_LOCATION_TO_TRANSPORT:
         case ActionsTypes.CLONE_TRANSPORT:
-
-            return TransportReducer[action.type](newState, action)
+            return TransportReducer[action.type](newState, action);
 
         default:
             // @ts-ignore
             break;
-
     }
 
-    return newState
-}
-export default reducer
+    return newState;
+};
+export default reducer;

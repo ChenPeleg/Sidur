@@ -1,43 +1,39 @@
-import {TextFieldPropertiesModel} from '../../models/text-field-properties.model';
+import { TextFieldPropertiesModel } from "../../models/text-field-properties.model";
 
-import React from 'react';
-import {Theme} from '@mui/system';
-import {TextField} from '@mui/material';
+import React from "react";
+import { Theme } from "@mui/system";
+import { TextField } from "@mui/material";
 
-
-const useStyles = (() => ({
+const useStyles = () => ({
     root: {
         direction: (theme: Theme) => theme.direction,
-        '& .MuiFormLabel-root': {
-            left: 'inherit'
+        "& .MuiFormLabel-root": {
+            left: "inherit",
         },
-        '& .MuiInputBase-input': {
+        "& .MuiInputBase-input": {
             // paddingTop: '10px',
             // paddingBottom: '10px'
-        }
-    }
-}))
-export const RenderTextField = (
-    {
-        input,
-        label,
-        meta,
-        ...custom
-    }: TextFieldPropertiesModel,
-) => (
-    <TextField variant={'standard'}
-               dir={'rtl'}
-               style={{
-                   direction: 'rtl',
-
-               }}
-               label={label}
-               sx={{
-                   ...useStyles()
-                       .root
-               }}
-               onChange={input.onChange}
-               {...input}
-               {...custom}
+        },
+    },
+});
+export const RenderTextField = ({
+    input,
+    label,
+    meta,
+    ...custom
+}: TextFieldPropertiesModel) => (
+    <TextField
+        variant={"standard"}
+        dir={"rtl"}
+        style={{
+            direction: "rtl",
+        }}
+        label={label}
+        sx={{
+            ...useStyles().root,
+        }}
+        onChange={input.onChange}
+        {...input}
+        {...custom}
     />
 );

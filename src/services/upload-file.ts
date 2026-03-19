@@ -1,5 +1,5 @@
 export const handleFileSelect = (evt: any) => {
-    const files = evt?.target?.files;  // FileList object
+    const files = evt?.target?.files; // FileList object
 
     // use the 1st file from the list
     const f = files[0];
@@ -10,7 +10,6 @@ export const handleFileSelect = (evt: any) => {
     reader.onload = (function (theFile) {
         return function (e: any) {
             if (theFile) {
-    
             }
             //  jQuery('#ms_word_filtered_html').val(e.target.result);
         };
@@ -18,5 +17,4 @@ export const handleFileSelect = (evt: any) => {
 
     // Read in the image file as a data URL.
     reader.readAsText(f);
-
-}
+};

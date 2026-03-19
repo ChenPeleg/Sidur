@@ -1,2084 +1,1895 @@
 {
-  "userName": "chen",
-  "userId": "chen",
-  "savedStore": {
-    "sidurArchive": [],
-    "locationGroupInEdit": null,
-    "sidurCollection": [
-      {
-        "id": "5",
-        "Name": "סידור לדוגמה",
+    "userName": "chen",
+    "userId": "chen",
+    "savedStore": {
+        "sidurArchive": [],
+        "locationGroupInEdit": null,
+        "sidurCollection": [
+            {
+                "id": "5",
+                "Name": "סידור לדוגמה",
+                "orders": [
+                    {
+                        "id": "132",
+                        "flexibility": ["-30", "10"],
+                        "passengers": "1",
+                        "location": "6",
+                        "TypeOfDrive": "2",
+                        "startHour": "08:00",
+                        "Comments": "פלג לרקפת  עד 10fsdfsdfsdfsdfsdfsdfsdfsdf",
+                        "driverName": "חן פלג",
+                        "finishHour": "13:00"
+                    },
+                    {
+                        "id": "100",
+                        "flexibility": ["-30", "10"],
+                        "passengers": "1",
+                        "location": "1",
+                        "TypeOfDrive": "3",
+                        "startHour": "07:20",
+                        "Comments": "אורה לוקחת את ילדי גן דרור לכרמיאל, רוצה להמשיך לתור לרופאה עד 10. ",
+                        "driverName": "אורה",
+                        "finishHour": "10,10"
+                    },
+                    {
+                        "id": "101",
+                        "flexibility": ["-30", "10"],
+                        "passengers": "1",
+                        "location": "6",
+                        "TypeOfDrive": "2",
+                        "startHour": "12:50",
+                        "Comments": "אורה למרפאה במשגב עד 13:00",
+                        "driverName": "אורה",
+                        "finishHour": "14:00"
+                    },
+                    {
+                        "id": "102",
+                        "flexibility": ["-30", "10"],
+                        "passengers": "1",
+                        "location": "6",
+                        "TypeOfDrive": "3",
+                        "startHour": "19:00",
+                        "Comments": "",
+                        "driverName": "אורה",
+                        "finishHour": ""
+                    },
+                    {
+                        "id": "103",
+                        "flexibility": ["-30", "10"],
+                        "passengers": "1",
+                        "location": "3",
+                        "TypeOfDrive": "2",
+                        "startHour": "08:30",
+                        "Comments": "אדל מבקשת צמוד עד 16:00. לדבר איתי  אם בעיה",
+                        "driverName": "אדל",
+                        "finishHour": "14:00"
+                    },
+                    {
+                        "id": "104",
+                        "flexibility": ["-30", "10"],
+                        "passengers": "1",
+                        "location": "6",
+                        "TypeOfDrive": "2",
+                        "startHour": "09:45",
+                        "Comments": "אושרית תשמח לשעה במשגב, גמישה עד 1320. לא דחוף, רק אם מסתדר.",
+                        "driverName": "אושרית",
+                        "finishHour": "11:00"
+                    },
+                    {
+                        "id": "105",
+                        "flexibility": ["-30", "10"],
+                        "passengers": "1",
+                        "location": "",
+                        "TypeOfDrive": "2",
+                        "startHour": "13:30",
+                        "Comments": "חנן לאיסוף שיבולי השמש עד 14:30",
+                        "driverName": "חנן לוי",
+                        "finishHour": "14:30"
+                    },
+                    {
+                        "id": "106",
+                        "flexibility": ["-30", "10"],
+                        "passengers": "1",
+                        "location": "2",
+                        "TypeOfDrive": "2",
+                        "startHour": "15:50",
+                        "Comments": "חנן לרקפת - יעזור מאוד צמוד עד 17:20",
+                        "driverName": "חנן לוי",
+                        "finishHour": "17:20"
+                    },
+                    {
+                        "id": "107",
+                        "flexibility": ["-30", "10"],
+                        "passengers": "1",
+                        "location": "6",
+                        "TypeOfDrive": "2",
+                        "startHour": "16:00",
+                        "Comments": "חנן ושקד מקופח כללית משגב אם אין צמוד",
+                        "driverName": "חנן לוי",
+                        "finishHour": "17:00"
+                    },
+                    {
+                        "id": "108",
+                        "flexibility": ["-30", "10"],
+                        "passengers": "1",
+                        "location": "1",
+                        "TypeOfDrive": "2",
+                        "startHour": "13:30",
+                        "Comments": "איילת לכרמיאל צמוד עד 15 וחצי ",
+                        "driverName": "איילת",
+                        "finishHour": "15:30"
+                    },
+                    {
+                        "id": "109",
+                        "flexibility": ["-30", "10"],
+                        "passengers": "1",
+                        "location": "2",
+                        "TypeOfDrive": "2",
+                        "startHour": "16:00",
+                        "Comments": "רז מרקפת ",
+                        "driverName": "איילת",
+                        "finishHour": "16:30"
+                    },
+                    {
+                        "id": "110",
+                        "flexibility": ["-30", "10"],
+                        "passengers": "1",
+                        "location": "6",
+                        "TypeOfDrive": "2",
+                        "startHour": "08:40",
+                        "Comments": "איילת למשגב צמוד עד 10:10 (לא להצמיד בבקשה נסיעות כי יש סיכוי שמתבטל מחר בבוקר ",
+                        "driverName": "איילת",
+                        "finishHour": "10:30"
+                    },
+                    {
+                        "id": "111",
+                        "flexibility": ["-30", "10"],
+                        "passengers": "1",
+                        "location": "1",
+                        "TypeOfDrive": "3",
+                        "startHour": "08:15",
+                        "Comments": "פביו לכרמיאל",
+                        "driverName": "פביו",
+                        "finishHour": ""
+                    },
+                    {
+                        "id": "112",
+                        "flexibility": ["-30", "10"],
+                        "passengers": "1",
+                        "location": "3",
+                        "TypeOfDrive": "2",
+                        "startHour": "14:00",
+                        "Comments": "פביו בחיפה ורוצה להישאר עד מאוחר  ולחזור ברכב. אם יש נסיעה לעשות איתה חילוף מה טוב. אם לא ואפשר לשריין רכב ואנסה למצוא נהג/ת, גם טוב. ",
+                        "driverName": "פביו",
+                        "finishHour": "20:00"
+                    },
+                    {
+                        "id": "113",
+                        "flexibility": ["-30", "10"],
+                        "passengers": "1",
+                        "location": "",
+                        "TypeOfDrive": "2",
+                        "startHour": "14:00",
+                        "Comments": "רפאל כהן וטל לכנרת עד 19",
+                        "driverName": "טל",
+                        "finishHour": "19:00"
+                    },
+                    {
+                        "id": "115",
+                        "flexibility": ["-30", "10"],
+                        "passengers": "1",
+                        "location": "6",
+                        "TypeOfDrive": "2",
+                        "startHour": "16:00",
+                        "Comments": "אינגריד יונתן ועמרי לחיסון שפעת במשגב, צמוד עד 17:30 אם אפשר עד אחרי, אינגרידף עד 19 ואז נעשה עוד משהו",
+                        "driverName": "אינגריד",
+                        "finishHour": "17:30"
+                    },
+                    {
+                        "id": "116",
+                        "flexibility": ["-30", "10"],
+                        "passengers": "1",
+                        "location": "13",
+                        "TypeOfDrive": "3",
+                        "startHour": "08:30",
+                        "Comments": "רונית לבוב לרכבת כרמיאל / לחיפה (להיות ב-10 בבת גלים) ",
+                        "driverName": "רונית לבוב",
+                        "finishHour": "10,10"
+                    },
+                    {
+                        "id": "117",
+                        "flexibility": ["-30", "10"],
+                        "passengers": "1",
+                        "location": "9",
+                        "TypeOfDrive": "3",
+                        "startHour": "09:15",
+                        "Comments": "משה מאשבל למרכז השיח בחיפה ",
+                        "driverName": "משה",
+                        "finishHour": "12:00"
+                    },
+                    {
+                        "id": "118",
+                        "flexibility": ["-30", "10"],
+                        "passengers": "1",
+                        "location": "9",
+                        "TypeOfDrive": "4",
+                        "startHour": "14:15",
+                        "Comments": "משה ברכב דבר ממרכז השיח בחיפה לאשבל. אם אינגרידף שאני אסע ברכב אחר וישאיר את רכב דבר בחיפה אז אין בעיה. הוא יכול לשמש את הסידור אחהצ וצריך להגיע ברביעי בבוקר לטבריה או רביד ",
+                        "driverName": "משה",
+                        "finishHour": ""
+                    },
+                    {
+                        "id": "119",
+                        "flexibility": ["-30", "10"],
+                        "passengers": "1",
+                        "location": "3",
+                        "TypeOfDrive": "3",
+                        "startHour": "07:20",
+                        "Comments": "יהל לרקפת, אריאלה לצומת או אם יש נסיעה לחיפה.",
+                        "driverName": "אריאלה",
+                        "finishHour": ""
+                    },
+                    {
+                        "id": "120",
+                        "flexibility": ["-30", "10"],
+                        "passengers": "1",
+                        "location": "3",
+                        "TypeOfDrive": "4",
+                        "startHour": "14:00",
+                        "Comments": "אריאלה מהצומת, או אם יש סביב 13:00 נסיעה מחיפה",
+                        "driverName": "אריאלה",
+                        "finishHour": "13:00,13:00"
+                    },
+                    {
+                        "id": "122",
+                        "flexibility": ["-30", "10"],
+                        "passengers": "1",
+                        "location": "1",
+                        "TypeOfDrive": "3",
+                        "startHour": "18:30",
+                        "Comments": "תמה ואמיר שוורץ לכרמיאל עד 22:00. יש סיכוי שיהיה רכב מסידור החלוץ",
+                        "driverName": "תמה",
+                        "finishHour": "22:00,22:00"
+                    },
+                    {
+                        "id": "123",
+                        "flexibility": ["-30", "10"],
+                        "passengers": "1",
+                        "location": "6",
+                        "TypeOfDrive": "2",
+                        "startHour": "06:15",
+                        "Comments": "ב615  דבורה למשגב עד 815",
+                        "driverName": "דבורה מסעודה",
+                        "finishHour": "08:30"
+                    },
+                    {
+                        "id": "124",
+                        "flexibility": ["-30", "10"],
+                        "passengers": "1",
+                        "location": "14",
+                        "TypeOfDrive": "2",
+                        "startHour": "19:15",
+                        "Comments": "ב1915  דבורה לרביד , סביב 2130 דבורה מרביד ",
+                        "driverName": "דבורה מסעודה",
+                        "finishHour": "22:30"
+                    },
+                    {
+                        "id": "125",
+                        "flexibility": ["-30", "10"],
+                        "passengers": "1",
+                        "location": "4",
+                        "TypeOfDrive": "2",
+                        "startHour": "14:00",
+                        "Comments": "רפאל עם  אחד הברלינגו להביא כלב. חוזר עד 17:00 לדבר איתי על בעיות",
+                        "driverName": "רפאל",
+                        "finishHour": "17:00"
+                    },
+                    {
+                        "id": "126",
+                        "flexibility": ["-30", "10"],
+                        "passengers": "1",
+                        "location": "4",
+                        "TypeOfDrive": "2",
+                        "startHour": "08:45",
+                        "Comments": "אורנית צמוד לעכו ועפולה עד 15:15. אם בעייתי דברו איתי",
+                        "driverName": "אורנית שוורץ",
+                        "finishHour": "17:00"
+                    },
+                    {
+                        "id": "127",
+                        "flexibility": ["-30", "10"],
+                        "passengers": "1",
+                        "location": "5",
+                        "TypeOfDrive": "3",
+                        "startHour": "07:30",
+                        "Comments": "יצחק לתיכון ",
+                        "driverName": "יצחק כהן",
+                        "finishHour": ""
+                    },
+                    {
+                        "id": "128",
+                        "flexibility": ["-30", "10"],
+                        "passengers": "1",
+                        "location": "5",
+                        "TypeOfDrive": "4",
+                        "startHour": "17:30",
+                        "Comments": "יצחק רכב מהתיכון לאסוף את נועם וארי מקורות יש גם אופציות נוספות להיות איתי בקשר",
+                        "driverName": "יצחק כהן",
+                        "finishHour": ""
+                    },
+                    {
+                        "id": "129",
+                        "flexibility": ["-30", "10"],
+                        "passengers": "1",
+                        "location": "2",
+                        "TypeOfDrive": "2",
+                        "startHour": "09:00",
+                        "Comments": "עמיר צמוד עד 15 לאזור טבריה",
+                        "driverName": "עמיר",
+                        "finishHour": "15:00"
+                    },
+                    {
+                        "id": "130",
+                        "flexibility": ["-30", "10"],
+                        "passengers": "1",
+                        "location": "10",
+                        "TypeOfDrive": "3",
+                        "startHour": "14:00",
+                        "Comments": "14:00 אייל מאשבל ליובלים ",
+                        "driverName": "אבייתר מעוז",
+                        "finishHour": "14:00,14:00"
+                    },
+                    {
+                        "id": "131",
+                        "flexibility": ["-30", "10"],
+                        "passengers": "1",
+                        "location": "10",
+                        "TypeOfDrive": "4",
+                        "startHour": "16:30",
+                        "Comments": "16:30 אייל מיובלים וממשיך עם הרכב ליובלים ועצמון, עד הלילה גמיש בשעת איסוף, צריך לצאת מיובלים ב20:00 לעצמון. יכול להקפיץ חזרה לאשבל וכו'",
+                        "driverName": "אבייתר מעוז",
+                        "finishHour": "20:00,20:00"
+                    }
+                ],
+                "deletedOrders": [],
+                "vehicles": [
+                    {
+                        "id": "1",
+                        "vehicleName": "שלגיה",
+                        "startHour": "08:00",
+                        "endHour": "09:00",
+                        "kmLimit": "",
+                        "seats": "7",
+                        "Comments": ""
+                    },
+                    {
+                        "id": "3",
+                        "vehicleName": "סנואו",
+                        "startHour": "08:00",
+                        "endHour": "09:00",
+                        "kmLimit": "",
+                        "seats": "7",
+                        "Comments": ""
+                    },
+                    {
+                        "id": "4",
+                        "vehicleName": "שכור",
+                        "startHour": "08:00",
+                        "endHour": "09:00",
+                        "kmLimit": "",
+                        "seats": "5",
+                        "Comments": ""
+                    },
+                    {
+                        "id": "5",
+                        "vehicleName": "ברלינגו",
+                        "startHour": "08:00",
+                        "endHour": "09:00",
+                        "kmLimit": "",
+                        "seats": "5",
+                        "Comments": ""
+                    },
+                    {
+                        "id": "6",
+                        "vehicleName": "שכור 1",
+                        "startHour": "08:00",
+                        "endHour": "09:00",
+                        "kmLimit": "",
+                        "seats": "5",
+                        "Comments": ""
+                    }
+                ],
+                "sketches": [],
+                "chosenSketch": "2",
+                "defaultOrderValues": {},
+                "locationGroupIdForSidur": "ESHBAL"
+            }
+        ],
+        "sidurId": "5",
         "orders": [
-          {
-            "id": "132",
-            "flexibility": [
-              "-30",
-              "10"
-            ],
-            "passengers": "1",
-            "location": "6",
-            "TypeOfDrive": "2",
-            "startHour": "08:00",
-            "Comments": "פלג לרקפת  עד 10fsdfsdfsdfsdfsdfsdfsdfsdf",
-            "driverName": "חן פלג",
-            "finishHour": "13:00"
-          },
-          {
-            "id": "100",
-            "flexibility": [
-              "-30",
-              "10"
-            ],
-            "passengers": "1",
-            "location": "1",
-            "TypeOfDrive": "3",
-            "startHour": "07:20",
-            "Comments": "אורה לוקחת את ילדי גן דרור לכרמיאל, רוצה להמשיך לתור לרופאה עד 10. ",
-            "driverName": "אורה",
-            "finishHour": "10,10"
-          },
-          {
-            "id": "101",
-            "flexibility": [
-              "-30",
-              "10"
-            ],
-            "passengers": "1",
-            "location": "6",
-            "TypeOfDrive": "2",
-            "startHour": "12:50",
-            "Comments": "אורה למרפאה במשגב עד 13:00",
-            "driverName": "אורה",
-            "finishHour": "14:00"
-          },
-          {
-            "id": "102",
-            "flexibility": [
-              "-30",
-              "10"
-            ],
-            "passengers": "1",
-            "location": "6",
-            "TypeOfDrive": "3",
-            "startHour": "19:00",
-            "Comments": "",
-            "driverName": "אורה",
-            "finishHour": ""
-          },
-          {
-            "id": "103",
-            "flexibility": [
-              "-30",
-              "10"
-            ],
-            "passengers": "1",
-            "location": "3",
-            "TypeOfDrive": "2",
-            "startHour": "08:30",
-            "Comments": "אדל מבקשת צמוד עד 16:00. לדבר איתי  אם בעיה",
-            "driverName": "אדל",
-            "finishHour": "14:00"
-          },
-          {
-            "id": "104",
-            "flexibility": [
-              "-30",
-              "10"
-            ],
-            "passengers": "1",
-            "location": "6",
-            "TypeOfDrive": "2",
-            "startHour": "09:45",
-            "Comments": "אושרית תשמח לשעה במשגב, גמישה עד 1320. לא דחוף, רק אם מסתדר.",
-            "driverName": "אושרית",
-            "finishHour": "11:00"
-          },
-          {
-            "id": "105",
-            "flexibility": [
-              "-30",
-              "10"
-            ],
-            "passengers": "1",
-            "location": "",
-            "TypeOfDrive": "2",
-            "startHour": "13:30",
-            "Comments": "חנן לאיסוף שיבולי השמש עד 14:30",
-            "driverName": "חנן לוי",
-            "finishHour": "14:30"
-          },
-          {
-            "id": "106",
-            "flexibility": [
-              "-30",
-              "10"
-            ],
-            "passengers": "1",
-            "location": "2",
-            "TypeOfDrive": "2",
-            "startHour": "15:50",
-            "Comments": "חנן לרקפת - יעזור מאוד צמוד עד 17:20",
-            "driverName": "חנן לוי",
-            "finishHour": "17:20"
-          },
-          {
-            "id": "107",
-            "flexibility": [
-              "-30",
-              "10"
-            ],
-            "passengers": "1",
-            "location": "6",
-            "TypeOfDrive": "2",
-            "startHour": "16:00",
-            "Comments": "חנן ושקד מקופח כללית משגב אם אין צמוד",
-            "driverName": "חנן לוי",
-            "finishHour": "17:00"
-          },
-          {
-            "id": "108",
-            "flexibility": [
-              "-30",
-              "10"
-            ],
-            "passengers": "1",
-            "location": "1",
-            "TypeOfDrive": "2",
-            "startHour": "13:30",
-            "Comments": "איילת לכרמיאל צמוד עד 15 וחצי ",
-            "driverName": "איילת",
-            "finishHour": "15:30"
-          },
-          {
-            "id": "109",
-            "flexibility": [
-              "-30",
-              "10"
-            ],
-            "passengers": "1",
-            "location": "2",
-            "TypeOfDrive": "2",
-            "startHour": "16:00",
-            "Comments": "רז מרקפת ",
-            "driverName": "איילת",
-            "finishHour": "16:30"
-          },
-          {
-            "id": "110",
-            "flexibility": [
-              "-30",
-              "10"
-            ],
-            "passengers": "1",
-            "location": "6",
-            "TypeOfDrive": "2",
-            "startHour": "08:40",
-            "Comments": "איילת למשגב צמוד עד 10:10 (לא להצמיד בבקשה נסיעות כי יש סיכוי שמתבטל מחר בבוקר ",
-            "driverName": "איילת",
-            "finishHour": "10:30"
-          },
-          {
-            "id": "111",
-            "flexibility": [
-              "-30",
-              "10"
-            ],
-            "passengers": "1",
-            "location": "1",
-            "TypeOfDrive": "3",
-            "startHour": "08:15",
-            "Comments": "פביו לכרמיאל",
-            "driverName": "פביו",
-            "finishHour": ""
-          },
-          {
-            "id": "112",
-            "flexibility": [
-              "-30",
-              "10"
-            ],
-            "passengers": "1",
-            "location": "3",
-            "TypeOfDrive": "2",
-            "startHour": "14:00",
-            "Comments": "פביו בחיפה ורוצה להישאר עד מאוחר  ולחזור ברכב. אם יש נסיעה לעשות איתה חילוף מה טוב. אם לא ואפשר לשריין רכב ואנסה למצוא נהג/ת, גם טוב. ",
-            "driverName": "פביו",
-            "finishHour": "20:00"
-          },
-          {
-            "id": "113",
-            "flexibility": [
-              "-30",
-              "10"
-            ],
-            "passengers": "1",
-            "location": "",
-            "TypeOfDrive": "2",
-            "startHour": "14:00",
-            "Comments": "רפאל כהן וטל לכנרת עד 19",
-            "driverName": "טל",
-            "finishHour": "19:00"
-          },
-          {
-            "id": "115",
-            "flexibility": [
-              "-30",
-              "10"
-            ],
-            "passengers": "1",
-            "location": "6",
-            "TypeOfDrive": "2",
-            "startHour": "16:00",
-            "Comments": "אינגריד יונתן ועמרי לחיסון שפעת במשגב, צמוד עד 17:30 אם אפשר עד אחרי, אינגרידף עד 19 ואז נעשה עוד משהו",
-            "driverName": "אינגריד",
-            "finishHour": "17:30"
-          },
-          {
-            "id": "116",
-            "flexibility": [
-              "-30",
-              "10"
-            ],
-            "passengers": "1",
-            "location": "13",
-            "TypeOfDrive": "3",
-            "startHour": "08:30",
-            "Comments": "רונית לבוב לרכבת כרמיאל / לחיפה (להיות ב-10 בבת גלים) ",
-            "driverName": "רונית לבוב",
-            "finishHour": "10,10"
-          },
-          {
-            "id": "117",
-            "flexibility": [
-              "-30",
-              "10"
-            ],
-            "passengers": "1",
-            "location": "9",
-            "TypeOfDrive": "3",
-            "startHour": "09:15",
-            "Comments": "משה מאשבל למרכז השיח בחיפה ",
-            "driverName": "משה",
-            "finishHour": "12:00"
-          },
-          {
-            "id": "118",
-            "flexibility": [
-              "-30",
-              "10"
-            ],
-            "passengers": "1",
-            "location": "9",
-            "TypeOfDrive": "4",
-            "startHour": "14:15",
-            "Comments": "משה ברכב דבר ממרכז השיח בחיפה לאשבל. אם אינגרידף שאני אסע ברכב אחר וישאיר את רכב דבר בחיפה אז אין בעיה. הוא יכול לשמש את הסידור אחהצ וצריך להגיע ברביעי בבוקר לטבריה או רביד ",
-            "driverName": "משה",
-            "finishHour": ""
-          },
-          {
-            "id": "119",
-            "flexibility": [
-              "-30",
-              "10"
-            ],
-            "passengers": "1",
-            "location": "3",
-            "TypeOfDrive": "3",
-            "startHour": "07:20",
-            "Comments": "יהל לרקפת, אריאלה לצומת או אם יש נסיעה לחיפה.",
-            "driverName": "אריאלה",
-            "finishHour": ""
-          },
-          {
-            "id": "120",
-            "flexibility": [
-              "-30",
-              "10"
-            ],
-            "passengers": "1",
-            "location": "3",
-            "TypeOfDrive": "4",
-            "startHour": "14:00",
-            "Comments": "אריאלה מהצומת, או אם יש סביב 13:00 נסיעה מחיפה",
-            "driverName": "אריאלה",
-            "finishHour": "13:00,13:00"
-          },
-          {
-            "id": "122",
-            "flexibility": [
-              "-30",
-              "10"
-            ],
-            "passengers": "1",
-            "location": "1",
-            "TypeOfDrive": "3",
-            "startHour": "18:30",
-            "Comments": "תמה ואמיר שוורץ לכרמיאל עד 22:00. יש סיכוי שיהיה רכב מסידור החלוץ",
-            "driverName": "תמה",
-            "finishHour": "22:00,22:00"
-          },
-          {
-            "id": "123",
-            "flexibility": [
-              "-30",
-              "10"
-            ],
-            "passengers": "1",
-            "location": "6",
-            "TypeOfDrive": "2",
-            "startHour": "06:15",
-            "Comments": "ב615  דבורה למשגב עד 815",
-            "driverName": "דבורה מסעודה",
-            "finishHour": "08:30"
-          },
-          {
-            "id": "124",
-            "flexibility": [
-              "-30",
-              "10"
-            ],
-            "passengers": "1",
-            "location": "14",
-            "TypeOfDrive": "2",
-            "startHour": "19:15",
-            "Comments": "ב1915  דבורה לרביד , סביב 2130 דבורה מרביד ",
-            "driverName": "דבורה מסעודה",
-            "finishHour": "22:30"
-          },
-          {
-            "id": "125",
-            "flexibility": [
-              "-30",
-              "10"
-            ],
-            "passengers": "1",
-            "location": "4",
-            "TypeOfDrive": "2",
-            "startHour": "14:00",
-            "Comments": "רפאל עם  אחד הברלינגו להביא כלב. חוזר עד 17:00 לדבר איתי על בעיות",
-            "driverName": "רפאל",
-            "finishHour": "17:00"
-          },
-          {
-            "id": "126",
-            "flexibility": [
-              "-30",
-              "10"
-            ],
-            "passengers": "1",
-            "location": "4",
-            "TypeOfDrive": "2",
-            "startHour": "08:45",
-            "Comments": "אורנית צמוד לעכו ועפולה עד 15:15. אם בעייתי דברו איתי",
-            "driverName": "אורנית שוורץ",
-            "finishHour": "17:00"
-          },
-          {
-            "id": "127",
-            "flexibility": [
-              "-30",
-              "10"
-            ],
-            "passengers": "1",
-            "location": "5",
-            "TypeOfDrive": "3",
-            "startHour": "07:30",
-            "Comments": "יצחק לתיכון ",
-            "driverName": "יצחק כהן",
-            "finishHour": ""
-          },
-          {
-            "id": "128",
-            "flexibility": [
-              "-30",
-              "10"
-            ],
-            "passengers": "1",
-            "location": "5",
-            "TypeOfDrive": "4",
-            "startHour": "17:30",
-            "Comments": "יצחק רכב מהתיכון לאסוף את נועם וארי מקורות יש גם אופציות נוספות להיות איתי בקשר",
-            "driverName": "יצחק כהן",
-            "finishHour": ""
-          },
-          {
-            "id": "129",
-            "flexibility": [
-              "-30",
-              "10"
-            ],
-            "passengers": "1",
-            "location": "2",
-            "TypeOfDrive": "2",
-            "startHour": "09:00",
-            "Comments": "עמיר צמוד עד 15 לאזור טבריה",
-            "driverName": "עמיר",
-            "finishHour": "15:00"
-          },
-          {
-            "id": "130",
-            "flexibility": [
-              "-30",
-              "10"
-            ],
-            "passengers": "1",
-            "location": "10",
-            "TypeOfDrive": "3",
-            "startHour": "14:00",
-            "Comments": "14:00 אייל מאשבל ליובלים ",
-            "driverName": "אבייתר מעוז",
-            "finishHour": "14:00,14:00"
-          },
-          {
-            "id": "131",
-            "flexibility": [
-              "-30",
-              "10"
-            ],
-            "passengers": "1",
-            "location": "10",
-            "TypeOfDrive": "4",
-            "startHour": "16:30",
-            "Comments": "16:30 אייל מיובלים וממשיך עם הרכב ליובלים ועצמון, עד הלילה גמיש בשעת איסוף, צריך לצאת מיובלים ב20:00 לעצמון. יכול להקפיץ חזרה לאשבל וכו'",
-            "driverName": "אבייתר מעוז",
-            "finishHour": "20:00,20:00"
-          }
+            {
+                "id": "132",
+                "flexibility": ["-30", "10"],
+                "passengers": "1",
+                "location": "6",
+                "TypeOfDrive": "2",
+                "startHour": "08:00",
+                "Comments": "פלג לרקפת  עד 10fsdfsdfsdfsdfsdfsdfsdfsdf",
+                "driverName": "חן פלג",
+                "finishHour": "13:00"
+            },
+            {
+                "id": "100",
+                "flexibility": ["-30", "10"],
+                "passengers": "1",
+                "location": "1",
+                "TypeOfDrive": "3",
+                "startHour": "07:20",
+                "Comments": "אורה לוקחת את ילדי גן דרור לכרמיאל, רוצה להמשיך לתור לרופאה עד 10. ",
+                "driverName": "אורה",
+                "finishHour": "10,10"
+            },
+            {
+                "id": "101",
+                "flexibility": ["-30", "10"],
+                "passengers": "1",
+                "location": "6",
+                "TypeOfDrive": "2",
+                "startHour": "12:50",
+                "Comments": "אורה למרפאה במשגב עד 13:00",
+                "driverName": "אורה",
+                "finishHour": "14:00"
+            },
+            {
+                "id": "102",
+                "flexibility": ["-30", "10"],
+                "passengers": "1",
+                "location": "6",
+                "TypeOfDrive": "3",
+                "startHour": "19:00",
+                "Comments": "",
+                "driverName": "אורה",
+                "finishHour": ""
+            },
+            {
+                "id": "103",
+                "flexibility": ["-30", "10"],
+                "passengers": "1",
+                "location": "3",
+                "TypeOfDrive": "2",
+                "startHour": "08:30",
+                "Comments": "אדל מבקשת צמוד עד 16:00. לדבר איתי  אם בעיה",
+                "driverName": "אדל",
+                "finishHour": "14:00"
+            },
+            {
+                "id": "104",
+                "flexibility": ["-30", "10"],
+                "passengers": "1",
+                "location": "6",
+                "TypeOfDrive": "2",
+                "startHour": "09:45",
+                "Comments": "אושרית תשמח לשעה במשגב, גמישה עד 1320. לא דחוף, רק אם מסתדר.",
+                "driverName": "אושרית",
+                "finishHour": "11:00"
+            },
+            {
+                "id": "105",
+                "flexibility": ["-30", "10"],
+                "passengers": "1",
+                "location": "",
+                "TypeOfDrive": "2",
+                "startHour": "13:30",
+                "Comments": "חנן לאיסוף שיבולי השמש עד 14:30",
+                "driverName": "חנן לוי",
+                "finishHour": "14:30"
+            },
+            {
+                "id": "106",
+                "flexibility": ["-30", "10"],
+                "passengers": "1",
+                "location": "2",
+                "TypeOfDrive": "2",
+                "startHour": "15:50",
+                "Comments": "חנן לרקפת - יעזור מאוד צמוד עד 17:20",
+                "driverName": "חנן לוי",
+                "finishHour": "17:20"
+            },
+            {
+                "id": "107",
+                "flexibility": ["-30", "10"],
+                "passengers": "1",
+                "location": "6",
+                "TypeOfDrive": "2",
+                "startHour": "16:00",
+                "Comments": "חנן ושקד מקופח כללית משגב אם אין צמוד",
+                "driverName": "חנן לוי",
+                "finishHour": "17:00"
+            },
+            {
+                "id": "108",
+                "flexibility": ["-30", "10"],
+                "passengers": "1",
+                "location": "1",
+                "TypeOfDrive": "2",
+                "startHour": "13:30",
+                "Comments": "איילת לכרמיאל צמוד עד 15 וחצי ",
+                "driverName": "איילת",
+                "finishHour": "15:30"
+            },
+            {
+                "id": "109",
+                "flexibility": ["-30", "10"],
+                "passengers": "1",
+                "location": "2",
+                "TypeOfDrive": "2",
+                "startHour": "16:00",
+                "Comments": "רז מרקפת ",
+                "driverName": "איילת",
+                "finishHour": "16:30"
+            },
+            {
+                "id": "110",
+                "flexibility": ["-30", "10"],
+                "passengers": "1",
+                "location": "6",
+                "TypeOfDrive": "2",
+                "startHour": "08:40",
+                "Comments": "איילת למשגב צמוד עד 10:10 (לא להצמיד בבקשה נסיעות כי יש סיכוי שמתבטל מחר בבוקר ",
+                "driverName": "איילת",
+                "finishHour": "10:30"
+            },
+            {
+                "id": "111",
+                "flexibility": ["-30", "10"],
+                "passengers": "1",
+                "location": "1",
+                "TypeOfDrive": "3",
+                "startHour": "08:15",
+                "Comments": "פביו לכרמיאל",
+                "driverName": "פביו",
+                "finishHour": ""
+            },
+            {
+                "id": "112",
+                "flexibility": ["-30", "10"],
+                "passengers": "1",
+                "location": "3",
+                "TypeOfDrive": "2",
+                "startHour": "14:00",
+                "Comments": "פביו בחיפה ורוצה להישאר עד מאוחר  ולחזור ברכב. אם יש נסיעה לעשות איתה חילוף מה טוב. אם לא ואפשר לשריין רכב ואנסה למצוא נהג/ת, גם טוב. ",
+                "driverName": "פביו",
+                "finishHour": "20:00"
+            },
+            {
+                "id": "113",
+                "flexibility": ["-30", "10"],
+                "passengers": "1",
+                "location": "",
+                "TypeOfDrive": "2",
+                "startHour": "14:00",
+                "Comments": "רפאל כהן וטל לכנרת עד 19",
+                "driverName": "טל",
+                "finishHour": "19:00"
+            },
+            {
+                "id": "115",
+                "flexibility": ["-30", "10"],
+                "passengers": "1",
+                "location": "6",
+                "TypeOfDrive": "2",
+                "startHour": "16:00",
+                "Comments": "אינגריד יונתן ועמרי לחיסון שפעת במשגב, צמוד עד 17:30 אם אפשר עד אחרי, אינגרידף עד 19 ואז נעשה עוד משהו",
+                "driverName": "אינגריד",
+                "finishHour": "17:30"
+            },
+            {
+                "id": "116",
+                "flexibility": ["-30", "10"],
+                "passengers": "1",
+                "location": "13",
+                "TypeOfDrive": "3",
+                "startHour": "08:30",
+                "Comments": "רונית לבוב לרכבת כרמיאל / לחיפה (להיות ב-10 בבת גלים) ",
+                "driverName": "רונית לבוב",
+                "finishHour": "10,10"
+            },
+            {
+                "id": "117",
+                "flexibility": ["-30", "10"],
+                "passengers": "1",
+                "location": "9",
+                "TypeOfDrive": "3",
+                "startHour": "09:15",
+                "Comments": "משה מאשבל למרכז השיח בחיפה ",
+                "driverName": "משה",
+                "finishHour": "12:00"
+            },
+            {
+                "id": "118",
+                "flexibility": ["-30", "10"],
+                "passengers": "1",
+                "location": "9",
+                "TypeOfDrive": "4",
+                "startHour": "14:15",
+                "Comments": "משה ברכב דבר ממרכז השיח בחיפה לאשבל. אם אינגרידף שאני אסע ברכב אחר וישאיר את רכב דבר בחיפה אז אין בעיה. הוא יכול לשמש את הסידור אחהצ וצריך להגיע ברביעי בבוקר לטבריה או רביד ",
+                "driverName": "משה",
+                "finishHour": ""
+            },
+            {
+                "id": "119",
+                "flexibility": ["-30", "10"],
+                "passengers": "1",
+                "location": "3",
+                "TypeOfDrive": "3",
+                "startHour": "07:20",
+                "Comments": "יהל לרקפת, אריאלה לצומת או אם יש נסיעה לחיפה.",
+                "driverName": "אריאלה",
+                "finishHour": ""
+            },
+            {
+                "id": "120",
+                "flexibility": ["-30", "10"],
+                "passengers": "1",
+                "location": "3",
+                "TypeOfDrive": "4",
+                "startHour": "14:00",
+                "Comments": "אריאלה מהצומת, או אם יש סביב 13:00 נסיעה מחיפה",
+                "driverName": "אריאלה",
+                "finishHour": "13:00,13:00"
+            },
+            {
+                "id": "122",
+                "flexibility": ["-30", "10"],
+                "passengers": "1",
+                "location": "1",
+                "TypeOfDrive": "3",
+                "startHour": "18:30",
+                "Comments": "תמה ואמיר שוורץ לכרמיאל עד 22:00. יש סיכוי שיהיה רכב מסידור החלוץ",
+                "driverName": "תמה",
+                "finishHour": "22:00,22:00"
+            },
+            {
+                "id": "123",
+                "flexibility": ["-30", "10"],
+                "passengers": "1",
+                "location": "6",
+                "TypeOfDrive": "2",
+                "startHour": "06:15",
+                "Comments": "ב615  דבורה למשגב עד 815",
+                "driverName": "דבורה מסעודה",
+                "finishHour": "08:30"
+            },
+            {
+                "id": "124",
+                "flexibility": ["-30", "10"],
+                "passengers": "1",
+                "location": "14",
+                "TypeOfDrive": "2",
+                "startHour": "19:15",
+                "Comments": "ב1915  דבורה לרביד , סביב 2130 דבורה מרביד ",
+                "driverName": "דבורה מסעודה",
+                "finishHour": "22:30"
+            },
+            {
+                "id": "125",
+                "flexibility": ["-30", "10"],
+                "passengers": "1",
+                "location": "4",
+                "TypeOfDrive": "2",
+                "startHour": "14:00",
+                "Comments": "רפאל עם  אחד הברלינגו להביא כלב. חוזר עד 17:00 לדבר איתי על בעיות",
+                "driverName": "רפאל",
+                "finishHour": "17:00"
+            },
+            {
+                "id": "126",
+                "flexibility": ["-30", "10"],
+                "passengers": "1",
+                "location": "4",
+                "TypeOfDrive": "2",
+                "startHour": "08:45",
+                "Comments": "אורנית צמוד לעכו ועפולה עד 15:15. אם בעייתי דברו איתי",
+                "driverName": "אורנית שוורץ",
+                "finishHour": "17:00"
+            },
+            {
+                "id": "127",
+                "flexibility": ["-30", "10"],
+                "passengers": "1",
+                "location": "5",
+                "TypeOfDrive": "3",
+                "startHour": "07:30",
+                "Comments": "יצחק לתיכון ",
+                "driverName": "יצחק כהן",
+                "finishHour": ""
+            },
+            {
+                "id": "128",
+                "flexibility": ["-30", "10"],
+                "passengers": "1",
+                "location": "5",
+                "TypeOfDrive": "4",
+                "startHour": "17:30",
+                "Comments": "יצחק רכב מהתיכון לאסוף את נועם וארי מקורות יש גם אופציות נוספות להיות איתי בקשר",
+                "driverName": "יצחק כהן",
+                "finishHour": ""
+            },
+            {
+                "id": "129",
+                "flexibility": ["-30", "10"],
+                "passengers": "1",
+                "location": "2",
+                "TypeOfDrive": "2",
+                "startHour": "09:00",
+                "Comments": "עמיר צמוד עד 15 לאזור טבריה",
+                "driverName": "עמיר",
+                "finishHour": "15:00"
+            },
+            {
+                "id": "130",
+                "flexibility": ["-30", "10"],
+                "passengers": "1",
+                "location": "10",
+                "TypeOfDrive": "3",
+                "startHour": "14:00",
+                "Comments": "14:00 אייל מאשבל ליובלים ",
+                "driverName": "אבייתר מעוז",
+                "finishHour": "14:00,14:00"
+            },
+            {
+                "id": "131",
+                "flexibility": ["-30", "10"],
+                "passengers": "1",
+                "location": "10",
+                "TypeOfDrive": "4",
+                "startHour": "16:30",
+                "Comments": "16:30 אייל מיובלים וממשיך עם הרכב ליובלים ועצמון, עד הלילה גמיש בשעת איסוף, צריך לצאת מיובלים ב20:00 לעצמון. יכול להקפיץ חזרה לאשבל וכו'",
+                "driverName": "אבייתר מעוז",
+                "finishHour": "20:00,20:00"
+            }
         ],
-        "deletedOrders": [],
         "vehicles": [
-          {
-            "id": "1",
-            "vehicleName": "שלגיה",
-            "startHour": "08:00",
-            "endHour": "09:00",
-            "kmLimit": "",
-            "seats": "7",
-            "Comments": ""
-          },
-          {
-            "id": "3",
-            "vehicleName": "סנואו",
-            "startHour": "08:00",
-            "endHour": "09:00",
-            "kmLimit": "",
-            "seats": "7",
-            "Comments": ""
-          },
-          {
-            "id": "4",
-            "vehicleName": "שכור",
-            "startHour": "08:00",
-            "endHour": "09:00",
-            "kmLimit": "",
-            "seats": "5",
-            "Comments": ""
-          },
-          {
-            "id": "5",
-            "vehicleName": "ברלינגו",
-            "startHour": "08:00",
-            "endHour": "09:00",
-            "kmLimit": "",
-            "seats": "5",
-            "Comments": ""
-          },
-          {
-            "id": "6",
-            "vehicleName": "שכור 1",
-            "startHour": "08:00",
-            "endHour": "09:00",
-            "kmLimit": "",
-            "seats": "5",
-            "Comments": ""
-          }
+            {
+                "id": "1",
+                "vehicleName": "שלגיה",
+                "startHour": "08:00",
+                "endHour": "09:00",
+                "kmLimit": "",
+                "seats": "7",
+                "Comments": ""
+            },
+            {
+                "id": "3",
+                "vehicleName": "סנואו",
+                "startHour": "08:00",
+                "endHour": "09:00",
+                "kmLimit": "",
+                "seats": "7",
+                "Comments": ""
+            },
+            {
+                "id": "4",
+                "vehicleName": "שכור",
+                "startHour": "08:00",
+                "endHour": "09:00",
+                "kmLimit": "",
+                "seats": "5",
+                "Comments": ""
+            },
+            {
+                "id": "5",
+                "vehicleName": "ברלינגו",
+                "startHour": "08:00",
+                "endHour": "09:00",
+                "kmLimit": "",
+                "seats": "5",
+                "Comments": ""
+            },
+            {
+                "id": "6",
+                "vehicleName": "שכור 1",
+                "startHour": "08:00",
+                "endHour": "09:00",
+                "kmLimit": "",
+                "seats": "5",
+                "Comments": ""
+            }
         ],
+        "orderIdInEdit": null,
+        "dataHolderForCurrentOrderInEdit": null,
+        "deletedOrders": [],
+        "defaultOrderValues": {
+            "id": "1",
+            "driverName": "",
+            "startHour": "08:00",
+            "finishHour": "09:00",
+            "TypeOfDrive": "3",
+            "Comments": "",
+            "passengers": "1",
+            "flexibility": ["-30", "10"],
+            "location": ""
+        },
         "sketches": [],
-        "chosenSketch": "2",
-        "defaultOrderValues": {},
-        "locationGroupIdForSidur": "ESHBAL"
-      }
-    ],
-    "sidurId": "5",
-    "orders": [
-      {
-        "id": "132",
-        "flexibility": [
-          "-30",
-          "10"
+        "displaySetting": {
+            "view": "sketch"
+        },
+        "SketchIdInEdit": null,
+        "pendingOrderIdInEdit": null,
+        "sessionState": {
+            "LocationGroupTabOpen": "0",
+            "SketchIdInEdit": "",
+            "locationGroupInEdit": "ESHBAL",
+            "orderIdInEdit": null,
+            "pendingOrderIdInEdit": null,
+            "dataHolderForCurrentOrderInEdit": null,
+            "isAnimationRunning": true,
+            "locationMainInEdit": "2",
+            "pendingOrderInEditActionSelectDrives": [],
+            "pendingOrderInEditAction": null,
+            "routeIdInEdit": "8",
+            "transportIdInEdit": "2"
+        },
+        "LocationGroups": [
+            {
+                "Locations": [
+                    {
+                        "EnName": "Karmiel",
+                        "id": "1",
+                        "name": "כרמיאל",
+                        "ETA": 30
+                    },
+                    {
+                        "EnName": "Rakefet",
+                        "id": "2",
+                        "name": "רקפת",
+                        "ETA": 30
+                    },
+                    {
+                        "EnName": "Haifa",
+                        "id": "3",
+                        "name": "חיפה",
+                        "ETA": 50
+                    },
+                    {
+                        "EnName": "Acre",
+                        "id": "4",
+                        "name": "עכו",
+                        "ETA": 45
+                    },
+                    {
+                        "EnName": "Hevrati",
+                        "id": "5",
+                        "name": "חברתי",
+                        "ETA": 50
+                    },
+                    {
+                        "EnName": "misgav",
+                        "id": "6",
+                        "name": "משגב",
+                        "ETA": 30
+                    },
+                    {
+                        "EnName": "Tzurit",
+                        "id": "7",
+                        "name": "צורית",
+                        "ETA": 30
+                    },
+                    {
+                        "EnName": "MaromGalil",
+                        "id": "8",
+                        "name": "מרום גליל",
+                        "ETA": 30
+                    },
+                    {
+                        "EnName": "Merkaz",
+                        "id": "9",
+                        "name": "מרכז",
+                        "ETA": 30
+                    },
+                    {
+                        "EnName": "Yuvalim",
+                        "id": "10",
+                        "name": "יובלים",
+                        "ETA": 30
+                    },
+                    {
+                        "EnName": "Yaad",
+                        "id": "11",
+                        "name": "יעד",
+                        "ETA": 30
+                    },
+                    {
+                        "EnName": "Sachnin",
+                        "id": "12",
+                        "name": "סכנין",
+                        "ETA": 30
+                    },
+                    {
+                        "EnName": "RailKarmiel",
+                        "id": "13",
+                        "name": "רכבת כרמיאל",
+                        "ETA": 25
+                    },
+                    {
+                        "id": "14",
+                        "ETA": "60",
+                        "name": "תל אביב",
+                        "EnName": "Other"
+                    },
+                    {
+                        "id": "15",
+                        "ETA": "45",
+                        "name": "חברתי קריות",
+                        "EnName": ""
+                    },
+                    {
+                        "id": "16",
+                        "ETA": "25",
+                        "name": "ראש פינה",
+                        "EnName": ""
+                    },
+                    {
+                        "id": "17",
+                        "ETA": "25",
+                        "name": "גולן",
+                        "EnName": ""
+                    },
+                    {
+                        "id": "18",
+                        "ETA": "25",
+                        "name": "צפת",
+                        "EnName": ""
+                    },
+                    {
+                        "id": "19",
+                        "ETA": "20",
+                        "name": "שעב",
+                        "EnName": ""
+                    },
+                    {
+                        "id": "20",
+                        "ETA": "40",
+                        "name": "קריית חיים",
+                        "EnName": ""
+                    },
+                    {
+                        "id": "21",
+                        "ETA": "45",
+                        "name": "טבעון",
+                        "EnName": ""
+                    },
+                    {
+                        "id": "22",
+                        "ETA": "25",
+                        "name": "דמיידה",
+                        "EnName": ""
+                    },
+                    {
+                        "id": "23",
+                        "ETA": "25",
+                        "name": "אשחר",
+                        "EnName": ""
+                    },
+                    {
+                        "id": "24",
+                        "ETA": "30",
+                        "name": "טל-אל",
+                        "EnName": ""
+                    },
+                    {
+                        "id": "25",
+                        "ETA": "35",
+                        "name": "כפר אושריתים",
+                        "EnName": ""
+                    },
+                    {
+                        "id": "26",
+                        "ETA": "25",
+                        "name": "תפן",
+                        "EnName": ""
+                    },
+                    {
+                        "id": "27",
+                        "ETA": "50",
+                        "name": "נהריה",
+                        "EnName": ""
+                    },
+                    {
+                        "id": "28",
+                        "ETA": "60",
+                        "name": "ראש הנקרה",
+                        "EnName": ""
+                    },
+                    {
+                        "id": "29",
+                        "ETA": "20",
+                        "name": "דיר אל אסד",
+                        "EnName": ""
+                    },
+                    {
+                        "id": "30",
+                        "ETA": "25",
+                        "name": "נחף",
+                        "EnName": ""
+                    },
+                    {
+                        "id": "31",
+                        "ETA": "25",
+                        "name": "מג'דל כרום",
+                        "EnName": ""
+                    },
+                    {
+                        "id": "32",
+                        "ETA": "25",
+                        "name": "מורשת",
+                        "EnName": ""
+                    },
+                    {
+                        "id": "33",
+                        "ETA": "25",
+                        "name": "כפר מנדא",
+                        "EnName": ""
+                    },
+                    {
+                        "id": "34",
+                        "ETA": "25",
+                        "name": "חנתון",
+                        "EnName": ""
+                    },
+                    {
+                        "id": "35",
+                        "ETA": "35",
+                        "name": "חנן הגליל",
+                        "EnName": ""
+                    },
+                    {
+                        "id": "36",
+                        "ETA": "45",
+                        "name": "תמרת",
+                        "EnName": ""
+                    },
+                    {
+                        "id": "37",
+                        "ETA": "40",
+                        "name": "רמת ישי",
+                        "EnName": ""
+                    },
+                    {
+                        "id": "38",
+                        "ETA": "50",
+                        "name": "עמק הירדן",
+                        "EnName": ""
+                    },
+                    {
+                        "id": "39",
+                        "ETA": "50",
+                        "name": "גליל עליון",
+                        "EnName": ""
+                    },
+                    {
+                        "id": "40",
+                        "ETA": "50",
+                        "name": "דלית אל כרמל",
+                        "EnName": ""
+                    },
+                    {
+                        "id": "41",
+                        "ETA": "25",
+                        "name": "קריות",
+                        "EnName": ""
+                    },
+                    {
+                        "id": "42",
+                        "ETA": "49",
+                        "name": "יקנעם",
+                        "EnName": ""
+                    },
+                    {
+                        "id": "43",
+                        "ETA": "25",
+                        "name": "זכרון יעקוב",
+                        "EnName": ""
+                    },
+                    {
+                        "id": "44",
+                        "ETA": "45",
+                        "name": "טירת הכרמל",
+                        "EnName": ""
+                    },
+                    {
+                        "id": "45",
+                        "ETA": "50",
+                        "name": "הגושרים",
+                        "EnName": ""
+                    },
+                    {
+                        "id": "46",
+                        "ETA": "60",
+                        "name": "קרית שמונה",
+                        "EnName": ""
+                    },
+                    {
+                        "id": "47",
+                        "ETA": "55",
+                        "name": "נצרת",
+                        "EnName": ""
+                    },
+                    {
+                        "id": "48",
+                        "ETA": "50",
+                        "name": "עפולה",
+                        "EnName": ""
+                    },
+                    {
+                        "id": "49",
+                        "ETA": "20",
+                        "name": "שורשים",
+                        "EnName": ""
+                    },
+                    {
+                        "id": "50",
+                        "ETA": "40",
+                        "name": "עין המפרץ",
+                        "EnName": ""
+                    },
+                    {
+                        "id": "51",
+                        "ETA": "40",
+                        "name": "רגבה",
+                        "EnName": ""
+                    },
+                    {
+                        "id": "52",
+                        "ETA": "25",
+                        "name": "שמרת",
+                        "EnName": ""
+                    },
+                    {
+                        "id": "53",
+                        "ETA": "25",
+                        "name": "מנוף",
+                        "EnName": ""
+                    },
+                    {
+                        "id": "54",
+                        "ETA": "25",
+                        "name": "יודפת",
+                        "EnName": ""
+                    },
+                    {
+                        "id": "55",
+                        "ETA": "25",
+                        "name": "תל יודפת",
+                        "EnName": ""
+                    },
+                    {
+                        "id": "56",
+                        "ETA": "25",
+                        "name": "אבלין",
+                        "EnName": ""
+                    },
+                    {
+                        "id": "57",
+                        "ETA": "30",
+                        "name": "קריית אתא",
+                        "EnName": ""
+                    },
+                    {
+                        "id": "58",
+                        "ETA": "45",
+                        "name": "לב המפרץ",
+                        "EnName": ""
+                    },
+                    {
+                        "id": "59",
+                        "ETA": "33",
+                        "name": "ראמה",
+                        "EnName": ""
+                    },
+                    {
+                        "id": "60",
+                        "ETA": "45",
+                        "name": "רביד",
+                        "EnName": ""
+                    },
+                    {
+                        "id": "61",
+                        "ETA": "50",
+                        "name": "גינוסר",
+                        "EnName": ""
+                    },
+                    {
+                        "id": "62",
+                        "ETA": "50",
+                        "name": "חוקוק",
+                        "EnName": ""
+                    },
+                    {
+                        "id": "63",
+                        "ETA": "50",
+                        "name": "כינרת",
+                        "EnName": ""
+                    },
+                    {
+                        "id": "64",
+                        "ETA": "50",
+                        "name": "טבריה",
+                        "EnName": ""
+                    },
+                    {
+                        "id": "65",
+                        "ETA": "10",
+                        "name": "צומת אשבל",
+                        "EnName": ""
+                    },
+                    {
+                        "id": "66",
+                        "ETA": "10",
+                        "name": "צומת יובלים",
+                        "EnName": ""
+                    },
+                    {
+                        "id": "67",
+                        "ETA": "20",
+                        "name": "צומת כרמיאל מערב",
+                        "EnName": ""
+                    },
+                    {
+                        "id": "68",
+                        "ETA": "30",
+                        "name": "צומת המוביל",
+                        "EnName": ""
+                    },
+                    {
+                        "id": "69",
+                        "ETA": "40",
+                        "name": "צומת אלונים",
+                        "EnName": ""
+                    },
+                    {
+                        "id": "70",
+                        "ETA": "15",
+                        "name": "צומת משגב",
+                        "EnName": ""
+                    },
+                    {
+                        "id": "71",
+                        "ETA": "25",
+                        "name": "צומת אחיהוד",
+                        "EnName": ""
+                    }
+                ],
+                "id": "ESHBAL",
+                "name": "אשבל",
+                "Transports": [
+                    {
+                        "name": "169 מצומת יובלים לחיפה",
+                        "id": "1",
+                        "comments": "",
+                        "TransportStops": [
+                            {
+                                "locationId": "66",
+                                "minuetsFromLast": 20,
+                                "position": 1
+                            },
+                            {
+                                "locationId": "3",
+                                "minuetsFromLast": 45,
+                                "position": 2
+                            }
+                        ],
+                        "TransportTime": [
+                            "05:15",
+                            "06:15",
+                            "07:15",
+                            "09:10",
+                            "09:00",
+                            "11:00",
+                            "13:00",
+                            "15:30",
+                            "16:30"
+                        ]
+                    },
+                    {
+                        "name": "קו 42 מאשבל לכרמיאל",
+                        "id": "2",
+                        "comments": "",
+                        "TransportStops": [
+                            {
+                                "locationId": "HOME_LOCATION",
+                                "minuetsFromLast": 20,
+                                "position": 1
+                            },
+                            {
+                                "locationId": "65",
+                                "minuetsFromLast": 15,
+                                "position": 2
+                            },
+                            {
+                                "locationId": "1",
+                                "minuetsFromLast": 20,
+                                "position": 3
+                            },
+                            {
+                                "locationId": "13",
+                                "minuetsFromLast": 5,
+                                "position": 4
+                            }
+                        ],
+                        "TransportTime": [
+                            "07:00",
+                            "09:40",
+                            "10:40",
+                            "11:40",
+                            "14:05",
+                            "15:05",
+                            "17:05",
+                            "20:40",
+                            "23:25"
+                        ]
+                    },
+                    {
+                        "name": "קו 42 מכרמיאל לאשבל",
+                        "id": "3",
+                        "comments": "",
+                        "TransportStops": [
+                            {
+                                "locationId": "13",
+                                "minuetsFromLast": 20,
+                                "position": 1
+                            },
+                            {
+                                "locationId": "1",
+                                "minuetsFromLast": 5,
+                                "position": 2
+                            },
+                            {
+                                "locationId": "HOME_LOCATION",
+                                "minuetsFromLast": 30,
+                                "position": 3
+                            }
+                        ],
+                        "TransportTime": [
+                            "07:40",
+                            "08:40",
+                            "10:40",
+                            "12:40",
+                            "14:10",
+                            "16:10",
+                            "19:40",
+                            "21:40"
+                        ]
+                    },
+                    {
+                        "name": "169 מחיפה לצומת יובלים",
+                        "id": "4",
+                        "comments": "",
+                        "TransportStops": [
+                            {
+                                "locationId": "3",
+                                "minuetsFromLast": 20,
+                                "position": 1
+                            },
+                            {
+                                "locationId": "70",
+                                "minuetsFromLast": 45,
+                                "position": 2
+                            },
+                            {
+                                "locationId": "66",
+                                "minuetsFromLast": 5,
+                                "position": 3
+                            }
+                        ],
+                        "TransportTime": [
+                            "12:30",
+                            "13:20",
+                            "14:15",
+                            "15:10",
+                            "16:10",
+                            "17:30",
+                            "19:00",
+                            "20:30"
+                        ]
+                    },
+                    {
+                        "name": "265 חיפה צומת יובלים",
+                        "id": "5",
+                        "comments": "",
+                        "TransportStops": [
+                            {
+                                "locationId": "3",
+                                "minuetsFromLast": 20,
+                                "position": 1
+                            },
+                            {
+                                "locationId": "70",
+                                "minuetsFromLast": 45,
+                                "position": 2
+                            },
+                            {
+                                "locationId": "66",
+                                "minuetsFromLast": 5,
+                                "position": 3
+                            }
+                        ],
+                        "TransportTime": [
+                            "06:35",
+                            "08:10",
+                            "09:00",
+                            "10:05",
+                            "11:30",
+                            "13:05",
+                            "15:10",
+                            "15:45",
+                            "16:50",
+                            "17:50",
+                            "18:50",
+                            "19:50",
+                            "20:15",
+                            "21:20",
+                            "22:45"
+                        ]
+                    },
+                    {
+                        "name": "265 צומת יובלים חיפה",
+                        "id": "6",
+                        "comments": "",
+                        "TransportStops": [
+                            {
+                                "locationId": "66",
+                                "minuetsFromLast": 20,
+                                "position": 1
+                            },
+                            {
+                                "locationId": "70",
+                                "minuetsFromLast": 5,
+                                "position": 2
+                            },
+                            {
+                                "locationId": "3",
+                                "minuetsFromLast": 45,
+                                "position": 3
+                            }
+                        ],
+                        "TransportTime": [
+                            "05:55",
+                            "06:50",
+                            "07:25",
+                            "07:55",
+                            "08:55",
+                            "10:25",
+                            "11:55",
+                            "12:55",
+                            "14:25",
+                            "16:15",
+                            "17:25",
+                            "18:25",
+                            "19:25",
+                            "21:25",
+                            "22:55"
+                        ]
+                    }
+                ],
+                "Routes": [
+                    {
+                        "name": "כביש 748 לחנן הגליל",
+                        "id": "1",
+                        "comments": "",
+                        "routStops": [
+                            {
+                                "locationId": "10",
+                                "minuetsFromLast": 20,
+                                "position": 1
+                            },
+                            {
+                                "locationId": "2",
+                                "minuetsFromLast": 10,
+                                "position": 2
+                            },
+                            {
+                                "locationId": "32",
+                                "minuetsFromLast": 15,
+                                "position": 3
+                            },
+                            {
+                                "locationId": "33",
+                                "minuetsFromLast": 10,
+                                "position": 4
+                            },
+                            {
+                                "locationId": "34",
+                                "minuetsFromLast": 10,
+                                "position": 5
+                            },
+                            {
+                                "locationId": "35",
+                                "minuetsFromLast": 10,
+                                "position": 6
+                            }
+                        ]
+                    },
+                    {
+                        "name": "כרמיאל עכו נהרייה ראש הנקרה",
+                        "id": "2",
+                        "comments": "",
+                        "routStops": [
+                            {
+                                "locationId": "10",
+                                "minuetsFromLast": 20,
+                                "position": 1
+                            },
+                            {
+                                "locationId": "49",
+                                "minuetsFromLast": 10,
+                                "position": 2
+                            },
+                            {
+                                "locationId": "1",
+                                "minuetsFromLast": 10,
+                                "position": 3
+                            },
+                            {
+                                "locationId": "13",
+                                "minuetsFromLast": 5,
+                                "position": 4
+                            },
+                            {
+                                "locationId": "4",
+                                "minuetsFromLast": 20,
+                                "position": 5
+                            },
+                            {
+                                "locationId": "51",
+                                "minuetsFromLast": 5,
+                                "position": 6
+                            },
+                            {
+                                "locationId": "52",
+                                "minuetsFromLast": 5,
+                                "position": 7
+                            },
+                            {
+                                "locationId": "50",
+                                "minuetsFromLast": 20,
+                                "position": 8
+                            },
+                            {
+                                "locationId": "27",
+                                "minuetsFromLast": 20,
+                                "position": 9
+                            },
+                            {
+                                "locationId": "28",
+                                "minuetsFromLast": 20,
+                                "position": 10
+                            }
+                        ]
+                    },
+                    {
+                        "name": "מנוף יודפת",
+                        "id": "3",
+                        "comments": "",
+                        "routStops": [
+                            {
+                                "locationId": "10",
+                                "minuetsFromLast": 20,
+                                "position": 1
+                            },
+                            {
+                                "locationId": "2",
+                                "minuetsFromLast": 10,
+                                "position": 2
+                            },
+                            {
+                                "locationId": "53",
+                                "minuetsFromLast": 20,
+                                "position": 3
+                            },
+                            {
+                                "locationId": "55",
+                                "minuetsFromLast": 20,
+                                "position": 4
+                            },
+                            {
+                                "locationId": "54",
+                                "minuetsFromLast": 10,
+                                "position": 5
+                            }
+                        ]
+                    },
+                    {
+                        "name": "יובלים - קריית אתא - חיפה",
+                        "id": "4",
+                        "comments": "",
+                        "routStops": [
+                            {
+                                "locationId": "10",
+                                "minuetsFromLast": 20,
+                                "position": 1
+                            },
+                            {
+                                "locationId": "6",
+                                "minuetsFromLast": 90,
+                                "position": 2
+                            },
+                            {
+                                "locationId": "2",
+                                "minuetsFromLast": 5,
+                                "position": 3
+                            },
+                            {
+                                "locationId": "32",
+                                "minuetsFromLast": 10,
+                                "position": 4
+                            },
+                            {
+                                "locationId": "56",
+                                "minuetsFromLast": 10,
+                                "position": 5
+                            },
+                            {
+                                "locationId": "57",
+                                "minuetsFromLast": 20,
+                                "position": 6
+                            },
+                            {
+                                "locationId": "41",
+                                "minuetsFromLast": 20,
+                                "position": 7
+                            },
+                            {
+                                "locationId": "20",
+                                "minuetsFromLast": 20,
+                                "position": 8
+                            },
+                            {
+                                "locationId": "58",
+                                "minuetsFromLast": 20,
+                                "position": 9
+                            },
+                            {
+                                "locationId": "3",
+                                "minuetsFromLast": 20,
+                                "position": 10
+                            }
+                        ]
+                    },
+                    {
+                        "name": "יובלים - ראמה - טבריה",
+                        "id": "5",
+                        "comments": "",
+                        "routStops": [
+                            {
+                                "locationId": "10",
+                                "minuetsFromLast": 20,
+                                "position": 1
+                            },
+                            {
+                                "locationId": "1",
+                                "minuetsFromLast": 15,
+                                "position": 2
+                            },
+                            {
+                                "locationId": "30",
+                                "minuetsFromLast": 10,
+                                "position": 3
+                            },
+                            {
+                                "locationId": "59",
+                                "minuetsFromLast": 10,
+                                "position": 4
+                            },
+                            {
+                                "locationId": "62",
+                                "minuetsFromLast": 30,
+                                "position": 5
+                            },
+                            {
+                                "locationId": "61",
+                                "minuetsFromLast": 10,
+                                "position": 6
+                            },
+                            {
+                                "locationId": "64",
+                                "minuetsFromLast": 10,
+                                "position": 7
+                            }
+                        ]
+                    },
+                    {
+                        "name": "אשחר - יעד - שעב",
+                        "id": "6",
+                        "comments": "",
+                        "routStops": [
+                            {
+                                "locationId": "23",
+                                "minuetsFromLast": 20,
+                                "position": 1
+                            },
+                            {
+                                "locationId": "10",
+                                "minuetsFromLast": 20,
+                                "position": 2
+                            },
+                            {
+                                "locationId": "11",
+                                "minuetsFromLast": 20,
+                                "position": 3
+                            },
+                            {
+                                "locationId": "19",
+                                "minuetsFromLast": 20,
+                                "position": 4
+                            }
+                        ]
+                    },
+                    {
+                        "name": "צמתים צ. אשבל  עד צ. אלונים",
+                        "id": "7",
+                        "comments": "",
+                        "routStops": [
+                            {
+                                "locationId": "65",
+                                "minuetsFromLast": 20,
+                                "position": 1
+                            },
+                            {
+                                "locationId": "66",
+                                "minuetsFromLast": 5,
+                                "position": 2
+                            },
+                            {
+                                "locationId": "70",
+                                "minuetsFromLast": 5,
+                                "position": 3
+                            },
+                            {
+                                "locationId": "68",
+                                "minuetsFromLast": 20,
+                                "position": 4
+                            },
+                            {
+                                "locationId": "69",
+                                "minuetsFromLast": 15,
+                                "position": 5
+                            }
+                        ]
+                    },
+                    {
+                        "name": "צמתים צ. אשבל עד צ. אחיהוד",
+                        "id": "8",
+                        "comments": "",
+                        "routStops": [
+                            {
+                                "locationId": "65",
+                                "minuetsFromLast": 20,
+                                "position": 1
+                            },
+                            {
+                                "locationId": "66",
+                                "minuetsFromLast": 5,
+                                "position": 2
+                            },
+                            {
+                                "locationId": "67",
+                                "minuetsFromLast": 10,
+                                "position": 3
+                            },
+                            {
+                                "locationId": "71",
+                                "minuetsFromLast": 15,
+                                "position": 4
+                            }
+                        ]
+                    }
+                ],
+                "dbId": ""
+            }
         ],
-        "passengers": "1",
-        "location": "6",
-        "TypeOfDrive": "2",
-        "startHour": "08:00",
-        "Comments": "פלג לרקפת  עד 10fsdfsdfsdfsdfsdfsdfsdfsdf",
-        "driverName": "חן פלג",
-        "finishHour": "13:00"
-      },
-      {
-        "id": "100",
-        "flexibility": [
-          "-30",
-          "10"
+        "recordBriefs": [
+            {
+                "id": "5",
+                "locationGroupOrSidurId": "ESHBAL",
+                "name": "סידור לדוגמה",
+                "typeOfRecord": 1
+            },
+            {
+                "dbId": "",
+                "id": "ESHBAL",
+                "locationGroupOrSidurId": "ESHBAL",
+                "name": "אשבל",
+                "typeOfRecord": 2
+            }
         ],
-        "passengers": "1",
-        "location": "1",
-        "TypeOfDrive": "3",
-        "startHour": "07:20",
-        "Comments": "אורה לוקחת את ילדי גן דרור לכרמיאל, רוצה להמשיך לתור לרופאה עד 10. ",
-        "driverName": "אורה",
-        "finishHour": "10,10"
-      },
-      {
-        "id": "101",
-        "flexibility": [
-          "-30",
-          "10"
-        ],
-        "passengers": "1",
-        "location": "6",
-        "TypeOfDrive": "2",
-        "startHour": "12:50",
-        "Comments": "אורה למרפאה במשגב עד 13:00",
-        "driverName": "אורה",
-        "finishHour": "14:00"
-      },
-      {
-        "id": "102",
-        "flexibility": [
-          "-30",
-          "10"
-        ],
-        "passengers": "1",
-        "location": "6",
-        "TypeOfDrive": "3",
-        "startHour": "19:00",
-        "Comments": "",
-        "driverName": "אורה",
-        "finishHour": ""
-      },
-      {
-        "id": "103",
-        "flexibility": [
-          "-30",
-          "10"
-        ],
-        "passengers": "1",
-        "location": "3",
-        "TypeOfDrive": "2",
-        "startHour": "08:30",
-        "Comments": "אדל מבקשת צמוד עד 16:00. לדבר איתי  אם בעיה",
-        "driverName": "אדל",
-        "finishHour": "14:00"
-      },
-      {
-        "id": "104",
-        "flexibility": [
-          "-30",
-          "10"
-        ],
-        "passengers": "1",
-        "location": "6",
-        "TypeOfDrive": "2",
-        "startHour": "09:45",
-        "Comments": "אושרית תשמח לשעה במשגב, גמישה עד 1320. לא דחוף, רק אם מסתדר.",
-        "driverName": "אושרית",
-        "finishHour": "11:00"
-      },
-      {
-        "id": "105",
-        "flexibility": [
-          "-30",
-          "10"
-        ],
-        "passengers": "1",
-        "location": "",
-        "TypeOfDrive": "2",
-        "startHour": "13:30",
-        "Comments": "חנן לאיסוף שיבולי השמש עד 14:30",
-        "driverName": "חנן לוי",
-        "finishHour": "14:30"
-      },
-      {
-        "id": "106",
-        "flexibility": [
-          "-30",
-          "10"
-        ],
-        "passengers": "1",
-        "location": "2",
-        "TypeOfDrive": "2",
-        "startHour": "15:50",
-        "Comments": "חנן לרקפת - יעזור מאוד צמוד עד 17:20",
-        "driverName": "חנן לוי",
-        "finishHour": "17:20"
-      },
-      {
-        "id": "107",
-        "flexibility": [
-          "-30",
-          "10"
-        ],
-        "passengers": "1",
-        "location": "6",
-        "TypeOfDrive": "2",
-        "startHour": "16:00",
-        "Comments": "חנן ושקד מקופח כללית משגב אם אין צמוד",
-        "driverName": "חנן לוי",
-        "finishHour": "17:00"
-      },
-      {
-        "id": "108",
-        "flexibility": [
-          "-30",
-          "10"
-        ],
-        "passengers": "1",
-        "location": "1",
-        "TypeOfDrive": "2",
-        "startHour": "13:30",
-        "Comments": "איילת לכרמיאל צמוד עד 15 וחצי ",
-        "driverName": "איילת",
-        "finishHour": "15:30"
-      },
-      {
-        "id": "109",
-        "flexibility": [
-          "-30",
-          "10"
-        ],
-        "passengers": "1",
-        "location": "2",
-        "TypeOfDrive": "2",
-        "startHour": "16:00",
-        "Comments": "רז מרקפת ",
-        "driverName": "איילת",
-        "finishHour": "16:30"
-      },
-      {
-        "id": "110",
-        "flexibility": [
-          "-30",
-          "10"
-        ],
-        "passengers": "1",
-        "location": "6",
-        "TypeOfDrive": "2",
-        "startHour": "08:40",
-        "Comments": "איילת למשגב צמוד עד 10:10 (לא להצמיד בבקשה נסיעות כי יש סיכוי שמתבטל מחר בבוקר ",
-        "driverName": "איילת",
-        "finishHour": "10:30"
-      },
-      {
-        "id": "111",
-        "flexibility": [
-          "-30",
-          "10"
-        ],
-        "passengers": "1",
-        "location": "1",
-        "TypeOfDrive": "3",
-        "startHour": "08:15",
-        "Comments": "פביו לכרמיאל",
-        "driverName": "פביו",
-        "finishHour": ""
-      },
-      {
-        "id": "112",
-        "flexibility": [
-          "-30",
-          "10"
-        ],
-        "passengers": "1",
-        "location": "3",
-        "TypeOfDrive": "2",
-        "startHour": "14:00",
-        "Comments": "פביו בחיפה ורוצה להישאר עד מאוחר  ולחזור ברכב. אם יש נסיעה לעשות איתה חילוף מה טוב. אם לא ואפשר לשריין רכב ואנסה למצוא נהג/ת, גם טוב. ",
-        "driverName": "פביו",
-        "finishHour": "20:00"
-      },
-      {
-        "id": "113",
-        "flexibility": [
-          "-30",
-          "10"
-        ],
-        "passengers": "1",
-        "location": "",
-        "TypeOfDrive": "2",
-        "startHour": "14:00",
-        "Comments": "רפאל כהן וטל לכנרת עד 19",
-        "driverName": "טל",
-        "finishHour": "19:00"
-      },
-      {
-        "id": "115",
-        "flexibility": [
-          "-30",
-          "10"
-        ],
-        "passengers": "1",
-        "location": "6",
-        "TypeOfDrive": "2",
-        "startHour": "16:00",
-        "Comments": "אינגריד יונתן ועמרי לחיסון שפעת במשגב, צמוד עד 17:30 אם אפשר עד אחרי, אינגרידף עד 19 ואז נעשה עוד משהו",
-        "driverName": "אינגריד",
-        "finishHour": "17:30"
-      },
-      {
-        "id": "116",
-        "flexibility": [
-          "-30",
-          "10"
-        ],
-        "passengers": "1",
-        "location": "13",
-        "TypeOfDrive": "3",
-        "startHour": "08:30",
-        "Comments": "רונית לבוב לרכבת כרמיאל / לחיפה (להיות ב-10 בבת גלים) ",
-        "driverName": "רונית לבוב",
-        "finishHour": "10,10"
-      },
-      {
-        "id": "117",
-        "flexibility": [
-          "-30",
-          "10"
-        ],
-        "passengers": "1",
-        "location": "9",
-        "TypeOfDrive": "3",
-        "startHour": "09:15",
-        "Comments": "משה מאשבל למרכז השיח בחיפה ",
-        "driverName": "משה",
-        "finishHour": "12:00"
-      },
-      {
-        "id": "118",
-        "flexibility": [
-          "-30",
-          "10"
-        ],
-        "passengers": "1",
-        "location": "9",
-        "TypeOfDrive": "4",
-        "startHour": "14:15",
-        "Comments": "משה ברכב דבר ממרכז השיח בחיפה לאשבל. אם אינגרידף שאני אסע ברכב אחר וישאיר את רכב דבר בחיפה אז אין בעיה. הוא יכול לשמש את הסידור אחהצ וצריך להגיע ברביעי בבוקר לטבריה או רביד ",
-        "driverName": "משה",
-        "finishHour": ""
-      },
-      {
-        "id": "119",
-        "flexibility": [
-          "-30",
-          "10"
-        ],
-        "passengers": "1",
-        "location": "3",
-        "TypeOfDrive": "3",
-        "startHour": "07:20",
-        "Comments": "יהל לרקפת, אריאלה לצומת או אם יש נסיעה לחיפה.",
-        "driverName": "אריאלה",
-        "finishHour": ""
-      },
-      {
-        "id": "120",
-        "flexibility": [
-          "-30",
-          "10"
-        ],
-        "passengers": "1",
-        "location": "3",
-        "TypeOfDrive": "4",
-        "startHour": "14:00",
-        "Comments": "אריאלה מהצומת, או אם יש סביב 13:00 נסיעה מחיפה",
-        "driverName": "אריאלה",
-        "finishHour": "13:00,13:00"
-      },
-      {
-        "id": "122",
-        "flexibility": [
-          "-30",
-          "10"
-        ],
-        "passengers": "1",
-        "location": "1",
-        "TypeOfDrive": "3",
-        "startHour": "18:30",
-        "Comments": "תמה ואמיר שוורץ לכרמיאל עד 22:00. יש סיכוי שיהיה רכב מסידור החלוץ",
-        "driverName": "תמה",
-        "finishHour": "22:00,22:00"
-      },
-      {
-        "id": "123",
-        "flexibility": [
-          "-30",
-          "10"
-        ],
-        "passengers": "1",
-        "location": "6",
-        "TypeOfDrive": "2",
-        "startHour": "06:15",
-        "Comments": "ב615  דבורה למשגב עד 815",
-        "driverName": "דבורה מסעודה",
-        "finishHour": "08:30"
-      },
-      {
-        "id": "124",
-        "flexibility": [
-          "-30",
-          "10"
-        ],
-        "passengers": "1",
-        "location": "14",
-        "TypeOfDrive": "2",
-        "startHour": "19:15",
-        "Comments": "ב1915  דבורה לרביד , סביב 2130 דבורה מרביד ",
-        "driverName": "דבורה מסעודה",
-        "finishHour": "22:30"
-      },
-      {
-        "id": "125",
-        "flexibility": [
-          "-30",
-          "10"
-        ],
-        "passengers": "1",
-        "location": "4",
-        "TypeOfDrive": "2",
-        "startHour": "14:00",
-        "Comments": "רפאל עם  אחד הברלינגו להביא כלב. חוזר עד 17:00 לדבר איתי על בעיות",
-        "driverName": "רפאל",
-        "finishHour": "17:00"
-      },
-      {
-        "id": "126",
-        "flexibility": [
-          "-30",
-          "10"
-        ],
-        "passengers": "1",
-        "location": "4",
-        "TypeOfDrive": "2",
-        "startHour": "08:45",
-        "Comments": "אורנית צמוד לעכו ועפולה עד 15:15. אם בעייתי דברו איתי",
-        "driverName": "אורנית שוורץ",
-        "finishHour": "17:00"
-      },
-      {
-        "id": "127",
-        "flexibility": [
-          "-30",
-          "10"
-        ],
-        "passengers": "1",
-        "location": "5",
-        "TypeOfDrive": "3",
-        "startHour": "07:30",
-        "Comments": "יצחק לתיכון ",
-        "driverName": "יצחק כהן",
-        "finishHour": ""
-      },
-      {
-        "id": "128",
-        "flexibility": [
-          "-30",
-          "10"
-        ],
-        "passengers": "1",
-        "location": "5",
-        "TypeOfDrive": "4",
-        "startHour": "17:30",
-        "Comments": "יצחק רכב מהתיכון לאסוף את נועם וארי מקורות יש גם אופציות נוספות להיות איתי בקשר",
-        "driverName": "יצחק כהן",
-        "finishHour": ""
-      },
-      {
-        "id": "129",
-        "flexibility": [
-          "-30",
-          "10"
-        ],
-        "passengers": "1",
-        "location": "2",
-        "TypeOfDrive": "2",
-        "startHour": "09:00",
-        "Comments": "עמיר צמוד עד 15 לאזור טבריה",
-        "driverName": "עמיר",
-        "finishHour": "15:00"
-      },
-      {
-        "id": "130",
-        "flexibility": [
-          "-30",
-          "10"
-        ],
-        "passengers": "1",
-        "location": "10",
-        "TypeOfDrive": "3",
-        "startHour": "14:00",
-        "Comments": "14:00 אייל מאשבל ליובלים ",
-        "driverName": "אבייתר מעוז",
-        "finishHour": "14:00,14:00"
-      },
-      {
-        "id": "131",
-        "flexibility": [
-          "-30",
-          "10"
-        ],
-        "passengers": "1",
-        "location": "10",
-        "TypeOfDrive": "4",
-        "startHour": "16:30",
-        "Comments": "16:30 אייל מיובלים וממשיך עם הרכב ליובלים ועצמון, עד הלילה גמיש בשעת איסוף, צריך לצאת מיובלים ב20:00 לעצמון. יכול להקפיץ חזרה לאשבל וכו'",
-        "driverName": "אבייתר מעוז",
-        "finishHour": "20:00,20:00"
-      }
-    ],
-    "vehicles": [
-      {
-        "id": "1",
-        "vehicleName": "שלגיה",
-        "startHour": "08:00",
-        "endHour": "09:00",
-        "kmLimit": "",
-        "seats": "7",
-        "Comments": ""
-      },
-      {
-        "id": "3",
-        "vehicleName": "סנואו",
-        "startHour": "08:00",
-        "endHour": "09:00",
-        "kmLimit": "",
-        "seats": "7",
-        "Comments": ""
-      },
-      {
-        "id": "4",
-        "vehicleName": "שכור",
-        "startHour": "08:00",
-        "endHour": "09:00",
-        "kmLimit": "",
-        "seats": "5",
-        "Comments": ""
-      },
-      {
-        "id": "5",
-        "vehicleName": "ברלינגו",
-        "startHour": "08:00",
-        "endHour": "09:00",
-        "kmLimit": "",
-        "seats": "5",
-        "Comments": ""
-      },
-      {
-        "id": "6",
-        "vehicleName": "שכור 1",
-        "startHour": "08:00",
-        "endHour": "09:00",
-        "kmLimit": "",
-        "seats": "5",
-        "Comments": ""
-      }
-    ],
-    "orderIdInEdit": null,
-    "dataHolderForCurrentOrderInEdit": null,
-    "deletedOrders": [],
-    "defaultOrderValues": {
-      "id": "1",
-      "driverName": "",
-      "startHour": "08:00",
-      "finishHour": "09:00",
-      "TypeOfDrive": "3",
-      "Comments": "",
-      "passengers": "1",
-      "flexibility": [
-        "-30",
-        "10"
-      ],
-      "location": ""
-    },
-    "sketches": [],
-    "displaySetting": {
-      "view": "sketch"
-    },
-    "SketchIdInEdit": null,
-    "pendingOrderIdInEdit": null,
-    "sessionState": {
-      "LocationGroupTabOpen": "0",
-      "SketchIdInEdit": "",
-      "locationGroupInEdit": "ESHBAL",
-      "orderIdInEdit": null,
-      "pendingOrderIdInEdit": null,
-      "dataHolderForCurrentOrderInEdit": null,
-      "isAnimationRunning": true,
-      "locationMainInEdit": "2",
-      "pendingOrderInEditActionSelectDrives": [],
-      "pendingOrderInEditAction": null,
-      "routeIdInEdit": "8",
-      "transportIdInEdit": "2"
-    },
-    "LocationGroups": [
-      {
         "Locations": [
-          {
-            "EnName": "Karmiel",
-            "id": "1",
-            "name": "כרמיאל",
-            "ETA": 30
-          },
-          {
-            "EnName": "Rakefet",
-            "id": "2",
-            "name": "רקפת",
-            "ETA": 30
-          },
-          {
-            "EnName": "Haifa",
-            "id": "3",
-            "name": "חיפה",
-            "ETA": 50
-          },
-          {
-            "EnName": "Acre",
-            "id": "4",
-            "name": "עכו",
-            "ETA": 45
-          },
-          {
-            "EnName": "Hevrati",
-            "id": "5",
-            "name": "חברתי",
-            "ETA": 50
-          },
-          {
-            "EnName": "misgav",
-            "id": "6",
-            "name": "משגב",
-            "ETA": 30
-          },
-          {
-            "EnName": "Tzurit",
-            "id": "7",
-            "name": "צורית",
-            "ETA": 30
-          },
-          {
-            "EnName": "MaromGalil",
-            "id": "8",
-            "name": "מרום גליל",
-            "ETA": 30
-          },
-          {
-            "EnName": "Merkaz",
-            "id": "9",
-            "name": "מרכז",
-            "ETA": 30
-          },
-          {
-            "EnName": "Yuvalim",
-            "id": "10",
-            "name": "יובלים",
-            "ETA": 30
-          },
-          {
-            "EnName": "Yaad",
-            "id": "11",
-            "name": "יעד",
-            "ETA": 30
-          },
-          {
-            "EnName": "Sachnin",
-            "id": "12",
-            "name": "סכנין",
-            "ETA": 30
-          },
-          {
-            "EnName": "RailKarmiel",
-            "id": "13",
-            "name": "רכבת כרמיאל",
-            "ETA": 25
-          },
-          {
-            "id": "14",
-            "ETA": "60",
-            "name": "תל אביב",
-            "EnName": "Other"
-          },
-          {
-            "id": "15",
-            "ETA": "45",
-            "name": "חברתי קריות",
-            "EnName": ""
-          },
-          {
-            "id": "16",
-            "ETA": "25",
-            "name": "ראש פינה",
-            "EnName": ""
-          },
-          {
-            "id": "17",
-            "ETA": "25",
-            "name": "גולן",
-            "EnName": ""
-          },
-          {
-            "id": "18",
-            "ETA": "25",
-            "name": "צפת",
-            "EnName": ""
-          },
-          {
-            "id": "19",
-            "ETA": "20",
-            "name": "שעב",
-            "EnName": ""
-          },
-          {
-            "id": "20",
-            "ETA": "40",
-            "name": "קריית חיים",
-            "EnName": ""
-          },
-          {
-            "id": "21",
-            "ETA": "45",
-            "name": "טבעון",
-            "EnName": ""
-          },
-          {
-            "id": "22",
-            "ETA": "25",
-            "name": "דמיידה",
-            "EnName": ""
-          },
-          {
-            "id": "23",
-            "ETA": "25",
-            "name": "אשחר",
-            "EnName": ""
-          },
-          {
-            "id": "24",
-            "ETA": "30",
-            "name": "טל-אל",
-            "EnName": ""
-          },
-          {
-            "id": "25",
-            "ETA": "35",
-            "name": "כפר אושריתים",
-            "EnName": ""
-          },
-          {
-            "id": "26",
-            "ETA": "25",
-            "name": "תפן",
-            "EnName": ""
-          },
-          {
-            "id": "27",
-            "ETA": "50",
-            "name": "נהריה",
-            "EnName": ""
-          },
-          {
-            "id": "28",
-            "ETA": "60",
-            "name": "ראש הנקרה",
-            "EnName": ""
-          },
-          {
-            "id": "29",
-            "ETA": "20",
-            "name": "דיר אל אסד",
-            "EnName": ""
-          },
-          {
-            "id": "30",
-            "ETA": "25",
-            "name": "נחף",
-            "EnName": ""
-          },
-          {
-            "id": "31",
-            "ETA": "25",
-            "name": "מג'דל כרום",
-            "EnName": ""
-          },
-          {
-            "id": "32",
-            "ETA": "25",
-            "name": "מורשת",
-            "EnName": ""
-          },
-          {
-            "id": "33",
-            "ETA": "25",
-            "name": "כפר מנדא",
-            "EnName": ""
-          },
-          {
-            "id": "34",
-            "ETA": "25",
-            "name": "חנתון",
-            "EnName": ""
-          },
-          {
-            "id": "35",
-            "ETA": "35",
-            "name": "חנן הגליל",
-            "EnName": ""
-          },
-          {
-            "id": "36",
-            "ETA": "45",
-            "name": "תמרת",
-            "EnName": ""
-          },
-          {
-            "id": "37",
-            "ETA": "40",
-            "name": "רמת ישי",
-            "EnName": ""
-          },
-          {
-            "id": "38",
-            "ETA": "50",
-            "name": "עמק הירדן",
-            "EnName": ""
-          },
-          {
-            "id": "39",
-            "ETA": "50",
-            "name": "גליל עליון",
-            "EnName": ""
-          },
-          {
-            "id": "40",
-            "ETA": "50",
-            "name": "דלית אל כרמל",
-            "EnName": ""
-          },
-          {
-            "id": "41",
-            "ETA": "25",
-            "name": "קריות",
-            "EnName": ""
-          },
-          {
-            "id": "42",
-            "ETA": "49",
-            "name": "יקנעם",
-            "EnName": ""
-          },
-          {
-            "id": "43",
-            "ETA": "25",
-            "name": "זכרון יעקוב",
-            "EnName": ""
-          },
-          {
-            "id": "44",
-            "ETA": "45",
-            "name": "טירת הכרמל",
-            "EnName": ""
-          },
-          {
-            "id": "45",
-            "ETA": "50",
-            "name": "הגושרים",
-            "EnName": ""
-          },
-          {
-            "id": "46",
-            "ETA": "60",
-            "name": "קרית שמונה",
-            "EnName": ""
-          },
-          {
-            "id": "47",
-            "ETA": "55",
-            "name": "נצרת",
-            "EnName": ""
-          },
-          {
-            "id": "48",
-            "ETA": "50",
-            "name": "עפולה",
-            "EnName": ""
-          },
-          {
-            "id": "49",
-            "ETA": "20",
-            "name": "שורשים",
-            "EnName": ""
-          },
-          {
-            "id": "50",
-            "ETA": "40",
-            "name": "עין המפרץ",
-            "EnName": ""
-          },
-          {
-            "id": "51",
-            "ETA": "40",
-            "name": "רגבה",
-            "EnName": ""
-          },
-          {
-            "id": "52",
-            "ETA": "25",
-            "name": "שמרת",
-            "EnName": ""
-          },
-          {
-            "id": "53",
-            "ETA": "25",
-            "name": "מנוף",
-            "EnName": ""
-          },
-          {
-            "id": "54",
-            "ETA": "25",
-            "name": "יודפת",
-            "EnName": ""
-          },
-          {
-            "id": "55",
-            "ETA": "25",
-            "name": "תל יודפת",
-            "EnName": ""
-          },
-          {
-            "id": "56",
-            "ETA": "25",
-            "name": "אבלין",
-            "EnName": ""
-          },
-          {
-            "id": "57",
-            "ETA": "30",
-            "name": "קריית אתא",
-            "EnName": ""
-          },
-          {
-            "id": "58",
-            "ETA": "45",
-            "name": "לב המפרץ",
-            "EnName": ""
-          },
-          {
-            "id": "59",
-            "ETA": "33",
-            "name": "ראמה",
-            "EnName": ""
-          },
-          {
-            "id": "60",
-            "ETA": "45",
-            "name": "רביד",
-            "EnName": ""
-          },
-          {
-            "id": "61",
-            "ETA": "50",
-            "name": "גינוסר",
-            "EnName": ""
-          },
-          {
-            "id": "62",
-            "ETA": "50",
-            "name": "חוקוק",
-            "EnName": ""
-          },
-          {
-            "id": "63",
-            "ETA": "50",
-            "name": "כינרת",
-            "EnName": ""
-          },
-          {
-            "id": "64",
-            "ETA": "50",
-            "name": "טבריה",
-            "EnName": ""
-          },
-          {
-            "id": "65",
-            "ETA": "10",
-            "name": "צומת אשבל",
-            "EnName": ""
-          },
-          {
-            "id": "66",
-            "ETA": "10",
-            "name": "צומת יובלים",
-            "EnName": ""
-          },
-          {
-            "id": "67",
-            "ETA": "20",
-            "name": "צומת כרמיאל מערב",
-            "EnName": ""
-          },
-          {
-            "id": "68",
-            "ETA": "30",
-            "name": "צומת המוביל",
-            "EnName": ""
-          },
-          {
-            "id": "69",
-            "ETA": "40",
-            "name": "צומת אלונים",
-            "EnName": ""
-          },
-          {
-            "id": "70",
-            "ETA": "15",
-            "name": "צומת משגב",
-            "EnName": ""
-          },
-          {
-            "id": "71",
-            "ETA": "25",
-            "name": "צומת אחיהוד",
-            "EnName": ""
-          }
-        ],
-        "id": "ESHBAL",
-        "name": "אשבל",
-        "Transports": [
-          {
-            "name": "169 מצומת יובלים לחיפה",
-            "id": "1",
-            "comments": "",
-            "TransportStops": [
-              {
-                "locationId": "66",
-                "minuetsFromLast": 20,
-                "position": 1
-              },
-              {
-                "locationId": "3",
-                "minuetsFromLast": 45,
-                "position": 2
-              }
-            ],
-            "TransportTime": [
-              "05:15",
-              "06:15",
-              "07:15",
-              "09:10",
-              "09:00",
-              "11:00",
-              "13:00",
-              "15:30",
-              "16:30"
-            ]
-          },
-          {
-            "name": "קו 42 מאשבל לכרמיאל",
-            "id": "2",
-            "comments": "",
-            "TransportStops": [
-              {
-                "locationId": "HOME_LOCATION",
-                "minuetsFromLast": 20,
-                "position": 1
-              },
-              {
-                "locationId": "65",
-                "minuetsFromLast": 15,
-                "position": 2
-              },
-              {
-                "locationId": "1",
-                "minuetsFromLast": 20,
-                "position": 3
-              },
-              {
-                "locationId": "13",
-                "minuetsFromLast": 5,
-                "position": 4
-              }
-            ],
-            "TransportTime": [
-              "07:00",
-              "09:40",
-              "10:40",
-              "11:40",
-              "14:05",
-              "15:05",
-              "17:05",
-              "20:40",
-              "23:25"
-            ]
-          },
-          {
-            "name": "קו 42 מכרמיאל לאשבל",
-            "id": "3",
-            "comments": "",
-            "TransportStops": [
-              {
-                "locationId": "13",
-                "minuetsFromLast": 20,
-                "position": 1
-              },
-              {
-                "locationId": "1",
-                "minuetsFromLast": 5,
-                "position": 2
-              },
-              {
-                "locationId": "HOME_LOCATION",
-                "minuetsFromLast": 30,
-                "position": 3
-              }
-            ],
-            "TransportTime": [
-              "07:40",
-              "08:40",
-              "10:40",
-              "12:40",
-              "14:10",
-              "16:10",
-              "19:40",
-              "21:40"
-            ]
-          },
-          {
-            "name": "169 מחיפה לצומת יובלים",
-            "id": "4",
-            "comments": "",
-            "TransportStops": [
-              {
-                "locationId": "3",
-                "minuetsFromLast": 20,
-                "position": 1
-              },
-              {
-                "locationId": "70",
-                "minuetsFromLast": 45,
-                "position": 2
-              },
-              {
-                "locationId": "66",
-                "minuetsFromLast": 5,
-                "position": 3
-              }
-            ],
-            "TransportTime": [
-              "12:30",
-              "13:20",
-              "14:15",
-              "15:10",
-              "16:10",
-              "17:30",
-              "19:00",
-              "20:30"
-            ]
-          },
-          {
-            "name": "265 חיפה צומת יובלים",
-            "id": "5",
-            "comments": "",
-            "TransportStops": [
-              {
-                "locationId": "3",
-                "minuetsFromLast": 20,
-                "position": 1
-              },
-              {
-                "locationId": "70",
-                "minuetsFromLast": 45,
-                "position": 2
-              },
-              {
-                "locationId": "66",
-                "minuetsFromLast": 5,
-                "position": 3
-              }
-            ],
-            "TransportTime": [
-              "06:35",
-              "08:10",
-              "09:00",
-              "10:05",
-              "11:30",
-              "13:05",
-              "15:10",
-              "15:45",
-              "16:50",
-              "17:50",
-              "18:50",
-              "19:50",
-              "20:15",
-              "21:20",
-              "22:45"
-            ]
-          },
-          {
-            "name": "265 צומת יובלים חיפה",
-            "id": "6",
-            "comments": "",
-            "TransportStops": [
-              {
-                "locationId": "66",
-                "minuetsFromLast": 20,
-                "position": 1
-              },
-              {
-                "locationId": "70",
-                "minuetsFromLast": 5,
-                "position": 2
-              },
-              {
-                "locationId": "3",
-                "minuetsFromLast": 45,
-                "position": 3
-              }
-            ],
-            "TransportTime": [
-              "05:55",
-              "06:50",
-              "07:25",
-              "07:55",
-              "08:55",
-              "10:25",
-              "11:55",
-              "12:55",
-              "14:25",
-              "16:15",
-              "17:25",
-              "18:25",
-              "19:25",
-              "21:25",
-              "22:55"
-            ]
-          }
-        ],
-        "Routes": [
-          {
-            "name": "כביש 748 לחנן הגליל",
-            "id": "1",
-            "comments": "",
-            "routStops": [
-              {
-                "locationId": "10",
-                "minuetsFromLast": 20,
-                "position": 1
-              },
-              {
-                "locationId": "2",
-                "minuetsFromLast": 10,
-                "position": 2
-              },
-              {
-                "locationId": "32",
-                "minuetsFromLast": 15,
-                "position": 3
-              },
-              {
-                "locationId": "33",
-                "minuetsFromLast": 10,
-                "position": 4
-              },
-              {
-                "locationId": "34",
-                "minuetsFromLast": 10,
-                "position": 5
-              },
-              {
-                "locationId": "35",
-                "minuetsFromLast": 10,
-                "position": 6
-              }
-            ]
-          },
-          {
-            "name": "כרמיאל עכו נהרייה ראש הנקרה",
-            "id": "2",
-            "comments": "",
-            "routStops": [
-              {
-                "locationId": "10",
-                "minuetsFromLast": 20,
-                "position": 1
-              },
-              {
-                "locationId": "49",
-                "minuetsFromLast": 10,
-                "position": 2
-              },
-              {
-                "locationId": "1",
-                "minuetsFromLast": 10,
-                "position": 3
-              },
-              {
-                "locationId": "13",
-                "minuetsFromLast": 5,
-                "position": 4
-              },
-              {
-                "locationId": "4",
-                "minuetsFromLast": 20,
-                "position": 5
-              },
-              {
-                "locationId": "51",
-                "minuetsFromLast": 5,
-                "position": 6
-              },
-              {
-                "locationId": "52",
-                "minuetsFromLast": 5,
-                "position": 7
-              },
-              {
-                "locationId": "50",
-                "minuetsFromLast": 20,
-                "position": 8
-              },
-              {
-                "locationId": "27",
-                "minuetsFromLast": 20,
-                "position": 9
-              },
-              {
-                "locationId": "28",
-                "minuetsFromLast": 20,
-                "position": 10
-              }
-            ]
-          },
-          {
-            "name": "מנוף יודפת",
-            "id": "3",
-            "comments": "",
-            "routStops": [
-              {
-                "locationId": "10",
-                "minuetsFromLast": 20,
-                "position": 1
-              },
-              {
-                "locationId": "2",
-                "minuetsFromLast": 10,
-                "position": 2
-              },
-              {
-                "locationId": "53",
-                "minuetsFromLast": 20,
-                "position": 3
-              },
-              {
-                "locationId": "55",
-                "minuetsFromLast": 20,
-                "position": 4
-              },
-              {
-                "locationId": "54",
-                "minuetsFromLast": 10,
-                "position": 5
-              }
-            ]
-          },
-          {
-            "name": "יובלים - קריית אתא - חיפה",
-            "id": "4",
-            "comments": "",
-            "routStops": [
-              {
-                "locationId": "10",
-                "minuetsFromLast": 20,
-                "position": 1
-              },
-              {
-                "locationId": "6",
-                "minuetsFromLast": 90,
-                "position": 2
-              },
-              {
-                "locationId": "2",
-                "minuetsFromLast": 5,
-                "position": 3
-              },
-              {
-                "locationId": "32",
-                "minuetsFromLast": 10,
-                "position": 4
-              },
-              {
-                "locationId": "56",
-                "minuetsFromLast": 10,
-                "position": 5
-              },
-              {
-                "locationId": "57",
-                "minuetsFromLast": 20,
-                "position": 6
-              },
-              {
-                "locationId": "41",
-                "minuetsFromLast": 20,
-                "position": 7
-              },
-              {
-                "locationId": "20",
-                "minuetsFromLast": 20,
-                "position": 8
-              },
-              {
-                "locationId": "58",
-                "minuetsFromLast": 20,
-                "position": 9
-              },
-              {
-                "locationId": "3",
-                "minuetsFromLast": 20,
-                "position": 10
-              }
-            ]
-          },
-          {
-            "name": "יובלים - ראמה - טבריה",
-            "id": "5",
-            "comments": "",
-            "routStops": [
-              {
-                "locationId": "10",
-                "minuetsFromLast": 20,
-                "position": 1
-              },
-              {
-                "locationId": "1",
-                "minuetsFromLast": 15,
-                "position": 2
-              },
-              {
-                "locationId": "30",
-                "minuetsFromLast": 10,
-                "position": 3
-              },
-              {
-                "locationId": "59",
-                "minuetsFromLast": 10,
-                "position": 4
-              },
-              {
-                "locationId": "62",
-                "minuetsFromLast": 30,
-                "position": 5
-              },
-              {
-                "locationId": "61",
-                "minuetsFromLast": 10,
-                "position": 6
-              },
-              {
-                "locationId": "64",
-                "minuetsFromLast": 10,
-                "position": 7
-              }
-            ]
-          },
-          {
-            "name": "אשחר - יעד - שעב",
-            "id": "6",
-            "comments": "",
-            "routStops": [
-              {
-                "locationId": "23",
-                "minuetsFromLast": 20,
-                "position": 1
-              },
-              {
-                "locationId": "10",
-                "minuetsFromLast": 20,
-                "position": 2
-              },
-              {
-                "locationId": "11",
-                "minuetsFromLast": 20,
-                "position": 3
-              },
-              {
-                "locationId": "19",
-                "minuetsFromLast": 20,
-                "position": 4
-              }
-            ]
-          },
-          {
-            "name": "צמתים צ. אשבל  עד צ. אלונים",
-            "id": "7",
-            "comments": "",
-            "routStops": [
-              {
-                "locationId": "65",
-                "minuetsFromLast": 20,
-                "position": 1
-              },
-              {
-                "locationId": "66",
-                "minuetsFromLast": 5,
-                "position": 2
-              },
-              {
-                "locationId": "70",
-                "minuetsFromLast": 5,
-                "position": 3
-              },
-              {
-                "locationId": "68",
-                "minuetsFromLast": 20,
-                "position": 4
-              },
-              {
-                "locationId": "69",
-                "minuetsFromLast": 15,
-                "position": 5
-              }
-            ]
-          },
-          {
-            "name": "צמתים צ. אשבל עד צ. אחיהוד",
-            "id": "8",
-            "comments": "",
-            "routStops": [
-              {
-                "locationId": "65",
-                "minuetsFromLast": 20,
-                "position": 1
-              },
-              {
-                "locationId": "66",
-                "minuetsFromLast": 5,
-                "position": 2
-              },
-              {
-                "locationId": "67",
-                "minuetsFromLast": 10,
-                "position": 3
-              },
-              {
-                "locationId": "71",
-                "minuetsFromLast": 15,
-                "position": 4
-              }
-            ]
-          }
-        ],
-        "dbId": ""
-      }
-    ],
-    "recordBriefs": [
-      {
-        "id": "5",
-        "locationGroupOrSidurId": "ESHBAL",
-        "name": "סידור לדוגמה",
-        "typeOfRecord": 1
-      },
-      {
-        "dbId": "",
-        "id": "ESHBAL",
-        "locationGroupOrSidurId": "ESHBAL",
-        "name": "אשבל",
-        "typeOfRecord": 2
-      }
-    ],
-    "Locations": [
-      {
-        "EnName": "Karmiel",
-        "id": "1",
-        "name": "כרמיאל",
-        "ETA": 30
-      },
-      {
-        "EnName": "Rakefet",
-        "id": "2",
-        "name": "רקפת",
-        "ETA": 30
-      },
-      {
-        "EnName": "Haifa",
-        "id": "3",
-        "name": "חיפה",
-        "ETA": 50
-      },
-      {
-        "EnName": "Acre",
-        "id": "4",
-        "name": "עכו",
-        "ETA": 45
-      },
-      {
-        "EnName": "Hevrati",
-        "id": "5",
-        "name": "חברתי",
-        "ETA": 50
-      },
-      {
-        "EnName": "misgav",
-        "id": "6",
-        "name": "משגב",
-        "ETA": 30
-      },
-      {
-        "EnName": "Tzurit",
-        "id": "7",
-        "name": "צורית",
-        "ETA": 30
-      },
-      {
-        "EnName": "MaromGalil",
-        "id": "8",
-        "name": "מרום גליל",
-        "ETA": 30
-      },
-      {
-        "EnName": "Merkaz",
-        "id": "9",
-        "name": "מרכז",
-        "ETA": 30
-      },
-      {
-        "EnName": "Yuvalim",
-        "id": "10",
-        "name": "יובלים",
-        "ETA": 30
-      },
-      {
-        "EnName": "Yaad",
-        "id": "11",
-        "name": "יעד",
-        "ETA": 30
-      },
-      {
-        "EnName": "Sachnin",
-        "id": "12",
-        "name": "סכנין",
-        "ETA": 30
-      },
-      {
-        "EnName": "RailKarmiel",
-        "id": "13",
-        "name": "רכבת כרמיאל",
-        "ETA": 25
-      },
-      {
-        "EnName": "Other",
-        "id": "14",
-        "name": "אחר",
-        "ETA": 60
-      }
-    ]
-  },
-  "timeStamp": "1644934333338",
-  "hash": "0"
+            {
+                "EnName": "Karmiel",
+                "id": "1",
+                "name": "כרמיאל",
+                "ETA": 30
+            },
+            {
+                "EnName": "Rakefet",
+                "id": "2",
+                "name": "רקפת",
+                "ETA": 30
+            },
+            {
+                "EnName": "Haifa",
+                "id": "3",
+                "name": "חיפה",
+                "ETA": 50
+            },
+            {
+                "EnName": "Acre",
+                "id": "4",
+                "name": "עכו",
+                "ETA": 45
+            },
+            {
+                "EnName": "Hevrati",
+                "id": "5",
+                "name": "חברתי",
+                "ETA": 50
+            },
+            {
+                "EnName": "misgav",
+                "id": "6",
+                "name": "משגב",
+                "ETA": 30
+            },
+            {
+                "EnName": "Tzurit",
+                "id": "7",
+                "name": "צורית",
+                "ETA": 30
+            },
+            {
+                "EnName": "MaromGalil",
+                "id": "8",
+                "name": "מרום גליל",
+                "ETA": 30
+            },
+            {
+                "EnName": "Merkaz",
+                "id": "9",
+                "name": "מרכז",
+                "ETA": 30
+            },
+            {
+                "EnName": "Yuvalim",
+                "id": "10",
+                "name": "יובלים",
+                "ETA": 30
+            },
+            {
+                "EnName": "Yaad",
+                "id": "11",
+                "name": "יעד",
+                "ETA": 30
+            },
+            {
+                "EnName": "Sachnin",
+                "id": "12",
+                "name": "סכנין",
+                "ETA": 30
+            },
+            {
+                "EnName": "RailKarmiel",
+                "id": "13",
+                "name": "רכבת כרמיאל",
+                "ETA": 25
+            },
+            {
+                "EnName": "Other",
+                "id": "14",
+                "name": "אחר",
+                "ETA": 60
+            }
+        ]
+    },
+    "timeStamp": "1644934333338",
+    "hash": "0"
 }
