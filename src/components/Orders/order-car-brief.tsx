@@ -1,18 +1,15 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import { OrderModel } from "../../models/Order.model";
-import { Box, SxProps } from "@mui/system";
 import { Typography } from "@mui/material";
 import { translations } from "../../services/translations";
 import { LanguageUtilities } from "../../services/language-utilities";
 import { LocationModel } from "../../models/Location.model";
 import { DriveType } from "../../models/DriveType.enum";
 
-//const TRL = translations;
-
 type AppProps = {
     orderId: string;
-    sx: SxProps;
+    className: string;
     isInEdit: boolean;
 };
 
@@ -74,15 +71,7 @@ export const OrderCarBrief = (props: AppProps) => {
         areDetailsMissing(orderValues) && !props.isInEdit;
 
     return (
-        <Box
-            sx={{
-                padding: "5px",
-                display: "flex",
-                flexDirection: "row",
-                justifyContent: "start",
-                alignItems: "start",
-            }}
-        >
+        <div className={`p-[5px] flex flex-row justify-start items-start ${props.className}`}>
             <Typography
                 fontWeight={props.isInEdit ? "bold" : "initial"}
                 fontSize={"large"}
@@ -97,6 +86,6 @@ export const OrderCarBrief = (props: AppProps) => {
                     ? " (" + translations.missingDetails + ") "
                     : null}
             </Typography>
-        </Box>
+        </div>
     );
 };

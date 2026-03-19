@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Theme } from "@mui/material";
+import { Theme } from "@mui/material";
 import { Utils } from "../../services/utils";
 import { AirbnbSlider, AirbnbThumbComponent } from "./air-bnb-slider";
 
@@ -46,23 +46,14 @@ export const VerticalHourField = (props: VerticalHourFieldProps) => {
     const minSlider = -1 * (InitialInputAsNumbers[1] + timeMargins);
 
     return (
-        <Box>
-            <Box
-                sx={{
-                    display: "flex",
-                    flexDirection: "column",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    height: "250px",
-                }}
-            >
+        <div>
+            <div className="flex flex-col items-center justify-center h-[250px]">
                 <AirbnbSlider
                     components={{ Thumb: AirbnbThumbComponent }}
                     orientation="vertical"
                     aria-labelledby="input-slider"
                     valueLabelDisplay="on"
                     valueLabelFormat={formatHourLabel}
-                    // variant={'standard'}
                     sx={sliderSx}
                     disableSwap
                     min={minSlider}
@@ -72,7 +63,7 @@ export const VerticalHourField = (props: VerticalHourFieldProps) => {
                     value={value}
                     onChange={handleSliderChange}
                 />
-            </Box>{" "}
-        </Box>
+            </div>{" "}
+        </div>
     );
 };

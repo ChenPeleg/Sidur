@@ -6,8 +6,6 @@ import { OrderFields, OrderModel } from "../../models/Order.model";
 import { RenderTextField } from "../Form/text-field";
 import { RenderSelectField } from "../Form/select-field";
 import { DriveType } from "../../models/DriveType.enum";
-import { Box } from "@mui/system";
-import type { SxProps } from "@mui/system";
 import { Button, MenuItem } from "@mui/material";
 import { translations } from "../../services/translations";
 import { ActionsTypes } from "../../store/types.actions";
@@ -19,30 +17,13 @@ import { RenderSelectFieldAutoComplete } from "../Form/select-field-auto-complet
 
 const TRL = translations;
 
-const fieldWrapper: SxProps = {
-    padding: "10px",
-};
-const selectFieldWrapper: SxProps = {
-    ...(fieldWrapper as SxProps),
-    paddingBottom: "0px",
-};
-
-const fieldWrapperText = {
-    display: "inline-flex",
-    padding: "10px",
-    maxWidth: "150px",
-};
+const fieldWrapper = "p-[10px]";
+const selectFieldWrapper = "p-[10px] pb-0";
+const fieldWrapperText = "inline-flex p-[10px] max-w-[150px]";
 
 const orderFields: OrderModel = new OrderFields();
 
-const Divider = () => (
-    <Box
-        sx={{
-            width: "10px",
-            height: "5px",
-        }}
-    />
-);
+const Divider = () => <div className="w-[10px] h-[5px]" />;
 
 const createInputProps = (
     name: string,
@@ -88,10 +69,8 @@ export const OrderCarForm = (formProps: MuiFormPropsModel) => {
         (state: { orders: OrderModel[] }) => state.orders
     );
 
-    // Find initial order
     const initialValues = orders.find((order) => order.id === id);
 
-    // State
     const [values, setValues] = useState<OrderModel | undefined>(initialValues);
     const [isAdvanced, setIsAdvanced] = useState(false);
 
@@ -132,18 +111,11 @@ export const OrderCarForm = (formProps: MuiFormPropsModel) => {
         LanguageUtilities.getPrefixByDriveType(typeOfDrive);
     const locations = formProps.locations;
 
-    const advanceFieldWrapper: SxProps = {
-        ...(fieldWrapper as SxProps),
-        display: isAdvanced ? "initial" : "none",
-    };
+    const advanceFieldWrapper = fieldWrapper + (isAdvanced ? "" : " hidden");
 
     const propsFor = (name: string) =>
         getInputAdapter(name, values, handleFieldChange);
 
-    // TODO: (Refactor) Remove these `any` casts.
-    // The `TextFieldPropertiesModel` is currently too strict (missing optional props like `rows`, `type`, `multiline`).
-    // We cast to `any` here to allow passing these props without changing the shared model which affects other components.
-    // A proper fix would be to create a more flexible interface or update the existing one + fix all consumers.
     const TextFieldAny = RenderTextField as any;
     const SelectFieldAny = RenderSelectField as any;
     const AutoCompleteAny = RenderSelectFieldAutoComplete as any;
@@ -159,21 +131,14 @@ export const OrderCarForm = (formProps: MuiFormPropsModel) => {
             }}
             dir={"rtl"}
         >
-            <Box
-                id={"form-wrapper"}
-                sx={{
-                    display: "flex",
-                    flexDirection: "row",
-                    flexWrap: "wrap",
-                }}
-            >
-                <Box sx={fieldWrapperText}>
+            <div id={"form-wrapper"} className="flex flex-row flex-wrap">
+                <div className={fieldWrapperText}>
                     <TextFieldAny
                         {...propsFor(orderFields.driverName)}
                         label={TRL.Name}
                     />
-                </Box>
-                <Box sx={selectFieldWrapper}>
+                </div>
+                <div className={selectFieldWrapper}>
                     <SelectFieldAny
                         {...propsFor("TypeOfDrive")}
                         label={TRL.TypeOfDrive}
@@ -189,9 +154,9 @@ export const OrderCarForm = (formProps: MuiFormPropsModel) => {
                             {TRL.OneWayTo}
                         </MenuItem>
                     </SelectFieldAny>
-                </Box>
+                </div>
 
-                <Box sx={selectFieldWrapper}>
+                <div className={selectFieldWrapper}>
                     <AutoCompleteAny
                         {...propsFor(orderFields.location)}
                         label={TRL.Where}
@@ -203,53 +168,47 @@ export const OrderCarForm = (formProps: MuiFormPropsModel) => {
                             })
                         )}
                     />
-                </Box>
+                </div>
 
-                <Box sx={fieldWrapper}>
+                <div className={fieldWrapper}>
                     <HourPickerAny
                         {...propsFor(orderFields.startHour)}
                         label={driveTimeLanguage.timeStart}
                     />
-                </Box>
-                <Box sx={fieldWrapper}>
+                </div>
+                <div className={fieldWrapper}>
                     <HourPickerAny
                         {...propsFor(orderFields.finishHour)}
                         custom={{ inActive: typeOfDrive !== DriveType.Tsamud }}
                         label={driveTimeLanguage.timeEnd}
                     />
-                </Box>
+                </div>
 
-                <Box sx={fieldWrapper}>
+                <div className={fieldWrapper}>
                     <TextFieldAny
                         {...propsFor(orderFields.Comments)}
                         label={TRL.Comments}
                         rows={2}
                     />
-                </Box>
+                </div>
 
-                <Box sx={fieldWrapper}>
+                <div className={fieldWrapper}>
                     <PassengerFieldAny
                         {...propsFor(orderFields.passengers)}
                         label={TRL.passengers}
                         type={"text"}
                     />
-                </Box>
+                </div>
 
-                <Box sx={advanceFieldWrapper}>
+                <div className={advanceFieldWrapper}>
                     <FlexibilityFieldAny
                         {...propsFor(orderFields.flexibility[0])}
                         label={TRL.flexibility}
                         rows={2}
                     />
-                </Box>
+                </div>
 
-                <Box
-                    sx={{
-                        ...(fieldWrapper as SxProps),
-                        display: "flex",
-                        flexDirection: "row",
-                    }}
-                >
+                <div className="p-[10px] flex flex-row">
                     <Button
                         sx={{ display: isAdvanced ? "none" : "initial" }}
                         variant="text"
@@ -268,8 +227,8 @@ export const OrderCarForm = (formProps: MuiFormPropsModel) => {
                     >
                         {TRL.Submit}
                     </Button>
-                </Box>
-            </Box>
+                </div>
+            </div>
         </form>
     );
 };

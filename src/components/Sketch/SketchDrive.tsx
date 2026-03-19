@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Box, SxProps } from "@mui/system";
+import { SxProps } from "@mui/system";
 import { Card, Typography } from "@mui/material";
 import { DriveModel } from "../../models/Sketch.model";
 import { DriveType } from "../../models/DriveType.enum";
@@ -71,54 +71,28 @@ export const SketchDrive = (props: sketchDriveProps) => {
 
     const customSx = custumSxMaker(props.chooseDriveMode);
     return (
-        <Box>
+        <div>
             {driveOverlap ? (
-                <Box
-                    sx={{
-                        zIndex: 50,
-                        position: "relative",
-                        m: "0.2em",
-                        mb: "0.3em",
-
-                        display: "flex",
-                        flexDirection: "row",
-                        alignItems: "stretch",
-                        justifyContent: "start",
-                        cursor: "default",
-                        bgcolor: Colors.warningRed,
-                        boxShadow:
-                            "0px -1px 7px 7px " +
-                            Colors.warningRed.replace("1.0", "0.8"),
-                        p: "0 0.5em",
+                <div
+                    className="z-[50] relative m-[0.2em] mb-[0.3em] flex flex-row items-stretch justify-start cursor-default py-0 px-[0.5em]"
+                    style={{
+                        backgroundColor: Colors.warningRed,
+                        boxShadow: `0px -1px 7px 7px ${Colors.warningRed.replace("1.0", "0.8")}`,
                     }}
                 >
                     {" "}
-                    <Box
-                        sx={{
-                            ...Styles.flexRow,
-                            alignItems: "center",
-                            justifyContent: "center",
-                            textAlign: "center",
-                        }}
-                    >
+                    <div className={`${Styles.flexRow} items-center justify-center text-center`}>
                         {" "}
-                        <Box sx={Styles.flexColumn}>
+                        <div className={Styles.flexColumn}>
                             {" "}
                             <WarningIcon />
-                        </Box>
-                        <Box
-                            sx={{
-                                ...Styles.flexRow,
-                                alignItems: "center",
-                                justifyContent: "center",
-                                textAlign: "center",
-                            }}
-                        >
+                        </div>
+                        <div className={`${Styles.flexRow} items-center justify-center text-center`}>
                             {" "}
                             <b> {translations.OverlapingDrives}</b>
-                        </Box>
-                    </Box>
-                </Box>
+                        </div>
+                    </div>
+                </div>
             ) : null}
             <Card
                 onClick={(event: any) => props.sketchDriveClick(event, drive)}
@@ -129,7 +103,6 @@ export const SketchDrive = (props: sketchDriveProps) => {
                     m: "0.2em",
                     mb: "0.3em",
                     position: "relative",
-
                     zIndex: 40,
                     minHeight: "10vh",
                     display: "flex",
@@ -140,23 +113,9 @@ export const SketchDrive = (props: sketchDriveProps) => {
                     ...customSx,
                 }}
             >
-                <Box
+                <div
                     id={"drive-hour"}
-                    sx={{
-                        display: "flex",
-                        flexDirection: "column",
-                        alignItems: "start",
-                        justifyContent: "start",
-                        flexWrap: "wrap",
-                        p: "0.2em",
-                        pl: "0.25em",
-                        pr: "0.25em",
-                        bgcolor: "#aadcff",
-                        //flexShrink: 4,
-                        //width: '20%',
-                        minHeight: "100%",
-                        //flexShrink: '4'
-                    }}
+                    className="flex flex-col items-start justify-start flex-wrap p-[0.2em] pl-[0.25em] pr-[0.25em] bg-[#aadcff] min-h-full"
                 >
                     <Typography dir="ltr" variant={"subtitle1"}>
                         {drive.startHour}{" "}
@@ -164,45 +123,24 @@ export const SketchDrive = (props: sketchDriveProps) => {
                     {drive.TypeOfDrive === DriveType.Tsamud ||
                     drive.TypeOfDrive === DriveType.TwoWay ? (
                         <>
-                            <Box
-                                sx={{
-                                    width: "10px",
-                                    height: "2px",
-                                    borderBottom: "1px solid black",
-                                    alignSelf: "center",
-                                }}
-                            />
+                            <div className="w-[10px] h-[2px] border-b border-black self-center" />
                             <Typography dir="ltr" variant={"subtitle1"}>
                                 {drive.finishHour}{" "}
                             </Typography>
                         </>
                     ) : null}
-                </Box>
+                </div>
 
-                <Box
+                <div
                     id={"drive-description"}
-                    sx={{
-                        display: "flex",
-                        flexDirection: "row",
-                        alignItems: "start",
-                        justifyContent: "start",
-                        p: "0.2em",
-                        pl: "0.4em",
-                        pr: "0.4em",
-                        flexGrow: 4,
-                    }}
+                    className="flex flex-row items-start justify-start p-[0.2em] pl-[0.4em] pr-[0.4em] grow"
                 >
-                    <Box
-                        sx={{
-                            width: "5px",
-                            height: "10px",
-                        }}
-                    />
+                    <div className="w-[5px] h-[10px]" />
                     <Typography variant={"subtitle1"}>
                         {drive.description}{" "}
                     </Typography>
-                </Box>
+                </div>
             </Card>
-        </Box>
+        </div>
     );
 };

@@ -1,5 +1,4 @@
 import * as React from "react";
-import Box from "@mui/material/Box";
 import LinearProgress from "@mui/material/LinearProgress";
 
 const presentAverageEachInterval = 20;
@@ -29,8 +28,8 @@ export const LinearLoading = (
     }, []);
 
     return (
-        <Box sx={{ width: "100%" }}>
+        <div className="w-full">
             <LinearProgress variant="indeterminate" value={progress} />
-        </Box>
+        </div>
     );
 };

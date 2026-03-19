@@ -1,4 +1,4 @@
-import { Box, Card } from "@mui/material";
+import { Card } from "@mui/material";
 import { LocationModel } from "../../models/Location.model";
 import * as React from "react";
 import { useState } from "react";
@@ -24,7 +24,7 @@ export const LocationChooseButton = (props: LocationFormProps) => {
     const isHome: boolean = props.id === ConfigService.Constants.HomeLocationId;
 
     return (
-        <Box sx={{ display: "flex" }}>
+        <div className="flex">
             <Card
                 sx={{
                     m: "0.2em",
@@ -43,20 +43,9 @@ export const LocationChooseButton = (props: LocationFormProps) => {
                 onClick={(_event) => props.onClick(justLocationObject)}
             >
                 {isHome ? (
-                    <Box
-                        sx={{
-                            p: "0px",
-                            display: "inline-flex",
-                        }}
-                    >
+                    <div className="p-0 inline-flex">
                         {" "}
-                        <Box
-                            id={"divider"}
-                            sx={{
-                                width: "20px",
-                                height: "20px",
-                            }}
-                        />{" "}
+                        <div id={"divider"} className="w-[20px] h-[20px]" />{" "}
                         <Home
                             sx={{
                                 m: "0px",
@@ -65,19 +54,12 @@ export const LocationChooseButton = (props: LocationFormProps) => {
                                 ml: "-10px",
                             }}
                         />
-                    </Box>
+                    </div>
                 ) : null}
-                <Box
-                    id={"text-field-container"}
-                    sx={{
-                        m: "0.5em",
-                        mr: "1em",
-                        ml: "1em",
-                    }}
-                >
+                <div id={"text-field-container"} className="m-[0.5em] mr-[1em] ml-[1em]">
                     {props.name}
-                </Box>
+                </div>
             </Card>
-        </Box>
+        </div>
     );
 };

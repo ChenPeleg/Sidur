@@ -6,7 +6,7 @@ import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
 import { translations } from "../../services/translations";
-import { Box, Select, SelectChangeEvent } from "@mui/material";
+import { Select, SelectChangeEvent } from "@mui/material";
 import MenuItem from "@mui/material/MenuItem";
 import { FileUploadType } from "../../store/store.types";
 
@@ -79,16 +79,7 @@ export const FileUploadDialog = (props: FileUploadProps) => {
             <Dialog open={open} onClose={handleCloseCancel}>
                 <DialogTitle> {translations.ImportFromFile}</DialogTitle>
                 <DialogContent>
-                    <Box
-                        sx={{
-                            minWidth: "25vw",
-                            display: "flex",
-                            alignItems: "center",
-
-                            flexDirection: "column",
-                            justifyContent: "center",
-                        }}
-                    >
+                    <div className="min-w-[25vw] flex items-center flex-col justify-center">
                         <Select
                             dir={"rtl"}
                             disableUnderline={true}
@@ -134,7 +125,7 @@ export const FileUploadDialog = (props: FileUploadProps) => {
                                 hidden
                             />
                         </Button>
-                    </Box>
+                    </div>
                 </DialogContent>
                 <DialogActions>
                     <Button

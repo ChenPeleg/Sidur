@@ -1,5 +1,4 @@
 import React from "react";
-import { Box } from "@mui/material";
 import { useSelector } from "react-redux";
 import { DisplaySettings } from "../store/store.types";
 import { SketchesContainer } from "../components/Sketch/SketchesContainer";
@@ -35,20 +34,8 @@ export const MainLayout = () => {
 
     return (
         <main>
-            <Box
-                sx={{ margin: "20px" }}
-                flexDirection="row"
-                display="flex"
-                alignItems="start"
-                justifyContent="start"
-            >
-                <Box
-                    flexDirection="column"
-                    flexWrap="wrap"
-                    display="flex"
-                    alignItems="start"
-                    justifyContent="start"
-                >
+            <div className="m-[20px] flex flex-row items-start justify-start">
+                <div className="flex flex-col flex-wrap items-start justify-start">
                     <Routes>
                         <Route path="/sketch" element={<SketchesContainer />} />
                         <Route path="/orders" element={<OrdersLayout />} />
@@ -57,8 +44,8 @@ export const MainLayout = () => {
                             element={<LocationGroupEditWrapper />}
                         />
                     </Routes>
-                </Box>
-            </Box>
+                </div>
+            </div>
         </main>
     );
 };

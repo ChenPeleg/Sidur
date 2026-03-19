@@ -9,7 +9,7 @@ import DialogTitle from "@mui/material/DialogTitle";
 import { translations } from "../../services/translations";
 import { TransportModel } from "../../models/Location.model";
 import { Theme } from "@mui/system";
-import { Box, IconButton } from "@mui/material";
+import { IconButton } from "@mui/material";
 import { Delete } from "@mui/icons-material";
 
 interface RenameProps {
@@ -19,7 +19,6 @@ interface RenameProps {
 }
 
 export const TransportScheduleDialog = (props: RenameProps) => {
-    // const [open, setOpen] = React.useState(false);
     const { onClose, transport, open } = props;
     const sxRoot = {
         direction: (theme: Theme) => theme.direction,
@@ -77,31 +76,14 @@ export const TransportScheduleDialog = (props: RenameProps) => {
                     {transport.name + " " + translations.exitTime + ":"}
                 </DialogTitle>
                 <DialogContent>
-                    <Box
-                        sx={{
-                            display: "flex",
-                            flexDirection: "column",
-                        }}
-                    >
-                        <Box
-                            sx={{
-                                display: "flex",
-                                flexDirection: "row",
-                                flexWrap: "wrap",
-                            }}
-                        >
+                    <div className="flex flex-col">
+                        <div className="flex flex-row flex-wrap">
                             {hourValues.map((s: string, i: number) => (
-                                <Box
+                                <div
                                     key={"hourValues" + i.toString()}
-                                    sx={{ display: "inline-flex" }}
+                                    className="inline-flex"
                                 >
-                                    <Box
-                                        id={"divider-hours"}
-                                        sx={{
-                                            width: "55px",
-                                            height: "20px",
-                                        }}
-                                    />
+                                    <div id={"divider-hours"} className="w-[55px] h-[20px]" />
 
                                     <IconButton
                                         size="small"
@@ -119,9 +101,9 @@ export const TransportScheduleDialog = (props: RenameProps) => {
                                             event: React.ChangeEvent<HTMLInputElement>
                                         ) => onChangeHour(event, i)}
                                     />
-                                </Box>
+                                </div>
                             ))}
-                        </Box>
+                        </div>
                         <Button
                             sx={{
                                 maxWidth: "100%",
@@ -136,7 +118,7 @@ export const TransportScheduleDialog = (props: RenameProps) => {
                             &nbsp;&nbsp;&nbsp; {translations.addHours}
                             &nbsp;&nbsp;&nbsp;
                         </Button>
-                    </Box>
+                    </div>
                 </DialogContent>
                 <DialogActions>
                     <Button

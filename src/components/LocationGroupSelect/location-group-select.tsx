@@ -1,6 +1,5 @@
 import React from "react";
 import {
-    Box,
     MenuItem,
     Select,
     SelectChangeEvent,
@@ -43,17 +42,9 @@ export const LocationGroupSelect = () => {
     };
 
     return (
-        <Box>
+        <div>
             {isNewSidur ? (
-                <Box
-                    sx={{
-                        display: "flex",
-                        flexDirection: "row",
-                        alignItems: "center",
-                        justifyContent: "start",
-                        mb: "10px",
-                    }}
-                >
+                <div className="flex flex-row items-center justify-start mb-[10px]">
                     <Typography
                         variant="h6"
                         noWrap
@@ -99,8 +90,8 @@ export const LocationGroupSelect = () => {
                             )
                         )}
                     </Select>
-                </Box>
+                </div>
             ) : null}
-        </Box>
+        </div>
     );
 };

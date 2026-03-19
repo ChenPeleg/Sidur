@@ -1,4 +1,4 @@
-import { Box } from "@mui/material";
+
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { ActionsTypes } from "../../store/types.actions";
@@ -19,7 +19,7 @@ export const LoadingShield = () => {
     useEffect(activeEffect, [activeEffect]);
 
     return (
-        <Box>
+        <div>
             <div
                 style={{
                     width: "100px",
@@ -140,6 +140,6 @@ export const LoadingShield = () => {
                     />
                 </svg>
             </div>
-        </Box>
+        </div>
     );
 };

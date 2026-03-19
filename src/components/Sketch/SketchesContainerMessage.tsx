@@ -1,4 +1,4 @@
-import { Box, Typography } from "@mui/material";
+import { Typography } from "@mui/material";
 import { Styles } from "../../hoc/themes";
 import { useSelector } from "react-redux";
 import { SidurStore } from "../../store/store.types";
@@ -57,17 +57,8 @@ export const SketchesContainerMessage = (props: {
     }
 
     return (
-        <Box
-            sx={{
-                ...Styles.flexRow,
-            }}
-        >
-            <Box
-                sx={{
-                    width: "20vw",
-                    height: "10px",
-                }}
-            />
+        <div className={Styles.flexRow}>
+            <div className="w-[20vw] h-[10px]" />
             <Typography variant={"h5"}>{messageText} </Typography>
             {messageText ? (
                 <>
@@ -86,6 +77,6 @@ export const SketchesContainerMessage = (props: {
                     </Typography>
                 </>
             ) : null}
-        </Box>
+        </div>
     );
 };

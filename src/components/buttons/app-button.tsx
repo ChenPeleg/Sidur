@@ -1,8 +1,6 @@
 import { SxProps } from "@mui/system";
 import React from "react";
-import { Add } from "@mui/icons-material";
-import { Box, Button } from "@mui/material";
-import { translations } from "../../services/translations";
+import { Button } from "@mui/material";
 import { Icons } from "../Icons/icons";
 
 export interface AddButtonProps {
@@ -23,7 +21,7 @@ export interface AddButtonProps {
 
 export const AppButton = (props: AddButtonProps) => {
     return (
-        <Box>
+        <div>
             <Button
                 id={"app-button"}
                 color={props.color ? props.color : undefined}
@@ -38,6 +36,6 @@ export const AppButton = (props: AddButtonProps) => {
                 &nbsp; &nbsp;
                 {props.text}
             </Button>
-        </Box>
+        </div>
     );
 };

@@ -1,7 +1,7 @@
 import { TextFieldPropertiesModel } from "../../models/text-field-properties.model";
 
 import React from "react";
-import { Box, Slider, Theme, Typography } from "@mui/material";
+import { Slider, Theme, Typography } from "@mui/material";
 import { translations } from "../../services/translations";
 import { Utils } from "../../services/utils";
 
@@ -46,7 +46,7 @@ export const RenderFlexibilityField = ({
                 <b>{translations.flexibility}: </b>
                 {renderFlexibilityText(input.value)}
             </Typography>
-            <Box sx={{ width: "250px" }} role={"button"}>
+            <div className="w-[250px]" role="button">
                 <Slider
                     variant={"standard"}
                     sx={sliderSx}
@@ -60,7 +60,7 @@ export const RenderFlexibilityField = ({
                     {...convertedInput}
                     {...custom}
                 />
-            </Box>{" "}
+            </div>{" "}
         </>
     );
 };

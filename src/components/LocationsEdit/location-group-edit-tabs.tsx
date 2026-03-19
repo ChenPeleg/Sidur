@@ -1,7 +1,6 @@
 import * as React from "react";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
-import Box from "@mui/material/Box";
 import { translations } from "../../services/translations";
 import { SidurStore } from "../../store/store.types";
 import { useDispatch, useSelector } from "react-redux";
@@ -27,7 +26,7 @@ const TabPanel = (props: TabPanelProps) => {
             aria-labelledby={`simple-tab-${index}`}
             {...other}
         >
-            {value === index && <Box sx={{ p: 3 }}>{children}</Box>}
+            {value === index && <div className="p-[24px]">{children}</div>}
         </div>
     );
 };
@@ -54,13 +53,8 @@ export const LocationsEditTabs = () => {
     };
 
     return (
-        <Box sx={{ width: "100%" }}>
-            <Box
-                sx={{
-                    borderBottom: 1,
-                    borderColor: "divider",
-                }}
-            >
+        <div className="w-full">
+            <div className="border-b border-gray-300">
                 <Tabs
                     value={locationTabSelected}
                     onChange={handleChange}
@@ -73,7 +67,7 @@ export const LocationsEditTabs = () => {
                         {...a11yProps(2)}
                     />
                 </Tabs>
-            </Box>
+            </div>
             <TabPanel value={locationTabSelected} index={0}>
                 <LocationsEdit />
             </TabPanel>
@@ -83,6 +77,6 @@ export const LocationsEditTabs = () => {
             <TabPanel value={locationTabSelected} index={2}>
                 <LocationsTransportEditWrapper />
             </TabPanel>
-        </Box>
+        </div>
     );
 };

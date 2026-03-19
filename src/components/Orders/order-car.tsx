@@ -1,9 +1,8 @@
 import React, { useState } from "react";
 
 import { OrderCarForm } from "./order-car-form";
-import { Box, Card, Collapse } from "@mui/material";
+import { Card, Collapse } from "@mui/material";
 import { OrderCarBrief } from "./order-car-brief";
-import { SxProps } from "@mui/system";
 import { useDispatch, useSelector } from "react-redux";
 import { ActionsTypes } from "../../store/types.actions";
 import { DeleteButton } from "../buttons/delete-button";
@@ -15,27 +14,7 @@ type AppProps = {
     isInEdit: boolean;
 };
 
-const useStyles = () => ({
-    cardBase: {
-        padding: "10px",
-        width: "100%",
-        borderRadius: "15px",
-    },
-    cardHeader: {
-        paddingBottom: 0,
-        paddingTop: "10px",
-    },
-    additionalText: {
-        fontSize: "14px",
-    },
-    dividerBox: {
-        width: "20px",
-        height: "20px",
-    },
-});
-
 export const OrderCar = (props: AppProps) => {
-    const classes = useStyles();
     const locations = useSelector(
         (state: { Locations: LocationModel[] }) => state.Locations
     );
@@ -74,48 +53,34 @@ export const OrderCar = (props: AppProps) => {
             },
         });
     };
-    const briefOrderStyle: SxProps = props.isInEdit
-        ? {}
-        : {
-              cursor: "pointer",
-              bgcolor: {
-                  transition: " ease-in-out 100ms",
-              },
-          };
+
+    const cardCursorClass = props.isInEdit ? "" : "cursor-pointer";
+
     return (
-        <Box>
-            <Box sx={{ display: "flex" }}>
+        <div>
+            <div className="flex">
                 <Card
                     onMouseOver={onMouseOver}
                     onMouseOut={onMouseOut}
                     elevation={inHover ? 7 : 2}
                     sx={{
-                        ...classes.cardBase,
-                        ...briefOrderStyle,
+                        padding: "10px",
+                        width: "100%",
+                        borderRadius: "15px",
                     }}
+                    className={cardCursorClass}
                     onClick={(event: any) =>
                         !props.isInEdit ? cardClickHandler(event) : null
                     }
                 >
                     <div tabIndex={0}>
-                        <Box
-                            sx={{
-                                display: "flex",
-                                flexDirection: "row",
-                                justifyContent: "space-between",
-                            }}
-                        >
+                        <div className="flex flex-row justify-between">
                             <OrderCarBrief
                                 isInEdit={props.isInEdit}
-                                sx={{ ...classes.cardBase }}
+                                className="p-[10px] w-full rounded-[15px]"
                                 orderId={props.orderId}
                             />
-                            <Box
-                                sx={{
-                                    display: "flex",
-                                    flexDirection: "row",
-                                }}
-                            >
+                            <div className="flex flex-row">
                                 <CloneButton
                                     cloneClickHandler={cloneClickHandler}
                                     sx={{ fontSize: "14px" }}
@@ -124,8 +89,8 @@ export const OrderCar = (props: AppProps) => {
                                     deleteClickHandler={deleteClickHandler}
                                     sx={{ fontSize: "14px" }}
                                 />
-                            </Box>
-                        </Box>
+                            </div>
+                        </div>
                     </div>
 
                     {props.isInEdit ? <></> : null}
@@ -142,8 +107,8 @@ export const OrderCar = (props: AppProps) => {
                         />
                     </Collapse>
                 </Card>
-            </Box>
-            <Box sx={{ ...classes.dividerBox }} />
-        </Box>
+            </div>
+            <div className="w-[20px] h-[20px]" />
+        </div>
     );
 };

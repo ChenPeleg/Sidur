@@ -7,8 +7,7 @@ import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
 import { translations } from "../../services/translations";
-import { Box, Typography } from "@mui/material";
-import { SxProps } from "@mui/system";
+import { Typography } from "@mui/material";
 import { MergeType } from "@mui/icons-material";
 import { DriveModel, SketchModel } from "../../models/Sketch.model";
 import { VerticalHourField } from "../buttons/vertical-hour-field";
@@ -75,9 +74,6 @@ export const SketchDriveMergeDialog = (props: SketchDriveMergeDialogProps) => {
     });
 
     const descriptionValueRef: any = useRef("");
-    const filedWrapper: SxProps = {
-        //  width: '320px'
-    };
     const handleCloseCancel = () => {
         onClose(null);
     };
@@ -117,23 +113,8 @@ export const SketchDriveMergeDialog = (props: SketchDriveMergeDialogProps) => {
                 <MergeType fontSize={"large"} /> {translations.MergeDrive}{" "}
             </DialogTitle>
             <DialogContent>
-                <Box
-                    sx={{
-                        ...filedWrapper,
-                        display: "flex",
-                        flexDirection: "row",
-                        minWidth: "35vw",
-                    }}
-                >
-                    <Box
-                        sx={{
-                            ...filedWrapper,
-                            display: "flex",
-                            flexDirection: "column",
-                            maxWidth: "160px",
-                            p: "0 0.2em",
-                        }}
-                    >
+                <div className="flex flex-row min-w-[35vw]">
+                    <div className="flex flex-col max-w-[160px] py-0 px-[0.2em]">
                         <Typography align={"center"} component="legend">
                             <b>{translations.DriveTimesAfterMerge}</b>
                         </Typography>
@@ -143,25 +124,13 @@ export const SketchDriveMergeDialog = (props: SketchDriveMergeDialogProps) => {
                             onHoursChange={handleHourChange}
                             label={translations.Start}
                         />
-                    </Box>
-                    <Box
-                        id={"divider-in-main-row"}
-                        sx={{
-                            width: "20px",
-                            height: "100px",
-                        }}
-                    />
-                    <Box
-                        sx={{
-                            ...filedWrapper,
-                            display: "flex",
-                            flexDirection: "column",
-                        }}
-                    >
+                    </div>
+                    <div id={"divider-in-main-row"} className="w-[20px] h-[100px]" />
+                    <div className="flex flex-col">
                         <Typography component="legend">
                             <b>{translations.DriveDescriptionNew}</b>
                         </Typography>
-                        <Box sx={{ ...filedWrapper }}>
+                        <div>
                             <TextField
                                 size={"medium"}
                                 margin="dense"
@@ -180,7 +149,7 @@ export const SketchDriveMergeDialog = (props: SketchDriveMergeDialogProps) => {
                                     }
                                 }}
                             />
-                        </Box>
+                        </div>
                         <Typography sx={{ mt: "1em" }} component="legend">
                             <b>
                                 {" "}
@@ -189,23 +158,19 @@ export const SketchDriveMergeDialog = (props: SketchDriveMergeDialogProps) => {
                                     : null}{" "}
                                 {translations.issues + ":"}
                             </b>
-                            <Box id={"issues"}>
+                            <div id={"issues"}>
                                 {issues.map((issue: string, i: number) => (
-                                    <Box
+                                    <div
                                         key={i}
-                                        sx={{
-                                            display: "flex",
-                                            flexDirection: "column",
-                                            p: "0.0em",
-                                        }}
+                                        className="flex flex-col"
                                     >
-                                        <Box sx={{ pb: "0em" }}>
+                                        <div>
                                             {(i + 1).toString() + ". "}
                                             {issue}
-                                        </Box>
-                                    </Box>
+                                        </div>
+                                    </div>
                                 ))}
-                            </Box>
+                            </div>
                         </Typography>{" "}
                         <Typography sx={{ mt: "1em" }} component="legend">
                             <b>
@@ -216,28 +181,24 @@ export const SketchDriveMergeDialog = (props: SketchDriveMergeDialogProps) => {
                                 {translations.newMergedOrder}
                             </b>
                         </Typography>
-                        <Box id={"connected-orders"}>
+                        <div id={"connected-orders"}>
                             {newImplementedOrders.map(
                                 (order: OrderModel, i: number) => (
-                                    <Box
+                                    <div
                                         key={i}
-                                        sx={{
-                                            display: "flex",
-                                            flexDirection: "column",
-                                            p: "0.2em",
-                                        }}
+                                        className="flex flex-col p-[0.2em]"
                                     >
-                                        <Box sx={{ pb: "0.2em" }}>
+                                        <div className="pb-[0.2em]">
                                             {orderToMergeBrief.timeText +
                                                 " " +
                                                 orderToMergeBrief.driverAndLocation +
                                                 ", " +
                                                 order.Comments}
-                                        </Box>
-                                    </Box>
+                                        </div>
+                                    </div>
                                 )
                             )}
-                        </Box>
+                        </div>
                         <Typography sx={{ mt: "0.2em" }} component="legend">
                             <b>
                                 {" "}
@@ -247,40 +208,30 @@ export const SketchDriveMergeDialog = (props: SketchDriveMergeDialogProps) => {
                                 {translations.connectedOrders}
                             </b>
                         </Typography>
-                        <Box id={"connected-orders"}>
+                        <div id={"connected-orders"}>
                             {implementedOrders.map(
                                 (order: OrderModel, i: number) => (
-                                    <Box
+                                    <div
                                         key={i}
-                                        sx={{
-                                            display: "flex",
-                                            flexDirection: "column",
-                                            p: "0.2em",
-                                        }}
+                                        className="flex flex-col p-[0.2em]"
                                     >
-                                        <Box sx={{ pb: "0.5em" }}>
+                                        <div className="pb-[0.5em]">
                                             {(i + 1).toString() + ". "}
                                             {order.Comments}
-                                        </Box>
-                                    </Box>
+                                        </div>
+                                    </div>
                                 )
                             )}
-                        </Box>
-                        <Box
-                            sx={{
-                                flexDirection: "row",
-                                alignItems: "center",
-                                justifyContent: "center",
-                                marginTop: "1em",
-                                display: "flex",
-                            }}
-                        ></Box>
-                    </Box>
-                </Box>
+                        </div>
+                        <div className="flex flex-row items-center justify-center mt-[1em]"></div>
+                    </div>
+                </div>
             </DialogContent>
             <DialogActions
                 sx={{
-                    ...Styles.flexRow,
+                    display: "flex",
+                    flexDirection: "row",
+                    alignItems: "start",
                     justifyContent: "center",
                 }}
             >
@@ -292,12 +243,7 @@ export const SketchDriveMergeDialog = (props: SketchDriveMergeDialogProps) => {
                 >
                     {translations.CancelMerge}
                 </Button>
-                <Box
-                    sx={{
-                        width: "30px",
-                        height: "10px",
-                    }}
-                />
+                <div className="w-[30px] h-[10px]" />
                 <Button
                     size={"large"}
                     variant={"contained"}

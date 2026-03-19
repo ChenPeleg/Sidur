@@ -1,11 +1,10 @@
 import React, { useState } from "react";
 import { translations } from "../../services/translations";
-import { SxProps } from "@mui/system";
 import { useDispatch, useSelector } from "react-redux";
 import { ActionsTypes } from "../../store/types.actions";
 import { VehicleModel } from "../../models/Vehicle.model";
 import { Add, TimeToLeave } from "@mui/icons-material";
-import { Badge, Box, Button } from "@mui/material";
+import { Badge, Button } from "@mui/material";
 import { VehicleEditDialog } from "../Dialogs/vehicle-edit-dialog";
 import { defaultVehicleValues } from "../../store/store.types";
 
@@ -17,20 +16,6 @@ export const Vehicles = () => {
         (state: { vehicles: VehicleModel[] }) => state.vehicles || []
     );
 
-    const vehicleButtonDesign: {
-        boxSX: SxProps;
-        variant: "text" | "outlined" | "contained";
-    } = {
-        boxSX: {
-            display: "flex",
-            margin: "0.5em",
-            mt: "0",
-            flexDirection: "column",
-            alignItems: "center",
-            justifyContent: "center",
-        },
-        variant: "contained",
-    };
     const handleVehicleEditClose = (value: VehicleModel | null) => {
         setVehicleEditOpen(false);
 
@@ -77,28 +62,12 @@ export const Vehicles = () => {
     };
 
     return (
-        <Box>
-            <Box
-                sx={{
-                    fontSize: "large",
-                    // height: '150px',
-                    mb: "1em",
-                    display: "flex",
-                    flexDirection: "row",
-                    flexWrap: "wrap",
-                    alignItems: "start",
-                    justifyContent: "start",
-                }}
-            >
+        <div>
+            <div className="text-lg mb-[1em] flex flex-row flex-wrap items-start justify-start">
                 {vehicles.map((v: VehicleModel, index: number) => (
-                    <Box
-                        key={index}
-                        sx={{
-                            ...vehicleButtonDesign.boxSX,
-                        }}
-                    >
+                    <div key={index} className="flex m-[0.5em] mt-0 flex-col items-center justify-center">
                         <Button
-                            variant={vehicleButtonDesign.variant}
+                            variant="contained"
                             onClick={(event) => {
                                 vehicleClickHandler(event, v.id);
                             }}
@@ -118,15 +87,11 @@ export const Vehicles = () => {
 
                             {v.vehicleName}
                         </Button>
-                    </Box>
+                    </div>
                 ))}
-                <Box
-                    sx={{
-                        ...vehicleButtonDesign.boxSX,
-                    }}
-                >
+                <div className="flex m-[0.5em] mt-0 flex-col items-center justify-center">
                     <Button
-                        variant={vehicleButtonDesign.variant}
+                        variant="contained"
                         onClick={(event) => vehicleClickHandler(event, "0")}
                     >
                         <Add
@@ -137,14 +102,14 @@ export const Vehicles = () => {
                         />{" "}
                         {translations.AddVehicles}{" "}
                     </Button>
-                </Box>
-            </Box>
+                </div>
+            </div>
             <VehicleEditDialog
                 vehicleData={vehicleClicked}
                 open={vehicleEditOpen}
                 onClose={handleVehicleEditClose}
                 onDelete={handleVehicleDelete}
             />
-        </Box>
+        </div>
     );
 };

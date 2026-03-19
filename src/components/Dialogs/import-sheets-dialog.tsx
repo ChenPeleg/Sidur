@@ -9,10 +9,7 @@ import DialogTitle from "@mui/material/DialogTitle";
 import { translations } from "../../services/translations";
 import { useDispatch, useSelector } from "react-redux";
 import { ActionsTypes } from "../../store/types.actions";
-import { SxProps } from "@mui/system";
 import { LinearLoading } from "../Loading/linear-loading";
-import { Box } from "@mui/material";
-import { Styles } from "../../hoc/themes";
 import { Check, ErrorOutline, HelpOutline } from "@mui/icons-material";
 import { ExplainVideoDialog } from "./explain-video-dialog";
 import { SidurStore } from "../../store/store.types";
@@ -61,7 +58,7 @@ export const ImportSheetsDialog = (props: ImportSheetsProps) => {
         setIsWaitingForValidation(false);
         dispatch({ type: ActionsTypes.OPEN_IMPORT_SHEETS_MODAL });
     };
-    const dialogStyle: SxProps = {
+    const dialogStyle = {
         minWidth: "35vw",
         minHeight: "50vh",
     };
@@ -127,37 +124,28 @@ export const ImportSheetsDialog = (props: ImportSheetsProps) => {
                         disabled={disableText}
                     />
                     {isWaitingForValidation && !importSheetCheckStatus ? (
-                        <Box id={"waiting-for-validation"}>
-                            <Box sx={{ padding: "20px", ...Styles.flexRow }}>
+                        <div id={"waiting-for-validation"}>
+                            <div className="p-[20px] flex flex-row items-start content-start">
                                 {translations.ImportFromSheetsPastValidating}
-                            </Box>
+                            </div>
 
                             <LinearLoading timeToFinish={200} />
-                        </Box>
+                        </div>
                     ) : null}
 
                     {importSheetCheckStatus === "OK" ? (
-                        <Box
-                            sx={{
-                                padding: "20px",
-                                ...Styles.flexColumn,
-                                justifyContent: "center",
-                                alignItems: "center",
-                            }}
-                        >
-                            <Box
-                                sx={{ ...Styles.flexRow, marginBottom: "20px" }}
-                            >
-                                <Box sx={{ padding: "0 20px 0 20px " }}>
+                        <div className="p-[20px] flex flex-col items-center justify-center content-start">
+                            <div className="flex flex-row items-start content-start mb-[20px]">
+                                <div className="py-0 px-[20px]">
                                     <Check
                                         sx={{
                                             fontSize: "30px",
                                             color: "green",
                                         }}
                                     />
-                                </Box>
+                                </div>
                                 {translations.ImportFromSheetsPastSuccess}
-                            </Box>
+                            </div>
 
                             <Button
                                 disabled={!importSheetCheckStatus}
@@ -167,52 +155,37 @@ export const ImportSheetsDialog = (props: ImportSheetsProps) => {
                             >
                                 {translations.ImportFromSheetsApprove}
                             </Button>
-                        </Box>
+                        </div>
                     ) : null}
 
                     {importSheetCheckStatus &&
                     importSheetCheckStatus.includes("Error") ? (
-                        <Box
-                            sx={{
-                                padding: "20px",
-                                ...Styles.flexColumn,
-                                justifyContent: "center",
-                                alignItems: "center",
-                            }}
-                        >
-                            <Box
-                                sx={{ ...Styles.flexRow, marginBottom: "20px" }}
-                            >
-                                <Box sx={{ padding: "0 20px 0 20px " }}>
+                        <div className="p-[20px] flex flex-col items-center justify-center content-start">
+                            <div className="flex flex-row items-start content-start mb-[20px]">
+                                <div className="py-0 px-[20px]">
                                     <ErrorOutline
                                         sx={{ fontSize: "30px", color: "red" }}
                                     />
-                                </Box>
+                                </div>
 
                                 {translations.ImportFromSheetsPastFail}
-                            </Box>
-                            <Box
-                                sx={{
-                                    direction: "ltr",
-                                    padding: "15px",
-                                    margin: "10px",
-                                    borderRadius: "5px",
-                                    backgroundColor: "#f29c9c",
-                                }}
+                            </div>
+                            <div
+                                dir="ltr"
+                                className="p-[15px] m-[10px] rounded-[5px] bg-[#f29c9c]"
                             >
                                 {formatErrorText(importSheetCheckStatus).map(
                                     (t, i) => (
-                                        <Box key={"container" + i}>
-                                            <Box
+                                        <div key={"container" + i}>
+                                            <div
                                                 key={i}
-                                                sx={{ padding: "00px" }}
                                             >
                                                 {t}
-                                            </Box>
-                                        </Box>
+                                            </div>
+                                        </div>
                                     )
                                 )}
-                            </Box>
+                            </div>
 
                             <Button
                                 disabled={!importSheetCheckStatus}
@@ -222,7 +195,7 @@ export const ImportSheetsDialog = (props: ImportSheetsProps) => {
                             >
                                 {translations.Approve}
                             </Button>
-                        </Box>
+                        </div>
                     ) : null}
                 </DialogContent>
                 <DialogActions>

@@ -1,5 +1,4 @@
 import {
-    Box,
     Card,
     IconButton,
     Select,
@@ -45,7 +44,7 @@ interface LocationRouteEditProps {
 }
 
 const maxHoursToSHow = 6;
-//const TransportStops
+
 export const LocationTransportEdit = (props: LocationRouteEditProps) => {
     const dispatch = useDispatch();
     const [RenameOpen, setRenameOpen] = React.useState(false);
@@ -151,7 +150,6 @@ export const LocationTransportEdit = (props: LocationRouteEditProps) => {
         stop: StopModel
     ): void => {
         const updatedRout = { ...props.transportRoute };
-        // const updatedValue = minutesFromLastOptions.find(o => o.value === event.target.value)
 
         updatedRout.TransportStops = updatedRout.TransportStops.map((s) => {
             if (s.locationId === stop.locationId) {
@@ -173,7 +171,7 @@ export const LocationTransportEdit = (props: LocationRouteEditProps) => {
         ) || [];
 
     return (
-        <Box>
+        <div>
             <Card
                 sx={{
                     height: "300px",
@@ -181,19 +179,8 @@ export const LocationTransportEdit = (props: LocationRouteEditProps) => {
                     flexDirection: "row",
                 }}
             >
-                <Box
-                    sx={{
-                        width: "400px",
-                        display: "flex",
-                        flexDirection: "column",
-                    }}
-                >
-                    <Box
-                        sx={{
-                            m: "1em",
-                            mb: "0px",
-                        }}
-                    >
+                <div className="w-[400px] flex flex-col">
+                    <div className="m-[1em] mb-0">
                         {" "}
                         <b>{props.transportRoute.name}</b>
                         <IconButton
@@ -206,22 +193,11 @@ export const LocationTransportEdit = (props: LocationRouteEditProps) => {
                         >
                             <Edit fontSize={"small"} />
                         </IconButton>
-                    </Box>
-                    <Box
-                        sx={{
-                            pr: "1em",
-                            pl: "1em",
-                            flex: "row",
-
-                            flexWrap: "wrap",
-                        }}
-                    >
+                    </div>
+                    <div className="pr-[1em] pl-[1em] flex-row flex-wrap">
                         {allStops.map((stop: StopModel, i: number) => (
-                            <Box
-                                sx={{
-                                    display: isLongRoute ? "inline" : "block",
-                                    p: "0.1em",
-                                }}
+                            <div
+                                className={isLongRoute ? "inline p-[0.1em]" : "block p-[0.1em]"}
                                 key={
                                     "stop.locationId" +
                                     stop.locationId +
@@ -235,8 +211,6 @@ export const LocationTransportEdit = (props: LocationRouteEditProps) => {
                                             variant={"standard"}
                                             value={stop.minuetsFromLastCode}
                                             sx={{
-                                                //  color: 'black',
-                                                //  fontSize: '1.25rem',
                                                 fontWeight: "normal",
                                             }}
                                             onChange={(
@@ -266,15 +240,7 @@ export const LocationTransportEdit = (props: LocationRouteEditProps) => {
                                                 )
                                             )}
                                         </Select>{" "}
-                                        <Box
-                                            sx={{
-                                                width: isLongRoute
-                                                    ? "15px"
-                                                    : "5px",
-                                                height: "5px",
-                                                display: "inline-flex",
-                                            }}
-                                        />
+                                        <div className={isLongRoute ? "inline-flex w-[15px] h-[5px]" : "inline-flex w-[5px] h-[5px]"} />
                                     </>
                                 ) : null}
                                 {i === 0 ? (
@@ -288,13 +254,7 @@ export const LocationTransportEdit = (props: LocationRouteEditProps) => {
                                         fontSize={"small"}
                                     />
                                 )}
-                                <Box
-                                    sx={{
-                                        width: "15px",
-                                        height: "5px",
-                                        display: "inline-flex",
-                                    }}
-                                />
+                                <div className="inline-flex w-[15px] h-[5px]" />
 
                                 <Card
                                     sx={{
@@ -306,14 +266,7 @@ export const LocationTransportEdit = (props: LocationRouteEditProps) => {
                                     {stop.locationName}{" "}
                                 </Card>
 
-                                <Box
-                                    sx={{
-                                        width: "15px",
-                                        height: "5px",
-                                        display: "inline-flex",
-                                        mb: isLongRoute ? "1.3em" : "1.6em",
-                                    }}
-                                />
+                                <div className={isLongRoute ? "inline-flex w-[15px] h-[5px] mb-[1.3em]" : "inline-flex w-[15px] h-[5px] mb-[1.6em]"} />
                                 {i + 1 === allStops.length ? (
                                     <IconButton
                                         size="small"
@@ -323,29 +276,14 @@ export const LocationTransportEdit = (props: LocationRouteEditProps) => {
                                         <Delete fontSize={"small"} />{" "}
                                     </IconButton>
                                 ) : null}
-                            </Box>
+                            </div>
                         ))}
-                    </Box>
-                </Box>
+                    </div>
+                </div>
                 <hr />
 
-                <Box
-                    sx={{
-                        flexDirection: "column",
-                        alignItems: "center",
-                        justifyContent: "center",
-                    }}
-                >
-                    <Box
-                        sx={{
-                            m: "1em",
-                            width: "100px",
-                            display: "flex",
-                            flexDirection: "column",
-                            alignItems: "center",
-                            // mb: '0px'
-                        }}
-                    >
+                <div className="flex-col items-center justify-center">
+                    <div className="m-[1em] w-[100px] flex flex-col items-center">
                         {" "}
                         <b>{translations.exitTime}</b>
                         <Button
@@ -361,24 +299,19 @@ export const LocationTransportEdit = (props: LocationRouteEditProps) => {
                             {translations.editTimeStarts}
                         </Button>
                         {timeTableBrief.map((t, i) => (
-                            <Box
+                            <div
                                 key={
                                     "props.transportRoute.id" +
                                     i.toString() +
                                     props.transportRoute.id
                                 }
-                                sx={{
-                                    m: "1em",
-                                    mb: "5px",
-                                    mt: "5px",
-                                    fontSize: "large",
-                                }}
+                                className="m-[1em] mb-[5px] mt-[5px] text-[large]"
                             >
                                 {i + 1 === maxHoursToSHow ? "..." : t}
-                            </Box>
+                            </div>
                         ))}
-                    </Box>
-                </Box>
+                    </div>
+                </div>
             </Card>
             <RouteTransportEditMenu
                 routeMoreAnchorEl={routeMoreAnchorEl}
@@ -402,6 +335,6 @@ export const LocationTransportEdit = (props: LocationRouteEditProps) => {
                 onClose={handleScheduleClose}
                 transport={props.transportRoute}
             />
-        </Box>
+        </div>
     );
 };

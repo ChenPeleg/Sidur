@@ -1,4 +1,4 @@
-import { Box, SxProps } from "@mui/system";
+import { SxProps } from "@mui/system";
 import React from "react";
 import { IconButton } from "@mui/material";
 import { Delete } from "@mui/icons-material";
@@ -13,7 +13,7 @@ export interface DeleteButtonProps {
 
 export const DeleteButton = (props: DeleteButtonProps) => {
     return (
-        <Box>
+        <div>
             <LightTooltip title={props?.toolTip ? props.toolTip : false}>
                 <IconButton
                     aria-haspopup="true"
@@ -27,6 +27,6 @@ export const DeleteButton = (props: DeleteButtonProps) => {
                     <Delete />
                 </IconButton>
             </LightTooltip>
-        </Box>
+        </div>
     );
 };

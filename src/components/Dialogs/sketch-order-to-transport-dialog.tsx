@@ -7,8 +7,7 @@ import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
 import { translations } from "../../services/translations";
-import { Box, Typography } from "@mui/material";
-import { SxProps } from "@mui/system";
+import { Typography } from "@mui/material";
 import { MergeType } from "@mui/icons-material";
 import { DriveModel, SketchModel } from "../../models/Sketch.model";
 import { OrderModel } from "../../models/Order.model";
@@ -78,9 +77,6 @@ export const SketchOrderToTransportDialog = (
     const secondOrderToMergeBrief = { ...orderToMergeBrief };
     const descriptionValueRef: any = useRef("");
     const secondDescriptionValueRef: any = useRef("");
-    const filedWrapper: SxProps = {
-        width: "100%",
-    };
     const handleCloseCancel = () => {
         onClose(null);
     };
@@ -114,29 +110,10 @@ export const SketchOrderToTransportDialog = (
                 {translations.publicTransportSolution}{" "}
             </DialogTitle>
             <DialogContent>
-                <Box
-                    sx={{
-                        ...filedWrapper,
-                        display: "flex",
-                        flexDirection: "row",
-                        minWidth: "35vw",
-                    }}
-                >
-                    <Box
-                        id={"divider-in-main-row"}
-                        sx={{
-                            width: "20px",
-                            height: "100px",
-                        }}
-                    />
-                    <Box
-                        sx={{
-                            ...filedWrapper,
-                            display: "flex",
-                            flexDirection: "column",
-                        }}
-                    >
-                        <Box sx={{ ...filedWrapper }}>
+                <div className="w-full flex flex-row min-w-[35vw]">
+                    <div id={"divider-in-main-row"} className="w-[20px] h-[100px]" />
+                    <div className="w-full flex flex-col">
+                        <div className="w-full">
                             <TextField
                                 size={"medium"}
                                 margin="dense"
@@ -158,7 +135,7 @@ export const SketchOrderToTransportDialog = (
                                     }
                                 }}
                             />
-                        </Box>
+                        </div>
 
                         <Typography sx={{ mt: "0.2em" }} component="legend">
                             <b>
@@ -170,7 +147,7 @@ export const SketchOrderToTransportDialog = (
                             </b>
                         </Typography>
                         {secondOrderToMergeBrief ? (
-                            <Box sx={{ ...filedWrapper }}>
+                            <div className="w-full">
                                 <TextField
                                     size={"medium"}
                                     margin="dense"
@@ -192,7 +169,7 @@ export const SketchOrderToTransportDialog = (
                                         }
                                     }}
                                 />
-                            </Box>
+                            </div>
                         ) : null}
 
                         <Typography sx={{ mt: "0.2em" }} component="legend">
@@ -205,41 +182,31 @@ export const SketchOrderToTransportDialog = (
                             </b>
                         </Typography>
 
-                        <Box id={"connected-orders"}>
+                        <div id={"connected-orders"}>
                             {implementedOrders.map(
                                 (order: OrderModel, i: number) => (
-                                    <Box
+                                    <div
                                         key={i}
-                                        sx={{
-                                            display: "flex",
-                                            flexDirection: "column",
-                                            p: "0.2em",
-                                        }}
+                                        className="flex flex-col p-[0.2em]"
                                     >
-                                        <Box sx={{ pb: "0.5em" }}>
+                                        <div className="pb-[0.5em]">
                                             {(i + 1).toString() + ". "}
                                             {order.Comments}
-                                        </Box>
-                                    </Box>
+                                        </div>
+                                    </div>
                                 )
                             )}
-                        </Box>
+                        </div>
 
-                        <Box
-                            sx={{
-                                flexDirection: "row",
-                                alignItems: "center",
-                                justifyContent: "center",
-                                marginTop: "1em",
-                                display: "flex",
-                            }}
-                        ></Box>
-                    </Box>
-                </Box>
+                        <div className="flex flex-row items-center justify-center mt-[1em]"></div>
+                    </div>
+                </div>
             </DialogContent>
             <DialogActions
                 sx={{
-                    ...Styles.flexRow,
+                    display: "flex",
+                    flexDirection: "row",
+                    alignItems: "start",
                     justifyContent: "center",
                 }}
             >
@@ -251,12 +218,7 @@ export const SketchOrderToTransportDialog = (
                 >
                     {translations.Cancel}
                 </Button>
-                <Box
-                    sx={{
-                        width: "30px",
-                        height: "10px",
-                    }}
-                />
+                <div className="w-[30px] h-[10px]" />
                 <Button
                     size={"large"}
                     variant={"contained"}

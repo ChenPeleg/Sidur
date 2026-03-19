@@ -1,5 +1,4 @@
 import React from "react";
-import { Box } from "@mui/system";
 import { useSelector } from "react-redux";
 import { Typography } from "@mui/material";
 import { LanguageUtilities } from "../../services/language-utilities";
@@ -22,20 +21,15 @@ export const SketchPendingOrderBrief = (props: sketchPendingOrderProps) => {
     );
 
     return (
-        <Box id={"pending-order"}>
-            <Box id={"drive-description"}>
-                <Box
-                    sx={{
-                        width: "5px",
-                        height: "10px",
-                    }}
-                />
+        <div id={"pending-order"}>
+            <div id={"drive-description"}>
+                <div className="w-[5px] h-[10px]" />
                 <Typography variant={"subtitle1"}>
                     {timeText(order, locations) +
                         " " +
                         driverAndLocation(order, locations)}{" "}
                 </Typography>
-            </Box>
-        </Box>
+            </div>
+        </div>
     );
 };

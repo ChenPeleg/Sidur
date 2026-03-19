@@ -1,5 +1,4 @@
 import React from "react";
-import { Box } from "@mui/system";
 import { useDispatch } from "react-redux";
 import { Button, Typography } from "@mui/material";
 import { LanguageUtilities } from "../../services/language-utilities";
@@ -105,20 +104,10 @@ export const SketchPendingOrderFull = (props: sketchPendingOrderProps) => {
     const isSidurMenuOpen = Boolean(pendingOrderAnchorEl);
 
     return (
-        <Box id={"pending-order"}>
-            <Box
+        <div id={"pending-order"}>
+            <div
                 id={"pending-order-data"}
-                sx={{
-                    display: "flex",
-                    flexDirection: "row",
-                    flexWrap: "wrap",
-                    alignItems: "start",
-                    justifyContent: "start",
-                    p: "0.2em",
-                    pl: "0.4em",
-                    pr: "0.4em",
-                    flexGrow: 4,
-                }}
+                className="flex flex-row flex-wrap items-start justify-start p-[0.2em] pl-[0.4em] pr-[0.4em] grow"
             >
                 <Typography variant={"subtitle1"}>
                     {order.Comments +
@@ -127,24 +116,14 @@ export const SketchPendingOrderFull = (props: sketchPendingOrderProps) => {
                             order.passengers
                         )}{" "}
                 </Typography>
-            </Box>
+            </div>
 
-            <Box
+            <div
                 id={"pending-order-actions"}
-                sx={{
-                    display: "flex",
-                    flexDirection: "row",
-                    flexWrap: "wrap",
-                    alignItems: "start",
-                    justifyContent: "start",
-                    p: "0.2em",
-                    pl: "0.4em",
-                    pr: "0.4em",
-                    flexGrow: 4,
-                }}
+                className="flex flex-row flex-wrap items-start justify-start p-[0.2em] pl-[0.4em] pr-[0.4em] grow"
             >
                 {[...pendingOrdersActions].map((n, i: number) => (
-                    <Box key={i} sx={{ p: "0.5em" }}>
+                    <div key={i} className="p-[0.5em]">
                         {" "}
                         <OrderActionButton
                             key={n.action.toString()}
@@ -152,9 +131,9 @@ export const SketchPendingOrderFull = (props: sketchPendingOrderProps) => {
                             actionType={n.action}
                             actionClickHandler={actionClickHandler}
                         />
-                    </Box>
+                    </div>
                 ))}
-                <Box sx={{ p: "0.5em" }}>
+                <div className="p-[0.5em]">
                     <Button
                         size="medium"
                         aria-label="show more"
@@ -171,8 +150,8 @@ export const SketchPendingOrderFull = (props: sketchPendingOrderProps) => {
                         {" "}
                         {translations.SketchActionRemove}
                     </Button>
-                </Box>
-                <Box sx={{ p: "0.5em" }}>
+                </div>
+                <div className="p-[0.5em]">
                     <Button
                         sx={{
                             pl: "5px",
@@ -195,8 +174,8 @@ export const SketchPendingOrderFull = (props: sketchPendingOrderProps) => {
                             }}
                         />
                     </Button>
-                </Box>
-                <Box sx={{ p: "0.5em" }}>
+                </div>
+                <div className="p-[0.5em]">
                     <Button
                         size="medium"
                         aria-label="show more"
@@ -208,8 +187,8 @@ export const SketchPendingOrderFull = (props: sketchPendingOrderProps) => {
                         {" "}
                         {translations.close}
                     </Button>
-                </Box>
-            </Box>
+                </div>
+            </div>
             <PendingOrderMenu
                 PendingOrderMenuAnchor={pendingOrderAnchorEl}
                 PendingOrderMenuId={pendingOrderMenuId}
@@ -217,6 +196,6 @@ export const SketchPendingOrderFull = (props: sketchPendingOrderProps) => {
                 handlePendingOrderMenuClick={handlePendingOrderMenuClick}
                 handlePendingOrderMenuClose={handleSidurMenuClose}
             />
-        </Box>
+        </div>
     );
 };

@@ -1,5 +1,4 @@
 import React from "react";
-import { Box } from "@mui/system";
 import { OrderCar } from "./order-car";
 import { useDispatch, useSelector } from "react-redux";
 import { OrderModel } from "../../models/Order.model";
@@ -32,17 +31,7 @@ export const Orders = () => {
 
     return (
         <div className={"max-w-3xl mx-auto"}>
-            <Box
-                sx={{
-                    display: "flex",
-                    flexDirection: "row",
-                    alignItems: "center",
-                    mb: "10px",
-                    justifyContent: "center",
-                    gap: "20px",
-                    minWidth: "30vw",
-                }}
-            >
+            <div className="flex flex-row items-center mb-[10px] justify-center gap-[20px] min-w-[30vw]">
                 <AddButton addClickHandler={addClickHandler} />
 
                 {orders.length ? null : (
@@ -53,8 +42,8 @@ export const Orders = () => {
                         addClickHandler={importOrdersClickHandler}
                     />
                 )}
-            </Box>
-            <Box>
+            </div>
+            <div>
                 {orders.map((o) => (
                     <OrderCar
                         orderId={o.id}
@@ -62,7 +51,7 @@ export const Orders = () => {
                         isInEdit={orderIdInEdit === o.id}
                     />
                 ))}
-            </Box>
+            </div>
         </div>
     );
 };
