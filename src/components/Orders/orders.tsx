@@ -31,7 +31,7 @@ export const Orders = () => {
     };
 
     return (
-        <Box>
+        <div className={"max-w-3xl mx-auto"}>
             <Box
                 sx={{
                     display: "flex",
@@ -63,6 +63,6 @@ export const Orders = () => {
                     />
                 ))}
             </Box>
-        </Box>
+        </div>
     );
 };
