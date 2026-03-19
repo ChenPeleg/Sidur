@@ -1,7 +1,7 @@
 import { SxProps } from "@mui/system";
 import React from "react";
 import { Add } from "@mui/icons-material";
-import { Box, Button } from "@mui/material";
+import { Button } from "@mui/material";
 import { translations } from "../../services/translations";
 
 export interface AddButtonProps {
@@ -11,7 +11,7 @@ export interface AddButtonProps {
 
 export const AddButton = (props: AddButtonProps) => {
     return (
-        <Box>
+        <div>
             <Button
                 id={"add-order-button"}
                 variant="contained"
@@ -21,6 +21,6 @@ export const AddButton = (props: AddButtonProps) => {
             >
                 <Add /> {translations.AddOrder}
             </Button>
-        </Box>
+        </div>
     );
 };

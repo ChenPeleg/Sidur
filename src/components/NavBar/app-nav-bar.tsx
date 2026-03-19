@@ -1,6 +1,5 @@
 import * as React from "react";
 import AppBar from "@mui/material/AppBar";
-import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
@@ -182,7 +181,7 @@ export const AppNavBar = () => {
     const menuId = "primary-search-account-menu";
     const sidurMenuId = "primary-search-account-menu-mobile";
     return (
-        <Box dir="rtl">
+        <div dir="rtl">
             <AppBar
                 position="static"
                 sx={{
@@ -266,23 +265,11 @@ export const AppNavBar = () => {
                     >
                         <Edit />
                     </IconButton>
-                    <Box
-                        sx={{
-                            width: "20px",
-                            height: "5px",
-                        }}
-                    />
+                    <div className="w-[20px] h-[5px]" />
                     <ToggleButtons />
 
-                    <Box sx={{ flexGrow: 1 }} />
-                    <Box
-                        sx={{
-                            display: {
-                                xs: "none",
-                                md: "flex",
-                            },
-                        }}
-                    >
+                    <div className="grow" />
+                    <div className="hidden md:flex">
                         <IconButton
                             size="large"
                             edge="end"
@@ -294,15 +281,8 @@ export const AppNavBar = () => {
                         >
                             <AccountCircle />
                         </IconButton>
-                    </Box>
-                    <Box
-                        sx={{
-                            display: {
-                                xs: "flex",
-                                md: "none",
-                            },
-                        }}
-                    >
+                    </div>
+                    <div className="flex md:hidden">
                         <IconButton
                             size="large"
                             aria-label="show more"
@@ -313,7 +293,7 @@ export const AppNavBar = () => {
                         >
                             <MoreIcon />
                         </IconButton>
-                    </Box>
+                    </div>
                 </Toolbar>
             </AppBar>
 
@@ -350,6 +330,6 @@ export const AppNavBar = () => {
                 open={importOrdersOpen}
                 selectedValue={sidurName}
             />
-        </Box>
+        </div>
     );
 };

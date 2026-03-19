@@ -1,58 +1,21 @@
 import React from "react";
 import { TimeToLeave } from "@mui/icons-material";
-import { Box } from "@mui/material";
-
-const useStyles: any = () => ({
-    root: {
-        flexGrow: 1,
-    },
-    headerText: {
-        fontSize: (theme: any) => theme?.typography?.h1.fontSize,
-        margin: (theme: any) => theme?.typography?.h1.marginTop,
-        padding: "5px",
-        display: "flex",
-        flexDirection: "row",
-        justifyContent: "center",
-        alignItems: "center",
-    },
-
-    carIcon: {
-        marginTop: "10px",
-        fontSize: (theme: any) => theme.typography.h1.fontSize,
-    },
-});
 
 export const HeaderLayout = () => {
-    const classes = useStyles();
     const icons =
-        "🌱 🌴 🌵 🌷 🌸 🌹 🌺 🌻 🌼 💐 🌾 🌿 🍀 🍁 🍂 🍃 🍄 🌰 🐭 🐹 🐮 🐯 🐇 🐰 🐈 🐱 🐎 🐴 🐑 🐔 🐤 🐣 🐥 🐦 🐧 🐘 🐫 🐗 🐷 🐽 🐕 🐩 🐶 🐺 🐻 🐨 🐼 🐵 🐒 🐲 🐍 🐢 🐸 🐳 🐬 🐙 🐟 🐠 🐡 🐚 🐌 🐛 🐜 🐝 🐞 🐾";
+        "🌱 🌴 🌵 🌷 🌸 🌹 🌺 🌻 🌼 💐 🌾 🌿 🍀 🍁 🍂 🍃 🍄 🌰 🐭 🐹 🐮 🐯 🐇 🐰 🐈 🐱 �� 🐴 🐑 🐔 🐤 🐣 🐥 🐦 🐧 🐘 🐫 🐗 🐷 🐽 🐕 🐩 🐶 🐺 🐻 🐨 🐼 🐵 🐒 🐲 🐍 🐢 🐸 🐳 🐬 🐙 🐟 🐠 🐡 🐚 🐌 🐛 🐜 🐝 🐞 🐾";
     const rand = Math.floor(Math.random() * 10);
     const icon = icons.slice(rand * 2, rand * 2 + 3);
 
     return (
         <header>
-            <Box
-                flexDirection="row"
-                flexWrap="wrap"
-                display="flex"
-                alignItems="center"
-                justifyContent="space-around"
-                dir={"rtl"}
-            >
-                <Box
-                    sx={{
-                        ...classes.headerText,
-                    }}
-                >
-                    <TimeToLeave
-                        sx={{
-                            ...classes.carIcon,
-                        }}
-                    />{" "}
+            <div className="flex flex-row flex-wrap items-center justify-around" dir="rtl">
+                <div className="text-[3rem] m-0 p-[5px] flex flex-row justify-center items-center">
+                    <TimeToLeave sx={{ marginTop: "10px", fontSize: "3rem" }} />{" "}
                     &nbsp; סידור{" "}
-                </Box>
-                <Box sx={{ fontSize: "48px" }}>{icon}</Box>
-            </Box>
+                </div>
+                <div className="text-[48px]">{icon}</div>
+            </div>
         </header>
     );
 };

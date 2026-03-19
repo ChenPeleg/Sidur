@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import { OrderModel } from "../../models/Order.model";
 import { SketchPendingOrderBrief } from "./SketchPendingOrderBrief";
 import { ActionsTypes } from "../../store/types.actions";
-import { Box, Card, Collapse } from "@mui/material";
+import { Card, Collapse } from "@mui/material";
 import { SketchPendingOrderFull } from "./SketchPendingOrderFull";
 
 interface sketchPendingOrderProps {
@@ -32,7 +32,7 @@ export const SketchPendingOrder = (props: sketchPendingOrderProps) => {
     const order = props.order;
     return (
         <>
-            <Box sx={{ display: "flex" }}>
+            <div className="flex">
                 <Card
                     onMouseOver={onMouseOver}
                     onMouseOut={onMouseOut}
@@ -53,30 +53,14 @@ export const SketchPendingOrder = (props: sketchPendingOrderProps) => {
                         !props.isInEdit ? cardClickHandler(event) : null
                     }
                 >
-                    <Box
-                        sx={{
-                            display: "flex",
-                            flexDirection: "column",
-                            alignItems: "start",
-                            justifyContent: "start",
-                        }}
-                    >
+                    <div className="flex flex-col items-start justify-start">
                         <div tabIndex={0}>
-                            <Box
-                                sx={{
-                                    display: "flex",
-                                    flexDirection: "row",
-                                    justifyContent: "space-between",
-                                    mr: "0.6em",
-                                    ml: "0.6em",
-                                    mt: "0",
-                                }}
-                            >
+                            <div className="flex flex-row justify-between mr-[0.6em] ml-[0.6em] mt-0">
                                 <SketchPendingOrderBrief
                                     isInEdit={props.isInEdit}
                                     order={props.order}
                                 />
-                            </Box>
+                            </div>
                         </div>
 
                         <Collapse in={props.isInEdit} unmountOnExit>
@@ -85,10 +69,9 @@ export const SketchPendingOrder = (props: sketchPendingOrderProps) => {
                                 order={order}
                             />
                         </Collapse>
-                    </Box>
+                    </div>
                 </Card>
-            </Box>
-            <Box sx={{}} />{" "}
+            </div>
         </>
     );
 };

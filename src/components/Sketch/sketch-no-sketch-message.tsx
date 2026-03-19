@@ -1,10 +1,10 @@
 import * as React from "react";
 import { translations } from "../../services/translations";
-import { Box, Card, CardContent } from "@mui/material";
+import { Card, CardContent } from "@mui/material";
 
 export const SketchNoSketchMessage = () => {
     return (
-        <Box>
+        <div>
             <Card
                 sx={{
                     width: "300px",
@@ -14,6 +14,6 @@ export const SketchNoSketchMessage = () => {
             >
                 <CardContent>{translations.NoSketchMessage}</CardContent>
             </Card>
-        </Box>
+        </div>
     );
 };

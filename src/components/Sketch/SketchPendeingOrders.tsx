@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Box, SxProps } from "@mui/system";
+import { SxProps } from "@mui/system";
 import { useSelector } from "react-redux";
 import { Badge, Collapse, Typography } from "@mui/material";
 import { OrderModel } from "../../models/Order.model";
@@ -29,30 +29,14 @@ export const SketchPendingOrders = (props: sketchPendingOrdersProps) => {
     );
 
     return (
-        <Box
+        <div
             id={"pending-order-hide-container"}
-            sx={{
-                display: "flex",
-                flexDirection: "row",
-                // mt : '6px',
-                pr: "10px",
-            }}
+            className="flex flex-row pr-[10px]"
         >
             <Collapse orientation="horizontal" in={!isPendingOrdersFolded}>
-                <Box
+                <div
                     id={"pending-order-container"}
-                    sx={{
-                        // backgroundColor: 'rgba(255,255,255,0.1)',
-                        m: "0.2em",
-                        mb: "0.3em",
-                        minHeight: "80vh",
-                        minWidth: "30vw",
-                        height: "100%",
-                        display: "flex",
-                        flexDirection: "column",
-                        alignItems: "stretch",
-                        justifyContent: "start",
-                    }}
+                    className="m-[0.2em] mb-[0.3em] min-h-[80vh] min-w-[30vw] h-full flex flex-col items-stretch justify-start"
                 >
                     <Typography variant={"h6"}>
                         {" "}
@@ -68,15 +52,9 @@ export const SketchPendingOrders = (props: sketchPendingOrdersProps) => {
                             />
                         );
                     })}
-                </Box>
+                </div>
             </Collapse>
-            <Box
-                id={"close-button-container"}
-                sx={{
-                    height: "30px",
-                    mr: "-12px",
-                }}
-            >
+            <div id={"close-button-container"} className="h-[30px] mr-[-12px]">
                 <IconButton
                     size="medium"
                     edge="end"
@@ -101,7 +79,7 @@ export const SketchPendingOrders = (props: sketchPendingOrdersProps) => {
                         />
                     )}
                 </IconButton>
-            </Box>
-        </Box>
+            </div>
+        </div>
     );
 };

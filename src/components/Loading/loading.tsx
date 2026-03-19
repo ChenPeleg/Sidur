@@ -1,17 +1,7 @@
-import { Box, Fade } from "@mui/material";
-import { SxProps } from "@mui/system";
+import { Fade } from "@mui/material";
 import { LoadingShield } from "./loading-shield";
 import { useSelector } from "react-redux";
 import { SessionModel } from "../../store/store.types";
-
-const loadingSx: SxProps = {
-    position: "absolute",
-    top: "65px",
-    left: "75px",
-    height: "50px",
-    width: "50px",
-    zIndex: 10000,
-};
 
 export const Loading = () => {
     const session: SessionModel = useSelector(
@@ -21,9 +11,9 @@ export const Loading = () => {
 
     return (
         <Fade in={isAnimationRunning} unmountOnExit>
-            <Box sx={loadingSx}>
+            <div className="absolute top-[65px] left-[75px] h-[50px] w-[50px] z-[10000]">
                 <LoadingShield />
-            </Box>
+            </div>
         </Fade>
     );
 };

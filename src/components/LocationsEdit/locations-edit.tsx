@@ -1,4 +1,3 @@
-import { Box } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import {
     RecordBriefModel,
@@ -113,10 +112,6 @@ export const LocationsEdit = () => {
     };
 
     const handleLocationUpdate = (updatedLocation: LocationModel) => {
-        // if (allLocationNames.includes(updatedLocation.name)) {
-        //
-        // }
-
         dispatch({
             type: ActionsTypes.UPDATE_LOCATION,
             payload: updatedLocation,
@@ -134,8 +129,8 @@ export const LocationsEdit = () => {
             : allLocations.filter((l) => l.name.includes(filterText.trim()));
     filteredLocations.sort((a, b) => (+a.id > +b.id ? -1 : 1));
     return (
-        <Box>
-            <Box sx={{ ...Styles.flexRow }}>
+        <div>
+            <div className={Styles.flexRow}>
                 <Button
                     variant="contained"
                     onClick={handleAddLocation}
@@ -144,12 +139,7 @@ export const LocationsEdit = () => {
                 >
                     {translations.addLocation}
                 </Button>
-                <Box
-                    sx={{
-                        width: "20px",
-                        height: "30px",
-                    }}
-                ></Box>
+                <div className="w-[20px] h-[30px]"></div>
                 <TextField
                     autoFocus
                     margin="dense"
@@ -161,29 +151,13 @@ export const LocationsEdit = () => {
                     onChange={(event) => {
                         return handleFilterValueChanged(event);
                     }}
-                    // onKeyUp={(event) => {
-                    //     if (event.key === 'Enter') {
-                    //         //   handleCloseRename()
-                    //     }
-                    // }}
                 />
-            </Box>
+            </div>
 
-            <Box
-                sx={{
-                    mt: "1em",
-                    overflowY: "auto",
-                    maxHeight: "50vh",
-                    direction: "ltr",
-                }}
-            >
-                <Box
-                    sx={{ direction: "rtl" }}
-                    id={"locations-container"}
-                    onBlur={handleStopEditLocation}
-                >
+            <div className="mt-[1em] overflow-y-auto max-h-[50vh]" dir="ltr">
+                <div dir="rtl" id={"locations-container"} onBlur={handleStopEditLocation}>
                     {filteredLocations.map((l: LocationWithUses, i: number) => (
-                        <Box
+                        <div
                             key={l.id}
                             onClick={(event) =>
                                 handleStartEditLocation(event, l.id)
@@ -197,10 +171,10 @@ export const LocationsEdit = () => {
                                 onUpdate={handleLocationUpdate}
                                 key={i}
                             />
-                        </Box>
+                        </div>
                     ))}
-                </Box>
-            </Box>
-        </Box>
+                </div>
+            </div>
+        </div>
     );
 };

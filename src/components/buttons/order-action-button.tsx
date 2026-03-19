@@ -1,6 +1,6 @@
 import { SxProps } from "@mui/system";
 import React from "react";
-import { Box, Button } from "@mui/material";
+import { Button } from "@mui/material";
 import { SketchDriveOrderEditActionEnum } from "../../models/SketchDriveOrderEditActionEnum";
 
 export interface OrderActionButtonProps {
@@ -15,7 +15,7 @@ export const OrderActionButton = (props: OrderActionButtonProps) => {
     const size = props.size ? props.size : "medium";
     const sx = props.sx || {};
     return (
-        <Box>
+        <div>
             <Button
                 sx={sx}
                 id={"action-order-button"}
@@ -26,6 +26,6 @@ export const OrderActionButton = (props: OrderActionButtonProps) => {
             >
                 {props.text}
             </Button>
-        </Box>
+        </div>
     );
 };

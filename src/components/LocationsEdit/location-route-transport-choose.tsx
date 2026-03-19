@@ -1,4 +1,4 @@
-import { Box, Card } from "@mui/material";
+import { Card } from "@mui/material";
 import {
     RouteModel,
     RouteOrTransport,
@@ -27,7 +27,7 @@ export const LocationRouteTransportChoose = (
     const width =
         props.routeOrTransport === RouteOrTransport.Route ? "400px" : "200px";
     return (
-        <Box sx={{ m: "0.6em" }}>
+        <div className="m-[0.6em]">
             <Card
                 sx={{
                     width: width,
@@ -41,6 +41,6 @@ export const LocationRouteTransportChoose = (
             >
                 {props.route.name}
             </Card>
-        </Box>
+        </div>
     );
 };

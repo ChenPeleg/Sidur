@@ -9,7 +9,7 @@ import { translations } from "../../services/translations";
 import { useDispatch } from "react-redux";
 import { ActionsTypes } from "../../store/types.actions";
 import TextField from "@mui/material/TextField";
-import { Box, Typography } from "@mui/material";
+import { Typography } from "@mui/material";
 
 interface FileUploadProps {
     open: boolean;
@@ -37,9 +37,9 @@ export const OrderImportDialog = (props: FileUploadProps) => {
         <div>
             <Dialog open={open} onClose={handleCloseCancel}>
                 <DialogTitle> {translations.ImportOrders}</DialogTitle>
-                <Box>
+                <div>
                     {/*<DialogContentText> {translations.PastHere}</DialogContentText>*/}
-                </Box>
+                </div>
 
                 <Typography />
                 <DialogContent>

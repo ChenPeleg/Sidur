@@ -1,6 +1,5 @@
 import React from "react";
 import {
-    Box,
     Button,
     IconButton,
     MenuItem,
@@ -172,17 +171,9 @@ export const LocationGroupEditWrapper = () => {
     const sketchName = locationGroupInEdit ? locationGroupInEdit.name : "";
 
     return (
-        <Box>
+        <div>
             {locationGroupInEdit ? (
-                <Box
-                    sx={{
-                        display: "flex",
-                        flexDirection: "row",
-                        alignItems: "center",
-                        justifyContent: "start",
-                        mb: "10px",
-                    }}
-                >
+                <div className="flex flex-row items-center justify-start mb-[10px]">
                     <Typography
                         variant="h6"
                         noWrap
@@ -205,7 +196,6 @@ export const LocationGroupEditWrapper = () => {
                         variant={"standard"}
                         value={locationGroupInEditId}
                         sx={{
-                            //  color: 'black',
                             fontSize: "1.25rem",
                             fontWeight: "normal",
                         }}
@@ -261,20 +251,13 @@ export const LocationGroupEditWrapper = () => {
                     >
                         <Edit />
                     </IconButton>
-                    <Box
-                        sx={{
-                            fontSize: "small",
-                            maxWidth: "50vw",
-                            pr: "20px",
-                            pl: "20px",
-                        }}
-                    >
+                    <div className="text-sm max-w-[50vw] pr-[20px] pl-[20px]">
                         {" "}
                         {locationGroupInEditId === "ESHBAL"
                             ? null
                             : buildTextForLocationInSidurim(isLocationInSidur)}
-                    </Box>
-                </Box>
+                    </div>
+                </div>
             ) : (
                 <Button
                     variant={"contained"}
@@ -303,6 +286,6 @@ export const LocationGroupEditWrapper = () => {
                 onClose={handleRenameClose}
                 selectedValue={sketchName}
             />
-        </Box>
+        </div>
     );
 };

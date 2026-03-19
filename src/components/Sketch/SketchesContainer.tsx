@@ -1,5 +1,4 @@
 import React from "react";
-import { Box } from "@mui/system";
 import { useDispatch, useSelector } from "react-redux";
 import { Button, Select, SelectChangeEvent, Typography } from "@mui/material";
 import { translations } from "../../services/translations";
@@ -123,17 +122,9 @@ export const SketchesContainer = () => {
     const sketchName = sketchInEdit ? sketchInEdit.name : "";
 
     return (
-        <Box>
+        <div>
             {SketchIdInEdit ? (
-                <Box
-                    sx={{
-                        display: "flex",
-                        flexDirection: "row",
-                        alignItems: "start",
-                        justifyContent: "start",
-                        mb: "10px",
-                    }}
-                >
+                <div className="flex flex-row items-start justify-start mb-[10px]">
                     <Typography
                         variant="h6"
                         noWrap
@@ -155,7 +146,6 @@ export const SketchesContainer = () => {
                             variant={"standard"}
                             value={SketchIdInEdit}
                             sx={{
-                                //  color: 'black',
                                 fontSize: "1.25rem",
                                 fontWeight: "normal",
                             }}
@@ -192,12 +182,7 @@ export const SketchesContainer = () => {
                     >
                         <Edit />
                     </IconButton>
-                    <Box
-                        sx={{
-                            width: "30px",
-                            height: "12px",
-                        }}
-                    />
+                    <div className="w-[30px] h-[12px]" />
                     <Button
                         variant={"contained"}
                         id={"sketches-download-sketch"}
@@ -209,7 +194,7 @@ export const SketchesContainer = () => {
                         clickCancel={handleSketchActionCancelClick}
                         sketch={sketchInEdit}
                     />
-                </Box>
+                </div>
             ) : (
                 <Button
                     variant={"contained"}
@@ -233,6 +218,6 @@ export const SketchesContainer = () => {
                 onClose={handleRenameClose}
                 selectedValue={sketchName}
             />
-        </Box>
+        </div>
     );
 };

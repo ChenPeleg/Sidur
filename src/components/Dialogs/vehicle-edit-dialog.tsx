@@ -8,8 +8,7 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
 import { translations } from "../../services/translations";
 import { VehicleModel } from "../../models/Vehicle.model";
-import { Box, ToggleButton, ToggleButtonGroup } from "@mui/material";
-import { SxProps } from "@mui/system";
+import { ToggleButton, ToggleButtonGroup } from "@mui/material";
 import { Delete } from "@mui/icons-material";
 
 interface VehicleEditDialogProps {
@@ -33,14 +32,12 @@ export const VehicleEditDialog = (props: VehicleEditDialogProps) => {
 
     const nameValueRef: any = useRef("");
     const commentsValueRef: any = useRef("");
-    const filedWrapper: SxProps = { width: "230px" };
     const handleCloseCancel = () => {
         onClose(null);
         setDidDialogJustClosed(true);
     };
     useEffect(() => {
         // Update the document title using the browser API
-        // document.title = `You clicked ${count} times`;
     });
     const handleCloseEdit = (): void => {
         let editedData: VehicleModel | null = null;
@@ -68,7 +65,7 @@ export const VehicleEditDialog = (props: VehicleEditDialogProps) => {
             <Dialog open={open} onClose={handleCloseCancel}>
                 <DialogTitle> {vehicleData?.vehicleName}</DialogTitle>
                 <DialogContent>
-                    <Box sx={{ ...filedWrapper }}>
+                    <div className="w-[230px]">
                         <TextField
                             autoFocus
                             margin="dense"
@@ -84,8 +81,8 @@ export const VehicleEditDialog = (props: VehicleEditDialogProps) => {
                                 }
                             }}
                         />
-                    </Box>
-                    <Box sx={{ ...filedWrapper }}>
+                    </div>
+                    <div className="w-[230px]">
                         <TextField
                             margin="dense"
                             id="vehicle-comments-dialog-text-field"
@@ -101,22 +98,11 @@ export const VehicleEditDialog = (props: VehicleEditDialogProps) => {
                                 }
                             }}
                         />
-                    </Box>
+                    </div>
 
-                    <Box
-                        dir={"ltr"}
-                        sx={{
-                            flexDirection: "row",
-                            alignItems: "center",
-                            justifyContent: "center",
-                            marginTop: "1em",
-                            display: "flex",
-                        }}
-                    >
+                    <div dir="ltr" className="flex flex-row items-center justify-center mt-[1em]">
                         <ToggleButtonGroup
                             color="primary"
-                            // value={seatsValue}
-                            // defaultValue={vehicleData?.seats || '5'}
                             exclusive
                             onChange={(event, value) => {
                                 handleSeatsValueChanged(event, value);
@@ -139,16 +125,8 @@ export const VehicleEditDialog = (props: VehicleEditDialogProps) => {
                                 5 {translations.seats}{" "}
                             </ToggleButton>
                         </ToggleButtonGroup>
-                    </Box>
-                    <Box
-                        sx={{
-                            flexDirection: "row",
-                            alignItems: "center",
-                            justifyContent: "center",
-                            marginTop: "1em",
-                            display: "flex",
-                        }}
-                    >
+                    </div>
+                    <div className="flex flex-row items-center justify-center mt-[1em]">
                         {vehicleData?.id !== "0" ? (
                             <Button
                                 variant="contained"
@@ -159,7 +137,7 @@ export const VehicleEditDialog = (props: VehicleEditDialogProps) => {
                                 <Delete /> {translations.Delete}
                             </Button>
                         ) : null}
-                    </Box>
+                    </div>
                 </DialogContent>
                 <DialogActions>
                     <Button

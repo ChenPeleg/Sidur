@@ -1,5 +1,4 @@
 import {
-    Box,
     Card,
     IconButton,
     Select,
@@ -36,7 +35,6 @@ interface LocationRouteEditProps {
     allLocations: LocationModel[];
 }
 
-//const routStops
 export const LocationRouteEdit = (props: LocationRouteEditProps) => {
     const dispatch = useDispatch();
 
@@ -130,7 +128,6 @@ export const LocationRouteEdit = (props: LocationRouteEditProps) => {
         stop: StopModel
     ): void => {
         const updatedRout = { ...props.route };
-        // const updatedValue = minutesFromLastOptions.find(o => o.value === event.target.value)
 
         updatedRout.routStops = updatedRout.routStops.map((s) => {
             if (s.locationId === stop.locationId) {
@@ -148,19 +145,14 @@ export const LocationRouteEdit = (props: LocationRouteEditProps) => {
     const isLongRoute: boolean = allStops?.length > 5;
 
     return (
-        <Box>
+        <div>
             <Card
                 sx={{
                     width: "400px",
                     minHeight: "300px",
                 }}
             >
-                <Box
-                    sx={{
-                        m: "1em",
-                        mb: "0px",
-                    }}
-                >
+                <div className="m-[1em] mb-0">
                     {" "}
                     <b>{props.route.name}</b>
                     <IconButton
@@ -173,23 +165,12 @@ export const LocationRouteEdit = (props: LocationRouteEditProps) => {
                     >
                         <Edit fontSize={"small"} />
                     </IconButton>
-                </Box>
-                <Box
-                    sx={{
-                        pr: "1em",
-                        pl: "1em",
-                        flex: "row",
-
-                        flexWrap: "wrap",
-                    }}
-                >
+                </div>
+                <div className="pr-[1em] pl-[1em] flex-row flex-wrap">
                     {allStops.map((stop: StopModel, i: number) => (
-                        <Box
+                        <div
                             key={stop.locationId + i.toString()}
-                            sx={{
-                                display: isLongRoute ? "inline" : "block",
-                                p: "0.1em",
-                            }}
+                            className={isLongRoute ? "inline p-[0.1em]" : "block p-[0.1em]"}
                         >
                             {i > 0 ? (
                                 <>
@@ -198,8 +179,6 @@ export const LocationRouteEdit = (props: LocationRouteEditProps) => {
                                         variant={"standard"}
                                         value={stop.minuetsFromLastCode}
                                         sx={{
-                                            //  color: 'black',
-                                            //  fontSize: '1.25rem',
                                             fontWeight: "normal",
                                         }}
                                         onChange={(
@@ -225,24 +204,12 @@ export const LocationRouteEdit = (props: LocationRouteEditProps) => {
                                             )
                                         )}
                                     </Select>{" "}
-                                    <Box
-                                        sx={{
-                                            width: isLongRoute ? "15px" : "5px",
-                                            height: "5px",
-                                            display: "inline-flex",
-                                        }}
-                                    />
+                                    <div className={isLongRoute ? "inline-flex w-[15px] h-[5px]" : "inline-flex w-[5px] h-[5px]"} />
                                     <ArrowBack
                                         sx={{ mb: "-5px" }}
                                         fontSize={"small"}
                                     />
-                                    <Box
-                                        sx={{
-                                            width: "15px",
-                                            height: "5px",
-                                            display: "inline-flex",
-                                        }}
-                                    />
+                                    <div className="inline-flex w-[15px] h-[5px]" />
                                 </>
                             ) : null}
                             <Card
@@ -255,14 +222,7 @@ export const LocationRouteEdit = (props: LocationRouteEditProps) => {
                                 {stop.locationName}{" "}
                             </Card>
 
-                            <Box
-                                sx={{
-                                    width: "15px",
-                                    height: "5px",
-                                    display: "inline-flex",
-                                    mb: isLongRoute ? "1.3em" : "1.6em",
-                                }}
-                            />
+                            <div className={isLongRoute ? "inline-flex w-[15px] h-[5px] mb-[1.3em]" : "inline-flex w-[15px] h-[5px] mb-[1.6em]"} />
                             {i + 1 === allStops.length ? (
                                 <IconButton
                                     size="small"
@@ -277,9 +237,9 @@ export const LocationRouteEdit = (props: LocationRouteEditProps) => {
                                     fontSize={"small"}
                                 />
                             )}
-                        </Box>
+                        </div>
                     ))}
-                </Box>
+                </div>
             </Card>
             <RouteTransportEditMenu
                 routeMoreAnchorEl={routeMoreAnchorEl}
@@ -293,6 +253,6 @@ export const LocationRouteEdit = (props: LocationRouteEditProps) => {
                 onClose={handleRenameClose}
                 selectedValue={props.route.name}
             />
-        </Box>
+        </div>
     );
 };

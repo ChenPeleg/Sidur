@@ -7,8 +7,7 @@ import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
 import { translations } from "../../services/translations";
-import { Box, Card, Typography } from "@mui/material";
-import { SxProps } from "@mui/system";
+import { Card, Typography } from "@mui/material";
 import { Delete } from "@mui/icons-material";
 import { DriveModel, SketchModel } from "../../models/Sketch.model";
 import { VerticalHourField } from "../buttons/vertical-hour-field";
@@ -54,9 +53,6 @@ export const SketchDriveEditDialog = (props: SketchDriveEditDialogProps) => {
     });
 
     const descriptionValueRef: any = useRef("");
-    const filedWrapper: SxProps = {
-        width: "230px",
-    };
     const handleCloseCancel = () => {
         onClose(null);
     };
@@ -95,16 +91,6 @@ export const SketchDriveEditDialog = (props: SketchDriveEditDialogProps) => {
     ) => {
         addToPendingClickHandler(event, orderId);
         handleCloseDelete();
-        // dispatch({
-        //     type: ActionsTypes.REMOVE_ORDER_FROM_SKETCH_DRIVE_AND_DELETE,
-        //     payload: {
-        //         orderId,
-        //         sketchDriveId: driveData.id
-        //     }
-        // })
-        // const newDrive = {...driveChangedData};
-        // newDrive.implementsOrders = newDrive.implementsOrders.filter(o => o !== orderId);
-        // setDriveChangedData(newDrive)
     };
     const handleHourChange = (event: Event, input: any) => {
         const newSketchData = { ...driveChangedData };
@@ -120,23 +106,8 @@ export const SketchDriveEditDialog = (props: SketchDriveEditDialogProps) => {
         <Dialog open={open} onClose={handleCloseCancel}>
             <DialogTitle> {translations.EditDrive}</DialogTitle>
             <DialogContent>
-                <Box
-                    sx={{
-                        ...filedWrapper,
-                        display: "flex",
-                        flexDirection: "row",
-                        minWidth: "35vw",
-                    }}
-                >
-                    <Box
-                        sx={{
-                            ...filedWrapper,
-                            display: "flex",
-                            flexDirection: "column",
-                            maxWidth: "160px",
-                            p: "0 0.2em",
-                        }}
-                    >
+                <div className="w-[230px] flex flex-row min-w-[35vw]">
+                    <div className="w-[230px] flex flex-col max-w-[160px] py-0 px-[0.2em]">
                         <Typography align={"center"} component="legend">
                             <b>{translations.DriveTimes}</b>
                         </Typography>
@@ -146,25 +117,17 @@ export const SketchDriveEditDialog = (props: SketchDriveEditDialogProps) => {
                             onHoursChange={handleHourChange}
                             label={translations.Start}
                         />
-                    </Box>
-                    <Box
-                        sx={{
-                            ...filedWrapper,
-                            display: "flex",
-                            flexDirection: "column",
-                        }}
-                    >
+                    </div>
+                    <div className="w-[230px] flex flex-col">
                         <Typography align={"center"} component="legend">
                             <b>{translations.DriveDescription}</b>
                         </Typography>
 
-                        <Box sx={{ ...filedWrapper }}>
+                        <div className="w-[230px]">
                             <TextField
                                 size={"medium"}
-                                //sx={{minHeight: '200px'}}
                                 margin="dense"
                                 id="vehicle-comments-dialog-text-field"
-                                //  label={translations.Comments}
                                 type="text"
                                 fullWidth
                                 multiline={true}
@@ -179,7 +142,7 @@ export const SketchDriveEditDialog = (props: SketchDriveEditDialogProps) => {
                                     }
                                 }}
                             />
-                        </Box>
+                        </div>
                         <Typography
                             align={"center"}
                             sx={{ mt: "1em" }}
@@ -193,7 +156,7 @@ export const SketchDriveEditDialog = (props: SketchDriveEditDialogProps) => {
                                 {translations.connectedOrders}
                             </b>
                         </Typography>
-                        <Box id={"connected-orders"}>
+                        <div id={"connected-orders"}>
                             {implementedOrders.map(
                                 (order: OrderModel, i: number) => (
                                     <Card
@@ -204,9 +167,9 @@ export const SketchDriveEditDialog = (props: SketchDriveEditDialogProps) => {
                                             p: "1em",
                                         }}
                                     >
-                                        <Box sx={{ pb: "0.5em" }}>
+                                        <div className="pb-[0.5em]">
                                             {order.Comments}
-                                        </Box>
+                                        </div>
 
                                         <OrderActionButton
                                             sx={{ width: "100%" }}
@@ -248,19 +211,11 @@ export const SketchDriveEditDialog = (props: SketchDriveEditDialogProps) => {
                                     </Card>
                                 )
                             )}
-                        </Box>
+                        </div>
 
-                        <Box
-                            sx={{
-                                flexDirection: "row",
-                                alignItems: "center",
-                                justifyContent: "center",
-                                marginTop: "1em",
-                                display: "flex",
-                            }}
-                        ></Box>
-                    </Box>
-                </Box>
+                        <div className="flex flex-row items-center justify-center mt-[1em]"></div>
+                    </div>
+                </div>
             </DialogContent>
             <DialogActions>
                 <Button

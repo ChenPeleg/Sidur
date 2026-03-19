@@ -1,7 +1,7 @@
 import * as React from "react";
 import Slider, { SliderThumb } from "@mui/material/Slider";
 import { styled } from "@mui/material/styles";
-import { Box } from "@mui/material";
+
 
 export const AirbnbSlider = styled(Slider)(({ theme }) => ({
     // color: '#3a8589',
@@ -71,8 +71,8 @@ export const AirbnbThumbComponent = (props: AirbnbThumbComponentProps) => {
     const { children, ...other } = props;
 
     return (
-        <Box>
+        <div>
             <SliderThumb {...other}>{children}</SliderThumb>
-        </Box>
+        </div>
     );
 };

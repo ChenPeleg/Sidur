@@ -1,12 +1,12 @@
 import * as React from "react";
 import { translations } from "../../services/translations";
-import { Box, Card, CardContent } from "@mui/material";
+import { Card, CardContent } from "@mui/material";
 import { LockTwoTone } from "@mui/icons-material";
 import { Styles } from "../../hoc/themes";
 
 export const LocationCantEditMessage = () => {
     return (
-        <Box>
+        <div>
             <Card
                 sx={{
                     width: "300px",
@@ -15,16 +15,7 @@ export const LocationCantEditMessage = () => {
                     m: "3em",
                 }}
             >
-                <Box
-                    sx={{
-                        ...Styles.flexRow,
-                        justifyContent: "start",
-                        alignItems: "center",
-
-                        m: "0.5em",
-                        mb: "0.1em",
-                    }}
-                >
+                <div className={`${Styles.flexRow} justify-start items-center m-[0.5em] mb-[0.1em]`}>
                     <b>
                         {" "}
                         <LockTwoTone
@@ -35,9 +26,9 @@ export const LocationCantEditMessage = () => {
                         />{" "}
                     </b>
                     <b>&nbsp; {translations.lockedForEdit}</b>
-                </Box>
+                </div>
                 <CardContent>{translations.cantEditLocationMessag}</CardContent>
             </Card>
-        </Box>
+        </div>
     );
 };

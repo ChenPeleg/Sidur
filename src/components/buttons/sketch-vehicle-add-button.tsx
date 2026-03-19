@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { Box } from "@mui/system";
 import { Card } from "@mui/material";
 import { Add } from "@mui/icons-material";
 
@@ -17,7 +16,7 @@ export const SketchVehicleAddButton = (props: sketchVehicleAddButtonProps) => {
     };
 
     return (
-        <Box>
+        <div>
             <Card
                 onClick={(event: any) => props.sketchDriveClick(event)}
                 onMouseOver={onMouseOver}
@@ -27,7 +26,6 @@ export const SketchVehicleAddButton = (props: sketchVehicleAddButtonProps) => {
                     m: "0.2em",
                     mb: "0.3em",
                     position: "relative",
-
                     zIndex: 40,
                     minHeight: "7vh",
                     display: "flex",
@@ -37,15 +35,11 @@ export const SketchVehicleAddButton = (props: sketchVehicleAddButtonProps) => {
                     cursor: "default",
                 }}
             >
-                <Box
-                    sx={{
-                        mt: "0.2em",
-                    }}
-                >
+                <div className="mt-[0.2em]">
                     {" "}
                     <Add fontSize={"large"} />{" "}
-                </Box>
+                </div>
             </Card>
-        </Box>
+        </div>
     );
 };

@@ -1,4 +1,4 @@
-import { Box, Card, Typography } from "@mui/material";
+import { Card, Typography } from "@mui/material";
 import { useDispatch } from "react-redux";
 import { LocationModel } from "../../models/Location.model";
 import * as React from "react";
@@ -68,13 +68,12 @@ export const LocationForm = (props: LocationFormProps) => {
         });
     };
     return (
-        <Box sx={{ display: "flex" }}>
+        <div className="flex">
             <Card
                 elevation={2}
                 sx={{
                     m: "0.2em",
                     mb: "0.3em",
-
                     cursor: "pointer",
                     display: "flex",
                     flexDirection: "row",
@@ -82,16 +81,7 @@ export const LocationForm = (props: LocationFormProps) => {
                     justifyContent: "start",
                 }}
             >
-                <Box
-                    id={"text-field-container"}
-                    sx={{
-                        m: "0.3em",
-                        mr: "1em",
-                        ml: "1em",
-                        display: "flex",
-                        flexDirection: "column",
-                    }}
-                >
+                <div id={"text-field-container"} className="m-[0.3em] mr-[1em] ml-[1em] flex flex-col">
                     <TextField
                         margin="dense"
                         InputProps={{
@@ -129,17 +119,9 @@ export const LocationForm = (props: LocationFormProps) => {
                             {translations.nameExists}
                         </Typography>
                     )}
-                </Box>
+                </div>
 
-                <Box
-                    id={"hour-field-container"}
-                    sx={{
-                        m: "0.3em",
-                        mr: "0.7em",
-                        ml: "0.7em",
-                        mt: "0.5em",
-                    }}
-                >
+                <div id={"hour-field-container"} className="m-[0.3em] mr-[0.7em] ml-[0.7em] mt-[0.5em]">
                     <TextField
                         type="number"
                         variant="standard"
@@ -159,27 +141,13 @@ export const LocationForm = (props: LocationFormProps) => {
                             }
                         }}
                     />
-                </Box>
-                <Box
-                    id={"caption-container"}
-                    sx={{
-                        m: "0.2em",
-                        mr: "0em",
-                        ml: "0em",
-                        mt: "0.5em",
-                    }}
-                >
+                </div>
+                <div id={"caption-container"} className="m-[0.2em] mr-0 ml-0 mt-[0.5em]">
                     <Typography component={"span"} variant={"caption"}>
                         {translations.ETAtext}
                     </Typography>
-                </Box>
-                <Box
-                    id={"caption-container"}
-                    sx={{
-                        width: "80px",
-                        height: "20px",
-                    }}
-                />
+                </div>
+                <div id={"spacer"} className="w-[80px] h-[20px]" />
                 <LightTooltip
                     title={
                         props.preventDelete
@@ -187,7 +155,7 @@ export const LocationForm = (props: LocationFormProps) => {
                             : buildCantDeleteText(props.usedIn).trim()
                     }
                 >
-                    <Box>
+                    <div>
                         <DeleteButton
                             deleteClickHandler={deleteClickHandler}
                             disabled={props.usedIn.length > 0}
@@ -198,17 +166,11 @@ export const LocationForm = (props: LocationFormProps) => {
                                     : "visible",
                             }}
                         />
-                    </Box>
+                    </div>
                 </LightTooltip>
 
-                <Box
-                    id={"caption-container"}
-                    sx={{
-                        width: "5px",
-                        height: "20px",
-                    }}
-                />
+                <div className="w-[5px] h-[20px]" />
             </Card>
-        </Box>
+        </div>
     );
 };

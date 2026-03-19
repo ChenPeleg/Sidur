@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Box } from "@mui/system";
+
 import { useDispatch, useSelector } from "react-redux";
 import { Collapse, Divider, Typography } from "@mui/material";
 import {
@@ -210,31 +210,17 @@ export const Sketch = () => {
         null;
 
     return sketchInEdit ? (
-        <Box
+        <div
             id={"sketch--scroll-container"}
-            sx={{
-                overflow: "auto",
-                width: "100vw",
-            }}
+            className="overflow-auto w-screen"
         >
-            <Box
+            <div
                 id={"sketch-container"}
-                sx={{
-                    display: "inline-block",
-                }}
+                className="inline-block"
             >
-                <Box
+                <div
                     id={"sketch-wrapper-row"}
-                    sx={{
-                        paddingRight: "20px",
-                        paddingLeft: "80px",
-                        display: "flex",
-                        flexDirection: "row",
-                        alignItems: "start",
-                        mb: "10px",
-                        justifyContent: "center",
-                        minWidth: "30vw",
-                    }}
+                    className="pr-[20px] pl-[80px] flex flex-row items-start mb-[10px] justify-center min-w-[30vw]"
                 >
                     <SketchPendingOrders
                         pendingOrders={sketchInEdit.unassignedOrders}
@@ -243,20 +229,11 @@ export const Sketch = () => {
                     {sketchInEdit.vehicleSchedules.map(
                         (vehicleTimeTable: VehicleScheduleModel, i: number) => {
                             return (
-                                <Box key={i}>
-                                    <Box
+                                <div key={i}>
+                                    <div
                                         key={i}
                                         id={"vehicle-column"}
-                                        sx={{
-                                            display: "flex",
-                                            flexDirection: "column",
-                                            alignItems: "stretch",
-                                            m: "15px",
-                                            mt: "0px",
-                                            justifyContent: "start",
-                                            minWidth: "6vw",
-                                            minHeight: "60vh",
-                                        }}
+                                        className="flex flex-col items-stretch m-[15px] mt-0 justify-start min-w-[6vw] min-h-[60vh]"
                                     >
                                         {" "}
                                         <Typography variant={"h6"}>
@@ -329,18 +306,18 @@ export const Sketch = () => {
                                                 }
                                             )}
                                         </TransitionGroup>
-                                    </Box>
+                                    </div>
                                     <Divider
                                         orientation="vertical"
                                         variant={"fullWidth"}
                                         sx={{ borderRight: "2px solid black " }}
                                         flexItem
                                     />
-                                </Box>
+                                </div>
                             );
                         }
                     )}
-                </Box>
+                </div>
                 {chosenDrive ? (
                     <SketchDriveEditDialog
                         vehicleId={"1"}
@@ -374,8 +351,8 @@ export const Sketch = () => {
                         }
                     />
                 ) : null}
-            </Box>
-        </Box>
+            </div>
+        </div>
     ) : (
         <SketchNoSketchMessage />
     );
