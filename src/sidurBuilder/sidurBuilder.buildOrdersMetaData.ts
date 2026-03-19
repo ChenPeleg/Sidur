@@ -1,48 +1,57 @@
-import {OrderModel} from '../models/Order.model';
-import {OrderMetaDataModel, OrderMetaStatus} from './models/sidurBuilder.models';
-import {DriveType} from '../models/DriveType.enum';
-import {CloneUtil} from '../services/clone-utility';
-import {Utils} from '../services/utils';
-import {LocationModel} from '../models/Location.model';
+import { OrderModel } from "../models/Order.model";
+import {
+    OrderMetaDataModel,
+    OrderMetaStatus,
+} from "./models/sidurBuilder.models";
+import { DriveType } from "../models/DriveType.enum";
+import { CloneUtil } from "../services/clone-utility";
+import { Utils } from "../services/utils";
+import { LocationModel } from "../models/Location.model";
 
-export const SidurBuilderBuildOrdersMetaData = (orders: OrderModel[], locations: LocationModel[], _buildSettings: any = null): OrderMetaDataModel[] => {
+export const SidurBuilderBuildOrdersMetaData = (
+    orders: OrderModel[],
+    locations: LocationModel[],
+    _buildSettings: any = null
+): OrderMetaDataModel[] => {
     let idCount: number = 1;
-    const clonedOrders: OrderModel[] = orders.map((o: OrderModel) => CloneUtil.deep(o, 'OrderModel'));
+    const clonedOrders: OrderModel[] = orders.map((o: OrderModel) =>
+        CloneUtil.deep(o, "OrderModel")
+    );
 
-    const ordersMeta: OrderMetaDataModel[] = clonedOrders.map((order: OrderModel) => {
-        const start: number = Utils.hourTextToDecimal(order.startHour);
-        const finish: number = Utils.hourTextToDecimal(order.finishHour);
-        const length = finish - start;
-        const metaOrder: OrderMetaDataModel = {
-            id: idCount.toString(),
-            order: {...order},
-            finish: finish,
-            start: start,
-            length: length,
-            status: OrderMetaStatus.None
+    const ordersMeta: OrderMetaDataModel[] = clonedOrders.map(
+        (order: OrderModel) => {
+            const start: number = Utils.hourTextToDecimal(order.startHour);
+            const finish: number = Utils.hourTextToDecimal(order.finishHour);
+            const length = finish - start;
+            const metaOrder: OrderMetaDataModel = {
+                id: idCount.toString(),
+                order: { ...order },
+                finish: finish,
+                start: start,
+                length: length,
+                status: OrderMetaStatus.None,
+            };
+            idCount++;
+
+            return metaOrder;
         }
-        idCount++;
-
-        return metaOrder
-    })
+    );
 
     // Estimate finish hour of non-Tsamud Drives
     ordersMeta.forEach((metaOrder: OrderMetaDataModel) => {
-        const driveType = metaOrder.order.TypeOfDrive
+        const driveType = metaOrder.order.TypeOfDrive;
         if (driveType === DriveType.Tsamud) {
-            return
+            return;
         }
         const locationId = metaOrder.order.location;
-        let locationObj = locations.find(l => l.id === locationId);
+        let locationObj = locations.find((l) => l.id === locationId);
         if (!locationObj) {
-            locationObj = locations.find(l => l.name === 'Other') ||
-                {
-                    EnName: 'Other',
-                    id: '999',
-                    name: 'אחר',
-                    ETA: 45,
-                }
-
+            locationObj = locations.find((l) => l.name === "Other") || {
+                EnName: "Other",
+                id: "999",
+                name: "אחר",
+                ETA: 45,
+            };
         }
         const EtaInHours = Utils.minutesToFraction(locationObj.ETA);
         switch (driveType) {
@@ -54,13 +63,9 @@ export const SidurBuilderBuildOrdersMetaData = (orders: OrderModel[], locations:
                 metaOrder.start = metaOrder.start - EtaInHours;
                 break;
         }
-        
+
         metaOrder.length = metaOrder.finish - metaOrder.start;
+    });
 
-
-    })
-
-    return ordersMeta
-}
-
-
+    return ordersMeta;
+};

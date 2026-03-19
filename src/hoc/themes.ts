@@ -1,20 +1,20 @@
 // A custom theme for this app
-import {createTheme, Theme} from '@mui/material';
-import {red} from '@mui/material/colors';
-import Assistant from '../assets/fonts/Assistant-Regular.ttf';
-import {SxProps} from '@mui/system';
+import { createTheme, Theme } from "@mui/material";
+import { red } from "@mui/material/colors";
+import Assistant from "../assets/fonts/Assistant-Regular.ttf";
+import { SxProps } from "@mui/system";
 
 // @ts-ignore
 // @ts-ignore
 export const themeMain: Theme = createTheme({
-    direction: 'rtl',
+    direction: "rtl",
     typography: {
-        fontFamily: 'Segoe UI, sans-serif',
+        fontFamily: "Segoe UI, sans-serif",
         h1: {
-            fontSize: '3rem',
+            fontSize: "3rem",
             marginTop: 0,
-            marginBottom: 0
-        }
+            marginBottom: 0,
+        },
     },
     components: {
         MuiCssBaseline: {
@@ -31,49 +31,45 @@ export const themeMain: Theme = createTheme({
         },
 
         MuiSelect: {
-            styleOverrides: {icon: {position: 'relative'}},
-
-        }
+            styleOverrides: { icon: { position: "relative" } },
+        },
     },
 
     palette: {
         primary: {
-            main: '#556cd6',
+            main: "#556cd6",
         },
         secondary: {
-            main: '#9e18be',
+            main: "#9e18be",
         },
         error: {
             main: red.A400,
         },
         background: {
-            default: '#fff',
+            default: "#fff",
         },
     },
-
-
 });
 
 export const Colors: Record<string, string> = {
-    'warningRed': 'rgb(255,59,59)',
-    'warningYellow': '#fcd632'
-}
+    warningRed: "rgb(255,59,59)",
+    warningYellow: "#fcd632",
+};
 export const Styles: Record<string, SxProps> = {
     smallIcons: {
-        height: '0.7em',
-        width: '0.7em'
+        height: "0.7em",
+        width: "0.7em",
     },
     flexRow: {
-        display: 'flex',
-        flexDirection: 'row',
-        alignItems: 'start',
-        alignContent: 'start'
+        display: "flex",
+        flexDirection: "row",
+        alignItems: "start",
+        alignContent: "start",
     },
     flexColumn: {
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'start',
-        alignContent: 'start'
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "start",
+        alignContent: "start",
     },
-
-}
+};
