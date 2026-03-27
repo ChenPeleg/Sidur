@@ -8,7 +8,7 @@ import { Select, SelectChangeEvent } from "@mui/material";
 import { Edit } from "@mui/icons-material";
 import { ActionsTypes } from "../../store/types.actions";
 import { SidurRecord, SidurStore } from "../../store/store.types";
-import { ToggleNavigationButtons } from "../buttons/toggle-button-group";
+import { ToggleNavigationButtons } from "../buttons/toggle-navigation-buttons.tsx";
 
 interface AppNavBarAppBarProps {
     menuId: string;
