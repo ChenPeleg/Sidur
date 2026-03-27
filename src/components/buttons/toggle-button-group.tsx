@@ -1,10 +1,8 @@
 import * as React from "react";
-import ToggleButton from "@mui/material/ToggleButton";
 import { translations } from "../../services/translations";
 import { useDispatch } from "react-redux";
 import { ActionsTypes } from "../../store/types.actions";
-import { StyledToggleButtonGroup } from "./styled-toggle-button";
-import { Link } from "react-router";
+import { AppToggleButton } from "./app-toggle-button";
 
 export const ToggleNavigationButtons = () => {
     const [alignment, setAlignment] = React.useState("web");
@@ -24,43 +22,33 @@ export const ToggleNavigationButtons = () => {
     };
 
     return (
-        <StyledToggleButtonGroup
-            value={alignment}
-            exclusive
-            sx={{
-                color: "white",
-                direction: "ltr",
-            }}
-            color={"standard"}
-            onChange={handleChange}
-        >
-            <ToggleButton
-                component={Link}
+        <div className="flex flex-row" dir="ltr">
+            <AppToggleButton
                 to="/locations"
-                sx={{ color: "white" }}
-                value={"locationsView"}
+                value="locationsView"
+                selected={alignment === "locationsView"}
+                onClick={(e) => handleChange(e, "locationsView")}
             >
                 {translations.Locations}
-            </ToggleButton>
+            </AppToggleButton>
 
-            <ToggleButton
-                component={Link}
+            <AppToggleButton
                 to="/sketch"
-                sx={{ color: "white" }}
-                value={"sketch"}
+                value="sketch"
+                selected={alignment === "sketch"}
+                onClick={(e) => handleChange(e, "sketch")}
             >
                 {translations.Sketch}
-            </ToggleButton>
+            </AppToggleButton>
 
-            <ToggleButton
-                component={Link}
+            <AppToggleButton
                 to="/orders"
-                sx={{ color: "white" }}
-                value={"orders"}
+                value="orders"
+                selected={alignment === "orders"}
+                onClick={(e) => handleChange(e, "orders")}
             >
-                {" "}
-                {translations.Orders}{" "}
-            </ToggleButton>
-        </StyledToggleButtonGroup>
+                {translations.Orders}
+            </AppToggleButton>
+        </div>
     );
 };
