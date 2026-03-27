@@ -1,19 +1,6 @@
 import * as React from "react";
-import AppBar from "@mui/material/AppBar";
-import Toolbar from "@mui/material/Toolbar";
-import IconButton from "@mui/material/IconButton";
-import Typography from "@mui/material/Typography";
-import MenuItem from "@mui/material/MenuItem";
-import MenuIcon from "@mui/icons-material/Menu";
-import AccountCircle from "@mui/icons-material/AccountCircle";
-import MoreIcon from "@mui/icons-material/MoreVert";
-import { translations } from "../../services/translations";
 import { useDispatch, useSelector } from "react-redux";
-import { Select, SelectChangeEvent } from "@mui/material";
-import { Edit } from "@mui/icons-material";
-import { ProfileMenu } from "./profile-menu";
 import { ActionsTypes } from "../../store/types.actions";
-import { SidurMenu } from "./sidur-menu";
 import { SidurActionType } from "../../models/SidurMenuClickActionType.enum";
 import { ProfileMenuClickActionType } from "../../models/profile-menu-click-action-type.enum";
 import {
@@ -21,26 +8,40 @@ import {
     SidurRecord,
     SidurStore,
 } from "../../store/store.types";
+import { StoreUtils } from "../../store/store-utils";
+import { AppNavBarAppBar } from "./app-nav-bar-app-bar";
+import { ProfileMenu } from "./profile-menu";
+import { SidurMenu } from "./sidur-menu";
+import { RenameDialog } from "../Dialogs/rename-dialog";
 import { FileUploadDialog } from "../Dialogs/file-uplaod-dialog";
 import { SidurManagementDialog } from "../Dialogs/sidur-management-dialog";
-import { ToggleButtons } from "../buttons/toggle-button-group";
-import { RenameDialog } from "../Dialogs/rename-dialog";
-import { StoreUtils } from "../../store/store-utils";
 import { ImportSheetsDialog } from "../Dialogs/import-sheets-dialog";
+import { useNavBarMenuState } from "./app-nav-bar-use-menus.tsx";
 
 export const AppNavBar = () => {
     const dispatch = useDispatch();
-    const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
-    const [RenameOpen, setRenameOpen] = React.useState(false);
-    const [UploadOpen, setUploadOpen] = React.useState(false);
-    const [ManageSidurimOpen, setManageSidurimOpen] = React.useState(false);
+
+    const {
+        anchorEl,
+        sidurMoreAnchorEl,
+        RenameOpen,
+        UploadOpen,
+        ManageSidurimOpen,
+        isProfileMenuOpen,
+        isSidurMenuOpen,
+        setRenameOpen,
+        setUploadOpen,
+        setManageSidurimOpen,
+        handleProfileMenuOpen,
+        handleSidurMenuOpen,
+        handleSidurMenuClose,
+        handleProfileMenuClose,
+    } = useNavBarMenuState();
 
     const importOrdersOpen = useSelector(
         (state: SidurStore) => state.sessionState.openDialog === "importOrders"
     );
 
-    const [sidurMoreAnchorEl, setSidurMoreAnchorEl] =
-        React.useState<null | HTMLElement>(null);
     const sidurId = useSelector((state: SidurStore) => state.sidurId);
     const sidurCollection = useSelector(
         (state: SidurStore) => state.sidurCollection
@@ -48,20 +49,12 @@ export const AppNavBar = () => {
     const sidurSelected = sidurCollection.find(
         (sidurRecord: SidurRecord) => sidurRecord.id === sidurId
     );
-
     const sidurName = sidurSelected?.Name || "";
 
     const openImportSheetModal = () => {
         dispatch({
             type: ActionsTypes.OPEN_IMPORT_SHEETS_MODAL,
         });
-    };
-
-    const isProfileMenuOpen = Boolean(anchorEl);
-    const isSidurMenuOpen = Boolean(sidurMoreAnchorEl);
-
-    const handleProfileMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
-        setAnchorEl(event.currentTarget);
     };
 
     const handleRenameClose = (value: string | null) => {
@@ -77,6 +70,7 @@ export const AppNavBar = () => {
             });
         }
     };
+
     const handleUploadClose = (
         result: { uploadType: FileUploadType; fileAsString: string } | null
     ): void => {
@@ -88,6 +82,7 @@ export const AppNavBar = () => {
             });
         }
     };
+
     const handleSidurMenuClick = (
         event: React.MouseEvent<HTMLElement>,
         clickAction: SidurActionType
@@ -125,15 +120,12 @@ export const AppNavBar = () => {
         }
         handleSidurMenuClose();
     };
-    const handleSidurMenuClose = () => {
-        setSidurMoreAnchorEl(null);
-    };
 
-    const handleProfileMenuClose = (
+    const handleProfileMenuCloseWithAction = (
         result: any,
         action?: ProfileMenuClickActionType
     ) => {
-        setAnchorEl(null);
+        handleProfileMenuClose();
         switch (action) {
             case ProfileMenuClickActionType.MyProfile:
                 dispatch({
@@ -160,141 +152,17 @@ export const AppNavBar = () => {
         handleSidurMenuClose();
     };
 
-    const handleSidurMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
-        setSidurMoreAnchorEl(event.currentTarget);
-    };
-    const handleSidurChanged = (event: any, _child: React.ReactNode) => {
-        const chosenSidur = event.target.value as string;
-        if (chosenSidur === "NEW") {
-            dispatch({
-                type: ActionsTypes.ADD_NEW_SIDUR,
-                payload: null,
-            });
-        } else {
-            dispatch({
-                type: ActionsTypes.CHOOSE_SIDUR,
-                payload: { id: chosenSidur },
-            });
-        }
-    };
     const menuId = "primary-search-account-menu";
     const sidurMenuId = "primary-search-account-menu-mobile";
+
     return (
         <div dir="rtl">
-            <AppBar
-                position="static"
-                sx={{
-                    mr: 0,
-                    ml: 0,
-                    "div.MuiToolbar-root.MuiToolbar-gutters.MuiToolbar-regular":
-                        {
-                            margin: 0,
-                        },
-                }}
-            >
-                <Toolbar
-                    sx={{
-                        mr: 0,
-                        ml: 0,
-                    }}
-                >
-                    <IconButton
-                        size="large"
-                        color="inherit"
-                        aria-label="open drawer"
-                        sx={{ mr: 0 }}
-                    >
-                        <MenuIcon />
-                    </IconButton>
-                    <Typography
-                        variant="h6"
-                        noWrap
-                        component="div"
-                        sx={{
-                            display: {
-                                xs: "none",
-                                sm: "block",
-                            },
-                        }}
-                    >
-                        {" "}
-                        &nbsp; &nbsp;
-                        {translations.Sidur}
-                        <Select
-                            dir={"rtl"}
-                            disableUnderline={true}
-                            variant={"standard"}
-                            value={sidurId}
-                            sx={{
-                                color: "white",
-                                fontSize: "1.25rem",
-                                fontWeight: "normal",
-                            }}
-                            onChange={(
-                                event: SelectChangeEvent<any>,
-                                child: React.ReactNode
-                            ) => {
-                                handleSidurChanged(event, child);
-                            }}
-                        >
-                            <MenuItem key={10000} value={"NEW"}>
-                                {" "}
-                                &nbsp;&nbsp;<b>{translations.NewSidur}</b>{" "}
-                                &nbsp;&nbsp;
-                            </MenuItem>
-
-                            {sidurCollection.map(
-                                (sidurRecord: SidurRecord, i: number) => (
-                                    <MenuItem key={i} value={sidurRecord.id}>
-                                        {" "}
-                                        &nbsp;&nbsp;{sidurRecord.Name}{" "}
-                                        &nbsp;&nbsp;
-                                    </MenuItem>
-                                )
-                            )}
-                        </Select>
-                    </Typography>
-                    <IconButton
-                        size="small"
-                        aria-label="show more"
-                        aria-controls={sidurMenuId}
-                        aria-haspopup="true"
-                        onClick={handleSidurMenuOpen}
-                        color="inherit"
-                    >
-                        <Edit />
-                    </IconButton>
-                    <div className="w-[20px] h-[5px]" />
-                    <ToggleButtons />
-
-                    <div className="grow" />
-                    <div className="hidden md:flex">
-                        <IconButton
-                            size="large"
-                            edge="end"
-                            aria-label="account of current user"
-                            aria-controls={menuId}
-                            aria-haspopup="true"
-                            onClick={handleProfileMenuOpen}
-                            color="inherit"
-                        >
-                            <AccountCircle />
-                        </IconButton>
-                    </div>
-                    <div className="flex md:hidden">
-                        <IconButton
-                            size="large"
-                            aria-label="show more"
-                            aria-controls={sidurMenuId}
-                            aria-haspopup="true"
-                            onClick={handleSidurMenuOpen}
-                            color="inherit"
-                        >
-                            <MoreIcon />
-                        </IconButton>
-                    </div>
-                </Toolbar>
-            </AppBar>
+            <AppNavBarAppBar
+                menuId={menuId}
+                sidurMenuId={sidurMenuId}
+                onProfileMenuOpen={handleProfileMenuOpen}
+                onSidurMenuOpen={handleSidurMenuOpen}
+            />
 
             <SidurMenu
                 sidurMoreAnchorEl={sidurMoreAnchorEl}
@@ -306,7 +174,7 @@ export const AppNavBar = () => {
             <ProfileMenu
                 menuId={menuId}
                 anchorEl={anchorEl}
-                handleMenuClose={handleProfileMenuClose}
+                handleMenuClose={handleProfileMenuCloseWithAction}
                 isMenuOpen={isProfileMenuOpen}
             />
             <RenameDialog
