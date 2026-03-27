@@ -7,7 +7,7 @@ import { ActionsTypes } from "../../store/types.actions";
 import { SidurStore } from "../../store/store.types";
 import { SketchActionType } from "../../models/SketchMenuClickActionType.enum";
 import { SketchMenu } from "./sketch-menu";
-import { Edit, GridOn } from "@mui/icons-material";
+import { Download, Edit, GridOn } from "@mui/icons-material";
 import IconButton from "@mui/material/IconButton";
 import { Sketch } from "./Sketch";
 import MenuItem from "@mui/material/MenuItem";
@@ -124,76 +124,95 @@ export const SketchesContainer = () => {
     return (
         <div>
             {SketchIdInEdit ? (
-                <div className="flex flex-row items-start justify-start mb-[10px]">
-                    <Typography
-                        variant="h6"
-                        noWrap
-                        component="div"
-                        sx={{
-                            display: {
-                                xs: "none",
-                                sm: "block",
-                                fontWight: "regular",
-                            },
-                        }}
+                <div className="flex lg:flex-row flex-col items-start justify-start mb-2.5">
+                    <div
+                        id={"sketches-sketch-cockpit-1"}
+                        className={"flex flex-row items-start justify-start"}
                     >
-                        {" "}
-                        &nbsp;
-                        {translations.Sketch} &nbsp;
-                        <Select
-                            dir={"rtl"}
-                            disableUnderline={true}
-                            variant={"standard"}
-                            value={SketchIdInEdit}
+                        <Typography
+                            variant="h6"
+                            noWrap
+                            component="div"
                             sx={{
-                                fontSize: "1.25rem",
-                                fontWeight: "normal",
-                            }}
-                            onChange={(
-                                event: SelectChangeEvent<any>,
-                                child: React.ReactNode
-                            ) => {
-                                handleSketchChanged(event, child);
+                                display: {
+                                    fontWight: "regular",
+                                },
                             }}
                         >
-                            <MenuItem key={"NEW"} value={"NEW"}>
-                                {" "}
-                                &nbsp; <b>{translations.CreateSketch}</b> &nbsp;
-                            </MenuItem>
-                            {sketches.map((oneSketch: SketchModel) => (
-                                <MenuItem
-                                    key={oneSketch.id}
-                                    value={oneSketch.id}
-                                >
+                            &nbsp;
+                            {translations.Sketch} &nbsp;
+                            <Select
+                                dir={"rtl"}
+                                disableUnderline={true}
+                                variant={"standard"}
+                                value={SketchIdInEdit}
+                                sx={{
+                                    fontSize: "1.25rem",
+                                    fontWeight: "normal",
+                                }}
+                                onChange={(
+                                    event: SelectChangeEvent<any>,
+                                    child: React.ReactNode
+                                ) => {
+                                    handleSketchChanged(event, child);
+                                }}
+                            >
+                                <MenuItem key={"NEW"} value={"NEW"}>
                                     {" "}
-                                    {oneSketch.name} &nbsp;{" "}
+                                    &nbsp; <b>
+                                        {translations.CreateSketch}
+                                    </b>{" "}
+                                    &nbsp;
                                 </MenuItem>
-                            ))}
-                        </Select>
-                    </Typography>
+                                {sketches.map((oneSketch: SketchModel) => (
+                                    <MenuItem
+                                        key={oneSketch.id}
+                                        value={oneSketch.id}
+                                    >
+                                        {" "}
+                                        {oneSketch.name} &nbsp;{" "}
+                                    </MenuItem>
+                                ))}
+                            </Select>
+                        </Typography>
 
-                    <IconButton
-                        size="small"
-                        aria-label="show more"
-                        aria-controls={sketchMenuId}
-                        aria-haspopup="true"
-                        onClick={handleSketchMenuOpen}
-                        color="inherit"
+                        <IconButton
+                            size="small"
+                            aria-label="show more"
+                            aria-controls={sketchMenuId}
+                            aria-haspopup="true"
+                            onClick={handleSketchMenuOpen}
+                            color="inherit"
+                        >
+                            <Edit />
+                        </IconButton>
+                        <div className="w-7.5 h-3" />
+                        <Button
+                            sx={{
+                                minWidth: "40px",
+                            }}
+                            variant={"contained"}
+                            id={"sketches-download-sketch"}
+                            onClick={handleDownloadSketch}
+                        >
+                            <span className={"  lg:hidden"}>
+                                <Download />
+                            </span>
+                            <span className={"hidden lg:inline mx-1"}>
+                                <GridOn /> &nbsp;
+                                {translations.downloadAsCSV}
+                            </span>
+                        </Button>
+                    </div>
+                    <div
+                        id={"sketches-sketch-cockpit-1"}
+                        className={"flex flex-row items-start justify-start"}
                     >
-                        <Edit />
-                    </IconButton>
-                    <div className="w-[30px] h-[12px]" />
-                    <Button
-                        variant={"contained"}
-                        id={"sketches-download-sketch"}
-                        onClick={handleDownloadSketch}
-                    >
-                        <GridOn /> &nbsp; {translations.downloadAsCSV}
-                    </Button>
-                    <SketchesContainerMessage
-                        clickCancel={handleSketchActionCancelClick}
-                        sketch={sketchInEdit}
-                    />
+                        <SketchesContainerMessage
+                            clickCancel={handleSketchActionCancelClick}
+                            sketch={sketchInEdit}
+                        />
+                    </div>
                 </div>
             ) : (
                 <Button
