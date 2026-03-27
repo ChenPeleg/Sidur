@@ -1,19 +1,13 @@
 import * as React from "react";
-import AppBar from "@mui/material/AppBar";
-import Toolbar from "@mui/material/Toolbar";
-import IconButton from "@mui/material/IconButton";
-import Typography from "@mui/material/Typography";
 import MenuItem from "@mui/material/MenuItem";
-import MenuIcon from "@mui/icons-material/Menu";
 import AccountCircle from "@mui/icons-material/AccountCircle";
-import MoreIcon from "@mui/icons-material/MoreVert";
 import { translations } from "../../services/translations";
 import { useDispatch, useSelector } from "react-redux";
 import { Select, SelectChangeEvent } from "@mui/material";
 import { Edit } from "@mui/icons-material";
 import { ActionsTypes } from "../../store/types.actions";
 import { SidurRecord, SidurStore } from "../../store/store.types";
-import { ToggleButtons } from "../buttons/toggle-button-group";
+import { ToggleNavigationButtons } from "../buttons/toggle-navigation-buttons.tsx";
 
 interface AppNavBarAppBarProps {
     menuId: string;
@@ -53,36 +47,17 @@ export const AppNavBarAppBar: React.FC<AppNavBarAppBarProps> = ({
     };
 
     return (
-        <AppBar
-            position="static"
-            sx={{
-                mr: 0,
-                ml: 0,
-                "div.MuiToolbar-root.MuiToolbar-gutters.MuiToolbar-regular": {
-                    margin: 0,
-                },
-            }}
-        >
-            <Toolbar
-                sx={{
-                    mr: 0,
-                    ml: 0,
-                }}
-            >
-                <Typography
-                    variant="h6"
-                    noWrap
-                    component="div"
-                    sx={{
-                        display: {
-                            xs: "none",
-                            sm: "block",
-                        },
-                    }}
+        <header className="flex flex-col bg-[#556cd6] text-white">
+            <nav className="flex flex-col lg:gap-3 w-full flex-wrap lg:flex-row lg:items-center lg:min-h-16   lg:px-4 relative">
+                <div
+                    id="nav-bar-part-1"
+                    className=" flex flex-row items-center  min-h-14 "
                 >
-                    {" "}
-                    &nbsp; &nbsp;
-                    {translations.Sidur}
+                    <span className={"hidden lg:flex text-xl"}>
+                        &nbsp; &nbsp;
+                        {translations.Sidur}
+                    </span>
+
                     <Select
                         dir={"rtl"}
                         disableUnderline={true}
@@ -102,60 +77,48 @@ export const AppNavBarAppBar: React.FC<AppNavBarAppBarProps> = ({
                     >
                         <MenuItem key={10000} value={"NEW"}>
                             {" "}
-                            &nbsp;&nbsp;<b>{translations.NewSidur}</b>{" "}
-                            &nbsp;&nbsp;
+                            &nbsp; <b>{translations.NewSidur}</b> &nbsp;&nbsp;
                         </MenuItem>
 
                         {sidurCollection.map(
                             (sidurRecord: SidurRecord, i: number) => (
                                 <MenuItem key={i} value={sidurRecord.id}>
-                                    {" "}
-                                    &nbsp;&nbsp;{sidurRecord.Name} &nbsp;&nbsp;
+                                    &nbsp;{sidurRecord.Name} &nbsp;&nbsp;
                                 </MenuItem>
                             )
                         )}
                     </Select>
-                </Typography>
-                <IconButton
-                    size="small"
-                    aria-label="show more"
-                    aria-controls={sidurMenuId}
-                    aria-haspopup="true"
-                    onClick={onSidurMenuOpen}
-                    color="inherit"
-                >
-                    <Edit />
-                </IconButton>
-                <div className="w-5 h-1.5" />
-                <ToggleButtons />
-
-                <div className="grow" />
-                <div className="hidden md:flex">
-                    <IconButton
-                        size="large"
-                        edge="end"
-                        aria-label="account of current user"
-                        aria-controls={menuId}
-                        aria-haspopup="true"
-                        onClick={onProfileMenuOpen}
-                        color="inherit"
-                    >
-                        <AccountCircle />
-                    </IconButton>
-                </div>
-                <div className="flex md:hidden">
-                    <IconButton
-                        size="large"
+                    <button
+                        type="button"
+                        className="p-1 rounded-full hover:bg-white/10 transition-colors text-white"
                         aria-label="show more"
                         aria-controls={sidurMenuId}
                         aria-haspopup="true"
                         onClick={onSidurMenuOpen}
-                        color="inherit"
                     >
-                        <MoreIcon />
-                    </IconButton>
+                        <Edit />
+                    </button>
                 </div>
-            </Toolbar>
-        </AppBar>
+                <div
+                    id="nav-bar-part-2"
+                    className={"  min-h-9 flex flex-row ps-5"}
+                >
+                    <ToggleNavigationButtons />
+                </div>
+
+                <div className="absolute lg:top-2 top-0.5 left-1">
+                    <button
+                        type="button"
+                        className="p-3 rounded-full hover:bg-white/10 transition-colors text-white"
+                        aria-label="account of current user"
+                        aria-controls={menuId}
+                        aria-haspopup="true"
+                        onClick={onProfileMenuOpen}
+                    >
+                        <AccountCircle />
+                    </button>
+                </div>
+            </nav>
+        </header>
     );
 };
