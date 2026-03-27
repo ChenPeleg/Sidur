@@ -23,7 +23,6 @@ import {
 } from "../../store/store.types";
 import { FileUploadDialog } from "../Dialogs/file-uplaod-dialog";
 import { SidurManagementDialog } from "../Dialogs/sidur-management-dialog";
-import { OrderImportDialog } from "../Dialogs/orders-import-dialog";
 import { ToggleButtons } from "../buttons/toggle-button-group";
 import { RenameDialog } from "../Dialogs/rename-dialog";
 import { StoreUtils } from "../../store/store-utils";
