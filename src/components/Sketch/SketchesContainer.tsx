@@ -124,7 +124,7 @@ export const SketchesContainer = () => {
     return (
         <div>
             {SketchIdInEdit ? (
-                <div className="flex flex-row items-start justify-start mb-2.5">
+                <div className="flex lg:flex-row flex-col items-start justify-start mb-2.5">
                     <div
                         id={"sketches-sketch-cockpit-1"}
                         className={"flex flex-row items-start justify-start"}
