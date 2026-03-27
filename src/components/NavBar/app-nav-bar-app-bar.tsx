@@ -48,7 +48,7 @@ export const AppNavBarAppBar: React.FC<AppNavBarAppBarProps> = ({
 
     return (
         <header className="flex flex-col bg-[#556cd6] text-white">
-            <nav className="flex   flex-col w-full flex-wrap lg:flex-row items-center lg:min-h-16  min-h-24 lg:px-4 relative">
+            <nav className="flex flex-col gap-3 w-full flex-wrap lg:flex-row lg:items-center lg:min-h-16  min-h-24 lg:px-4 relative">
                 <div
                     id="nav-bar-part-1"
                     className=" flex flex-row items-center  "
