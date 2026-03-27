@@ -18,12 +18,11 @@ export const AppToggleButton: React.FC<AppToggleButtonProps> = ({
     children,
     className = "",
 }) => {
-    const baseClasses =
-        "px-4 py-2 text-white transition-colors duration-200 border-0 cursor-pointer";
+    const defaultedClasses = className || "px-4 py-2 text-white  border-0 ";
     const normalClasses = "bg-white/10 hover:bg-white/20";
     const selectedClasses = "bg-white/30 hover:bg-white/40";
 
-    const combinedClasses = `${baseClasses} ${selected ? selectedClasses : normalClasses} ${className}`;
+    const combinedClasses = `transition-colors duration-200 cursor-pointer ${defaultedClasses} ${selected ? selectedClasses : normalClasses} ${className}`;
 
     const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
         if (onClick) {

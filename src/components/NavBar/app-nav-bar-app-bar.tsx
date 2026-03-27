@@ -49,9 +49,9 @@ export const AppNavBarAppBar: React.FC<AppNavBarAppBarProps> = ({
 
     return (
         <header className="flex flex-col bg-[#556cd6] text-white">
-            <nav className="flex flex-row flex-wrap items-center min-h-16 px-4">
-                <div className=" sm:block text-xl whitespace-nowrap">
-                    <span className={"hidden lg:flex"}>
+            <nav className="flex flex-row w-full flex-wrap lg:flex-nowrap items-center min-h-16 lg:px-4 ">
+                <div className=" flex flex-row items-center  ">
+                    <span className={"hidden lg:flex text-xl"}>
                         &nbsp; &nbsp;
                         {translations.Sidur}
                     </span>
