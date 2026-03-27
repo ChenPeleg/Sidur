@@ -69,14 +69,6 @@ export const AppNavBarAppBar: React.FC<AppNavBarAppBarProps> = ({
                     ml: 0,
                 }}
             >
-                {/*<IconButton*/}
-                {/*    size="large"*/}
-                {/*    color="inherit"*/}
-                {/*    aria-label="open drawer"*/}
-                {/*    sx={{ mr: 0 }}*/}
-                {/*>*/}
-                {/*    <MenuIcon />*/}
-                {/*</IconButton>*/}
                 <Typography
                     variant="h6"
                     noWrap
