@@ -58,7 +58,7 @@ export const SketchesContainerMessage = (props: {
 
     return (
         <div className={Styles.flexRow}>
-            <div className="w-[20vw] h-[10px]" />
+            <div className="w-[20vw] h-2.5" />
             <Typography variant={"h5"}>{messageText} </Typography>
             {messageText ? (
                 <>
