@@ -8,7 +8,7 @@ import { Select, SelectChangeEvent } from "@mui/material";
 import { Edit } from "@mui/icons-material";
 import { ActionsTypes } from "../../store/types.actions";
 import { SidurRecord, SidurStore } from "../../store/store.types";
-import { ToggleButtons } from "../buttons/toggle-button-group";
+import { ToggleNavigationButtons } from "../buttons/toggle-button-group";
 
 interface AppNavBarAppBarProps {
     menuId: string;
@@ -97,7 +97,7 @@ export const AppNavBarAppBar: React.FC<AppNavBarAppBarProps> = ({
                     <Edit />
                 </button>
                 <div className="w-5 h-1.5" />
-                <ToggleButtons />
+                <ToggleNavigationButtons />
 
                 <div className="grow" />
                 <div className="hidden md:flex">

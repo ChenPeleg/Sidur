@@ -6,7 +6,7 @@ import { ActionsTypes } from "../../store/types.actions";
 import { StyledToggleButtonGroup } from "./styled-toggle-button";
 import { Link } from "react-router";
 
-export const ToggleButtons = () => {
+export const ToggleNavigationButtons = () => {
     const [alignment, setAlignment] = React.useState("web");
     const dispatch = useDispatch();
     const handleChange = (
