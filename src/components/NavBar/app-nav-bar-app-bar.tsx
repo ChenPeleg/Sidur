@@ -1,7 +1,6 @@
 import * as React from "react";
 import MenuItem from "@mui/material/MenuItem";
 import AccountCircle from "@mui/icons-material/AccountCircle";
-import MoreIcon from "@mui/icons-material/MoreVert";
 import { translations } from "../../services/translations";
 import { useDispatch, useSelector } from "react-redux";
 import { Select, SelectChangeEvent } from "@mui/material";
@@ -49,8 +48,11 @@ export const AppNavBarAppBar: React.FC<AppNavBarAppBarProps> = ({
 
     return (
         <header className="flex flex-col bg-[#556cd6] text-white">
-            <nav className="flex flex-row w-full flex-wrap lg:flex-nowrap items-center lg:min-h-16  min-h-24 lg:px-4 relative">
-                <div className=" flex flex-row items-center  ">
+            <nav className="flex   flex-col w-full flex-wrap lg:flex-row items-center lg:min-h-16  min-h-24 lg:px-4 relative">
+                <div
+                    id="nav-bar-part-1"
+                    className=" flex flex-row items-center  "
+                >
                     <span className={"hidden lg:flex text-xl"}>
                         &nbsp; &nbsp;
                         {translations.Sidur}
@@ -88,21 +90,21 @@ export const AppNavBarAppBar: React.FC<AppNavBarAppBarProps> = ({
                             )
                         )}
                     </Select>
+                    <button
+                        type="button"
+                        className="p-1 rounded-full hover:bg-white/10 transition-colors text-white"
+                        aria-label="show more"
+                        aria-controls={sidurMenuId}
+                        aria-haspopup="true"
+                        onClick={onSidurMenuOpen}
+                    >
+                        <Edit />
+                    </button>
                 </div>
-                <button
-                    type="button"
-                    className="p-1 rounded-full hover:bg-white/10 transition-colors text-white"
-                    aria-label="show more"
-                    aria-controls={sidurMenuId}
-                    aria-haspopup="true"
-                    onClick={onSidurMenuOpen}
-                >
-                    <Edit />
-                </button>
-                <div className="w-5 h-1.5" />
-                <ToggleNavigationButtons />
+                <div id="nav-bar-part-2">
+                    <ToggleNavigationButtons />
+                </div>
 
-                <div className="grow" />
                 <div className="absolute lg:top-2 top-0.5 left-1">
                     <button
                         type="button"

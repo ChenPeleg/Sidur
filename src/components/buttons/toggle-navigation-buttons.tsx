@@ -21,7 +21,7 @@ export const ToggleNavigationButtons = () => {
         });
     };
     const customToggleButtonStyle =
-        "rounded-full  mx-1 max-h-9 lg:max-h-16 px-2 py-1   lg:px-4 lg:py-2 text-white  border-0  flex items-center justify-center text-white ";
+        "rounded-full  mx-1 max-h-9 lg:max-h-16 px-2 py-0   lg:px-4 lg:py-2 text-white  border-0  flex items-center justify-center text-white ";
 
     return (
         <div className="flex flex-row  " dir="ltr">
