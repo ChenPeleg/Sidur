@@ -34,7 +34,10 @@ export const AppNavBarAppBar: React.FC<AppNavBarAppBarProps> = ({
         (state: SidurStore) => state.sidurCollection
     );
 
-    const handleSidurChanged = (event: SelectChangeEvent<any>, _child: React.ReactNode) => {
+    const handleSidurChanged = (
+        event: SelectChangeEvent<any>,
+        _child: React.ReactNode
+    ) => {
         const chosenSidur = event.target.value as string;
         if (chosenSidur === "NEW") {
             dispatch({
@@ -66,14 +69,14 @@ export const AppNavBarAppBar: React.FC<AppNavBarAppBarProps> = ({
                     ml: 0,
                 }}
             >
-                <IconButton
-                    size="large"
-                    color="inherit"
-                    aria-label="open drawer"
-                    sx={{ mr: 0 }}
-                >
-                    <MenuIcon />
-                </IconButton>
+                {/*<IconButton*/}
+                {/*    size="large"*/}
+                {/*    color="inherit"*/}
+                {/*    aria-label="open drawer"*/}
+                {/*    sx={{ mr: 0 }}*/}
+                {/*>*/}
+                {/*    <MenuIcon />*/}
+                {/*</IconButton>*/}
                 <Typography
                     variant="h6"
                     noWrap
@@ -115,8 +118,7 @@ export const AppNavBarAppBar: React.FC<AppNavBarAppBarProps> = ({
                             (sidurRecord: SidurRecord, i: number) => (
                                 <MenuItem key={i} value={sidurRecord.id}>
                                     {" "}
-                                    &nbsp;&nbsp;{sidurRecord.Name}{" "}
-                                    &nbsp;&nbsp;
+                                    &nbsp;&nbsp;{sidurRecord.Name} &nbsp;&nbsp;
                                 </MenuItem>
                             )
                         )}
@@ -165,4 +167,3 @@ export const AppNavBarAppBar: React.FC<AppNavBarAppBarProps> = ({
         </AppBar>
     );
 };
-
