@@ -49,7 +49,7 @@ export const AppNavBarAppBar: React.FC<AppNavBarAppBarProps> = ({
 
     return (
         <header className="flex flex-col bg-[#556cd6] text-white">
-            <nav className="flex flex-row w-full flex-wrap lg:flex-nowrap items-center min-h-16 lg:px-4 ">
+            <nav className="flex flex-row w-full flex-wrap lg:flex-nowrap items-center lg:min-h-16  min-h-24 lg:px-4 relative">
                 <div className=" flex flex-row items-center  ">
                     <span className={"hidden lg:flex text-xl"}>
                         &nbsp; &nbsp;
@@ -103,7 +103,7 @@ export const AppNavBarAppBar: React.FC<AppNavBarAppBarProps> = ({
                 <ToggleNavigationButtons />
 
                 <div className="grow" />
-                <div className=" ">
+                <div className="absolute lg:top-2 top-0.5 left-1">
                     <button
                         type="button"
                         className="p-3 rounded-full hover:bg-white/10 transition-colors text-white"
@@ -113,18 +113,6 @@ export const AppNavBarAppBar: React.FC<AppNavBarAppBarProps> = ({
                         onClick={onProfileMenuOpen}
                     >
                         <AccountCircle />
-                    </button>
-                </div>
-                <div className="flex  ">
-                    <button
-                        type="button"
-                        className="p-3 rounded-full hover:bg-white/10 transition-colors text-white"
-                        aria-label="show more"
-                        aria-controls={sidurMenuId}
-                        aria-haspopup="true"
-                        onClick={onSidurMenuOpen}
-                    >
-                        <MoreIcon />
                     </button>
                 </div>
             </nav>
