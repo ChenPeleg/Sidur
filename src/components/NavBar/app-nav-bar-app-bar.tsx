@@ -49,10 +49,13 @@ export const AppNavBarAppBar: React.FC<AppNavBarAppBarProps> = ({
 
     return (
         <header className="flex flex-col bg-[#556cd6] text-white">
-            <nav className="flex items-center min-h-16 px-4">
-                <div className="hidden sm:block text-xl whitespace-nowrap">
-                    &nbsp; &nbsp;
-                    {translations.Sidur}
+            <nav className="flex flex-row flex-wrap items-center min-h-16 px-4">
+                <div className=" sm:block text-xl whitespace-nowrap">
+                    <span className={"hidden lg:flex"}>
+                        &nbsp; &nbsp;
+                        {translations.Sidur}
+                    </span>
+
                     <Select
                         dir={"rtl"}
                         disableUnderline={true}
@@ -100,7 +103,7 @@ export const AppNavBarAppBar: React.FC<AppNavBarAppBarProps> = ({
                 <ToggleNavigationButtons />
 
                 <div className="grow" />
-                <div className="hidden md:flex">
+                <div className=" ">
                     <button
                         type="button"
                         className="p-3 rounded-full hover:bg-white/10 transition-colors text-white"
@@ -112,7 +115,7 @@ export const AppNavBarAppBar: React.FC<AppNavBarAppBarProps> = ({
                         <AccountCircle />
                     </button>
                 </div>
-                <div className="flex md:hidden">
+                <div className="flex  ">
                     <button
                         type="button"
                         className="p-3 rounded-full hover:bg-white/10 transition-colors text-white"
