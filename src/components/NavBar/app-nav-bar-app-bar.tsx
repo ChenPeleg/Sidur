@@ -48,10 +48,10 @@ export const AppNavBarAppBar: React.FC<AppNavBarAppBarProps> = ({
 
     return (
         <header className="flex flex-col bg-[#556cd6] text-white">
-            <nav className="flex flex-col gap-3 w-full flex-wrap lg:flex-row lg:items-center lg:min-h-16  min-h-24 lg:px-4 relative">
+            <nav className="flex flex-col lg:gap-3 w-full flex-wrap lg:flex-row lg:items-center lg:min-h-16   lg:px-4 relative">
                 <div
                     id="nav-bar-part-1"
-                    className=" flex flex-row items-center  "
+                    className=" flex flex-row items-center  min-h-14 "
                 >
                     <span className={"hidden lg:flex text-xl"}>
                         &nbsp; &nbsp;
@@ -77,15 +77,13 @@ export const AppNavBarAppBar: React.FC<AppNavBarAppBarProps> = ({
                     >
                         <MenuItem key={10000} value={"NEW"}>
                             {" "}
-                            &nbsp;&nbsp;<b>{translations.NewSidur}</b>{" "}
-                            &nbsp;&nbsp;
+                            &nbsp; <b>{translations.NewSidur}</b> &nbsp;&nbsp;
                         </MenuItem>
 
                         {sidurCollection.map(
                             (sidurRecord: SidurRecord, i: number) => (
                                 <MenuItem key={i} value={sidurRecord.id}>
-                                    {" "}
-                                    &nbsp;&nbsp;{sidurRecord.Name} &nbsp;&nbsp;
+                                    &nbsp;{sidurRecord.Name} &nbsp;&nbsp;
                                 </MenuItem>
                             )
                         )}
@@ -101,7 +99,10 @@ export const AppNavBarAppBar: React.FC<AppNavBarAppBarProps> = ({
                         <Edit />
                     </button>
                 </div>
-                <div id="nav-bar-part-2">
+                <div
+                    id="nav-bar-part-2"
+                    className={"  min-h-9 flex flex-row ps-5"}
+                >
                     <ToggleNavigationButtons />
                 </div>
 
