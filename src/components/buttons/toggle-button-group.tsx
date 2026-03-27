@@ -20,12 +20,14 @@ export const ToggleNavigationButtons = () => {
             },
         });
     };
+    const customToggleButtonStyle = "rounded-full mx-1";
 
     return (
-        <div className="flex flex-row" dir="ltr">
+        <div className="flex flex-row  " dir="ltr">
             <AppToggleButton
                 to="/locations"
                 value="locationsView"
+                className={customToggleButtonStyle}
                 selected={alignment === "locationsView"}
                 onClick={(e) => handleChange(e, "locationsView")}
             >
@@ -36,6 +38,7 @@ export const ToggleNavigationButtons = () => {
                 to="/sketch"
                 value="sketch"
                 selected={alignment === "sketch"}
+                className={customToggleButtonStyle}
                 onClick={(e) => handleChange(e, "sketch")}
             >
                 {translations.Sketch}
@@ -45,6 +48,7 @@ export const ToggleNavigationButtons = () => {
                 to="/orders"
                 value="orders"
                 selected={alignment === "orders"}
+                className={customToggleButtonStyle}
                 onClick={(e) => handleChange(e, "orders")}
             >
                 {translations.Orders}
