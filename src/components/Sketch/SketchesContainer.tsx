@@ -181,7 +181,9 @@ export const SketchesContainer = () => {
                     </IconButton>
                     <div className="w-7.5 h-3" />
                     <Button
-                        sx={{ minWidth: "40px", padding: "6px" }}
+                        sx={{
+                            minWidth: "40px",
+                        }}
                         variant={"contained"}
                         id={"sketches-download-sketch"}
                         onClick={handleDownloadSketch}
@@ -189,7 +191,7 @@ export const SketchesContainer = () => {
                         <span className={"  lg:hidden"}>
                             <Download />
                         </span>
-                        <span className={"hidden lg:inline"}>
+                        <span className={"hidden lg:inline mx-1"}>
                             <GridOn /> &nbsp;
                             {translations.downloadAsCSV}
                         </span>
