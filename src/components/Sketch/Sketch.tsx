@@ -210,17 +210,11 @@ export const Sketch = () => {
         null;
 
     return sketchInEdit ? (
-        <div
-            id={"sketch--scroll-container"}
-            className="overflow-auto w-screen"
-        >
-            <div
-                id={"sketch-container"}
-                className="inline-block"
-            >
+        <div id={"sketch--scroll-container"} className="overflow-auto w-screen">
+            <div id={"sketch-container"} className="inline-block">
                 <div
                     id={"sketch-wrapper-row"}
-                    className="pr-[20px] pl-[80px] flex flex-row items-start mb-[10px] justify-center min-w-[30vw]"
+                    className="pr-5 pl-20 flex flex-row items-start mb-2.5 justify-center min-w-[30vw]"
                 >
                     <SketchPendingOrders
                         pendingOrders={sketchInEdit.unassignedOrders}

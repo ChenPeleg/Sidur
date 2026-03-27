@@ -7,7 +7,7 @@ import { ActionsTypes } from "../../store/types.actions";
 import { SidurStore } from "../../store/store.types";
 import { SketchActionType } from "../../models/SketchMenuClickActionType.enum";
 import { SketchMenu } from "./sketch-menu";
-import { Edit, GridOn } from "@mui/icons-material";
+import { Download, Edit, GridOn } from "@mui/icons-material";
 import IconButton from "@mui/material/IconButton";
 import { Sketch } from "./Sketch";
 import MenuItem from "@mui/material/MenuItem";
@@ -124,20 +124,17 @@ export const SketchesContainer = () => {
     return (
         <div>
             {SketchIdInEdit ? (
-                <div className="flex flex-row items-start justify-start mb-[10px]">
+                <div className="flex flex-row items-start justify-start mb-2.5">
                     <Typography
                         variant="h6"
                         noWrap
                         component="div"
                         sx={{
                             display: {
-                                xs: "none",
-                                sm: "block",
                                 fontWight: "regular",
                             },
                         }}
                     >
-                        {" "}
                         &nbsp;
                         {translations.Sketch} &nbsp;
                         <Select
@@ -182,13 +179,20 @@ export const SketchesContainer = () => {
                     >
                         <Edit />
                     </IconButton>
-                    <div className="w-[30px] h-[12px]" />
+                    <div className="w-7.5 h-3" />
                     <Button
+                        sx={{ minWidth: "40px", padding: "6px" }}
                         variant={"contained"}
                         id={"sketches-download-sketch"}
                         onClick={handleDownloadSketch}
                     >
-                        <GridOn /> &nbsp; {translations.downloadAsCSV}
+                        <span className={"  lg:hidden"}>
+                            <Download />
+                        </span>
+                        <span className={"hidden lg:inline"}>
+                            <GridOn /> &nbsp;
+                            {translations.downloadAsCSV}
+                        </span>
                     </Button>
                     <SketchesContainerMessage
                         clickCancel={handleSketchActionCancelClick}
