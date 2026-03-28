@@ -29,10 +29,10 @@ export const SketchDriveReducer: Record<
     ): SidurStore => {
         let newState = { ...state };
         const sketchDriveChanged: DriveModel = action.payload.value;
-        const SketchIdInEdit = newState.sessionState.SketchIdInEdit;
+        const sketchIdInEdit = newState.sessionState.sketchIdInEdit;
 
         const sketchObj: SketchModel | undefined = newState.sketches.find(
-            (record: SketchModel) => record.id === SketchIdInEdit
+            (record: SketchModel) => record.id === sketchIdInEdit
         );
 
         if (sketchObj !== undefined) {
@@ -65,11 +65,11 @@ export const SketchDriveReducer: Record<
     ): SidurStore => {
         let newState = { ...state };
         const sketchDriveChanged: DriveModel = action.payload.value;
-        const SketchIdInEdit = newState.sessionState.SketchIdInEdit;
+        const sketchIdInEdit = newState.sessionState.sketchIdInEdit;
         newState.sessionState.pendingOrderInEditAction = null;
         newState.sessionState.pendingOrderInEditActionSelectDrives = null;
         const sketchObj: SketchModel | undefined = newState.sketches.find(
-            (record: SketchModel) => record.id === SketchIdInEdit
+            (record: SketchModel) => record.id === sketchIdInEdit
         );
 
         if (sketchObj !== undefined) {
@@ -119,12 +119,12 @@ export const SketchDriveReducer: Record<
     ): SidurStore => {
         let newState = { ...state };
         const sketchDriveToReplace: DriveModel = action.payload.value;
-        const SketchIdInEdit = newState.sessionState.SketchIdInEdit;
+        const sketchIdInEdit = newState.sessionState.sketchIdInEdit;
         const pendingOrderId = newState.sessionState.pendingOrderIdInEdit;
         newState.sessionState.pendingOrderInEditAction = null;
         newState.sessionState.pendingOrderInEditActionSelectDrives = null;
         const sketchObj: SketchModel | undefined = newState.sketches.find(
-            (record: SketchModel) => record.id === SketchIdInEdit
+            (record: SketchModel) => record.id === sketchIdInEdit
         );
         const pendingOrder = sketchObj?.unassignedOrders.find(
             (o) => o.id === pendingOrderId
@@ -193,12 +193,12 @@ export const SketchDriveReducer: Record<
     ): SidurStore => {
         let newState = { ...state };
         const vehicleTimeTableId: string = action.payload.value;
-        const SketchIdInEdit = newState.sessionState.SketchIdInEdit;
+        const sketchIdInEdit = newState.sessionState.sketchIdInEdit;
         const pendingOrderId = newState.sessionState.pendingOrderIdInEdit;
         newState.sessionState.pendingOrderInEditAction = null;
         newState.sessionState.pendingOrderInEditActionSelectDrives = null;
         const sketchObj: SketchModel | undefined = newState.sketches.find(
-            (record: SketchModel) => record.id === SketchIdInEdit
+            (record: SketchModel) => record.id === sketchIdInEdit
         );
         const pendingOrder = sketchObj?.unassignedOrders.find(
             (o) => o.id === pendingOrderId
@@ -243,10 +243,10 @@ export const SketchDriveReducer: Record<
 
         const sketchDriveChangedId: string = action.payload.sketchDriveId;
         const orderIdToRemove: string = action.payload.orderId;
-        const SketchIdInEdit = newState.sessionState.SketchIdInEdit;
+        const sketchIdInEdit = newState.sessionState.sketchIdInEdit;
 
         const sketchObj: SketchModel | undefined = newState.sketches.find(
-            (record: SketchModel) => record.id === SketchIdInEdit
+            (record: SketchModel) => record.id === sketchIdInEdit
         );
 
         if (sketchObj !== undefined) {
@@ -295,10 +295,10 @@ export const SketchDriveReducer: Record<
     ): SidurStore => {
         let newState = { ...state };
         const sketchDriveToDelete: DriveModel = action.payload.value;
-        const SketchIdInEdit = newState.sessionState.SketchIdInEdit;
+        const sketchIdInEdit = newState.sessionState.sketchIdInEdit;
 
         const sketchObj: SketchModel | undefined = newState.sketches.find(
-            (record: SketchModel) => record.id === SketchIdInEdit
+            (record: SketchModel) => record.id === sketchIdInEdit
         );
 
         if (sketchObj !== undefined) {
@@ -334,9 +334,9 @@ const getVehicleIdFromDriveId = (
     state: SidurStore,
     driveId: string
 ): string => {
-    const SketchIdInEdit = state.sessionState.SketchIdInEdit;
+    const sketchIdInEdit = state.sessionState.sketchIdInEdit;
     const sketchObj: SketchModel | undefined = state.sketches.find(
-        (record: SketchModel) => record.id === SketchIdInEdit
+        (record: SketchModel) => record.id === sketchIdInEdit
     );
     const vehicleSchedules = sketchObj?.vehicleSchedules || [];
     let vehicleId = "";

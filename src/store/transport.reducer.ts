@@ -105,7 +105,7 @@ export const TransportReducer: Record<
 
                 const transportStop: RoadStopModel = {
                     locationId: locationToAdd.id,
-                    minuetsFromLast: 20,
+                    minutesFromLast: 20,
                     position: maxPosition + 1,
                 };
                 transportInEdit.TransportStops.push(transportStop);

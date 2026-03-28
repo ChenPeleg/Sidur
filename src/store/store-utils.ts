@@ -148,7 +148,7 @@ export const StoreUtils = {
     defaultSessionState(): SessionModel {
         const defaultSession: SessionModel = {
             LocationGroupTabOpen: null,
-            SketchIdInEdit: null,
+            sketchIdInEdit: null,
             dataHolderForCurrentOrderInEdit: null,
             isAnimationRunning: true,
             locationGroupInEdit: null,

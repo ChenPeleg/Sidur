@@ -37,14 +37,14 @@ export const SketchDriveEditDialog = (props: SketchDriveEditDialogProps) => {
 
     const driveData = sketchDriveData.drive;
     const dispatch = useDispatch();
-    const SketchIdInEdit = useSelector(
-        (state: SidurStore) => state.sessionState.SketchIdInEdit
+    const sketchIdInEdit = useSelector(
+        (state: SidurStore) => state.sessionState.sketchIdInEdit
     );
     const sketches: SketchModel[] = useSelector(
         (state: { sketches: SketchModel[] }) => state.sketches
     );
     const sketchInEdit: SketchModel | null =
-        sketches.find((sketch: SketchModel) => sketch.id === SketchIdInEdit) ||
+        sketches.find((sketch: SketchModel) => sketch.id === sketchIdInEdit) ||
         null;
 
     const sketchOrders = sketchInEdit?.assignedOrders || [];

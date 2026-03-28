@@ -38,8 +38,12 @@ export interface SessionModel {
     pendingOrderIdInEdit: null | string;
     pendingOrderInEditAction: null | SketchDriveOrderEditActionEnum;
     pendingOrderInEditActionSelectDrives: null | string[];
-    SketchIdInEdit: null | string;
+    sketchIdInEdit: null | string;
     LocationGroupTabOpen: null | string;
+    /**
+     * Temporary storage for order data during edit operations.
+     * Holds the current state of an order being edited before changes are committed.
+     */
     dataHolderForCurrentOrderInEdit: null | OrderModel;
     isAnimationRunning: boolean;
     locationMainInEdit: null | string;

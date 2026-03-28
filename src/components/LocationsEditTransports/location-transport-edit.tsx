@@ -35,7 +35,7 @@ export enum RouteOrTransEditAction {
 
 interface StopModel extends RoadStopModel {
     locationName: string;
-    minuetsFromLastCode: number;
+    minutesFromLastCode: number;
 }
 
 interface LocationRouteEditProps {
@@ -123,7 +123,7 @@ export const LocationTransportEdit = (props: LocationRouteEditProps) => {
                 const stop: StopModel = {
                     ...r,
                     locationName: location.name,
-                    minuetsFromLastCode: r.minuetsFromLast || 30,
+                    minutesFromLastCode: r.minutesFromLast || 30,
                 };
                 return stop;
             } else {
@@ -154,7 +154,7 @@ export const LocationTransportEdit = (props: LocationRouteEditProps) => {
         updatedRout.TransportStops = updatedRout.TransportStops.map((s) => {
             if (s.locationId === stop.locationId) {
                 const newStop = { ...s };
-                newStop.minuetsFromLast = event.target.value;
+                newStop.minutesFromLast = event.target.value;
                 return newStop;
             }
             return s;
@@ -209,7 +209,7 @@ export const LocationTransportEdit = (props: LocationRouteEditProps) => {
                                         <Select
                                             disableUnderline={true}
                                             variant={"standard"}
-                                            value={stop.minuetsFromLastCode}
+                                            value={stop.minutesFromLastCode}
                                             sx={{
                                                 fontWeight: "normal",
                                             }}
