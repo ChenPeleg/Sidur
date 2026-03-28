@@ -49,7 +49,7 @@ export const LocationsEdit = () => {
     const routeStopsWithLocations = currentLocationGroup.Routes.map((r) => {
         return {
             name: r.name,
-            locations: r.routStops.map((rs) => rs.locationId),
+            locations: r.routeStops.map((rs) => rs.locationId),
         };
     });
     const transportsWithLocations = currentLocationGroup.Transports.map((r) => {

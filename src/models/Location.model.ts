@@ -15,7 +15,7 @@ export interface TransportModel {
 
 export interface RoadStopModel {
     locationId: string;
-    minuetsFromLast: number;
+    minutesFromLast: number;
     position: number;
 }
 
@@ -28,7 +28,7 @@ export interface RouteModel {
     id: string;
     name: string;
     comments: string;
-    routStops: RoadStopModel[];
+    routeStops: RoadStopModel[];
 }
 
 export interface LocationGroup {

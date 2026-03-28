@@ -30,14 +30,14 @@ export const SketchOrderToTransportDialog = (
     const { onClose, open, PendingOrderToTransportId } = props;
     const dispatch = useDispatch();
 
-    const SketchIdInEdit = useSelector(
-        (state: SidurStore) => state.sessionState.SketchIdInEdit
+    const sketchIdInEdit = useSelector(
+        (state: SidurStore) => state.sessionState.sketchIdInEdit
     );
     const sketches: SketchModel[] = useSelector(
         (state: { sketches: SketchModel[] }) => state.sketches
     );
     const sketchInEdit: SketchModel = sketches.find(
-        (sketch: SketchModel) => sketch.id === SketchIdInEdit
+        (sketch: SketchModel) => sketch.id === sketchIdInEdit
     ) as SketchModel;
     const orderToMerge: OrderModel = sketchInEdit.unassignedOrders.find(
         (o) => o.id === PendingOrderToTransportId

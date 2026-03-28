@@ -58,10 +58,10 @@ export const PendingOrdersReducer: Record<
     ): SidurStore => {
         let newState = { ...state };
         const orderToRemoveId = action.payload.id;
-        const SketchIdInEdit = state.sessionState.SketchIdInEdit;
+        const sketchIdInEdit = state.sessionState.sketchIdInEdit;
 
         const sketchObj: SketchModel | undefined = state.sketches.find(
-            (record: SketchModel) => record.id === SketchIdInEdit
+            (record: SketchModel) => record.id === sketchIdInEdit
         );
         if (sketchObj) {
             const orderToRemove: OrderModel | undefined =
@@ -77,7 +77,7 @@ export const PendingOrdersReducer: Record<
                 );
                 newState.sketches = newState.sketches.map(
                     (sketch: SketchModel) => {
-                        if (sketch.id === SketchIdInEdit) {
+                        if (sketch.id === sketchIdInEdit) {
                             return { ...sketchObj };
                         } else {
                             return sketch;
@@ -99,10 +99,10 @@ export const PendingOrdersReducer: Record<
     ): SidurStore => {
         let newState = { ...state };
         const orderToMoveId = action.payload.id;
-        const SketchIdInEdit = state.sessionState.SketchIdInEdit;
+        const sketchIdInEdit = state.sessionState.sketchIdInEdit;
 
         const sketchObj: SketchModel | undefined = state.sketches.find(
-            (record: SketchModel) => record.id === SketchIdInEdit
+            (record: SketchModel) => record.id === sketchIdInEdit
         );
         if (sketchObj) {
             const orderToMove: OrderModel | undefined =
@@ -117,7 +117,7 @@ export const PendingOrdersReducer: Record<
                 ];
                 newState.sketches = newState.sketches.map(
                     (sketch: SketchModel) => {
-                        if (sketch.id === SketchIdInEdit) {
+                        if (sketch.id === sketchIdInEdit) {
                             return { ...sketchObj };
                         } else {
                             return sketch;
@@ -138,10 +138,10 @@ export const PendingOrdersReducer: Record<
     ): SidurStore => {
         let newState = { ...state };
         const orderToMoveId = action.payload.id;
-        const SketchIdInEdit = state.sessionState.SketchIdInEdit;
+        const sketchIdInEdit = state.sessionState.sketchIdInEdit;
 
         const sketchObj: SketchModel | undefined = state.sketches.find(
-            (record: SketchModel) => record.id === SketchIdInEdit
+            (record: SketchModel) => record.id === sketchIdInEdit
         );
         if (sketchObj) {
             const orderToMove: OrderModel | undefined =
@@ -156,7 +156,7 @@ export const PendingOrdersReducer: Record<
                 ];
                 newState.sketches = newState.sketches.map(
                     (sketch: SketchModel) => {
-                        if (sketch.id === SketchIdInEdit) {
+                        if (sketch.id === sketchIdInEdit) {
                             return { ...sketchObj };
                         } else {
                             return sketch;
@@ -178,10 +178,10 @@ export const PendingOrdersReducer: Record<
         let newState = { ...state };
         newState.sessionState.pendingOrderInEditAction =
             SketchDriveOrderEditActionEnum.Merge;
-        const SketchIdInEdit = state.sessionState.SketchIdInEdit;
+        const sketchIdInEdit = state.sessionState.sketchIdInEdit;
 
         const sketchObj: SketchModel = state.sketches.find(
-            (record: SketchModel) => record.id === SketchIdInEdit
+            (record: SketchModel) => record.id === sketchIdInEdit
         ) as SketchModel;
         const relavantDrives = SidurEditorService.getRelevantDriveIdsToChoose(
             sketchObj,
@@ -202,10 +202,10 @@ export const PendingOrdersReducer: Record<
         let newState = { ...state };
         newState.sessionState.pendingOrderInEditAction =
             SketchDriveOrderEditActionEnum.AddToVehicle;
-        const SketchIdInEdit = state.sessionState.SketchIdInEdit;
+        const sketchIdInEdit = state.sessionState.sketchIdInEdit;
 
         const sketchObj: SketchModel = state.sketches.find(
-            (record: SketchModel) => record.id === SketchIdInEdit
+            (record: SketchModel) => record.id === sketchIdInEdit
         ) as SketchModel;
 
         newState.sessionState.pendingOrderInEditActionSelectDrives = [
@@ -233,10 +233,10 @@ export const PendingOrdersReducer: Record<
     ): SidurStore => {
         let newState = { ...state };
         const orderToSplitId = action.payload.id;
-        const SketchIdInEdit = state.sessionState.SketchIdInEdit;
+        const sketchIdInEdit = state.sessionState.sketchIdInEdit;
 
         const sketchObj: SketchModel | undefined = state.sketches.find(
-            (record: SketchModel) => record.id === SketchIdInEdit
+            (record: SketchModel) => record.id === sketchIdInEdit
         );
         if (sketchObj) {
             const orderToSplit: OrderModel | undefined =
@@ -268,7 +268,7 @@ export const PendingOrdersReducer: Record<
 
                 newState.sketches = newState.sketches.map(
                     (sketch: SketchModel) => {
-                        if (sketch.id === SketchIdInEdit) {
+                        if (sketch.id === sketchIdInEdit) {
                             return { ...sketchObj };
                         } else {
                             return sketch;
@@ -306,10 +306,10 @@ export const PendingOrdersReducer: Record<
         let newState = { ...state };
         newState.sessionState.pendingOrderInEditAction =
             SketchDriveOrderEditActionEnum.ReplaceExisting;
-        const SketchIdInEdit = state.sessionState.SketchIdInEdit;
+        const sketchIdInEdit = state.sessionState.sketchIdInEdit;
 
         const sketchObj: SketchModel = state.sketches.find(
-            (record: SketchModel) => record.id === SketchIdInEdit
+            (record: SketchModel) => record.id === sketchIdInEdit
         ) as SketchModel;
         const relavantDrives = SidurEditorService.getRelevantDriveIdsToChoose(
             sketchObj,

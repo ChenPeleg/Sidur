@@ -116,7 +116,7 @@ export const SidurEditorService = {
         );
 
         if (
-            startGapInMinutes > ConfigService.MinimumMinuetGapFormNotifications
+            startGapInMinutes > ConfigService.MinimumMinuteGapFormNotifications
         ) {
             let message =
                 translations.gapForMergeDrives1 +
@@ -127,7 +127,7 @@ export const SidurEditorService = {
             issues.push(message);
         }
         if (
-            finishGapInMinutes > ConfigService.MinimumMinuetGapFormNotifications
+            finishGapInMinutes > ConfigService.MinimumMinuteGapFormNotifications
         ) {
             let message =
                 translations.gapForMergeDrives1 +
