@@ -45,7 +45,7 @@ export const RouteReducer: Record<
                 name: name,
                 id: newId,
                 comments: "",
-                routStops: [],
+                routeStops: [],
             };
             newRoute.name = buildRouteName(
                 newRoute,
@@ -88,7 +88,7 @@ export const RouteReducer: Record<
                 const isNameAutoBuild =
                     routeInEdit.name ===
                     buildRouteName(routeInEdit, currentLocationGroup.Locations);
-                const allPositions = routeInEdit.routStops.map(
+                const allPositions = routeInEdit.routeStops.map(
                     (s) => s.position
                 );
                 allPositions.push(0);
@@ -96,10 +96,10 @@ export const RouteReducer: Record<
 
                 const routeStop: RoadStopModel = {
                     locationId: locationToAdd.id,
-                    minuetsFromLast: 20,
+                    minutesFromLast: 20,
                     position: maxPosition + 1,
                 };
-                routeInEdit.routStops.push(routeStop);
+                routeInEdit.routeStops.push(routeStop);
                 if (isNameAutoBuild) {
                     routeInEdit.name = buildRouteName(
                         routeInEdit,
@@ -269,7 +269,7 @@ export const RouteReducer: Record<
                     currentLocationGroup.Routes.map((l) => l.id)
                 );
                 newRoute.id = newId;
-                newRoute.routStops = newRoute.routStops.map((rs) => ({
+                newRoute.routeStops = newRoute.routeStops.map((rs) => ({
                     ...rs,
                 }));
                 newRoute.name = buildRouteName(
@@ -294,28 +294,28 @@ const buildRouteName = (
     route: RouteModel,
     locations: LocationModel[]
 ): string => {
-    if (route.routStops.length === 0) {
+    if (route.routeStops.length === 0) {
         return translations.newRoute + " " + route.id.toString();
-    } else if (route.routStops.length === 1) {
+    } else if (route.routeStops.length === 1) {
         return (
             translations.newRoute +
             " " +
             route.id.toString() +
             " - " +
-            getLocationName(route.routStops[0].locationId, locations)
+            getLocationName(route.routeStops[0].locationId, locations)
         );
-    } else if (route.routStops.length > 1 && route.routStops.length < 4) {
-        return route.routStops
+    } else if (route.routeStops.length > 1 && route.routeStops.length < 4) {
+        return route.routeStops
             .map((s) => getLocationName(s.locationId, locations))
             .join(" - ");
     } else {
-        return route.routStops
+        return route.routeStops
             .map((s) => getLocationName(s.locationId, locations))
             .filter(
                 (l, i) =>
                     i === 0 ||
-                    i + 2 > route.routStops.length ||
-                    Math.floor(route.routStops.length / 2) === i
+                    i + 2 > route.routeStops.length ||
+                    Math.floor(route.routeStops.length / 2) === i
             )
             .join(" - ");
     }

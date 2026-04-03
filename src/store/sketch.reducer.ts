@@ -35,12 +35,12 @@ export const SketchReducer: Record<
                 (record: SidurRecord) => record.id === newState.sidurId
             );
         if (chosenSidurObj !== undefined) {
-            const deconstructedSidur = { ...chosenSidurObj };
-            deconstructedSidur.orders = newState.orders;
-            deconstructedSidur.sketches = newState.sketches;
-            deconstructedSidur.vehicles = newState.vehicles;
+            const updatedSidur = { ...chosenSidurObj };
+            updatedSidur.orders = newState.orders;
+            updatedSidur.sketches = newState.sketches;
+            updatedSidur.vehicles = newState.vehicles;
             const newSketch = SidurBuilder(
-                deconstructedSidur,
+                updatedSidur,
                 newState.Locations
             );
             newSketch.id = newId;
@@ -48,7 +48,7 @@ export const SketchReducer: Record<
                 newState.sketches = [];
             }
             newState.sketches.push(newSketch);
-            newState.sessionState.SketchIdInEdit = newId;
+            newState.sessionState.sketchIdInEdit = newId;
         }
 
         newState = StoreUtils.updateSidurRecordWithSketchChanges(newState);
@@ -93,11 +93,11 @@ export const SketchReducer: Record<
     ): SidurStore => {
         let newState = { ...state };
         const chosenSketchId = action.payload.id;
-        const previousSketchId = newState.sessionState.SketchIdInEdit;
+        const previousSketchId = newState.sessionState.sketchIdInEdit;
         if (chosenSketchId === previousSketchId) {
             return newState;
         }
-        newState.sessionState.SketchIdInEdit = chosenSketchId;
+        newState.sessionState.sketchIdInEdit = chosenSketchId;
         const chosenSketchObj: SketchModel | undefined = newState.sketches.find(
             (record: SketchModel) => record.id === chosenSketchId
         );
@@ -158,13 +158,13 @@ export const SketchReducer: Record<
         if (newState.sketches.length) {
             const sketchesIds = newState.sketches.map((s) => s.id);
             if (posOfDeletedSketch > 1) {
-                newState.sessionState.SketchIdInEdit =
+                newState.sessionState.sketchIdInEdit =
                     sketchesIds[posOfDeletedSketch - 1];
             } else {
-                newState.sessionState.SketchIdInEdit = sketchesIds[0];
+                newState.sessionState.sketchIdInEdit = sketchesIds[0];
             }
         } else {
-            newState.sessionState.SketchIdInEdit = "";
+            newState.sessionState.sketchIdInEdit = "";
         }
 
         newState = StoreUtils.updateSidurRecordWithSketchChanges(newState);
@@ -188,7 +188,7 @@ export const SketchReducer: Record<
             newSketch.id = newSketchId;
             newState.sketches = newState.sketches.map((c) => c);
             newState.sketches.push(newSketch);
-            newState.sessionState.SketchIdInEdit = newSketchId;
+            newState.sessionState.sketchIdInEdit = newSketchId;
             // newState = setChosenSidur(newState, newSketch);
         }
         newState = StoreUtils.updateSidurRecordWithSketchChanges(newState);

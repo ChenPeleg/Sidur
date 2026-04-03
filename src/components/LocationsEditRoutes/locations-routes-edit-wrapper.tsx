@@ -83,7 +83,7 @@ export const LocationsRoutesEditWrapper = () => {
                   l.name.includes(filterLocationText.trim())
               );
     const routInEditLocations: string[] = routInEdit
-        ? routInEdit.routStops.map((rs) => rs.locationId)
+        ? routInEdit.routeStops.map((rs) => rs.locationId)
         : [];
 
     const filteredLocations = filteredLocationsBeforeRouteCalc.filter(

@@ -24,8 +24,8 @@ import { SketchOrderToTransportDialog } from "../Dialogs/sketch-order-to-transpo
 
 export const Sketch = () => {
     const dispatch = useDispatch();
-    const SketchIdInEdit = useSelector(
-        (state: SidurStore) => state.sessionState.SketchIdInEdit
+    const sketchIdInEdit = useSelector(
+        (state: SidurStore) => state.sessionState.sketchIdInEdit
     );
     const pendingOrderInEditActionSelectDrives = useSelector(
         (state: SidurStore) =>
@@ -206,7 +206,7 @@ export const Sketch = () => {
     };
 
     const sketchInEdit: SketchModel | null =
-        sketches.find((sketch: SketchModel) => sketch.id === SketchIdInEdit) ||
+        sketches.find((sketch: SketchModel) => sketch.id === sketchIdInEdit) ||
         null;
 
     return sketchInEdit ? (

@@ -23,7 +23,7 @@ This document outlines a comprehensive refactoring strategy for the Sidur codeba
 
 ## Phase 1: Critical Naming Fixes (HIGH PRIORITY)
 
-### 1.1 Fix Misspelled "minuets" → "minutes" ⬜
+### 1.1 Fix Misspelled "minuets" → "minutes" ✅
 
 **Impact**: 10+ files across models, components, and reducers
 
@@ -36,22 +36,22 @@ This document outlines a comprehensive refactoring strategy for the Sidur codeba
 - `src/services/config-service.ts` - `MinimumMinuetGapFormNotifications`
 
 **Steps**:
-1. ⬜ Create a new branch for this refactoring
-2. ⬜ Update Location model interface: `minuetsFromLast` → `minutesFromLast`
-3. ⬜ Update all component references
-4. ⬜ Update reducer references
-5. ⬜ Update config service field name
-6. ⬜ Search for `minuet` (case-insensitive) to ensure all instances are caught
-7. ⬜ Run TypeScript compiler to verify no broken references
-8. ⬜ Run tests to ensure functionality unchanged
-9. ⬜ Update any documentation mentioning this field
+1. ✅ Create a new branch for this refactoring
+2. ✅ Update Location model interface: `minuetsFromLast` → `minutesFromLast`
+3. ✅ Update all component references
+4. ✅ Update reducer references
+5. ✅ Update config service field name
+6. ✅ Search for `minuet` (case-insensitive) to ensure all instances are caught
+7. ✅ Run TypeScript compiler to verify no broken references
+8. ✅ Run tests to ensure functionality unchanged
+9. ✅ Update any documentation mentioning this field
 
 **Verification**:
 - `npm run typecheck` passes
 - `npm test` passes
 - Grep for "minuet" returns zero results (except in comments explaining the fix)
 
-### 1.2 Standardize ID Naming Convention ⬜
+### 1.2 Standardize ID Naming Convention ✅
 
 **Issue**: Inconsistent PascalCase vs camelCase for ID fields
 
@@ -61,24 +61,24 @@ This document outlines a comprehensive refactoring strategy for the Sidur codeba
   - Keep `pendingOrderIdInEdit` as is
 
 **Steps**:
-1. ⬜ Update SessionModel interface
-2. ⬜ Update all usages in components
-3. ⬜ Update store references
-4. ⬜ Run TypeScript compiler
-5. ⬜ Run tests
+1. ✅ Update SessionModel interface
+2. ✅ Update all usages in components
+3. ✅ Update store references
+4. ✅ Run TypeScript compiler
+5. ✅ Run tests
 
-### 1.3 Fix Typo: "routStops" → "routeStops" ⬜
+### 1.3 Fix Typo: "routStops" → "routeStops" ✅
 
 **Files to update**:
 - Search for `routStops` and replace with `routeStops`
 
 **Steps**:
-1. ⬜ Identify all occurrences
-2. ⬜ Update model definitions
-3. ⬜ Update component usages
-4. ⬜ Verify with TypeScript compiler
+1. ✅ Identify all occurrences
+2. ✅ Update model definitions
+3. ✅ Update component usages
+4. ✅ Verify with TypeScript compiler
 
-### 1.4 Clarify Unclear Variable Names ⬜
+### 1.4 Clarify Unclear Variable Names ✅
 
 **Updates needed**:
 - `location-group-edit-wrapper.tsx:144` - `chosenSketch` → `chosenLocationGroup`
@@ -87,9 +87,9 @@ This document outlines a comprehensive refactoring strategy for the Sidur codeba
 - `SessionModel.ts` - Add JSDoc comment for `daHolderForCurrentOrderInEdit` to clarify purpose
 
 **Steps**:
-1. ⬜ Rename variables one file at a time
-2. ⬜ Verify each change with TypeScript compiler
-3. ⬜ Update any related tests
+1. ✅ Rename variables one file at a time
+2. ✅ Verify each change with TypeScript compiler
+3. ✅ Update any related tests
 
 ## Phase 2: Split Large Files (HIGH PRIORITY)
 

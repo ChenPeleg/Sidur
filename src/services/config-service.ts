@@ -15,5 +15,5 @@ export const ConfigService = {
             };
         },
     },
-    MinimumMinuetGapFormNotifications: 30,
+    MinimumMinuteGapFormNotifications: 30,
 };
