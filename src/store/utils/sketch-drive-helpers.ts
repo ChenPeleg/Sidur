@@ -11,15 +11,13 @@ export const getVehicleIdFromDriveId = (
         (record: SketchModel) => record.id === sketchIdInEdit
     );
     const vehicleSchedules = sketchObj?.vehicleSchedules || [];
-    let vehicleId = "";
-    vehicleSchedules.forEach((v: VehicleScheduleModel) => {
-        v.drives.forEach((d: DriveModel) => {
-            if (d.id === driveId) {
-                vehicleId = v.id;
-            }
-        });
-    });
-    return vehicleId;
+    for (const v of vehicleSchedules) {
+        const drive = v.drives.find((d: DriveModel) => d.id === driveId);
+        if (drive) {
+            return v.id;
+        }
+    }
+    return "";
 };
 
 export const getNewDriveIdFromSketch = (sketch: SketchModel): string => {

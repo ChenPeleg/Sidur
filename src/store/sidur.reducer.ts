@@ -9,6 +9,7 @@ import { OrderModel } from "../models/Order.model";
 import { LocationGroup } from "../models/Location.model";
 import { StoreUtils } from "./store-utils";
 import { CloneUtil } from "../services/clone-utility";
+import { translations } from "../services/translations";
 import {
     setChosenSidur,
     getAllSidurIDs,
@@ -256,7 +257,7 @@ export const SidurReducer: Record<
                 CloneUtil.deepCloneSidur(sidurForCloning);
             const originalName = newSidur.Name;
             const newSidurId = getNewSidurId(state);
-            newSidur.Name = "(עותק) " + originalName;
+            newSidur.Name = translations.CopyOf + " " + originalName;
             newSidur.dbId = "";
             newSidur.id = newSidurId;
             newState.sidurCollection = newState.sidurCollection.map((c) => c);

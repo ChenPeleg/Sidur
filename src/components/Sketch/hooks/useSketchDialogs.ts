@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { DriveModel, SketchModel } from "../../../models/Sketch.model";
 import { OrderModel } from "../../../models/Order.model";
@@ -45,13 +45,14 @@ export const useSketchDialogs = (): UseSketchDialogsResult => {
         useState(false);
     const [chosenDrive, setChosenDrive] = useState<ChosenDrive | null>(null);
 
-    if (
-        sessionState.pendingOrderInEditAction ===
-            SketchDriveOrderEditActionEnum.publicTransport &&
-        !sketchOrderToTransportOpen
-    ) {
-        setSketchOrderToTransportOpen(true);
-    }
+    useEffect(() => {
+        if (
+            sessionState.pendingOrderInEditAction ===
+            SketchDriveOrderEditActionEnum.publicTransport
+        ) {
+            setSketchOrderToTransportOpen(true);
+        }
+    }, [sessionState.pendingOrderInEditAction]);
 
     const handleSketchDriveEditDelete = (sketchDriveData: ChosenDrive) => {
         setSketchDriveEditOpen(false);

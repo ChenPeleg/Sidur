@@ -59,9 +59,7 @@ export const useTransportEdit = (
 
     const isLongRoute: boolean = allStops?.length > 5;
     const timeTableBrief =
-        transportRoute.TransportTime?.filter((_t, i) =>
-            i < MAX_HOURS_TO_SHOW
-        ) || [];
+        transportRoute.TransportTime?.slice(0, MAX_HOURS_TO_SHOW) || [];
 
     const handleRouteMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
         setRouteMoreAnchorEl(event.currentTarget);
