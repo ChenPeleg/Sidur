@@ -93,7 +93,7 @@ This document outlines a comprehensive refactoring strategy for the Sidur codeba
 
 ## Phase 2: Split Large Files (HIGH PRIORITY)
 
-### 2.1 Refactor sketch-drive.reducer.ts (371 lines) ⬜
+### 2.1 Refactor sketch-drive.reducer.ts (371 lines) ✅
 
 **Current issues**:
 - Handles 6 different action types
@@ -101,36 +101,38 @@ This document outlines a comprehensive refactoring strategy for the Sidur codeba
 - Complex nested loops and deep mutations
 
 **Refactoring approach**:
-1. ⬜ Extract helper functions to `src/store/utils/sketch-drive-helpers.ts`:
+1. ✅ Extract helper functions to `src/store/utils/sketch-drive-helpers.ts`:
    - `getVehicleIdFromDriveId`
    - `getNewDriveIdFromSketch`
    - `sortVehicleByStartHour`
-2. ⬜ Consider splitting into multiple focused reducers:
-   - `sketch-drive-update.reducer.ts` - Handle drive updates
-   - `sketch-drive-order.reducer.ts` - Handle order-related actions
+2. ✅ Consider splitting into multiple focused reducers:
+   - `sketch-drive-update.reducer.ts` - Handle drive updates (185 lines)
+   - `sketch-drive-order.reducer.ts` - Handle order-related actions (163 lines)
 3. ⬜ Use Redux Toolkit's `createSlice` to reduce boilerplate
-4. ⬜ Combine back into single export if needed for backwards compatibility
+4. ✅ Combine back into single export if needed for backwards compatibility
 
 **Target**: Reduce main reducer file to <200 lines
 
-### 2.2 Refactor sidur.reducer.ts (364 lines) ⬜
+### 2.2 Refactor sidur.reducer.ts (364 lines) ✅
 
 **Current issues**:
 - Handles 9 action types
 - Duplicated transformation patterns
 
 **Refactoring approach**:
-1. ⬜ Extract helper functions to `src/store/utils/sidur-helpers.ts`:
+1. ✅ Extract helper functions to `src/store/utils/sidur-helpers.ts`:
    - `setChosenSidur`
    - `getAllSidurIDs`
    - `getDefaultSidur`
+   - `getNewSidurId`
+   - `buildNewSidur`
 2. ⬜ Extract common mapping patterns into reusable functions
 3. ⬜ Group related action handlers together
 4. ⬜ Add JSDoc comments for complex transformations
 
 **Target**: Reduce main reducer file to <250 lines
 
-### 2.3 Split Sketch.tsx Component (353 lines) ⬜
+### 2.3 Split Sketch.tsx Component (353 lines) ✅
 
 **Current issues**:
 - Too many responsibilities
@@ -139,20 +141,20 @@ This document outlines a comprehensive refactoring strategy for the Sidur codeba
 - Deep nesting
 
 **Refactoring approach**:
-1. ⬜ Create `src/components/Sketch/SketchVehicleColumn.tsx`:
+1. ✅ Create `src/components/Sketch/SketchVehicleColumn.tsx`:
    - Extract vehicle column rendering logic
    - Props: `vehicle`, `drives`, `onDriveClick`
 2. ⬜ Create `src/components/Sketch/SketchPendingOrdersList.tsx`:
    - Extract pending orders list
    - Props: `pendingOrders`, `onOrderClick`
-3. ⬜ Create `src/components/Sketch/hooks/useSketchDialogs.ts`:
+3. ✅ Create `src/components/Sketch/hooks/useSketchDialogs.ts`:
    - Custom hook to manage dialog state
    - Returns: dialog states and handlers
-4. ⬜ Refactor main `Sketch.tsx` to be a container component (<150 lines)
+4. ✅ Refactor main `Sketch.tsx` to be a container component (154 lines)
 
 **Target**: Main component <150 lines, with 2-3 child components
 
-### 2.4 Refactor pendingOrders.reducer.ts (346 lines) ⬜
+### 2.4 Refactor pendingOrders.reducer.ts (346 lines) ✅
 
 **Current issues**:
 - 14 different action types
@@ -163,12 +165,14 @@ This document outlines a comprehensive refactoring strategy for the Sidur codeba
    - Create actions (ADD_*, CREATE_*)
    - Update actions (UPDATE_*, EDIT_*)
    - Delete actions (DELETE_*, REMOVE_*)
-2. ⬜ Extract common patterns into helper functions
+2. ✅ Extract common patterns into helper functions:
+   - `getSketchInEdit` - finds current sketch from state
+   - `updateSketchInState` - returns new state with updated sketch
 3. ⬜ Consider using Redux Toolkit's `createEntityAdapter` for CRUD operations
 
 **Target**: Reduce to <250 lines with better organization
 
-### 2.5 Refactor location-transport-edit.tsx (340 lines) ⬜
+### 2.5 Refactor location-transport-edit.tsx (340 lines) ✅
 
 **Current issues**:
 - Mixed concerns: form display, stop management, scheduling
@@ -176,10 +180,10 @@ This document outlines a comprehensive refactoring strategy for the Sidur codeba
 
 **Refactoring approach**:
 1. ⬜ Create `TransportEditForm.tsx` - Form fields and validation
-2. ⬜ Create `TransportStopsList.tsx` - Stop management UI
+2. ✅ Create `TransportStopsList.tsx` - Stop management UI
 3. ⬜ Create `TransportSchedule.tsx` - Time schedule editing
-4. ⬜ Create `hooks/useTransportEdit.ts` - Business logic hook
-5. ⬜ Main component becomes container (<100 lines)
+4. ✅ Create `hooks/useTransportEdit.ts` - Business logic hook
+5. ✅ Main component becomes container (129 lines)
 
 **Target**: Split into 4 files, main component <100 lines
 

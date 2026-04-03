@@ -6,6 +6,10 @@ import { StoreUtils } from "./store-utils";
 import { SketchDriveOrderEditActionEnum } from "../models/SketchDriveOrderEditActionEnum";
 import { SidurEditorService } from "../sidurEditor/sidurEditor.service";
 import { Utils } from "../services/utils";
+import {
+    getSketchInEdit,
+    updateSketchInState,
+} from "./utils/pending-orders-helpers";
 
 export type PendingOrdersReducerFunctions =
     | ActionsTypes.CLICKED_PENDING_ORDER
@@ -58,32 +62,22 @@ export const PendingOrdersReducer: Record<
     ): SidurStore => {
         let newState = { ...state };
         const orderToRemoveId = action.payload.id;
-        const sketchIdInEdit = state.sessionState.sketchIdInEdit;
+        const sketchObj = getSketchInEdit(state);
 
-        const sketchObj: SketchModel | undefined = state.sketches.find(
-            (record: SketchModel) => record.id === sketchIdInEdit
-        );
         if (sketchObj) {
             const orderToRemove: OrderModel | undefined =
                 sketchObj.unassignedOrders.find(
                     (o) => o.id === orderToRemoveId
                 );
             if (orderToRemove) {
-                sketchObj.assignedOrders = [...sketchObj.assignedOrders];
-                sketchObj.assignedOrders.push(orderToRemove);
-                sketchObj.unassignedOrders = [...sketchObj.unassignedOrders];
+                sketchObj.assignedOrders = [
+                    ...sketchObj.assignedOrders,
+                    orderToRemove,
+                ];
                 sketchObj.unassignedOrders = sketchObj.unassignedOrders.filter(
                     (o) => o.id !== orderToRemoveId
                 );
-                newState.sketches = newState.sketches.map(
-                    (sketch: SketchModel) => {
-                        if (sketch.id === sketchIdInEdit) {
-                            return { ...sketchObj };
-                        } else {
-                            return sketch;
-                        }
-                    }
-                );
+                newState = updateSketchInState(newState, sketchObj);
             }
             newState.sessionState.pendingOrderIdInEdit = null;
         }
@@ -99,33 +93,20 @@ export const PendingOrdersReducer: Record<
     ): SidurStore => {
         let newState = { ...state };
         const orderToMoveId = action.payload.id;
-        const sketchIdInEdit = state.sessionState.sketchIdInEdit;
+        const sketchObj = getSketchInEdit(state);
 
-        const sketchObj: SketchModel | undefined = state.sketches.find(
-            (record: SketchModel) => record.id === sketchIdInEdit
-        );
         if (sketchObj) {
             const orderToMove: OrderModel | undefined =
                 sketchObj.unassignedOrders.find((o) => o.id === orderToMoveId);
             if (orderToMove) {
-                sketchObj.unassignedOrders = sketchObj.unassignedOrders.filter(
-                    (o) => o.id !== orderToMoveId
-                );
                 sketchObj.unassignedOrders = [
                     orderToMove,
-                    ...sketchObj.unassignedOrders,
+                    ...sketchObj.unassignedOrders.filter(
+                        (o) => o.id !== orderToMoveId
+                    ),
                 ];
-                newState.sketches = newState.sketches.map(
-                    (sketch: SketchModel) => {
-                        if (sketch.id === sketchIdInEdit) {
-                            return { ...sketchObj };
-                        } else {
-                            return sketch;
-                        }
-                    }
-                );
+                newState = updateSketchInState(newState, sketchObj);
             }
-            // newState.sessionState.pendingOrderIdInEdit = null;
         }
         StoreUtils.abortSessionPendingOrderState(newState);
         StoreUtils.updateSidurRecordWithSketchChanges(newState);
@@ -138,31 +119,19 @@ export const PendingOrdersReducer: Record<
     ): SidurStore => {
         let newState = { ...state };
         const orderToMoveId = action.payload.id;
-        const sketchIdInEdit = state.sessionState.sketchIdInEdit;
+        const sketchObj = getSketchInEdit(state);
 
-        const sketchObj: SketchModel | undefined = state.sketches.find(
-            (record: SketchModel) => record.id === sketchIdInEdit
-        );
         if (sketchObj) {
             const orderToMove: OrderModel | undefined =
                 sketchObj.unassignedOrders.find((o) => o.id === orderToMoveId);
             if (orderToMove) {
-                sketchObj.unassignedOrders = sketchObj.unassignedOrders.filter(
-                    (o) => o.id !== orderToMoveId
-                );
                 sketchObj.unassignedOrders = [
-                    ...sketchObj.unassignedOrders,
+                    ...sketchObj.unassignedOrders.filter(
+                        (o) => o.id !== orderToMoveId
+                    ),
                     orderToMove,
                 ];
-                newState.sketches = newState.sketches.map(
-                    (sketch: SketchModel) => {
-                        if (sketch.id === sketchIdInEdit) {
-                            return { ...sketchObj };
-                        } else {
-                            return sketch;
-                        }
-                    }
-                );
+                newState = updateSketchInState(newState, sketchObj);
             }
             newState.sessionState.pendingOrderIdInEdit = null;
         }
@@ -178,11 +147,8 @@ export const PendingOrdersReducer: Record<
         let newState = { ...state };
         newState.sessionState.pendingOrderInEditAction =
             SketchDriveOrderEditActionEnum.Merge;
-        const sketchIdInEdit = state.sessionState.sketchIdInEdit;
 
-        const sketchObj: SketchModel = state.sketches.find(
-            (record: SketchModel) => record.id === sketchIdInEdit
-        ) as SketchModel;
+        const sketchObj = getSketchInEdit(state) as SketchModel;
         const relavantDrives = SidurEditorService.getRelevantDriveIdsToChoose(
             sketchObj,
             newState.sessionState.pendingOrderIdInEdit as string
@@ -202,12 +168,6 @@ export const PendingOrdersReducer: Record<
         let newState = { ...state };
         newState.sessionState.pendingOrderInEditAction =
             SketchDriveOrderEditActionEnum.AddToVehicle;
-        const sketchIdInEdit = state.sessionState.sketchIdInEdit;
-
-        const sketchObj: SketchModel = state.sketches.find(
-            (record: SketchModel) => record.id === sketchIdInEdit
-        ) as SketchModel;
-
         newState.sessionState.pendingOrderInEditActionSelectDrives = [
             "noDrivesRealyNeeded",
         ];
@@ -233,11 +193,8 @@ export const PendingOrdersReducer: Record<
     ): SidurStore => {
         let newState = { ...state };
         const orderToSplitId = action.payload.id;
-        const sketchIdInEdit = state.sessionState.sketchIdInEdit;
+        const sketchObj = getSketchInEdit(state);
 
-        const sketchObj: SketchModel | undefined = state.sketches.find(
-            (record: SketchModel) => record.id === sketchIdInEdit
-        );
         if (sketchObj) {
             const orderToSplit: OrderModel | undefined =
                 sketchObj.unassignedOrders.find((o) => o.id === orderToSplitId);
@@ -249,32 +206,20 @@ export const PendingOrdersReducer: Record<
                 const allSketchOrders = sketchObj.unassignedOrders.concat(
                     sketchObj.assignedOrders
                 );
-
                 const newId1 = Utils.getNextId(
                     allSketchOrders.map((o) => o.id)
                 );
                 const newId2 = (+newId1 + 1).toString();
                 newOrders[0].id = newId1;
                 newOrders[1].id = newId2;
-                sketchObj.unassignedOrders = sketchObj.unassignedOrders.filter(
-                    (o) => o.id !== orderToSplit.id
-                );
-
                 sketchObj.unassignedOrders = [
                     newOrders[0],
                     newOrders[1],
-                    ...sketchObj.unassignedOrders,
+                    ...sketchObj.unassignedOrders.filter(
+                        (o) => o.id !== orderToSplit.id
+                    ),
                 ];
-
-                newState.sketches = newState.sketches.map(
-                    (sketch: SketchModel) => {
-                        if (sketch.id === sketchIdInEdit) {
-                            return { ...sketchObj };
-                        } else {
-                            return sketch;
-                        }
-                    }
-                );
+                newState = updateSketchInState(newState, sketchObj);
             }
             newState.sessionState.pendingOrderIdInEdit = null;
         }
@@ -306,11 +251,8 @@ export const PendingOrdersReducer: Record<
         let newState = { ...state };
         newState.sessionState.pendingOrderInEditAction =
             SketchDriveOrderEditActionEnum.ReplaceExisting;
-        const sketchIdInEdit = state.sessionState.sketchIdInEdit;
 
-        const sketchObj: SketchModel = state.sketches.find(
-            (record: SketchModel) => record.id === sketchIdInEdit
-        ) as SketchModel;
+        const sketchObj = getSketchInEdit(state) as SketchModel;
         const relavantDrives = SidurEditorService.getRelevantDriveIdsToChoose(
             sketchObj,
             newState.sessionState.pendingOrderIdInEdit as string
