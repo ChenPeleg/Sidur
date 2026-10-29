@@ -141,8 +141,8 @@ export const LocationGroupEditWrapper = () => {
         event: any,
         _child: React.ReactNode
     ) => {
-        const chosenSketch = event.target.value as string;
-        if (chosenSketch === "NEW") {
+        const chosenLocationGroup = event.target.value as string;
+        if (chosenLocationGroup === "NEW") {
             dispatch({
                 type: ActionsTypes.NEW_LOCATION_GROUP,
                 payload: null,
@@ -150,7 +150,7 @@ export const LocationGroupEditWrapper = () => {
         } else {
             dispatch({
                 type: ActionsTypes.CHOOSE_LOCATION_GROUP,
-                payload: { id: chosenSketch },
+                payload: { id: chosenLocationGroup },
             });
         }
     };

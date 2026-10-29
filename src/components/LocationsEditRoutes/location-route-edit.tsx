@@ -27,7 +27,7 @@ export enum RouteOrTransEditAction {
 
 interface StopModel extends RoadStopModel {
     locationName: string;
-    minuetsFromLastCode: number;
+    minutesFromLastCode: number;
 }
 
 interface LocationRouteEditProps {
@@ -46,7 +46,7 @@ export const LocationRouteEdit = (props: LocationRouteEditProps) => {
     const handleRouteMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
         setRouteMoreAnchorEl(event.currentTarget);
     };
-    const sketchMenuId = "primary-transportRoute-menu";
+    const routeMenuId = "primary-transportRoute-menu";
 
     const handleRouteMenuClose = () => {
         setRouteMoreAnchorEl(null);
@@ -91,7 +91,7 @@ export const LocationRouteEdit = (props: LocationRouteEditProps) => {
             });
         }
     };
-    const allStops: StopModel[] = props.route.routStops
+    const allStops: StopModel[] = props.route.routeStops
         .map((r: RoadStopModel) => {
             const location = props.allLocations.find(
                 (l) => l.id === r.locationId
@@ -101,7 +101,7 @@ export const LocationRouteEdit = (props: LocationRouteEditProps) => {
                 const stop: StopModel = {
                     ...r,
                     locationName: location.name,
-                    minuetsFromLastCode: r.minuetsFromLast || 30,
+                    minutesFromLastCode: r.minutesFromLast || 30,
                 };
                 return stop;
             } else {
@@ -116,8 +116,8 @@ export const LocationRouteEdit = (props: LocationRouteEditProps) => {
         }));
     const handleRemoveLast = (_event: any) => {
         const updatedRout = { ...props.route };
-        updatedRout.routStops = [...updatedRout.routStops];
-        updatedRout.routStops.pop();
+        updatedRout.routeStops = [...updatedRout.routeStops];
+        updatedRout.routeStops.pop();
         dispatch({
             type: ActionsTypes.UPDATE_ROUTE,
             payload: updatedRout,
@@ -129,10 +129,10 @@ export const LocationRouteEdit = (props: LocationRouteEditProps) => {
     ): void => {
         const updatedRout = { ...props.route };
 
-        updatedRout.routStops = updatedRout.routStops.map((s) => {
+        updatedRout.routeStops = updatedRout.routeStops.map((s) => {
             if (s.locationId === stop.locationId) {
                 const newStop = { ...s };
-                newStop.minuetsFromLast = event.target.value;
+                newStop.minutesFromLast = event.target.value;
                 return newStop;
             }
             return s;
@@ -158,7 +158,7 @@ export const LocationRouteEdit = (props: LocationRouteEditProps) => {
                     <IconButton
                         size="small"
                         aria-label="show more"
-                        aria-controls={sketchMenuId}
+                        aria-controls={routeMenuId}
                         aria-haspopup="true"
                         onClick={handleRouteMenuOpen}
                         color="inherit"
@@ -177,7 +177,7 @@ export const LocationRouteEdit = (props: LocationRouteEditProps) => {
                                     <Select
                                         disableUnderline={true}
                                         variant={"standard"}
-                                        value={stop.minuetsFromLastCode}
+                                        value={stop.minutesFromLastCode}
                                         sx={{
                                             fontWeight: "normal",
                                         }}

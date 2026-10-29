@@ -1,17 +1,22 @@
 import { ActionsTypes } from "./types.actions";
 import {
     AppConstants,
-    defaultVehicleValues,
     IAction,
     SidurRecord,
     SidurStore,
 } from "./store.types";
 import { OrderModel } from "../models/Order.model";
-import { Utils } from "../services/utils";
-import { translations } from "../services/translations";
+import { LocationGroup } from "../models/Location.model";
 import { StoreUtils } from "./store-utils";
 import { CloneUtil } from "../services/clone-utility";
-import { LocationGroup } from "../models/Location.model";
+import { translations } from "../services/translations";
+import {
+    setChosenSidur,
+    getAllSidurIDs,
+    getDefaultSidur,
+    getNewSidurId,
+    buildNewSidur,
+} from "./utils/sidur-helpers";
 
 export type SidurReducerFunctions =
     | ActionsTypes.RENAME_SIDUR
@@ -23,18 +28,6 @@ export type SidurReducerFunctions =
     | ActionsTypes.MOVE_TO_ACTIVE_SIDUR
     | ActionsTypes.DELETE_FOREVER_SIDUR
     | ActionsTypes.CHANGE_SIDUR_LOCATION_GROUP;
-
-const DefaultSidur: SidurRecord = {
-    id: "1",
-    dbId: "",
-    Name: "הסידור החדש שלי",
-    orders: [],
-    deletedOrders: [],
-    vehicles: [defaultVehicleValues],
-    sketches: [],
-    chosenSketch: "",
-    locationGroupIdForSidur: "",
-};
 
 export const SidurReducer: Record<
     SidurReducerFunctions,
@@ -239,25 +232,13 @@ export const SidurReducer: Record<
         action: IAction
     ): SidurStore => {
         let newState = { ...state };
-        const newSidurId = Utils.getNextId(getAllSidurIDs(state));
-        const loactionGroupId =
+        const locationGroupId =
             newState.sessionState.locationGroupInEdit ||
             (newState.LocationGroups[0].id as string);
-        const newSidur: SidurRecord = {
-            id: newSidurId,
-            dbId: "",
-            Name: translations.Sidur + " " + newSidurId,
-            orders: [],
-            deletedOrders: [],
-            vehicles: [defaultVehicleValues],
-            defaultOrderValues: newState.defaultOrderValues,
-            sketches: [],
-            chosenSketch: "",
-            locationGroupIdForSidur: loactionGroupId,
-        };
+        const newSidur: SidurRecord = buildNewSidur(state, locationGroupId);
         newState.sidurCollection = newState.sidurCollection.map((c) => c);
         newState.sidurCollection.push(newSidur);
-        newState.sidurId = newSidurId;
+        newState.sidurId = newSidur.id;
         newState = setChosenSidur(newState, newSidur);
         newState = StoreUtils.updateRecordBrief(newState);
         return newState;
@@ -274,8 +255,9 @@ export const SidurReducer: Record<
         if (sidurForCloning) {
             const newSidur: SidurRecord =
                 CloneUtil.deepCloneSidur(sidurForCloning);
-            newSidur.Name = translations.CopyOf + " " + newSidur.Name;
-            const newSidurId = Utils.getNextId(getAllSidurIDs(state));
+            const originalName = newSidur.Name;
+            const newSidurId = getNewSidurId(state);
+            newSidur.Name = translations.CopyOf + " " + originalName;
             newSidur.dbId = "";
             newSidur.id = newSidurId;
             newState.sidurCollection = newState.sidurCollection.map((c) => c);
@@ -320,45 +302,4 @@ export const SidurReducer: Record<
         newState = StoreUtils.updateRecordBrief(newState);
         return newState;
     },
-};
-const setChosenSidur = (
-    state: SidurStore,
-    chosenSidur: SidurRecord
-): SidurStore => {
-    const newState = { ...state };
-
-    newState.orders = chosenSidur?.orders.map((o) => ({ ...o })) || [];
-    newState.vehicles = chosenSidur?.vehicles.map((o) => ({ ...o })) || [];
-    newState.deletedOrders =
-        chosenSidur?.deletedOrders?.map((o) => ({ ...o })) || [];
-    newState.sketches = chosenSidur?.sketches?.map((o) => ({ ...o })) || [];
-    newState.sessionState.orderIdInEdit = null;
-    newState.sessionState.dataHolderForCurrentOrderInEdit = null;
-    const newLocationGroup = newState.LocationGroups.find(
-        (lg) => lg.id === chosenSidur.locationGroupIdForSidur
-    ) as LocationGroup;
-    newState.Locations = newLocationGroup.Locations;
-    return newState;
-};
-const getAllSidurIDs = (state: SidurStore): string[] => {
-    const collectionIds = state.sidurCollection.map((o) => o.id);
-    const ArchiveIdsWithWords = state.sidurArchive.map((o) => o.id);
-
-    const ArchiveIds = ArchiveIdsWithWords.map((id) =>
-        StoreUtils.removeIdPrefix(id)
-    );
-    return [...ArchiveIds, ...collectionIds];
-};
-
-const getDefaultSidur = (state: SidurStore): SidurRecord => {
-    const newSidur: SidurRecord = { ...DefaultSidur };
-    newSidur.id = Utils.getNextId(getAllSidurIDs(state));
-    const allNames = [
-        ...state.sidurCollection.map((o) => o.Name),
-        ...state.sidurArchive.map((o) => o.Name),
-    ];
-    if (allNames.some((name) => name === newSidur.Name)) {
-        newSidur.Name = newSidur.Name + " " + newSidur.id;
-    }
-    return newSidur;
 };

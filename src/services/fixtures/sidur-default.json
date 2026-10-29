@@ -814,11 +814,11 @@
         "displaySetting": {
             "view": "sketch"
         },
-        "SketchIdInEdit": null,
+        "sketchIdInEdit": null,
         "pendingOrderIdInEdit": null,
         "sessionState": {
             "LocationGroupTabOpen": "0",
-            "SketchIdInEdit": "",
+            "sketchIdInEdit": "",
             "locationGroupInEdit": "ESHBAL",
             "orderIdInEdit": null,
             "pendingOrderIdInEdit": null,
@@ -1270,12 +1270,12 @@
                         "TransportStops": [
                             {
                                 "locationId": "66",
-                                "minuetsFromLast": 20,
+                                "minutesFromLast": 20,
                                 "position": 1
                             },
                             {
                                 "locationId": "3",
-                                "minuetsFromLast": 45,
+                                "minutesFromLast": 45,
                                 "position": 2
                             }
                         ],
@@ -1298,22 +1298,22 @@
                         "TransportStops": [
                             {
                                 "locationId": "HOME_LOCATION",
-                                "minuetsFromLast": 20,
+                                "minutesFromLast": 20,
                                 "position": 1
                             },
                             {
                                 "locationId": "65",
-                                "minuetsFromLast": 15,
+                                "minutesFromLast": 15,
                                 "position": 2
                             },
                             {
                                 "locationId": "1",
-                                "minuetsFromLast": 20,
+                                "minutesFromLast": 20,
                                 "position": 3
                             },
                             {
                                 "locationId": "13",
-                                "minuetsFromLast": 5,
+                                "minutesFromLast": 5,
                                 "position": 4
                             }
                         ],
@@ -1336,17 +1336,17 @@
                         "TransportStops": [
                             {
                                 "locationId": "13",
-                                "minuetsFromLast": 20,
+                                "minutesFromLast": 20,
                                 "position": 1
                             },
                             {
                                 "locationId": "1",
-                                "minuetsFromLast": 5,
+                                "minutesFromLast": 5,
                                 "position": 2
                             },
                             {
                                 "locationId": "HOME_LOCATION",
-                                "minuetsFromLast": 30,
+                                "minutesFromLast": 30,
                                 "position": 3
                             }
                         ],
@@ -1368,17 +1368,17 @@
                         "TransportStops": [
                             {
                                 "locationId": "3",
-                                "minuetsFromLast": 20,
+                                "minutesFromLast": 20,
                                 "position": 1
                             },
                             {
                                 "locationId": "70",
-                                "minuetsFromLast": 45,
+                                "minutesFromLast": 45,
                                 "position": 2
                             },
                             {
                                 "locationId": "66",
-                                "minuetsFromLast": 5,
+                                "minutesFromLast": 5,
                                 "position": 3
                             }
                         ],
@@ -1400,17 +1400,17 @@
                         "TransportStops": [
                             {
                                 "locationId": "3",
-                                "minuetsFromLast": 20,
+                                "minutesFromLast": 20,
                                 "position": 1
                             },
                             {
                                 "locationId": "70",
-                                "minuetsFromLast": 45,
+                                "minutesFromLast": 45,
                                 "position": 2
                             },
                             {
                                 "locationId": "66",
-                                "minuetsFromLast": 5,
+                                "minutesFromLast": 5,
                                 "position": 3
                             }
                         ],
@@ -1439,17 +1439,17 @@
                         "TransportStops": [
                             {
                                 "locationId": "66",
-                                "minuetsFromLast": 20,
+                                "minutesFromLast": 20,
                                 "position": 1
                             },
                             {
                                 "locationId": "70",
-                                "minuetsFromLast": 5,
+                                "minutesFromLast": 5,
                                 "position": 2
                             },
                             {
                                 "locationId": "3",
-                                "minuetsFromLast": 45,
+                                "minutesFromLast": 45,
                                 "position": 3
                             }
                         ],
@@ -1477,35 +1477,35 @@
                         "name": "כביש 748 לחנן הגליל",
                         "id": "1",
                         "comments": "",
-                        "routStops": [
+                        "routeStops": [
                             {
                                 "locationId": "10",
-                                "minuetsFromLast": 20,
+                                "minutesFromLast": 20,
                                 "position": 1
                             },
                             {
                                 "locationId": "2",
-                                "minuetsFromLast": 10,
+                                "minutesFromLast": 10,
                                 "position": 2
                             },
                             {
                                 "locationId": "32",
-                                "minuetsFromLast": 15,
+                                "minutesFromLast": 15,
                                 "position": 3
                             },
                             {
                                 "locationId": "33",
-                                "minuetsFromLast": 10,
+                                "minutesFromLast": 10,
                                 "position": 4
                             },
                             {
                                 "locationId": "34",
-                                "minuetsFromLast": 10,
+                                "minutesFromLast": 10,
                                 "position": 5
                             },
                             {
                                 "locationId": "35",
-                                "minuetsFromLast": 10,
+                                "minutesFromLast": 10,
                                 "position": 6
                             }
                         ]
@@ -1514,55 +1514,55 @@
                         "name": "כרמיאל עכו נהרייה ראש הנקרה",
                         "id": "2",
                         "comments": "",
-                        "routStops": [
+                        "routeStops": [
                             {
                                 "locationId": "10",
-                                "minuetsFromLast": 20,
+                                "minutesFromLast": 20,
                                 "position": 1
                             },
                             {
                                 "locationId": "49",
-                                "minuetsFromLast": 10,
+                                "minutesFromLast": 10,
                                 "position": 2
                             },
                             {
                                 "locationId": "1",
-                                "minuetsFromLast": 10,
+                                "minutesFromLast": 10,
                                 "position": 3
                             },
                             {
                                 "locationId": "13",
-                                "minuetsFromLast": 5,
+                                "minutesFromLast": 5,
                                 "position": 4
                             },
                             {
                                 "locationId": "4",
-                                "minuetsFromLast": 20,
+                                "minutesFromLast": 20,
                                 "position": 5
                             },
                             {
                                 "locationId": "51",
-                                "minuetsFromLast": 5,
+                                "minutesFromLast": 5,
                                 "position": 6
                             },
                             {
                                 "locationId": "52",
-                                "minuetsFromLast": 5,
+                                "minutesFromLast": 5,
                                 "position": 7
                             },
                             {
                                 "locationId": "50",
-                                "minuetsFromLast": 20,
+                                "minutesFromLast": 20,
                                 "position": 8
                             },
                             {
                                 "locationId": "27",
-                                "minuetsFromLast": 20,
+                                "minutesFromLast": 20,
                                 "position": 9
                             },
                             {
                                 "locationId": "28",
-                                "minuetsFromLast": 20,
+                                "minutesFromLast": 20,
                                 "position": 10
                             }
                         ]
@@ -1571,30 +1571,30 @@
                         "name": "מנוף יודפת",
                         "id": "3",
                         "comments": "",
-                        "routStops": [
+                        "routeStops": [
                             {
                                 "locationId": "10",
-                                "minuetsFromLast": 20,
+                                "minutesFromLast": 20,
                                 "position": 1
                             },
                             {
                                 "locationId": "2",
-                                "minuetsFromLast": 10,
+                                "minutesFromLast": 10,
                                 "position": 2
                             },
                             {
                                 "locationId": "53",
-                                "minuetsFromLast": 20,
+                                "minutesFromLast": 20,
                                 "position": 3
                             },
                             {
                                 "locationId": "55",
-                                "minuetsFromLast": 20,
+                                "minutesFromLast": 20,
                                 "position": 4
                             },
                             {
                                 "locationId": "54",
-                                "minuetsFromLast": 10,
+                                "minutesFromLast": 10,
                                 "position": 5
                             }
                         ]
@@ -1603,55 +1603,55 @@
                         "name": "יובלים - קריית אתא - חיפה",
                         "id": "4",
                         "comments": "",
-                        "routStops": [
+                        "routeStops": [
                             {
                                 "locationId": "10",
-                                "minuetsFromLast": 20,
+                                "minutesFromLast": 20,
                                 "position": 1
                             },
                             {
                                 "locationId": "6",
-                                "minuetsFromLast": 90,
+                                "minutesFromLast": 90,
                                 "position": 2
                             },
                             {
                                 "locationId": "2",
-                                "minuetsFromLast": 5,
+                                "minutesFromLast": 5,
                                 "position": 3
                             },
                             {
                                 "locationId": "32",
-                                "minuetsFromLast": 10,
+                                "minutesFromLast": 10,
                                 "position": 4
                             },
                             {
                                 "locationId": "56",
-                                "minuetsFromLast": 10,
+                                "minutesFromLast": 10,
                                 "position": 5
                             },
                             {
                                 "locationId": "57",
-                                "minuetsFromLast": 20,
+                                "minutesFromLast": 20,
                                 "position": 6
                             },
                             {
                                 "locationId": "41",
-                                "minuetsFromLast": 20,
+                                "minutesFromLast": 20,
                                 "position": 7
                             },
                             {
                                 "locationId": "20",
-                                "minuetsFromLast": 20,
+                                "minutesFromLast": 20,
                                 "position": 8
                             },
                             {
                                 "locationId": "58",
-                                "minuetsFromLast": 20,
+                                "minutesFromLast": 20,
                                 "position": 9
                             },
                             {
                                 "locationId": "3",
-                                "minuetsFromLast": 20,
+                                "minutesFromLast": 20,
                                 "position": 10
                             }
                         ]
@@ -1660,40 +1660,40 @@
                         "name": "יובלים - ראמה - טבריה",
                         "id": "5",
                         "comments": "",
-                        "routStops": [
+                        "routeStops": [
                             {
                                 "locationId": "10",
-                                "minuetsFromLast": 20,
+                                "minutesFromLast": 20,
                                 "position": 1
                             },
                             {
                                 "locationId": "1",
-                                "minuetsFromLast": 15,
+                                "minutesFromLast": 15,
                                 "position": 2
                             },
                             {
                                 "locationId": "30",
-                                "minuetsFromLast": 10,
+                                "minutesFromLast": 10,
                                 "position": 3
                             },
                             {
                                 "locationId": "59",
-                                "minuetsFromLast": 10,
+                                "minutesFromLast": 10,
                                 "position": 4
                             },
                             {
                                 "locationId": "62",
-                                "minuetsFromLast": 30,
+                                "minutesFromLast": 30,
                                 "position": 5
                             },
                             {
                                 "locationId": "61",
-                                "minuetsFromLast": 10,
+                                "minutesFromLast": 10,
                                 "position": 6
                             },
                             {
                                 "locationId": "64",
-                                "minuetsFromLast": 10,
+                                "minutesFromLast": 10,
                                 "position": 7
                             }
                         ]
@@ -1702,25 +1702,25 @@
                         "name": "אשחר - יעד - שעב",
                         "id": "6",
                         "comments": "",
-                        "routStops": [
+                        "routeStops": [
                             {
                                 "locationId": "23",
-                                "minuetsFromLast": 20,
+                                "minutesFromLast": 20,
                                 "position": 1
                             },
                             {
                                 "locationId": "10",
-                                "minuetsFromLast": 20,
+                                "minutesFromLast": 20,
                                 "position": 2
                             },
                             {
                                 "locationId": "11",
-                                "minuetsFromLast": 20,
+                                "minutesFromLast": 20,
                                 "position": 3
                             },
                             {
                                 "locationId": "19",
-                                "minuetsFromLast": 20,
+                                "minutesFromLast": 20,
                                 "position": 4
                             }
                         ]
@@ -1729,30 +1729,30 @@
                         "name": "צמתים צ. אשבל  עד צ. אלונים",
                         "id": "7",
                         "comments": "",
-                        "routStops": [
+                        "routeStops": [
                             {
                                 "locationId": "65",
-                                "minuetsFromLast": 20,
+                                "minutesFromLast": 20,
                                 "position": 1
                             },
                             {
                                 "locationId": "66",
-                                "minuetsFromLast": 5,
+                                "minutesFromLast": 5,
                                 "position": 2
                             },
                             {
                                 "locationId": "70",
-                                "minuetsFromLast": 5,
+                                "minutesFromLast": 5,
                                 "position": 3
                             },
                             {
                                 "locationId": "68",
-                                "minuetsFromLast": 20,
+                                "minutesFromLast": 20,
                                 "position": 4
                             },
                             {
                                 "locationId": "69",
-                                "minuetsFromLast": 15,
+                                "minutesFromLast": 15,
                                 "position": 5
                             }
                         ]
@@ -1761,25 +1761,25 @@
                         "name": "צמתים צ. אשבל עד צ. אחיהוד",
                         "id": "8",
                         "comments": "",
-                        "routStops": [
+                        "routeStops": [
                             {
                                 "locationId": "65",
-                                "minuetsFromLast": 20,
+                                "minutesFromLast": 20,
                                 "position": 1
                             },
                             {
                                 "locationId": "66",
-                                "minuetsFromLast": 5,
+                                "minutesFromLast": 5,
                                 "position": 2
                             },
                             {
                                 "locationId": "67",
-                                "minuetsFromLast": 10,
+                                "minutesFromLast": 10,
                                 "position": 3
                             },
                             {
                                 "locationId": "71",
-                                "minuetsFromLast": 15,
+                                "minutesFromLast": 15,
                                 "position": 4
                             }
                         ]

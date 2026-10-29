@@ -17,8 +17,8 @@ import { SketchesContainerMessage } from "./SketchesContainerMessage";
 
 export const SketchesContainer = () => {
     const dispatch = useDispatch();
-    const SketchIdInEdit = useSelector(
-        (state: SidurStore) => state.sessionState.SketchIdInEdit
+    const sketchIdInEdit = useSelector(
+        (state: SidurStore) => state.sessionState.sketchIdInEdit
     );
     const sketches: SketchModel[] = useSelector(
         (state: { sketches: SketchModel[] }) => state.sketches
@@ -36,7 +36,7 @@ export const SketchesContainer = () => {
     };
     const handleRenameClose = (value: string | null) => {
         setRenameOpen(false);
-        const id = SketchIdInEdit;
+        const id = sketchIdInEdit;
         if (value) {
             dispatch({
                 type: ActionsTypes.RENAME_SKETCH,
@@ -55,14 +55,14 @@ export const SketchesContainer = () => {
             case SketchActionType.CreateCopy:
                 dispatch({
                     type: ActionsTypes.CLONE_SKETCH,
-                    payload: { id: SketchIdInEdit },
+                    payload: { id: sketchIdInEdit },
                 });
                 break;
 
             case SketchActionType.Delete:
                 dispatch({
                     type: ActionsTypes.DELETE_SKETCH,
-                    payload: { id: SketchIdInEdit },
+                    payload: { id: sketchIdInEdit },
                 });
                 break;
             case SketchActionType.Rename:
@@ -116,14 +116,14 @@ export const SketchesContainer = () => {
     };
 
     const sketchInEdit: SketchModel | null =
-        sketches.find((sketch: SketchModel) => sketch.id === SketchIdInEdit) ||
+        sketches.find((sketch: SketchModel) => sketch.id === sketchIdInEdit) ||
         null;
 
     const sketchName = sketchInEdit ? sketchInEdit.name : "";
 
     return (
         <div>
-            {SketchIdInEdit ? (
+            {sketchIdInEdit ? (
                 <div className="flex lg:flex-row flex-col items-start justify-start mb-2.5">
                     <div
                         id={"sketches-sketch-cockpit-1"}
@@ -145,7 +145,7 @@ export const SketchesContainer = () => {
                                 dir={"rtl"}
                                 disableUnderline={true}
                                 variant={"standard"}
-                                value={SketchIdInEdit}
+                                value={sketchIdInEdit}
                                 sx={{
                                     fontSize: "1.25rem",
                                     fontWeight: "normal",
@@ -227,7 +227,7 @@ export const SketchesContainer = () => {
             <Sketch />
             <SketchMenu
                 sketchMoreAnchorEl={sketchMoreAnchorEl}
-                sketchMenuId={SketchIdInEdit || ""}
+                sketchMenuId={sketchIdInEdit || ""}
                 isSketchMenuOpen={isSketchMenuOpen}
                 handleSketchMenuClick={handleSketchMenuClick}
                 handleSketchMenuClose={handleSketchMenuClose}
