@@ -49,7 +49,7 @@ export const VerticalHourField = (props: VerticalHourFieldProps) => {
         <div>
             <div className="flex flex-col items-center justify-center h-[250px]">
                 <AirbnbSlider
-                    components={{ Thumb: AirbnbThumbComponent }}
+                    slots={{ thumb: AirbnbThumbComponent }}
                     orientation="vertical"
                     aria-labelledby="input-slider"
                     valueLabelDisplay="on"

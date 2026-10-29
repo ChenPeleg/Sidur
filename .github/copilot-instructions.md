@@ -6,13 +6,13 @@ Sidur is a React-based application for managing communal community transportatio
 
 ## Technology Stack
 
-- **Frontend Framework**: React 19.2.4 with TypeScript (strict mode)
-- **Build Tool**: Vite 7.3.1
-- **State Management**: Redux Toolkit 2.11.2 with domain-separated reducers
-- **UI Components**: Material-UI (MUI) v7.3.7
+- **Frontend Framework**: React 19.3.1 with TypeScript 6.0 (strict mode)
+- **Build Tool**: Vite 8.3.5
+- **State Management**: Redux Toolkit 2.13.0 with domain-separated reducers
+- **UI Components**: Material-UI (MUI) v9.5.0
 - **Styling**: Transitioning from MUI Box to Tailwind CSS v4
-- **Routing**: React Router 7.13.0
-- **Testing**: Vitest 4.0.18 with React Testing Library 16.3.2
+- **Routing**: React Router 8.5.0
+- **Testing**: Vitest 5.0.5 with React Testing Library 16.3.3
 - **Node Version**: 24.x (required)
 
 ## Code Style and Formatting

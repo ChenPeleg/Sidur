@@ -81,15 +81,20 @@ export const LocationForm = (props: LocationFormProps) => {
                     justifyContent: "start",
                 }}
             >
-                <div id={"text-field-container"} className="m-[0.3em] mr-[1em] ml-[1em] flex flex-col">
+                <div
+                    id={"text-field-container"}
+                    className="m-[0.3em] mr-[1em] ml-[1em] flex flex-col"
+                >
                     <TextField
                         margin="dense"
-                        InputProps={{
-                            disableUnderline: !props.isInEdit,
-                            sx: {
-                                color: props.isLocationNameValid
-                                    ? "initial"
-                                    : "red",
+                        slotProps={{
+                            input: {
+                                disableUnderline: !props.isInEdit,
+                                sx: {
+                                    color: props.isLocationNameValid
+                                        ? "initial"
+                                        : "red",
+                                },
                             },
                         }}
                         id={"sidur-rename-dialog-text-field"}
@@ -121,18 +126,23 @@ export const LocationForm = (props: LocationFormProps) => {
                     )}
                 </div>
 
-                <div id={"hour-field-container"} className="m-[0.3em] mr-[0.7em] ml-[0.7em] mt-[0.5em]">
+                <div
+                    id={"hour-field-container"}
+                    className="m-[0.3em] mr-[0.7em] ml-[0.7em] mt-[0.5em]"
+                >
                     <TextField
                         type="number"
                         variant="standard"
                         inputRef={valueMinutesRef}
                         value={etaValue}
-                        InputProps={{
-                            inputProps: {
+                        slotProps={{
+                            input: {
+                                disableUnderline: !props.isInEdit,
+                            },
+                            htmlInput: {
                                 max: 120,
                                 min: 10,
                             },
-                            disableUnderline: !props.isInEdit,
                         }}
                         onChange={(event) => {
                             if (props.isInEdit) {
@@ -142,7 +152,10 @@ export const LocationForm = (props: LocationFormProps) => {
                         }}
                     />
                 </div>
-                <div id={"caption-container"} className="m-[0.2em] mr-0 ml-0 mt-[0.5em]">
+                <div
+                    id={"caption-container"}
+                    className="m-[0.2em] mr-0 ml-0 mt-[0.5em]"
+                >
                     <Typography component={"span"} variant={"caption"}>
                         {translations.ETAtext}
                     </Typography>

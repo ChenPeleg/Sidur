@@ -10,7 +10,11 @@ import { translations } from "../../services/translations";
 import { useDispatch, useSelector } from "react-redux";
 import { ActionsTypes } from "../../store/types.actions";
 import { LinearLoading } from "../Loading/linear-loading";
-import { Check, ErrorOutline, HelpOutline } from "@mui/icons-material";
+import {
+    Check,
+    ErrorOutlineOutlined as ErrorOutline,
+    HelpOutlineOutlined as HelpOutline,
+} from "@mui/icons-material";
 import { ExplainVideoDialog } from "./explain-video-dialog";
 import { SidurStore } from "../../store/store.types";
 
@@ -177,11 +181,7 @@ export const ImportSheetsDialog = (props: ImportSheetsProps) => {
                                 {formatErrorText(importSheetCheckStatus).map(
                                     (t, i) => (
                                         <div key={"container" + i}>
-                                            <div
-                                                key={i}
-                                            >
-                                                {t}
-                                            </div>
+                                            <div key={i}>{t}</div>
                                         </div>
                                     )
                                 )}

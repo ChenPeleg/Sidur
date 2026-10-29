@@ -71,15 +71,21 @@ export const OrderCarBrief = (props: AppProps) => {
         areDetailsMissing(orderValues) && !props.isInEdit;
 
     return (
-        <div className={`p-[5px] flex flex-row justify-start items-start ${props.className}`}>
+        <div
+            className={`p-[5px] flex flex-row justify-start items-start ${props.className}`}
+        >
             <Typography
-                fontWeight={props.isInEdit ? "bold" : "initial"}
-                fontSize={"large"}
-                padding={"initial"}
+                sx={{
+                    fontWeight: props.isInEdit ? "bold" : "initial",
+                    fontSize: "large",
+                    padding: "initial",
+                }}
             >
                 {buildBriefText(orderValues, locations)}
             </Typography>
-            <Typography fontSize={"large"} color={"red"} padding={"initial"}>
+            <Typography
+                sx={{ fontSize: "large", color: "red", padding: "initial" }}
+            >
                 {" "}
                 &nbsp;
                 {missingDetailsShown
