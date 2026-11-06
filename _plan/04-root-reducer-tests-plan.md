@@ -33,27 +33,27 @@ Several reducers shallow-copy the state and then mutate the nested `sessionState
 
 ## Setup
 
-1. ⬜ `test/store/helpers/build-store.ts`: `buildStore(partial?: Partial<SidurStore>)` returning a valid `SidurStore` from `DefaultSidurFetching` (deep-cloned per call) with one sidur in `sidurCollection` matching `sidurId`.
-2. ⬜ `test/store/helpers/deep-freeze.ts`: `deepFreeze` for collections (see risk above).
-3. ⬜ Import `reducer` after `localStorage.clear()` (`beforeEach` + `vi.resetModules()` + dynamic import where needed) so the initial state is the default.
-4. ⬜ Determinism: `vi.mock` `StoreUtils.HandleReducerSaveToLocalStorage` (or spy on `SaveLoadService.saveToLocalStorage`); fake timers for date-based ids if encountered.
+1. ✅ `test/store/helpers/build-store.ts`: `buildStore(partial?: Partial<SidurStore>)` returning a valid `SidurStore` from `DefaultSidurFetching` (deep-cloned per call) with one sidur in `sidurCollection` matching `sidurId`.
+2. ✅ `test/store/helpers/deep-freeze.ts`: `deepFreeze` for collections (see risk above).
+3. ✅ Import `reducer` after `localStorage.clear()` (`beforeEach` + `vi.resetModules()` + dynamic import where needed) so the initial state is the default.
+4. ✅ Determinism: `vi.mock` `StoreUtils.HandleReducerSaveToLocalStorage` (or spy on `SaveLoadService.saveToLocalStorage`); fake timers for date-based ids if encountered.
 
 ## Test files (all call only the root `reducer`)
 
 Place in `test/store/`:
 
-5. ⬜ `reducer.routing.test.ts`
+5. ✅ `reducer.routing.test.ts`
    - Default state is used when `state` is `undefined`; saved `localStorage` state is used when present.
    - Unknown action returns an equal state.
    - Iterate every `ActionsTypes` value (except documented unrouted ones: `OPEN_MY_PROFILE`) and assert the reducer does not fall through, e.g. by spying on each domain map entry (`vi.spyOn(OrderReducer, type)`) and checking it was called once with `(state copy, action)`.
-6. ⬜ `reducer.display-vehicle.test.ts`: display and vehicle rules above.
-7. ⬜ `reducer.order.test.ts`: order rules above (add, clone, edit flow, update, delete, unknown id, deleted-id collision).
-8. ⬜ `reducer.sidur.test.ts`: choose (same id, other id, unknown id), rename (empty), add, clone, delete, archive, move to active, delete forever, location group change.
-9. ⬜ `reducer.sketch.test.ts`: new, choose, rename, clone, delete, download (mock `DownloadCSVFile`).
-10. ⬜ `reducer.pending-orders-and-drives.test.ts`: pending-order and sketch-drive actions.
-11. ⬜ `reducer.locations-routes-transports.test.ts`: location group, location, route, transport actions.
-12. ⬜ `reducer.import-export.test.ts`: modal open/close, paste validation status, approve, file upload and text import (mock file/download services).
-13. ⬜ One end-to-end sequence through the root reducer: add order → edit → update → new sketch → choose other sidur → back, asserting data is preserved.
+6. ✅ `reducer.display-vehicle.test.ts`: display and vehicle rules above.
+7. ✅ `reducer.order.test.ts`: order rules above (add, clone, edit flow, update, delete, unknown id, deleted-id collision).
+8. ✅ `reducer.sidur.test.ts`: choose (same id, other id, unknown id), rename (empty), add, clone, delete, archive, move to active, delete forever, location group change.
+9. ✅ `reducer.sketch.test.ts`: new, choose, rename, clone, delete, download (mock `DownloadCSVFile`).
+10. ✅ `reducer.pending-orders-and-drives.test.ts`: pending-order and sketch-drive actions.
+11. ✅ `reducer.locations-routes-transports.test.ts`: location group, location, route, transport actions.
+12. ✅ `reducer.import-export.test.ts`: modal open/close, paste validation status, approve, file upload and text import (mock file/download services).
+13. ✅ One end-to-end sequence through the root reducer: add order → edit → update → new sketch → choose other sidur → back, asserting data is preserved.
 
 ## Conventions
 
@@ -63,7 +63,7 @@ Place in `test/store/`:
 
 ## Verify
 
-14. ⬜ `npm test`, `npm run typecheck`, `npm run lint`.
+14. ✅ `npm test`, `npm run typecheck`, `npm run lint`.
 
 ## Success criteria
 
