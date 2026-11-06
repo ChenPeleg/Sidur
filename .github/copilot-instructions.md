@@ -42,7 +42,7 @@ Sidur is a React-based application for managing communal community transportatio
 - Components are organized by feature domain in `src/components/`
 - Redux reducers are separated by domain in `src/store/`
 - Shared styles and themes in `src/hoc/themes.ts`
-- Test utilities in `src/__tests-utils__/`
+- Test utilities in `test/utils/`
 
 ### Component Structure
 ```typescript
@@ -132,9 +132,9 @@ const dispatch = useDispatch<AppDispatch>();
 - `npm run test:ui` - Interactive test UI
 
 ### Test File Location
-- Place tests in `src/__tests__/` directory
+- Place tests in `test/` directory (mirrors `src/`)
 - Use `.test.ts` or `.test.tsx` extensions
-- Test utilities should go in `src/__tests-utils__/`
+- Test utilities should go in `test/utils/`
 
 ### Testing Best Practices
 ```typescript

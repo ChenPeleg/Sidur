@@ -1,10 +1,10 @@
 import React from "react";
 import { act, render, screen } from "@testing-library/react";
 import { Provider } from "react-redux";
-import configureStore from "../../../__tests-utils__/redux-mock-store";
+import configureStore from "../../utils/redux-mock-store";
 
-import { VehicleEditDialog } from "../vehicle-edit-dialog";
-import { VehicleModel } from "../../../models/Vehicle.model";
+import { VehicleEditDialog } from "../../../src/components/Dialogs/vehicle-edit-dialog";
+import { VehicleModel } from "../../../src/models/Vehicle.model";
 import { vi, Mock } from "vitest";
 import userEvent from "@testing-library/user-event";
 

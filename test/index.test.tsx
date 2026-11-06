@@ -1,5 +1,5 @@
 import React from "react";
-import { customMatcherRunner } from "../__tests-utils__/cutom-matchers";
+import { customMatcherRunner } from "./utils/cutom-matchers";
 import { vi } from "vitest";
 
 vi.mock("react-dom", () => ({ render: vi.fn() }));

@@ -1,7 +1,7 @@
 import React from "react";
 import { render, screen } from "@testing-library/react";
-import { TextFieldPropertiesModel } from "../../../models/text-field-properties.model";
-import { RenderFlexibilityField } from "../flexibility-field";
+import { TextFieldPropertiesModel } from "../../../src/models/text-field-properties.model";
+import { RenderFlexibilityField } from "../../../src/components/Form/flexibility-field";
 import { vi } from "vitest";
 
 describe("Form Flexibility field ", () => {

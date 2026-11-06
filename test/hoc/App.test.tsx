@@ -1,8 +1,8 @@
 import React from "react";
 
-import App from "./App";
-import { Root } from "./Root";
-import "../setupTests";
+import App from "../../src/hoc/App";
+import { Root } from "../../src/hoc/Root";
+import "../../src/setupTests";
 import { render, screen } from "@testing-library/react";
 
 let component: HTMLElement;
