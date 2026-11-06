@@ -103,117 +103,129 @@ export const SketchDriveEditDialog = (props: SketchDriveEditDialogProps) => {
     );
 
     return (
-        <Dialog open={open} onClose={handleCloseCancel}>
+        <Dialog
+            open={open}
+            onClose={handleCloseCancel}
+            fullWidth
+            maxWidth="sm"
+            slotProps={{
+                paper: { sx: { m: "12px", width: "calc(100% - 24px)" } },
+            }}
+        >
             <DialogTitle> {translations.EditDrive}</DialogTitle>
             <DialogContent>
-                <div className="w-[230px] flex flex-row min-w-[35vw]">
-                    <div className="w-[230px] flex flex-col max-w-[160px] py-0 px-[0.2em]">
-                        <Typography align={"center"} component="legend">
-                            <b>{translations.DriveTimes}</b>
-                        </Typography>
-
-                        <VerticalHourField
-                            input={[driveData.startHour, driveData.finishHour]}
-                            onHoursChange={handleHourChange}
-                            label={translations.Start}
-                        />
-                    </div>
-                    <div className="w-[230px] flex flex-col">
+                <div className="flex flex-col w-full gap-[0.5em]">
+                    <div className="w-full">
                         <Typography align={"center"} component="legend">
                             <b>{translations.DriveDescription}</b>
                         </Typography>
-
-                        <div className="w-[230px]">
-                            <TextField
-                                size={"medium"}
-                                margin="dense"
-                                id="vehicle-comments-dialog-text-field"
-                                type="text"
-                                fullWidth
-                                multiline={true}
-                                variant="standard"
-                                defaultValue={(
-                                    driveData?.description || ""
-                                ).replace("  ", " ")}
-                                inputRef={descriptionValueRef}
-                                onKeyUp={(event) => {
-                                    if (event.key === "Enter") {
-                                        handleCloseEdit();
-                                    }
-                                }}
+                        <TextField
+                            size={"medium"}
+                            margin="dense"
+                            id="vehicle-comments-dialog-text-field"
+                            type="text"
+                            fullWidth
+                            multiline={true}
+                            variant="standard"
+                            defaultValue={(
+                                driveData?.description || ""
+                            ).replace("  ", " ")}
+                            inputRef={descriptionValueRef}
+                            onKeyUp={(event) => {
+                                if (event.key === "Enter") {
+                                    handleCloseEdit();
+                                }
+                            }}
+                        />
+                    </div>
+                    <div className="flex flex-row w-full gap-[1em]">
+                        <div className="flex flex-col shrink-0 w-[110px] px-[0.2em]">
+                            <Typography align={"center"} component="legend">
+                                <b>{translations.DriveTimes}</b>
+                            </Typography>
+                            <VerticalHourField
+                                input={[
+                                    driveData.startHour,
+                                    driveData.finishHour,
+                                ]}
+                                onHoursChange={handleHourChange}
+                                label={translations.Start}
                             />
                         </div>
-                        <Typography
-                            align={"center"}
-                            sx={{ mt: "1em" }}
-                            component="legend"
-                        >
-                            <b>
-                                {" "}
-                                {implementedOrders.length === 0
-                                    ? translations.none + " "
-                                    : null}{" "}
-                                {translations.connectedOrders}
-                            </b>
-                        </Typography>
-                        <div id={"connected-orders"}>
-                            {implementedOrders.map(
-                                (order: OrderModel, i: number) => (
-                                    <Card
-                                        key={i}
-                                        sx={{
-                                            display: "flex",
-                                            flexDirection: "column",
-                                            p: "1em",
-                                        }}
-                                    >
-                                        <div className="pb-[0.5em]">
-                                            {order.Comments}
-                                        </div>
-
-                                        <OrderActionButton
-                                            sx={{ width: "100%" }}
-                                            size={"small"}
-                                            actionType={
-                                                SketchDriveOrderEditActionEnum.AddToPending
-                                            }
-                                            text={
-                                                "      " +
-                                                translations.SketchActionAddToPending
-                                            }
-                                            actionClickHandler={(event: any) =>
-                                                addToPendingClickHandler(
-                                                    event,
-                                                    order.id
-                                                )
-                                            }
-                                        />
-
-                                        <OrderActionButton
-                                            sx={{ width: "100%", mt: "5px" }}
-                                            size={"small"}
-                                            actionType={
-                                                SketchDriveOrderEditActionEnum.AddToPending
-                                            }
-                                            text={
-                                                "      " +
-                                                translations.SketchActionAddToPending +
-                                                " " +
-                                                translations.AndDelete
-                                            }
-                                            actionClickHandler={(event: any) =>
-                                                addToPendingAndDeleteClickHandler(
-                                                    event,
-                                                    order.id
-                                                )
-                                            }
-                                        />
-                                    </Card>
-                                )
-                            )}
+                        <div className="flex flex-col flex-1 min-w-0">
+                            <Typography align={"center"} component="legend">
+                                <b>
+                                    {implementedOrders.length === 0
+                                        ? translations.none + " "
+                                        : null}
+                                    {translations.connectedOrders}
+                                </b>
+                            </Typography>
+                            <div
+                                id={"connected-orders"}
+                                className="flex flex-col gap-[0.5em] mt-[0.5em]"
+                            >
+                                {implementedOrders.map(
+                                    (order: OrderModel, i: number) => (
+                                        <Card
+                                            key={i}
+                                            sx={{
+                                                display: "flex",
+                                                flexDirection: "column",
+                                                p: "0.8em",
+                                            }}
+                                        >
+                                            <div className="pb-[0.5em] break-words">
+                                                {order.Comments}
+                                            </div>
+                                            <OrderActionButton
+                                                sx={{ width: "100%" }}
+                                                size={"small"}
+                                                actionType={
+                                                    SketchDriveOrderEditActionEnum.AddToPending
+                                                }
+                                                text={
+                                                    "      " +
+                                                    translations.SketchActionAddToPending
+                                                }
+                                                actionClickHandler={(
+                                                    event: any
+                                                ) =>
+                                                    addToPendingClickHandler(
+                                                        event,
+                                                        order.id
+                                                    )
+                                                }
+                                            />
+                                            <OrderActionButton
+                                                sx={{
+                                                    width: "100%",
+                                                    mt: "5px",
+                                                }}
+                                                size={"small"}
+                                                actionType={
+                                                    SketchDriveOrderEditActionEnum.AddToPending
+                                                }
+                                                text={
+                                                    "      " +
+                                                    translations.SketchActionAddToPending +
+                                                    " " +
+                                                    translations.AndDelete
+                                                }
+                                                actionClickHandler={(
+                                                    event: any
+                                                ) =>
+                                                    addToPendingAndDeleteClickHandler(
+                                                        event,
+                                                        order.id
+                                                    )
+                                                }
+                                            />
+                                        </Card>
+                                    )
+                                )}
+                            </div>
                         </div>
-
-                        <div className="flex flex-row items-center justify-center mt-[1em]"></div>
                     </div>
                 </div>
             </DialogContent>
