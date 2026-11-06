@@ -3,10 +3,7 @@ import reducer from "../../src/store/reducer";
 import { ActionsTypes } from "../../src/store/types.actions";
 import { buildStore, freezeCollections } from "./helpers/build-store";
 import { stubPersistence } from "./helpers/setup";
-import { IAction } from "../../src/store/store.types";
-
-const act = (type: ActionsTypes, payload: IAction["payload"] = {}) =>
-    ({ type, payload }) as IAction;
+import { act } from "./helpers/build-sketch";
 
 describe("root reducer - display", () => {
     it("CHANGE_VIEW sets the view without touching the input", () => {

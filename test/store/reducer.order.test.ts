@@ -11,11 +11,8 @@ import reducer from "../../src/store/reducer";
 import { ActionsTypes } from "../../src/store/types.actions";
 import { buildStore, freezeCollections } from "./helpers/build-store";
 import { stubPersistence } from "./helpers/setup";
-import { IAction } from "../../src/store/store.types";
 import { deepFreeze } from "./helpers/deep-freeze";
-
-const act = (type: ActionsTypes, payload: IAction["payload"] = {}) =>
-    ({ type, payload }) as IAction;
+import { act } from "./helpers/build-sketch";
 
 describe("root reducer - orders", () => {
     beforeEach(() => stubPersistence());

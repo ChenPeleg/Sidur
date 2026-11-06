@@ -4,10 +4,7 @@ import { ActionsTypes } from "../../src/store/types.actions";
 import { buildStore } from "./helpers/build-store";
 import { buildTwoSidurStore } from "./helpers/two-sidurim";
 import { stubPersistence } from "./helpers/setup";
-import { IAction } from "../../src/store/store.types";
-
-const act = (type: ActionsTypes, payload: IAction["payload"] = {}) =>
-    ({ type, payload }) as IAction;
+import { act } from "./helpers/build-sketch";
 
 describe("root reducer - sidur", () => {
     beforeEach(() => stubPersistence());

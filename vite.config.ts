@@ -36,6 +36,11 @@ export default defineConfig(({ mode }) => {
             environment: "jsdom",
             setupFiles: "./src/setupTests.ts",
             css: true,
+            coverage: {
+                provider: "v8",
+                include: ["src/store/**"],
+                reporter: ["text", "json-summary"],
+            },
         },
     };
 });
