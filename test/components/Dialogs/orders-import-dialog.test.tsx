@@ -1,8 +1,8 @@
 import React from "react";
 import { act, render } from "@testing-library/react";
-import { OrderImportDialog } from "../orders-import-dialog";
+import { OrderImportDialog } from "../../../src/components/Dialogs/orders-import-dialog";
 import { Provider } from "react-redux";
-import configureStore from "../../../__tests-utils__/redux-mock-store";
+import configureStore from "../../utils/redux-mock-store";
 import { TextField } from "@mui/material";
 import { vi, Mock } from "vitest";
 

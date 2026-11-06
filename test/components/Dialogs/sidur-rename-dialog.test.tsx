@@ -1,9 +1,9 @@
 import React from "react";
 import { act, render, screen } from "@testing-library/react";
 import { Provider } from "react-redux";
-import configureStore from "../../../__tests-utils__/redux-mock-store";
+import configureStore from "../../utils/redux-mock-store";
 
-import { RenameDialog } from "../rename-dialog";
+import { RenameDialog } from "../../../src/components/Dialogs/rename-dialog";
 import { vi, Mock } from "vitest";
 import userEvent from "@testing-library/user-event";
 

@@ -1,4 +1,4 @@
-import { FileUploadDialog } from "../file-uplaod-dialog";
+import { FileUploadDialog } from "../../../src/components/Dialogs/file-uplaod-dialog";
 
 import React from "react";
 import { render, screen } from "@testing-library/react";

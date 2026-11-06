@@ -1,7 +1,10 @@
-import "../../../setupTests";
+import "../../../src/setupTests";
 
-import { AddButton, AddButtonProps } from "../../Icons/add-button";
-import { translations } from "../../../services/translations";
+import {
+    AddButton,
+    AddButtonProps,
+} from "../../../src/components/Icons/add-button";
+import { translations } from "../../../src/services/translations";
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { vi } from "vitest";

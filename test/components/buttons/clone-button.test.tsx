@@ -1,41 +1,44 @@
-import "../../../setupTests";
-import { DeleteButton, DeleteButtonProps } from "../delete-button";
+import "../../../src/setupTests";
+import {
+    CloneButton,
+    CloneButtonProps,
+} from "../../../src/components/buttons/clone-button";
 import { render, screen } from "@testing-library/react";
+
 import userEvent from "@testing-library/user-event";
 import { vi } from "vitest";
 
 const clickMock = vi.fn();
-const props: DeleteButtonProps = {
+const props: CloneButtonProps = {
     sx: null,
-    deleteClickHandler: clickMock,
+    cloneClickHandler: clickMock,
 };
 
-describe("Delete Button", () => {
-    it("contains only one button", () => {
+describe("Clone Button", () => {
+    it("only one button", () => {
         render(
-            <DeleteButton
-                deleteClickHandler={props.deleteClickHandler}
+            <CloneButton
+                cloneClickHandler={props.cloneClickHandler}
                 sx={null}
             />
         );
         expect(screen.getAllByRole("button")).toHaveLength(1);
     });
-    it("only have delete icon", () => {
+    it("only have text to add", () => {
         render(
-            <DeleteButton
-                deleteClickHandler={props.deleteClickHandler}
+            <CloneButton
+                cloneClickHandler={props.cloneClickHandler}
                 sx={null}
             />
         );
-
         expect(screen.getAllByRole("button")[0].innerHTML).toContain(
-            "DeleteIcon"
+            "ContentCopyIcon"
         );
     });
     it("click triggers click handler", async () => {
         render(
-            <DeleteButton
-                deleteClickHandler={props.deleteClickHandler}
+            <CloneButton
+                cloneClickHandler={props.cloneClickHandler}
                 sx={null}
             />
         );
