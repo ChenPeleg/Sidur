@@ -3,10 +3,8 @@ import reducer from "../../src/store/reducer";
 import { ActionsTypes } from "../../src/store/types.actions";
 import { buildStore } from "./helpers/build-store";
 import { stubPersistence } from "./helpers/setup";
-import { IAction, SidurStore } from "../../src/store/store.types";
-
-const act = (type: ActionsTypes, payload: IAction["payload"] = {}) =>
-    ({ type, payload }) as IAction;
+import { SidurStore } from "../../src/store/store.types";
+import { act } from "./helpers/build-sketch";
 
 const withSketch = (): SidurStore =>
     reducer(buildStore(), act(ActionsTypes.NEW_SKETCH));

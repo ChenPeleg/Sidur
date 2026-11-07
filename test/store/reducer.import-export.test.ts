@@ -12,16 +12,14 @@ import reducer from "../../src/store/reducer";
 import { ActionsTypes } from "../../src/store/types.actions";
 import { buildStore } from "./helpers/build-store";
 import { stubPersistence } from "./helpers/setup";
-import { FileUploadType, IAction } from "../../src/store/store.types";
+import { FileUploadType } from "../../src/store/store.types";
 import {
     ImportOrdersFromText,
     validateImportedData,
 } from "../../src/services/import-orders-from-text";
 import { DownloadFile } from "../../src/services/download-file";
 import { StoreUtils } from "../../src/store/store-utils";
-
-const act = (type: ActionsTypes, payload: IAction["payload"] = {}) =>
-    ({ type, payload }) as IAction;
+import { act } from "./helpers/build-sketch";
 
 describe("root reducer - import / export", () => {
     beforeEach(() => {
@@ -103,6 +101,34 @@ describe("root reducer - import / export", () => {
         expect(result.sessionState.importSheetCheckStatus).toBe(
             "Error: bad data"
         );
+    });
+
+    describe.each([
+        ActionsTypes.IMPORT_SHEETS_DATA_PASTE,
+        ActionsTypes.APPROVE_IMPORT_SHEETS_DATA,
+    ])("%s with an error that has no message", (type) => {
+        const throwWithoutMessage = () => {
+            vi.mocked(ImportOrdersFromText).mockReturnValue([]);
+            vi.mocked(validateImportedData).mockImplementation(() => {
+                throw {};
+            });
+        };
+
+        it("currently reports 'Error: undefined'", () => {
+            throwWithoutMessage();
+            const result = reducer(buildStore(), act(type, "text"));
+            expect(result.sessionState.importSheetCheckStatus).toBe(
+                "Error: undefined"
+            );
+        });
+
+        // Known issue: `"Error: " + err.message || "Error"` parses as
+        // `("Error: " + err.message) || "Error"`, so the fallback is dead code.
+        it.fails("falls back to 'Error' (known issue)", () => {
+            throwWithoutMessage();
+            const result = reducer(buildStore(), act(type, "text"));
+            expect(result.sessionState.importSheetCheckStatus).toBe("Error");
+        });
     });
 
     it("IMPORT_ORDERS_AS_TEXT appends parsed orders", () => {
